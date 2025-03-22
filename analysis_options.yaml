@@ -1,1 +1,46 @@
 include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  strong-mode:
+    implicit-casts: false   # 암시적 형변환 방지
+    implicit-dynamic: false # 자동 dynamic 타입 사용 금지
+
+  exclude:
+    - lib/**.g.dart
+
+  errors:
+    missing_required_param: error   # 필수 매개변수 누락 시 오류 처리
+    missing_return: error           # 반환값 없는 함수 오류 처리
+    dead_code: warning              # 사용되지 않는 코드 경고
+
+linter:
+  rules:
+    # 필수적으로 사용하면 좋은 Linter Rules
+    always_use_package_imports: true                  # 패키지 경로로 import 강제
+    avoid_print: true                                 # print() 대신 Logger 사용 권장
+    prefer_const_constructors: true                   # const 생성자 사용 권장
+    prefer_const_declarations: true                   # const 가능한 변수는 const 사용
+    prefer_final_fields: true                         # 클래스 내에서 불변 필드는 final 사용
+    prefer_single_quotes: true                        # 문자열에 단일 인용부호(') 사용 권장
+    always_specify_types: true                        # 변수 타입 명시 강제
+    unawaited_futures: true                           # await 없이 실행되는 Future 경고 (버그 예방)
+
+    # 코드 스타일 통일을 위한 Linter Rules
+    always_put_required_named_parameters_first: true  # required 파라미터를 앞에 배치
+    sort_child_properties_last: true                  # child를 마지막에 배치 (Flutter UI 가독성 향상)
+    sort_constructors_first: true                     # 클래스의 생성자를 가장 위에 배치
+    sort_pub_dependencies: true                       # pubspec.yaml dependencies 정렬
+    use_super_parameters: true                        # super 키워드로 파라미터 전달 간소화
+
+    # 버그 예방을 위한 Linter Rules
+    avoid_function_literals_in_foreach_calls: true    # foreach에서 함수 리터럴 사용 방지 (성능 최적화)
+    avoid_unnecessary_containers: true                # 불필요한 Container 사용 방지
+    avoid_empty_else: true                            # 빈 else 블록 방지
+    prefer_expression_function_bodies: false           # 짧은 함수는 표현식 사용
+    prefer_interpolation_to_compose_strings: true     # 문자열 + 연산자 대신 `${}` 사용
+
+    # Flutter 관련 유용한 Linter Rules
+    use_key_in_widget_constructors: true              # 모든 Stateful/StatelessWidget에 key 추가 권장
+    avoid_redundant_argument_values: true             # 기본값과 동일한 인자 제거
+    prefer_const_literals_to_create_immutables: true  # 불변 리스트, 맵, Set은 const 사용
+    prefer_final_locals: true                         # 지역 변수는 final 사용 권장
