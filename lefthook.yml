@@ -1,9 +1,8 @@
 pre-commit:
   commands:
     # formatting 적용
-    pretty:
-      glob: '*.dart'
-      run: flutter format {staged_files} && git add {staged_files}
+    check-dart-format:
+      run: fvm dart format --set-exit-if-changed lib
     # linter 적용
     linter:
-      run: flutter analyze
+      run: fvm flutter analyze
