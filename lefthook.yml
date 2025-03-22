@@ -1,0 +1,9 @@
+pre-commit:
+  commands:
+    # formatting 적용
+    pretty:
+      glob: '*.dart'
+      run: flutter format {staged_files} && git add {staged_files}
+    # linter 적용
+    linter:
+      run: flutter analyze
