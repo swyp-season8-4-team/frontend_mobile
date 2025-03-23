@@ -5,7 +5,6 @@ import 'package:frontend_mobile/core/resource/result.dart';
 abstract class Usecase<T, P> {
   Future<Result<T, CustomException>> call({required P params});
 
-  /// R1: 모델, R2: 매개변수
   static Future<Result<T, CustomException>> execute<T, P>({
     required Usecase<T, P> usecase,
     required P params,
