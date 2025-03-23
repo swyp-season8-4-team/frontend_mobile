@@ -1,10 +1,9 @@
-import 'package:frontend_mobile/core/resource/model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'local_login_model.g.dart';
 
 @JsonSerializable()
-class LocalLoginModel implements Model {
+class LocalLoginModel {
   const LocalLoginModel({
     required this.accessToken,
     required this.refreshToken,

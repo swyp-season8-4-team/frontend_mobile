@@ -18,9 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LocalLoginState {
   Status get status => throw _privateConstructorUsedError;
-  Code get code => throw _privateConstructorUsedError;
-  String get message => throw _privateConstructorUsedError;
   LocalLoginModel get data => throw _privateConstructorUsedError;
+  ExceptionModel get exception => throw _privateConstructorUsedError;
 
   /// Create a copy of LocalLoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -36,7 +35,7 @@ abstract class $LocalLoginStateCopyWith<$Res> {
     $Res Function(LocalLoginState) then,
   ) = _$LocalLoginStateCopyWithImpl<$Res, LocalLoginState>;
   @useResult
-  $Res call({Status status, Code code, String message, LocalLoginModel data});
+  $Res call({Status status, LocalLoginModel data, ExceptionModel exception});
 }
 
 /// @nodoc
@@ -55,9 +54,8 @@ class _$LocalLoginStateCopyWithImpl<$Res, $Val extends LocalLoginState>
   @override
   $Res call({
     Object? status = null,
-    Object? code = null,
-    Object? message = null,
     Object? data = null,
+    Object? exception = null,
   }) {
     return _then(
       _value.copyWith(
@@ -66,21 +64,16 @@ class _$LocalLoginStateCopyWithImpl<$Res, $Val extends LocalLoginState>
                     ? _value.status
                     : status // ignore: cast_nullable_to_non_nullable
                         as Status,
-            code:
-                null == code
-                    ? _value.code
-                    : code // ignore: cast_nullable_to_non_nullable
-                        as Code,
-            message:
-                null == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String,
             data:
                 null == data
                     ? _value.data
                     : data // ignore: cast_nullable_to_non_nullable
                         as LocalLoginModel,
+            exception:
+                null == exception
+                    ? _value.exception
+                    : exception // ignore: cast_nullable_to_non_nullable
+                        as ExceptionModel,
           )
           as $Val,
     );
@@ -96,7 +89,7 @@ abstract class _$$LocalLoginStateImplCopyWith<$Res>
   ) = __$$LocalLoginStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Status status, Code code, String message, LocalLoginModel data});
+  $Res call({Status status, LocalLoginModel data, ExceptionModel exception});
 }
 
 /// @nodoc
@@ -114,9 +107,8 @@ class __$$LocalLoginStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? code = null,
-    Object? message = null,
     Object? data = null,
+    Object? exception = null,
   }) {
     return _then(
       _$LocalLoginStateImpl(
@@ -125,21 +117,16 @@ class __$$LocalLoginStateImplCopyWithImpl<$Res>
                 ? _value.status
                 : status // ignore: cast_nullable_to_non_nullable
                     as Status,
-        code:
-            null == code
-                ? _value.code
-                : code // ignore: cast_nullable_to_non_nullable
-                    as Code,
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
         data:
             null == data
                 ? _value.data
                 : data // ignore: cast_nullable_to_non_nullable
                     as LocalLoginModel,
+        exception:
+            null == exception
+                ? _value.exception
+                : exception // ignore: cast_nullable_to_non_nullable
+                    as ExceptionModel,
       ),
     );
   }
@@ -150,8 +137,6 @@ class __$$LocalLoginStateImplCopyWithImpl<$Res>
 class _$LocalLoginStateImpl implements _LocalLoginState {
   const _$LocalLoginStateImpl({
     this.status = Status.initial,
-    this.code = Code.C003,
-    this.message = '',
     this.data = const LocalLoginModel(
       accessToken: '',
       refreshToken: '',
@@ -163,6 +148,12 @@ class _$LocalLoginStateImpl implements _LocalLoginState {
       profileImageUrl: '',
       preferenceSet: false,
     ),
+    this.exception = const ExceptionModel(
+      status: -1,
+      code: '',
+      message: '',
+      timestamp: '',
+    ),
   });
 
   @override
@@ -170,17 +161,14 @@ class _$LocalLoginStateImpl implements _LocalLoginState {
   final Status status;
   @override
   @JsonKey()
-  final Code code;
-  @override
-  @JsonKey()
-  final String message;
-  @override
-  @JsonKey()
   final LocalLoginModel data;
+  @override
+  @JsonKey()
+  final ExceptionModel exception;
 
   @override
   String toString() {
-    return 'LocalLoginState(status: $status, code: $code, message: $message, data: $data)';
+    return 'LocalLoginState(status: $status, data: $data, exception: $exception)';
   }
 
   @override
@@ -189,13 +177,13 @@ class _$LocalLoginStateImpl implements _LocalLoginState {
         (other.runtimeType == runtimeType &&
             other is _$LocalLoginStateImpl &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.code, code) || other.code == code) &&
-            (identical(other.message, message) || other.message == message) &&
-            (identical(other.data, data) || other.data == data));
+            (identical(other.data, data) || other.data == data) &&
+            (identical(other.exception, exception) ||
+                other.exception == exception));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, code, message, data);
+  int get hashCode => Object.hash(runtimeType, status, data, exception);
 
   /// Create a copy of LocalLoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -212,19 +200,16 @@ class _$LocalLoginStateImpl implements _LocalLoginState {
 abstract class _LocalLoginState implements LocalLoginState {
   const factory _LocalLoginState({
     final Status status,
-    final Code code,
-    final String message,
     final LocalLoginModel data,
+    final ExceptionModel exception,
   }) = _$LocalLoginStateImpl;
 
   @override
   Status get status;
   @override
-  Code get code;
-  @override
-  String get message;
-  @override
   LocalLoginModel get data;
+  @override
+  ExceptionModel get exception;
 
   /// Create a copy of LocalLoginState
   /// with the given fields replaced by the non-null parameter values.

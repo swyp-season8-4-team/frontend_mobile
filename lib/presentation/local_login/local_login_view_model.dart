@@ -1,10 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:frontend_mobile/core/resource/enum.dart';
-import 'package:frontend_mobile/core/resource/result/result.dart';
-import 'package:frontend_mobile/data/request_body/auth/local_login_request_body.dart';
+import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
+import 'package:frontend_mobile/core/resource/exception/exception_model.dart';
+import 'package:frontend_mobile/core/resource/result.dart';
+import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/auth/local_login_model.dart';
-import 'package:frontend_mobile/domain/usecase/auth/base/auth_usecase.dart';
+import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/domain/usecase/auth/post_dev_local_login_usecase.dart';
 
 part 'local_login_state.dart';
@@ -13,38 +15,34 @@ part 'local_login_view_model.freezed.dart';
 final AutoDisposeStateNotifierProvider<LocalLoginViewModel, LocalLoginState>
 localLoginViewModelProvider =
     StateNotifierProvider.autoDispose<LocalLoginViewModel, LocalLoginState>(
-      (Ref ref) => LocalLoginViewModel(usecase: ref.read(authUsecaseProvider)),
+      (Ref ref) => LocalLoginViewModel(ref: ref),
     );
 
 class LocalLoginViewModel extends StateNotifier<LocalLoginState> {
-  LocalLoginViewModel({required this.usecase}) : super(const LocalLoginState());
+  LocalLoginViewModel({required this.ref}) : super(const LocalLoginState());
 
-  final AuthUsecase usecase;
+  final Ref ref;
 
   /// [Dev 로그인(presentation)](https://api.desserbee.com/swagger-ui/index.html#/Authentication/devlogin)
-  void postDevLocalLogin({required LocalLoginRequestBody body}) async {
+  void postDevLocalLogin({required LocalLoginParams params}) async {
     state = state.copyWith(status: Status.loading);
 
     await Future<void>.delayed(const Duration(seconds: 2));
 
-    final Result<LocalLoginModel> response = await usecase
-        .execute<LocalLoginModel>(
-          usecase: PostDevLocalLoginUsecase(body: body),
+    final Result<LocalLoginModel, CustomException> response =
+        await Usecase.execute(
+          usecase: ref.read(postDevLocalLoginUsecaseProvider),
+          params: params,
         );
 
-    response.when(
-      success: (LocalLoginModel data) {
-        state = state.copyWith(
-          status: Status.success,
-          code: Code.C003,
-          data: data,
-        );
+    response.map(
+      success: (Success<LocalLoginModel, CustomException> success) {
+        state = state.copyWith(status: Status.success, data: success.data);
       },
-      failure: (String message) {
+      failure: (Failure<LocalLoginModel, CustomException> failure) {
         state = state.copyWith(
           status: Status.failure,
-          code: Code.C001,
-          message: message,
+          exception: failure.exception.model,
         );
       },
     );

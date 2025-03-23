@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend_mobile/core/resource/enum.dart';
-import 'package:frontend_mobile/data/request_body/auth/local_login_request_body.dart';
+import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
 
 class LocalLoginView extends ConsumerStatefulWidget {
@@ -19,7 +19,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
       ref
           .read(localLoginViewModelProvider.notifier)
           .postDevLocalLogin(
-            body: LocalLoginRequestBody(
+            params: LocalLoginParams(
               email: 'test@example.com',
               password: '123456',
               keepLoggedIn: true,

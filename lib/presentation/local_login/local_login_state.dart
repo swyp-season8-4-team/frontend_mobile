@@ -4,8 +4,6 @@ part of 'local_login_view_model.dart';
 class LocalLoginState with _$LocalLoginState {
   const factory LocalLoginState({
     @Default(Status.initial) Status status,
-    @Default(Code.C003) Code code,
-    @Default('') String message,
     @Default(
       LocalLoginModel(
         accessToken: '',
@@ -20,5 +18,7 @@ class LocalLoginState with _$LocalLoginState {
       ),
     )
     LocalLoginModel data,
+    @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
+    ExceptionModel exception,
   }) = _LocalLoginState;
 }
