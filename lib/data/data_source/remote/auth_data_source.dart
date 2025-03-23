@@ -15,7 +15,7 @@ final Provider<AuthApi> authApiProvider = Provider<AuthApi>((Ref ref) {
 });
 
 @RestApi(baseUrl: 'http://api.desserbee.com/')
-abstract class AuthApi {
+abstract interface class AuthApi {
   factory AuthApi(Dio dio, {String? baseUrl}) = _AuthApi;
 
   /// [Dev 로그인(data)](https://api.desserbee.com/swagger-ui/index.html#/Authentication/devlogin)
