@@ -1,8 +1,8 @@
-import 'package:frontend_mobile/data/data_source/remote/auth_data_source.dart';
+import 'package:frontend_mobile/data/data_source/remote/auth_remote_data_source.dart';
 import 'package:frontend_mobile/data/entity/auth/local_login_entity.dart';
 import 'package:frontend_mobile/data/request_body/auth/local_login_request_body.dart';
 
-class AuthMockApi implements AuthApi {
+class AuthMockDataSource implements AuthRemoteDataSource {
   @override
   Future<LocalLoginEntity> postDevLocalLogin({
     required LocalLoginRequestBody body,
