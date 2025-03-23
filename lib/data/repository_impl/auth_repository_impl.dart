@@ -23,20 +23,12 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Result<LocalLoginModel, CustomException>> postDevLocalLogin({
     required LocalLoginParams params,
   }) async {
-    final Result<LocalLoginEntity, CustomException> response = await apiCall(
-      api: () async => await api.postDevLocalLogin(body: params.toBody()),
-    );
-
-    return response.map(
-      success: (Success<LocalLoginEntity, CustomException> success) {
-        return Success<LocalLoginModel, CustomException>(
-          data: success.data.toModel(),
+    return await apiCall(
+      api: () async {
+        final LocalLoginEntity result = await api.postDevLocalLogin(
+          body: params.toBody(),
         );
-      },
-      failure: (Failure<LocalLoginEntity, CustomException> failure) {
-        return Failure<LocalLoginModel, CustomException>(
-          exception: failure.exception,
-        );
+        return result.toModel();
       },
     );
   }
