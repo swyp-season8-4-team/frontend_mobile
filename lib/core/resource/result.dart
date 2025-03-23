@@ -1,7 +1,7 @@
 import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
 
 /// Result 패턴 적용
-abstract class Result<T, E extends CustomException> {
+sealed class Result<T, E extends CustomException> {
   const Result();
 
   R map<R>({
