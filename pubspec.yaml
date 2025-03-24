@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.6.1
+  flutter_svg: ^2.0.17
   freezed_annotation: 2.4.4
   intl: ^0.20.2
   json_annotation: ^4.9.0
@@ -30,6 +31,12 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - asset/animation/
+    - asset/etc/
+    - asset/font/
+    - asset/icon/
 
 # flutter_gen configuration
 flutter_gen:
