@@ -41,7 +41,7 @@ flutter:
 
 # flutter_gen configuration
 flutter_gen:
-  output: lib/common/gen_assets/ # 추출할 경로
+  output: lib/common/gen_asset/ # 추출할 경로
   line_length: 80
 
   # 특정 패키지와의 통합
