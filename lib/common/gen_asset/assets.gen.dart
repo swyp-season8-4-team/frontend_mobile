@@ -57,23 +57,14 @@ class $AssetIconGen {
   /// Directory path: asset/icon/file
   $AssetIconFileGen get file => const $AssetIconFileGen();
 
-  /// File path: asset/icon/icon.svg
-  SvgGenImage get icon => const SvgGenImage('asset/icon/icon.svg');
-
   /// Directory path: asset/icon/map
   $AssetIconMapGen get map => const $AssetIconMapGen();
 
   /// Directory path: asset/icon/media
   $AssetIconMediaGen get media => const $AssetIconMediaGen();
 
-  /// File path: asset/icon/search.svg
-  SvgGenImage get search => const SvgGenImage('asset/icon/search.svg');
-
   /// Directory path: asset/icon/system
   $AssetIconSystemGen get system => const $AssetIconSystemGen();
-
-  /// List of all assets
-  List<SvgGenImage> get values => [icon, search];
 }
 
 class $AssetIconArrowGen {
