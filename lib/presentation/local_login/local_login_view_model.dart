@@ -10,7 +10,7 @@ import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/domain/usecase/auth/post_dev_local_login_usecase.dart';
 
 part 'local_login_state.dart';
-part 'local_login_view_model.freezed.dart';
+part 'generated/local_login_view_model.freezed.dart';
 
 final AutoDisposeStateNotifierProvider<LocalLoginViewModel, LocalLoginState>
 localLoginViewModelProvider =

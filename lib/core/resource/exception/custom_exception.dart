@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:frontend_mobile/core/resource/exception/exception_model.dart';
 
-part 'custom_exception.freezed.dart';
+part 'generated/custom_exception.freezed.dart';
 
 @freezed
 /// 에러 모델([문서](https://www.notion.so/1b5c3a9f020181b48806ef4d470b4cd5?pvs=4))

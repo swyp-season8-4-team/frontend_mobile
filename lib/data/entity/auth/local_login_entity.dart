@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'local_login_entity.g.dart';
+part 'generated/local_login_entity.g.dart';
 
 @JsonSerializable()
 class LocalLoginEntity {

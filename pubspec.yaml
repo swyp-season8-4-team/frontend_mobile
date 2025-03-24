@@ -9,16 +9,21 @@ environment:
 dependencies:
   app_tracking_transparency: ^2.0.6+1
   dio: ^5.8.0+1
+  envied: ^1.1.1
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.6.1
+  flutter_svg: ^2.0.17
   freezed_annotation: 2.4.4
   intl: ^0.20.2
   json_annotation: ^4.9.0
+  lottie: ^3.3.1
   retrofit: ^4.4.2
 
 dev_dependencies:
   build_runner: ^2.4.15
+  envied_generator: ^1.1.1
+  flutter_gen_runner: ^5.10.0
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
@@ -29,3 +34,19 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - asset/animation/
+    - asset/etc/
+    - asset/font/
+    - asset/icon/
+
+# flutter_gen configuration
+flutter_gen:
+  output: lib/common/gen_asset/ # 추출할 경로
+  line_length: 80
+
+  # 특정 패키지와의 통합
+  integrations:
+    flutter_svg: true
+    lottie: true
