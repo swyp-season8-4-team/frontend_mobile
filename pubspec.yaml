@@ -40,6 +40,13 @@ flutter:
     - asset/etc/
     - asset/font/
     - asset/icon/
+    - asset/icon/arrow/
+    - asset/icon/contact/
+    - asset/icon/editor/
+    - asset/icon/file/
+    - asset/icon/map/
+    - asset/icon/media/
+    - asset/icon/system/
 
 # flutter_gen configuration
 flutter_gen:
