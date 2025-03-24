@@ -5,7 +5,7 @@ import 'package:frontend_mobile/data/entity/auth/local_login_entity.dart';
 import 'package:frontend_mobile/data/request_body/auth/local_login_request_body.dart';
 import 'package:retrofit/retrofit.dart';
 
-part 'auth_remote_data_source.g.dart';
+part 'generated/auth_remote_data_source.g.dart';
 
 final Provider<AuthRemoteDataSource> authApiProvider =
     Provider<AuthRemoteDataSource>((Ref ref) {

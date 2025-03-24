@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'local_login_entity.dart';
+part of '../local_login_entity.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

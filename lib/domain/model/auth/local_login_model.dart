@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'local_login_model.g.dart';
+part 'generated/local_login_model.g.dart';
 
 @JsonSerializable()
 class LocalLoginModel {
