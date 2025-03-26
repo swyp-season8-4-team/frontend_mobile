@@ -35,11 +35,45 @@ class $AssetEtcGen {
 class $AssetFontGen {
   const $AssetFontGen();
 
-  /// File path: asset/font/font.otf
-  String get font => 'asset/font/font.otf';
+  /// File path: asset/font/Pretendard-Black.ttf
+  String get pretendardBlack => 'asset/font/Pretendard-Black.ttf';
+
+  /// File path: asset/font/Pretendard-Bold.ttf
+  String get pretendardBold => 'asset/font/Pretendard-Bold.ttf';
+
+  /// File path: asset/font/Pretendard-ExtraBold.ttf
+  String get pretendardExtraBold => 'asset/font/Pretendard-ExtraBold.ttf';
+
+  /// File path: asset/font/Pretendard-ExtraLight.ttf
+  String get pretendardExtraLight => 'asset/font/Pretendard-ExtraLight.ttf';
+
+  /// File path: asset/font/Pretendard-Light.ttf
+  String get pretendardLight => 'asset/font/Pretendard-Light.ttf';
+
+  /// File path: asset/font/Pretendard-Medium.ttf
+  String get pretendardMedium => 'asset/font/Pretendard-Medium.ttf';
+
+  /// File path: asset/font/Pretendard-Regular.ttf
+  String get pretendardRegular => 'asset/font/Pretendard-Regular.ttf';
+
+  /// File path: asset/font/Pretendard-SemiBold.ttf
+  String get pretendardSemiBold => 'asset/font/Pretendard-SemiBold.ttf';
+
+  /// File path: asset/font/Pretendard-Thin.ttf
+  String get pretendardThin => 'asset/font/Pretendard-Thin.ttf';
 
   /// List of all assets
-  List<String> get values => [font];
+  List<String> get values => [
+    pretendardBlack,
+    pretendardBold,
+    pretendardExtraBold,
+    pretendardExtraLight,
+    pretendardLight,
+    pretendardMedium,
+    pretendardRegular,
+    pretendardSemiBold,
+    pretendardThin,
+  ];
 }
 
 class $AssetIconGen {
