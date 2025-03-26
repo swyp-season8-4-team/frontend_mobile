@@ -285,6 +285,10 @@ class $AssetIconEditorGen {
 class $AssetIconEtcGen {
   const $AssetIconEtcGen();
 
+  /// File path: asset/icon/etc/13x20_tumbler_filled.svg
+  SvgGenImage get a13x20TumblerFilled =>
+      const SvgGenImage('asset/icon/etc/13x20_tumbler_filled.svg');
+
   /// File path: asset/icon/etc/16_close_filled_1.svg
   SvgGenImage get a16CloseFilled1 =>
       const SvgGenImage('asset/icon/etc/16_close_filled_1.svg');
@@ -293,8 +297,22 @@ class $AssetIconEtcGen {
   SvgGenImage get a16CloseFilled2 =>
       const SvgGenImage('asset/icon/etc/16_close_filled_2.svg');
 
+  /// File path: asset/icon/etc/16x16_pet_filled.svg
+  SvgGenImage get a16x16PetFilled =>
+      const SvgGenImage('asset/icon/etc/16x16_pet_filled.svg');
+
+  /// File path: asset/icon/etc/23x16_car_filled.svg
+  SvgGenImage get a23x16CarFilled =>
+      const SvgGenImage('asset/icon/etc/23x16_car_filled.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [a16CloseFilled1, a16CloseFilled2];
+  List<SvgGenImage> get values => [
+    a13x20TumblerFilled,
+    a16CloseFilled1,
+    a16CloseFilled2,
+    a16x16PetFilled,
+    a23x16CarFilled,
+  ];
 }
 
 class $AssetIconFileGen {
