@@ -11,8 +11,8 @@ final Provider<AuthRemoteDataSource> authApiProvider =
     Provider<AuthRemoteDataSource>((Ref ref) {
       return AuthMockDataSource();
 
-      // final Dio dio = Dio();
-      // return AuthApi(dio);
+      // final dio = ref.read(appDioProvider);
+      // return AuthRemoteDataSource(dio);
     });
 
 @RestApi(baseUrl: 'http://api.desserbee.com/')
