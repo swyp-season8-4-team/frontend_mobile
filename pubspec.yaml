@@ -49,6 +49,28 @@ flutter:
     - asset/icon/media/
     - asset/icon/system/
 
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: asset/font/Pretendard-Thin.ttf
+          weight: 100
+        - asset: asset/font/Pretendard-ExtraLight.ttf
+          weight: 200
+        - asset: asset/font/Pretendard-Light.ttf
+          weight: 300
+        - asset: asset/font/Pretendard-Regular.ttf
+          weight: 400
+        - asset: asset/font/Pretendard-Medium.ttf
+          weight: 500
+        - asset: asset/font/Pretendard-SemiBold.ttf
+          weight: 600
+        - asset: asset/font/Pretendard-Bold.ttf
+          weight: 700
+        - asset: asset/font/Pretendard-ExtraBold.ttf
+          weight: 800
+        - asset: asset/font/Pretendard-Black.ttf
+          weight: 900
+
 # flutter_gen configuration
 flutter_gen:
   output: lib/common/gen_asset/ # 추출할 경로
