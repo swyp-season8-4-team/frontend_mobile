@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
+/// 특성 태그(Attribute Tag)
+/// https://www.figma.com/design/Cmw8GLJYfuUVf9A3QNxqgW/SWYP_%EC%95%B1_1%EA%B8%B0_%EB%94%94%EC%A0%80%EB%B9%84?node-id=398-38295&t=NaNRsPzG4mCFiRIR-4
 class CustomAttributeTag extends StatefulWidget {
   const CustomAttributeTag({
     required this.label,

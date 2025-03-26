@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/foundation/font_weight/font_weight_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
+/// 기타 태그 (Etc Tag)
+/// https://www.figma.com/design/Cmw8GLJYfuUVf9A3QNxqgW/SWYP_%EC%95%B1_1%EA%B8%B0_%EB%94%94%EC%A0%80%EB%B9%84?node-id=398-38295&t=NaNRsPzG4mCFiRIR-4
 class CustomEtcTag extends StatelessWidget {
   const CustomEtcTag({
     required this.label,
@@ -47,7 +49,7 @@ class CustomEtcTag extends StatelessWidget {
   }
 }
 
-/// 주차 가능 태그
+/// 주차 가능 태그 (Etc Tag 기반)
 class CanParkingTag extends StatelessWidget {
   const CanParkingTag({super.key});
 
@@ -57,7 +59,7 @@ class CanParkingTag extends StatelessWidget {
   }
 }
 
-/// 반려동물 동반 태그
+/// 반려동물 동반 태그 (Etc Tag 기반)
 class PetTag extends StatelessWidget {
   const PetTag({super.key});
 
@@ -70,7 +72,7 @@ class PetTag extends StatelessWidget {
   }
 }
 
-/// 텀블러 할인 태그
+/// 텀블러 할인 태그 (Etc Tag 기반)
 class DiscountTumblerTag extends StatelessWidget {
   const DiscountTumblerTag({super.key});
 
