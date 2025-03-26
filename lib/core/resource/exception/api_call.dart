@@ -39,173 +39,307 @@ Future<Result<T, CustomException>> apiCall<T>({
     switch (exceptionModel.code) {
       case 'C001':
         return Failure<T, CustomException>(
-          exception: CustomException.invalidInputValue(model: exceptionModel),
+          exception: CustomException.c001(model: exceptionModel),
         );
       case 'C002':
         return Failure<T, CustomException>(
-          exception: CustomException.internalServerError(model: exceptionModel),
+          exception: CustomException.c002(model: exceptionModel),
         );
       case 'A001':
         return Failure<T, CustomException>(
-          exception: CustomException.duplicateEmail(model: exceptionModel),
+          exception: CustomException.a001(model: exceptionModel),
         );
       case 'A002':
         return Failure<T, CustomException>(
-          exception: CustomException.duplicateNickname(model: exceptionModel),
+          exception: CustomException.a002(model: exceptionModel),
         );
       case 'A003':
         return Failure<T, CustomException>(
-          exception: CustomException.invalidVerificationToken(
-            model: exceptionModel,
-          ),
+          exception: CustomException.a003(model: exceptionModel),
         );
       case 'A004':
         return Failure<T, CustomException>(
-          exception: CustomException.expiredVerificationToken(
-            model: exceptionModel,
-          ),
+          exception: CustomException.a004(model: exceptionModel),
         );
       case 'A005':
         return Failure<T, CustomException>(
-          exception: CustomException.passwordMismatch(model: exceptionModel),
+          exception: CustomException.a005(model: exceptionModel),
         );
       case 'A006':
         return Failure<T, CustomException>(
-          exception: CustomException.invalidCredentials(model: exceptionModel),
+          exception: CustomException.a006(model: exceptionModel),
         );
       case 'A007':
         return Failure<T, CustomException>(
-          exception: CustomException.signupRestrictedDeletedAccount(
-            model: exceptionModel,
-          ),
+          exception: CustomException.a007(model: exceptionModel),
+        );
+      case 'U010':
+        return Failure<T, CustomException>(
+          exception: CustomException.u010(model: exceptionModel),
+        );
+      case 'A008':
+        return Failure<T, CustomException>(
+          exception: CustomException.a008(model: exceptionModel),
+        );
+      case 'O001':
+        return Failure<T, CustomException>(
+          exception: CustomException.o001(model: exceptionModel),
+        );
+      case 'J001':
+        return Failure<T, CustomException>(
+          exception: CustomException.j001(model: exceptionModel),
+        );
+      case 'J002':
+        return Failure<T, CustomException>(
+          exception: CustomException.j002(model: exceptionModel),
+        );
+      case 'J003':
+        return Failure<T, CustomException>(
+          exception: CustomException.j003(model: exceptionModel),
+        );
+      case 'J004':
+        return Failure<T, CustomException>(
+          exception: CustomException.j004(model: exceptionModel),
+        );
+      case 'J005':
+        return Failure<T, CustomException>(
+          exception: CustomException.j005(model: exceptionModel),
         );
       case 'E005':
         return Failure<T, CustomException>(
-          exception: CustomException.emailSendingFailed(model: exceptionModel),
+          exception: CustomException.e005(model: exceptionModel),
         );
       case 'E001':
         return Failure<T, CustomException>(
-          exception: CustomException.tooManyVerificationRequests(
-            model: exceptionModel,
-          ),
-        );
-      case 'E006':
-        return Failure<T, CustomException>(
-          exception: CustomException.emailAlreadyRegistered(
-            model: exceptionModel,
-          ),
+          exception: CustomException.e001(model: exceptionModel),
         );
       case 'U001':
         return Failure<T, CustomException>(
-          exception: CustomException.userNotFound(model: exceptionModel),
-        );
-      case 'U002':
-        return Failure<T, CustomException>(
-          exception: CustomException.userDeleted(model: exceptionModel),
-        );
-      case 'U003':
-        return Failure<T, CustomException>(
-          exception: CustomException.invalidUserStatus(model: exceptionModel),
+          exception: CustomException.u001(model: exceptionModel),
         );
       case 'U004':
         return Failure<T, CustomException>(
-          exception: CustomException.unauthorizedAccess(model: exceptionModel),
+          exception: CustomException.u004(model: exceptionModel),
         );
       case 'U005':
         return Failure<T, CustomException>(
-          exception: CustomException.invalidUserUuid(model: exceptionModel),
+          exception: CustomException.u005(model: exceptionModel),
         );
       case 'P001':
         return Failure<T, CustomException>(
-          exception: CustomException.preferencesNotFound(model: exceptionModel),
+          exception: CustomException.p001(model: exceptionModel),
         );
       case 'P002':
         return Failure<T, CustomException>(
-          exception: CustomException.userPreferencesNotFound(
-            model: exceptionModel,
-          ),
+          exception: CustomException.p002(model: exceptionModel),
+        );
+      case 'K001':
+        return Failure<T, CustomException>(
+          exception: CustomException.k001(model: exceptionModel),
+        );
+      case 'K002':
+        return Failure<T, CustomException>(
+          exception: CustomException.k002(model: exceptionModel),
         );
       case 'S001':
         return Failure<T, CustomException>(
-          exception: CustomException.storeNotFound(model: exceptionModel),
+          exception: CustomException.s001(model: exceptionModel),
         );
       case 'S002':
         return Failure<T, CustomException>(
-          exception: CustomException.storeCreationFailed(model: exceptionModel),
+          exception: CustomException.s002(model: exceptionModel),
         );
       case 'S003':
         return Failure<T, CustomException>(
-          exception: CustomException.storeAccessDenied(model: exceptionModel),
+          exception: CustomException.s003(model: exceptionModel),
         );
       case 'S004':
         return Failure<T, CustomException>(
-          exception: CustomException.storeAlreadyExists(model: exceptionModel),
+          exception: CustomException.s004(model: exceptionModel),
         );
       case 'S005':
         return Failure<T, CustomException>(
-          exception: CustomException.storeListNotFound(model: exceptionModel),
-        );
-      case 'S006':
-        return Failure<T, CustomException>(
-          exception: CustomException.storeDuplicateList(model: exceptionModel),
+          exception: CustomException.s005(model: exceptionModel),
         );
       case 'S007':
         return Failure<T, CustomException>(
-          exception: CustomException.storeDuplicateListName(
-            model: exceptionModel,
-          ),
-        );
-      case 'S008':
-        return Failure<T, CustomException>(
-          exception: CustomException.storeDuplicateColor(model: exceptionModel),
+          exception: CustomException.s007(model: exceptionModel),
         );
       case 'S009':
         return Failure<T, CustomException>(
-          exception: CustomException.storeAlreadySaved(model: exceptionModel),
+          exception: CustomException.s009(model: exceptionModel),
         );
       case 'S010':
         return Failure<T, CustomException>(
-          exception: CustomException.savedStoreNotFound(model: exceptionModel),
+          exception: CustomException.s010(model: exceptionModel),
         );
       case 'S011':
         return Failure<T, CustomException>(
-          exception: CustomException.invalidStoreUuid(model: exceptionModel),
+          exception: CustomException.s011(model: exceptionModel),
         );
       case 'S012':
         return Failure<T, CustomException>(
-          exception: CustomException.invalidTagSelection(model: exceptionModel),
+          exception: CustomException.s012(model: exceptionModel),
         );
       case 'S013':
         return Failure<T, CustomException>(
-          exception: CustomException.invalidTagIncluded(model: exceptionModel),
+          exception: CustomException.s013(model: exceptionModel),
         );
       case 'S014':
         return Failure<T, CustomException>(
-          exception: CustomException.invalidStoreReviewUuid(
-            model: exceptionModel,
-          ),
+          exception: CustomException.s014(model: exceptionModel),
         );
       case 'S015':
         return Failure<T, CustomException>(
-          exception: CustomException.storeReviewNotFound(model: exceptionModel),
+          exception: CustomException.s015(model: exceptionModel),
         );
       case 'S016':
         return Failure<T, CustomException>(
-          exception: CustomException.invalidStoreReview(model: exceptionModel),
+          exception: CustomException.s016(model: exceptionModel),
         );
       case 'S017':
         return Failure<T, CustomException>(
-          exception: CustomException.invalidStoreMenuUuid(
-            model: exceptionModel,
-          ),
+          exception: CustomException.s017(model: exceptionModel),
         );
       case 'S018':
         return Failure<T, CustomException>(
-          exception: CustomException.storeMenuNotFound(model: exceptionModel),
+          exception: CustomException.s018(model: exceptionModel),
         );
       case 'S019':
         return Failure<T, CustomException>(
-          exception: CustomException.invalidStoreMenu(model: exceptionModel),
+          exception: CustomException.s019(model: exceptionModel),
+        );
+      case 'F001':
+        return Failure<T, CustomException>(
+          exception: CustomException.f001(model: exceptionModel),
+        );
+      case 'F002':
+        return Failure<T, CustomException>(
+          exception: CustomException.f002(model: exceptionModel),
+        );
+      case 'F003':
+        return Failure<T, CustomException>(
+          exception: CustomException.f003(model: exceptionModel),
+        );
+      case 'F004':
+        return Failure<T, CustomException>(
+          exception: CustomException.f004(model: exceptionModel),
+        );
+      case 'F005':
+        return Failure<T, CustomException>(
+          exception: CustomException.f005(model: exceptionModel),
+        );
+      case 'I001':
+        return Failure<T, CustomException>(
+          exception: CustomException.i001(model: exceptionModel),
+        );
+      case 'I002':
+        return Failure<T, CustomException>(
+          exception: CustomException.i002(model: exceptionModel),
+        );
+      case 'I003':
+        return Failure<T, CustomException>(
+          exception: CustomException.i003(model: exceptionModel),
+        );
+      case 'M001':
+        return Failure<T, CustomException>(
+          exception: CustomException.m001(model: exceptionModel),
+        );
+      case 'M002':
+        return Failure<T, CustomException>(
+          exception: CustomException.m002(model: exceptionModel),
+        );
+      case 'M003':
+        return Failure<T, CustomException>(
+          exception: CustomException.m003(model: exceptionModel),
+        );
+      case 'M004':
+        return Failure<T, CustomException>(
+          exception: CustomException.m004(model: exceptionModel),
+        );
+      case 'M005':
+        return Failure<T, CustomException>(
+          exception: CustomException.m005(model: exceptionModel),
+        );
+      case 'M006':
+        return Failure<T, CustomException>(
+          exception: CustomException.m006(model: exceptionModel),
+        );
+      case 'M007':
+        return Failure<T, CustomException>(
+          exception: CustomException.m007(model: exceptionModel),
+        );
+      case 'M008':
+        return Failure<T, CustomException>(
+          exception: CustomException.m008(model: exceptionModel),
+        );
+      case 'M009':
+        return Failure<T, CustomException>(
+          exception: CustomException.m009(model: exceptionModel),
+        );
+      case 'M010':
+        return Failure<T, CustomException>(
+          exception: CustomException.m010(model: exceptionModel),
+        );
+      case 'M011':
+        return Failure<T, CustomException>(
+          exception: CustomException.m011(model: exceptionModel),
+        );
+      case 'M012':
+        return Failure<T, CustomException>(
+          exception: CustomException.m012(model: exceptionModel),
+        );
+      case 'M013':
+        return Failure<T, CustomException>(
+          exception: CustomException.m013(model: exceptionModel),
+        );
+      case 'M014':
+        return Failure<T, CustomException>(
+          exception: CustomException.m014(model: exceptionModel),
+        );
+      case 'M015':
+        return Failure<T, CustomException>(
+          exception: CustomException.m015(model: exceptionModel),
+        );
+      case 'M016':
+        return Failure<T, CustomException>(
+          exception: CustomException.m016(model: exceptionModel),
+        );
+      case 'M017':
+        return Failure<T, CustomException>(
+          exception: CustomException.m017(model: exceptionModel),
+        );
+      case 'R001':
+        return Failure<T, CustomException>(
+          exception: CustomException.r001(model: exceptionModel),
+        );
+      case 'R002':
+        return Failure<T, CustomException>(
+          exception: CustomException.r002(model: exceptionModel),
+        );
+      case 'R003':
+        return Failure<T, CustomException>(
+          exception: CustomException.r003(model: exceptionModel),
+        );
+      case 'R004':
+        return Failure<T, CustomException>(
+          exception: CustomException.r004(model: exceptionModel),
+        );
+      case 'R005':
+        return Failure<T, CustomException>(
+          exception: CustomException.r005(model: exceptionModel),
+        );
+      case 'R006':
+        return Failure<T, CustomException>(
+          exception: CustomException.r006(model: exceptionModel),
+        );
+      case 'R007':
+        return Failure<T, CustomException>(
+          exception: CustomException.r007(model: exceptionModel),
+        );
+      case 'R008':
+        return Failure<T, CustomException>(
+          exception: CustomException.r008(model: exceptionModel),
         );
       default:
         return Failure<T, CustomException>(
