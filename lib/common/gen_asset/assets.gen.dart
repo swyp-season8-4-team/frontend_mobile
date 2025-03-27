@@ -302,31 +302,16 @@ class $AssetIconEtcGen {
   SvgGenImage get a18CloseEyeOutlined =>
       const SvgGenImage('asset/icon/etc/18_close_eye_outlined.svg');
 
-  /// File path: asset/icon/etc/18_close_filled.svg
-  SvgGenImage get a18CloseFilled =>
-      const SvgGenImage('asset/icon/etc/18_close_filled.svg');
-
   /// File path: asset/icon/etc/18_open_eye_outlined.svg
   SvgGenImage get a18OpenEyeOutlined =>
       const SvgGenImage('asset/icon/etc/18_open_eye_outlined.svg');
-
-  /// File path: asset/icon/etc/18_visibility_off_outlined.svg
-  SvgGenImage get a18VisibilityOffOutlined =>
-      const SvgGenImage('asset/icon/etc/18_visibility_off_outlined.svg');
-
-  /// File path: asset/icon/etc/18_visibility_on_outlined.svg
-  SvgGenImage get a18VisibilityOnOutlined =>
-      const SvgGenImage('asset/icon/etc/18_visibility_on_outlined.svg');
 
   /// List of all assets
   List<SvgGenImage> get values => [
     a18CloseCircleFilledEnabled,
     a18CloseCircleFilledPressed,
     a18CloseEyeOutlined,
-    a18CloseFilled,
     a18OpenEyeOutlined,
-    a18VisibilityOffOutlined,
-    a18VisibilityOnOutlined,
   ];
 }
 
