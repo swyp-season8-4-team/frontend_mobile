@@ -301,6 +301,18 @@ class $AssetIconEtcGen {
   SvgGenImage get a16x16PetFilled =>
       const SvgGenImage('asset/icon/etc/16x16_pet_filled.svg');
 
+  /// File path: asset/icon/etc/20_car_filled.svg
+  SvgGenImage get a20CarFilled =>
+      const SvgGenImage('asset/icon/etc/20_car_filled.svg');
+
+  /// File path: asset/icon/etc/20_pet_filled.svg
+  SvgGenImage get a20PetFilled =>
+      const SvgGenImage('asset/icon/etc/20_pet_filled.svg');
+
+  /// File path: asset/icon/etc/20_tumblr_filled.svg
+  SvgGenImage get a20TumblrFilled =>
+      const SvgGenImage('asset/icon/etc/20_tumblr_filled.svg');
+
   /// File path: asset/icon/etc/23x16_car_filled.svg
   SvgGenImage get a23x16CarFilled =>
       const SvgGenImage('asset/icon/etc/23x16_car_filled.svg');
@@ -311,6 +323,9 @@ class $AssetIconEtcGen {
     a16CloseFilled1,
     a16CloseFilled2,
     a16x16PetFilled,
+    a20CarFilled,
+    a20PetFilled,
+    a20TumblrFilled,
     a23x16CarFilled,
   ];
 }
