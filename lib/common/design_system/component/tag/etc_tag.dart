@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_mobile/common/design_system/foundation/font_weight/font_weight_config.dart';
+import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
 /// 기타 태그 (Etc Tag)
@@ -17,13 +17,8 @@ class CustomEtcTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// TODO: 타이포그래피 내 텍스트스타일 적용 필요
-    const TextStyle baseTextStyle = TextStyle(
-      fontSize: 11,
-      height: 14 / 11,
-      fontWeight: FontWeightConfig.regular,
-      color: Color(0xFF393939),
-    );
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.translucent,
@@ -31,17 +26,21 @@ class CustomEtcTag extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
 
-          /// TODO: 컬러 시스템값 적용 필요
-          color: const Color(0xFFF5F5F5),
+          color: ScaleColorConfig.neutral80,
         ),
         height: 32,
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2.5),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             icon.svg(),
-            const SizedBox(width: 10),
-            Text(label, style: baseTextStyle),
+            const SizedBox(width: 4),
+            Text(
+              label,
+              style: textTheme.labelSmall?.copyWith(
+                color: ScaleColorConfig.neutral30,
+              ),
+            ),
           ],
         ),
       ),
@@ -55,7 +54,7 @@ class CanParkingTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomEtcTag(label: '주차 가능', icon: Assets.icon.etc.a23x16CarFilled);
+    return CustomEtcTag(label: '주차 가능', icon: Assets.icon.etc.a20CarFilled);
   }
 }
 
@@ -65,10 +64,7 @@ class PetTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomEtcTag(
-      label: '반려동물 동반',
-      icon: Assets.icon.etc.a16x16PetFilled,
-    );
+    return CustomEtcTag(label: '반려 함께', icon: Assets.icon.etc.a20PetFilled);
   }
 }
 
@@ -78,9 +74,6 @@ class DiscountTumblerTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomEtcTag(
-      label: '텀블러 할인',
-      icon: Assets.icon.etc.a13x20TumblerFilled,
-    );
+    return CustomEtcTag(label: '텀블러 할인', icon: Assets.icon.etc.a20TumblrFilled);
   }
 }
