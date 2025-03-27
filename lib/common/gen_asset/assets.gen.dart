@@ -88,6 +88,9 @@ class $AssetIconGen {
   /// Directory path: asset/icon/editor
   $AssetIconEditorGen get editor => const $AssetIconEditorGen();
 
+  /// Directory path: asset/icon/etc
+  $AssetIconEtcGen get etc => const $AssetIconEtcGen();
+
   /// Directory path: asset/icon/file
   $AssetIconFileGen get file => const $AssetIconFileGen();
 
@@ -276,6 +279,29 @@ class $AssetIconEditorGen {
     pencil1Line,
     pencil2Line,
     pencil3Line,
+  ];
+}
+
+class $AssetIconEtcGen {
+  const $AssetIconEtcGen();
+
+  /// File path: asset/icon/etc/18_close_filled.svg
+  SvgGenImage get a18CloseFilled =>
+      const SvgGenImage('asset/icon/etc/18_close_filled.svg');
+
+  /// File path: asset/icon/etc/18_visibility_off_outlined.svg
+  SvgGenImage get a18VisibilityOffOutlined =>
+      const SvgGenImage('asset/icon/etc/18_visibility_off_outlined.svg');
+
+  /// File path: asset/icon/etc/18_visibility_on_outlined.svg
+  SvgGenImage get a18VisibilityOnOutlined =>
+      const SvgGenImage('asset/icon/etc/18_visibility_on_outlined.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [
+    a18CloseFilled,
+    a18VisibilityOffOutlined,
+    a18VisibilityOnOutlined,
   ];
 }
 
