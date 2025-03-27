@@ -111,14 +111,19 @@ class _CustomInputBoxState extends State<CustomInputBox> {
             error: widget.error ? const SizedBox.shrink() : null,
             fillColor: ScaleColorConfig.neutral90,
             suffixIcon: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.only(right: 16),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   _buildCloseButton(),
                   _buildVisibilityOptionButton(),
                 ],
               ),
+            ),
+            suffixIconConstraints: const BoxConstraints(
+              // 아이콘 너비 + 왼쪽 패딩
+              minWidth: 18 + 16,
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
@@ -153,16 +158,33 @@ class _CustomInputBoxState extends State<CustomInputBox> {
         if (widget.error && widget.errorText != null)
           Padding(
             padding: const EdgeInsets.only(top: 12),
-            child: Text(widget.errorText!, style: feedbackTextStyle),
+            child: Row(
+              children: <Widget>[
+                Assets.icon.system.a16WarningCircleFilled.svg(),
+                const SizedBox(width: 5),
+                Expanded(
+                  child: Text(widget.errorText!, style: feedbackTextStyle),
+                ),
+              ],
+            ),
           )
         else if (widget.success && widget.successText != null)
           Padding(
             padding: const EdgeInsets.only(top: 12),
-            child: Text(
-              widget.successText!,
-              style: feedbackTextStyle.copyWith(
-                color: ScaleColorConfig.success60,
-              ),
+            child: Row(
+              children: <Widget>[
+                Assets.icon.system.a16CheckCircleFilled.svg(),
+                const SizedBox(width: 5),
+
+                Expanded(
+                  child: Text(
+                    widget.successText!,
+                    style: feedbackTextStyle.copyWith(
+                      color: ScaleColorConfig.success60,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
       ],
@@ -176,7 +198,7 @@ class _CustomInputBoxState extends State<CustomInputBox> {
         widget.onCloseButtonTap?.call();
         _textEditingController.clear();
       },
-      child: Assets.icon.etc.a18CloseFilled.svg(),
+      child: Assets.icon.etc.a18CloseCircleFilledEnabled.svg(),
     );
   }
 
@@ -191,8 +213,8 @@ class _CustomInputBoxState extends State<CustomInputBox> {
         onTap: widget.onVisibilityButtonTap,
         child:
             widget.visibility
-                ? Assets.icon.etc.a18VisibilityOffOutlined.svg()
-                : Assets.icon.etc.a18VisibilityOnOutlined.svg(),
+                ? Assets.icon.etc.a18CloseEyeOutlined.svg()
+                : Assets.icon.etc.a18OpenEyeOutlined.svg(),
       ),
     );
   }
