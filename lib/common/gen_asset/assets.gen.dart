@@ -88,6 +88,9 @@ class $AssetIconGen {
   /// Directory path: asset/icon/editor
   $AssetIconEditorGen get editor => const $AssetIconEditorGen();
 
+  /// Directory path: asset/icon/etc
+  $AssetIconEtcGen get etc => const $AssetIconEtcGen();
+
   /// Directory path: asset/icon/file
   $AssetIconFileGen get file => const $AssetIconFileGen();
 
@@ -276,6 +279,39 @@ class $AssetIconEditorGen {
     pencil1Line,
     pencil2Line,
     pencil3Line,
+  ];
+}
+
+class $AssetIconEtcGen {
+  const $AssetIconEtcGen();
+
+  /// File path: asset/icon/etc/16_close_filled_1.svg
+  SvgGenImage get a16CloseFilled1 =>
+      const SvgGenImage('asset/icon/etc/16_close_filled_1.svg');
+
+  /// File path: asset/icon/etc/16_close_filled_2.svg
+  SvgGenImage get a16CloseFilled2 =>
+      const SvgGenImage('asset/icon/etc/16_close_filled_2.svg');
+
+  /// File path: asset/icon/etc/20_car_filled.svg
+  SvgGenImage get a20CarFilled =>
+      const SvgGenImage('asset/icon/etc/20_car_filled.svg');
+
+  /// File path: asset/icon/etc/20_pet_filled.svg
+  SvgGenImage get a20PetFilled =>
+      const SvgGenImage('asset/icon/etc/20_pet_filled.svg');
+
+  /// File path: asset/icon/etc/20_tumblr_filled.svg
+  SvgGenImage get a20TumblrFilled =>
+      const SvgGenImage('asset/icon/etc/20_tumblr_filled.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [
+    a16CloseFilled1,
+    a16CloseFilled2,
+    a20CarFilled,
+    a20PetFilled,
+    a20TumblrFilled,
   ];
 }
 
