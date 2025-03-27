@@ -4,11 +4,13 @@ import 'package:frontend_mobile/common/design_system/foundation/color/scale_colo
 
 class CustomSubTopBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomSubTopBar({
+    required this.title,
     required this.actions,
     this.primary = true,
     super.key,
   });
 
+  final String title;
   final bool primary;
   final List<Widget> actions;
 
@@ -24,7 +26,7 @@ class CustomSubTopBar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: Colors.transparent,
         leadingWidth: 24 + 7,
         leading: icon.leftLine(onTap: () {}),
-        title: Text('타이틀', style: textTheme.titleLarge),
+        title: Text(title, style: textTheme.titleLarge),
         centerTitle: true,
         actions: actions,
       ),
