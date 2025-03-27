@@ -4,8 +4,14 @@ import 'package:frontend_mobile/common/design_system/foundation/color/scale_colo
 import 'package:frontend_mobile/common/design_system/foundation/font_weight/font_weight_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
-/// Text Field
+/// Input Box
 /// https://www.figma.com/design/Cmw8GLJYfuUVf9A3QNxqgW/SWYP_%EC%95%B1_1%EA%B8%B0_%EB%94%94%EC%A0%80%EB%B9%84?node-id=400-73177&t=3ArDzZQuJj0XGk5f-4
+/// ---------------------------
+/// [Input Box를 사용하고 싶은 경우]
+/// CustomInputBox를 호출
+///
+/// [버튼형 Input Box를 사용하고 싶은 경우]
+/// CustomInputBox.picker를 호출
 
 enum InputBoxType {
   // 사용자가 직접 텍스트를 입력할 수 있는 input (default)
@@ -15,13 +21,6 @@ enum InputBoxType {
   picker,
 }
 
-/// Input Box
-/// ---------------------------
-/// Input Box를 사용하고 싶은 경우
-/// CustomInputBox를 호출
-///
-/// 버튼형 Input Box를 사용하고 싶은 경우
-/// CustomInputBox.picker를 호출
 class CustomInputBox extends StatefulWidget {
   const CustomInputBox({
     this.label,
