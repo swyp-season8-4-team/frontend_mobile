@@ -15,16 +15,15 @@ import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
 enum InputBoxType {
   // 사용자가 직접 텍스트를 입력할 수 있는 input (default)
-  direct,
+  input,
 
   // 사용자가 직접 텍스트를 입력하지 않는 버튼형 input
-  picker,
+  button,
 }
 
 class CustomInputBox extends StatefulWidget {
-  const CustomInputBox({
+  const CustomInputBox.input({
     this.label,
-    super.key,
     this.visibility = true,
     this.visibilityControll = false,
     this.errorText,
@@ -39,14 +38,15 @@ class CustomInputBox extends StatefulWidget {
     this.onCloseButtonTap,
     this.onVisibilityButtonTap,
     this.onTap,
-  }) : type = InputBoxType.direct;
-
-  const CustomInputBox.picker({
-    this.label,
     super.key,
+  }) : type = InputBoxType.input;
+
+  const CustomInputBox.button({
+    this.label,
     this.controller,
     this.hintText,
     this.onTap,
+    super.key,
   }) : visibility = true,
        visibilityControll = false,
        errorText = null,
@@ -58,7 +58,7 @@ class CustomInputBox extends StatefulWidget {
        success = false,
        onCloseButtonTap = null,
        onVisibilityButtonTap = null,
-       type = InputBoxType.picker;
+       type = InputBoxType.button;
   // 라벨
   final String? label;
   // 글자 암호화 컨트롤 표시 여부
@@ -124,7 +124,7 @@ class _CustomInputBoxState extends State<CustomInputBox> {
       onTap: widget.onTap,
       behavior: HitTestBehavior.translucent,
       child: IgnorePointer(
-        ignoring: widget.type == InputBoxType.picker,
+        ignoring: widget.type == InputBoxType.button,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -140,7 +140,7 @@ class _CustomInputBoxState extends State<CustomInputBox> {
                 // 자동으로 unfocus
                 FocusManager.instance.primaryFocus?.unfocus();
               },
-              readOnly: widget.type == InputBoxType.picker,
+              readOnly: widget.type == InputBoxType.button,
               controller: _textEditingController,
               inputFormatters: widget.inputFormatters,
               keyboardType: widget.keyboardType,
@@ -156,13 +156,13 @@ class _CustomInputBoxState extends State<CustomInputBox> {
                 isDense: true,
                 error: widget.error ? const SizedBox.shrink() : null,
                 fillColor:
-                    widget.type == InputBoxType.picker
+                    widget.type == InputBoxType.button
                         ? ScaleColorConfig.neutral70
                         : ScaleColorConfig.neutral90,
                 suffixIcon: Padding(
                   padding: const EdgeInsets.only(right: 16),
                   child:
-                      widget.type == InputBoxType.picker
+                      widget.type == InputBoxType.button
                           ? Assets.icon.arrow.a18RightLine.svg()
                           : Row(
                             mainAxisSize: MainAxisSize.min,
