@@ -3,15 +3,14 @@ import 'package:frontend_mobile/common/design_system/foundation/color/scale_colo
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
 class SnackBarCloseButton extends StatelessWidget {
-  const SnackBarCloseButton({super.key});
+  const SnackBarCloseButton({required this.onTap, super.key});
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: GestureDetector(
-        onTap: () {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-        },
+        onTap: onTap,
         child: Assets.icon.system.closeLine.svg(
           colorFilter: ColorFilter.mode(
             ScaleColorConfig.neutral80,
@@ -26,8 +25,8 @@ class SnackBarCloseButton extends StatelessWidget {
 class SnackBarActionButton extends StatelessWidget {
   const SnackBarActionButton({
     required this.onTap,
-    super.key,
     this.label = 'Action',
+    super.key,
   });
 
   final VoidCallback onTap;
