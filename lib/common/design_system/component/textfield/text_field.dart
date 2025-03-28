@@ -6,12 +6,12 @@ import 'package:frontend_mobile/common/design_system/foundation/font_weight/font
 /// https://www.figma.com/design/Cmw8GLJYfuUVf9A3QNxqgW/SWYP_%EC%95%B1_1%EA%B8%B0_%EB%94%94%EC%A0%80%EB%B9%84?node-id=400-73177&t=3ArDzZQuJj0XGk5f-4
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
-    super.key,
     this.label,
     this.hintText = '내용을 입력해주세요',
     this.onChanged,
     this.maxLength = 60,
     this.controller,
+    super.key,
   });
   final String? label;
   final String hintText;
@@ -30,14 +30,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   void initState() {
     super.initState();
     _textEditingController = widget.controller ?? TextEditingController();
-
-    // 내부에서 자체생성한 TextEditingController에 대해서만 리스너 추가
-    // 아래 리스너는 텍스트필드에 입력된 텍스트의 length를 갱신하기 위함
-    if (widget.controller == null) {
-      _textEditingController.addListener(() {
-        setState(() {});
-      });
-    }
+    _textEditingController.addListener(_textEditingListener);
   }
 
   @override
@@ -139,9 +132,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
     );
   }
 
+  // 텍스트필드에 입력된 텍스트의 length를 갱신하기 위한 listener
+  void _textEditingListener() {
+    setState(() {});
+  }
+
   @override
   void dispose() {
     // 내부에서 생성한 컨트롤러인 경우, 내부에서 dispose
+    _textEditingController.removeListener(_textEditingListener);
     if (_textEditingController != widget.controller) {
       _textEditingController.dispose();
     }
