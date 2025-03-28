@@ -43,14 +43,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
       letterSpacing: -0.28,
     );
 
-    final TextStyle counterTextStyle = TextStyle(
-      color: ScaleColorConfig.neutral50,
-      fontSize: 12,
-      fontWeight: FontWeightConfig.regular,
-      height: 18 / 12,
-      letterSpacing: -0.48,
-    );
-
     final TextStyle hintTextStyle = TextStyle(
       color: ScaleColorConfig.neutral50,
       fontSize: 14,
@@ -58,6 +50,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       height: 20 / 14,
       letterSpacing: 0.25,
     );
+
+    final TextTheme textTheme = Theme.of(context).textTheme;
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Column(
@@ -77,13 +71,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   children: <InlineSpan>[
                     TextSpan(
                       text: '${_textEditingController.text.length}',
-                      style: counterTextStyle.copyWith(
+                      style: textTheme.labelLarge?.copyWith(
                         color: ScaleColorConfig.neutral30,
                       ),
                     ),
                     TextSpan(
                       text: '/${widget.maxLength}',
-                      style: counterTextStyle,
+                      style: textTheme.labelLarge?.copyWith(
+                        color: ScaleColorConfig.neutral50,
+                      ),
                     ),
                   ],
                 ),
