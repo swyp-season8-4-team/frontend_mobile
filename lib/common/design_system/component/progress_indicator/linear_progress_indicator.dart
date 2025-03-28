@@ -11,7 +11,11 @@ class CustomLinearProgressIndicator extends StatelessWidget {
     required this.maxValue,
     super.key,
   });
+
+  // 현재 진행 상태 값 (예: 완료된 작업 수)
   final double currentValue;
+
+  // 진행 상태의 최대 값 (예: 전체 작업 수)
   final double maxValue;
 
   @override
@@ -42,6 +46,8 @@ class CustomLinearProgressIndicator extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           '${currentValue.toInt()}/${maxValue.toInt()}',
+
+          // TODO: 타이포그래피 적용 필요
           style: TextStyle(
             fontSize: 14,
             height: 20 / 14,
