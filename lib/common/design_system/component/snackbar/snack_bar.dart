@@ -6,7 +6,7 @@ import 'package:frontend_mobile/common/design_system/foundation/font_weight/font
 /// https://www.figma.com/design/Cmw8GLJYfuUVf9A3QNxqgW/SWYP_%EC%95%B1_1%EA%B8%B0_%EB%94%94%EC%A0%80%EB%B9%84?node-id=402-47680&t=5o43YjWL0f9qsQKt-4
 /// CustomSnackBar.show를 호출하여 사용
 class CustomSnackBar {
-  void show({
+  static void show({
     required BuildContext context,
 
     // 설명 텍스트
@@ -25,6 +25,9 @@ class CustomSnackBar {
 
     // 우측 action item
     SnackBarActionButton? actionButton,
+
+    // 바텀 네브바 상단에 위치 여부
+    bool aboveBottomNavigation = false,
   }) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
@@ -44,6 +47,12 @@ class CustomSnackBar {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
       padding: EdgeInsets.zero,
       duration: duration,
+      elevation: 2,
+      margin: EdgeInsets.only(
+        left: 16,
+        right: 16,
+        bottom: aboveBottomNavigation ? 100 : 30,
+      ),
       content:
           expanded
               ? Column(
