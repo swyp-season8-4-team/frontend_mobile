@@ -37,7 +37,14 @@ class _CustomPhotoUploaderState extends State<CustomPhotoUploader> {
           color: _getBackgroundColor(),
           border: Border.all(color: ScaleColorConfig.neutral40, width: 1.17),
         ),
-        child: Center(child: Assets.icon.system.addCircleLine.svg()),
+        child: Center(
+          child: Assets.icon.system.addCircleLine.svg(
+            colorFilter: ColorFilter.mode(
+              ScaleColorConfig.neutral30,
+              BlendMode.srcIn,
+            ),
+          ),
+        ),
       ),
     );
   }
