@@ -7,19 +7,14 @@ import 'package:frontend_mobile/common/design_system/foundation/font_weight/font
 class CustomSnackBar extends StatelessWidget {
   const CustomSnackBar({
     required this.description,
-    this.duration = const Duration(seconds: 3),
     this.expanded = false,
     this.closeButton,
     this.actionButton,
-    this.aboveBottomNavigation = false,
     super.key,
   });
 
   // 설명 텍스트
   final String description;
-
-  // 표시 지속 시간 (기본 3초)
-  final Duration duration;
 
   // 스낵바 확장 여부
   // true : 세로로 확장된 형태의 큰 스낵바
@@ -31,9 +26,6 @@ class CustomSnackBar extends StatelessWidget {
 
   // 우측 action item
   final SnackBarActionButton? actionButton;
-
-  // 바텀 네브바 상단에 위치 여부
-  final bool aboveBottomNavigation;
 
   @override
   Widget build(BuildContext context) {

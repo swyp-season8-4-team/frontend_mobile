@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/core/manager/toast/toast_manager.dart';
 
-class SnackBarCloseButton extends StatelessWidget {
-  const SnackBarCloseButton({required this.onTap, super.key});
-  final VoidCallback onTap;
+class SnackBarCloseButton extends ConsumerWidget {
+  const SnackBarCloseButton({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Center(
       child: GestureDetector(
-        onTap: onTap,
+        onTap: () {
+          ref.read(toastManagerProvider).remove();
+        },
         child: Assets.icon.system.closeLine.svg(
           colorFilter: ColorFilter.mode(
             ScaleColorConfig.neutral80,

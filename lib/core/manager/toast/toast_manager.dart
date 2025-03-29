@@ -22,17 +22,23 @@ class ToastManager {
   final FToast _fToast;
 
   // Toast 초기화
-  // Toast를 표시하고 싶은 Widget의 initState에서 반드시 호출
-  void init({required BuildContext context}) {
+  void _init({required BuildContext context}) {
     _fToast.init(context);
   }
 
   // Toast 표시
   void show({
+    required BuildContext context,
     required Widget toastWidget,
+
+    // 바텀 네브바 상단에 표시 여부
+    bool aboveBottomNavigation = false,
+
+    // 지속시간 (기본 3초)
     Duration duration = const Duration(seconds: 3),
   }) {
-    // Custom Toast Position
+    _init(context: context);
+
     _fToast.showToast(
       child: toastWidget,
       toastDuration: duration,
@@ -41,7 +47,12 @@ class ToastManager {
         Widget child,
         ToastGravity? gravity,
       ) {
-        return Positioned(right: 16.0, left: 16.0, bottom: 30, child: child);
+        return Positioned(
+          right: 16.0,
+          left: 16.0,
+          bottom: aboveBottomNavigation ? 100 : 30,
+          child: child,
+        );
       },
     );
   }
