@@ -330,22 +330,6 @@ class $AssetIconEtcGen {
   SvgGenImage get a48RadioButtonUncheckedPressed =>
       const SvgGenImage('asset/icon/etc/48_radio_button_unchecked_pressed.svg');
 
-  /// File path: asset/icon/etc/radio_button_checked.svg
-  SvgGenImage get radioButtonChecked =>
-      const SvgGenImage('asset/icon/etc/radio_button_checked.svg');
-
-  /// File path: asset/icon/etc/radio_button_checked_disabled.svg
-  SvgGenImage get radioButtonCheckedDisabled =>
-      const SvgGenImage('asset/icon/etc/radio_button_checked_disabled.svg');
-
-  /// File path: asset/icon/etc/radio_button_unchecked.svg
-  SvgGenImage get radioButtonUnchecked =>
-      const SvgGenImage('asset/icon/etc/radio_button_unchecked.svg');
-
-  /// File path: asset/icon/etc/radio_button_unchecked_disabled.svg
-  SvgGenImage get radioButtonUncheckedDisabled =>
-      const SvgGenImage('asset/icon/etc/radio_button_unchecked_disabled.svg');
-
   /// List of all assets
   List<SvgGenImage> get values => [
     a16CloseFilled1,
@@ -359,10 +343,6 @@ class $AssetIconEtcGen {
     a48RadioButtonUnchecked,
     a48RadioButtonUncheckedDisabled,
     a48RadioButtonUncheckedPressed,
-    radioButtonChecked,
-    radioButtonCheckedDisabled,
-    radioButtonUnchecked,
-    radioButtonUncheckedDisabled,
   ];
 }
 
