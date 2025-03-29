@@ -47,10 +47,15 @@ class ToastManager {
         Widget child,
         ToastGravity? gravity,
       ) {
+        final double systemBottomPadding =
+            MediaQuery.of(context).padding.bottom;
         return Positioned(
           right: 16.0,
           left: 16.0,
-          bottom: aboveBottomNavigation ? 100 : 30,
+          bottom:
+              aboveBottomNavigation
+                  ? systemBottomPadding + 100
+                  : systemBottomPadding + 30,
           child: child,
         );
       },
