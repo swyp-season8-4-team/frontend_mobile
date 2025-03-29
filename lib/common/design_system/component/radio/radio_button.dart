@@ -13,8 +13,14 @@ class CustomRadioButton extends StatefulWidget {
     super.key,
   });
   final String? label;
+
+  // 라디오 버튼 체크 여부
   final bool value;
+
+  // 라디오 버튼 클릭 이벤트 콜백
   final VoidCallback onTap;
+
+  // enabled 여부
   final bool enabled;
 
   @override
@@ -26,75 +32,57 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: widget.enabled ? widget.onTap : null,
-          onTapDown: widget.enabled ? (_) => _setPressed() : null,
-          onTapUp: widget.enabled ? (_) => _unsetPressed() : null,
-          onTapCancel: widget.enabled ? _unsetPressed : null,
-          child: SizedBox.square(
-            dimension: 48,
-            child: Center(child: _buildIcon()),
-          ),
-        ),
-        if (widget.label != null)
-          Padding(
-            padding: const EdgeInsets.only(left: 2),
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: widget.enabled ? widget.onTap : null,
+      onTapDown: widget.enabled ? (_) => _setPressed() : null,
+      onTapUp: widget.enabled ? (_) => _unsetPressed() : null,
+      onTapCancel: widget.enabled ? _unsetPressed : null,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          _buildIcon(),
+          if (widget.label != null)
+            Padding(
+              padding: const EdgeInsets.only(left: 2),
 
-            // TODO: 타이포그래피 적용 필요
-            child: Text(
-              widget.label!,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 24,
-                fontWeight: FontWeight.w500,
-                letterSpacing: -0.36,
+              // TODO: 타이포그래피 적용 필요
+              child: Text(
+                widget.label!,
+                style: TextStyle(
+                  color:
+                      widget.enabled
+                          ? Colors.black
+                          : ScaleColorConfig.neutral50,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: -0.36,
+                ),
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget _buildIcon() {
     if (widget.enabled) {
       if (widget.value && !_pressed) {
-        return Assets.icon.etc.radioButtonChecked.svg();
+        return Assets.icon.etc.a48RadioButtonChecked.svg();
       } else if (widget.value && _pressed) {
-        return Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: ScaleColorConfig.secondary60,
-          ),
-          width: 40,
-          height: 40,
-          alignment: Alignment.center,
-          child: Assets.icon.etc.radioButtonChecked.svg(),
-        );
+        return Assets.icon.etc.a48RadioButtonCheckedPressed.svg();
       } else if (!widget.value && !_pressed) {
-        return Assets.icon.etc.radioButtonUnchecked.svg();
+        return Assets.icon.etc.a48RadioButtonUnchecked.svg();
       } else {
-        return Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: ScaleColorConfig.secondary60,
-          ),
-          width: 40,
-          height: 40,
-          alignment: Alignment.center,
-          child: Assets.icon.etc.radioButtonUnchecked.svg(),
-        );
+        return Assets.icon.etc.a48RadioButtonUncheckedPressed.svg();
       }
     }
 
     if (widget.value) {
-      return Assets.icon.etc.radioButtonCheckedDisabled.svg();
+      return Assets.icon.etc.a48RadioButtonCheckedDisabled.svg();
     }
 
-    return Assets.icon.etc.radioButtonUncheckedDisabled.svg();
+    return Assets.icon.etc.a48RadioButtonUncheckedDisabled.svg();
   }
 
   void _setPressed() {
