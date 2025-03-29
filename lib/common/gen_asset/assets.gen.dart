@@ -305,6 +305,22 @@ class $AssetIconEtcGen {
   SvgGenImage get a20TumblrFilled =>
       const SvgGenImage('asset/icon/etc/20_tumblr_filled.svg');
 
+  /// File path: asset/icon/etc/radio_button_checked.svg
+  SvgGenImage get radioButtonChecked =>
+      const SvgGenImage('asset/icon/etc/radio_button_checked.svg');
+
+  /// File path: asset/icon/etc/radio_button_checked_disabled.svg
+  SvgGenImage get radioButtonCheckedDisabled =>
+      const SvgGenImage('asset/icon/etc/radio_button_checked_disabled.svg');
+
+  /// File path: asset/icon/etc/radio_button_unchecked.svg
+  SvgGenImage get radioButtonUnchecked =>
+      const SvgGenImage('asset/icon/etc/radio_button_unchecked.svg');
+
+  /// File path: asset/icon/etc/radio_button_unchecked_disabled.svg
+  SvgGenImage get radioButtonUncheckedDisabled =>
+      const SvgGenImage('asset/icon/etc/radio_button_unchecked_disabled.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
     a16CloseFilled1,
@@ -312,6 +328,10 @@ class $AssetIconEtcGen {
     a20CarFilled,
     a20PetFilled,
     a20TumblrFilled,
+    radioButtonChecked,
+    radioButtonCheckedDisabled,
+    radioButtonUnchecked,
+    radioButtonUncheckedDisabled,
   ];
 }
 
