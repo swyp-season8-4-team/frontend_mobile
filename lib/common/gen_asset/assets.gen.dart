@@ -305,6 +305,30 @@ class $AssetIconEtcGen {
   SvgGenImage get a20TumblrFilled =>
       const SvgGenImage('asset/icon/etc/20_tumblr_filled.svg');
 
+  /// File path: asset/icon/etc/48_checkbox_checked.svg
+  SvgGenImage get a48CheckboxChecked =>
+      const SvgGenImage('asset/icon/etc/48_checkbox_checked.svg');
+
+  /// File path: asset/icon/etc/48_checkbox_checked_disabled.svg
+  SvgGenImage get a48CheckboxCheckedDisabled =>
+      const SvgGenImage('asset/icon/etc/48_checkbox_checked_disabled.svg');
+
+  /// File path: asset/icon/etc/48_checkbox_checked_pressed.svg
+  SvgGenImage get a48CheckboxCheckedPressed =>
+      const SvgGenImage('asset/icon/etc/48_checkbox_checked_pressed.svg');
+
+  /// File path: asset/icon/etc/48_checkbox_unchecked.svg
+  SvgGenImage get a48CheckboxUnchecked =>
+      const SvgGenImage('asset/icon/etc/48_checkbox_unchecked.svg');
+
+  /// File path: asset/icon/etc/48_checkbox_unchecked_disabled.svg
+  SvgGenImage get a48CheckboxUncheckedDisabled =>
+      const SvgGenImage('asset/icon/etc/48_checkbox_unchecked_disabled.svg');
+
+  /// File path: asset/icon/etc/48_checkbox_unchecked_pressed.svg
+  SvgGenImage get a48CheckboxUncheckedPressed =>
+      const SvgGenImage('asset/icon/etc/48_checkbox_unchecked_pressed.svg');
+
   /// File path: asset/icon/etc/48_radio_button_checked.svg
   SvgGenImage get a48RadioButtonChecked =>
       const SvgGenImage('asset/icon/etc/48_radio_button_checked.svg');
@@ -337,6 +361,12 @@ class $AssetIconEtcGen {
     a20CarFilled,
     a20PetFilled,
     a20TumblrFilled,
+    a48CheckboxChecked,
+    a48CheckboxCheckedDisabled,
+    a48CheckboxCheckedPressed,
+    a48CheckboxUnchecked,
+    a48CheckboxUncheckedDisabled,
+    a48CheckboxUncheckedPressed,
     a48RadioButtonChecked,
     a48RadioButtonCheckedDisabled,
     a48RadioButtonCheckedPressed,
