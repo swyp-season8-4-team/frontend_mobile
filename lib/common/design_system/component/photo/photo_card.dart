@@ -4,6 +4,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
+/// Photo Card
+/// https://www.figma.com/design/S1zkOn7DjDJ0b1mcPVJRil/SWYP_%E1%84%8B%E1%85%A2%E1%86%B8_1%E1%84%80%E1%85%B5_%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A5%E1%84%87%E1%85%B5?node-id=404-39738&m=dev
+
+// Photo Card에 표시될 image의 source
 enum PhotoCardSource { file, network }
 
 class CustomPhotoCard extends StatefulWidget {
@@ -22,6 +26,8 @@ class CustomPhotoCard extends StatefulWidget {
   final PhotoCardSource source;
   final String? imageUrl;
   final File? file;
+
+  // 이미지 삭제 이벤트 콜백
   final VoidCallback onRemove;
 
   @override
