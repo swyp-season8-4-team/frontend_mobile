@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
@@ -87,6 +88,10 @@ class _CustomExpandableTextState extends State<CustomExpandableText>
                               color: ScaleColorConfig.neutral40,
                             ),
                           ),
+                          const SizedBox(width: 2),
+                          _expanded
+                              ? Assets.icon.etc.a14UpLineFilled.svg()
+                              : Assets.icon.etc.a14DownLineFilled.svg(),
                         ],
                       ),
                     ),
