@@ -16,7 +16,7 @@ class CustomMainTopBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         backgroundColor: Colors.transparent,
         leadingWidth: 86,
-        leading: Image.asset(Assets.image.logo.path),
+        leading: Assets.image.logo.image(),
         actions: TopBarIcon.toList(<Widget>[
           icon.notification(onTap: () {}, alert: true),
           icon.search(onTap: () {}),
