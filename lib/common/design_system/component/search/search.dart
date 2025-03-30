@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
+/// Search
+/// https://www.figma.com/design/S1zkOn7DjDJ0b1mcPVJRil/SWYP_%E1%84%8B%E1%85%A2%E1%86%B8_1%E1%84%80%E1%85%B5_%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A5%E1%84%87%E1%85%B5?node-id=401-73710&m=dev
 class CustomSearch extends StatefulWidget {
   const CustomSearch({
     required this.onSubmitted,
@@ -23,6 +25,7 @@ class CustomSearch extends StatefulWidget {
   final TextInputType? keyboardType;
   // 지우기 이벤트 탭 이벤트 콜백
   final VoidCallback? onCloseButtonTap;
+  // 텍스트 입력 완료 이벤트 콜백
   final void Function(String) onSubmitted;
 
   @override
