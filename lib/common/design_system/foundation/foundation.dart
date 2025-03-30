@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/semantic_color_config.dart';
 import 'package:frontend_mobile/common/design_system/foundation/typography/typography_config.dart';
 
-class CustomFoundation {
+class FoundationConfig {
   static TextTheme textTheme = const TextTheme(
     // Display
     displayLarge: TypographyConfig.displayLarge,

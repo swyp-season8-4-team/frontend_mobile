@@ -104,6 +104,16 @@ class $AssetIconGen {
   $AssetIconSystemGen get system => const $AssetIconSystemGen();
 }
 
+class $AssetImageGen {
+  const $AssetImageGen();
+
+  /// File path: asset/image/logo.png
+  AssetGenImage get logo => const AssetGenImage('asset/image/logo.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [logo];
+}
+
 class $AssetIconArrowGen {
   const $AssetIconArrowGen();
 
@@ -542,6 +552,7 @@ class Assets {
   static const $AssetEtcGen etc = $AssetEtcGen();
   static const $AssetFontGen font = $AssetFontGen();
   static const $AssetIconGen icon = $AssetIconGen();
+  static const $AssetImageGen image = $AssetImageGen();
 }
 
 class AssetGenImage {
