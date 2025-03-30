@@ -27,7 +27,6 @@ class CustomSegment extends StatelessWidget {
                 labelPadding: const EdgeInsets.symmetric(
                   horizontal: 20,
                   vertical: 8,
-                  // vertical: 18,
                 ),
                 dividerColor: Colors.transparent,
                 indicator: BoxDecoration(
