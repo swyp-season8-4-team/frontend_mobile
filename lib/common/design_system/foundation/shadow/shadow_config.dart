@@ -112,9 +112,91 @@ class Level5 implements Level {
 }
 
 class ShadowConfig {
-  static Level1 level1 = Level1();
-  static Level2 level2 = Level2();
-  static Level3 level3 = Level3();
-  static Level4 level4 = Level4();
-  static Level5 level5 = Level5();
+  factory ShadowConfig() {
+    return _instance;
+  }
+
+  ShadowConfig._();
+
+  static ShadowConfig get _instance => ShadowConfig._();
+
+  /// level1이 적용된 BoxShadow
+  List<BoxShadow> get level1 => <BoxShadow>[
+    BoxShadow(
+      color: Level1().first.color,
+      offset: Offset(Level1().first.dx, Level1().first.dy),
+      spreadRadius: Level1().first.spreadRadius,
+      blurRadius: Level1().first.blurRadius,
+    ),
+    BoxShadow(
+      color: Level1().second.color,
+      offset: Offset(Level1().second.dx, Level1().second.dy),
+      spreadRadius: Level1().second.spreadRadius,
+      blurRadius: Level1().second.blurRadius,
+    ),
+  ];
+
+  /// level2가 적용된 BoxShadow
+  List<BoxShadow> get level2 => <BoxShadow>[
+    BoxShadow(
+      color: Level2().first.color,
+      offset: Offset(Level2().first.dx, Level2().first.dy),
+      spreadRadius: Level2().first.spreadRadius,
+      blurRadius: Level2().first.blurRadius,
+    ),
+    BoxShadow(
+      color: Level2().second.color,
+      offset: Offset(Level2().second.dx, Level2().second.dy),
+      spreadRadius: Level2().second.spreadRadius,
+      blurRadius: Level2().second.blurRadius,
+    ),
+  ];
+
+  /// level3이 적용된 BoxShadow
+  List<BoxShadow> get level3 => <BoxShadow>[
+    BoxShadow(
+      color: Level3().first.color,
+      offset: Offset(Level3().first.dx, Level3().first.dy),
+      spreadRadius: Level3().first.spreadRadius,
+      blurRadius: Level3().first.blurRadius,
+    ),
+    BoxShadow(
+      color: Level3().second.color,
+      offset: Offset(Level3().second.dx, Level3().second.dy),
+      spreadRadius: Level3().second.spreadRadius,
+      blurRadius: Level3().second.blurRadius,
+    ),
+  ];
+
+  /// level4가 적용된 BoxShadow
+  List<BoxShadow> get level4 => <BoxShadow>[
+    BoxShadow(
+      color: Level4().first.color,
+      offset: Offset(Level4().first.dx, Level4().first.dy),
+      spreadRadius: Level4().first.spreadRadius,
+      blurRadius: Level4().first.blurRadius,
+    ),
+    BoxShadow(
+      color: Level4().second.color,
+      offset: Offset(Level4().second.dx, Level4().second.dy),
+      spreadRadius: Level4().second.spreadRadius,
+      blurRadius: Level4().second.blurRadius,
+    ),
+  ];
+
+  /// level5가 적용된 BoxShadow
+  List<BoxShadow> get level5 => <BoxShadow>[
+    BoxShadow(
+      color: Level5().first.color,
+      offset: Offset(Level5().first.dx, Level5().first.dy),
+      spreadRadius: Level5().first.spreadRadius,
+      blurRadius: Level5().first.blurRadius,
+    ),
+    BoxShadow(
+      color: Level5().second.color,
+      offset: Offset(Level5().second.dx, Level5().second.dy),
+      spreadRadius: Level5().second.spreadRadius,
+      blurRadius: Level5().second.blurRadius,
+    ),
+  ];
 }
