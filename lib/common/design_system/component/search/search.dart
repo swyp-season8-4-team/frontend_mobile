@@ -5,6 +5,7 @@ import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
 class CustomSearch extends StatefulWidget {
   const CustomSearch({
+    required this.onSubmitted,
     this.onChanged,
     this.controller,
     this.hintText = '검색어를 입력해주세요',
@@ -22,6 +23,7 @@ class CustomSearch extends StatefulWidget {
   final TextInputType? keyboardType;
   // 지우기 이벤트 탭 이벤트 콜백
   final VoidCallback? onCloseButtonTap;
+  final void Function(String) onSubmitted;
 
   @override
   State<CustomSearch> createState() => _CustomSearchState();
@@ -48,6 +50,7 @@ class _CustomSearchState extends State<CustomSearch> {
         // 자동으로 unfocus
         FocusManager.instance.primaryFocus?.unfocus();
       },
+      onSubmitted: widget.onSubmitted,
       controller: _textEditingController,
       inputFormatters: widget.inputFormatters,
       keyboardType: widget.keyboardType,
