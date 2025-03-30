@@ -10,20 +10,17 @@ class CustomNumberBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    return FittedBox(
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(99),
-          color: ScaleColorConfig.error90,
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 4),
-        child: Align(
-          child: Text(
-            number >= 1000 ? '999+' : number.toString(),
-            style: textTheme.labelSmall?.copyWith(
-              color: ScaleColorConfig.error10,
-            ),
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(99),
+        color: ScaleColorConfig.error90,
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 4),
+      child: Text(
+        number >= 1000 ? '999+' : number.toString(),
+        style: textTheme.labelSmall?.copyWith(
+          height: 1,
+          color: ScaleColorConfig.error10,
         ),
       ),
     );
