@@ -4,6 +4,8 @@ import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
+/// Expandable Text
+/// https://www.figma.com/design/S1zkOn7DjDJ0b1mcPVJRil/SWYP_%E1%84%8B%E1%85%A2%E1%86%B8_1%E1%84%80%E1%85%B5_%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A5%E1%84%87%E1%85%B5?node-id=400-73178&m=dev
 class CustomExpandableText extends StatefulWidget {
   const CustomExpandableText({
     required this.text,
