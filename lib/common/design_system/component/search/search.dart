@@ -75,7 +75,14 @@ class _CustomSearchState extends State<CustomSearch> {
               widget.onCloseButtonTap?.call();
               _textEditingController.clear();
             },
-            child: Assets.icon.etc.a18CloseCircleFilledEnabled.svg(),
+            child: Assets.icon.system.closeCircleFill.svg(
+              width: 18,
+              height: 18,
+              colorFilter: ColorFilter.mode(
+                ScaleColorConfig.neutral50,
+                BlendMode.srcIn,
+              ),
+            ),
           ),
         ),
         suffixIconConstraints: const BoxConstraints(
