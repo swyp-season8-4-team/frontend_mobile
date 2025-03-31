@@ -10,14 +10,14 @@ void main() {
   runApp(const ProviderScope(child: MainApp()));
 }
 
-class MainApp extends StatefulWidget {
+class MainApp extends ConsumerStatefulWidget {
   const MainApp({super.key});
 
   @override
-  State<MainApp> createState() => _MainAppState();
+  ConsumerState<MainApp> createState() => _MainAppState();
 }
 
-class _MainAppState extends State<MainApp> {
+class _MainAppState extends ConsumerState<MainApp> {
   @override
   void initState() {
     super.initState();
@@ -29,8 +29,8 @@ class _MainAppState extends State<MainApp> {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: FontFamily.pretendard,
-        colorScheme: CustomFoundation.colorScheme,
-        textTheme: CustomFoundation.textTheme,
+        colorScheme: FoundationConfig.colorScheme,
+        textTheme: FoundationConfig.textTheme,
       ),
       home: const Scaffold(body: LocalLoginView()),
     );
