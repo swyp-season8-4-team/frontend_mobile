@@ -39,7 +39,7 @@ class _CustomPhotoUploaderState extends State<CustomPhotoUploader> {
         ),
         child: Center(
           child: Assets.icon.system.addCircleLine.svg(
-            colorFilter: ColorFilter.mode(
+            colorFilter: const ColorFilter.mode(
               ScaleColorConfig.neutral30,
               BlendMode.srcIn,
             ),

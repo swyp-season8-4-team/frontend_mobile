@@ -104,8 +104,22 @@ class $AssetIconGen {
   $AssetIconSystemGen get system => const $AssetIconSystemGen();
 }
 
+class $AssetImageGen {
+  const $AssetImageGen();
+
+  /// File path: asset/image/logo.png
+  AssetGenImage get logo => const AssetGenImage('asset/image/logo.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [logo];
+}
+
 class $AssetIconArrowGen {
   const $AssetIconArrowGen();
+
+  /// File path: asset/icon/arrow/18_right_line.svg
+  SvgGenImage get a18RightLine =>
+      const SvgGenImage('asset/icon/arrow/18_right_line.svg');
 
   /// File path: asset/icon/arrow/arrow_down_line.svg
   SvgGenImage get arrowDownLine =>
@@ -148,6 +162,7 @@ class $AssetIconArrowGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+    a18RightLine,
     arrowDownLine,
     arrowLeftDownLine,
     arrowLeftLine,
@@ -293,6 +308,22 @@ class $AssetIconEtcGen {
   SvgGenImage get a16CloseFilled2 =>
       const SvgGenImage('asset/icon/etc/16_close_filled_2.svg');
 
+  /// File path: asset/icon/etc/18_close_circle_filled_enabled.svg
+  SvgGenImage get a18CloseCircleFilledEnabled =>
+      const SvgGenImage('asset/icon/etc/18_close_circle_filled_enabled.svg');
+
+  /// File path: asset/icon/etc/18_close_circle_filled_pressed.svg
+  SvgGenImage get a18CloseCircleFilledPressed =>
+      const SvgGenImage('asset/icon/etc/18_close_circle_filled_pressed.svg');
+
+  /// File path: asset/icon/etc/18_close_eye_outlined.svg
+  SvgGenImage get a18CloseEyeOutlined =>
+      const SvgGenImage('asset/icon/etc/18_close_eye_outlined.svg');
+
+  /// File path: asset/icon/etc/18_open_eye_outlined.svg
+  SvgGenImage get a18OpenEyeOutlined =>
+      const SvgGenImage('asset/icon/etc/18_open_eye_outlined.svg');
+
   /// File path: asset/icon/etc/20_car_filled.svg
   SvgGenImage get a20CarFilled =>
       const SvgGenImage('asset/icon/etc/20_car_filled.svg');
@@ -309,6 +340,10 @@ class $AssetIconEtcGen {
   List<SvgGenImage> get values => [
     a16CloseFilled1,
     a16CloseFilled2,
+    a18CloseCircleFilledEnabled,
+    a18CloseCircleFilledPressed,
+    a18CloseEyeOutlined,
+    a18OpenEyeOutlined,
     a20CarFilled,
     a20PetFilled,
     a20TumblrFilled,
@@ -410,6 +445,14 @@ class $AssetIconMediaGen {
 class $AssetIconSystemGen {
   const $AssetIconSystemGen();
 
+  /// File path: asset/icon/system/16_check_circle_filled.svg
+  SvgGenImage get a16CheckCircleFilled =>
+      const SvgGenImage('asset/icon/system/16_check_circle_filled.svg');
+
+  /// File path: asset/icon/system/16_warning_circle_filled.svg
+  SvgGenImage get a16WarningCircleFilled =>
+      const SvgGenImage('asset/icon/system/16_warning_circle_filled.svg');
+
   /// File path: asset/icon/system/add_circle_fill.svg
   SvgGenImage get addCircleFill =>
       const SvgGenImage('asset/icon/system/add_circle_fill.svg');
@@ -508,6 +551,8 @@ class $AssetIconSystemGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+    a16CheckCircleFilled,
+    a16WarningCircleFilled,
     addCircleFill,
     addCircleLine,
     alertFill,
@@ -542,6 +587,7 @@ class Assets {
   static const $AssetEtcGen etc = $AssetEtcGen();
   static const $AssetFontGen font = $AssetFontGen();
   static const $AssetIconGen icon = $AssetIconGen();
+  static const $AssetImageGen image = $AssetImageGen();
 }
 
 class AssetGenImage {

@@ -108,7 +108,7 @@ class _CustomPhotoCardState extends State<CustomPhotoCard> {
                   ? Assets.icon.system.closeCircleFill.svg(
                     width: 16,
                     height: 16,
-                    colorFilter: ColorFilter.mode(
+                    colorFilter: const ColorFilter.mode(
                       ScaleColorConfig.neutral30,
                       BlendMode.srcIn,
                     ),
@@ -116,7 +116,7 @@ class _CustomPhotoCardState extends State<CustomPhotoCard> {
                   : Assets.icon.system.closeCircleFill.svg(
                     width: 16,
                     height: 16,
-                    colorFilter: ColorFilter.mode(
+                    colorFilter: const ColorFilter.mode(
                       ScaleColorConfig.neutral50,
                       BlendMode.srcIn,
                     ),

@@ -29,8 +29,8 @@ class _MainAppState extends State<MainApp> {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: FontFamily.pretendard,
-        colorScheme: CustomFoundation.colorScheme,
-        textTheme: CustomFoundation.textTheme,
+        colorScheme: FoundationConfig.colorScheme,
+        textTheme: FoundationConfig.textTheme,
       ),
       home: const Scaffold(body: LocalLoginView()),
     );

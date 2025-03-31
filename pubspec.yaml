@@ -51,6 +51,7 @@ flutter:
     - asset/icon/media/
     - asset/icon/system/
     - asset/icon/etc/
+    - asset/image/
 
   fonts:
     - family: Pretendard
