@@ -50,7 +50,7 @@ class CustomLinearProgressIndicator extends StatelessWidget {
           '${min(currentValueTruncated, maxValueTruncated)}/$maxValueTruncated',
 
           // TODO: 타이포그래피 적용 필요
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             height: 20 / 14,
             color: ScaleColorConfig.neutral40,

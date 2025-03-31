@@ -103,7 +103,7 @@ class _CustomInputBoxState extends State<CustomInputBox> {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    final TextStyle labelTextStyle = TextStyle(
+    const TextStyle labelTextStyle = TextStyle(
       fontWeight: FontWeightConfig.medium,
       fontSize: 14,
       height: 18 / 14,
@@ -111,7 +111,7 @@ class _CustomInputBoxState extends State<CustomInputBox> {
       letterSpacing: -0.28,
     );
 
-    final TextStyle feedbackTextStyle = TextStyle(
+    const TextStyle feedbackTextStyle = TextStyle(
       fontWeight: FontWeightConfig.regular,
       fontSize: 14,
       height: 17 / 14,
@@ -190,7 +190,9 @@ class _CustomInputBoxState extends State<CustomInputBox> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6),
-                  borderSide: BorderSide(color: ScaleColorConfig.neutral30),
+                  borderSide: const BorderSide(
+                    color: ScaleColorConfig.neutral30,
+                  ),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6),

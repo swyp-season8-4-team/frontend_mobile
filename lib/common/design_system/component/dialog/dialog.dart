@@ -87,7 +87,7 @@ class CustomDialog extends StatelessWidget {
 
                 return ScaleColorConfig.neutral100;
               }),
-              foregroundColor: WidgetStatePropertyAll<Color>(
+              foregroundColor: const WidgetStatePropertyAll<Color>(
                 ScaleColorConfig.success50,
               ),
               shape: const WidgetStatePropertyAll<OutlinedBorder>(
