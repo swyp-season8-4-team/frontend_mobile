@@ -8,13 +8,13 @@ import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 /// https://www.figma.com/design/Cmw8GLJYfuUVf9A3QNxqgW/SWYP_%EC%95%B1_1%EA%B8%B0_%EB%94%94%EC%A0%80%EB%B9%84?node-id=400-73177&t=3ArDzZQuJj0XGk5f-4
 /// ---------------------------
 /// [Input Box를 사용하고 싶은 경우]
-/// CustomInputBox를 호출
+/// CustomInputBox.input를 호출
 ///
 /// [버튼형 Input Box를 사용하고 싶은 경우]
-/// CustomInputBox.picker를 호출
+/// CustomInputBox.button을 호출
 
 enum InputBoxType {
-  // 사용자가 직접 텍스트를 입력할 수 있는 input (default)
+  // 사용자가 직접 텍스트를 입력할 수 있는 input
   input,
 
   // 사용자가 직접 텍스트를 입력하지 않는 버튼형 input
@@ -84,7 +84,6 @@ class CustomInputBox extends StatefulWidget {
   // 텍스트 암호화 탭 이벤트 이벤트 콜백
   final VoidCallback? onVisibilityButtonTap;
   // input box type
-  // default : direct
   final InputBoxType type;
   @override
   State<CustomInputBox> createState() => _CustomInputBoxState();
