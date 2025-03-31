@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/common/design_system/foundation/shadow/shadow_config.dart';
 
 /// Dialog
 /// https://www.figma.com/design/S1zkOn7DjDJ0b1mcPVJRil/SWYP_%E1%84%8B%E1%85%A2%E1%86%B8_1%E1%84%80%E1%85%B5_%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A5%E1%84%87%E1%85%B5?node-id=40000088-62443&t=7TVdidIqbT7gZsMY-4
@@ -19,6 +20,7 @@ class CustomDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ShadowConfig shadow = ShadowConfig();
     return Align(
       child: Material(
         color: Colors.transparent,
@@ -31,20 +33,7 @@ class CustomDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: ScaleColorConfig.primary100,
 
-                // TODO: shadow04 적용 필요
-                boxShadow: const <BoxShadow>[
-                  BoxShadow(
-                    color: Color(0x4C282014),
-                    blurRadius: 3,
-                    offset: Offset(0, 2),
-                  ),
-                  BoxShadow(
-                    color: Color(0x26282014),
-                    blurRadius: 10,
-                    offset: Offset(0, 6),
-                    spreadRadius: 4,
-                  ),
-                ],
+                boxShadow: shadow.level4,
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
