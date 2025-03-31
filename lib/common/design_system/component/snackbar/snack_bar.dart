@@ -58,6 +58,7 @@ class CustomSnackBar extends StatelessWidget {
 
   Widget _getContentArea({required BuildContext context}) {
     // right item 사용 여부
+    // right item : 스낵바 우측에 표시되는 close item 및 action item
     final bool hasRightItem = closeButton != null || actionButton != null;
 
     const TextStyle contentTextStyle = TextStyle(
