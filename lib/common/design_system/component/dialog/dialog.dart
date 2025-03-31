@@ -8,47 +8,55 @@ class CustomDialog extends StatelessWidget {
     required this.description,
     this.title,
     this.onConfirmTap,
+    this.footer,
     super.key,
   });
 
   final String? title;
   final String description;
   final VoidCallback? onConfirmTap;
+  final CustomDialogFooterButton? footer;
 
   @override
   Widget build(BuildContext context) {
     return Align(
       child: Material(
         color: Colors.transparent,
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: ScaleColorConfig.primary100,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: ScaleColorConfig.primary100,
 
-            // TODO: shadow04 적용 필요
-            boxShadow: const <BoxShadow>[
-              BoxShadow(
-                color: Color(0x4C282014),
-                blurRadius: 3,
-                offset: Offset(0, 2),
+                // TODO: shadow04 적용 필요
+                boxShadow: const <BoxShadow>[
+                  BoxShadow(
+                    color: Color(0x4C282014),
+                    blurRadius: 3,
+                    offset: Offset(0, 2),
+                  ),
+                  BoxShadow(
+                    color: Color(0x26282014),
+                    blurRadius: 10,
+                    offset: Offset(0, 6),
+                    spreadRadius: 4,
+                  ),
+                ],
               ),
-              BoxShadow(
-                color: Color(0x26282014),
-                blurRadius: 10,
-                offset: Offset(0, 6),
-                spreadRadius: 4,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  _buildContent(context),
+                  _buildDivider(context),
+                  _buildAction(context),
+                ],
               ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              _buildContent(context),
-              _buildDivider(context),
-              _buildAction(context),
-            ],
-          ),
+            ),
+            if (footer != null) _buildFooter(context),
+          ],
         ),
       ),
     );
@@ -151,4 +159,34 @@ class CustomDialog extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildFooter(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: GestureDetector(
+        onTap: footer!.onTap,
+        behavior: HitTestBehavior.translucent,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: Text(
+            footer!.text,
+            style: textTheme.titleSmall?.copyWith(
+              color: ScaleColorConfig.primary100,
+              decoration: TextDecoration.underline,
+              decorationColor: ScaleColorConfig.primary100,
+              decorationThickness: 1,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomDialogFooterButton {
+  const CustomDialogFooterButton({required this.text, required this.onTap});
+  final String text;
+  final void Function() onTap;
 }
