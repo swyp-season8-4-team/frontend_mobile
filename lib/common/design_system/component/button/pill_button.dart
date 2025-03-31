@@ -74,7 +74,7 @@ class CustomPillButton extends StatelessWidget {
             colorFilter:
                 !disabled
                     ? null
-                    : ColorFilter.mode(
+                    : const ColorFilter.mode(
                       ScaleColorConfig.neutral50,
                       BlendMode.srcIn,
                     ),
