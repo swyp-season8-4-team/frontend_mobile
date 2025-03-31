@@ -22,6 +22,8 @@ class CustomLinearProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
+    final int currentValueTruncated = currentValue.toInt();
+    final int maxValueTruncated = maxValue.toInt();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
@@ -45,7 +47,7 @@ class CustomLinearProgressIndicator extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          '${currentValue.toInt()}/${maxValue.toInt()}',
+          '${min(currentValueTruncated, maxValueTruncated)}/$maxValueTruncated',
 
           // TODO: 타이포그래피 적용 필요
           style: TextStyle(
