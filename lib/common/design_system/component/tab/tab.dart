@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_mobile/common/design_system/component/badge/number_badge.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 
 class TabItem {
@@ -42,27 +43,27 @@ class _CustomTabState extends State<CustomTab>
   Widget _tab({required TabItem item, required int index}) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(item.label),
+    return Container(
+      width: 79,
+      margin: const EdgeInsets.only(right: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(item.label),
 
-        if (item.number != null) ...<Widget>[
-          const SizedBox(width: 4),
-          Text(
-            item.number.toString(),
-            style:
-                _tabController.index == index
-                    /// TODO: 숫자 뱃지 적용할 예정
-                    ? textTheme.labelSmall?.copyWith(
-                      color: ScaleColorConfig.error50,
-                    )
-                    : textTheme.labelSmall?.copyWith(
-                      color: ScaleColorConfig.neutral50,
-                    ),
-          ),
+          if (item.number != null) ...<Widget>[
+            const SizedBox(width: 4),
+            _tabController.index == index
+                ? CustomNumberBadge(number: item.number!)
+                : Text(
+                  item.number! >= 1000 ? '999+' : item.number.toString(),
+                  style: textTheme.labelSmall?.copyWith(
+                    color: ScaleColorConfig.neutral50,
+                  ),
+                ),
+          ],
         ],
-      ],
+      ),
     );
   }
 
@@ -74,13 +75,15 @@ class _CustomTabState extends State<CustomTab>
       color: ScaleColorConfig.surface90,
       child: Container(
         height: 40,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(bottom: BorderSide(color: ScaleColorConfig.surface70)),
         ),
         child: TabBar(
           controller: _tabController,
+          isScrollable: true,
+          tabAlignment: TabAlignment.center,
           indicatorSize: TabBarIndicatorSize.tab,
-          indicator: BoxDecoration(
+          indicator: const BoxDecoration(
             color: ScaleColorConfig.surface90,
             border: Border(
               bottom: BorderSide(color: ScaleColorConfig.primary70, width: 2.5),
@@ -88,6 +91,7 @@ class _CustomTabState extends State<CustomTab>
           ),
           dividerColor: Colors.transparent,
           padding: const EdgeInsets.symmetric(horizontal: 16),
+          labelPadding: EdgeInsets.zero,
           labelStyle: textTheme.labelLarge?.copyWith(
             color: ScaleColorConfig.neutral30,
           ),
@@ -97,7 +101,7 @@ class _CustomTabState extends State<CustomTab>
           overlayColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
             return ScaleColorConfig.surface80;
           }),
-          tabs: List<Tab>.generate(widget.list.length, (int index) {
+          tabs: List<Widget>.generate(widget.list.length, (int index) {
             final TabItem item = widget.list[index];
 
             return Tab(child: _tab(item: item, index: index));
