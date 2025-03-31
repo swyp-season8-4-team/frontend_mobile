@@ -293,10 +293,6 @@ class $AssetIconEtcGen {
   SvgGenImage get a16CloseFilled2 =>
       const SvgGenImage('asset/icon/etc/16_close_filled_2.svg');
 
-  /// File path: asset/icon/etc/16_close_filled_3.svg
-  SvgGenImage get a16CloseFilled3 =>
-      const SvgGenImage('asset/icon/etc/16_close_filled_3.svg');
-
   /// File path: asset/icon/etc/20_car_filled.svg
   SvgGenImage get a20CarFilled =>
       const SvgGenImage('asset/icon/etc/20_car_filled.svg');
@@ -313,7 +309,6 @@ class $AssetIconEtcGen {
   List<SvgGenImage> get values => [
     a16CloseFilled1,
     a16CloseFilled2,
-    a16CloseFilled3,
     a20CarFilled,
     a20PetFilled,
     a20TumblrFilled,
