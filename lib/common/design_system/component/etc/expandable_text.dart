@@ -92,8 +92,22 @@ class _CustomExpandableTextState extends State<CustomExpandableText>
                           ),
                           const SizedBox(width: 2),
                           _expanded
-                              ? Assets.icon.etc.a14UpLineFilled.svg()
-                              : Assets.icon.etc.a14DownLineFilled.svg(),
+                              ? Assets.icon.arrow.upLine.svg(
+                                width: 14,
+                                height: 14,
+                                colorFilter: ColorFilter.mode(
+                                  ScaleColorConfig.neutral40,
+                                  BlendMode.srcIn,
+                                ),
+                              )
+                              : Assets.icon.arrow.downLine.svg(
+                                width: 14,
+                                height: 14,
+                                colorFilter: ColorFilter.mode(
+                                  ScaleColorConfig.neutral40,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
                         ],
                       ),
                     ),
