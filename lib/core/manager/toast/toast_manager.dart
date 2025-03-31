@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 final Provider<ToastManager> toastManagerProvider = Provider<ToastManager>((
   Ref ref,
 ) {
-  // main.dart에서 override
-  throw Exception();
+  return ToastManager(fToast: FToast());
 });
 
 /// 토스트를 표시하고 제거하는 Manager

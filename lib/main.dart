@@ -1,25 +1,13 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:frontend_mobile/common/design_system/foundation/foundation.dart';
 import 'package:frontend_mobile/common/gen_asset/fonts.gen.dart';
-import 'package:frontend_mobile/core/manager/toast/toast_manager.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(
-    ProviderScope(
-      overrides: <Override>[
-        // ToastManagerProvider를 override
-        toastManagerProvider.overrideWith((Ref<ToastManager> ref) {
-          return ToastManager(fToast: FToast());
-        }),
-      ],
-      child: const MainApp(),
-    ),
-  );
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 class MainApp extends ConsumerStatefulWidget {
