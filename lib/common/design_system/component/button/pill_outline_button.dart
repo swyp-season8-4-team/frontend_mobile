@@ -71,21 +71,21 @@ class _CustomPillOutlineButtonState extends State<CustomPillOutlineButton> {
       WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         /// Presssed
         if (states.contains(WidgetState.pressed)) {
-          return BorderSide(color: ScaleColorConfig.neutral50);
+          return const BorderSide(color: ScaleColorConfig.neutral50);
         }
 
         /// Selected
         if (_isSelected) {
-          return BorderSide(color: ScaleColorConfig.primary70);
+          return const BorderSide(color: ScaleColorConfig.primary70);
         }
 
         /// Disabled
         if (states.contains(WidgetState.disabled)) {
-          return BorderSide(color: ScaleColorConfig.neutral70);
+          return const BorderSide(color: ScaleColorConfig.neutral70);
         }
 
         /// Enabled
-        return BorderSide(color: ScaleColorConfig.neutral50);
+        return const BorderSide(color: ScaleColorConfig.neutral50);
       });
 
   void _onPressed() {
@@ -128,7 +128,7 @@ class _CustomPillOutlineButtonState extends State<CustomPillOutlineButton> {
                 colorFilter:
                     !widget.disabled
                         ? null
-                        : ColorFilter.mode(
+                        : const ColorFilter.mode(
                           ScaleColorConfig.neutral50,
                           BlendMode.srcIn,
                         ),
