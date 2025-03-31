@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_mobile/common/design_system/component/chip/custom_chip.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/common/design_system/foundation/shadow/shadow_config.dart';
 
 class CustomFloatingChip extends StatefulWidget {
   const CustomFloatingChip({
@@ -45,13 +47,15 @@ class _CustomFloatingChipState extends State<CustomFloatingChip> {
 
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
-    /// TODO: Shadow 정의되면 적용해야 함
-    return RawChip(
-      color: _color,
-      shape: RoundedRectangleBorder(
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: !_isSelected ? ShadowConfig().level1 : ShadowConfig().level2,
         borderRadius: BorderRadius.circular(24),
+      ),
+      child: CustomChip(
+        color: _color,
+        label: widget.label,
+        onPressed: _onPressed,
         side: BorderSide(
           color:
               !_isSelected
@@ -59,15 +63,6 @@ class _CustomFloatingChipState extends State<CustomFloatingChip> {
                   : ScaleColorConfig.primary70,
         ),
       ),
-      label: Text(widget.label),
-      labelStyle: textTheme.labelLarge?.copyWith(
-        color: ScaleColorConfig.primary20,
-      ),
-      onPressed: _onPressed,
-      visualDensity: const VisualDensity(vertical: -4),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      labelPadding: EdgeInsets.zero,
-      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     );
   }
 }
