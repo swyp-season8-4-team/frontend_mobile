@@ -21,7 +21,7 @@ class CustomFillButton extends StatelessWidget {
       WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         /// Presssed
         if (states.contains(WidgetState.pressed)) {
-          return primary ? ScaleColorConfig.primary20 : ScaleColorConfig.white;
+          return primary ? ScaleColorConfig.primary20 : Colors.white;
         }
 
         /// Disabled
@@ -30,7 +30,7 @@ class CustomFillButton extends StatelessWidget {
         }
 
         /// Enabled
-        return primary ? ScaleColorConfig.primary20 : ScaleColorConfig.white;
+        return primary ? ScaleColorConfig.primary20 : Colors.white;
       });
 
   WidgetStateProperty<Color?> get _backgroundColor =>
