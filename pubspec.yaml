@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   app_tracking_transparency: ^2.0.6+1
+  cached_network_image: ^3.4.1
   dio: ^5.8.0+1
   envied: ^1.1.1
   flutter:
@@ -16,6 +17,7 @@ dependencies:
   flutter_svg: ^2.0.17
   fluttertoast: ^8.2.12
   freezed_annotation: 2.4.4
+  image_picker: ^1.1.2
   intl: ^0.20.2
   json_annotation: ^4.9.0
   lottie: ^3.3.1

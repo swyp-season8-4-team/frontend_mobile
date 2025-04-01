@@ -68,5 +68,9 @@
     <string>개인 맞춤형 광고를 게재하는 데 사용됩니다</string>
     <key>ITSAppUsesNonExemptEncryption</key>
     <false/>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app required NSPhotoLibraryUsageDescription permission</string>
+    <key>NSCameraUsageDescription</key>
+    <string>This app required NSCameraUsageDescription permission</string>
 </dict>
 </plist>
