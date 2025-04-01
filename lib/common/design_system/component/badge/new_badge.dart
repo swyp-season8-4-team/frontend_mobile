@@ -10,7 +10,7 @@ class CustomNewBadge extends StatelessWidget {
 
     return Container(
       width: 16,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         shape: BoxShape.circle,
         color: ScaleColorConfig.error40,
       ),
