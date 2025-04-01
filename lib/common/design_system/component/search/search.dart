@@ -78,7 +78,7 @@ class _CustomSearchState extends State<CustomSearch> {
             child: Assets.icon.system.closeCircleFill.svg(
               width: 18,
               height: 18,
-              colorFilter: ColorFilter.mode(
+              colorFilter: const ColorFilter.mode(
                 ScaleColorConfig.neutral50,
                 BlendMode.srcIn,
               ),
@@ -92,7 +92,7 @@ class _CustomSearchState extends State<CustomSearch> {
         prefixIcon: Padding(
           padding: const EdgeInsets.only(left: 16, right: 10),
           child: Assets.icon.file.search1Line.svg(
-            colorFilter: ColorFilter.mode(
+            colorFilter: const ColorFilter.mode(
               ScaleColorConfig.neutral40,
               BlendMode.srcIn,
             ),
@@ -114,7 +114,7 @@ class _CustomSearchState extends State<CustomSearch> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6),
-          borderSide: BorderSide(color: ScaleColorConfig.neutral30),
+          borderSide: const BorderSide(color: ScaleColorConfig.neutral30),
         ),
         hintText: widget.hintText,
         hintStyle: textTheme.bodyMedium?.copyWith(
