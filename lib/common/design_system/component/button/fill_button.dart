@@ -5,13 +5,16 @@ class CustomFillButton extends StatelessWidget {
   const CustomFillButton({
     required this.label,
     required this.onPressed,
+    this.width,
     this.disabled = false,
     this.primary = true,
+
     super.key,
   });
 
   final String label;
   final VoidCallback? onPressed;
+  final double? width;
   final bool disabled;
 
   /// primary가 true면 Honey, false면 Olive
@@ -58,13 +61,13 @@ class CustomFillButton extends StatelessWidget {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return SizedBox(
-      width: 159,
+      width: width ?? double.infinity,
       child: FilledButton(
         onPressed: !disabled ? onPressed : null,
         style: FilledButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
           minimumSize: Size.zero,
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10.5),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           elevation: 0,
           textStyle: textTheme.titleMedium,
