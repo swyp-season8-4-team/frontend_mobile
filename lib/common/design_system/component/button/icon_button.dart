@@ -8,12 +8,16 @@ class CustomIconButton extends StatefulWidget {
   const CustomIconButton({
     required this.onPressed,
     required this.svg,
+    required this.isSelected,
+    required this.selectedHandler,
     this.disabled = false,
     super.key,
   });
 
   final VoidCallback? onPressed;
   final SvgGenImage svg;
+  final bool isSelected;
+  final VoidCallback? selectedHandler;
   final bool disabled;
 
   @override
@@ -22,53 +26,51 @@ class CustomIconButton extends StatefulWidget {
 
 class _CustomIconButtonState extends State<CustomIconButton> {
   Color _iconColor = Colors.black;
-  bool _isSelected = false;
 
-  WidgetStateProperty<Color?>? get _foregroundColor =>
-      WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          /// Presssed
-          if (states.contains(WidgetState.pressed)) {
-            setState(() {
-              _iconColor = ScaleColorConfig.neutral40;
-            });
-            return;
-          }
-
-          /// Selected
-          if (_isSelected) {
-            setState(() {
-              _iconColor = ScaleColorConfig.primary20;
-            });
-            return;
-          }
-
-          /// Disabled
-          if (states.contains(WidgetState.disabled)) {
-            setState(() {
-              _iconColor = ScaleColorConfig.neutral40;
-            });
-            return;
-          }
-
-          /// Enabled
+  void _iconColorHandler({required Set<WidgetState> states}) =>
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        /// Presssed
+        if (states.contains(WidgetState.pressed)) {
           setState(() {
             _iconColor = ScaleColorConfig.neutral40;
           });
-        });
+          return;
+        }
 
-        return null;
+        /// Selected
+        if (widget.isSelected) {
+          setState(() {
+            _iconColor = ScaleColorConfig.primary20;
+          });
+          return;
+        }
+
+        /// Disabled
+        if (states.contains(WidgetState.disabled)) {
+          setState(() {
+            _iconColor = ScaleColorConfig.neutral40;
+          });
+          return;
+        }
+
+        /// Enabled
+        setState(() {
+          _iconColor = ScaleColorConfig.neutral40;
+        });
       });
 
   WidgetStateProperty<Color?>? get _backgroundColor =>
       WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        /// 아이콘 색을 컨트롤하는 핸들러
+        _iconColorHandler(states: states);
+
         /// Presssed
         if (states.contains(WidgetState.pressed)) {
           return ScaleColorConfig.neutral60;
         }
 
         /// Selected
-        if (_isSelected) {
+        if (widget.isSelected) {
           return ScaleColorConfig.primary80;
         }
 
@@ -86,9 +88,9 @@ class _CustomIconButtonState extends State<CustomIconButton> {
       widget.onPressed!();
     }
 
-    setState(() {
-      _isSelected = !_isSelected;
-    });
+    if (widget.selectedHandler != null) {
+      widget.selectedHandler!();
+    }
   }
 
   @override
@@ -108,10 +110,7 @@ class _CustomIconButtonState extends State<CustomIconButton> {
           padding: const EdgeInsets.all(4),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           elevation: 0,
-        ).copyWith(
-          foregroundColor: _foregroundColor,
-          backgroundColor: _backgroundColor,
-        ),
+        ).copyWith(backgroundColor: _backgroundColor),
         icon: Padding(
           padding: const EdgeInsets.all(4),
           child: SvgPicture.asset(
