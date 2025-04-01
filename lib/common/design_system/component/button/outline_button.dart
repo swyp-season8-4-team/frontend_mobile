@@ -8,6 +8,7 @@ class CustomOutlineButton extends StatelessWidget {
     required this.label,
     required this.onPressed,
     required this.svg,
+    this.width,
     this.disabled = false,
     this.large = true,
     super.key,
@@ -16,6 +17,7 @@ class CustomOutlineButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
   final SvgGenImage svg;
+  final double? width;
   final bool disabled;
 
   /// 사이즈를 구분할 때 사용하는 변수
@@ -74,9 +76,8 @@ class CustomOutlineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    return Container(
-      width: large ? 159 : null,
-      constraints: const BoxConstraints(maxWidth: 159, minWidth: 79),
+    return SizedBox(
+      width: width,
       child: OutlinedButton(
         onPressed: !disabled ? onPressed : null,
         style: OutlinedButton.styleFrom(
@@ -106,10 +107,10 @@ class CustomOutlineButton extends StatelessWidget {
                       ),
             ),
             const SizedBox(width: 10),
-            if (large)
+            if (width != null)
               Expanded(child: Text(label, textAlign: TextAlign.center))
             else
-              Flexible(child: Text(label, textAlign: TextAlign.center)),
+              Text(label, textAlign: TextAlign.center),
           ],
         ),
       ),
