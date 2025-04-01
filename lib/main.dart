@@ -31,6 +31,8 @@ class _MainAppState extends ConsumerState<MainApp> {
         fontFamily: FontFamily.pretendard,
         colorScheme: FoundationConfig.colorScheme,
         textTheme: FoundationConfig.textTheme,
+        highlightColor: Colors.transparent,
+        splashFactory: NoSplash.splashFactory,
       ),
       home: const Scaffold(body: LocalLoginView()),
     );
