@@ -9,10 +9,20 @@ class TabItem {
   final int? number;
 }
 
+class TabType {
+  TabType({required this.tabItem, required this.child});
+
+  /// TabBar 안에 들어가는 tabItem
+  final TabItem tabItem;
+
+  /// TabBarView에 들어가는 위젯
+  final Widget child;
+}
+
 class CustomTab extends StatefulWidget {
   const CustomTab({required this.list, super.key});
 
-  final List<TabItem> list;
+  final List<TabType> list;
 
   @override
   State<CustomTab> createState() => _CustomTabState();
@@ -67,46 +77,61 @@ class _CustomTabState extends State<CustomTab>
     );
   }
 
+  Widget _tabBar({required TextTheme textTheme}) {
+    return Container(
+      height: 40,
+      decoration: const BoxDecoration(
+        border: Border(bottom: BorderSide(color: ScaleColorConfig.surface70)),
+      ),
+      child: TabBar(
+        controller: _tabController,
+        isScrollable: true,
+        tabAlignment: TabAlignment.center,
+        indicatorSize: TabBarIndicatorSize.tab,
+        indicator: const BoxDecoration(
+          color: ScaleColorConfig.surface90,
+          border: Border(
+            bottom: BorderSide(color: ScaleColorConfig.primary70, width: 2.5),
+          ),
+        ),
+        dividerColor: Colors.transparent,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        labelPadding: EdgeInsets.zero,
+        labelStyle: textTheme.labelLarge?.copyWith(
+          color: ScaleColorConfig.neutral30,
+        ),
+        unselectedLabelStyle: textTheme.labelLarge?.copyWith(
+          color: ScaleColorConfig.neutral30,
+        ),
+        overlayColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
+          return ScaleColorConfig.surface80;
+        }),
+        tabs: List<Widget>.generate(widget.list.length, (int index) {
+          final TabType tabType = widget.list[index];
+
+          return Tab(child: _tab(item: tabType.tabItem, index: index));
+        }),
+      ),
+    );
+  }
+
+  Widget _tabBarView() {
+    return Expanded(
+      child: TabBarView(
+        controller: _tabController,
+        children: widget.list.map((TabType e) => e.child).toList(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return Material(
       color: ScaleColorConfig.surface90,
-      child: Container(
-        height: 40,
-        decoration: const BoxDecoration(
-          border: Border(bottom: BorderSide(color: ScaleColorConfig.surface70)),
-        ),
-        child: TabBar(
-          controller: _tabController,
-          isScrollable: true,
-          tabAlignment: TabAlignment.center,
-          indicatorSize: TabBarIndicatorSize.tab,
-          indicator: const BoxDecoration(
-            color: ScaleColorConfig.surface90,
-            border: Border(
-              bottom: BorderSide(color: ScaleColorConfig.primary70, width: 2.5),
-            ),
-          ),
-          dividerColor: Colors.transparent,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          labelPadding: EdgeInsets.zero,
-          labelStyle: textTheme.labelLarge?.copyWith(
-            color: ScaleColorConfig.neutral30,
-          ),
-          unselectedLabelStyle: textTheme.labelLarge?.copyWith(
-            color: ScaleColorConfig.neutral30,
-          ),
-          overlayColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
-            return ScaleColorConfig.surface80;
-          }),
-          tabs: List<Widget>.generate(widget.list.length, (int index) {
-            final TabItem item = widget.list[index];
-
-            return Tab(child: _tab(item: item, index: index));
-          }),
-        ),
+      child: Column(
+        children: <Widget>[_tabBar(textTheme: textTheme), _tabBarView()],
       ),
     );
   }
