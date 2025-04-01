@@ -12,10 +12,18 @@ class SegmentType {
 }
 
 class CustomSegment extends StatelessWidget {
-  const CustomSegment({required this.first, required this.second, super.key});
+  const CustomSegment({
+    required this.first,
+    required this.second,
+    this.physics,
+    super.key,
+  });
 
   final SegmentType first;
   final SegmentType second;
+
+  /// TabBarView physics
+  final ScrollPhysics? physics;
 
   BorderRadius get _borderRadius => BorderRadius.circular(6);
 
@@ -69,7 +77,10 @@ class CustomSegment extends StatelessWidget {
 
   Widget _tabBarView() {
     return Expanded(
-      child: TabBarView(children: <Widget>[first.child, second.child]),
+      child: TabBarView(
+        physics: physics,
+        children: <Widget>[first.child, second.child],
+      ),
     );
   }
 
