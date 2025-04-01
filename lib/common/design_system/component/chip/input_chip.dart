@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend_mobile/common/design_system/component/chip/custom_chip.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
@@ -48,8 +47,7 @@ class _CustomInputChipState extends State<CustomInputChip> {
       label: widget.label,
       onPressed: widget.onPressed,
       side: const BorderSide(color: ScaleColorConfig.neutral50),
-      trailing: SvgPicture.asset(
-        Assets.icon.system.closeCircleFill.path,
+      trailing: Assets.icon.system.closeCircleFill.svg(
         width: 16,
         colorFilter: ColorFilter.mode(_iconColor, BlendMode.srcIn),
       ),
