@@ -3,10 +3,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
-class CustomPillOutlineButton extends StatefulWidget {
+class CustomPillOutlineButton extends StatelessWidget {
   const CustomPillOutlineButton({
     required this.label,
     required this.onPressed,
+    required this.isSelected,
+    required this.selectedHandler,
+    this.width,
     this.disabled = false,
     this.svg,
     super.key,
@@ -14,16 +17,11 @@ class CustomPillOutlineButton extends StatefulWidget {
 
   final String label;
   final VoidCallback? onPressed;
+  final bool isSelected;
+  final VoidCallback? selectedHandler;
+  final double? width;
   final bool disabled;
   final SvgGenImage? svg;
-
-  @override
-  State<CustomPillOutlineButton> createState() =>
-      _CustomPillOutlineButtonState();
-}
-
-class _CustomPillOutlineButtonState extends State<CustomPillOutlineButton> {
-  bool _isSelected = false;
 
   WidgetStateProperty<Color?> get _foregroundColor =>
       WidgetStateProperty.resolveWith((Set<WidgetState> states) {
@@ -33,7 +31,7 @@ class _CustomPillOutlineButtonState extends State<CustomPillOutlineButton> {
         }
 
         /// Selected
-        if (_isSelected) {
+        if (isSelected) {
           return ScaleColorConfig.primary20;
         }
 
@@ -54,7 +52,7 @@ class _CustomPillOutlineButtonState extends State<CustomPillOutlineButton> {
         }
 
         /// Selected
-        if (_isSelected) {
+        if (isSelected) {
           return ScaleColorConfig.primary90;
         }
 
@@ -75,7 +73,7 @@ class _CustomPillOutlineButtonState extends State<CustomPillOutlineButton> {
         }
 
         /// Selected
-        if (_isSelected) {
+        if (isSelected) {
           return const BorderSide(color: ScaleColorConfig.primary70);
         }
 
@@ -89,13 +87,13 @@ class _CustomPillOutlineButtonState extends State<CustomPillOutlineButton> {
       });
 
   void _onPressed() {
-    if (widget.onPressed != null) {
-      widget.onPressed!();
+    if (onPressed != null) {
+      onPressed!();
     }
 
-    setState(() {
-      _isSelected = !_isSelected;
-    });
+    if (selectedHandler != null) {
+      selectedHandler!();
+    }
   }
 
   @override
@@ -103,9 +101,9 @@ class _CustomPillOutlineButtonState extends State<CustomPillOutlineButton> {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return SizedBox(
-      width: 159,
+      width: width ?? double.infinity,
       child: OutlinedButton(
-        onPressed: !widget.disabled ? _onPressed : null,
+        onPressed: !disabled ? _onPressed : null,
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(99),
@@ -122,11 +120,11 @@ class _CustomPillOutlineButtonState extends State<CustomPillOutlineButton> {
         ),
         child: Row(
           children: <Widget>[
-            if (widget.svg != null) ...<Widget>[
+            if (svg != null) ...<Widget>[
               SvgPicture.asset(
-                widget.svg!.path,
+                svg!.path,
                 colorFilter:
-                    !widget.disabled
+                    !disabled
                         ? null
                         : const ColorFilter.mode(
                           ScaleColorConfig.neutral50,
@@ -135,7 +133,7 @@ class _CustomPillOutlineButtonState extends State<CustomPillOutlineButton> {
               ),
               const SizedBox(width: 10),
             ],
-            Expanded(child: Text(widget.label, textAlign: TextAlign.center)),
+            Expanded(child: Text(label, textAlign: TextAlign.center)),
           ],
         ),
       ),
