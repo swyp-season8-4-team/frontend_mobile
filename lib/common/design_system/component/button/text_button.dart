@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
-class CustomTextButton extends StatefulWidget {
+class CustomTextButton extends StatelessWidget {
   const CustomTextButton.svg({
     required this.label,
     required this.onPressed,
@@ -26,29 +26,24 @@ class CustomTextButton extends StatefulWidget {
   final SvgGenImage? svg;
   final bool underline;
 
-  @override
-  State<CustomTextButton> createState() => _CustomTextButtonState();
-}
-
-class _CustomTextButtonState extends State<CustomTextButton> {
   WidgetStateProperty<Color?> get _foregroundColor =>
       WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         /// Presssed
         if (states.contains(WidgetState.pressed)) {
-          return widget.svg != null
+          return svg != null
               ? ScaleColorConfig.primary60
               : ScaleColorConfig.secondary10;
         }
 
         /// Disabled
         if (states.contains(WidgetState.disabled)) {
-          return widget.svg != null
+          return svg != null
               ? ScaleColorConfig.neutral50
               : ScaleColorConfig.neutral40;
         }
 
         /// Enabled
-        return widget.svg != null
+        return svg != null
             ? ScaleColorConfig.primary60
             : ScaleColorConfig.secondary30;
       });
@@ -57,27 +52,23 @@ class _CustomTextButtonState extends State<CustomTextButton> {
       WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         /// Presssed
         if (states.contains(WidgetState.pressed)) {
-          return widget.svg != null
-              ? ScaleColorConfig.surface80
-              : Colors.transparent;
+          return svg != null ? ScaleColorConfig.surface80 : Colors.transparent;
         }
 
         /// Disabled
         if (states.contains(WidgetState.disabled)) {
-          return widget.svg != null ? Colors.transparent : null;
+          return svg != null ? Colors.transparent : null;
         }
 
         /// Enabled
         return Colors.transparent;
       });
 
-  WidgetStateProperty<TextStyle?> get _textStyle =>
+  WidgetStateProperty<TextStyle?> _textStyle({required TextTheme textTheme}) =>
       WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-        final TextTheme textTheme = Theme.of(context).textTheme;
-
         /// Presssed
         if (states.contains(WidgetState.pressed)) {
-          return widget.svg != null
+          return svg != null
               ? textTheme.bodySmall
               : textTheme.labelLarge?.copyWith(
                 decoration: TextDecoration.underline,
@@ -87,7 +78,7 @@ class _CustomTextButtonState extends State<CustomTextButton> {
 
         /// Disabled
         if (states.contains(WidgetState.disabled)) {
-          return widget.svg != null
+          return svg != null
               ? textTheme.bodySmall
               : textTheme.labelLarge?.copyWith(
                 decoration: TextDecoration.underline,
@@ -96,7 +87,7 @@ class _CustomTextButtonState extends State<CustomTextButton> {
         }
 
         /// Enabled
-        return widget.svg != null
+        return svg != null
             ? textTheme.bodySmall
             : textTheme.labelLarge?.copyWith(
               decoration: TextDecoration.underline,
@@ -106,8 +97,10 @@ class _CustomTextButtonState extends State<CustomTextButton> {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
     return TextButton(
-      onPressed: !widget.disabled ? widget.onPressed : null,
+      onPressed: !disabled ? onPressed : null,
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         minimumSize: Size.zero,
@@ -117,20 +110,18 @@ class _CustomTextButtonState extends State<CustomTextButton> {
       ).copyWith(
         foregroundColor: _foregroundColor,
         backgroundColor: _backgroundColor,
-        textStyle: _textStyle,
+        textStyle: _textStyle(textTheme: textTheme),
         overlayColor:
-            widget.svg != null
-                ? null
-                : WidgetStateProperty.all(Colors.transparent),
+            svg != null ? null : WidgetStateProperty.all(Colors.transparent),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          if (widget.svg != null) ...<Widget>[
+          if (svg != null) ...<Widget>[
             SvgPicture.asset(
-              widget.svg!.path,
+              svg!.path,
               colorFilter:
-                  !widget.disabled
+                  !disabled
                       ? const ColorFilter.mode(
                         ScaleColorConfig.primary60,
                         BlendMode.srcIn,
@@ -143,7 +134,7 @@ class _CustomTextButtonState extends State<CustomTextButton> {
             ),
             const SizedBox(width: 10),
           ],
-          Text(widget.label, textAlign: TextAlign.center),
+          Text(label, textAlign: TextAlign.center),
         ],
       ),
     );
