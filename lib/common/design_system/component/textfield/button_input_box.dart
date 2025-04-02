@@ -103,10 +103,10 @@ class CustomButtonInputBox extends StatelessWidget {
         horizontal = 16;
         vertical = 12.5;
       }
+    } else {
+      horizontal = 16;
+      vertical = 12.5;
     }
-
-    horizontal = 16;
-    vertical = 12.5;
 
     return EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical);
   }
