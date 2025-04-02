@@ -95,7 +95,7 @@ class _CustomExpandableTextState extends State<CustomExpandableText>
                               ? Assets.icon.arrow.upLine.svg(
                                 width: 14,
                                 height: 14,
-                                colorFilter: ColorFilter.mode(
+                                colorFilter: const ColorFilter.mode(
                                   ScaleColorConfig.neutral40,
                                   BlendMode.srcIn,
                                 ),
@@ -103,7 +103,7 @@ class _CustomExpandableTextState extends State<CustomExpandableText>
                               : Assets.icon.arrow.downLine.svg(
                                 width: 14,
                                 height: 14,
-                                colorFilter: ColorFilter.mode(
+                                colorFilter: const ColorFilter.mode(
                                   ScaleColorConfig.neutral40,
                                   BlendMode.srcIn,
                                 ),
