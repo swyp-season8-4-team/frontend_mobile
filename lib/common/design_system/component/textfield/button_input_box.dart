@@ -73,7 +73,7 @@ class CustomButtonInputBox extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                _buildContent(context),
+                Expanded(child: _buildContent(context)),
                 const SizedBox(width: 10),
                 Assets.icon.arrow.rightLine.svg(
                   width: 18,
@@ -123,62 +123,61 @@ class CustomButtonInputBox extends StatelessWidget {
           style: textTheme.bodyMedium?.copyWith(
             color: ScaleColorConfig.neutral30,
           ),
+          overflow: TextOverflow.ellipsis,
         );
       }
 
-      return Expanded(
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            // 태그를 배치 가능한 영역의 너비
-            final double availableWidth = constraints.maxWidth - 40;
+      return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          // 태그를 배치 가능한 영역의 너비
+          final double availableWidth = constraints.maxWidth - 40;
 
-            // 사용중인 영역의 너비
-            double usedWidth = 0;
+          // 사용중인 영역의 너비
+          double usedWidth = 0;
 
-            // 표시될 태그들
-            final List<String> visibleTags = <String>[];
+          // 표시될 태그들
+          final List<String> visibleTags = <String>[];
 
-            // 숨겨진 태그들
-            int hiddenCount = 0;
+          // 숨겨진 태그들
+          int hiddenCount = 0;
 
-            for (String tag in tags!) {
-              final double tagWidth = _calculateTextWidth(tag, context);
-              if (usedWidth + tagWidth + 4 < availableWidth) {
-                visibleTags.add(tag);
-                usedWidth += (tagWidth + 4);
-              } else {
-                hiddenCount++;
-              }
+          for (String tag in tags!) {
+            final double tagWidth = _calculateTextWidth(tag, context);
+            if (usedWidth + tagWidth + 4 < availableWidth) {
+              visibleTags.add(tag);
+              usedWidth += (tagWidth + 4);
+            } else {
+              hiddenCount++;
             }
+          }
 
-            return Row(
-              children: <Widget>[
-                ...visibleTags.mapIndexed(
-                  (int index, String tag) => Padding(
-                    padding: EdgeInsets.only(
-                      right: index == visibleTags.length - 1 ? 0 : 4,
+          return Row(
+            children: <Widget>[
+              ...visibleTags.mapIndexed(
+                (int index, String tag) => Padding(
+                  padding: EdgeInsets.only(
+                    right: index == visibleTags.length - 1 ? 0 : 4,
+                  ),
+                  child: _Tag(text: tag),
+                ),
+              ),
+
+              const Spacer(),
+              if (hiddenCount > 0)
+                SizedBox(
+                  width: 32,
+                  child: Text(
+                    '외 $hiddenCount개',
+                    style: textTheme.labelLarge?.copyWith(
+                      color: ScaleColorConfig.neutral40,
                     ),
-                    child: _Tag(text: tag),
+                    maxLines: 1,
+                    overflow: TextOverflow.fade,
                   ),
                 ),
-
-                const Spacer(),
-                if (hiddenCount > 0)
-                  SizedBox(
-                    width: 32,
-                    child: Text(
-                      '외 $hiddenCount개',
-                      style: textTheme.labelLarge?.copyWith(
-                        color: ScaleColorConfig.neutral40,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.fade,
-                    ),
-                  ),
-              ],
-            );
-          },
-        ),
+            ],
+          );
+        },
       );
     }
 
@@ -187,6 +186,7 @@ class CustomButtonInputBox extends StatelessWidget {
     if (text == null) {
       return Text(
         hintText ?? '',
+        overflow: TextOverflow.ellipsis,
         style: textTheme.bodyMedium?.copyWith(
           color: ScaleColorConfig.neutral50,
         ),
@@ -195,6 +195,7 @@ class CustomButtonInputBox extends StatelessWidget {
 
     return Text(
       text!,
+      overflow: TextOverflow.ellipsis,
       style: textTheme.bodyMedium?.copyWith(color: ScaleColorConfig.neutral20),
     );
   }
