@@ -35,7 +35,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle labelTextStyle = TextStyle(
+    const TextStyle labelTextStyle = TextStyle(
       fontWeight: FontWeightConfig.medium,
       fontSize: 14,
       height: 18 / 14,
@@ -43,7 +43,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       letterSpacing: -0.28,
     );
 
-    final TextStyle hintTextStyle = TextStyle(
+    const TextStyle hintTextStyle = TextStyle(
       color: ScaleColorConfig.neutral50,
       fontSize: 14,
       fontWeight: FontWeightConfig.regular,
@@ -120,7 +120,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
-              borderSide: BorderSide(color: ScaleColorConfig.neutral30),
+              borderSide: const BorderSide(color: ScaleColorConfig.neutral30),
             ),
           ),
         ),

@@ -15,7 +15,7 @@ class SnackBarCloseButton extends ConsumerWidget {
           ref.read(toastManagerProvider).remove();
         },
         child: Assets.icon.system.closeLine.svg(
-          colorFilter: ColorFilter.mode(
+          colorFilter: const ColorFilter.mode(
             ScaleColorConfig.neutral80,
             BlendMode.srcIn,
           ),

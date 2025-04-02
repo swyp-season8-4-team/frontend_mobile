@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/common/design_system/foundation/shadow/shadow_config.dart';
 
 /// Dialog
 /// https://www.figma.com/design/S1zkOn7DjDJ0b1mcPVJRil/SWYP_%E1%84%8B%E1%85%A2%E1%86%B8_1%E1%84%80%E1%85%B5_%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A5%E1%84%87%E1%85%B5?node-id=40000088-62443&t=7TVdidIqbT7gZsMY-4
@@ -8,47 +9,43 @@ class CustomDialog extends StatelessWidget {
     required this.description,
     this.title,
     this.onConfirmTap,
+    this.footer,
     super.key,
   });
 
   final String? title;
   final String description;
   final VoidCallback? onConfirmTap;
+  final CustomDialogFooterButton? footer;
 
   @override
   Widget build(BuildContext context) {
+    final ShadowConfig shadow = ShadowConfig();
     return Align(
       child: Material(
         color: Colors.transparent,
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: ScaleColorConfig.primary100,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: ScaleColorConfig.primary100,
 
-            // TODO: shadow04 적용 필요
-            boxShadow: const <BoxShadow>[
-              BoxShadow(
-                color: Color(0x4C282014),
-                blurRadius: 3,
-                offset: Offset(0, 2),
+                boxShadow: shadow.level4,
               ),
-              BoxShadow(
-                color: Color(0x26282014),
-                blurRadius: 10,
-                offset: Offset(0, 6),
-                spreadRadius: 4,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  _buildContent(context),
+                  _buildDivider(context),
+                  _buildAction(context),
+                ],
               ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              _buildContent(context),
-              _buildDivider(context),
-              _buildAction(context),
-            ],
-          ),
+            ),
+            if (footer != null) _buildFooter(context),
+          ],
         ),
       ),
     );
@@ -87,7 +84,7 @@ class CustomDialog extends StatelessWidget {
 
                 return ScaleColorConfig.neutral100;
               }),
-              foregroundColor: WidgetStatePropertyAll<Color>(
+              foregroundColor: const WidgetStatePropertyAll<Color>(
                 ScaleColorConfig.success50,
               ),
               shape: const WidgetStatePropertyAll<OutlinedBorder>(
@@ -151,4 +148,34 @@ class CustomDialog extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildFooter(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: GestureDetector(
+        onTap: footer!.onTap,
+        behavior: HitTestBehavior.translucent,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: Text(
+            footer!.text,
+            style: textTheme.titleSmall?.copyWith(
+              color: ScaleColorConfig.primary100,
+              decoration: TextDecoration.underline,
+              decorationColor: ScaleColorConfig.primary100,
+              decorationThickness: 1,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomDialogFooterButton {
+  const CustomDialogFooterButton({required this.text, required this.onTap});
+  final String text;
+  final void Function() onTap;
 }
