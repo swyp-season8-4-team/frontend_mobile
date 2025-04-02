@@ -20,9 +20,12 @@ class TabType {
 }
 
 class CustomTab extends StatefulWidget {
-  const CustomTab({required this.list, super.key});
+  const CustomTab({required this.list, this.physics, super.key});
 
   final List<TabType> list;
+
+  /// TabBarView physics
+  final ScrollPhysics? physics;
 
   @override
   State<CustomTab> createState() => _CustomTabState();
@@ -31,6 +34,11 @@ class CustomTab extends StatefulWidget {
 class _CustomTabState extends State<CustomTab>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  int _currentIndex = 0;
+  int? _pressedIndex;
+
+  /// tab 사이 간격
+  double get _tabGap => 4;
 
   @override
   void initState() {
@@ -53,14 +61,21 @@ class _CustomTabState extends State<CustomTab>
   Widget _tab({required TabItem item, required int index}) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    return Container(
+    return AnimatedContainer(
       width: 79,
-      margin: const EdgeInsets.only(right: 4),
+      height: double.infinity,
+      margin: EdgeInsets.only(
+        right: index != _tabController.length - 1 ? _tabGap : 0,
+      ),
+      duration: kTabScrollDuration,
+      color:
+          _pressedIndex == index
+              ? ScaleColorConfig.surface80
+              : Colors.transparent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(item.label),
-
           if (item.number != null) ...<Widget>[
             const SizedBox(width: 4),
             _tabController.index == index
@@ -94,6 +109,9 @@ class _CustomTabState extends State<CustomTab>
             bottom: BorderSide(color: ScaleColorConfig.primary70, width: 2.5),
           ),
         ),
+        indicatorPadding: EdgeInsets.only(
+          right: _currentIndex != _tabController.length - 1 ? _tabGap : 0,
+        ),
         dividerColor: Colors.transparent,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         labelPadding: EdgeInsets.zero,
@@ -104,12 +122,34 @@ class _CustomTabState extends State<CustomTab>
           color: ScaleColorConfig.neutral30,
         ),
         overlayColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
-          return ScaleColorConfig.surface80;
+          return Colors.transparent;
         }),
         tabs: List<Widget>.generate(widget.list.length, (int index) {
           final TabType tabType = widget.list[index];
 
-          return Tab(child: _tab(item: tabType.tabItem, index: index));
+          return GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              _tabController.animateTo(index);
+              _currentIndex = index;
+            },
+            onTapDown: (_) {
+              setState(() {
+                _pressedIndex = index;
+              });
+            },
+            onTapUp: (_) {
+              setState(() {
+                _pressedIndex = null;
+              });
+            },
+            onTapCancel: () {
+              setState(() {
+                _pressedIndex = null;
+              });
+            },
+            child: _tab(item: tabType.tabItem, index: index),
+          );
         }),
       ),
     );
@@ -119,6 +159,7 @@ class _CustomTabState extends State<CustomTab>
     return Expanded(
       child: TabBarView(
         controller: _tabController,
+        physics: widget.physics,
         children: widget.list.map((TabType e) => e.child).toList(),
       ),
     );
