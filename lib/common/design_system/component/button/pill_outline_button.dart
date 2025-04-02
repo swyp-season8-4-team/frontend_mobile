@@ -8,7 +8,6 @@ class CustomPillOutlineButton extends StatelessWidget {
     required this.label,
     required this.onPressed,
     required this.isSelected,
-    required this.selectedHandler,
     this.width,
     this.disabled = false,
     this.svg,
@@ -18,7 +17,6 @@ class CustomPillOutlineButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
   final bool isSelected;
-  final VoidCallback? selectedHandler;
   final double? width;
   final bool disabled;
   final SvgGenImage? svg;
@@ -86,16 +84,6 @@ class CustomPillOutlineButton extends StatelessWidget {
         return const BorderSide(color: ScaleColorConfig.neutral50);
       });
 
-  void _onPressed() {
-    if (onPressed != null) {
-      onPressed!();
-    }
-
-    if (selectedHandler != null) {
-      selectedHandler!();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
@@ -103,7 +91,7 @@ class CustomPillOutlineButton extends StatelessWidget {
     return SizedBox(
       width: width ?? double.infinity,
       child: OutlinedButton(
-        onPressed: !disabled ? _onPressed : null,
+        onPressed: !disabled ? onPressed : null,
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(99),

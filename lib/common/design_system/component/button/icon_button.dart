@@ -9,7 +9,6 @@ class CustomIconButton extends StatefulWidget {
     required this.onPressed,
     required this.svg,
     required this.isSelected,
-    required this.selectedHandler,
     this.disabled = false,
     super.key,
   });
@@ -17,7 +16,6 @@ class CustomIconButton extends StatefulWidget {
   final VoidCallback? onPressed;
   final SvgGenImage svg;
   final bool isSelected;
-  final VoidCallback? selectedHandler;
   final bool disabled;
 
   @override
@@ -83,16 +81,6 @@ class _CustomIconButtonState extends State<CustomIconButton> {
         return ScaleColorConfig.neutral90;
       });
 
-  void _onPressed() {
-    if (widget.onPressed != null) {
-      widget.onPressed!();
-    }
-
-    if (widget.selectedHandler != null) {
-      widget.selectedHandler!();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -101,7 +89,7 @@ class _CustomIconButtonState extends State<CustomIconButton> {
         shape: BoxShape.circle,
       ),
       child: IconButton(
-        onPressed: !widget.disabled ? _onPressed : null,
+        onPressed: !widget.disabled ? widget.onPressed : null,
         style: IconButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(99),
