@@ -25,7 +25,6 @@ class CustomEtcTag extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
-
           color: ScaleColorConfig.neutral80,
         ),
         height: 32,
