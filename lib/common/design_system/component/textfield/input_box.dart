@@ -21,6 +21,7 @@ class CustomInputBox extends StatefulWidget {
     this.keyboardType,
     this.error = false,
     this.success = false,
+    this.closeControll = false,
     this.onCloseButtonTap,
     this.onVisibilityButtonTap,
     super.key,
@@ -44,6 +45,8 @@ class CustomInputBox extends StatefulWidget {
   // 성공 여부
   final bool success;
   final String? successText;
+  // 지우기 컨트롤 표시 여부
+  final bool closeControll;
   // 지우기 이벤트 탭 이벤트 콜백
   final VoidCallback? onCloseButtonTap;
   // 텍스트 암호화 탭 이벤트 이벤트 콜백
@@ -54,6 +57,8 @@ class CustomInputBox extends StatefulWidget {
 
 class _CustomInputBoxState extends State<CustomInputBox> {
   late final TextEditingController _textEditingController;
+
+  bool get _hasSuffix => widget.closeControll || widget.visibilityControll;
 
   @override
   void initState() {
@@ -112,24 +117,30 @@ class _CustomInputBoxState extends State<CustomInputBox> {
             isDense: true,
             error: widget.error ? const SizedBox.shrink() : null,
             fillColor: ScaleColorConfig.neutral90,
-            suffixIcon: Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  _buildCloseButton(),
-                  _buildVisibilityOptionButton(),
-                ],
-              ),
-            ),
-            suffixIconConstraints: const BoxConstraints(
-              // 아이콘 너비 + 왼쪽 패딩
-              minWidth: 18 + 16,
-            ),
+            suffixIcon:
+                _hasSuffix
+                    ? Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          _buildCloseButton(),
+                          _buildVisibilityOptionButton(),
+                        ],
+                      ),
+                    )
+                    : null,
+            suffixIconConstraints:
+                _hasSuffix
+                    ? const BoxConstraints(
+                      // 아이콘 너비 + 왼쪽 패딩
+                      minWidth: 18 + 16,
+                    )
+                    : null,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
-              vertical: 13.5,
+              vertical: 12.5,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
@@ -194,6 +205,9 @@ class _CustomInputBoxState extends State<CustomInputBox> {
   }
 
   Widget _buildCloseButton() {
+    if (!widget.closeControll) {
+      return const SizedBox.shrink();
+    }
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
