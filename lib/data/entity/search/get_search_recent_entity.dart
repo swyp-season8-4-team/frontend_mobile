@@ -15,5 +15,5 @@ class GetSearchRecentEntity {
 
   final int id;
   final String keyword;
-  final String createdAt;
+  final DateTime createdAt;
 }

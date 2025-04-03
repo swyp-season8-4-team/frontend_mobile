@@ -11,7 +11,7 @@ GetSearchRecentEntity _$GetSearchRecentEntityFromJson(
 ) => GetSearchRecentEntity(
   id: (json['id'] as num).toInt(),
   keyword: json['keyword'] as String,
-  createdAt: json['createdAt'] as String,
+  createdAt: DateTime.parse(json['createdAt'] as String),
 );
 
 Map<String, dynamic> _$GetSearchRecentEntityToJson(
@@ -19,5 +19,5 @@ Map<String, dynamic> _$GetSearchRecentEntityToJson(
 ) => <String, dynamic>{
   'id': instance.id,
   'keyword': instance.keyword,
-  'createdAt': instance.createdAt,
+  'createdAt': instance.createdAt.toIso8601String(),
 };
