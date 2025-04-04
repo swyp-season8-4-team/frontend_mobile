@@ -51,7 +51,7 @@ class _SearchRemoteDataSource implements SearchRemoteDataSource {
   }
 
   @override
-  Future<List<GetSearchPopularEntity>> getPopularSearches({
+  Future<GetPopularSearchesEntity> getPopularSearches({
     required GetSearchPopularQueryParam query,
   }) async {
     final _extra = <String, dynamic>{};
@@ -59,7 +59,7 @@ class _SearchRemoteDataSource implements SearchRemoteDataSource {
     queryParameters.addAll(query.toJson());
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<GetSearchPopularEntity>>(
+    final _options = _setStreamType<GetPopularSearchesEntity>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -69,16 +69,10 @@ class _SearchRemoteDataSource implements SearchRemoteDataSource {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<GetSearchPopularEntity> _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetPopularSearchesEntity _value;
     try {
-      _value =
-          _result.data!
-              .map(
-                (dynamic i) =>
-                    GetSearchPopularEntity.fromJson(i as Map<String, dynamic>),
-              )
-              .toList();
+      _value = GetPopularSearchesEntity.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

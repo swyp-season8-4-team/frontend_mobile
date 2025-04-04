@@ -21,7 +21,7 @@ abstract class SearchRemoteDataSource {
   Future<List<GetSearchRecentEntity>> getRecentSearches();
 
   @GET('/api/search/popular')
-  Future<List<GetSearchPopularEntity>> getPopularSearches({
+  Future<GetPopularSearchesEntity> getPopularSearches({
     @Queries() required GetSearchPopularQueryParam query,
   });
 
