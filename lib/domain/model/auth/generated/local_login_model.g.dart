@@ -15,7 +15,8 @@ LocalLoginModel _$LocalLoginModelFromJson(Map<String, dynamic> json) =>
       userUuid: json['userUuid'] as String,
       email: json['email'] as String,
       nickname: json['nickname'] as String,
-      profileImageUrl: json['profileImageUrl'] as String,
+      profileImageUrl: json['profileImageUrl'] as String?,
+      deviceId: json['deviceId'] as String,
       preferenceSet: json['preferenceSet'] as bool,
     );
 
@@ -29,5 +30,6 @@ Map<String, dynamic> _$LocalLoginModelToJson(LocalLoginModel instance) =>
       'email': instance.email,
       'nickname': instance.nickname,
       'profileImageUrl': instance.profileImageUrl,
+      'deviceId': instance.deviceId,
       'preferenceSet': instance.preferenceSet,
     };

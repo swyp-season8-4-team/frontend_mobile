@@ -13,6 +13,7 @@ class LocalLoginModel {
     required this.email,
     required this.nickname,
     required this.profileImageUrl,
+    required this.deviceId,
     required this.preferenceSet,
   });
 
@@ -26,6 +27,7 @@ class LocalLoginModel {
   final String userUuid;
   final String email;
   final String nickname;
-  final String profileImageUrl;
+  final String? profileImageUrl;
+  final String deviceId;
   final bool preferenceSet;
 }

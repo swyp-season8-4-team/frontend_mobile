@@ -13,7 +13,8 @@ class LocalLoginState with _$LocalLoginState {
         userUuid: '',
         email: '',
         nickname: '',
-        profileImageUrl: '',
+        profileImageUrl: null,
+        deviceId: '',
         preferenceSet: false,
       ),
     )
