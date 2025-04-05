@@ -9,14 +9,37 @@ class AuthMockDataSource implements AuthRemoteDataSource {
   }) {
     return Future<LocalLoginEntity>(
       () => LocalLoginEntity(
-        accessToken: 'joefjwioqjfgiowjfiojweiofj',
-        refreshToken: 'jeoiwqhfewguhwqhefuuiqwhfeiuhwe',
-        tokenType: 'string',
-        expiresIn: 9007199254740991,
-        userUuid: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-        email: 'test@example.com',
-        nickname: 'Patrick',
-        profileImageUrl: 'string',
+        accessToken:
+            'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZXNzZXJ0YmVlLmNvbSIsImlhdCI6MTc0Mzg1ODkzNywiZXhwIjoxNzQzODU5MTE3LCJqdGkiOiJlMDhhMzRmYy03NDYyLTRmYzgtYTI4Zi02YTkyY2Y2Nzc5N2MiLCJ0eXBlIjoiQUNDRVNTIiwic3ViIjoiODcyYjI4MWItZmQzOS00ZTg4LTlmMmYtMTIzNDQxM2YyZGUwIiwicm9sZXMiOlsiUk9MRV9VU0VSIl19.W3MMfgoo4UKqslrfTkMMSxO3fobkDfkteriX7ZMrU5o',
+        refreshToken:
+            'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZXNzZXJ0YmVlLmNvbSIsImlhdCI6MTc0Mzg1ODkzNywiZXhwIjoxNzQzODU5NTM3LCJqdGkiOiJkYzc0NWZiYS0zNTJiLTQ4YzEtOTI5Mi1kOTg1YmUxZDQ2YjQiLCJ0eXBlIjoiUkVGUkVTSCIsInN1YiI6Ijg3MmIyODFiLWZkMzktNGU4OC05ZjJmLTEyMzQ0MTNmMmRlMCJ9.yg3FelMBBWXXNgN6Y4kmCWFQ3Qr9FXOKCnUvSzwKu6k',
+        tokenType: 'Bearer',
+        expiresIn: 180,
+        userUuid: '872b281b-fd39-4e88-9f2f-1234413f2de0',
+        email: 'dudals9701@naver.com',
+        nickname: '일반테스트1',
+        deviceId: 'a5b802cf-d279-46d2-8cd8-75dc581b6c60',
+        preferenceSet: true,
+      ),
+    );
+  }
+
+  @override
+  Future<LocalLoginEntity> postLocalLogin({
+    required LocalLoginRequestBody body,
+  }) {
+    return Future<LocalLoginEntity>(
+      () => LocalLoginEntity(
+        accessToken:
+            'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZXNzZXJ0YmVlLmNvbSIsImlhdCI6MTc0Mzg1ODkzNywiZXhwIjoxNzQzODU5MTE3LCJqdGkiOiJlMDhhMzRmYy03NDYyLTRmYzgtYTI4Zi02YTkyY2Y2Nzc5N2MiLCJ0eXBlIjoiQUNDRVNTIiwic3ViIjoiODcyYjI4MWItZmQzOS00ZTg4LTlmMmYtMTIzNDQxM2YyZGUwIiwicm9sZXMiOlsiUk9MRV9VU0VSIl19.W3MMfgoo4UKqslrfTkMMSxO3fobkDfkteriX7ZMrU5o',
+        refreshToken:
+            'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZXNzZXJ0YmVlLmNvbSIsImlhdCI6MTc0Mzg1ODkzNywiZXhwIjoxNzQzODU5NTM3LCJqdGkiOiJkYzc0NWZiYS0zNTJiLTQ4YzEtOTI5Mi1kOTg1YmUxZDQ2YjQiLCJ0eXBlIjoiUkVGUkVTSCIsInN1YiI6Ijg3MmIyODFiLWZkMzktNGU4OC05ZjJmLTEyMzQ0MTNmMmRlMCJ9.yg3FelMBBWXXNgN6Y4kmCWFQ3Qr9FXOKCnUvSzwKu6k',
+        tokenType: 'Bearer',
+        expiresIn: 180,
+        userUuid: '872b281b-fd39-4e88-9f2f-1234413f2de0',
+        email: 'dudals9701@naver.com',
+        nickname: '일반테스트1',
+        deviceId: 'a5b802cf-d279-46d2-8cd8-75dc581b6c60',
         preferenceSet: true,
       ),
     );
