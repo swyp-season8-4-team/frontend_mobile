@@ -1,6 +1,7 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/design_system/foundation/foundation.dart';
 import 'package:frontend_mobile/common/gen_asset/fonts.gen.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
@@ -33,6 +34,7 @@ class _MainAppState extends ConsumerState<MainApp> {
         textTheme: FoundationConfig.textTheme,
         highlightColor: Colors.transparent,
         splashFactory: NoSplash.splashFactory,
+        scaffoldBackgroundColor: ScaleColorConfig.surface90,
       ),
       home: const Scaffold(body: LocalLoginView()),
     );
