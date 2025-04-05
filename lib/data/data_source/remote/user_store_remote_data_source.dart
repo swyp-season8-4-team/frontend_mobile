@@ -4,6 +4,8 @@ import 'package:frontend_mobile/core/resource/network/app_dio.dart';
 import 'package:frontend_mobile/data/entity/user_store/get_user_store_list_entity.dart';
 import 'package:frontend_mobile/data/entity/user_store/get_user_store_list_summary_entity.dart';
 import 'package:frontend_mobile/data/entity/user_store/get_user_store_location_entity.dart';
+import 'package:frontend_mobile/data/query_param/user_store/add_user_store_list_query_param.dart';
+import 'package:frontend_mobile/data/query_param/user_store/update_user_store_list_query_param.dart';
 import 'package:retrofit/http.dart';
 
 part 'generated/user_store_remote_data_source.g.dart';
@@ -25,7 +27,10 @@ abstract class UserStoreRemoteDataSource {
 
   /// [저장 리스트 생성](https://release.desserbee.com/swagger-ui/index.html#/UserStore/createUserStoreList)
   @POST('/api/user-store/{userUuid}/lists')
-  Future<void> addUserStoreList({@Path() required String userUuid});
+  Future<void> addUserStoreList({
+    @Path() required String userUuid,
+    @Queries() required AddUserStoreListQueryParam query,
+  });
 
   /// [리스트에 가게 저장](https://release.desserbee.com/swagger-ui/index.html#/UserStore/addStoreToList)
   @POST('/api/user-store/lists/{listId}/stores/{storeUuid}')
@@ -53,7 +58,10 @@ abstract class UserStoreRemoteDataSource {
 
   /// [저장 리스트 수정](https://release.desserbee.com/swagger-ui/index.html#/UserStore/updateUserStoreList)
   @PATCH('/api/user-store/lists/{listId}')
-  Future<void> updateUserStoreList({@Path() required int listId});
+  Future<void> updateUserStoreList({
+    @Path() required int listId,
+    @Queries() required UpdateUserStoreListQueryParam query,
+  });
 
   /// [리스트에 저장된 가게 조회](https://release.desserbee.com/swagger-ui/index.html#/UserStore/getStoresByList)
   @GET('/api/user-store/lists/{listId}/stores')

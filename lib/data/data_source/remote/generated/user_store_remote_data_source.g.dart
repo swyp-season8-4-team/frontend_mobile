@@ -53,9 +53,13 @@ class _UserStoreRemoteDataSource implements UserStoreRemoteDataSource {
   }
 
   @override
-  Future<void> addUserStoreList({required String userUuid}) async {
+  Future<void> addUserStoreList({
+    required String userUuid,
+    required AddUserStoreListQueryParam query,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(query.toJson());
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
@@ -164,9 +168,13 @@ class _UserStoreRemoteDataSource implements UserStoreRemoteDataSource {
   }
 
   @override
-  Future<void> updateUserStoreList({required int listId}) async {
+  Future<void> updateUserStoreList({
+    required int listId,
+    required UpdateUserStoreListQueryParam query,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(query.toJson());
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
