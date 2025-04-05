@@ -107,11 +107,15 @@ class $AssetIconGen {
 class $AssetImageGen {
   const $AssetImageGen();
 
+  /// File path: asset/image/kakao_login.png
+  AssetGenImage get kakaoLogin =>
+      const AssetGenImage('asset/image/kakao_login.png');
+
   /// File path: asset/image/logo.png
   AssetGenImage get logo => const AssetGenImage('asset/image/logo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [logo];
+  List<AssetGenImage> get values => [kakaoLogin, logo];
 }
 
 class $AssetIconArrowGen {
