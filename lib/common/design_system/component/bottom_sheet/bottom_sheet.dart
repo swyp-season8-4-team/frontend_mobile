@@ -1,84 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
+import 'package:frontend_mobile/common/design_system/component/button/outline_button.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+
+class BottomSheetButton {
+  BottomSheetButton({required this.label, required this.onPressed});
+
+  final String label;
+  final VoidCallback onPressed;
+}
 
 class CustomBottomSheet {
   CustomBottomSheet.middle({
-    required BuildContext context,
-    required Widget child,
-    bool button = false,
-  }) {
-    _show(
-      context: context,
-      returnedFromBuilder: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            _header(context: context),
-            Container(
-              height: 298,
-              padding: const EdgeInsets.only(
-                top: 10,
-                right: 16,
-                bottom: 16,
-                left: 16,
-              ),
-              child: child,
-            ),
-            if (button)
-              Container(
-                height: 85,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 20,
-                ),
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(color: ScaleColorConfig.neutral50),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    // TODO: 버튼 컴포넌트 만들면 재적용할 예정
-                    ElevatedButton(onPressed: () {}, child: const Text('Text')),
-                    const SizedBox(width: 10),
-                    ElevatedButton(onPressed: () {}, child: const Text('Text')),
-                  ],
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
+    required this.context,
+    required this.child,
+    this.leftButton,
+    this.rightButton,
+  }) : height = 298,
+       padding = const EdgeInsets.only(
+         top: 10,
+         right: 16,
+         bottom: 16,
+         left: 16,
+       ),
+       assert(
+         leftButton == null || rightButton != null,
+         'leftButton must be provided when rightButton is set',
+       ),
+       assert(
+         rightButton == null || leftButton != null,
+         'rightButton must be provided when leftButton is set',
+       ) {
+    _show();
   }
 
   CustomBottomSheet.short({
-    required BuildContext context,
-    required Widget child,
-  }) {
-    _show(
-      context: context,
-      returnedFromBuilder: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            _header(context: context),
-            Container(
-              height: 134,
-              padding: const EdgeInsets.all(10),
-              child: child,
-            ),
-          ],
-        ),
-      ),
-    );
+    required this.context,
+    required this.child,
+    this.leftButton,
+    this.rightButton,
+  }) : height = 134,
+       padding = const EdgeInsets.all(10),
+       assert(
+         leftButton == null || rightButton != null,
+         'leftButton must be provided when rightButton is set',
+       ),
+       assert(
+         rightButton == null || leftButton != null,
+         'rightButton must be provided when leftButton is set',
+       ) {
+    _show();
   }
 
-  /// showModalBottomSheet 호출하는 함수
-  void _show({
-    required BuildContext context,
-    required Widget returnedFromBuilder,
-  }) {
+  final BuildContext context;
+  final Widget child;
+  final double height;
+  final EdgeInsets padding;
+  final BottomSheetButton? rightButton;
+  final BottomSheetButton? leftButton;
+
+  void _show() {
     showModalBottomSheet(
       context: context,
       backgroundColor: ScaleColorConfig.white,
@@ -87,26 +68,62 @@ class CustomBottomSheet {
         borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
       ),
       builder: (BuildContext context) {
-        return returnedFromBuilder;
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              _header,
+              Container(
+                width: double.infinity,
+                height: height,
+                padding: padding,
+                child: SingleChildScrollView(child: child),
+              ),
+              if (leftButton != null && rightButton != null) _button,
+            ],
+          ),
+        );
       },
     );
   }
 
   /// Drag handle
-  Widget _header({required BuildContext context}) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: Container(
-        width: 32,
-        height: 4,
-        decoration: BoxDecoration(
-          // TODO: 컬러 정의 필요
-          color: const Color(0xFF79747E),
-          borderRadius: BorderRadius.circular(100),
-        ),
+  Widget get _header => Container(
+    padding: const EdgeInsets.symmetric(vertical: 16),
+    child: Container(
+      width: 32,
+      height: 4,
+      decoration: BoxDecoration(
+        color: ScaleColorConfig.neutral30,
+        borderRadius: BorderRadius.circular(100),
       ),
-    );
-  }
+    ),
+  );
+
+  /// 하단 버튼들
+  Widget get _button => Container(
+    height: 85,
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+    decoration: const BoxDecoration(
+      border: Border(top: BorderSide(color: ScaleColorConfig.neutral50)),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Expanded(
+          child: CustomOutlineButton(
+            label: leftButton!.label,
+            onPressed: leftButton!.onPressed,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: CustomFillButton(
+            label: rightButton!.label,
+            onPressed: rightButton!.onPressed,
+          ),
+        ),
+      ],
+    ),
+  );
 }
