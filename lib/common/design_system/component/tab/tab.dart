@@ -62,7 +62,7 @@ class _CustomTabState extends State<CustomTab>
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return AnimatedContainer(
-      width: 79,
+      constraints: const BoxConstraints(minWidth: 79),
       height: double.infinity,
       margin: EdgeInsets.only(
         right: index != _tabController.length - 1 ? _tabGap : 0,
