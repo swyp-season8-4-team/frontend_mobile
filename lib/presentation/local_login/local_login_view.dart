@@ -169,6 +169,8 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
+                      /// TODO: 로그인 유지를 누르면 자동 로그인 되도록 구현해야 됨
+                      /// api/users/me api 사용
                       CustomRadioButton.small(
                         onTap: () {
                           setState(() {
@@ -211,6 +213,8 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                       ],
                     ),
                   ),
+
+                  /// TODO: 카카오 로그인 연동 해야됨
                   CustomSnsLoginButton(
                     svgImage: Assets.icon.sns.kakao,
                     label: '카카오 로그인',
@@ -229,6 +233,8 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                           color: ScaleColorConfig.neutral30,
                         ),
                       ),
+
+                      /// TODO: 회원가입 구현해야 됨
                       CustomTextButton.underline(
                         label: '회원가입',
                         onPressed: () {},
