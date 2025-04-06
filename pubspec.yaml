@@ -53,6 +53,7 @@ flutter:
     - asset/icon/media/
     - asset/icon/system/
     - asset/icon/etc/
+    - asset/icon/sns/
     - asset/image/
 
   fonts:
