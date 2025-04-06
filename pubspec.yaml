@@ -54,6 +54,7 @@ flutter:
     - asset/icon/system/
     - asset/icon/dessert/
     - asset/icon/user/
+    - asset/icon/menu/
     - asset/icon/etc/
     - asset/image/
 

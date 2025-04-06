@@ -103,6 +103,9 @@ class $AssetIconGen {
   /// Directory path: asset/icon/media
   $AssetIconMediaGen get media => const $AssetIconMediaGen();
 
+  /// Directory path: asset/icon/menu
+  $AssetIconMenuGen get menu => const $AssetIconMenuGen();
+
   /// Directory path: asset/icon/system
   $AssetIconSystemGen get system => const $AssetIconSystemGen();
 
@@ -540,6 +543,21 @@ class $AssetIconMediaGen {
     notificationLine,
     videoLine,
   ];
+}
+
+class $AssetIconMenuGen {
+  const $AssetIconMenuGen();
+
+  /// File path: asset/icon/menu/more_1_fill.svg
+  SvgGenImage get more1Fill =>
+      const SvgGenImage('asset/icon/menu/more_1_fill.svg');
+
+  /// File path: asset/icon/menu/more_2_fill.svg
+  SvgGenImage get more2Fill =>
+      const SvgGenImage('asset/icon/menu/more_2_fill.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [more1Fill, more2Fill];
 }
 
 class $AssetIconSystemGen {
