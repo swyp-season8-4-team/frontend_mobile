@@ -73,13 +73,25 @@ Future<Result<T, CustomException>> apiCall<T>({
         return Failure<T, CustomException>(
           exception: CustomException.a007(model: exceptionModel),
         );
-      case 'U010':
-        return Failure<T, CustomException>(
-          exception: CustomException.u010(model: exceptionModel),
-        );
       case 'A008':
         return Failure<T, CustomException>(
           exception: CustomException.a008(model: exceptionModel),
+        );
+      case 'A009':
+        return Failure<T, CustomException>(
+          exception: CustomException.a009(model: exceptionModel),
+        );
+      case 'A010':
+        return Failure<T, CustomException>(
+          exception: CustomException.a010(model: exceptionModel),
+        );
+      case 'A011':
+        return Failure<T, CustomException>(
+          exception: CustomException.a011(model: exceptionModel),
+        );
+      case 'A012':
+        return Failure<T, CustomException>(
+          exception: CustomException.a012(model: exceptionModel),
         );
       case 'O001':
         return Failure<T, CustomException>(
@@ -105,13 +117,13 @@ Future<Result<T, CustomException>> apiCall<T>({
         return Failure<T, CustomException>(
           exception: CustomException.j005(model: exceptionModel),
         );
-      case 'E005':
-        return Failure<T, CustomException>(
-          exception: CustomException.e005(model: exceptionModel),
-        );
       case 'E001':
         return Failure<T, CustomException>(
           exception: CustomException.e001(model: exceptionModel),
+        );
+      case 'E005':
+        return Failure<T, CustomException>(
+          exception: CustomException.e005(model: exceptionModel),
         );
       case 'U001':
         return Failure<T, CustomException>(
