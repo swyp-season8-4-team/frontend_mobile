@@ -144,14 +144,14 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                   ),
                   const SizedBox(height: 73),
 
-                  CustomInputBox.input(
+                  CustomInputBox(
                     controller: _emailController,
                     error: _emailError,
                     errorText: '이메일을 확인해주세요',
                     hintText: '이메일',
                   ),
                   const SizedBox(height: 12),
-                  CustomInputBox.input(
+                  CustomInputBox(
                     controller: _passwordController,
                     error: _passwordError,
                     errorText: '비밀번호를 확인해 주세요',
@@ -212,7 +212,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                     ),
                   ),
                   CustomSnsLoginButton(
-                    svgImage: Assets.icon.contact.chat3Line,
+                    svgImage: Assets.icon.sns.kakao,
                     label: '카카오 로그인',
                     onPressed: () {},
                     backgroundColor: const Color(0xFFFEE500),
