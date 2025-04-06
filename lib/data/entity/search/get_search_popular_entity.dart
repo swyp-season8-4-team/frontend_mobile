@@ -11,10 +11,10 @@ class GetPopularSearchesEntity {
 
   const GetPopularSearchesEntity({
     required this.lastUpdatedTime,
-    required this.searches,
+    this.searches,
   });
   final DateTime lastUpdatedTime;
-  final List<_PopularSearch> searches;
+  final List<_PopularSearch>? searches;
 }
 
 @JsonSerializable()

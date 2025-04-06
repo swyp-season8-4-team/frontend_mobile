@@ -11,8 +11,8 @@ GetPopularSearchesEntity _$GetPopularSearchesEntityFromJson(
 ) => GetPopularSearchesEntity(
   lastUpdatedTime: DateTime.parse(json['lastUpdatedTime'] as String),
   searches:
-      (json['searches'] as List<dynamic>)
-          .map((e) => _PopularSearch.fromJson(e as Map<String, dynamic>))
+      (json['searches'] as List<dynamic>?)
+          ?.map((e) => _PopularSearch.fromJson(e as Map<String, dynamic>))
           .toList(),
 );
 
