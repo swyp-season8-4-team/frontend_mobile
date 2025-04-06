@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend_mobile/data/entity/store/get_store_holiday_entity.dart';
 import 'package:frontend_mobile/data/entity/store/get_store_operating_hour_entity.dart';
 
 part 'generated/get_store_from_map_entity.g.dart';
@@ -15,7 +16,8 @@ class GetStoreFromMapEntity {
     required this.operatingHours,
     required this.shortReviewCount,
     required this.tags,
-    required this.storeImage,
+    this.storeImage,
+    this.holidays,
   });
 
   factory GetStoreFromMapEntity.fromJson(Map<String, dynamic> json) =>
@@ -27,7 +29,8 @@ class GetStoreFromMapEntity {
   final double latitude;
   final double longitude;
   final List<GetStoreOperatingHourEntity> operatingHours;
+  final List<GetStoreHolidayEntity>? holidays;
   final int shortReviewCount;
   final List<String> tags;
-  final String storeImage;
+  final String? storeImage;
 }

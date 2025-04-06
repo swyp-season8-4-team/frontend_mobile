@@ -24,7 +24,13 @@ GetStoreFromMapEntity _$GetStoreFromMapEntityFromJson(
           .toList(),
   shortReviewCount: (json['shortReviewCount'] as num).toInt(),
   tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
-  storeImage: json['storeImage'] as String,
+  storeImage: json['storeImage'] as String?,
+  holidays:
+      (json['holidays'] as List<dynamic>?)
+          ?.map(
+            (e) => GetStoreHolidayEntity.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
 );
 
 Map<String, dynamic> _$GetStoreFromMapEntityToJson(
@@ -37,6 +43,7 @@ Map<String, dynamic> _$GetStoreFromMapEntityToJson(
   'latitude': instance.latitude,
   'longitude': instance.longitude,
   'operatingHours': instance.operatingHours,
+  'holidays': instance.holidays,
   'shortReviewCount': instance.shortReviewCount,
   'tags': instance.tags,
   'storeImage': instance.storeImage,
