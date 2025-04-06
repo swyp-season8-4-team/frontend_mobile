@@ -38,12 +38,13 @@ class CustomSnsLoginButton extends StatelessWidget {
           foregroundColor: foregroundColor,
         ),
         child: Stack(
+          alignment: Alignment.centerLeft,
           children: <Widget>[
             SizedBox(
               width: double.infinity,
               child: Text(label, textAlign: TextAlign.center),
             ),
-            svgImage.svg(),
+            svgImage.svg(width: 18, height: 17),
           ],
         ),
       ),
