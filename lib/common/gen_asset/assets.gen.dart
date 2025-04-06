@@ -299,6 +299,10 @@ class $AssetIconDessertGen {
 class $AssetIconEditorGen {
   const $AssetIconEditorGen();
 
+  /// File path: asset/icon/editor/bookmark_line.svg
+  SvgGenImage get bookmarkLine =>
+      const SvgGenImage('asset/icon/editor/bookmark_line.svg');
+
   /// File path: asset/icon/editor/edit-user_2_line.svg
   SvgGenImage get editUser2Line =>
       const SvgGenImage('asset/icon/editor/edit-user_2_line.svg');
@@ -329,6 +333,7 @@ class $AssetIconEditorGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+    bookmarkLine,
     editUser2Line,
     edit1Line,
     edit3Line,
@@ -623,9 +628,17 @@ class $AssetIconSystemGen {
   SvgGenImage get exitLine =>
       const SvgGenImage('asset/icon/system/exit_line.svg');
 
+  /// File path: asset/icon/system/keyboard-down_1_line.svg
+  SvgGenImage get keyboardDown1Line =>
+      const SvgGenImage('asset/icon/system/keyboard-down_1_line.svg');
+
   /// File path: asset/icon/system/minimize_line.svg
   SvgGenImage get minimizeLine =>
       const SvgGenImage('asset/icon/system/minimize_line.svg');
+
+  /// File path: asset/icon/system/minus_1_line.svg
+  SvgGenImage get minus1Line =>
+      const SvgGenImage('asset/icon/system/minus_1_line.svg');
 
   /// File path: asset/icon/system/question_fill.svg
   SvgGenImage get questionFill =>
@@ -684,7 +697,9 @@ class $AssetIconSystemGen {
     closeLine,
     entranceLine,
     exitLine,
+    keyboardDown1Line,
     minimizeLine,
+    minus1Line,
     questionFill,
     questionLine,
     refresh1Line,
