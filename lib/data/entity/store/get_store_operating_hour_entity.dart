@@ -8,11 +8,11 @@ class GetStoreOperatingHourEntity {
     required this.dayOfWeek,
     required this.openingTime,
     required this.closingTime,
-    required this.lastOrderTime,
     required this.isClosed,
-    required this.regularClosureType,
-    required this.regularClosureWeeks,
-    required this.breakTimes,
+    this.lastOrderTime,
+    this.regularClosureType,
+    this.regularClosureWeeks,
+    this.breakTimes,
   });
 
   factory GetStoreOperatingHourEntity.fromJson(Map<String, dynamic> json) =>
@@ -20,13 +20,13 @@ class GetStoreOperatingHourEntity {
   final String dayOfWeek;
   final String openingTime;
   final String closingTime;
-  final String lastOrderTime;
+  final String? lastOrderTime;
   final bool isClosed;
-  final String regularClosureType;
-  final String regularClosureWeeks;
+  final String? regularClosureType;
+  final String? regularClosureWeeks;
 
   //ignore: library_private_types_in_public_api
-  final List<_BreakTime> breakTimes;
+  final List<_BreakTime>? breakTimes;
 }
 
 @JsonSerializable()

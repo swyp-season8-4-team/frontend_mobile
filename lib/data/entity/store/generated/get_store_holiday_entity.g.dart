@@ -10,7 +10,7 @@ GetStoreHolidayEntity _$GetStoreHolidayEntityFromJson(
   Map<String, dynamic> json,
 ) => GetStoreHolidayEntity(
   date: json['date'] as String,
-  reason: json['reason'] as String,
+  reason: json['reason'] as String?,
 );
 
 Map<String, dynamic> _$GetStoreHolidayEntityToJson(

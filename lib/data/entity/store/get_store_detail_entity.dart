@@ -12,49 +12,49 @@ class GetStoreDetailEntity extends GetStoreSummaryEntity {
     required super.storeId,
     required super.storeUuid,
     required super.name,
-    required super.averageRating,
-    required super.storeImages,
-    required super.ownerPickImages,
     required super.tags,
-    required super.primaryStoreLink,
-    required super.storeLinks,
     required super.operatingHours,
-    required super.holidays,
-    required super.topPreferences,
     required super.address,
     required super.phone,
-    required super.description,
-    required super.animalYn,
-    required super.tumblerYn,
-    required super.parkingYn,
-    required this.userId,
-    required this.userUuid,
     required this.ownerId,
     required this.ownerUuid,
     required this.latitude,
     required this.longitude,
     required this.menus,
     required this.totalReviewCount,
-    required this.storeReviews,
-    required this.communityReviews,
-    required this.mate,
-    required this.saved,
-    required this.savedListId,
+    this.userId,
+    this.userUuid,
+    this.storeReviews,
+    this.communityReviews,
+    this.mate,
+    this.saved,
+    this.savedListId,
+    super.averageRating,
+    super.storeImages,
+    super.ownerPickImages,
+    super.primaryStoreLink,
+    super.storeLinks,
+    super.holidays,
+    super.topPreferences,
+    super.description,
+    super.animalYn,
+    super.tumblerYn,
+    super.parkingYn,
   });
 
-  final int userId;
-  final String userUuid;
+  final int? userId;
+  final String? userUuid;
   final int ownerId;
   final String ownerUuid;
   final double latitude;
   final double longitude;
   final List<_Menu> menus;
   final int totalReviewCount;
-  final List<_StoreReview> storeReviews;
-  final List<_CommunityReview> communityReviews;
-  final List<_Mate> mate;
-  final bool saved;
-  final int savedListId;
+  final List<_StoreReview>? storeReviews;
+  final List<_CommunityReview>? communityReviews;
+  final List<_Mate>? mate;
+  final bool? saved;
+  final int? savedListId;
 }
 
 @JsonSerializable()
@@ -65,16 +65,16 @@ class _Menu {
     required this.menuUuid,
     required this.name,
     required this.price,
-    required this.isPopular,
-    required this.description,
-    required this.images,
+    this.isPopular,
+    this.description,
+    this.images,
   });
   final String menuUuid;
   final String name;
   final int price;
-  final bool isPopular;
-  final String description;
-  final List<String> images;
+  final bool? isPopular;
+  final String? description;
+  final List<String>? images;
 }
 
 @JsonSerializable()
@@ -84,11 +84,11 @@ class _StoreReview {
     required this.storeId,
     required this.userUuid,
     required this.nickname,
-    required this.profileImage,
     required this.content,
     required this.rating,
     required this.createdAt,
-    required this.images,
+    this.profileImage,
+    this.images,
   });
 
   factory _StoreReview.fromJson(Map<String, dynamic> json) =>
@@ -97,11 +97,11 @@ class _StoreReview {
   final int storeId;
   final String userUuid;
   final String nickname;
-  final String profileImage;
+  final String? profileImage;
   final String content;
   final double rating;
   final DateTime createdAt;
-  final List<String> images;
+  final List<String>? images;
 }
 
 @JsonSerializable()

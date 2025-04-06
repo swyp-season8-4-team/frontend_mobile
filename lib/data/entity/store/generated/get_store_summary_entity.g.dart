@@ -12,17 +12,7 @@ GetStoreSummaryEntity _$GetStoreSummaryEntityFromJson(
   storeId: (json['storeId'] as num).toInt(),
   storeUuid: json['storeUuid'] as String,
   name: json['name'] as String,
-  averageRating: (json['averageRating'] as num).toDouble(),
-  storeImages:
-      (json['storeImages'] as List<dynamic>).map((e) => e as String).toList(),
-  ownerPickImages:
-      (json['ownerPickImages'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
   tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
-  primaryStoreLink: json['primaryStoreLink'] as String,
-  storeLinks:
-      (json['storeLinks'] as List<dynamic>).map((e) => e as String).toList(),
   operatingHours:
       (json['operatingHours'] as List<dynamic>)
           .map(
@@ -30,20 +20,32 @@ GetStoreSummaryEntity _$GetStoreSummaryEntityFromJson(
                 GetStoreOperatingHourEntity.fromJson(e as Map<String, dynamic>),
           )
           .toList(),
-  holidays:
-      (json['holidays'] as List<dynamic>)
-          .map((e) => GetStoreHolidayEntity.fromJson(e as Map<String, dynamic>))
-          .toList(),
-  topPreferences:
-      (json['topPreferences'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
   address: json['address'] as String,
   phone: json['phone'] as String,
-  description: json['description'] as String,
-  animalYn: json['animalYn'] as bool,
-  tumblerYn: json['tumblerYn'] as bool,
-  parkingYn: json['parkingYn'] as bool,
+  averageRating: (json['averageRating'] as num?)?.toDouble(),
+  storeImages:
+      (json['storeImages'] as List<dynamic>?)?.map((e) => e as String).toList(),
+  ownerPickImages:
+      (json['ownerPickImages'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+  primaryStoreLink: json['primaryStoreLink'] as String?,
+  storeLinks:
+      (json['storeLinks'] as List<dynamic>?)?.map((e) => e as String).toList(),
+  holidays:
+      (json['holidays'] as List<dynamic>?)
+          ?.map(
+            (e) => GetStoreHolidayEntity.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
+  topPreferences:
+      (json['topPreferences'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+  description: json['description'] as String?,
+  animalYn: json['animalYn'] as bool?,
+  tumblerYn: json['tumblerYn'] as bool?,
+  parkingYn: json['parkingYn'] as bool?,
 );
 
 Map<String, dynamic> _$GetStoreSummaryEntityToJson(

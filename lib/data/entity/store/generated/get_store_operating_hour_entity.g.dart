@@ -12,13 +12,13 @@ GetStoreOperatingHourEntity _$GetStoreOperatingHourEntityFromJson(
   dayOfWeek: json['dayOfWeek'] as String,
   openingTime: json['openingTime'] as String,
   closingTime: json['closingTime'] as String,
-  lastOrderTime: json['lastOrderTime'] as String,
   isClosed: json['isClosed'] as bool,
-  regularClosureType: json['regularClosureType'] as String,
-  regularClosureWeeks: json['regularClosureWeeks'] as String,
+  lastOrderTime: json['lastOrderTime'] as String?,
+  regularClosureType: json['regularClosureType'] as String?,
+  regularClosureWeeks: json['regularClosureWeeks'] as String?,
   breakTimes:
-      (json['breakTimes'] as List<dynamic>)
-          .map((e) => _BreakTime.fromJson(e as Map<String, dynamic>))
+      (json['breakTimes'] as List<dynamic>?)
+          ?.map((e) => _BreakTime.fromJson(e as Map<String, dynamic>))
           .toList(),
 );
 

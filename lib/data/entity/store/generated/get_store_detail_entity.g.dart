@@ -12,17 +12,7 @@ GetStoreDetailEntity _$GetStoreDetailEntityFromJson(
   storeId: (json['storeId'] as num).toInt(),
   storeUuid: json['storeUuid'] as String,
   name: json['name'] as String,
-  averageRating: (json['averageRating'] as num).toDouble(),
-  storeImages:
-      (json['storeImages'] as List<dynamic>).map((e) => e as String).toList(),
-  ownerPickImages:
-      (json['ownerPickImages'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
   tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
-  primaryStoreLink: json['primaryStoreLink'] as String,
-  storeLinks:
-      (json['storeLinks'] as List<dynamic>).map((e) => e as String).toList(),
   operatingHours:
       (json['operatingHours'] as List<dynamic>)
           .map(
@@ -30,22 +20,8 @@ GetStoreDetailEntity _$GetStoreDetailEntityFromJson(
                 GetStoreOperatingHourEntity.fromJson(e as Map<String, dynamic>),
           )
           .toList(),
-  holidays:
-      (json['holidays'] as List<dynamic>)
-          .map((e) => GetStoreHolidayEntity.fromJson(e as Map<String, dynamic>))
-          .toList(),
-  topPreferences:
-      (json['topPreferences'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
   address: json['address'] as String,
   phone: json['phone'] as String,
-  description: json['description'] as String,
-  animalYn: json['animalYn'] as bool,
-  tumblerYn: json['tumblerYn'] as bool,
-  parkingYn: json['parkingYn'] as bool,
-  userId: (json['userId'] as num).toInt(),
-  userUuid: json['userUuid'] as String,
   ownerId: (json['ownerId'] as num).toInt(),
   ownerUuid: json['ownerUuid'] as String,
   latitude: (json['latitude'] as num).toDouble(),
@@ -55,20 +31,46 @@ GetStoreDetailEntity _$GetStoreDetailEntityFromJson(
           .map((e) => _Menu.fromJson(e as Map<String, dynamic>))
           .toList(),
   totalReviewCount: (json['totalReviewCount'] as num).toInt(),
+  userId: (json['userId'] as num?)?.toInt(),
+  userUuid: json['userUuid'] as String?,
   storeReviews:
-      (json['storeReviews'] as List<dynamic>)
-          .map((e) => _StoreReview.fromJson(e as Map<String, dynamic>))
+      (json['storeReviews'] as List<dynamic>?)
+          ?.map((e) => _StoreReview.fromJson(e as Map<String, dynamic>))
           .toList(),
   communityReviews:
-      (json['communityReviews'] as List<dynamic>)
-          .map((e) => _CommunityReview.fromJson(e as Map<String, dynamic>))
+      (json['communityReviews'] as List<dynamic>?)
+          ?.map((e) => _CommunityReview.fromJson(e as Map<String, dynamic>))
           .toList(),
   mate:
-      (json['mate'] as List<dynamic>)
-          .map((e) => _Mate.fromJson(e as Map<String, dynamic>))
+      (json['mate'] as List<dynamic>?)
+          ?.map((e) => _Mate.fromJson(e as Map<String, dynamic>))
           .toList(),
-  saved: json['saved'] as bool,
-  savedListId: (json['savedListId'] as num).toInt(),
+  saved: json['saved'] as bool?,
+  savedListId: (json['savedListId'] as num?)?.toInt(),
+  averageRating: (json['averageRating'] as num?)?.toDouble(),
+  storeImages:
+      (json['storeImages'] as List<dynamic>?)?.map((e) => e as String).toList(),
+  ownerPickImages:
+      (json['ownerPickImages'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+  primaryStoreLink: json['primaryStoreLink'] as String?,
+  storeLinks:
+      (json['storeLinks'] as List<dynamic>?)?.map((e) => e as String).toList(),
+  holidays:
+      (json['holidays'] as List<dynamic>?)
+          ?.map(
+            (e) => GetStoreHolidayEntity.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
+  topPreferences:
+      (json['topPreferences'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+  description: json['description'] as String?,
+  animalYn: json['animalYn'] as bool?,
+  tumblerYn: json['tumblerYn'] as bool?,
+  parkingYn: json['parkingYn'] as bool?,
 );
 
 Map<String, dynamic> _$GetStoreDetailEntityToJson(
@@ -111,9 +113,9 @@ _Menu _$MenuFromJson(Map<String, dynamic> json) => _Menu(
   menuUuid: json['menuUuid'] as String,
   name: json['name'] as String,
   price: (json['price'] as num).toInt(),
-  isPopular: json['isPopular'] as bool,
-  description: json['description'] as String,
-  images: (json['images'] as List<dynamic>).map((e) => e as String).toList(),
+  isPopular: json['isPopular'] as bool?,
+  description: json['description'] as String?,
+  images: (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
 );
 
 Map<String, dynamic> _$MenuToJson(_Menu instance) => <String, dynamic>{
@@ -130,11 +132,11 @@ _StoreReview _$StoreReviewFromJson(Map<String, dynamic> json) => _StoreReview(
   storeId: (json['storeId'] as num).toInt(),
   userUuid: json['userUuid'] as String,
   nickname: json['nickname'] as String,
-  profileImage: json['profileImage'] as String,
   content: json['content'] as String,
   rating: (json['rating'] as num).toDouble(),
   createdAt: DateTime.parse(json['createdAt'] as String),
-  images: (json['images'] as List<dynamic>).map((e) => e as String).toList(),
+  profileImage: json['profileImage'] as String?,
+  images: (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
 );
 
 Map<String, dynamic> _$StoreReviewToJson(_StoreReview instance) =>
