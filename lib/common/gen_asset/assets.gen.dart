@@ -105,6 +105,9 @@ class $AssetIconGen {
 
   /// Directory path: asset/icon/system
   $AssetIconSystemGen get system => const $AssetIconSystemGen();
+
+  /// Directory path: asset/icon/user
+  $AssetIconUserGen get user => const $AssetIconUserGen();
 }
 
 class $AssetImageGen {
@@ -675,6 +678,29 @@ class $AssetIconSystemGen {
     warningFill,
     warningLine,
   ];
+}
+
+class $AssetIconUserGen {
+  const $AssetIconUserGen();
+
+  /// File path: asset/icon/user/group_1_line.svg
+  SvgGenImage get group1Line =>
+      const SvgGenImage('asset/icon/user/group_1_line.svg');
+
+  /// File path: asset/icon/user/user_1_line.svg
+  SvgGenImage get user1Line =>
+      const SvgGenImage('asset/icon/user/user_1_line.svg');
+
+  /// File path: asset/icon/user/user_2_line.svg
+  SvgGenImage get user2Line =>
+      const SvgGenImage('asset/icon/user/user_2_line.svg');
+
+  /// File path: asset/icon/user/user_3_line.svg
+  SvgGenImage get user3Line =>
+      const SvgGenImage('asset/icon/user/user_3_line.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [group1Line, user1Line, user2Line, user3Line];
 }
 
 class Assets {
