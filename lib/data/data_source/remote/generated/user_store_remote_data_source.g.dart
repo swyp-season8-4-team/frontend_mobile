@@ -79,11 +79,12 @@ class _UserStoreRemoteDataSource implements UserStoreRemoteDataSource {
   Future<void> addStoreToUserStoreList({
     required int listId,
     required String storeUuid,
+    required List<int> preferenceIds,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = preferenceIds;
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(

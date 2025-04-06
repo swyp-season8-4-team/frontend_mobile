@@ -37,6 +37,7 @@ abstract class UserStoreRemoteDataSource {
   Future<void> addStoreToUserStoreList({
     @Path() required int listId,
     @Path() required String storeUuid,
+    @Body() required List<int> preferenceIds,
   });
 
   /// [리스트에 저장된 가게 삭제](https://release.desserbee.com/swagger-ui/index.html#/UserStore/removeStoreFromList)
