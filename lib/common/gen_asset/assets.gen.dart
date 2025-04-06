@@ -85,6 +85,9 @@ class $AssetIconGen {
   /// Directory path: asset/icon/contact
   $AssetIconContactGen get contact => const $AssetIconContactGen();
 
+  /// Directory path: asset/icon/dessert
+  $AssetIconDessertGen get dessert => const $AssetIconDessertGen();
+
   /// Directory path: asset/icon/editor
   $AssetIconEditorGen get editor => const $AssetIconEditorGen();
 
@@ -251,6 +254,39 @@ class $AssetIconContactGen {
     phoneIncomingLine,
     phoneOutgoingLine,
     phoneSuccessLine,
+  ];
+}
+
+class $AssetIconDessertGen {
+  const $AssetIconDessertGen();
+
+  /// File path: asset/icon/dessert/birthday_2_line.svg
+  SvgGenImage get birthday2Line =>
+      const SvgGenImage('asset/icon/dessert/birthday_2_line.svg');
+
+  /// File path: asset/icon/dessert/bread_line.svg
+  SvgGenImage get breadLine =>
+      const SvgGenImage('asset/icon/dessert/bread_line.svg');
+
+  /// File path: asset/icon/dessert/cake_line.svg
+  SvgGenImage get cakeLine =>
+      const SvgGenImage('asset/icon/dessert/cake_line.svg');
+
+  /// File path: asset/icon/dessert/cupcake_line.svg
+  SvgGenImage get cupcakeLine =>
+      const SvgGenImage('asset/icon/dessert/cupcake_line.svg');
+
+  /// File path: asset/icon/dessert/donut_line.svg
+  SvgGenImage get donutLine =>
+      const SvgGenImage('asset/icon/dessert/donut_line.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [
+    birthday2Line,
+    breadLine,
+    cakeLine,
+    cupcakeLine,
+    donutLine,
   ];
 }
 
