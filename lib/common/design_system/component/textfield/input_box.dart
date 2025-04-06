@@ -247,6 +247,10 @@ class _CustomInputBoxState extends State<CustomInputBox> {
   }
 
   Widget _buildCloseButton() {
+    if (_textEditingController.text.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
@@ -261,6 +265,7 @@ class _CustomInputBoxState extends State<CustomInputBox> {
     if (!widget.visibilityControll) {
       return const SizedBox.shrink();
     }
+
     return Padding(
       padding: const EdgeInsets.only(left: 10),
       child: GestureDetector(
@@ -268,8 +273,8 @@ class _CustomInputBoxState extends State<CustomInputBox> {
         onTap: widget.onVisibilityButtonTap,
         child:
             widget.visibility
-                ? Assets.icon.etc.a18CloseEyeOutlined.svg()
-                : Assets.icon.etc.a18OpenEyeOutlined.svg(),
+                ? Assets.icon.etc.a18OpenEyeOutlined.svg()
+                : Assets.icon.etc.a18CloseEyeOutlined.svg(),
       ),
     );
   }
