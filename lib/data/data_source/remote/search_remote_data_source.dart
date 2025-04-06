@@ -17,17 +17,21 @@ final Provider<SearchRemoteDataSource> searchApiProvider =
 abstract class SearchRemoteDataSource {
   factory SearchRemoteDataSource(Dio dio) = _SearchRemoteDataSource;
 
+  /// [최근 검색어 조회](https://release.desserbee.com/swagger-ui/index.html#/Search%20Keyword/getRecentSearches)
   @GET('/api/search/recent')
   Future<List<GetSearchRecentEntity>> getRecentSearches();
 
+  /// [실시간 인기 검색어 조회](https://release.desserbee.com/swagger-ui/index.html#/Search%20Keyword/getPopularSearches)
   @GET('/api/search/popular')
   Future<GetPopularSearchesEntity> getPopularSearches({
     @Queries() required GetSearchPopularQueryParam query,
   });
 
+  /// [최근 검색어 전체 삭제](https://release.desserbee.com/swagger-ui/index.html#/Search%20Keyword/deleteAllRecentSearches)
   @DELETE('/api/search/recent/all')
   Future<void> deleteSearchRecentAll();
 
+  /// [최근 검색어 삭제](https://release.desserbee.com/swagger-ui/index.html#/Search%20Keyword/deleteRecentSearch)
   @DELETE('/api/search/recent/{id}')
   Future<void> deleteSearchRecent({@Path('id') required String searchId});
 }
