@@ -7,7 +7,7 @@ class CustomOutlineButton extends StatelessWidget {
   const CustomOutlineButton({
     required this.label,
     required this.onPressed,
-    required this.svg,
+    this.svg,
     this.width,
     this.disabled = false,
     this.large = true,
@@ -16,7 +16,7 @@ class CustomOutlineButton extends StatelessWidget {
 
   final String label;
   final VoidCallback? onPressed;
-  final SvgGenImage svg;
+  final SvgGenImage? svg;
   final double? width;
   final bool disabled;
 
@@ -95,18 +95,21 @@ class CustomOutlineButton extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            SvgPicture.asset(
-              svg.path,
-              width: large ? null : 18,
-              colorFilter:
-                  !disabled
-                      ? null
-                      : const ColorFilter.mode(
-                        ScaleColorConfig.neutral50,
-                        BlendMode.srcIn,
-                      ),
-            ),
-            const SizedBox(width: 10),
+            if (svg != null) ...<Widget>[
+              SvgPicture.asset(
+                svg!.path,
+                width: large ? null : 18,
+                colorFilter:
+                    !disabled
+                        ? null
+                        : const ColorFilter.mode(
+                          ScaleColorConfig.neutral50,
+                          BlendMode.srcIn,
+                        ),
+              ),
+              const SizedBox(width: 10),
+            ],
+
             if (width != null)
               Expanded(child: Text(label, textAlign: TextAlign.center))
             else

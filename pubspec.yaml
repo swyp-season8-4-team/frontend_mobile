@@ -52,6 +52,9 @@ flutter:
     - asset/icon/map/
     - asset/icon/media/
     - asset/icon/system/
+    - asset/icon/dessert/
+    - asset/icon/user/
+    - asset/icon/menu/
     - asset/icon/etc/
     - asset/icon/sns/
     - asset/image/
