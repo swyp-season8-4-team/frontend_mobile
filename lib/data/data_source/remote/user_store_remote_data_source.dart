@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
-import 'package:frontend_mobile/data/entity/user_store/get_user_store_list_entity.dart';
-import 'package:frontend_mobile/data/entity/user_store/get_user_store_list_summary_entity.dart';
-import 'package:frontend_mobile/data/entity/user_store/get_user_store_location_entity.dart';
+import 'package:frontend_mobile/data/entity/user_store/user_store_list_entity.dart';
+import 'package:frontend_mobile/data/entity/user_store/user_store_list_summary_entity.dart';
+import 'package:frontend_mobile/data/entity/user_store/user_store_location_entity.dart';
 import 'package:frontend_mobile/data/query_param/user_store/add_user_store_list_query_param.dart';
 import 'package:frontend_mobile/data/query_param/user_store/update_user_store_list_query_param.dart';
 import 'package:retrofit/http.dart';
@@ -21,7 +21,7 @@ abstract class UserStoreRemoteDataSource {
 
   /// [저장 리스트 전체 조회](https://release.desserbee.com/swagger-ui/index.html#/UserStore/getUserStoreLists)
   @GET('/api/user-store/{userUuid}/lists')
-  Future<List<GetUserStoreListEntity>> getUserStoreListAll({
+  Future<List<UserStoreListEntity>> getUserStoreListAll({
     @Path() required String userUuid,
   });
 
@@ -49,7 +49,7 @@ abstract class UserStoreRemoteDataSource {
 
   /// [저장 리스트 정보 조회](https://release.desserbee.com/swagger-ui/index.html#/UserStore/getUserStoreList)
   @GET('/api/user-store/lists/{listId}')
-  Future<GetUserStoreListSummaryEntity> getUserStoreListSummary({
+  Future<UserStoreListSummaryEntity> getUserStoreListSummary({
     @Path() required int listId,
   });
 
@@ -66,13 +66,13 @@ abstract class UserStoreRemoteDataSource {
 
   /// [리스트에 저장된 가게 조회](https://release.desserbee.com/swagger-ui/index.html#/UserStore/getStoresByList)
   @GET('/api/user-store/lists/{listId}/stores')
-  Future<GetUserStoreListEntity> getStoresByUserStoreList({
+  Future<UserStoreListEntity> getStoresByUserStoreList({
     @Path() required int listId,
   });
 
   /// [저장 리스트 내 가게 위치 조회](https://release.desserbee.com/swagger-ui/index.html#/UserStore/getStoresByListId)
   @GET('/api/user-store/lists/{listId}/stores/locations')
-  Future<List<GetUserStoreLocationEntity>> getUserStoreLocations({
+  Future<List<UserStoreLocationEntity>> getUserStoreLocations({
     @Path() required int listId,
   });
 }

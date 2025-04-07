@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'generated/get_user_store_location_entity.g.dart';
+part 'generated/user_store_location_entity.g.dart';
 
 @JsonSerializable()
-class GetUserStoreLocationEntity {
-  const GetUserStoreLocationEntity({
+class UserStoreLocationEntity {
+  const UserStoreLocationEntity({
     required this.listId,
     required this.iconColorId,
     required this.storeId,
@@ -13,8 +13,8 @@ class GetUserStoreLocationEntity {
     required this.longitude,
   });
 
-  factory GetUserStoreLocationEntity.fromJson(Map<String, dynamic> json) =>
-      _$GetUserStoreLocationEntityFromJson(json);
+  factory UserStoreLocationEntity.fromJson(Map<String, dynamic> json) =>
+      _$UserStoreLocationEntityFromJson(json);
   final int listId;
   final int iconColorId;
   final int storeId;

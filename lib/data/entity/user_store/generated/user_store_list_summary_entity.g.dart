@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../get_user_store_list_summary_entity.dart';
+part of '../user_store_list_summary_entity.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetUserStoreListSummaryEntity _$GetUserStoreListSummaryEntityFromJson(
+UserStoreListSummaryEntity _$UserStoreListSummaryEntityFromJson(
   Map<String, dynamic> json,
-) => GetUserStoreListSummaryEntity(
+) => UserStoreListSummaryEntity(
   listId: (json['listId'] as num).toInt(),
   listName: json['listName'] as String,
   iconColorId: (json['iconColorId'] as num).toInt(),
 );
 
-Map<String, dynamic> _$GetUserStoreListSummaryEntityToJson(
-  GetUserStoreListSummaryEntity instance,
+Map<String, dynamic> _$UserStoreListSummaryEntityToJson(
+  UserStoreListSummaryEntity instance,
 ) => <String, dynamic>{
   'listId': instance.listId,
   'listName': instance.listName,

@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../get_user_store_location_entity.dart';
+part of '../user_store_location_entity.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetUserStoreLocationEntity _$GetUserStoreLocationEntityFromJson(
+UserStoreLocationEntity _$UserStoreLocationEntityFromJson(
   Map<String, dynamic> json,
-) => GetUserStoreLocationEntity(
+) => UserStoreLocationEntity(
   listId: (json['listId'] as num).toInt(),
   iconColorId: (json['iconColorId'] as num).toInt(),
   storeId: (json['storeId'] as num).toInt(),
@@ -17,8 +17,8 @@ GetUserStoreLocationEntity _$GetUserStoreLocationEntityFromJson(
   longitude: (json['longitude'] as num).toDouble(),
 );
 
-Map<String, dynamic> _$GetUserStoreLocationEntityToJson(
-  GetUserStoreLocationEntity instance,
+Map<String, dynamic> _$UserStoreLocationEntityToJson(
+  UserStoreLocationEntity instance,
 ) => <String, dynamic>{
   'listId': instance.listId,
   'iconColorId': instance.iconColorId,

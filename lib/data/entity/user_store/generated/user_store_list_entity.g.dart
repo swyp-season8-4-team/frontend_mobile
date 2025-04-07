@@ -6,22 +6,21 @@ part of '../user_store_list_entity.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetUserStoreListEntity _$GetUserStoreListEntityFromJson(
-  Map<String, dynamic> json,
-) => GetUserStoreListEntity(
-  listId: (json['listId'] as num).toInt(),
-  userUuid: json['userUuid'] as String,
-  listName: json['listName'] as String,
-  iconColorId: (json['iconColorId'] as num).toInt(),
-  storeCount: (json['storeCount'] as num).toInt(),
-  storeData:
-      (json['storeData'] as List<dynamic>?)
-          ?.map((e) => _StoreData.fromJson(e as Map<String, dynamic>))
-          .toList(),
-);
+UserStoreListEntity _$UserStoreListEntityFromJson(Map<String, dynamic> json) =>
+    UserStoreListEntity(
+      listId: (json['listId'] as num).toInt(),
+      userUuid: json['userUuid'] as String,
+      listName: json['listName'] as String,
+      iconColorId: (json['iconColorId'] as num).toInt(),
+      storeCount: (json['storeCount'] as num).toInt(),
+      storeData:
+          (json['storeData'] as List<dynamic>?)
+              ?.map((e) => _StoreData.fromJson(e as Map<String, dynamic>))
+              .toList(),
+    );
 
-Map<String, dynamic> _$GetUserStoreListEntityToJson(
-  GetUserStoreListEntity instance,
+Map<String, dynamic> _$UserStoreListEntityToJson(
+  UserStoreListEntity instance,
 ) => <String, dynamic>{
   'listId': instance.listId,
   'userUuid': instance.userUuid,

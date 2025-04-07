@@ -18,14 +18,14 @@ class _UserStoreRemoteDataSource implements UserStoreRemoteDataSource {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<GetUserStoreListEntity>> getUserStoreListAll({
+  Future<List<UserStoreListEntity>> getUserStoreListAll({
     required String userUuid,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<GetUserStoreListEntity>>(
+    final _options = _setStreamType<List<UserStoreListEntity>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -36,13 +36,13 @@ class _UserStoreRemoteDataSource implements UserStoreRemoteDataSource {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<GetUserStoreListEntity> _value;
+    late List<UserStoreListEntity> _value;
     try {
       _value =
           _result.data!
               .map(
                 (dynamic i) =>
-                    GetUserStoreListEntity.fromJson(i as Map<String, dynamic>),
+                    UserStoreListEntity.fromJson(i as Map<String, dynamic>),
               )
               .toList();
     } on Object catch (e, s) {
@@ -121,14 +121,14 @@ class _UserStoreRemoteDataSource implements UserStoreRemoteDataSource {
   }
 
   @override
-  Future<GetUserStoreListSummaryEntity> getUserStoreListSummary({
+  Future<UserStoreListSummaryEntity> getUserStoreListSummary({
     required int listId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<GetUserStoreListSummaryEntity>(
+    final _options = _setStreamType<UserStoreListSummaryEntity>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -139,9 +139,9 @@ class _UserStoreRemoteDataSource implements UserStoreRemoteDataSource {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late GetUserStoreListSummaryEntity _value;
+    late UserStoreListSummaryEntity _value;
     try {
-      _value = GetUserStoreListSummaryEntity.fromJson(_result.data!);
+      _value = UserStoreListSummaryEntity.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -192,14 +192,14 @@ class _UserStoreRemoteDataSource implements UserStoreRemoteDataSource {
   }
 
   @override
-  Future<GetUserStoreListEntity> getStoresByUserStoreList({
+  Future<UserStoreListEntity> getStoresByUserStoreList({
     required int listId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<GetUserStoreListEntity>(
+    final _options = _setStreamType<UserStoreListEntity>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -210,9 +210,9 @@ class _UserStoreRemoteDataSource implements UserStoreRemoteDataSource {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late GetUserStoreListEntity _value;
+    late UserStoreListEntity _value;
     try {
-      _value = GetUserStoreListEntity.fromJson(_result.data!);
+      _value = UserStoreListEntity.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -221,14 +221,14 @@ class _UserStoreRemoteDataSource implements UserStoreRemoteDataSource {
   }
 
   @override
-  Future<List<GetUserStoreLocationEntity>> getUserStoreLocations({
+  Future<List<UserStoreLocationEntity>> getUserStoreLocations({
     required int listId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<GetUserStoreLocationEntity>>(
+    final _options = _setStreamType<List<UserStoreLocationEntity>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -239,14 +239,13 @@ class _UserStoreRemoteDataSource implements UserStoreRemoteDataSource {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<GetUserStoreLocationEntity> _value;
+    late List<UserStoreLocationEntity> _value;
     try {
       _value =
           _result.data!
               .map(
-                (dynamic i) => GetUserStoreLocationEntity.fromJson(
-                  i as Map<String, dynamic>,
-                ),
+                (dynamic i) =>
+                    UserStoreLocationEntity.fromJson(i as Map<String, dynamic>),
               )
               .toList();
     } on Object catch (e, s) {

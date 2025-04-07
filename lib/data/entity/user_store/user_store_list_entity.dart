@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'generated/get_user_store_list_entity.g.dart';
+part 'generated/user_store_list_entity.g.dart';
 
 //ignore_for_file: library_private_types_in_public_api
 
 @JsonSerializable()
-class GetUserStoreListEntity {
-  const GetUserStoreListEntity({
+class UserStoreListEntity {
+  const UserStoreListEntity({
     required this.listId,
     required this.userUuid,
     required this.listName,
@@ -15,8 +15,8 @@ class GetUserStoreListEntity {
     this.storeData,
   });
 
-  factory GetUserStoreListEntity.fromJson(Map<String, dynamic> json) =>
-      _$GetUserStoreListEntityFromJson(json);
+  factory UserStoreListEntity.fromJson(Map<String, dynamic> json) =>
+      _$UserStoreListEntityFromJson(json);
 
   final int listId;
   final String userUuid;
