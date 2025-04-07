@@ -44,4 +44,12 @@ class SemanticColorConfig {
   // Outline
   static Color outline = ScaleColorConfig.neutral50;
   static Color outlineVarient = ScaleColorConfig.neutral70;
+
+  // Accent
+  static Color accentYellow = const Color(0xFFFFC803);
+  static Color accentOrange = const Color(0xFFFF8803);
+  static Color accentGreen = const Color(0xFF05D352);
+  static Color accentOcean = const Color(0xFF00C6D8);
+  static Color accentBlue = const Color(0xFF0066FF);
+  static Color accentRed = const Color(0xFFFF2D31);
 }
