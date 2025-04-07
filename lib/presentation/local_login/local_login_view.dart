@@ -10,6 +10,7 @@ import 'package:frontend_mobile/common/design_system/component/radio/radio_butto
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/presentation/home.dart';
@@ -51,16 +52,11 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
   //   _timer = Timer(const Duration(milliseconds: 300), _renderHandler);
   // }
 
-  bool _isValidEmail({required String email}) {
-    final RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    return emailRegex.hasMatch(email);
-  }
-
   void _onSubmit() {
     final String email = _emailController.text;
     final String password = _passwordController.text;
 
-    if (!_isValidEmail(email: email)) {
+    if (!email.isEmail) {
       setState(() {
         _emailError = true;
         _passwordError = false;
