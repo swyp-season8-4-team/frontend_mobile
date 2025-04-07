@@ -1,15 +1,15 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:frontend_mobile/data/entity/store/get_store_holiday_entity.dart';
-import 'package:frontend_mobile/data/entity/store/get_store_operating_hour_entity.dart';
+import 'package:frontend_mobile/data/entity/store/store_holiday_entity.dart';
+import 'package:frontend_mobile/data/entity/store/store_operating_hour_entity.dart';
 
-part 'generated/get_store_summary_entity.g.dart';
+part 'generated/store_summary_entity.g.dart';
 
 @JsonSerializable()
-class GetStoreSummaryEntity {
-  factory GetStoreSummaryEntity.fromJson(Map<String, dynamic> json) =>
-      _$GetStoreSummaryEntityFromJson(json);
+class StoreSummaryEntity {
+  factory StoreSummaryEntity.fromJson(Map<String, dynamic> json) =>
+      _$StoreSummaryEntityFromJson(json);
 
-  const GetStoreSummaryEntity({
+  const StoreSummaryEntity({
     required this.storeId,
     required this.storeUuid,
     required this.name,
@@ -38,8 +38,8 @@ class GetStoreSummaryEntity {
   final List<String> tags;
   final String? primaryStoreLink;
   final List<String>? storeLinks;
-  final List<GetStoreOperatingHourEntity> operatingHours;
-  final List<GetStoreHolidayEntity>? holidays;
+  final List<StoreOperatingHourEntity> operatingHours;
+  final List<StoreHolidayEntity>? holidays;
   final List<String>? topPreferences;
   final String address;
   final String phone;

@@ -1,14 +1,15 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:frontend_mobile/data/entity/store/get_store_summary_entity.dart';
-part 'generated/get_store_detail_entity.g.dart';
+import 'package:frontend_mobile/data/entity/store/store_summary_entity.dart';
+part 'generated/store_detail_entity.g.dart';
 
 //ignore_for_file: library_private_types_in_public_api
 
 @JsonSerializable()
-class GetStoreDetailEntity extends GetStoreSummaryEntity {
-  factory GetStoreDetailEntity.fromJson(Map<String, dynamic> json) =>
-      _$GetStoreDetailEntityFromJson(json);
-  GetStoreDetailEntity({
+class StoreDetailEntity extends StoreSummaryEntity {
+  factory StoreDetailEntity.fromJson(Map<String, dynamic> json) =>
+      _$StoreDetailEntityFromJson(json);
+
+  StoreDetailEntity({
     required super.storeId,
     required super.storeUuid,
     required super.name,

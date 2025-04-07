@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../get_store_from_map_entity.dart';
+part of '../store_by_location_entity.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetStoreFromMapEntity _$GetStoreFromMapEntityFromJson(
+StoreByLocationEntity _$StoreByLocationEntityFromJson(
   Map<String, dynamic> json,
-) => GetStoreFromMapEntity(
+) => StoreByLocationEntity(
   storeId: (json['storeId'] as num).toInt(),
   storeUuid: json['storeUuid'] as String,
   name: json['name'] as String,
@@ -18,8 +18,7 @@ GetStoreFromMapEntity _$GetStoreFromMapEntityFromJson(
   operatingHours:
       (json['operatingHours'] as List<dynamic>)
           .map(
-            (e) =>
-                GetStoreOperatingHourEntity.fromJson(e as Map<String, dynamic>),
+            (e) => StoreOperatingHourEntity.fromJson(e as Map<String, dynamic>),
           )
           .toList(),
   shortReviewCount: (json['shortReviewCount'] as num).toInt(),
@@ -27,14 +26,12 @@ GetStoreFromMapEntity _$GetStoreFromMapEntityFromJson(
   storeImage: json['storeImage'] as String?,
   holidays:
       (json['holidays'] as List<dynamic>?)
-          ?.map(
-            (e) => GetStoreHolidayEntity.fromJson(e as Map<String, dynamic>),
-          )
+          ?.map((e) => StoreHolidayEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
 );
 
-Map<String, dynamic> _$GetStoreFromMapEntityToJson(
-  GetStoreFromMapEntity instance,
+Map<String, dynamic> _$StoreByLocationEntityToJson(
+  StoreByLocationEntity instance,
 ) => <String, dynamic>{
   'storeId': instance.storeId,
   'storeUuid': instance.storeUuid,

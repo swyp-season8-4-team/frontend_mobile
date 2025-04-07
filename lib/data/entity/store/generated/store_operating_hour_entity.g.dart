@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../get_store_operating_hour_entity.dart';
+part of '../store_operating_hour_entity.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetStoreOperatingHourEntity _$GetStoreOperatingHourEntityFromJson(
+StoreOperatingHourEntity _$StoreOperatingHourEntityFromJson(
   Map<String, dynamic> json,
-) => GetStoreOperatingHourEntity(
+) => StoreOperatingHourEntity(
   dayOfWeek: json['dayOfWeek'] as String,
   openingTime: json['openingTime'] as String,
   closingTime: json['closingTime'] as String,
@@ -22,8 +22,8 @@ GetStoreOperatingHourEntity _$GetStoreOperatingHourEntityFromJson(
           .toList(),
 );
 
-Map<String, dynamic> _$GetStoreOperatingHourEntityToJson(
-  GetStoreOperatingHourEntity instance,
+Map<String, dynamic> _$StoreOperatingHourEntityToJson(
+  StoreOperatingHourEntity instance,
 ) => <String, dynamic>{
   'dayOfWeek': instance.dayOfWeek,
   'openingTime': instance.openingTime,

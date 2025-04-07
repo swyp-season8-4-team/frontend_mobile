@@ -1,18 +1,15 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'generated/get_search_popular_entity.g.dart';
+part 'generated/search_popular_entity.g.dart';
 
 //ignore_for_file: library_private_types_in_public_api
 
 @JsonSerializable()
-class GetPopularSearchesEntity {
-  factory GetPopularSearchesEntity.fromJson(Map<String, dynamic> json) =>
-      _$GetPopularSearchesEntityFromJson(json);
+class PopularSearchesEntity {
+  factory PopularSearchesEntity.fromJson(Map<String, dynamic> json) =>
+      _$PopularSearchesEntityFromJson(json);
 
-  const GetPopularSearchesEntity({
-    required this.lastUpdatedTime,
-    this.searches,
-  });
+  const PopularSearchesEntity({required this.lastUpdatedTime, this.searches});
   final DateTime lastUpdatedTime;
   final List<_PopularSearch>? searches;
 }

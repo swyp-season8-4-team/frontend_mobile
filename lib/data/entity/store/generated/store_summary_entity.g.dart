@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../get_store_summary_entity.dart';
+part of '../store_summary_entity.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetStoreSummaryEntity _$GetStoreSummaryEntityFromJson(
+StoreSummaryEntity _$StoreSummaryEntityFromJson(
   Map<String, dynamic> json,
-) => GetStoreSummaryEntity(
+) => StoreSummaryEntity(
   storeId: (json['storeId'] as num).toInt(),
   storeUuid: json['storeUuid'] as String,
   name: json['name'] as String,
@@ -16,8 +16,7 @@ GetStoreSummaryEntity _$GetStoreSummaryEntityFromJson(
   operatingHours:
       (json['operatingHours'] as List<dynamic>)
           .map(
-            (e) =>
-                GetStoreOperatingHourEntity.fromJson(e as Map<String, dynamic>),
+            (e) => StoreOperatingHourEntity.fromJson(e as Map<String, dynamic>),
           )
           .toList(),
   address: json['address'] as String,
@@ -34,9 +33,7 @@ GetStoreSummaryEntity _$GetStoreSummaryEntityFromJson(
       (json['storeLinks'] as List<dynamic>?)?.map((e) => e as String).toList(),
   holidays:
       (json['holidays'] as List<dynamic>?)
-          ?.map(
-            (e) => GetStoreHolidayEntity.fromJson(e as Map<String, dynamic>),
-          )
+          ?.map((e) => StoreHolidayEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
   topPreferences:
       (json['topPreferences'] as List<dynamic>?)
@@ -48,25 +45,24 @@ GetStoreSummaryEntity _$GetStoreSummaryEntityFromJson(
   parkingYn: json['parkingYn'] as bool?,
 );
 
-Map<String, dynamic> _$GetStoreSummaryEntityToJson(
-  GetStoreSummaryEntity instance,
-) => <String, dynamic>{
-  'storeId': instance.storeId,
-  'storeUuid': instance.storeUuid,
-  'name': instance.name,
-  'averageRating': instance.averageRating,
-  'storeImages': instance.storeImages,
-  'ownerPickImages': instance.ownerPickImages,
-  'tags': instance.tags,
-  'primaryStoreLink': instance.primaryStoreLink,
-  'storeLinks': instance.storeLinks,
-  'operatingHours': instance.operatingHours,
-  'holidays': instance.holidays,
-  'topPreferences': instance.topPreferences,
-  'address': instance.address,
-  'phone': instance.phone,
-  'description': instance.description,
-  'animalYn': instance.animalYn,
-  'tumblerYn': instance.tumblerYn,
-  'parkingYn': instance.parkingYn,
-};
+Map<String, dynamic> _$StoreSummaryEntityToJson(StoreSummaryEntity instance) =>
+    <String, dynamic>{
+      'storeId': instance.storeId,
+      'storeUuid': instance.storeUuid,
+      'name': instance.name,
+      'averageRating': instance.averageRating,
+      'storeImages': instance.storeImages,
+      'ownerPickImages': instance.ownerPickImages,
+      'tags': instance.tags,
+      'primaryStoreLink': instance.primaryStoreLink,
+      'storeLinks': instance.storeLinks,
+      'operatingHours': instance.operatingHours,
+      'holidays': instance.holidays,
+      'topPreferences': instance.topPreferences,
+      'address': instance.address,
+      'phone': instance.phone,
+      'description': instance.description,
+      'animalYn': instance.animalYn,
+      'tumblerYn': instance.tumblerYn,
+      'parkingYn': instance.parkingYn,
+    };

@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../get_search_popular_entity.dart';
+part of '../search_popular_entity.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetPopularSearchesEntity _$GetPopularSearchesEntityFromJson(
+PopularSearchesEntity _$PopularSearchesEntityFromJson(
   Map<String, dynamic> json,
-) => GetPopularSearchesEntity(
+) => PopularSearchesEntity(
   lastUpdatedTime: DateTime.parse(json['lastUpdatedTime'] as String),
   searches:
       (json['searches'] as List<dynamic>?)
@@ -16,8 +16,8 @@ GetPopularSearchesEntity _$GetPopularSearchesEntityFromJson(
           .toList(),
 );
 
-Map<String, dynamic> _$GetPopularSearchesEntityToJson(
-  GetPopularSearchesEntity instance,
+Map<String, dynamic> _$PopularSearchesEntityToJson(
+  PopularSearchesEntity instance,
 ) => <String, dynamic>{
   'lastUpdatedTime': instance.lastUpdatedTime.toIso8601String(),
   'searches': instance.searches,

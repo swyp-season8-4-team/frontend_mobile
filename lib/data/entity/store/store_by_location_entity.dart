@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:frontend_mobile/data/entity/store/get_store_holiday_entity.dart';
-import 'package:frontend_mobile/data/entity/store/get_store_operating_hour_entity.dart';
+import 'package:frontend_mobile/data/entity/store/store_holiday_entity.dart';
+import 'package:frontend_mobile/data/entity/store/store_operating_hour_entity.dart';
 
-part 'generated/get_store_from_map_entity.g.dart';
+part 'generated/store_by_location_entity.g.dart';
 
 @JsonSerializable()
-class GetStoreFromMapEntity {
-  const GetStoreFromMapEntity({
+class StoreByLocationEntity {
+  const StoreByLocationEntity({
     required this.storeId,
     required this.storeUuid,
     required this.name,
@@ -20,16 +20,16 @@ class GetStoreFromMapEntity {
     this.holidays,
   });
 
-  factory GetStoreFromMapEntity.fromJson(Map<String, dynamic> json) =>
-      _$GetStoreFromMapEntityFromJson(json);
+  factory StoreByLocationEntity.fromJson(Map<String, dynamic> json) =>
+      _$StoreByLocationEntityFromJson(json);
   final int storeId;
   final String storeUuid;
   final String name;
   final String address;
   final double latitude;
   final double longitude;
-  final List<GetStoreOperatingHourEntity> operatingHours;
-  final List<GetStoreHolidayEntity>? holidays;
+  final List<StoreOperatingHourEntity> operatingHours;
+  final List<StoreHolidayEntity>? holidays;
   final int shortReviewCount;
   final List<String> tags;
   final String? storeImage;

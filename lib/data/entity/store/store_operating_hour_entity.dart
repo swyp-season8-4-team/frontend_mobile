@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'generated/get_store_operating_hour_entity.g.dart';
+part 'generated/store_operating_hour_entity.g.dart';
 
 @JsonSerializable()
-class GetStoreOperatingHourEntity {
-  const GetStoreOperatingHourEntity({
+class StoreOperatingHourEntity {
+  const StoreOperatingHourEntity({
     required this.dayOfWeek,
     required this.openingTime,
     required this.closingTime,
@@ -15,8 +15,9 @@ class GetStoreOperatingHourEntity {
     this.breakTimes,
   });
 
-  factory GetStoreOperatingHourEntity.fromJson(Map<String, dynamic> json) =>
-      _$GetStoreOperatingHourEntityFromJson(json);
+  factory StoreOperatingHourEntity.fromJson(Map<String, dynamic> json) =>
+      _$StoreOperatingHourEntityFromJson(json);
+
   final String dayOfWeek;
   final String openingTime;
   final String closingTime;

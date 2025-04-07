@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
-import 'package:frontend_mobile/data/entity/search/get_search_popular_entity.dart';
-import 'package:frontend_mobile/data/entity/search/get_search_recent_entity.dart';
+import 'package:frontend_mobile/data/entity/search/search_popular_entity.dart';
+import 'package:frontend_mobile/data/entity/search/search_recent_entity.dart';
 import 'package:frontend_mobile/data/query_param/search/get_search_popular_query_param.dart';
 import 'package:retrofit/http.dart';
 
@@ -19,11 +19,11 @@ abstract class SearchRemoteDataSource {
 
   /// [최근 검색어 조회](https://release.desserbee.com/swagger-ui/index.html#/Search%20Keyword/getRecentSearches)
   @GET('/api/search/recent')
-  Future<List<GetSearchRecentEntity>> getRecentSearches();
+  Future<List<RecentSearchEntity>> getRecentSearches();
 
   /// [실시간 인기 검색어 조회](https://release.desserbee.com/swagger-ui/index.html#/Search%20Keyword/getPopularSearches)
   @GET('/api/search/popular')
-  Future<GetPopularSearchesEntity> getPopularSearches({
+  Future<PopularSearchesEntity> getPopularSearches({
     @Queries() required GetSearchPopularQueryParam query,
   });
 

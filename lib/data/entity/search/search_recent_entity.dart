@@ -1,17 +1,17 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'generated/get_search_recent_entity.g.dart';
+part 'generated/search_recent_entity.g.dart';
 
 @JsonSerializable()
-class GetSearchRecentEntity {
-  const GetSearchRecentEntity({
+class RecentSearchEntity {
+  const RecentSearchEntity({
     required this.id,
     required this.keyword,
     required this.createdAt,
   });
 
-  factory GetSearchRecentEntity.fromJson(Map<String, dynamic> json) =>
-      _$GetSearchRecentEntityFromJson(json);
+  factory RecentSearchEntity.fromJson(Map<String, dynamic> json) =>
+      _$RecentSearchEntityFromJson(json);
 
   final int id;
   final String keyword;

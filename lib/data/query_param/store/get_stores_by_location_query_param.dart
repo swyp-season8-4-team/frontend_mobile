@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'generated/get_stores_from_map_query_param.g.dart';
+part 'generated/get_stores_by_location_query_param.g.dart';
 
 @JsonSerializable()
-class GetStoresFromMapQueryParam {
-  const GetStoresFromMapQueryParam({
+class GetStoresByLocationQueryParam {
+  const GetStoresByLocationQueryParam({
     required this.latitude,
     required this.longitude,
     required this.radius,
@@ -17,5 +17,5 @@ class GetStoresFromMapQueryParam {
   final List<int>? preferenceTagIds;
   final String? searchKeyword;
 
-  Map<String, dynamic> toJson() => _$GetStoresFromMapQueryParamToJson(this);
+  Map<String, dynamic> toJson() => _$GetStoresByLocationQueryParamToJson(this);
 }

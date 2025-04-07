@@ -18,12 +18,12 @@ class _SearchRemoteDataSource implements SearchRemoteDataSource {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<GetSearchRecentEntity>> getRecentSearches() async {
+  Future<List<RecentSearchEntity>> getRecentSearches() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<GetSearchRecentEntity>>(
+    final _options = _setStreamType<List<RecentSearchEntity>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -34,13 +34,13 @@ class _SearchRemoteDataSource implements SearchRemoteDataSource {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<GetSearchRecentEntity> _value;
+    late List<RecentSearchEntity> _value;
     try {
       _value =
           _result.data!
               .map(
                 (dynamic i) =>
-                    GetSearchRecentEntity.fromJson(i as Map<String, dynamic>),
+                    RecentSearchEntity.fromJson(i as Map<String, dynamic>),
               )
               .toList();
     } on Object catch (e, s) {
@@ -51,7 +51,7 @@ class _SearchRemoteDataSource implements SearchRemoteDataSource {
   }
 
   @override
-  Future<GetPopularSearchesEntity> getPopularSearches({
+  Future<PopularSearchesEntity> getPopularSearches({
     required GetSearchPopularQueryParam query,
   }) async {
     final _extra = <String, dynamic>{};
@@ -59,7 +59,7 @@ class _SearchRemoteDataSource implements SearchRemoteDataSource {
     queryParameters.addAll(query.toJson());
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<GetPopularSearchesEntity>(
+    final _options = _setStreamType<PopularSearchesEntity>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -70,9 +70,9 @@ class _SearchRemoteDataSource implements SearchRemoteDataSource {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late GetPopularSearchesEntity _value;
+    late PopularSearchesEntity _value;
     try {
-      _value = GetPopularSearchesEntity.fromJson(_result.data!);
+      _value = PopularSearchesEntity.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

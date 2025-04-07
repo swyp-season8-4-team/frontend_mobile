@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../get_stores_from_map_query_param.dart';
+part of '../get_stores_by_location_query_param.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetStoresFromMapQueryParam _$GetStoresFromMapQueryParamFromJson(
+GetStoresByLocationQueryParam _$GetStoresByLocationQueryParamFromJson(
   Map<String, dynamic> json,
-) => GetStoresFromMapQueryParam(
+) => GetStoresByLocationQueryParam(
   latitude: (json['latitude'] as num).toDouble(),
   longitude: (json['longitude'] as num).toDouble(),
   radius: (json['radius'] as num).toDouble(),
@@ -19,8 +19,8 @@ GetStoresFromMapQueryParam _$GetStoresFromMapQueryParamFromJson(
   searchKeyword: json['searchKeyword'] as String?,
 );
 
-Map<String, dynamic> _$GetStoresFromMapQueryParamToJson(
-  GetStoresFromMapQueryParam instance,
+Map<String, dynamic> _$GetStoresByLocationQueryParamToJson(
+  GetStoresByLocationQueryParam instance,
 ) => <String, dynamic>{
   'latitude': instance.latitude,
   'longitude': instance.longitude,
