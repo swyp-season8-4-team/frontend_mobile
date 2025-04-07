@@ -85,6 +85,9 @@ class $AssetIconGen {
   /// Directory path: asset/icon/contact
   $AssetIconContactGen get contact => const $AssetIconContactGen();
 
+  /// Directory path: asset/icon/dessert
+  $AssetIconDessertGen get dessert => const $AssetIconDessertGen();
+
   /// Directory path: asset/icon/editor
   $AssetIconEditorGen get editor => const $AssetIconEditorGen();
 
@@ -100,8 +103,14 @@ class $AssetIconGen {
   /// Directory path: asset/icon/media
   $AssetIconMediaGen get media => const $AssetIconMediaGen();
 
+  /// Directory path: asset/icon/menu
+  $AssetIconMenuGen get menu => const $AssetIconMenuGen();
+
   /// Directory path: asset/icon/system
   $AssetIconSystemGen get system => const $AssetIconSystemGen();
+
+  /// Directory path: asset/icon/user
+  $AssetIconUserGen get user => const $AssetIconUserGen();
 }
 
 class $AssetImageGen {
@@ -254,8 +263,45 @@ class $AssetIconContactGen {
   ];
 }
 
+class $AssetIconDessertGen {
+  const $AssetIconDessertGen();
+
+  /// File path: asset/icon/dessert/birthday_2_line.svg
+  SvgGenImage get birthday2Line =>
+      const SvgGenImage('asset/icon/dessert/birthday_2_line.svg');
+
+  /// File path: asset/icon/dessert/bread_line.svg
+  SvgGenImage get breadLine =>
+      const SvgGenImage('asset/icon/dessert/bread_line.svg');
+
+  /// File path: asset/icon/dessert/cake_line.svg
+  SvgGenImage get cakeLine =>
+      const SvgGenImage('asset/icon/dessert/cake_line.svg');
+
+  /// File path: asset/icon/dessert/cupcake_line.svg
+  SvgGenImage get cupcakeLine =>
+      const SvgGenImage('asset/icon/dessert/cupcake_line.svg');
+
+  /// File path: asset/icon/dessert/donut_line.svg
+  SvgGenImage get donutLine =>
+      const SvgGenImage('asset/icon/dessert/donut_line.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [
+    birthday2Line,
+    breadLine,
+    cakeLine,
+    cupcakeLine,
+    donutLine,
+  ];
+}
+
 class $AssetIconEditorGen {
   const $AssetIconEditorGen();
+
+  /// File path: asset/icon/editor/bookmark_line.svg
+  SvgGenImage get bookmarkLine =>
+      const SvgGenImage('asset/icon/editor/bookmark_line.svg');
 
   /// File path: asset/icon/editor/edit-user_2_line.svg
   SvgGenImage get editUser2Line =>
@@ -287,6 +333,7 @@ class $AssetIconEditorGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+    bookmarkLine,
     editUser2Line,
     edit1Line,
     edit3Line,
@@ -503,6 +550,21 @@ class $AssetIconMediaGen {
   ];
 }
 
+class $AssetIconMenuGen {
+  const $AssetIconMenuGen();
+
+  /// File path: asset/icon/menu/more_1_fill.svg
+  SvgGenImage get more1Fill =>
+      const SvgGenImage('asset/icon/menu/more_1_fill.svg');
+
+  /// File path: asset/icon/menu/more_2_fill.svg
+  SvgGenImage get more2Fill =>
+      const SvgGenImage('asset/icon/menu/more_2_fill.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [more1Fill, more2Fill];
+}
+
 class $AssetIconSystemGen {
   const $AssetIconSystemGen();
 
@@ -566,9 +628,17 @@ class $AssetIconSystemGen {
   SvgGenImage get exitLine =>
       const SvgGenImage('asset/icon/system/exit_line.svg');
 
+  /// File path: asset/icon/system/keyboard-down_1_line.svg
+  SvgGenImage get keyboardDown1Line =>
+      const SvgGenImage('asset/icon/system/keyboard-down_1_line.svg');
+
   /// File path: asset/icon/system/minimize_line.svg
   SvgGenImage get minimizeLine =>
       const SvgGenImage('asset/icon/system/minimize_line.svg');
+
+  /// File path: asset/icon/system/minus_1_line.svg
+  SvgGenImage get minus1Line =>
+      const SvgGenImage('asset/icon/system/minus_1_line.svg');
 
   /// File path: asset/icon/system/question_fill.svg
   SvgGenImage get questionFill =>
@@ -627,7 +697,9 @@ class $AssetIconSystemGen {
     closeLine,
     entranceLine,
     exitLine,
+    keyboardDown1Line,
     minimizeLine,
+    minus1Line,
     questionFill,
     questionLine,
     refresh1Line,
@@ -639,6 +711,29 @@ class $AssetIconSystemGen {
     warningFill,
     warningLine,
   ];
+}
+
+class $AssetIconUserGen {
+  const $AssetIconUserGen();
+
+  /// File path: asset/icon/user/group_1_line.svg
+  SvgGenImage get group1Line =>
+      const SvgGenImage('asset/icon/user/group_1_line.svg');
+
+  /// File path: asset/icon/user/user_1_line.svg
+  SvgGenImage get user1Line =>
+      const SvgGenImage('asset/icon/user/user_1_line.svg');
+
+  /// File path: asset/icon/user/user_2_line.svg
+  SvgGenImage get user2Line =>
+      const SvgGenImage('asset/icon/user/user_2_line.svg');
+
+  /// File path: asset/icon/user/user_3_line.svg
+  SvgGenImage get user3Line =>
+      const SvgGenImage('asset/icon/user/user_3_line.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [group1Line, user1Line, user2Line, user3Line];
 }
 
 class Assets {
