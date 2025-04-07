@@ -111,14 +111,14 @@ class CustomBottomSheet {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Expanded(
-          child: CustomOutlineButton(
+          child: CustomOutlineButton.medium(
             label: leftButton!.label,
             onPressed: leftButton!.onPressed,
           ),
         ),
         const SizedBox(width: 10),
         Expanded(
-          child: CustomFillButton(
+          child: CustomFillButton.medium(
             label: rightButton!.label,
             onPressed: rightButton!.onPressed,
           ),
