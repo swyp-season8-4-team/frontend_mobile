@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ScaleColorConfig {
+  // default color
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color black = Color(0xFF000000);
+
   // Primary: Honey yellow
   static const Color primary5 = Color(0xFF190F00);
   static const Color primary10 = Color(0xFF271900);
