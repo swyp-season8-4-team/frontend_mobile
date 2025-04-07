@@ -137,11 +137,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset(
-                    Assets.image.logo.path,
-                    width: 172,
-                    fit: BoxFit.fitWidth,
-                  ),
+                  Assets.image.logo.image(width: 172, fit: BoxFit.fitWidth),
                   const SizedBox(height: 73),
 
                   CustomInputBox(
