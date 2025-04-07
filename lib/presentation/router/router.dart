@@ -15,6 +15,7 @@ class AppRouter {
   final GoRouter _router = GoRouter(
     // TODO: 화면 플로우에 맞춰 initialLocation 수정 필요
     initialLocation: AppRoutes.localLogin.name,
+    navigatorKey: rootNavigatorKey,
     routes: <RouteBase>[
       GoRoute(
         path: AppRoutes.auth.path,
