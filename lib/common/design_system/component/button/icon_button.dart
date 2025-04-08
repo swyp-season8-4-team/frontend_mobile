@@ -10,7 +10,6 @@ class CustomIconButton extends StatefulWidget {
     required this.svg,
     required this.isSelected,
     this.disabled = false,
-    this.iconColor,
     super.key,
   });
 
@@ -18,21 +17,20 @@ class CustomIconButton extends StatefulWidget {
   final SvgGenImage svg;
   final bool isSelected;
   final bool disabled;
-  final Color? iconColor;
 
   @override
   State<CustomIconButton> createState() => _CustomIconButtonState();
 }
 
 class _CustomIconButtonState extends State<CustomIconButton> {
-  late Color _iconColor = widget.iconColor ?? Colors.black;
+  late Color _iconColor = Colors.black;
 
   void _iconColorHandler({required Set<WidgetState> states}) =>
       WidgetsBinding.instance.addPostFrameCallback((_) {
         /// Presssed
         if (states.contains(WidgetState.pressed)) {
           setState(() {
-            _iconColor = widget.iconColor ?? ScaleColorConfig.neutral40;
+            _iconColor = ScaleColorConfig.neutral40;
           });
           return;
         }
@@ -40,7 +38,7 @@ class _CustomIconButtonState extends State<CustomIconButton> {
         /// Selected
         if (widget.isSelected) {
           setState(() {
-            _iconColor = widget.iconColor ?? ScaleColorConfig.primary20;
+            _iconColor = ScaleColorConfig.primary20;
           });
           return;
         }
@@ -48,14 +46,14 @@ class _CustomIconButtonState extends State<CustomIconButton> {
         /// Disabled
         if (states.contains(WidgetState.disabled)) {
           setState(() {
-            _iconColor = widget.iconColor ?? ScaleColorConfig.neutral40;
+            _iconColor = ScaleColorConfig.neutral40;
           });
           return;
         }
 
         /// Enabled
         setState(() {
-          _iconColor = widget.iconColor ?? ScaleColorConfig.neutral40;
+          _iconColor = ScaleColorConfig.neutral40;
         });
       });
 
