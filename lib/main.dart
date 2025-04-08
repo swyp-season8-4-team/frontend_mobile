@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/foundation/foundation.dart';
 import 'package:frontend_mobile/common/gen_asset/fonts.gen.dart';
-import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
+import 'package:frontend_mobile/presentation/router/router.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +26,8 @@ class _MainAppState extends ConsumerState<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: ref.read(appRouterProvider).routerConfig,
       theme: ThemeData(
         fontFamily: FontFamily.pretendard,
         colorScheme: FoundationConfig.colorScheme,
@@ -34,7 +35,6 @@ class _MainAppState extends ConsumerState<MainApp> {
         highlightColor: Colors.transparent,
         splashFactory: NoSplash.splashFactory,
       ),
-      home: const Scaffold(body: LocalLoginView()),
     );
   }
 
