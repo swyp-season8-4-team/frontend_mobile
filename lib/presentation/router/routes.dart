@@ -5,11 +5,13 @@ import 'package:frontend_mobile/core/resource/route_info.dart';
 abstract class AppRoutes {
   AppRoutes._();
 
-  // 인증 관련 페이지의 기반 Route Info
-  static const RouteInfo auth = RouteInfo(name: '/auth', path: '/auth');
+  static const RouteInfo splash = RouteInfo(name: '/splash', path: '/splash');
 
   // 로그인 성공시, 이동하는 화면 (테스트용 페이지)
   static const RouteInfo home = RouteInfo(name: '/home', path: '/home');
+
+  // 인증 관련 페이지의 기반 Route Info
+  static const RouteInfo auth = RouteInfo(name: '/auth', path: '/auth');
 
   // 로그인 화면
   static final RouteInfo localLogin = RouteInfo(
