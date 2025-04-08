@@ -137,7 +137,7 @@ class CustomSavedStoreList extends StatelessWidget {
                 ),
               )
             else
-              CustomCheckBox(onTap: onCheckboxTap!),
+              CustomCheckBox(onTap: onCheckboxTap!, value: checked),
           ],
         ),
       ),
