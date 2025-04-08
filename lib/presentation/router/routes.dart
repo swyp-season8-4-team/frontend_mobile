@@ -8,6 +8,9 @@ abstract class AppRoutes {
   // 인증 관련 페이지의 기반 Route Info
   static const RouteInfo auth = RouteInfo(name: '/auth', path: '/auth');
 
+  // 로그인 성공시, 이동하는 화면 (테스트용 페이지)
+  static const RouteInfo home = RouteInfo(name: '/home', path: '/home');
+
   // 로그인 화면
   static final RouteInfo localLogin = RouteInfo(
     name: '${auth.name}/local_login',

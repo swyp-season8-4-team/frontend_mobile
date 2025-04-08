@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/presentation/home.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +18,11 @@ class AppRouter {
     initialLocation: AppRoutes.localLogin.name,
     navigatorKey: rootNavigatorKey,
     routes: <RouteBase>[
+      GoRoute(
+        path: AppRoutes.home.path,
+        name: AppRoutes.home.name,
+        builder: (BuildContext context, GoRouterState state) => const Home(),
+      ),
       GoRoute(
         path: AppRoutes.auth.path,
         name: AppRoutes.auth.name,
