@@ -436,6 +436,10 @@ class $AssetIconEtcGen {
   SvgGenImage get a48RadioButtonUncheckedPressed =>
       const SvgGenImage('asset/icon/etc/48_radio_button_unchecked_pressed.svg');
 
+  /// File path: asset/icon/etc/flower_filled.svg
+  SvgGenImage get flowerFilled =>
+      const SvgGenImage('asset/icon/etc/flower_filled.svg');
+
   /// File path: asset/icon/etc/flower_line.svg
   SvgGenImage get flowerLine =>
       const SvgGenImage('asset/icon/etc/flower_line.svg');
@@ -464,6 +468,7 @@ class $AssetIconEtcGen {
     a48RadioButtonUnchecked,
     a48RadioButtonUncheckedDisabled,
     a48RadioButtonUncheckedPressed,
+    flowerFilled,
     flowerLine,
   ];
 }
@@ -617,6 +622,10 @@ class $AssetIconSystemGen {
   SvgGenImage get alertLine =>
       const SvgGenImage('asset/icon/system/alert_line.svg');
 
+  /// File path: asset/icon/system/anticlockwise_1_line.svg
+  SvgGenImage get anticlockwise1Line =>
+      const SvgGenImage('asset/icon/system/anticlockwise_1_line.svg');
+
   /// File path: asset/icon/system/chart_1_filled.svg
   SvgGenImage get chart1Filled =>
       const SvgGenImage('asset/icon/system/chart_1_filled.svg');
@@ -713,6 +722,7 @@ class $AssetIconSystemGen {
     addCircleLine,
     alertFill,
     alertLine,
+    anticlockwise1Line,
     chart1Filled,
     checkCircleFill,
     checkCircleLine,
