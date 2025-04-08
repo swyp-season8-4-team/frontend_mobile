@@ -35,18 +35,20 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
     );
 
     if (localLoginState.status == Status.loading) {
-      return const Center(child: CircularProgressIndicator());
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
-    return Align(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text('accessToken: ${localLoginState.data.accessToken}'),
-          Text('refreshToken: ${localLoginState.data.refreshToken}'),
-          Text('email: ${localLoginState.data.email}'),
-          Text('nickname: ${localLoginState.data.nickname}'),
-        ],
+    return Scaffold(
+      body: Align(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('accessToken: ${localLoginState.data.accessToken}'),
+            Text('refreshToken: ${localLoginState.data.refreshToken}'),
+            Text('email: ${localLoginState.data.email}'),
+            Text('nickname: ${localLoginState.data.nickname}'),
+          ],
+        ),
       ),
     );
   }
