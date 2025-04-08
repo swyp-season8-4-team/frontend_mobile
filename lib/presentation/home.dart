@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
 
 class Home extends ConsumerWidget {
@@ -14,6 +15,13 @@ class Home extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            ElevatedButton(
+              onPressed: () async {
+                const FlutterSecureStorage storage = FlutterSecureStorage();
+                await storage.deleteAll();
+              },
+              child: const Text('storage 비우기'),
+            ),
             Text(loginState.data.nickname),
             Text(loginState.data.email),
             Text(loginState.data.deviceId),
