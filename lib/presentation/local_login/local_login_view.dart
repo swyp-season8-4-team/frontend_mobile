@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/sns_login_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
-import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/radio/radio_button.dart';
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
@@ -114,12 +113,12 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
           );
           break;
         case Status.failure:
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return CustomDialog.basic(description: next.exception.message);
-            },
-          );
+        // showDialog(
+        //   context: context,
+        //   builder: (BuildContext context) {
+        //     return CustomDialog.basic(description: next.exception.message);
+        //   },
+        // );
         default:
       }
     });
