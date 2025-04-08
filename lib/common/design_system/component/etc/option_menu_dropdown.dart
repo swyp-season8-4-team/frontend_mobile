@@ -20,6 +20,7 @@ class CustomOptionMenuDropdown extends StatelessWidget {
       ),
       child: IntrinsicWidth(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             if (optionMenus.isNotEmpty)
               ...List<Widget>.generate(2 * optionMenus.length - 1, (int index) {
