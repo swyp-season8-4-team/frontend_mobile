@@ -6,10 +6,10 @@ import 'package:frontend_mobile/common/design_system/component/etc/option_menu_d
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
-/// Map Save List
+/// Map Save List Item
 /// https://www.figma.com/design/S1zkOn7DjDJ0b1mcPVJRil/SWYP_%E1%84%8B%E1%85%A2%E1%86%B8_1%E1%84%80%E1%85%B5_%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A5%E1%84%87%E1%85%B5?node-id=40000781-244763&m=dev
-class CustomSavedStoreList extends StatelessWidget {
-  const CustomSavedStoreList.withCheckbox({
+class CustomSavedStoreListItem extends StatelessWidget {
+  const CustomSavedStoreListItem.withCheckbox({
     required this.leftIconColor,
     required this.name,
     required this.storeLength,
@@ -23,7 +23,7 @@ class CustomSavedStoreList extends StatelessWidget {
        optionMenusVisible = false,
        onOptionMenusTap = null;
 
-  const CustomSavedStoreList.withOptionMenus({
+  const CustomSavedStoreListItem.withOptionMenus({
     required this.leftIconColor,
     required this.name,
     required this.storeLength,
