@@ -432,6 +432,10 @@ class $AssetIconEtcGen {
   SvgGenImage get a48RadioButtonUncheckedPressed =>
       const SvgGenImage('asset/icon/etc/48_radio_button_unchecked_pressed.svg');
 
+  /// File path: asset/icon/etc/flower_line.svg
+  SvgGenImage get flowerLine =>
+      const SvgGenImage('asset/icon/etc/flower_line.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
     a16CloseFilled1,
@@ -455,6 +459,7 @@ class $AssetIconEtcGen {
     a48RadioButtonUnchecked,
     a48RadioButtonUncheckedDisabled,
     a48RadioButtonUncheckedPressed,
+    flowerLine,
   ];
 }
 
