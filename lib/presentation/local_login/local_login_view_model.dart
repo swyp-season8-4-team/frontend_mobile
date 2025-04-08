@@ -25,7 +25,7 @@ class LocalLoginViewModel extends StateNotifier<LocalLoginState> {
   final Ref ref;
 
   /// Dev 로그인(presentation)
-  void postDevLocalLogin({required LocalLoginParams params}) async {
+  Future<void> postDevLocalLogin({required LocalLoginParams params}) async {
     state = state.copyWith(status: Status.loading);
 
     // await Future<void>.delayed(const Duration(seconds: 2));
@@ -50,7 +50,7 @@ class LocalLoginViewModel extends StateNotifier<LocalLoginState> {
   }
 
   /// 로그인(presentation)
-  void postLocalLogin({required LocalLoginParams params}) async {
+  Future<void> postLocalLogin({required LocalLoginParams params}) async {
     state = state.copyWith(status: Status.loading);
 
     final Result<LocalLoginModel, CustomException> response =

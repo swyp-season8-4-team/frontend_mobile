@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/sns_login_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
@@ -10,8 +11,10 @@ import 'package:frontend_mobile/common/design_system/component/radio/radio_butto
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/core/resource/token_info.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
@@ -120,11 +123,28 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
     final LocalLoginState state = ref.watch(localLoginViewModelProvider);
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    ref.listen(localLoginViewModelProvider, (_, LocalLoginState next) {
+    ref.listen(localLoginViewModelProvider, (_, LocalLoginState next) async {
       switch (next.status) {
         case Status.success:
           // TODO: 개발 하기 편하게 하려고 pushNamed 사용했고, 추후에 goNamed로 바꿀 예정
-          context.pushNamed(AppRoutes.home.name);
+          unawaited(context.pushNamed(AppRoutes.home.name));
+
+          /// 로그인 유지가 활성화된 경우
+          if (_keepLoggedIn) {
+            final TokenInfo tokenInfo = TokenInfo(
+              accessToken: next.data.accessToken,
+              refreshToken: next.data.refreshToken,
+              expiresIn: next.data.expiresIn,
+              email: _emailController.text,
+              password: _passwordController.text,
+            );
+
+            const FlutterSecureStorage storage = FlutterSecureStorage();
+            await storage.write(
+              key: Constant.tokenInfo,
+              value: TokenInfo.serialize(tokenInfo: tokenInfo),
+            );
+          }
           break;
         case Status.failure:
           switch (next.exception.code) {
@@ -140,17 +160,19 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                 _passwordErrorText = next.exception.message;
               });
             default:
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return CustomDialog.basic(
-                    description: next.exception.message,
-                    primaryButton: CustomDialogButton(
-                      text: '확인',
-                      onTap: () => context.pop(),
-                    ),
-                  );
-                },
+              unawaited(
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return CustomDialog.basic(
+                      description: next.exception.message,
+                      primaryButton: CustomDialogButton(
+                        text: '확인',
+                        onTap: () => context.pop(),
+                      ),
+                    );
+                  },
+                ),
               );
           }
 
@@ -176,6 +198,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                     error: _emailError,
                     errorText: _emailErrorText,
                     hintText: '이메일',
+                    closeControll: true,
                   ),
                   const SizedBox(height: 12),
                   CustomInputBox(
@@ -195,6 +218,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                       });
                     },
                     visibility: _visibility,
+                    closeControll: true,
                     visibilityControll: true,
                   ),
                   const SizedBox(height: 12),
@@ -202,8 +226,6 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      /// TODO: 로그인 유지를 누르면 자동 로그인 되도록 구현해야 됨
-                      /// api/users/me api 사용
                       CustomRadioButton.small(
                         onTap: () {
                           setState(() {
