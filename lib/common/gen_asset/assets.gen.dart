@@ -440,6 +440,10 @@ class $AssetIconEtcGen {
   SvgGenImage get flowerFilled =>
       const SvgGenImage('asset/icon/etc/flower_filled.svg');
 
+  /// File path: asset/icon/etc/flower_filled_selected.svg
+  SvgGenImage get flowerFilledSelected =>
+      const SvgGenImage('asset/icon/etc/flower_filled_selected.svg');
+
   /// File path: asset/icon/etc/flower_line.svg
   SvgGenImage get flowerLine =>
       const SvgGenImage('asset/icon/etc/flower_line.svg');
@@ -469,6 +473,7 @@ class $AssetIconEtcGen {
     a48RadioButtonUncheckedDisabled,
     a48RadioButtonUncheckedPressed,
     flowerFilled,
+    flowerFilledSelected,
     flowerLine,
   ];
 }
