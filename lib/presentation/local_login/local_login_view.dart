@@ -5,15 +5,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/sns_login_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
+import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/radio/radio_button.dart';
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/core/util/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
-import 'package:frontend_mobile/presentation/home.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:go_router/go_router.dart';
 
 class LocalLoginView extends ConsumerStatefulWidget {
   const LocalLoginView({super.key});
@@ -27,7 +30,15 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
   final TextEditingController _passwordController = TextEditingController();
 
   bool _emailError = false;
+  String _emailErrorText = '';
+
+  /// 실시간 입력과 관련된 비밀번호
+  bool _realTimePasswordError = false;
+  final String _realTimePasswordErrorText = '비밀번호를 다시 입력해주세요';
+
+  /// api 통신와 관련된 비밀번호
   bool _passwordError = false;
+  String _passwordErrorText = '';
 
   bool _keepLoggedIn = false;
   bool _visibility = false;
@@ -37,19 +48,26 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
   @override
   void initState() {
     super.initState();
-    _emailController.addListener(_renderHandler);
-    _passwordController.addListener(_renderHandler);
+    _emailController.addListener(_onEmailRender);
+    _passwordController.addListener(_onPasswordRender);
   }
 
-  void _renderHandler() {
+  void _onEmailRender() {
     setState(() {});
   }
 
-  // void _debounce() {
-  //   if (_timer?.isActive ?? false) _timer!.cancel();
-
-  //   _timer = Timer(const Duration(milliseconds: 300), _renderHandler);
-  // }
+  void _onPasswordRender() {
+    if (_passwordController.text.isNotEmpty &&
+        !_passwordController.text.isPasswordValid) {
+      setState(() {
+        _realTimePasswordError = true;
+      });
+    } else {
+      setState(() {
+        _realTimePasswordError = false;
+      });
+    }
+  }
 
   void _onSubmit() {
     final String email = _emailController.text;
@@ -90,8 +108,8 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
   @override
   void dispose() {
     _timer?.cancel();
-    _emailController.removeListener(_renderHandler);
-    _passwordController.removeListener(_renderHandler);
+    _emailController.removeListener(_onEmailRender);
+    _passwordController.removeListener(_onPasswordRender);
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -99,33 +117,51 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
 
   @override
   Widget build(BuildContext context) {
-    final LocalLoginState loginState = ref.watch(localLoginViewModelProvider);
+    final LocalLoginState state = ref.watch(localLoginViewModelProvider);
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     ref.listen(localLoginViewModelProvider, (_, LocalLoginState next) {
       switch (next.status) {
         case Status.success:
-          Navigator.push(
-            context,
-            MaterialPageRoute<void>(
-              builder: (BuildContext ctx) => const Home(),
-            ),
-          );
+          // TODO: 개발 하기 편하게 하려고 pushNamed 사용했고, 추후에 goNamed로 바꿀 예정
+          context.pushNamed(AppRoutes.home.name);
           break;
         case Status.failure:
-        // showDialog(
-        //   context: context,
-        //   builder: (BuildContext context) {
-        //     return CustomDialog.basic(description: next.exception.message);
-        //   },
-        // );
+          switch (next.exception.code) {
+            case 'A013':
+              setState(() {
+                _emailError = true;
+                _emailErrorText = next.exception.message;
+              });
+              break;
+            case 'A014':
+              setState(() {
+                _passwordError = true;
+                _passwordErrorText = next.exception.message;
+              });
+            default:
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CustomDialog.basic(
+                    description: next.exception.message,
+                    primaryButton: CustomDialogButton(
+                      text: '확인',
+                      onTap: () => context.pop(),
+                    ),
+                  );
+                },
+              );
+          }
+
         default:
       }
     });
 
-    return Stack(
-      children: <Widget>[
-        Align(
+    return CustomLoadingOverlay(
+      isLoading: state.status == Status.loading,
+      child: Material(
+        child: Align(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: SingleChildScrollView(
@@ -138,14 +174,20 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                   CustomInputBox(
                     controller: _emailController,
                     error: _emailError,
-                    errorText: '이메일을 확인해주세요',
+                    errorText: _emailErrorText,
                     hintText: '이메일',
                   ),
                   const SizedBox(height: 12),
                   CustomInputBox(
                     controller: _passwordController,
-                    error: _passwordError,
-                    errorText: '비밀번호를 확인해 주세요',
+                    error:
+                        state.status == Status.failure
+                            ? _passwordError
+                            : _realTimePasswordError,
+                    errorText:
+                        state.status == Status.failure
+                            ? _passwordErrorText
+                            : _realTimePasswordErrorText,
                     hintText: '비밀번호',
                     onVisibilityButtonTap: () {
                       setState(() {
@@ -181,7 +223,10 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
 
                   CustomFillButton(
                     label: '로그인',
-                    disabled: _passwordController.text.length < 8,
+                    disabled:
+                        _passwordController.text.length < 8 ||
+                        !_passwordController.text.isPasswordValid ||
+                        state.status == Status.loading,
                     onPressed: _onSubmit,
                   ),
                   Container(
@@ -237,17 +282,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
             ),
           ),
         ),
-
-        if (loginState.status == Status.loading)
-          Positioned.fill(
-            child: Container(
-              color: Colors.black45,
-              child: const Align(
-                child: Positioned(child: CircularProgressIndicator()),
-              ),
-            ),
-          ),
-      ],
+      ),
     );
   }
 }
