@@ -367,6 +367,10 @@ class $AssetIconEtcGen {
   SvgGenImage get a18CloseEyeOutlined =>
       const SvgGenImage('asset/icon/etc/18_close_eye_outlined.svg');
 
+  /// File path: asset/icon/etc/18_coupon_bedge.svg
+  SvgGenImage get a18CouponBedge =>
+      const SvgGenImage('asset/icon/etc/18_coupon_bedge.svg');
+
   /// File path: asset/icon/etc/18_open_eye_outlined.svg
   SvgGenImage get a18OpenEyeOutlined =>
       const SvgGenImage('asset/icon/etc/18_open_eye_outlined.svg');
@@ -432,6 +436,18 @@ class $AssetIconEtcGen {
   SvgGenImage get a48RadioButtonUncheckedPressed =>
       const SvgGenImage('asset/icon/etc/48_radio_button_unchecked_pressed.svg');
 
+  /// File path: asset/icon/etc/flower_filled.svg
+  SvgGenImage get flowerFilled =>
+      const SvgGenImage('asset/icon/etc/flower_filled.svg');
+
+  /// File path: asset/icon/etc/flower_filled_selected.svg
+  SvgGenImage get flowerFilledSelected =>
+      const SvgGenImage('asset/icon/etc/flower_filled_selected.svg');
+
+  /// File path: asset/icon/etc/flower_line.svg
+  SvgGenImage get flowerLine =>
+      const SvgGenImage('asset/icon/etc/flower_line.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
     a16CloseFilled1,
@@ -439,6 +455,7 @@ class $AssetIconEtcGen {
     a18CloseCircleFilledEnabled,
     a18CloseCircleFilledPressed,
     a18CloseEyeOutlined,
+    a18CouponBedge,
     a18OpenEyeOutlined,
     a20CarFilled,
     a20PetFilled,
@@ -455,6 +472,9 @@ class $AssetIconEtcGen {
     a48RadioButtonUnchecked,
     a48RadioButtonUncheckedDisabled,
     a48RadioButtonUncheckedPressed,
+    flowerFilled,
+    flowerFilledSelected,
+    flowerLine,
   ];
 }
 
@@ -493,6 +513,18 @@ class $AssetIconFileGen {
 class $AssetIconMapGen {
   const $AssetIconMapGen();
 
+  /// File path: asset/icon/map/22x30_marker_1.svg
+  SvgGenImage get a22x30Marker1 =>
+      const SvgGenImage('asset/icon/map/22x30_marker_1.svg');
+
+  /// File path: asset/icon/map/50_current_location.svg
+  SvgGenImage get a50CurrentLocation =>
+      const SvgGenImage('asset/icon/map/50_current_location.svg');
+
+  /// File path: asset/icon/map/60x69_selected_marker_1.svg
+  SvgGenImage get a60x69SelectedMarker1 =>
+      const SvgGenImage('asset/icon/map/60x69_selected_marker_1.svg');
+
   /// File path: asset/icon/map/aiming_2_line.svg
   SvgGenImage get aiming2Line =>
       const SvgGenImage('asset/icon/map/aiming_2_line.svg');
@@ -514,6 +546,9 @@ class $AssetIconMapGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+    a22x30Marker1,
+    a50CurrentLocation,
+    a60x69SelectedMarker1,
     aiming2Line,
     locationLine,
     mapLine,
@@ -591,6 +626,10 @@ class $AssetIconSystemGen {
   /// File path: asset/icon/system/alert_line.svg
   SvgGenImage get alertLine =>
       const SvgGenImage('asset/icon/system/alert_line.svg');
+
+  /// File path: asset/icon/system/anticlockwise_1_line.svg
+  SvgGenImage get anticlockwise1Line =>
+      const SvgGenImage('asset/icon/system/anticlockwise_1_line.svg');
 
   /// File path: asset/icon/system/chart_1_filled.svg
   SvgGenImage get chart1Filled =>
@@ -688,6 +727,7 @@ class $AssetIconSystemGen {
     addCircleLine,
     alertFill,
     alertLine,
+    anticlockwise1Line,
     chart1Filled,
     checkCircleFill,
     checkCircleLine,
