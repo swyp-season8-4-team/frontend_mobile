@@ -77,4 +77,12 @@ extension ColorSchemeExt on ColorScheme {
   Color get onSuccess => SemanticColorConfig.onSuccess;
   Color get successContainer => SemanticColorConfig.successContainer;
   Color get onSuccessContainer => SemanticColorConfig.onSuccessContainer;
+
+  // Accent
+  Color get accentYellow => SemanticColorConfig.accentYellow;
+  Color get accentOrange => SemanticColorConfig.accentOrange;
+  Color get accentGreen => SemanticColorConfig.accentGreen;
+  Color get accentOcean => SemanticColorConfig.accentOcean;
+  Color get accentBlue => SemanticColorConfig.accentBlue;
+  Color get accentRed => SemanticColorConfig.accentRed;
 }
