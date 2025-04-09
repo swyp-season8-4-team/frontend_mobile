@@ -7,7 +7,6 @@ import 'package:frontend_mobile/common/design_system/component/button/fill_butto
 import 'package:frontend_mobile/common/design_system/component/button/sns_login_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
-import 'package:frontend_mobile/common/design_system/component/radio/radio_button.dart';
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
@@ -43,7 +42,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
   bool _passwordError = false;
   String _passwordErrorText = '';
 
-  bool _keepLoggedIn = false;
+  final bool _keepLoggedIn = false;
   bool _visibility = false;
 
   Timer? _timer;
@@ -223,26 +222,26 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                   ),
                   const SizedBox(height: 12),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      CustomRadioButton.small(
-                        onTap: () {
-                          setState(() {
-                            _keepLoggedIn = !_keepLoggedIn;
-                          });
-                        },
-                        label: '로그인 유지',
-                        value: _keepLoggedIn,
-                      ),
-                      CustomTextButton.underline(
-                        label: '비밀번호 찾기',
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 44),
-
+                  /// TODO: 추후에 작업 진행
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: <Widget>[
+                  //     CustomRadioButton.small(
+                  //       onTap: () {
+                  //         setState(() {
+                  //           _keepLoggedIn = !_keepLoggedIn;
+                  //         });
+                  //       },
+                  //       label: '로그인 유지',
+                  //       value: _keepLoggedIn,
+                  //     ),
+                  //     CustomTextButton.underline(
+                  //       label: '비밀번호 찾기',
+                  //       onPressed: () {},
+                  //     ),
+                  //   ],
+                  // ),
+                  // const SizedBox(height: 44),
                   CustomFillButton(
                     label: '로그인',
                     disabled:
@@ -276,7 +275,20 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                   CustomSnsLoginButton(
                     svgImage: Assets.icon.sns.kakao,
                     label: '카카오 로그인',
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return CustomDialog.basic(
+                            description: '서비스 준비중입니다.',
+                            primaryButton: CustomDialogButton(
+                              text: '확인',
+                              onTap: () => context.pop(),
+                            ),
+                          );
+                        },
+                      );
+                    },
                     backgroundColor: const Color(0xFFFEE500),
                     foregroundColor: const Color(0xFF191919),
                   ),
