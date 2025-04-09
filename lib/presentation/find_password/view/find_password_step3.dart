@@ -4,11 +4,13 @@ import 'package:frontend_mobile/common/design_system/component/button/fill_butto
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
-import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/core/resource/enum.dart';
+import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/util/find_password_wrapper.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
 import 'package:frontend_mobile/presentation/find_password/find_password_view_model.dart';
-import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:go_router/go_router.dart';
 
 class FindPasswordStep3 extends ConsumerStatefulWidget {
   const FindPasswordStep3({super.key});
@@ -28,32 +30,42 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
   bool _passwordError = false;
   final String _passwordErrorText = '';
 
+  /// 실시간 입력과 관련된 비밀번호
+  bool _realTimePasswordCheckError = false;
+  final String _realTimePasswordCheckErrorText = '비밀번호를 다시 입력해주세요';
+
+  /// api 통신와 관련된 비밀번호
   bool _passwordCheckError = false;
   String _passwordCheckErrorText = '';
 
   @override
   void initState() {
     super.initState();
-    _passwordController.addListener(_renderHandler);
-    _passwordCheckController.addListener(_renderHandler);
+    _passwordController.addListener(_onPasswordRender);
+    _passwordCheckController.addListener(_onPasswordCheckRender);
   }
 
-  void _renderHandler() {
+  void _onPasswordRender() {
     setState(() {});
   }
 
-  bool _isValidPassword({required String password}) {
-    final RegExp regex = RegExp(
-      r'^(?=.*[a-z])(?=.*\d)(?=.*[!@#\$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$',
-    );
-
-    return regex.hasMatch(password);
+  void _onPasswordCheckRender() {
+    if (_passwordCheckController.text.isNotEmpty &&
+        !_passwordCheckController.text.isPasswordValid) {
+      setState(() {
+        _realTimePasswordCheckError = true;
+      });
+    } else {
+      setState(() {
+        _realTimePasswordCheckError = false;
+      });
+    }
   }
 
   @override
   void dispose() {
-    _passwordController.removeListener(_renderHandler);
-    _passwordCheckController.removeListener(_renderHandler);
+    _passwordController.removeListener(_onPasswordRender);
+    _passwordCheckController.removeListener(_onPasswordCheckRender);
     _passwordController.dispose();
     _passwordCheckController.dispose();
     super.dispose();
@@ -69,7 +81,7 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
       return;
     }
 
-    if (!_isValidPassword(password: _passwordController.text)) {
+    if (!_passwordController.text.isPasswordValid) {
       setState(() {
         _passwordError = true;
         _passwordCheckError = true;
@@ -91,15 +103,10 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
         return CustomDialog.basic(
           title: '비밀번호 변경 성공',
           description: '이제 새 비밀번호로 \n 로그인할 수 있습니다.',
-          onConfirmTap: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute<void>(
-                builder: (BuildContext ctx) => const LocalLoginView(),
-              ),
-              (Route<dynamic> route) => false,
-            );
-          },
+          primaryButton: CustomDialogButton(
+            text: '로그인 하기',
+            onTap: () => context.goNamed(AppRoutes.localLogin.name),
+          ),
         );
       },
     );
@@ -110,8 +117,10 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
     final FindPasswordState state = ref.watch(findPasswordViewModelProvider);
     final TextTheme textTheme = Theme.of(context).textTheme;
 
+    /// TODO: 비밀번호 변경 api 관련 ref.listen 만들기
+
     return CustomLoadingOverlay(
-      isLoading: state.status == Status.loading,
+      isLoading: state.passwordStatus == Status.loading,
       child: CustomFindPasswordWrapper(
         child: Column(
           children: <Widget>[
@@ -154,8 +163,14 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
                       controller: _passwordCheckController,
                       hintText: '비밀번호 확인',
                       visibility: _passwordCheckVisibility,
-                      error: _passwordCheckError,
-                      errorText: _passwordCheckErrorText,
+                      error:
+                          state.passwordStatus == Status.failure
+                              ? _passwordCheckError
+                              : _realTimePasswordCheckError,
+                      errorText:
+                          state.passwordStatus == Status.failure
+                              ? _passwordCheckErrorText
+                              : _realTimePasswordCheckErrorText,
                       onVisibilityButtonTap: () {
                         setState(() {
                           _passwordCheckVisibility = !_passwordCheckVisibility;
