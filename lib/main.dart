@@ -1,5 +1,6 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/foundation/foundation.dart';
 import 'package:frontend_mobile/common/gen_asset/fonts.gen.dart';
@@ -7,7 +8,7 @@ import 'package:frontend_mobile/presentation/router/router.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const ProviderScope(child: MainApp()));
+  runApp(const ProviderScope(child: Portal(child: MainApp())));
 }
 
 class MainApp extends ConsumerStatefulWidget {
