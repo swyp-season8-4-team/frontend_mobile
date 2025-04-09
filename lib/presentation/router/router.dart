@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/presentation/find_password/view/find_password_step1.dart';
+import 'package:frontend_mobile/presentation/find_password/view/find_password_step2.dart';
+import 'package:frontend_mobile/presentation/find_password/view/find_password_step3.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
@@ -35,6 +38,30 @@ class AppRouter {
             builder:
                 (BuildContext context, GoRouterState state) =>
                     const LocalLoginView(),
+          ),
+
+          GoRoute(
+            path: AppRoutes.findPasswordStep1.path,
+            name: AppRoutes.findPasswordStep1.name,
+            builder:
+                (BuildContext context, GoRouterState state) =>
+                    const FindPasswordStep1(),
+          ),
+          GoRoute(
+            path: AppRoutes.findPasswordStep2.path,
+            name: AppRoutes.findPasswordStep2.name,
+            builder: (BuildContext context, GoRouterState state) {
+              final String email = state.extra as String;
+
+              return FindPasswordStep2(email: email);
+            },
+          ),
+          GoRoute(
+            path: AppRoutes.findPasswordStep3.path,
+            name: AppRoutes.findPasswordStep3.name,
+            builder:
+                (BuildContext context, GoRouterState state) =>
+                    const FindPasswordStep3(),
           ),
         ],
       ),
