@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/sns_login_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
@@ -10,10 +9,8 @@ import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dar
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
-import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
-import 'package:frontend_mobile/core/resource/token_info.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
@@ -128,22 +125,22 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
           // TODO: 개발 하기 편하게 하려고 pushNamed 사용했고, 추후에 goNamed로 바꿀 예정
           unawaited(context.pushNamed(AppRoutes.home.name));
 
-          /// 로그인 유지가 활성화된 경우
-          if (_keepLoggedIn) {
-            final TokenInfo tokenInfo = TokenInfo(
-              accessToken: next.data.accessToken,
-              refreshToken: next.data.refreshToken,
-              expiresIn: next.data.expiresIn,
-              email: _emailController.text,
-              password: _passwordController.text,
-            );
+          // /// 로그인 유지가 활성화된 경우
+          // if (_keepLoggedIn) {
+          //   final TokenInfo tokenInfo = TokenInfo(
+          //     accessToken: next.data.accessToken,
+          //     refreshToken: next.data.refreshToken,
+          //     expiresIn: next.data.expiresIn,
+          //     email: _emailController.text,
+          //     password: _passwordController.text,
+          //   );
 
-            const FlutterSecureStorage storage = FlutterSecureStorage();
-            await storage.write(
-              key: Constant.tokenInfo,
-              value: TokenInfo.serialize(tokenInfo: tokenInfo),
-            );
-          }
+          //   const FlutterSecureStorage storage = FlutterSecureStorage();
+          //   await storage.write(
+          //     key: Constant.tokenInfo,
+          //     value: TokenInfo.serialize(tokenInfo: tokenInfo),
+          //   );
+          // }
           break;
         case Status.failure:
           switch (next.exception.code) {
@@ -280,7 +277,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                         context: context,
                         builder: (BuildContext context) {
                           return CustomDialog.basic(
-                            description: '서비스 준비중입니다.',
+                            description: '서비스 준비중',
                             primaryButton: CustomDialogButton(
                               text: '확인',
                               onTap: () => context.pop(),
