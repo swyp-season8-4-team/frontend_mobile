@@ -13,6 +13,7 @@ import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
+import 'package:frontend_mobile/global/login/login_view_model.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
@@ -122,6 +123,8 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
     ref.listen(localLoginViewModelProvider, (_, LocalLoginState next) async {
       switch (next.status) {
         case Status.success:
+          ref.read(loginViewModelProvider.notifier).login();
+
           // TODO: 개발 하기 편하게 하려고 pushNamed 사용했고, 추후에 goNamed로 바꿀 예정
           unawaited(context.pushNamed(AppRoutes.home.name));
 
