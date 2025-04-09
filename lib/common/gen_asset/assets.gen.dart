@@ -116,11 +116,27 @@ class $AssetIconGen {
 class $AssetImageGen {
   const $AssetImageGen();
 
+  /// File path: asset/image/coupon_bedge.png
+  AssetGenImage get couponBedge =>
+      const AssetGenImage('asset/image/coupon_bedge.png');
+
+  /// File path: asset/image/current_location.png
+  AssetGenImage get currentLocation =>
+      const AssetGenImage('asset/image/current_location.png');
+
   /// File path: asset/image/logo.png
   AssetGenImage get logo => const AssetGenImage('asset/image/logo.png');
 
+  /// File path: asset/image/marker_1.png
+  AssetGenImage get marker1 => const AssetGenImage('asset/image/marker_1.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [logo];
+  List<AssetGenImage> get values => [
+    couponBedge,
+    currentLocation,
+    logo,
+    marker1,
+  ];
 }
 
 class $AssetIconArrowGen {

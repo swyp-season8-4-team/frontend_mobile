@@ -26,6 +26,13 @@ class _MainAppState extends ConsumerState<MainApp> {
   void initState() {
     super.initState();
     _initAppTrackingTransparency();
+
+    // 지도에 표시될 이미지 preload
+    // 관련 이슈 : https://github.com/note11g/flutter_naver_map/issues/218#issuecomment-2041435215
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      precacheImage(Image.asset('asset/image/marker_1.png').image, context);
+      precacheImage(Image.asset('asset/image/coupon_bedge.png').image, context);
+    });
   }
 
   @override
