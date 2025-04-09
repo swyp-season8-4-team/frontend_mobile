@@ -1,8 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'generated/local_login_model.g.dart';
-
-@JsonSerializable()
 class LocalLoginModel {
   const LocalLoginModel({
     required this.accessToken,
@@ -15,9 +10,6 @@ class LocalLoginModel {
     required this.profileImageUrl,
     required this.preferenceSet,
   });
-
-  factory LocalLoginModel.fromJson(Map<String, dynamic> json) =>
-      _$LocalLoginModelFromJson(json);
 
   final String accessToken;
   final String refreshToken;

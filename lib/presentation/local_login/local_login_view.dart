@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/core/resource/enum.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:go_router/go_router.dart';
 
 class LocalLoginView extends ConsumerStatefulWidget {
   const LocalLoginView({super.key});
@@ -43,6 +45,12 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                context.pushNamed(AppRoutes.findPasswordStep1.name);
+              },
+              child: const Text('비밀번호 찾기'),
+            ),
             Text('accessToken: ${localLoginState.data.accessToken}'),
             Text('refreshToken: ${localLoginState.data.refreshToken}'),
             Text('email: ${localLoginState.data.email}'),
