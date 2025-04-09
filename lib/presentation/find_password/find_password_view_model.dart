@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend_mobile/core/resource/enum.dart';
 import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
 import 'package:frontend_mobile/core/resource/exception/exception_model.dart';
 import 'package:frontend_mobile/core/resource/result.dart';
-import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/email/email_verification_request_model.dart';
 import 'package:frontend_mobile/domain/model/email/email_verify_model.dart';
@@ -27,10 +27,13 @@ class FindPasswordViewModel extends StateNotifier<FindPasswordState> {
   final Ref ref;
 
   /// 이메일 인증 코드 발송
-  Future<FindPasswordState> postVerificationRequest({
+  void postVerificationRequest({
     required EmailVerificationRequestParams params,
   }) async {
-    state = state.copyWith(status: Status.loading);
+    state = state.copyWith(
+      postVerificationRequestStatus: Status.loading,
+      postVerifyStatus: Status.initial,
+    );
 
     final Result<EmailVerificationRequestModel, CustomException> response =
         await Usecase.execute(
@@ -43,7 +46,7 @@ class FindPasswordViewModel extends StateNotifier<FindPasswordState> {
         Success<EmailVerificationRequestModel, CustomException> success,
       ) {
         state = state.copyWith(
-          status: Status.success,
+          postVerificationRequestStatus: Status.success,
           verificationRequestData: success.data,
         );
       },
@@ -51,20 +54,19 @@ class FindPasswordViewModel extends StateNotifier<FindPasswordState> {
         Failure<EmailVerificationRequestModel, CustomException> failure,
       ) {
         state = state.copyWith(
-          status: Status.failure,
+          postVerificationRequestStatus: Status.failure,
           exception: failure.exception.model,
         );
       },
     );
-
-    return state;
   }
 
   /// 이메일 인증 코드 확인
-  Future<FindPasswordState> postVerify({
-    required EmailVerifyParams params,
-  }) async {
-    state = state.copyWith(status: Status.loading);
+  void postVerify({required EmailVerifyParams params}) async {
+    state = state.copyWith(
+      postVerificationRequestStatus: Status.initial,
+      postVerifyStatus: Status.loading,
+    );
 
     final Result<EmailVerifyModel, CustomException> response =
         await Usecase.execute(
@@ -75,18 +77,16 @@ class FindPasswordViewModel extends StateNotifier<FindPasswordState> {
     response.map(
       success: (Success<EmailVerifyModel, CustomException> success) {
         state = state.copyWith(
-          status: Status.success,
+          postVerifyStatus: Status.success,
           verifyData: success.data,
         );
       },
       failure: (Failure<EmailVerifyModel, CustomException> failure) {
         state = state.copyWith(
-          status: Status.failure,
+          postVerifyStatus: Status.failure,
           exception: failure.exception.model,
         );
       },
     );
-
-    return state;
   }
 }

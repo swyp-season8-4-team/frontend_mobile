@@ -1,15 +1,19 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
-import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/core/resource/enum.dart';
+import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/util/find_password_wrapper.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/email/email_verification_request_params.dart';
 import 'package:frontend_mobile/presentation/find_password/find_password_view_model.dart';
-import 'package:frontend_mobile/presentation/find_password/view/find_password_step2.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:go_router/go_router.dart';
 
 class FindPasswordStep1 extends ConsumerStatefulWidget {
   const FindPasswordStep1({super.key});
@@ -20,7 +24,6 @@ class FindPasswordStep1 extends ConsumerStatefulWidget {
 
 class _FindPasswordStep1State extends ConsumerState<FindPasswordStep1> {
   final TextEditingController _emailController = TextEditingController();
-  final bool _disabled = false;
 
   @override
   void initState() {
@@ -32,11 +35,6 @@ class _FindPasswordStep1State extends ConsumerState<FindPasswordStep1> {
     setState(() {});
   }
 
-  bool _isValidEmail({required String email}) {
-    final RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    return emailRegex.hasMatch(email);
-  }
-
   @override
   void dispose() {
     _emailController.removeListener(_renderHandler);
@@ -44,25 +42,21 @@ class _FindPasswordStep1State extends ConsumerState<FindPasswordStep1> {
     super.dispose();
   }
 
-  void _onNextButton() async {
-    final FindPasswordState state = await ref
-        .read(findPasswordViewModelProvider.notifier)
-        .postVerificationRequest(
-          params: EmailVerificationRequestParams(
-            email: _emailController.text,
-            purpose: 'PASSWORD_RESET',
-          ),
-        );
+  @override
+  Widget build(BuildContext context) {
+    final FindPasswordState state = ref.watch(findPasswordViewModelProvider);
+    final TextTheme textTheme = Theme.of(context).textTheme;
 
-    if (mounted) {
-      switch (state.status) {
+    ref.listen(findPasswordViewModelProvider, (
+      _,
+      FindPasswordState next,
+    ) async {
+      switch (next.postVerificationRequestStatus) {
         case Status.success:
-          await Navigator.push(
-            context,
-            MaterialPageRoute<void>(
-              builder:
-                  (BuildContext ctx) =>
-                      FindPasswordStep2(email: _emailController.text),
+          unawaited(
+            context.pushNamed(
+              AppRoutes.findPasswordStep2.name,
+              extra: _emailController.text,
             ),
           );
           break;
@@ -71,23 +65,23 @@ class _FindPasswordStep1State extends ConsumerState<FindPasswordStep1> {
           await showDialog(
             context: context,
             builder: (BuildContext context) {
-              return CustomDialog.basic(description: state.exception.message);
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap: () => context.pop(),
+                ),
+              );
             },
           );
           break;
 
         default:
       }
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final FindPasswordState state = ref.watch(findPasswordViewModelProvider);
-    final TextTheme textTheme = Theme.of(context).textTheme;
+    });
 
     return CustomLoadingOverlay(
-      isLoading: state.status == Status.loading,
+      isLoading: state.postVerificationRequestStatus == Status.loading,
       child: CustomFindPasswordWrapper(
         child: Column(
           children: <Widget>[
@@ -115,9 +109,18 @@ class _FindPasswordStep1State extends ConsumerState<FindPasswordStep1> {
             CustomFillButton.large(
               label: '다음',
               disabled:
-                  state.status == Status.loading ||
-                  !_isValidEmail(email: _emailController.text),
-              onPressed: _onNextButton,
+                  state.postVerificationRequestStatus == Status.loading ||
+                  !_emailController.text.isEmail,
+              onPressed: () {
+                ref
+                    .read(findPasswordViewModelProvider.notifier)
+                    .postVerificationRequest(
+                      params: EmailVerificationRequestParams(
+                        email: _emailController.text,
+                        purpose: EmailPurpose.passwordReset.value,
+                      ),
+                    );
+              },
             ),
             SizedBox(height: MediaQuery.of(context).padding.bottom + 32),
           ],

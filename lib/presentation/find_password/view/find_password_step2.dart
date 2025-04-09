@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
-import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/core/manager/toast/toast_manager.dart';
-import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/core/resource/enum.dart';
 import 'package:frontend_mobile/core/util/find_password_wrapper.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/email/email_verification_request_params.dart';
 import 'package:frontend_mobile/domain/param/email/email_verify_params.dart';
 import 'package:frontend_mobile/presentation/find_password/find_password_view_model.dart';
-import 'package:frontend_mobile/presentation/find_password/view/find_password_step3.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:go_router/go_router.dart';
 
 class FindPasswordStep2 extends ConsumerStatefulWidget {
   const FindPasswordStep2({required this.email, super.key});
@@ -54,38 +54,6 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
     super.dispose();
   }
 
-  void _onValidationCheck() async {
-    final FindPasswordState state = await ref
-        .read(findPasswordViewModelProvider.notifier)
-        .postVerify(
-          params: EmailVerifyParams(
-            email: widget.email,
-            code: _codeController.text,
-            purpose: 'PASSWORD_RESET',
-          ),
-        );
-
-    switch (state.status) {
-      case Status.success:
-        setState(() {
-          _validationCheck = true;
-          _success = true;
-          _successText = '인증이 완료되었습니다.';
-        });
-        break;
-
-      case Status.failure:
-        setState(() {
-          _validationCheck = true;
-          _error = true;
-          _errorText = state.exception.message;
-        });
-        break;
-
-      default:
-    }
-  }
-
   void _onSendAgain() async {
     setState(() {
       _validationCheck = false;
@@ -101,29 +69,14 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
       toastWidget: const CustomSnackBar(description: '인증코드를 다시 보내드렸습니다.'),
     );
 
-    final FindPasswordState state = await ref
+    ref
         .read(findPasswordViewModelProvider.notifier)
         .postVerificationRequest(
           params: EmailVerificationRequestParams(
             email: widget.email,
-            purpose: 'PASSWORD_RESET',
+            purpose: EmailPurpose.passwordReset.value,
           ),
         );
-
-    if (mounted) {
-      switch (state.status) {
-        case Status.failure:
-          await showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return CustomDialog.basic(description: state.exception.message);
-            },
-          );
-          break;
-
-        default:
-      }
-    }
   }
 
   @override
@@ -131,8 +84,35 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
     final FindPasswordState state = ref.watch(findPasswordViewModelProvider);
     final TextTheme textTheme = Theme.of(context).textTheme;
 
+    ref.listen(
+      findPasswordViewModelProvider.select(
+        (FindPasswordState state) => state.postVerifyStatus,
+      ),
+      (_, Status status) {
+        switch (status) {
+          case Status.success:
+            setState(() {
+              _validationCheck = true;
+              _success = true;
+              _successText = '인증이 완료되었습니다.';
+            });
+            break;
+
+          case Status.failure:
+            setState(() {
+              _validationCheck = true;
+              _error = true;
+              _errorText = '잘못된 인증코드입니다.';
+            });
+            break;
+
+          default:
+        }
+      },
+    );
+
     return CustomLoadingOverlay(
-      isLoading: state.status == Status.loading,
+      isLoading: state.postVerifyStatus == Status.loading,
       child: CustomFindPasswordWrapper(
         child: Column(
           children: <Widget>[
@@ -173,10 +153,20 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
                         CustomFillButton.medium(
                           label: '중복확인',
                           disabled:
-                              state.status == Status.loading ||
+                              state.postVerifyStatus == Status.loading ||
                               _codeController.text.length < 6,
                           width: 100,
-                          onPressed: _onValidationCheck,
+                          onPressed: () {
+                            ref
+                                .read(findPasswordViewModelProvider.notifier)
+                                .postVerify(
+                                  params: EmailVerifyParams(
+                                    email: widget.email,
+                                    code: _codeController.text,
+                                    purpose: EmailPurpose.passwordReset.value,
+                                  ),
+                                );
+                          },
                         ),
                       ],
                     ),
@@ -192,7 +182,7 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
                         ),
                         CustomTextButton.underline(
                           label: '재전송',
-                          disabled: state.status == Status.loading,
+                          disabled: state.postVerifyStatus == Status.loading,
                           onPressed: _onSendAgain,
                         ),
                       ],
@@ -203,14 +193,10 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
             ),
             CustomFillButton.large(
               label: '다음',
-              disabled: state.status == Status.loading || !_validationCheck,
+              disabled:
+                  state.postVerifyStatus == Status.loading || !_validationCheck,
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext ctx) => const FindPasswordStep3(),
-                  ),
-                );
+                context.pushNamed(AppRoutes.findPasswordStep3.name);
               },
             ),
             SizedBox(height: MediaQuery.of(context).padding.bottom + 32),
