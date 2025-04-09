@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/presentation/home.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
+import 'package:frontend_mobile/presentation/map/map_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/splash_view.dart';
 import 'package:go_router/go_router.dart';
@@ -51,6 +52,13 @@ class AppRouter {
                     const LocalLoginView(),
           ),
         ],
+      ),
+      GoRoute(
+        path: AppRoutes.map.path,
+        name: AppRoutes.map.name,
+        builder: (BuildContext context, GoRouterState state) {
+          return const MapView();
+        },
       ),
     ],
   );

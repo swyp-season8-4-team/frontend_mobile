@@ -18,4 +18,7 @@ abstract class AppRoutes {
     name: '${auth.name}/local_login',
     path: 'local_login',
   );
+
+  // 지도 화면
+  static const RouteInfo map = RouteInfo(name: '/map', path: '/map');
 }
