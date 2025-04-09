@@ -8,4 +8,10 @@ part 'generated/env.g.dart';
 abstract class Env {
   @EnviedField(varName: 'DEV_SERVER_BASE_URL')
   static final String devServerBaseUrl = _Env.devServerBaseUrl;
+
+  @EnviedField(varName: 'PROD_SERVER_BASE_URL')
+  static final String prodServerBaseUrl = _Env.prodServerBaseUrl;
+
+  @EnviedField(varName: 'NAVER_MAP_CLIENT_ID')
+  static final String naverMapClientId = _Env.naverMapClientId;
 }
