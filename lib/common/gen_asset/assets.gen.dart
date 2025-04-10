@@ -448,6 +448,9 @@ class $AssetIconEtcGen {
   SvgGenImage get flowerLine =>
       const SvgGenImage('asset/icon/etc/flower_line.svg');
 
+  /// File path: asset/icon/etc/hexagon.svg
+  SvgGenImage get hexagon => const SvgGenImage('asset/icon/etc/hexagon.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
     a16CloseFilled1,
@@ -475,6 +478,7 @@ class $AssetIconEtcGen {
     flowerFilled,
     flowerFilledSelected,
     flowerLine,
+    hexagon,
   ];
 }
 
