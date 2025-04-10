@@ -14,6 +14,9 @@ abstract class AppRoutes {
     path: 'local_login',
   );
 
+  // 지도 화면
+  static const RouteInfo map = RouteInfo(name: '/map', path: '/map');
+
   // 비밀번호 찾기 페이지 기반 Route Info
   static final RouteInfo findPassword = RouteInfo(
     name: '${auth.name}/find_password',

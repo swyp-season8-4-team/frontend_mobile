@@ -72,5 +72,9 @@
     <string>This app required NSPhotoLibraryUsageDescription permission</string>
     <key>NSCameraUsageDescription</key>
     <string>This app required NSCameraUsageDescription permission</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>This app needs permission to access location information to display your current location on the map.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs permission to access location information to display your current location on the map.</string>
 </dict>
 </plist>

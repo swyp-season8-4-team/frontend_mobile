@@ -4,6 +4,7 @@ import 'package:frontend_mobile/presentation/find_password/view/find_password_st
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step2.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step3.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
+import 'package:frontend_mobile/presentation/map/map_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
 
@@ -64,6 +65,13 @@ class AppRouter {
                     const FindPasswordStep3(),
           ),
         ],
+      ),
+      GoRoute(
+        path: AppRoutes.map.path,
+        name: AppRoutes.map.name,
+        builder: (BuildContext context, GoRouterState state) {
+          return const MapView();
+        },
       ),
     ],
   );
