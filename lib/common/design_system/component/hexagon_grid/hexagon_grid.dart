@@ -212,11 +212,14 @@ class CustomHexagonGrid extends StatelessWidget {
                   child:
                       hexagon.text != null
                           ? Text(hexagon.text!, style: getTextStyle(context))
-                          : CachedNetworkImage(
-                            width: 200,
-                            height: 200,
-                            fit: BoxFit.fill,
-                            imageUrl: hexagon.imageUrl!,
+                          : Padding(
+                            padding: const EdgeInsets.all(2.5),
+                            child: CachedNetworkImage(
+                              width: 200,
+                              height: 200,
+                              fit: BoxFit.cover,
+                              imageUrl: hexagon.imageUrl!,
+                            ),
                           ),
                 ),
               ],
