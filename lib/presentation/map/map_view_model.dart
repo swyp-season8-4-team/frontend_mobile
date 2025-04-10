@@ -19,7 +19,9 @@ mapViewModelProvider =
     });
 
 class MapViewModel extends StateNotifier<MapState> {
-  MapViewModel({required Ref<Object?> ref}) : _ref = ref, super(MapState());
+  MapViewModel({required Ref<Object?> ref}) : _ref = ref, super(MapState()) {
+    getAllPrferences();
+  }
 
   final Ref _ref;
 

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,6 +7,9 @@ import 'package:frontend_mobile/common/design_system/component/chip/floating_chi
 import 'package:frontend_mobile/common/design_system/component/etc/map/map_icon_button.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/main_top_bar.dart';
 import 'package:frontend_mobile/core/manager/geolocation/geo_location_service_impl.dart';
+import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
+import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:frontend_mobile/presentation/widget/scaffold_with_navigation_bar.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -24,6 +28,12 @@ class _MapViewState extends ConsumerState<MapView> {
   @override
   Widget build(BuildContext context) {
     // TODO: Viewmodel을 통한 상태관리 필요
+    final MapState state = ref.watch(mapViewModelProvider);
+
+    // TODO: 로딩 UI 변경 필요
+    if (state.getAllPreferencesStatus.isLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
 
     return ScaffoldWithNavigationBar(
       appBar: const CustomMainTopBar(),
@@ -64,6 +74,15 @@ class _MapViewState extends ConsumerState<MapView> {
                   child: Row(
                     children: <Widget>[
                       CustomFloatingChip(label: '내 취향', onPressed: () {}),
+                      ...state.preferences.mapIndexed(
+                        (int index, PreferenceModel e) => Padding(
+                          padding: const EdgeInsets.only(left: 6),
+                          child: CustomFloatingChip(
+                            label: e.preferenceName,
+                            onPressed: () {},
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
