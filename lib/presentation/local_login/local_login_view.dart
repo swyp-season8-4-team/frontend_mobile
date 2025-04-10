@@ -31,6 +31,12 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
   bool _emailError = false;
   String _emailErrorText = '';
 
+  /// 비밀번호 에러를 실시간 기준으로 할지 api 통신 기준으로 할지 결정하는 변수
+  /// null: 에러 설정 X
+  /// true: 실시간 에러 기준
+  /// false: api 통신 에러 기준
+  bool? isRealTimePasswordError;
+
   /// 실시간 입력과 관련된 비밀번호
   bool _realTimePasswordError = false;
   final String _realTimePasswordErrorText = '비밀번호를 다시 입력해주세요';
@@ -56,6 +62,8 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
   }
 
   void _onPasswordRender() {
+    isRealTimePasswordError = true;
+
     if (_passwordController.text.isNotEmpty &&
         !_passwordController.text.isPasswordValid) {
       setState(() {
@@ -148,12 +156,14 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
           switch (next.exception.code) {
             case 'A013':
               setState(() {
+                isRealTimePasswordError = false;
                 _emailError = true;
                 _emailErrorText = next.exception.message;
               });
               break;
             case 'A014':
               setState(() {
+                isRealTimePasswordError = false;
                 _passwordError = true;
                 _passwordErrorText = next.exception.message;
               });
@@ -202,11 +212,13 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                   CustomInputBox(
                     controller: _passwordController,
                     error:
-                        state.status == Status.failure
+                        isRealTimePasswordError != null &&
+                                !isRealTimePasswordError!
                             ? _passwordError
                             : _realTimePasswordError,
                     errorText:
-                        state.status == Status.failure
+                        isRealTimePasswordError != null &&
+                                !isRealTimePasswordError!
                             ? _passwordErrorText
                             : _realTimePasswordErrorText,
                     hintText: '비밀번호',
@@ -244,6 +256,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                   CustomFillButton(
                     label: '로그인',
                     disabled:
+                        !_emailController.text.isEmail ||
                         _passwordController.text.length < 8 ||
                         !_passwordController.text.isPasswordValid ||
                         state.status == Status.loading,
