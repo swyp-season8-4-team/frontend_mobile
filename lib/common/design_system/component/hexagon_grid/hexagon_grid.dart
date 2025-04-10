@@ -199,27 +199,31 @@ class CustomHexagonGrid extends StatelessWidget {
 
           return HexagonWidgetBuilder(
             cornerRadius: _cornerRadius,
+            padding: 5,
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(2.5),
+                    padding: const EdgeInsets.all(7),
                     child: SizedBox(child: Assets.icon.etc.hexagon.svg()),
                   ),
                 ),
                 Align(
                   child:
                       hexagon.text != null
-                          ? Text(hexagon.text!, style: getTextStyle(context))
-                          : Padding(
-                            padding: const EdgeInsets.all(2.5),
-                            child: CachedNetworkImage(
-                              width: 200,
-                              height: 200,
-                              fit: BoxFit.cover,
-                              imageUrl: hexagon.imageUrl!,
+                          ? Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: Text(
+                              hexagon.text!,
+                              style: getTextStyle(context),
                             ),
+                          )
+                          : CachedNetworkImage(
+                            width: 200,
+                            height: 200,
+                            fit: BoxFit.cover,
+                            imageUrl: hexagon.imageUrl!,
                           ),
                 ),
               ],
