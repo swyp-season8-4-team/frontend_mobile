@@ -15,6 +15,7 @@ final Provider<PreferenceRemoteDataSource> preferenceApiProvider =
 abstract class PreferenceRemoteDataSource {
   factory PreferenceRemoteDataSource(Dio dio) = _PreferenceRemoteDataSource;
 
+  /// 모든 선호도 조회
   @GET('/api/preferences')
   Future<List<PreferenceEntity>> getAllPreferences();
 }
