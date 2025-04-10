@@ -116,6 +116,9 @@ class $AssetIconGen {
 class $AssetImageGen {
   const $AssetImageGen();
 
+  /// File path: asset/image/bee.png
+  AssetGenImage get bee => const AssetGenImage('asset/image/bee.png');
+
   /// File path: asset/image/coupon_bedge.png
   AssetGenImage get couponBedge =>
       const AssetGenImage('asset/image/coupon_bedge.png');
@@ -132,6 +135,7 @@ class $AssetImageGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+    bee,
     couponBedge,
     currentLocation,
     logo,
