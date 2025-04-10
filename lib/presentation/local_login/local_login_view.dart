@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
-import 'package:frontend_mobile/common/design_system/component/button/sns_login_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
@@ -13,7 +12,7 @@ import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
-import 'package:frontend_mobile/global/login/login_view_model.dart';
+import 'package:frontend_mobile/presentation/global/login/login_view_model.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
@@ -250,48 +249,48 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                         state.status == Status.loading,
                     onPressed: _onSubmit,
                   ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 12),
-                    child: Stack(
-                      children: <Widget>[
-                        const Divider(color: ScaleColorConfig.neutral70),
-                        Align(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            color: ScaleColorConfig.surface90,
-                            child: Text(
-                              '또는',
-                              style: textTheme.labelSmall?.copyWith(
-                                color: const Color(0xFF6C6C6C),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Container(
+                  //   margin: const EdgeInsets.symmetric(vertical: 12),
+                  //   child: Stack(
+                  //     children: <Widget>[
+                  //       const Divider(color: ScaleColorConfig.neutral70),
+                  //       Align(
+                  //         child: Container(
+                  //           padding: const EdgeInsets.symmetric(horizontal: 16),
+                  //           color: ScaleColorConfig.surface90,
+                  //           child: Text(
+                  //             '또는',
+                  //             style: textTheme.labelSmall?.copyWith(
+                  //               color: const Color(0xFF6C6C6C),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
 
-                  /// TODO: 카카오 로그인 연동 해야됨
-                  CustomSnsLoginButton(
-                    svgImage: Assets.icon.sns.kakao,
-                    label: '카카오 로그인',
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return CustomDialog.basic(
-                            description: '서비스 준비중',
-                            primaryButton: CustomDialogButton(
-                              text: '확인',
-                              onTap: () => context.pop(),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    backgroundColor: const Color(0xFFFEE500),
-                    foregroundColor: const Color(0xFF191919),
-                  ),
+                  // /// TODO: 카카오 로그인 연동 해야됨
+                  // CustomSnsLoginButton(
+                  //   svgImage: Assets.icon.sns.kakao,
+                  //   label: '카카오 로그인',
+                  //   onPressed: () {
+                  //     showDialog(
+                  //       context: context,
+                  //       builder: (BuildContext context) {
+                  //         return CustomDialog.basic(
+                  //           description: '서비스 준비중',
+                  //           primaryButton: CustomDialogButton(
+                  //             text: '확인',
+                  //             onTap: () => context.pop(),
+                  //           ),
+                  //         );
+                  //       },
+                  //     );
+                  //   },
+                  //   backgroundColor: const Color(0xFFFEE500),
+                  //   foregroundColor: const Color(0xFF191919),
+                  // ),
                   const SizedBox(height: 34),
 
                   Row(
