@@ -106,6 +106,9 @@ class $AssetIconGen {
   /// Directory path: asset/icon/menu
   $AssetIconMenuGen get menu => const $AssetIconMenuGen();
 
+  /// Directory path: asset/icon/sns
+  $AssetIconSnsGen get sns => const $AssetIconSnsGen();
+
   /// Directory path: asset/icon/system
   $AssetIconSystemGen get system => const $AssetIconSystemGen();
 
@@ -387,6 +390,31 @@ class $AssetIconEtcGen {
   SvgGenImage get a20TumblrFilled =>
       const SvgGenImage('asset/icon/etc/20_tumblr_filled.svg');
 
+  /// File path: asset/icon/etc/26_radio_button_checked.svg
+  SvgGenImage get a26RadioButtonChecked =>
+      const SvgGenImage('asset/icon/etc/26_radio_button_checked.svg');
+
+  /// File path: asset/icon/etc/26_radio_button_checked_disabled.svg
+  SvgGenImage get a26RadioButtonCheckedDisabled =>
+      const SvgGenImage('asset/icon/etc/26_radio_button_checked_disabled.svg');
+
+  /// File path: asset/icon/etc/26_radio_button_checked_presssed.svg
+  SvgGenImage get a26RadioButtonCheckedPresssed =>
+      const SvgGenImage('asset/icon/etc/26_radio_button_checked_presssed.svg');
+
+  /// File path: asset/icon/etc/26_radio_button_unchecked.svg
+  SvgGenImage get a26RadioButtonUnchecked =>
+      const SvgGenImage('asset/icon/etc/26_radio_button_unchecked.svg');
+
+  /// File path: asset/icon/etc/26_radio_button_unchecked_disabled.svg
+  SvgGenImage get a26RadioButtonUncheckedDisabled => const SvgGenImage(
+    'asset/icon/etc/26_radio_button_unchecked_disabled.svg',
+  );
+
+  /// File path: asset/icon/etc/26_radio_button_unchecked_pressed.svg
+  SvgGenImage get a26RadioButtonUncheckedPressed =>
+      const SvgGenImage('asset/icon/etc/26_radio_button_unchecked_pressed.svg');
+
   /// File path: asset/icon/etc/48_checkbox_checked.svg
   SvgGenImage get a48CheckboxChecked =>
       const SvgGenImage('asset/icon/etc/48_checkbox_checked.svg');
@@ -460,6 +488,12 @@ class $AssetIconEtcGen {
     a20CarFilled,
     a20PetFilled,
     a20TumblrFilled,
+    a26RadioButtonChecked,
+    a26RadioButtonCheckedDisabled,
+    a26RadioButtonCheckedPresssed,
+    a26RadioButtonUnchecked,
+    a26RadioButtonUncheckedDisabled,
+    a26RadioButtonUncheckedPressed,
     a48CheckboxChecked,
     a48CheckboxCheckedDisabled,
     a48CheckboxCheckedPressed,
@@ -598,6 +632,16 @@ class $AssetIconMenuGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [more1Fill, more2Fill];
+}
+
+class $AssetIconSnsGen {
+  const $AssetIconSnsGen();
+
+  /// File path: asset/icon/sns/kakao.svg
+  SvgGenImage get kakao => const SvgGenImage('asset/icon/sns/kakao.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [kakao];
 }
 
 class $AssetIconSystemGen {

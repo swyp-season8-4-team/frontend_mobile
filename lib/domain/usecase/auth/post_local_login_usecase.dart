@@ -7,17 +7,15 @@ import 'package:frontend_mobile/domain/model/auth/local_login_model.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/domain/repository/auth_repository.dart';
 
-final Provider<PostDevLocalLoginUsecase> postDevLocalLoginUsecaseProvider =
-    Provider<PostDevLocalLoginUsecase>(
-      (Ref ref) => PostDevLocalLoginUsecase(
-        repository: ref.read(authRepositoryProvider),
-      ),
+final Provider<PostLocalLoginUsecase> postLocalLoginUsecaseProvider =
+    Provider<PostLocalLoginUsecase>(
+      (Ref ref) =>
+          PostLocalLoginUsecase(repository: ref.read(authRepositoryProvider)),
     );
 
-class PostDevLocalLoginUsecase
-    extends Usecase<LocalLoginModel, LocalLoginParams> {
-  /// Dev 로그인(domain)
-  PostDevLocalLoginUsecase({required this.repository});
+class PostLocalLoginUsecase extends Usecase<LocalLoginModel, LocalLoginParams> {
+  /// 로그인(domain)
+  PostLocalLoginUsecase({required this.repository});
 
   final AuthRepository repository;
 
@@ -25,6 +23,6 @@ class PostDevLocalLoginUsecase
   Future<Result<LocalLoginModel, CustomException>> call({
     required LocalLoginParams params,
   }) async {
-    return await repository.postDevLocalLogin(params: params);
+    return await repository.postLocalLogin(params: params);
   }
 }

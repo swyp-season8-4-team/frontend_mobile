@@ -145,7 +145,8 @@ class _$LocalLoginStateImpl implements _LocalLoginState {
       userUuid: '',
       email: '',
       nickname: '',
-      profileImageUrl: '',
+      profileImageUrl: null,
+      deviceId: '',
       preferenceSet: false,
     ),
     this.exception = const ExceptionModel(

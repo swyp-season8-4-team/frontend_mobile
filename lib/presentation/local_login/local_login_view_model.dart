@@ -8,9 +8,10 @@ import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/auth/local_login_model.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/domain/usecase/auth/post_dev_local_login_usecase.dart';
+import 'package:frontend_mobile/domain/usecase/auth/post_local_login_usecase.dart';
 
-part 'local_login_state.dart';
 part 'generated/local_login_view_model.freezed.dart';
+part 'local_login_state.dart';
 
 final AutoDisposeStateNotifierProvider<LocalLoginViewModel, LocalLoginState>
 localLoginViewModelProvider =
@@ -23,15 +24,38 @@ class LocalLoginViewModel extends StateNotifier<LocalLoginState> {
 
   final Ref ref;
 
-  /// [Dev 로그인(presentation)](https://api.desserbee.com/swagger-ui/index.html#/Authentication/devlogin)
-  void postDevLocalLogin({required LocalLoginParams params}) async {
+  /// Dev 로그인(presentation)
+  Future<void> postDevLocalLogin({required LocalLoginParams params}) async {
     state = state.copyWith(status: Status.loading);
 
-    await Future<void>.delayed(const Duration(seconds: 2));
+    // await Future<void>.delayed(const Duration(seconds: 2));
 
     final Result<LocalLoginModel, CustomException> response =
         await Usecase.execute(
           usecase: ref.read(postDevLocalLoginUsecaseProvider),
+          params: params,
+        );
+
+    response.map(
+      success: (Success<LocalLoginModel, CustomException> success) {
+        state = state.copyWith(status: Status.success, data: success.data);
+      },
+      failure: (Failure<LocalLoginModel, CustomException> failure) {
+        state = state.copyWith(
+          status: Status.failure,
+          exception: failure.exception.model,
+        );
+      },
+    );
+  }
+
+  /// 로그인(presentation)
+  Future<void> postLocalLogin({required LocalLoginParams params}) async {
+    state = state.copyWith(status: Status.loading);
+
+    final Result<LocalLoginModel, CustomException> response =
+        await Usecase.execute(
+          usecase: ref.read(postLocalLoginUsecaseProvider),
           params: params,
         );
 
