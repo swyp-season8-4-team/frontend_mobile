@@ -9,10 +9,13 @@ import 'package:frontend_mobile/core/resource/params/no_params.dart';
 import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
+import 'package:frontend_mobile/domain/model/store/store_summary_model.dart';
 import 'package:frontend_mobile/domain/param/store/get_my_preferences_stores_by_location_params.dart';
+import 'package:frontend_mobile/domain/param/store/get_store_summary_params.dart';
 import 'package:frontend_mobile/domain/param/store/get_stores_by_location_params.dart';
 import 'package:frontend_mobile/domain/usecase/preference/get_all_preferences_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/store/get_my_preferences_stores_by_location_usecase.dart';
+import 'package:frontend_mobile/domain/usecase/store/get_store_summary_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/store/get_stores_by_location_usecase.dart';
 
 part 'map_state.dart';
@@ -201,5 +204,33 @@ class MapViewModel extends StateNotifier<MapState> {
     state = state.copyWith(preferenceTagIds: <int>[]);
 
     getStoresByCameraPosition(lat: lat, lng: lng, radius: radius);
+  }
+
+  // 가게 간략 정보 조회
+  Future<MapState> getStoreSummary({required String storeUuid}) async {
+    state = state.copyWith(getStoreSummaryStatus: Status.loading);
+
+    final Result<StoreSummaryModel, CustomException> result =
+        await Usecase.execute(
+          usecase: _ref.read(getStoreSummaryUsecaseProvider),
+          params: GetStoreSummaryParams(storeUuid: storeUuid),
+        );
+
+    result.map(
+      success: (Success<StoreSummaryModel, CustomException> success) {
+        state = state.copyWith(
+          getStoreSummaryStatus: Status.success,
+          storeSummary: success.data,
+        );
+      },
+      failure: (Failure<StoreSummaryModel, CustomException> failure) {
+        state = state.copyWith(
+          getStoreSummaryStatus: Status.failure,
+          getStoreSummaryExceptionModel: failure.exception.model,
+        );
+      },
+    );
+
+    return state;
   }
 }

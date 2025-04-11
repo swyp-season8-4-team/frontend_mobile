@@ -55,11 +55,22 @@ class StoreMockDataSource implements StoreRemoteDataSource {
     return <StoreByLocationEntity>[
       const StoreByLocationEntity(
         storeId: 1,
-        storeUuid: '123456',
+        storeUuid: 'store-uuid-1',
         name: '디저트 가게1',
         address: '서울시 강남구 역삼동 어쩌구저쩌구',
         latitude: 37.514575,
         longitude: 127.0495556,
+        operatingHours: <StoreOperatingHourEntity>[],
+        shortReviewCount: 2,
+        tags: <String>[],
+      ),
+      const StoreByLocationEntity(
+        storeId: 2,
+        storeUuid: 'store-uuid-2',
+        name: '디저트 가게2',
+        address: '서울시 강남구 역삼동 어쩌구저쩌구',
+        latitude: 37.614575,
+        longitude: 127.1495556,
         operatingHours: <StoreOperatingHourEntity>[],
         shortReviewCount: 2,
         tags: <String>[],

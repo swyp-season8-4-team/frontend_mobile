@@ -36,6 +36,10 @@ mixin _$MapState {
       throw _privateConstructorUsedError;
   ExceptionModel get getMyPreferencesStoresByLocationExceptionModel =>
       throw _privateConstructorUsedError;
+  StoreSummaryModel? get storeSummary => throw _privateConstructorUsedError;
+  Status get getStoreSummaryStatus => throw _privateConstructorUsedError;
+  ExceptionModel get getStoreSummaryExceptionModel =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of MapState
   /// with the given fields replaced by the non-null parameter values.
@@ -64,6 +68,9 @@ abstract class $MapStateCopyWith<$Res> {
     Status getMyPreferencesStoresByLocationStatus,
     ExceptionModel getStoresByLocationExceptionModel,
     ExceptionModel getMyPreferencesStoresByLocationExceptionModel,
+    StoreSummaryModel? storeSummary,
+    Status getStoreSummaryStatus,
+    ExceptionModel getStoreSummaryExceptionModel,
   });
 }
 
@@ -96,6 +103,9 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
     Object? getMyPreferencesStoresByLocationStatus = null,
     Object? getStoresByLocationExceptionModel = null,
     Object? getMyPreferencesStoresByLocationExceptionModel = null,
+    Object? storeSummary = freezed,
+    Object? getStoreSummaryStatus = null,
+    Object? getStoreSummaryExceptionModel = null,
   }) {
     return _then(
       _value.copyWith(
@@ -169,6 +179,21 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
                     ? _value.getMyPreferencesStoresByLocationExceptionModel
                     : getMyPreferencesStoresByLocationExceptionModel // ignore: cast_nullable_to_non_nullable
                         as ExceptionModel,
+            storeSummary:
+                freezed == storeSummary
+                    ? _value.storeSummary
+                    : storeSummary // ignore: cast_nullable_to_non_nullable
+                        as StoreSummaryModel?,
+            getStoreSummaryStatus:
+                null == getStoreSummaryStatus
+                    ? _value.getStoreSummaryStatus
+                    : getStoreSummaryStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            getStoreSummaryExceptionModel:
+                null == getStoreSummaryExceptionModel
+                    ? _value.getStoreSummaryExceptionModel
+                    : getStoreSummaryExceptionModel // ignore: cast_nullable_to_non_nullable
+                        as ExceptionModel,
           )
           as $Val,
     );
@@ -199,6 +224,9 @@ abstract class _$$MapStateImplCopyWith<$Res>
     Status getMyPreferencesStoresByLocationStatus,
     ExceptionModel getStoresByLocationExceptionModel,
     ExceptionModel getMyPreferencesStoresByLocationExceptionModel,
+    StoreSummaryModel? storeSummary,
+    Status getStoreSummaryStatus,
+    ExceptionModel getStoreSummaryExceptionModel,
   });
 }
 
@@ -230,6 +258,9 @@ class __$$MapStateImplCopyWithImpl<$Res>
     Object? getMyPreferencesStoresByLocationStatus = null,
     Object? getStoresByLocationExceptionModel = null,
     Object? getMyPreferencesStoresByLocationExceptionModel = null,
+    Object? storeSummary = freezed,
+    Object? getStoreSummaryStatus = null,
+    Object? getStoreSummaryExceptionModel = null,
   }) {
     return _then(
       _$MapStateImpl(
@@ -303,6 +334,21 @@ class __$$MapStateImplCopyWithImpl<$Res>
                 ? _value.getMyPreferencesStoresByLocationExceptionModel
                 : getMyPreferencesStoresByLocationExceptionModel // ignore: cast_nullable_to_non_nullable
                     as ExceptionModel,
+        storeSummary:
+            freezed == storeSummary
+                ? _value.storeSummary
+                : storeSummary // ignore: cast_nullable_to_non_nullable
+                    as StoreSummaryModel?,
+        getStoreSummaryStatus:
+            null == getStoreSummaryStatus
+                ? _value.getStoreSummaryStatus
+                : getStoreSummaryStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        getStoreSummaryExceptionModel:
+            null == getStoreSummaryExceptionModel
+                ? _value.getStoreSummaryExceptionModel
+                : getStoreSummaryExceptionModel // ignore: cast_nullable_to_non_nullable
+                    as ExceptionModel,
       ),
     );
   }
@@ -337,6 +383,14 @@ class _$MapStateImpl implements _MapState {
       timestamp: '',
     ),
     this.getMyPreferencesStoresByLocationExceptionModel = const ExceptionModel(
+      status: -1,
+      code: '',
+      message: '',
+      timestamp: '',
+    ),
+    this.storeSummary,
+    this.getStoreSummaryStatus = Status.initial,
+    this.getStoreSummaryExceptionModel = const ExceptionModel(
       status: -1,
       code: '',
       message: '',
@@ -408,10 +462,18 @@ class _$MapStateImpl implements _MapState {
   @override
   @JsonKey()
   final ExceptionModel getMyPreferencesStoresByLocationExceptionModel;
+  @override
+  final StoreSummaryModel? storeSummary;
+  @override
+  @JsonKey()
+  final Status getStoreSummaryStatus;
+  @override
+  @JsonKey()
+  final ExceptionModel getStoreSummaryExceptionModel;
 
   @override
   String toString() {
-    return 'MapState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, myPreferenceFilterSelected: $myPreferenceFilterSelected, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel)';
+    return 'MapState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, myPreferenceFilterSelected: $myPreferenceFilterSelected, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel, storeSummary: $storeSummary, getStoreSummaryStatus: $getStoreSummaryStatus, getStoreSummaryExceptionModel: $getStoreSummaryExceptionModel)';
   }
 
   @override
@@ -475,7 +537,17 @@ class _$MapStateImpl implements _MapState {
                   getMyPreferencesStoresByLocationExceptionModel,
                 ) ||
                 other.getMyPreferencesStoresByLocationExceptionModel ==
-                    getMyPreferencesStoresByLocationExceptionModel));
+                    getMyPreferencesStoresByLocationExceptionModel) &&
+            (identical(other.storeSummary, storeSummary) ||
+                other.storeSummary == storeSummary) &&
+            (identical(other.getStoreSummaryStatus, getStoreSummaryStatus) ||
+                other.getStoreSummaryStatus == getStoreSummaryStatus) &&
+            (identical(
+                  other.getStoreSummaryExceptionModel,
+                  getStoreSummaryExceptionModel,
+                ) ||
+                other.getStoreSummaryExceptionModel ==
+                    getStoreSummaryExceptionModel));
   }
 
   @override
@@ -495,6 +567,9 @@ class _$MapStateImpl implements _MapState {
     getMyPreferencesStoresByLocationStatus,
     getStoresByLocationExceptionModel,
     getMyPreferencesStoresByLocationExceptionModel,
+    storeSummary,
+    getStoreSummaryStatus,
+    getStoreSummaryExceptionModel,
   );
 
   /// Create a copy of MapState
@@ -522,6 +597,9 @@ abstract class _MapState implements MapState {
     final Status getMyPreferencesStoresByLocationStatus,
     final ExceptionModel getStoresByLocationExceptionModel,
     final ExceptionModel getMyPreferencesStoresByLocationExceptionModel,
+    final StoreSummaryModel? storeSummary,
+    final Status getStoreSummaryStatus,
+    final ExceptionModel getStoreSummaryExceptionModel,
   }) = _$MapStateImpl;
 
   @override
@@ -552,6 +630,12 @@ abstract class _MapState implements MapState {
   ExceptionModel get getStoresByLocationExceptionModel;
   @override
   ExceptionModel get getMyPreferencesStoresByLocationExceptionModel;
+  @override
+  StoreSummaryModel? get storeSummary;
+  @override
+  Status get getStoreSummaryStatus;
+  @override
+  ExceptionModel get getStoreSummaryExceptionModel;
 
   /// Create a copy of MapState
   /// with the given fields replaced by the non-null parameter values.

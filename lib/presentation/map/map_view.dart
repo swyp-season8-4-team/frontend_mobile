@@ -17,6 +17,7 @@ import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
+import 'package:frontend_mobile/domain/model/store/store_summary_model.dart';
 import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:frontend_mobile/presentation/widget/scaffold_with_navigation_bar.dart';
 import 'package:geolocator/geolocator.dart';
@@ -76,6 +77,9 @@ class _MapViewState extends ConsumerState<MapView> {
                 await _setCustomLocationOverlay();
 
                 setState(() {});
+              },
+              onMapTapped: (_, _) {
+                _clearSelectedShop();
               },
             ),
             Positioned(top: 16, left: 0, child: _buildFilterList()),

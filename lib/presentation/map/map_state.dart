@@ -21,5 +21,9 @@ class MapState with _$MapState {
     ExceptionModel getStoresByLocationExceptionModel,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel getMyPreferencesStoresByLocationExceptionModel,
+    StoreSummaryModel? storeSummary,
+    @Default(Status.initial) Status getStoreSummaryStatus,
+    @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
+    ExceptionModel getStoreSummaryExceptionModel,
   }) = _MapState;
 }

@@ -120,7 +120,63 @@ extension MapViewMethodExt on _MapViewState {
       id: model.storeUuid,
       icon: markerImage,
       position: NLatLng(model.latitude, model.longitude),
-    );
+    )..setOnTapListener((NMarker overlay) async {
+      final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
+
+      // 이전에 선택된 마커가 있다면 초기화
+      await _clearSelectedShop();
+
+      // 선택한 마커에 해당하는 가게 간략 정보 조회
+      await viewmodel.getStoreSummary(storeUuid: overlay.info.id);
+
+      await _mapController.deleteOverlay(
+        NOverlayInfo(type: NOverlayType.marker, id: overlay.info.id),
+      );
+
+      final NMarker newMarker = NMarker(
+        id: overlay.info.id,
+        position: overlay.position,
+        anchor: overlay.anchor,
+        size: const Size(60, 66),
+        icon: NOverlayImage.fromAssetImage(Assets.image.markerSelected.path),
+      );
+
+      await _mapController.addOverlay(newMarker);
+
+      final NCameraPosition cameraPosition =
+          await _mapController.getCameraPosition();
+
+      await _mapController.updateCamera(
+        NCameraUpdate.fromCameraPosition(
+          NCameraPosition(target: overlay.position, zoom: cameraPosition.zoom),
+        ),
+      );
+    });
+  }
+
+  Future<void> _clearSelectedShop() async {
+    final MapState state = ref.read(mapViewModelProvider);
+    final StoreSummaryModel? selectedStore = state.storeSummary;
+
+    if (selectedStore != null) {
+      await _mapController.deleteOverlay(
+        NOverlayInfo(
+          type: NOverlayType.marker,
+          id: selectedStore.storeUuid.toString(),
+        ),
+      );
+
+      final StoreByLocationModel? storeByLocation = state.storesByLocation
+          .firstWhereOrNull(
+            (StoreByLocationModel e) => e.storeUuid == selectedStore.storeUuid,
+          );
+
+      if (storeByLocation != null) {
+        await _mapController.addOverlay(
+          await _storeToMarker(model: storeByLocation),
+        );
+      }
+    }
   }
 }
 
