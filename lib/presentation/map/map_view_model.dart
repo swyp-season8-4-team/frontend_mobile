@@ -59,7 +59,7 @@ class MapViewModel extends StateNotifier<MapState> {
     return state;
   }
 
-  // 현재 위치에서 조회
+  // 주어진 위치에서 가게 조회
   void getStoresByCameraPosition({
     required double lat,
     required double lng,
@@ -138,7 +138,7 @@ class MapViewModel extends StateNotifier<MapState> {
     return state;
   }
 
-  // 주어진 영역 내에서 내 취향 필터 업데이트
+  // 주어진 영역 내에서 내 취향 필터 업데이트를 통한 가게 조회
   void updateMyPreferenceFilter({
     required double lat,
     required double lng,
@@ -157,7 +157,7 @@ class MapViewModel extends StateNotifier<MapState> {
     getStoresByCameraPosition(lat: lat, lng: lng, radius: radius);
   }
 
-  // 주어진 영역 내에서 취향 필터 업데이트
+  // 주어진 영역 내에서 취향 필터 업데이트를 통한 가게 조회
   void updatePreferenceFilter({
     required double lat,
     required double lng,

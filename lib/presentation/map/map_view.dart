@@ -9,6 +9,9 @@ import 'package:frontend_mobile/common/design_system/component/chip/floating_chi
 import 'package:frontend_mobile/common/design_system/component/etc/map/map_icon_button.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/marker/default_marker.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/main_top_bar.dart';
+import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/common/design_system/foundation/shadow/shadow_config.dart';
+import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/manager/geolocation/geo_location_service_impl.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
@@ -35,6 +38,8 @@ class _MapViewState extends ConsumerState<MapView> {
   Widget build(BuildContext context) {
     final MapState state = ref.watch(mapViewModelProvider);
     final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     if (state.getAllPreferencesStatus.isLoading) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
@@ -167,6 +172,55 @@ class _MapViewState extends ConsumerState<MapView> {
                   },
                 ),
               ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: GestureDetector(
+                onTap: () async {
+                  final ({double lat, double lng, double radius}) queryOption =
+                      await _getQueryOption();
+                  viewmodel.getStoresByCameraPosition(
+                    lat: queryOption.lat,
+                    lng: queryOption.lng,
+                    radius: queryOption.radius,
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: colorScheme.outline),
+                    boxShadow: ShadowConfig().level1,
+                    borderRadius: BorderRadius.circular(99),
+                    color: ScaleColorConfig.primary100,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Assets.icon.system.refresh1Line.svg(
+                        width: 18,
+                        height: 18,
+                        colorFilter: const ColorFilter.mode(
+                          ScaleColorConfig.success50,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        '현 위치에서 새로고침',
+                        style: textTheme.labelLarge?.copyWith(
+                          color: ScaleColorConfig.success50,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
         ],
