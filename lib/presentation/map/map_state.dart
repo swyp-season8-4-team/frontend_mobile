@@ -8,5 +8,24 @@ class MapState with _$MapState {
     @Default(Status.loading) Status getAllPreferencesStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel getAllPreferencesException,
+    @Default(<StoreByLocationModel>[])
+    List<StoreByLocationModel> storesByLocation,
+    @Default(GetStoresByLocationParams(latitude: 0, longitude: 0, radius: 0))
+    GetStoresByLocationParams getStoresByLocationParams,
+    @Default(
+      GetMyPreferencesStoresByLocationParams(
+        latitude: 0,
+        longitude: 0,
+        radius: 0,
+      ),
+    )
+    GetMyPreferencesStoresByLocationParams
+    getMyPreferencesStoresByLocationParams,
+    @Default(Status.loading) Status getStoresByLocationStatus,
+    @Default(Status.loading) Status getMyPreferencesStoresByLocationStatus,
+    @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
+    ExceptionModel getStoresByLocationExceptionModel,
+    @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
+    ExceptionModel getMyPreferencesStoresByLocationExceptionModel,
   }) = _MapState;
 }

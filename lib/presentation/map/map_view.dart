@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
@@ -5,13 +7,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/dessert_mate_button.dart';
 import 'package:frontend_mobile/common/design_system/component/chip/floating_chip.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/map/map_icon_button.dart';
+import 'package:frontend_mobile/common/design_system/component/etc/marker/default_marker.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/main_top_bar.dart';
 import 'package:frontend_mobile/core/manager/geolocation/geo_location_service_impl.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
+import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
+import 'package:frontend_mobile/domain/param/store/get_stores_by_location_params.dart';
 import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:frontend_mobile/presentation/widget/scaffold_with_navigation_bar.dart';
 import 'package:geolocator/geolocator.dart';
+
+part 'map_view_extensions.dart';
 
 class MapView extends ConsumerStatefulWidget {
   const MapView({super.key});
@@ -34,6 +41,21 @@ class _MapViewState extends ConsumerState<MapView> {
     if (state.getAllPreferencesStatus.isLoading) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
+
+    ref.listen(
+      mapViewModelProvider.select((MapState state) => state.storesByLocation),
+      (_, List<StoreByLocationModel> next) async {
+        await _mapController.clearOverlays();
+
+        final List<NMarker> markers = await Future.wait(<Future<NMarker>>[
+          ...next.map((StoreByLocationModel e) => _storeToMarker(model: e)),
+        ]);
+
+        await _mapController.addOverlayAll(markers.toSet());
+
+        await _setCustomLocationOverlay();
+      },
+    );
 
     return ScaffoldWithNavigationBar(
       appBar: const CustomMainTopBar(),
@@ -113,49 +135,6 @@ class _MapViewState extends ConsumerState<MapView> {
         ],
       ),
     );
-  }
-
-  Future<void> _goToCurrentLocation() async {
-    try {
-      final Position result =
-          await ref.read(geoLocationManagerProvider).getCurrentPosition();
-
-      await _mapController.updateCamera(
-        NCameraUpdate.fromCameraPosition(
-          NCameraPosition(
-            target: NLatLng(result.latitude, result.longitude),
-            zoom: _zoom,
-          ),
-        ),
-      );
-
-      // 위치 권한이 허용된 이후
-      // 트래킹할 수 있도록 설정
-      await _mapController.setLocationTrackingMode(
-        NLocationTrackingMode.noFollow,
-      );
-    } catch (e) {
-      return;
-    }
-  }
-
-  Future<void> _setCustomLocationOverlay() async {
-    if (mounted) {
-      final NLocationOverlay locationOverlay =
-          _mapController.getLocationOverlay();
-
-      // NOverlayImage.fromAssetImage는 svg를 지원하지 않음
-      const NOverlayImage locationOverlayImage = NOverlayImage.fromAssetImage(
-        'asset/image/current_location.png',
-      );
-
-      locationOverlay
-        ..setIcon(locationOverlayImage)
-        ..setIconSize(const Size.square(50))
-        ..setCircleColor(Colors.transparent)
-        ..setIsVisible(false)
-        ..setIsVisible(true);
-    }
   }
 
   @override
