@@ -111,15 +111,14 @@ extension MapViewExt on _MapViewState {
 
   Future<NMarker> _storeToMarker({required StoreByLocationModel model}) async {
     final NOverlayImage markerImage = await NOverlayImage.fromWidget(
-      widget: CustomDefaultMarker(text: model.name),
-      size: const Size(108, 70),
+      widget: Align(child: CustomDefaultMarker(text: model.name)),
+      size: const Size(108, 75),
       context: context,
     );
 
     return NMarker(
       id: model.storeUuid,
       icon: markerImage,
-      anchor: const NPoint(0.5, 0.5),
       position: NLatLng(model.latitude, model.longitude),
     );
   }
