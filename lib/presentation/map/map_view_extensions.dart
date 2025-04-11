@@ -48,7 +48,7 @@ extension MapViewExt on _MapViewState {
     }
   }
 
-  Future<({double lat, double lng, double radius})> getQueryOption() async {
+  Future<({double lat, double lng, double radius})> _getQueryOption() async {
     // 위도 1도의 거리
     const double killometerPerLatitude = 6400 * 2 * pi / 360;
 
@@ -86,29 +86,25 @@ extension MapViewExt on _MapViewState {
           await ref.read(geoLocationManagerProvider).getCurrentPosition();
 
       final ({double lat, double lng, double radius}) queryOption =
-          await getQueryOption();
+          await _getQueryOption();
 
-      await ref
+      ref
           .read(mapViewModelProvider.notifier)
-          .getStoresByLocation(
-            params: GetStoresByLocationParams(
-              latitude: positon.latitude,
-              longitude: positon.longitude,
-              radius: queryOption.radius,
-            ),
+          .getStoresByCurrentLocation(
+            lat: positon.latitude,
+            lng: positon.longitude,
+            radius: queryOption.radius,
           );
     } catch (e) {
       final ({double lat, double lng, double radius}) queryOption =
-          await getQueryOption();
+          await _getQueryOption();
 
-      await ref
+      ref
           .read(mapViewModelProvider.notifier)
-          .getStoresByLocation(
-            params: GetStoresByLocationParams(
-              latitude: queryOption.lat,
-              longitude: queryOption.lng,
-              radius: queryOption.radius,
-            ),
+          .getStoresByCurrentLocation(
+            lat: queryOption.lat,
+            lng: queryOption.lng,
+            radius: queryOption.radius,
           );
     }
   }

@@ -13,7 +13,6 @@ import 'package:frontend_mobile/core/manager/geolocation/geo_location_service_im
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
-import 'package:frontend_mobile/domain/param/store/get_stores_by_location_params.dart';
 import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:frontend_mobile/presentation/widget/scaffold_with_navigation_bar.dart';
 import 'package:geolocator/geolocator.dart';
@@ -97,7 +96,19 @@ class _MapViewState extends ConsumerState<MapView> {
                           padding: const EdgeInsets.only(left: 6),
                           child: CustomFloatingChip(
                             label: e.preferenceName,
-                            onPressed: () {},
+                            selected: state.preferenceTagIds.contains(e.id),
+                            onPressed: () async {
+                              final ({double lat, double lng, double radius})
+                              queryOption = await _getQueryOption();
+                              ref
+                                  .read(mapViewModelProvider.notifier)
+                                  .updatePreferenceFilter(
+                                    lat: queryOption.lat,
+                                    lng: queryOption.lng,
+                                    radius: queryOption.radius,
+                                    preference: e,
+                                  );
+                            },
                           ),
                         ),
                       ),

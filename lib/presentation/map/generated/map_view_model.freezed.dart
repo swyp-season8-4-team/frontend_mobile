@@ -23,11 +23,11 @@ mixin _$MapState {
       throw _privateConstructorUsedError;
   List<StoreByLocationModel> get storesByLocation =>
       throw _privateConstructorUsedError;
-  GetStoresByLocationParams get getStoresByLocationParams =>
-      throw _privateConstructorUsedError;
-  GetMyPreferencesStoresByLocationParams
-  get getMyPreferencesStoresByLocationParams =>
-      throw _privateConstructorUsedError;
+  double get lat => throw _privateConstructorUsedError;
+  double get lng => throw _privateConstructorUsedError;
+  double get radius => throw _privateConstructorUsedError;
+  List<int> get preferenceTagIds => throw _privateConstructorUsedError;
+  String get searchKeyword => throw _privateConstructorUsedError;
   Status get getStoresByLocationStatus => throw _privateConstructorUsedError;
   Status get getMyPreferencesStoresByLocationStatus =>
       throw _privateConstructorUsedError;
@@ -53,9 +53,11 @@ abstract class $MapStateCopyWith<$Res> {
     Status getAllPreferencesStatus,
     ExceptionModel getAllPreferencesException,
     List<StoreByLocationModel> storesByLocation,
-    GetStoresByLocationParams getStoresByLocationParams,
-    GetMyPreferencesStoresByLocationParams
-    getMyPreferencesStoresByLocationParams,
+    double lat,
+    double lng,
+    double radius,
+    List<int> preferenceTagIds,
+    String searchKeyword,
     Status getStoresByLocationStatus,
     Status getMyPreferencesStoresByLocationStatus,
     ExceptionModel getStoresByLocationExceptionModel,
@@ -82,8 +84,11 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
     Object? getAllPreferencesStatus = null,
     Object? getAllPreferencesException = null,
     Object? storesByLocation = null,
-    Object? getStoresByLocationParams = null,
-    Object? getMyPreferencesStoresByLocationParams = null,
+    Object? lat = null,
+    Object? lng = null,
+    Object? radius = null,
+    Object? preferenceTagIds = null,
+    Object? searchKeyword = null,
     Object? getStoresByLocationStatus = null,
     Object? getMyPreferencesStoresByLocationStatus = null,
     Object? getStoresByLocationExceptionModel = null,
@@ -111,16 +116,31 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
                     ? _value.storesByLocation
                     : storesByLocation // ignore: cast_nullable_to_non_nullable
                         as List<StoreByLocationModel>,
-            getStoresByLocationParams:
-                null == getStoresByLocationParams
-                    ? _value.getStoresByLocationParams
-                    : getStoresByLocationParams // ignore: cast_nullable_to_non_nullable
-                        as GetStoresByLocationParams,
-            getMyPreferencesStoresByLocationParams:
-                null == getMyPreferencesStoresByLocationParams
-                    ? _value.getMyPreferencesStoresByLocationParams
-                    : getMyPreferencesStoresByLocationParams // ignore: cast_nullable_to_non_nullable
-                        as GetMyPreferencesStoresByLocationParams,
+            lat:
+                null == lat
+                    ? _value.lat
+                    : lat // ignore: cast_nullable_to_non_nullable
+                        as double,
+            lng:
+                null == lng
+                    ? _value.lng
+                    : lng // ignore: cast_nullable_to_non_nullable
+                        as double,
+            radius:
+                null == radius
+                    ? _value.radius
+                    : radius // ignore: cast_nullable_to_non_nullable
+                        as double,
+            preferenceTagIds:
+                null == preferenceTagIds
+                    ? _value.preferenceTagIds
+                    : preferenceTagIds // ignore: cast_nullable_to_non_nullable
+                        as List<int>,
+            searchKeyword:
+                null == searchKeyword
+                    ? _value.searchKeyword
+                    : searchKeyword // ignore: cast_nullable_to_non_nullable
+                        as String,
             getStoresByLocationStatus:
                 null == getStoresByLocationStatus
                     ? _value.getStoresByLocationStatus
@@ -161,9 +181,11 @@ abstract class _$$MapStateImplCopyWith<$Res>
     Status getAllPreferencesStatus,
     ExceptionModel getAllPreferencesException,
     List<StoreByLocationModel> storesByLocation,
-    GetStoresByLocationParams getStoresByLocationParams,
-    GetMyPreferencesStoresByLocationParams
-    getMyPreferencesStoresByLocationParams,
+    double lat,
+    double lng,
+    double radius,
+    List<int> preferenceTagIds,
+    String searchKeyword,
     Status getStoresByLocationStatus,
     Status getMyPreferencesStoresByLocationStatus,
     ExceptionModel getStoresByLocationExceptionModel,
@@ -189,8 +211,11 @@ class __$$MapStateImplCopyWithImpl<$Res>
     Object? getAllPreferencesStatus = null,
     Object? getAllPreferencesException = null,
     Object? storesByLocation = null,
-    Object? getStoresByLocationParams = null,
-    Object? getMyPreferencesStoresByLocationParams = null,
+    Object? lat = null,
+    Object? lng = null,
+    Object? radius = null,
+    Object? preferenceTagIds = null,
+    Object? searchKeyword = null,
     Object? getStoresByLocationStatus = null,
     Object? getMyPreferencesStoresByLocationStatus = null,
     Object? getStoresByLocationExceptionModel = null,
@@ -218,16 +243,31 @@ class __$$MapStateImplCopyWithImpl<$Res>
                 ? _value._storesByLocation
                 : storesByLocation // ignore: cast_nullable_to_non_nullable
                     as List<StoreByLocationModel>,
-        getStoresByLocationParams:
-            null == getStoresByLocationParams
-                ? _value.getStoresByLocationParams
-                : getStoresByLocationParams // ignore: cast_nullable_to_non_nullable
-                    as GetStoresByLocationParams,
-        getMyPreferencesStoresByLocationParams:
-            null == getMyPreferencesStoresByLocationParams
-                ? _value.getMyPreferencesStoresByLocationParams
-                : getMyPreferencesStoresByLocationParams // ignore: cast_nullable_to_non_nullable
-                    as GetMyPreferencesStoresByLocationParams,
+        lat:
+            null == lat
+                ? _value.lat
+                : lat // ignore: cast_nullable_to_non_nullable
+                    as double,
+        lng:
+            null == lng
+                ? _value.lng
+                : lng // ignore: cast_nullable_to_non_nullable
+                    as double,
+        radius:
+            null == radius
+                ? _value.radius
+                : radius // ignore: cast_nullable_to_non_nullable
+                    as double,
+        preferenceTagIds:
+            null == preferenceTagIds
+                ? _value._preferenceTagIds
+                : preferenceTagIds // ignore: cast_nullable_to_non_nullable
+                    as List<int>,
+        searchKeyword:
+            null == searchKeyword
+                ? _value.searchKeyword
+                : searchKeyword // ignore: cast_nullable_to_non_nullable
+                    as String,
         getStoresByLocationStatus:
             null == getStoresByLocationStatus
                 ? _value.getStoresByLocationStatus
@@ -267,17 +307,11 @@ class _$MapStateImpl implements _MapState {
     ),
     final List<StoreByLocationModel> storesByLocation =
         const <StoreByLocationModel>[],
-    this.getStoresByLocationParams = const GetStoresByLocationParams(
-      latitude: 0,
-      longitude: 0,
-      radius: 0,
-    ),
-    this.getMyPreferencesStoresByLocationParams =
-        const GetMyPreferencesStoresByLocationParams(
-          latitude: 0,
-          longitude: 0,
-          radius: 0,
-        ),
+    this.lat = 37.514575,
+    this.lng = 127.0495556,
+    this.radius = 5,
+    final List<int> preferenceTagIds = const <int>[],
+    this.searchKeyword = '',
     this.getStoresByLocationStatus = Status.loading,
     this.getMyPreferencesStoresByLocationStatus = Status.loading,
     this.getStoresByLocationExceptionModel = const ExceptionModel(
@@ -293,7 +327,8 @@ class _$MapStateImpl implements _MapState {
       timestamp: '',
     ),
   }) : _preferences = preferences,
-       _storesByLocation = storesByLocation;
+       _storesByLocation = storesByLocation,
+       _preferenceTagIds = preferenceTagIds;
 
   final List<PreferenceModel> _preferences;
   @override
@@ -322,11 +357,26 @@ class _$MapStateImpl implements _MapState {
 
   @override
   @JsonKey()
-  final GetStoresByLocationParams getStoresByLocationParams;
+  final double lat;
   @override
   @JsonKey()
-  final GetMyPreferencesStoresByLocationParams
-  getMyPreferencesStoresByLocationParams;
+  final double lng;
+  @override
+  @JsonKey()
+  final double radius;
+  final List<int> _preferenceTagIds;
+  @override
+  @JsonKey()
+  List<int> get preferenceTagIds {
+    if (_preferenceTagIds is EqualUnmodifiableListView)
+      return _preferenceTagIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_preferenceTagIds);
+  }
+
+  @override
+  @JsonKey()
+  final String searchKeyword;
   @override
   @JsonKey()
   final Status getStoresByLocationStatus;
@@ -342,7 +392,7 @@ class _$MapStateImpl implements _MapState {
 
   @override
   String toString() {
-    return 'MapState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storesByLocation: $storesByLocation, getStoresByLocationParams: $getStoresByLocationParams, getMyPreferencesStoresByLocationParams: $getMyPreferencesStoresByLocationParams, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel)';
+    return 'MapState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel)';
   }
 
   @override
@@ -369,17 +419,15 @@ class _$MapStateImpl implements _MapState {
               other._storesByLocation,
               _storesByLocation,
             ) &&
-            (identical(
-                  other.getStoresByLocationParams,
-                  getStoresByLocationParams,
-                ) ||
-                other.getStoresByLocationParams == getStoresByLocationParams) &&
-            (identical(
-                  other.getMyPreferencesStoresByLocationParams,
-                  getMyPreferencesStoresByLocationParams,
-                ) ||
-                other.getMyPreferencesStoresByLocationParams ==
-                    getMyPreferencesStoresByLocationParams) &&
+            (identical(other.lat, lat) || other.lat == lat) &&
+            (identical(other.lng, lng) || other.lng == lng) &&
+            (identical(other.radius, radius) || other.radius == radius) &&
+            const DeepCollectionEquality().equals(
+              other._preferenceTagIds,
+              _preferenceTagIds,
+            ) &&
+            (identical(other.searchKeyword, searchKeyword) ||
+                other.searchKeyword == searchKeyword) &&
             (identical(
                   other.getStoresByLocationStatus,
                   getStoresByLocationStatus,
@@ -412,8 +460,11 @@ class _$MapStateImpl implements _MapState {
     getAllPreferencesStatus,
     getAllPreferencesException,
     const DeepCollectionEquality().hash(_storesByLocation),
-    getStoresByLocationParams,
-    getMyPreferencesStoresByLocationParams,
+    lat,
+    lng,
+    radius,
+    const DeepCollectionEquality().hash(_preferenceTagIds),
+    searchKeyword,
     getStoresByLocationStatus,
     getMyPreferencesStoresByLocationStatus,
     getStoresByLocationExceptionModel,
@@ -435,9 +486,11 @@ abstract class _MapState implements MapState {
     final Status getAllPreferencesStatus,
     final ExceptionModel getAllPreferencesException,
     final List<StoreByLocationModel> storesByLocation,
-    final GetStoresByLocationParams getStoresByLocationParams,
-    final GetMyPreferencesStoresByLocationParams
-    getMyPreferencesStoresByLocationParams,
+    final double lat,
+    final double lng,
+    final double radius,
+    final List<int> preferenceTagIds,
+    final String searchKeyword,
     final Status getStoresByLocationStatus,
     final Status getMyPreferencesStoresByLocationStatus,
     final ExceptionModel getStoresByLocationExceptionModel,
@@ -453,10 +506,15 @@ abstract class _MapState implements MapState {
   @override
   List<StoreByLocationModel> get storesByLocation;
   @override
-  GetStoresByLocationParams get getStoresByLocationParams;
+  double get lat;
   @override
-  GetMyPreferencesStoresByLocationParams
-  get getMyPreferencesStoresByLocationParams;
+  double get lng;
+  @override
+  double get radius;
+  @override
+  List<int> get preferenceTagIds;
+  @override
+  String get searchKeyword;
   @override
   Status get getStoresByLocationStatus;
   @override

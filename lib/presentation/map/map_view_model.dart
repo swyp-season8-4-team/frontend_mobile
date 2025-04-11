@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
@@ -58,29 +59,30 @@ class MapViewModel extends StateNotifier<MapState> {
     return state;
   }
 
+  // 현재 위치에서 조회
+  void getStoresByCurrentLocation({
+    required double lat,
+    required double lng,
+    required double radius,
+  }) {
+    state = state.copyWith(lat: lat, lng: lng, radius: radius);
+    getStoresByLocation();
+  }
+
   // 반경 내 가게 조회
-  Future<MapState> getStoresByLocation({
-    required GetStoresByLocationParams params,
-  }) async {
-    state = state.copyWith(
-      getStoresByLocationStatus: Status.loading,
-      getStoresByLocationParams: GetStoresByLocationParams(
-        latitude: params.latitude,
-        longitude: params.longitude,
-        radius: params.radius,
-        preferenceTagIds:
-            params.preferenceTagIds ??
-            state.getStoresByLocationParams.preferenceTagIds,
-        searchKeyword:
-            params.searchKeyword ??
-            state.getStoresByLocationParams.searchKeyword,
-      ),
-    );
+  Future<MapState> getStoresByLocation() async {
+    state = state.copyWith(getStoresByLocationStatus: Status.loading);
 
     final Result<List<StoreByLocationModel>, CustomException> result =
         await Usecase.execute(
           usecase: _ref.read(getStoresByLocationUsecaseProvider),
-          params: state.getStoresByLocationParams,
+          params: GetStoresByLocationParams(
+            latitude: state.lat,
+            longitude: state.lng,
+            radius: state.radius,
+            preferenceTagIds: state.preferenceTagIds,
+            searchKeyword: state.searchKeyword,
+          ),
         );
 
     result.map(
@@ -102,9 +104,7 @@ class MapViewModel extends StateNotifier<MapState> {
   }
 
   // 반경 내 취향에 맞는 가게 조회
-  Future<MapState> getMyPreferencesStoresByLocation({
-    required GetMyPreferencesStoresByLocationParams params,
-  }) async {
+  Future<MapState> getMyPreferencesStoresByLocation() async {
     state = state.copyWith(
       getMyPreferencesStoresByLocationStatus: Status.loading,
     );
@@ -113,9 +113,9 @@ class MapViewModel extends StateNotifier<MapState> {
         await Usecase.execute(
           usecase: _ref.read(getMyPreferencesStoresByLocationUsecaseProvider),
           params: GetMyPreferencesStoresByLocationParams(
-            longitude: params.longitude,
-            latitude: params.latitude,
-            radius: params.latitude,
+            longitude: state.lng,
+            latitude: state.lat,
+            radius: state.radius,
           ),
         );
 
@@ -136,5 +136,34 @@ class MapViewModel extends StateNotifier<MapState> {
     );
 
     return state;
+  }
+
+  // 취향 필터 업데이트
+  void updatePreferenceFilter({
+    required double lat,
+    required double lng,
+    required double radius,
+    required PreferenceModel preference,
+  }) {
+    state = state.copyWith(lat: lat, lng: lng, radius: radius);
+
+    final int? selectablePreference = state.preferenceTagIds.firstWhereOrNull(
+      (int e) => e == preference.id,
+    );
+
+    if (selectablePreference != null) {
+      state = state.copyWith(
+        preferenceTagIds:
+            state.preferenceTagIds
+                .where((int e) => e != selectablePreference)
+                .toList(),
+      );
+    } else {
+      state = state.copyWith(
+        preferenceTagIds: <int>[...state.preferenceTagIds, preference.id],
+      );
+    }
+
+    getStoresByLocation();
   }
 }
