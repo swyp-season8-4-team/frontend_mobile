@@ -50,13 +50,9 @@ class _MapViewState extends ConsumerState<MapView> {
             onMapReady: (NaverMapController controller) async {
               _mapController = controller;
 
-              await _mapController.setLocationTrackingMode(
-                NLocationTrackingMode.noFollow,
-              );
+              await _goToCurrentLocation();
 
               await _setCustomLocationOverlay();
-
-              await _goToCurrentLocation();
 
               setState(() {});
             },
@@ -132,6 +128,12 @@ class _MapViewState extends ConsumerState<MapView> {
           ),
         ),
       );
+
+      // 위치 권한이 허용된 이후
+      // 트래킹할 수 있도록 설정
+      await _mapController.setLocationTrackingMode(
+        NLocationTrackingMode.noFollow,
+      );
     } catch (e) {
       return;
     }
@@ -151,6 +153,7 @@ class _MapViewState extends ConsumerState<MapView> {
         ..setIcon(locationOverlayImage)
         ..setIconSize(const Size.square(50))
         ..setCircleColor(Colors.transparent)
+        ..setIsVisible(false)
         ..setIsVisible(true);
     }
   }
