@@ -5,6 +5,7 @@ import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/foundation/foundation.dart';
 import 'package:frontend_mobile/common/env/env.dart';
+import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/common/gen_asset/fonts.gen.dart';
 import 'package:frontend_mobile/presentation/router/router.dart';
 
@@ -30,8 +31,8 @@ class _MainAppState extends ConsumerState<MainApp> {
     // 지도에 표시될 이미지 preload
     // 관련 이슈 : https://github.com/note11g/flutter_naver_map/issues/218#issuecomment-2041435215
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      precacheImage(Image.asset('asset/image/marker_1.png').image, context);
-      precacheImage(Image.asset('asset/image/coupon_bedge.png').image, context);
+      precacheImage(Assets.image.marker1.provider(), context);
+      precacheImage(Assets.image.couponBedge.provider(), context);
     });
   }
 
