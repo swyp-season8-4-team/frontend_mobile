@@ -12,6 +12,7 @@ class MapState with _$MapState {
     @Default(37.514575) double lat,
     @Default(127.0495556) double lng,
     @Default(5) double radius,
+    @Default(false) bool myPreferenceFilterSelected,
     @Default(<int>[]) List<int> preferenceTagIds,
     @Default('') String searchKeyword,
     @Default(Status.loading) Status getStoresByLocationStatus,

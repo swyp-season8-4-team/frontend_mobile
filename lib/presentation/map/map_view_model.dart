@@ -60,7 +60,7 @@ class MapViewModel extends StateNotifier<MapState> {
   }
 
   // 현재 위치에서 조회
-  void getStoresByCurrentLocation({
+  void getStoresByCameraPosition({
     required double lat,
     required double lng,
     required double radius,
@@ -138,7 +138,26 @@ class MapViewModel extends StateNotifier<MapState> {
     return state;
   }
 
-  // 취향 필터 업데이트
+  // 주어진 영역 내에서 내 취향 필터 업데이트
+  void updateMyPreferenceFilter({
+    required double lat,
+    required double lng,
+    required double radius,
+  }) async {
+    if (state.myPreferenceFilterSelected) {
+      state = state.copyWith(preferenceTagIds: <int>[]);
+    } else {
+      // TODO: preferenceTagIds에 맞춤 취향 지정 예정
+    }
+
+    state = state.copyWith(
+      myPreferenceFilterSelected: !state.myPreferenceFilterSelected,
+    );
+
+    getStoresByCameraPosition(lat: lat, lng: lng, radius: radius);
+  }
+
+  // 주어진 영역 내에서 취향 필터 업데이트
   void updatePreferenceFilter({
     required double lat,
     required double lng,
@@ -146,6 +165,12 @@ class MapViewModel extends StateNotifier<MapState> {
     required PreferenceModel preference,
   }) {
     state = state.copyWith(lat: lat, lng: lng, radius: radius);
+
+    // 내 취향 필터가 이미 선택되어 있었다면
+    // 내 취향 필터 선택 해제 처리
+    if (state.myPreferenceFilterSelected) {
+      state = state.copyWith(myPreferenceFilterSelected: false);
+    }
 
     final int? selectablePreference = state.preferenceTagIds.firstWhereOrNull(
       (int e) => e == preference.id,
@@ -164,6 +189,17 @@ class MapViewModel extends StateNotifier<MapState> {
       );
     }
 
-    getStoresByLocation();
+    getStoresByCameraPosition(lat: lat, lng: lng, radius: radius);
+  }
+
+  // 모든 필터 해제 후 주어진 영역 내 가게 조회
+  void clearAllFilter({
+    required double lat,
+    required double lng,
+    required double radius,
+  }) {
+    state = state.copyWith(preferenceTagIds: <int>[]);
+
+    getStoresByCameraPosition(lat: lat, lng: lng, radius: radius);
   }
 }

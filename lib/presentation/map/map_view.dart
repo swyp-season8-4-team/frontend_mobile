@@ -33,10 +33,9 @@ class _MapViewState extends ConsumerState<MapView> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Viewmodel을 통한 상태관리 필요
     final MapState state = ref.watch(mapViewModelProvider);
+    final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
 
-    // TODO: 로딩 UI 변경 필요
     if (state.getAllPreferencesStatus.isLoading) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
@@ -90,7 +89,20 @@ class _MapViewState extends ConsumerState<MapView> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     children: <Widget>[
-                      CustomFloatingChip(label: '내 취향', onPressed: () {}),
+                      CustomFloatingChip(
+                        label: '내 취향',
+                        selected: state.myPreferenceFilterSelected,
+                        onPressed: () async {
+                          final ({double lat, double lng, double radius})
+                          queryOption = await _getQueryOption();
+
+                          viewmodel.updateMyPreferenceFilter(
+                            lat: queryOption.lat,
+                            lng: queryOption.lng,
+                            radius: queryOption.radius,
+                          );
+                        },
+                      ),
                       ...state.preferences.mapIndexed(
                         (int index, PreferenceModel e) => Padding(
                           padding: const EdgeInsets.only(left: 6),
@@ -100,14 +112,12 @@ class _MapViewState extends ConsumerState<MapView> {
                             onPressed: () async {
                               final ({double lat, double lng, double radius})
                               queryOption = await _getQueryOption();
-                              ref
-                                  .read(mapViewModelProvider.notifier)
-                                  .updatePreferenceFilter(
-                                    lat: queryOption.lat,
-                                    lng: queryOption.lng,
-                                    radius: queryOption.radius,
-                                    preference: e,
-                                  );
+                              viewmodel.updatePreferenceFilter(
+                                lat: queryOption.lat,
+                                lng: queryOption.lng,
+                                radius: queryOption.radius,
+                                preference: e,
+                              );
                             },
                           ),
                         ),
@@ -129,6 +139,22 @@ class _MapViewState extends ConsumerState<MapView> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
+                if (!state.myPreferenceFilterSelected &&
+                    state.preferenceTagIds.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: CustomMapIconButton.filterReset(
+                      onPressed: () async {
+                        final ({double lat, double lng, double radius})
+                        queryOption = await _getQueryOption();
+                        viewmodel.clearAllFilter(
+                          lng: queryOption.lng,
+                          lat: queryOption.lat,
+                          radius: queryOption.lng,
+                        );
+                      },
+                    ),
+                  ),
                 CustomMapIconButton.saveStore(
                   isSelected: true,
                   onPressed: () {},

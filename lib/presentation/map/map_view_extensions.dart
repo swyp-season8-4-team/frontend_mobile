@@ -90,7 +90,7 @@ extension MapViewExt on _MapViewState {
 
       ref
           .read(mapViewModelProvider.notifier)
-          .getStoresByCurrentLocation(
+          .getStoresByCameraPosition(
             lat: positon.latitude,
             lng: positon.longitude,
             radius: queryOption.radius,
@@ -101,7 +101,7 @@ extension MapViewExt on _MapViewState {
 
       ref
           .read(mapViewModelProvider.notifier)
-          .getStoresByCurrentLocation(
+          .getStoresByCameraPosition(
             lat: queryOption.lat,
             lng: queryOption.lng,
             radius: queryOption.radius,

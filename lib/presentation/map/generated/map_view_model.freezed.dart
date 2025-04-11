@@ -26,6 +26,7 @@ mixin _$MapState {
   double get lat => throw _privateConstructorUsedError;
   double get lng => throw _privateConstructorUsedError;
   double get radius => throw _privateConstructorUsedError;
+  bool get myPreferenceFilterSelected => throw _privateConstructorUsedError;
   List<int> get preferenceTagIds => throw _privateConstructorUsedError;
   String get searchKeyword => throw _privateConstructorUsedError;
   Status get getStoresByLocationStatus => throw _privateConstructorUsedError;
@@ -56,6 +57,7 @@ abstract class $MapStateCopyWith<$Res> {
     double lat,
     double lng,
     double radius,
+    bool myPreferenceFilterSelected,
     List<int> preferenceTagIds,
     String searchKeyword,
     Status getStoresByLocationStatus,
@@ -87,6 +89,7 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
     Object? lat = null,
     Object? lng = null,
     Object? radius = null,
+    Object? myPreferenceFilterSelected = null,
     Object? preferenceTagIds = null,
     Object? searchKeyword = null,
     Object? getStoresByLocationStatus = null,
@@ -131,6 +134,11 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
                     ? _value.radius
                     : radius // ignore: cast_nullable_to_non_nullable
                         as double,
+            myPreferenceFilterSelected:
+                null == myPreferenceFilterSelected
+                    ? _value.myPreferenceFilterSelected
+                    : myPreferenceFilterSelected // ignore: cast_nullable_to_non_nullable
+                        as bool,
             preferenceTagIds:
                 null == preferenceTagIds
                     ? _value.preferenceTagIds
@@ -184,6 +192,7 @@ abstract class _$$MapStateImplCopyWith<$Res>
     double lat,
     double lng,
     double radius,
+    bool myPreferenceFilterSelected,
     List<int> preferenceTagIds,
     String searchKeyword,
     Status getStoresByLocationStatus,
@@ -214,6 +223,7 @@ class __$$MapStateImplCopyWithImpl<$Res>
     Object? lat = null,
     Object? lng = null,
     Object? radius = null,
+    Object? myPreferenceFilterSelected = null,
     Object? preferenceTagIds = null,
     Object? searchKeyword = null,
     Object? getStoresByLocationStatus = null,
@@ -258,6 +268,11 @@ class __$$MapStateImplCopyWithImpl<$Res>
                 ? _value.radius
                 : radius // ignore: cast_nullable_to_non_nullable
                     as double,
+        myPreferenceFilterSelected:
+            null == myPreferenceFilterSelected
+                ? _value.myPreferenceFilterSelected
+                : myPreferenceFilterSelected // ignore: cast_nullable_to_non_nullable
+                    as bool,
         preferenceTagIds:
             null == preferenceTagIds
                 ? _value._preferenceTagIds
@@ -310,6 +325,7 @@ class _$MapStateImpl implements _MapState {
     this.lat = 37.514575,
     this.lng = 127.0495556,
     this.radius = 5,
+    this.myPreferenceFilterSelected = false,
     final List<int> preferenceTagIds = const <int>[],
     this.searchKeyword = '',
     this.getStoresByLocationStatus = Status.loading,
@@ -364,6 +380,9 @@ class _$MapStateImpl implements _MapState {
   @override
   @JsonKey()
   final double radius;
+  @override
+  @JsonKey()
+  final bool myPreferenceFilterSelected;
   final List<int> _preferenceTagIds;
   @override
   @JsonKey()
@@ -392,7 +411,7 @@ class _$MapStateImpl implements _MapState {
 
   @override
   String toString() {
-    return 'MapState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel)';
+    return 'MapState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, myPreferenceFilterSelected: $myPreferenceFilterSelected, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel)';
   }
 
   @override
@@ -422,6 +441,12 @@ class _$MapStateImpl implements _MapState {
             (identical(other.lat, lat) || other.lat == lat) &&
             (identical(other.lng, lng) || other.lng == lng) &&
             (identical(other.radius, radius) || other.radius == radius) &&
+            (identical(
+                  other.myPreferenceFilterSelected,
+                  myPreferenceFilterSelected,
+                ) ||
+                other.myPreferenceFilterSelected ==
+                    myPreferenceFilterSelected) &&
             const DeepCollectionEquality().equals(
               other._preferenceTagIds,
               _preferenceTagIds,
@@ -463,6 +488,7 @@ class _$MapStateImpl implements _MapState {
     lat,
     lng,
     radius,
+    myPreferenceFilterSelected,
     const DeepCollectionEquality().hash(_preferenceTagIds),
     searchKeyword,
     getStoresByLocationStatus,
@@ -489,6 +515,7 @@ abstract class _MapState implements MapState {
     final double lat,
     final double lng,
     final double radius,
+    final bool myPreferenceFilterSelected,
     final List<int> preferenceTagIds,
     final String searchKeyword,
     final Status getStoresByLocationStatus,
@@ -511,6 +538,8 @@ abstract class _MapState implements MapState {
   double get lng;
   @override
   double get radius;
+  @override
+  bool get myPreferenceFilterSelected;
   @override
   List<int> get preferenceTagIds;
   @override
