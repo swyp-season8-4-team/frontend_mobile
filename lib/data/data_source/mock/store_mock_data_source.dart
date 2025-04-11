@@ -22,9 +22,30 @@ class StoreMockDataSource implements StoreRemoteDataSource {
   }
 
   @override
-  Future<StoreSummaryEntity> getStoreSummary({required String storeUuid}) {
-    // TODO: implement getStoreSummary
-    throw UnimplementedError();
+  Future<StoreSummaryEntity> getStoreSummary({
+    required String storeUuid,
+  }) async {
+    return StoreSummaryEntity(
+      storeId: 123,
+      storeUuid: storeUuid,
+      name: '디저비 가게1',
+      tags: <String>[],
+      averageRating: 4.5,
+      storeImages: <String>[
+        'https://picsum.photos/250?image=5',
+        'https://picsum.photos/250?image=5',
+      ],
+      operatingHours: <StoreOperatingHourEntity>[
+        const StoreOperatingHourEntity(
+          dayOfWeek: '월',
+          openingTime: '09:00',
+          closingTime: '17:00',
+          isClosed: false,
+        ),
+      ],
+      address: '서울시 강남구 역삼동',
+      phone: '010-9999-8888',
+    );
   }
 
   @override
