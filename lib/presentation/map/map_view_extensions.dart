@@ -1,7 +1,7 @@
 part of 'map_view.dart';
 
 // ignore: library_private_types_in_public_api
-extension MapViewExt on _MapViewState {
+extension MapViewMethodExt on _MapViewState {
   Future<void> _goToCurrentLocation() async {
     try {
       final Position result =
@@ -120,6 +120,148 @@ extension MapViewExt on _MapViewState {
       id: model.storeUuid,
       icon: markerImage,
       position: NLatLng(model.latitude, model.longitude),
+    );
+  }
+}
+
+// ignore: library_private_types_in_public_api
+extension MapViewWidgetExt on _MapViewState {
+  // 상단 필터
+  Widget _buildFilterList() {
+    final MapState state = ref.watch(mapViewModelProvider);
+    final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
+    return SizedBox(
+      height: 28,
+      width: MediaQuery.of(context).size.width,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            children: <Widget>[
+              CustomFloatingChip(
+                label: '내 취향',
+                selected: state.myPreferenceFilterSelected,
+                onPressed: () async {
+                  final ({double lat, double lng, double radius}) queryOption =
+                      await _getQueryOption();
+
+                  viewmodel.updateMyPreferenceFilter(
+                    lat: queryOption.lat,
+                    lng: queryOption.lng,
+                    radius: queryOption.radius,
+                  );
+                },
+              ),
+              ...state.preferences.mapIndexed(
+                (int index, PreferenceModel e) => Padding(
+                  padding: const EdgeInsets.only(left: 6),
+                  child: CustomFloatingChip(
+                    label: e.preferenceName,
+                    selected: state.preferenceTagIds.contains(e.id),
+                    onPressed: () async {
+                      final ({double lat, double lng, double radius})
+                      queryOption = await _getQueryOption();
+                      viewmodel.updatePreferenceFilter(
+                        lat: queryOption.lat,
+                        lng: queryOption.lng,
+                        radius: queryOption.radius,
+                        preference: e,
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // 우측 버튼
+  Widget _buildControlButtons() {
+    final MapState state = ref.watch(mapViewModelProvider);
+    final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        if (!state.myPreferenceFilterSelected &&
+            state.preferenceTagIds.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: CustomMapIconButton.filterReset(
+              onPressed: () async {
+                final ({double lat, double lng, double radius}) queryOption =
+                    await _getQueryOption();
+                viewmodel.clearAllFilter(
+                  lng: queryOption.lng,
+                  lat: queryOption.lat,
+                  radius: queryOption.lng,
+                );
+              },
+            ),
+          ),
+        CustomMapIconButton.saveStore(isSelected: true, onPressed: () {}),
+        const SizedBox(height: 10),
+        CustomMapIconButton.myLocation(
+          isSelected: false,
+          onPressed: () {
+            _goToCurrentLocation();
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRefreshButton() {
+    final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: GestureDetector(
+        onTap: () async {
+          final ({double lat, double lng, double radius}) queryOption =
+              await _getQueryOption();
+          viewmodel.getStoresByCameraPosition(
+            lat: queryOption.lat,
+            lng: queryOption.lng,
+            radius: queryOption.radius,
+          );
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          decoration: BoxDecoration(
+            border: Border.all(color: colorScheme.outline),
+            boxShadow: ShadowConfig().level1,
+            borderRadius: BorderRadius.circular(99),
+            color: ScaleColorConfig.primary100,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Assets.icon.system.refresh1Line.svg(
+                width: 18,
+                height: 18,
+                colorFilter: const ColorFilter.mode(
+                  ScaleColorConfig.success50,
+                  BlendMode.srcIn,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                '현 위치에서 새로고침',
+                style: textTheme.labelLarge?.copyWith(
+                  color: ScaleColorConfig.success50,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
