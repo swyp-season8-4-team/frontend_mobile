@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/design_system/foundation/foundation.dart';
 import 'package:frontend_mobile/common/env/env.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
@@ -46,6 +47,7 @@ class _MainAppState extends ConsumerState<MainApp> {
         textTheme: FoundationConfig.textTheme,
         highlightColor: Colors.transparent,
         splashFactory: NoSplash.splashFactory,
+        scaffoldBackgroundColor: ScaleColorConfig.surface90,
       ),
     );
   }

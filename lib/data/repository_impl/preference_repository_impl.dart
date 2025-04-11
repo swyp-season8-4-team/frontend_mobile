@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend_mobile/core/resource/exception/api_call.dart';
+import 'package:frontend_mobile/core/resource/api_call.dart';
 import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
 import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/core/resource/params/no_params.dart';
