@@ -39,7 +39,7 @@ class CustomDefaultMarker extends StatelessWidget {
             ),
           ),
         ),
-        Assets.icon.map.a22x30Marker1.svg(),
+        Assets.image.marker1.image(width: 22, height: 30),
       ],
     );
   }

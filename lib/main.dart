@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/design_system/foundation/foundation.dart';
 import 'package:frontend_mobile/common/env/env.dart';
+import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/common/gen_asset/fonts.gen.dart';
 import 'package:frontend_mobile/presentation/router/router.dart';
 
@@ -27,6 +28,13 @@ class _MainAppState extends ConsumerState<MainApp> {
   void initState() {
     super.initState();
     _initAppTrackingTransparency();
+
+    // 지도에 표시될 이미지 preload
+    // 관련 이슈 : https://github.com/note11g/flutter_naver_map/issues/218#issuecomment-2041435215
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      precacheImage(Assets.image.marker1.provider(), context);
+      precacheImage(Assets.image.couponBedge.provider(), context);
+    });
   }
 
   @override

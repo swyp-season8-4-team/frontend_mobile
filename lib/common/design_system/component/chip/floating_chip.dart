@@ -7,19 +7,19 @@ class CustomFloatingChip extends StatefulWidget {
   const CustomFloatingChip({
     required this.label,
     required this.onPressed,
+    this.selected = false,
     super.key,
   });
 
   final String label;
   final VoidCallback? onPressed;
+  final bool selected;
 
   @override
   State<CustomFloatingChip> createState() => _CustomFloatingChipState();
 }
 
 class _CustomFloatingChipState extends State<CustomFloatingChip> {
-  bool _isSelected = false;
-
   WidgetStateProperty<Color?> get _color =>
       WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         /// Pressed
@@ -28,7 +28,7 @@ class _CustomFloatingChipState extends State<CustomFloatingChip> {
         }
 
         /// Selected
-        if (_isSelected) {
+        if (widget.selected) {
           return ScaleColorConfig.primary90;
         }
 
@@ -39,17 +39,14 @@ class _CustomFloatingChipState extends State<CustomFloatingChip> {
     if (widget.onPressed != null) {
       widget.onPressed!();
     }
-
-    setState(() {
-      _isSelected = !_isSelected;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        boxShadow: !_isSelected ? ShadowConfig().level1 : ShadowConfig().level2,
+        boxShadow:
+            !widget.selected ? ShadowConfig().level1 : ShadowConfig().level2,
         borderRadius: BorderRadius.circular(24),
       ),
       child: CustomChip(
@@ -58,7 +55,7 @@ class _CustomFloatingChipState extends State<CustomFloatingChip> {
         onPressed: _onPressed,
         side: BorderSide(
           color:
-              !_isSelected
+              !widget.selected
                   ? ScaleColorConfig.neutral50
                   : ScaleColorConfig.primary70,
         ),
