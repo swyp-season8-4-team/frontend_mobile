@@ -91,6 +91,7 @@ extension MapViewWidgetExt on _MapViewState {
     );
   }
 
+  // 하단 중앙 새로고침 버튼
   Widget _buildRefreshButton() {
     final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
     final TextTheme textTheme = Theme.of(context).textTheme;
@@ -151,7 +152,6 @@ extension MapViewWidgetExt on _MapViewState {
           final MapState state = ref.watch(mapViewModelProvider);
           final TextTheme textTheme = Theme.of(context).textTheme;
           final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
           final DayOfWeek today = DayOfWeek.values[DateTime.now().weekday - 1];
 
           return Padding(
@@ -165,11 +165,12 @@ extension MapViewWidgetExt on _MapViewState {
                     )
                     : Builder(
                       builder: (BuildContext context) {
+                        final StoreSummaryModel storeSummary =
+                            state.storeSummary!;
+
                         // 오늘 가게 영업 여부
-                        final StoreOperatingHourModel todayOperatingInfo = state
-                            .storeSummary!
-                            .operatingHours
-                            .firstWhere(
+                        final StoreOperatingHourModel todayOperatingInfo =
+                            storeSummary.operatingHours.firstWhere(
                               (StoreOperatingHourModel e) =>
                                   e.dayOfWeek == today,
                             );
@@ -179,7 +180,7 @@ extension MapViewWidgetExt on _MapViewState {
                                 DayOfWeek.values.length];
 
                         final StoreOperatingHourModel? nextDayOperatingInfo =
-                            state.storeSummary!.operatingHours.firstWhereOrNull(
+                            storeSummary.operatingHours.firstWhereOrNull(
                               (StoreOperatingHourModel e) =>
                                   e.dayOfWeek == nextDay,
                             );
@@ -191,7 +192,7 @@ extension MapViewWidgetExt on _MapViewState {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  state.storeSummary?.name ?? '',
+                                  storeSummary.name,
                                   style: textTheme.titleMedium?.copyWith(
                                     color: ScaleColorConfig.primary20,
                                   ),
@@ -236,8 +237,7 @@ extension MapViewWidgetExt on _MapViewState {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      state.storeSummary?.tags.join(' | ') ??
-                                          '',
+                                      storeSummary.tags.join(' | '),
                                       style: textTheme.labelSmall?.copyWith(
                                         color: ScaleColorConfig.neutral30,
                                       ),
@@ -248,7 +248,7 @@ extension MapViewWidgetExt on _MapViewState {
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
-                                          state.storeSummary?.address ?? '',
+                                          storeSummary.address,
                                           style: textTheme.labelSmall?.copyWith(
                                             color: ScaleColorConfig.neutral40,
                                           ),
@@ -287,7 +287,7 @@ extension MapViewWidgetExt on _MapViewState {
 
                                       children: <Widget>[
                                         Text(
-                                          state.storeSummary?.phone ?? '',
+                                          storeSummary.phone,
                                           style: textTheme.labelSmall?.copyWith(
                                             color: ScaleColorConfig.neutral40,
                                           ),
@@ -300,8 +300,7 @@ extension MapViewWidgetExt on _MapViewState {
                                           CrossAxisAlignment.start,
 
                                       children: <Widget>[
-                                        if (state.storeSummary?.parkingYn ==
-                                            true)
+                                        if (storeSummary.parkingYn == true)
                                           Padding(
                                             padding: const EdgeInsets.only(
                                               right: 10,
@@ -310,8 +309,7 @@ extension MapViewWidgetExt on _MapViewState {
                                               svg: Assets.icon.etc.a20CarFilled,
                                             ),
                                           ),
-                                        if (state.storeSummary?.tumblerYn ==
-                                            true)
+                                        if (storeSummary.tumblerYn == true)
                                           Padding(
                                             padding: const EdgeInsets.only(
                                               right: 10,
@@ -324,8 +322,7 @@ extension MapViewWidgetExt on _MapViewState {
                                                       .a20TumblrFilled,
                                             ),
                                           ),
-                                        if (state.storeSummary?.animalYn ==
-                                            true)
+                                        if (storeSummary.animalYn == true)
                                           Padding(
                                             padding: const EdgeInsets.only(
                                               right: 10,
@@ -344,47 +341,42 @@ extension MapViewWidgetExt on _MapViewState {
                             SizedBox(
                               height: 70,
                               child:
-                                  state.storeSummary?.storeImages != null
+                                  storeSummary.storeImages != null
                                       ? Row(
-                                        children: <Widget>[
-                                          ...List<Widget>.generate(3 * 2 - 1, (
-                                            int index,
-                                          ) {
-                                            if (index.isOdd) {
-                                              return const SizedBox(width: 6);
-                                            }
+                                        children: List<Widget>.generate(3, (
+                                          int index,
+                                        ) {
+                                          final int imageCount =
+                                              storeSummary.storeImages!.length;
 
-                                            if (index <
-                                                state
-                                                        .storeSummary!
-                                                        .storeImages!
-                                                        .length *
-                                                    2) {
-                                              return Expanded(
-                                                child: _StoreImage(
-                                                  numberOfImages:
-                                                      index == 4
-                                                          ? state
-                                                                  .storeSummary!
-                                                                  .storeImages!
-                                                                  .length -
-                                                              3
-                                                          : null,
-                                                  imageUrl:
-                                                      state
-                                                          .storeSummary!
-                                                          .storeImages![(index /
-                                                              2)
-                                                          .toInt()],
-                                                ),
-                                              );
-                                            } else {
-                                              return const Expanded(
-                                                child: SizedBox(),
-                                              );
-                                            }
-                                          }),
-                                        ],
+                                          // 이미지가 없는 경우 빈 공간 유지
+                                          if (index >= imageCount) {
+                                            return const Expanded(
+                                              child: SizedBox(),
+                                            );
+                                          }
+
+                                          final String imageUrl =
+                                              storeSummary.storeImages![index];
+
+                                          // 마지막 이미지에 남은 수가 있으면 표시
+                                          final int? numberOfImages =
+                                              (index == 2 && imageCount > 3)
+                                                  ? imageCount - 3
+                                                  : null;
+
+                                          return Expanded(
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                right: index < 2 ? 6 : 0,
+                                              ),
+                                              child: _StoreImage(
+                                                imageUrl: imageUrl,
+                                                numberOfImages: numberOfImages,
+                                              ),
+                                            ),
+                                          );
+                                        }),
                                       )
                                       : const SizedBox.shrink(),
                             ),
