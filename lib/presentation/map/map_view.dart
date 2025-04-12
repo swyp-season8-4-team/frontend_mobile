@@ -10,8 +10,10 @@ import 'package:frontend_mobile/core/manager/geolocation/geo_location_service_im
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/map/map_view_model.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/widget/scaffold_with_navigation_bar.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:go_router/go_router.dart';
 
 class MapView extends ConsumerStatefulWidget {
   const MapView({super.key});
@@ -36,7 +38,11 @@ class _MapViewState extends ConsumerState<MapView> {
     }
 
     return ScaffoldWithNavigationBar(
-      appBar: const CustomMainTopBar(),
+      appBar: CustomMainTopBar(
+        onSearchIconTap: () {
+          context.pushNamed(AppRoutes.searchStore.name);
+        },
+      ),
       body: Stack(
         children: <Widget>[
           NaverMap(
