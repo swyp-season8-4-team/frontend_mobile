@@ -4,8 +4,9 @@ import 'package:frontend_mobile/common/design_system/component/button/fill_butto
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
-import 'package:frontend_mobile/core/resource/enum.dart';
+import 'package:frontend_mobile/core/resource/email.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
+import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/find_password_wrapper.dart';
 import 'package:frontend_mobile/core/util/global_loading_indicator.dart';
 import 'package:frontend_mobile/domain/param/email/email_verification_request_params.dart';
@@ -110,7 +111,7 @@ class _FindPasswordStep1State extends ConsumerState<FindPasswordStep1> {
           CustomFillButton.large(
             label: '다음',
             disabled:
-                state.postVerificationRequestStatus == Status.loading ||
+                state.postVerificationRequestStatus.isLoading ||
                 !_emailController.text.isEmail,
             onPressed: () {
               ref

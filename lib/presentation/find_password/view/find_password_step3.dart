@@ -4,8 +4,8 @@ import 'package:frontend_mobile/common/design_system/component/button/fill_butto
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
-import 'package:frontend_mobile/core/resource/enum.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
+import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/find_password_wrapper.dart';
 import 'package:frontend_mobile/presentation/find_password/find_password_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
@@ -160,11 +160,11 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
                     hintText: '비밀번호 확인',
                     visibility: _passwordCheckVisibility,
                     error:
-                        state.passwordStatus == Status.failure
+                        state.passwordStatus.isFailure
                             ? _passwordCheckError
                             : _realTimePasswordCheckError,
                     errorText:
-                        state.passwordStatus == Status.failure
+                        state.passwordStatus.isFailure
                             ? _passwordCheckErrorText
                             : _realTimePasswordCheckErrorText,
                     onVisibilityButtonTap: () {

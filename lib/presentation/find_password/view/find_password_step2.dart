@@ -6,7 +6,8 @@ import 'package:frontend_mobile/common/design_system/component/snackbar/snack_ba
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/core/manager/toast/toast_manager.dart';
-import 'package:frontend_mobile/core/resource/enum.dart';
+import 'package:frontend_mobile/core/resource/email.dart';
+import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/find_password_wrapper.dart';
 import 'package:frontend_mobile/core/util/global_loading_indicator.dart';
 import 'package:frontend_mobile/domain/param/email/email_verification_request_params.dart';
@@ -161,9 +162,8 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
                       CustomFillButton.medium(
                         label: '중복확인',
                         disabled:
-                            state.postVerificationRequestStatus ==
-                                Status.loading ||
-                            state.postVerifyStatus == Status.loading ||
+                            state.postVerificationRequestStatus.isLoading ||
+                            state.postVerifyStatus.isLoading ||
                             _codeController.text.length < 6,
                         width: 100,
                         onPressed: () {
@@ -192,7 +192,7 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
                       ),
                       CustomTextButton.underline(
                         label: '재전송',
-                        disabled: state.postVerifyStatus == Status.loading,
+                        disabled: state.postVerifyStatus.isLoading,
                         onPressed: _onSendAgain,
                       ),
                     ],
