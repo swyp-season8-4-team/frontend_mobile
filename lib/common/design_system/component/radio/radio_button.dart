@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
 /// Radio Button
 /// https://www.figma.com/design/S1zkOn7DjDJ0b1mcPVJRil/SWYP_%E1%84%8B%E1%85%A2%E1%86%B8_1%E1%84%80%E1%85%B5_%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A5%E1%84%87%E1%85%B5?node-id=404-36845&m=dev
 class CustomRadioButton extends StatefulWidget {
-  const CustomRadioButton({
+  const CustomRadioButton.large({
     required this.onTap,
     this.value = false,
     this.enabled = true,
     this.label,
     super.key,
-  });
+  }) : isLarge = true;
+
+  const CustomRadioButton.small({
+    required this.onTap,
+    this.value = false,
+    this.enabled = true,
+    this.label,
+    super.key,
+  }) : isLarge = false;
+
   final String? label;
 
   // 라디오 버튼 체크 여부
@@ -23,12 +31,25 @@ class CustomRadioButton extends StatefulWidget {
   // enabled 여부
   final bool enabled;
 
+  // radio 사이즈가 large인지 small인지 구분하는 변수
+  final bool isLarge;
+
   @override
   State<CustomRadioButton> createState() => _CustomRadioButtonState();
 }
 
 class _CustomRadioButtonState extends State<CustomRadioButton> {
   bool _pressed = false;
+
+  TextStyle? _textStyle() {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    if (widget.isLarge) {
+      return textTheme.headlineSmall;
+    }
+
+    return textTheme.labelLarge;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,20 +66,7 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
           if (widget.label != null)
             Padding(
               padding: const EdgeInsets.only(left: 2),
-
-              // TODO: 타이포그래피 적용 필요
-              child: Text(
-                widget.label!,
-                style: TextStyle(
-                  color:
-                      widget.enabled
-                          ? Colors.black
-                          : ScaleColorConfig.neutral50,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: -0.36,
-                ),
-              ),
+              child: Text(widget.label!, style: _textStyle()),
             ),
         ],
       ),
@@ -68,21 +76,33 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
   Widget _buildIcon() {
     if (widget.enabled) {
       if (widget.value && !_pressed) {
-        return Assets.icon.etc.a48RadioButtonChecked.svg();
+        return widget.isLarge
+            ? Assets.icon.etc.a48RadioButtonChecked.svg()
+            : Assets.icon.etc.a26RadioButtonChecked.svg();
       } else if (widget.value && _pressed) {
-        return Assets.icon.etc.a48RadioButtonCheckedPressed.svg();
+        return widget.isLarge
+            ? Assets.icon.etc.a48RadioButtonCheckedPressed.svg()
+            : Assets.icon.etc.a26RadioButtonCheckedPresssed.svg();
       } else if (!widget.value && !_pressed) {
-        return Assets.icon.etc.a48RadioButtonUnchecked.svg();
+        return widget.isLarge
+            ? Assets.icon.etc.a48RadioButtonUnchecked.svg()
+            : Assets.icon.etc.a26RadioButtonUnchecked.svg();
       } else {
-        return Assets.icon.etc.a48RadioButtonUncheckedPressed.svg();
+        return widget.isLarge
+            ? Assets.icon.etc.a48RadioButtonUncheckedPressed.svg()
+            : Assets.icon.etc.a26RadioButtonUncheckedPressed.svg();
       }
     }
 
     if (widget.value) {
-      return Assets.icon.etc.a48RadioButtonCheckedDisabled.svg();
+      return widget.isLarge
+          ? Assets.icon.etc.a48RadioButtonCheckedDisabled.svg()
+          : Assets.icon.etc.a26RadioButtonCheckedDisabled.svg();
     }
 
-    return Assets.icon.etc.a48RadioButtonUncheckedDisabled.svg();
+    return widget.isLarge
+        ? Assets.icon.etc.a48RadioButtonUncheckedDisabled.svg()
+        : Assets.icon.etc.a26RadioButtonUncheckedDisabled.svg();
   }
 
   void _setPressed() {

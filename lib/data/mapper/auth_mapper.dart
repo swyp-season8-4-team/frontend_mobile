@@ -14,6 +14,7 @@ extension LocalLoginEntityExt on LocalLoginEntity {
       email: email,
       nickname: nickname,
       profileImageUrl: profileImageUrl,
+      deviceId: deviceId,
       preferenceSet: preferenceSet,
     );
   }
