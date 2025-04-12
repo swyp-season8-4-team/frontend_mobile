@@ -184,6 +184,7 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
             disabled:
                 !(_passwordController.text.isNotEmpty &&
                     _passwordCheckController.text.isNotEmpty &&
+                    _passwordController.text == _passwordCheckController.text &&
                     !_passwordError &&
                     !_realTimePasswordCheckError &&
                     !_passwordCheckError),
