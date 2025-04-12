@@ -9,7 +9,7 @@ import 'package:frontend_mobile/core/manager/toast/toast_manager.dart';
 import 'package:frontend_mobile/core/resource/email.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/find_password_wrapper.dart';
-import 'package:frontend_mobile/core/util/global_loading_indicator.dart';
+import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/email/email_verification_request_params.dart';
 import 'package:frontend_mobile/domain/param/email/email_verify_params.dart';
 import 'package:frontend_mobile/presentation/find_password/find_password_view_model.dart';
@@ -92,11 +92,7 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
       ),
       (_, Status status) {
         switch (status) {
-          case Status.loading:
-            GlobalLoadingIndicator().show(context: context);
-
           case Status.success:
-            GlobalLoadingIndicator().hide();
             setState(() {
               _isValidCode = true;
               _success = true;
@@ -105,7 +101,6 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
             break;
 
           case Status.failure:
-            GlobalLoadingIndicator().hide();
             setState(() {
               _isValidCode = false;
               _error = true;
@@ -118,98 +113,101 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
       },
     );
 
-    return CustomFindPasswordWrapper(
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    widget.email,
-                    style: textTheme.titleLarge?.copyWith(
-                      color: ScaleColorConfig.primary60,
+    return CustomLoadingOverlay(
+      isLoading: state.postVerifyStatus.isLoading,
+      child: CustomFindPasswordWrapper(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      widget.email,
+                      style: textTheme.titleLarge?.copyWith(
+                        color: ScaleColorConfig.primary60,
+                      ),
                     ),
-                  ),
-                  Text(
-                    '인증코드를 보내드렸어요!',
-                    style: textTheme.titleLarge?.copyWith(
-                      color: ScaleColorConfig.primary5,
+                    Text(
+                      '인증코드를 보내드렸어요!',
+                      style: textTheme.titleLarge?.copyWith(
+                        color: ScaleColorConfig.primary5,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 45),
+                    const SizedBox(height: 45),
 
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Expanded(
-                        child: CustomInputBox(
-                          controller: _codeController,
-                          hintText: '인증번호 N자리',
-                          closeControll: true,
-                          success: _success,
-                          successText: _successText,
-                          error: _error,
-                          errorText: _errorText,
-                          onCloseButtonTap: () {
-                            _isValidCode = false;
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Expanded(
+                          child: CustomInputBox(
+                            controller: _codeController,
+                            hintText: '인증번호 N자리',
+                            closeControll: true,
+                            success: _success,
+                            successText: _successText,
+                            error: _error,
+                            errorText: _errorText,
+                            onCloseButtonTap: () {
+                              _isValidCode = false;
+                            },
+                            keyboardType: TextInputType.number,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        CustomFillButton.medium(
+                          label: '중복확인',
+                          disabled:
+                              state.postVerificationRequestStatus.isLoading ||
+                              state.postVerifyStatus.isLoading ||
+                              _codeController.text.length < 6,
+                          width: 100,
+                          onPressed: () {
+                            ref
+                                .read(findPasswordViewModelProvider.notifier)
+                                .postVerify(
+                                  params: EmailVerifyParams(
+                                    email: widget.email,
+                                    code: _codeController.text,
+                                    purpose: EmailPurpose.passwordReset.value,
+                                  ),
+                                );
                           },
-                          keyboardType: TextInputType.number,
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      CustomFillButton.medium(
-                        label: '중복확인',
-                        disabled:
-                            state.postVerificationRequestStatus.isLoading ||
-                            state.postVerifyStatus.isLoading ||
-                            _codeController.text.length < 6,
-                        width: 100,
-                        onPressed: () {
-                          ref
-                              .read(findPasswordViewModelProvider.notifier)
-                              .postVerify(
-                                params: EmailVerifyParams(
-                                  email: widget.email,
-                                  code: _codeController.text,
-                                  purpose: EmailPurpose.passwordReset.value,
-                                ),
-                              );
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 45),
+                      ],
+                    ),
+                    const SizedBox(height: 45),
 
-                  Row(
-                    children: <Widget>[
-                      Text(
-                        '인증코드를 아직 받지 못하셨나요?',
-                        style: textTheme.bodyLarge?.copyWith(
-                          color: ScaleColorConfig.neutral30,
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          '인증코드를 아직 받지 못하셨나요?',
+                          style: textTheme.bodyLarge?.copyWith(
+                            color: ScaleColorConfig.neutral30,
+                          ),
                         ),
-                      ),
-                      CustomTextButton.underline(
-                        label: '재전송',
-                        disabled: state.postVerifyStatus.isLoading,
-                        onPressed: _onSendAgain,
-                      ),
-                    ],
-                  ),
-                ],
+                        CustomTextButton.underline(
+                          label: '재전송',
+                          disabled: state.postVerifyStatus.isLoading,
+                          onPressed: _onSendAgain,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          CustomFillButton.large(
-            label: '다음',
-            disabled: !_isValidCode,
-            onPressed: () {
-              context.pushNamed(AppRoutes.findPasswordStep3.name);
-            },
-          ),
-          SizedBox(height: MediaQuery.of(context).padding.bottom + 32),
-        ],
+            CustomFillButton.large(
+              label: '다음',
+              disabled: !_isValidCode,
+              onPressed: () {
+                context.pushNamed(AppRoutes.findPasswordStep3.name);
+              },
+            ),
+            SizedBox(height: MediaQuery.of(context).padding.bottom + 32),
+          ],
+        ),
       ),
     );
   }

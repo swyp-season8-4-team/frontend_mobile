@@ -8,7 +8,7 @@ import 'package:frontend_mobile/core/resource/email.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/find_password_wrapper.dart';
-import 'package:frontend_mobile/core/util/global_loading_indicator.dart';
+import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/email/email_verification_request_params.dart';
 import 'package:frontend_mobile/presentation/find_password/find_password_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
@@ -48,12 +48,7 @@ class _FindPasswordStep1State extends ConsumerState<FindPasswordStep1> {
 
     ref.listen(findPasswordViewModelProvider, (_, FindPasswordState next) {
       switch (next.postVerificationRequestStatus) {
-        case Status.loading:
-          GlobalLoadingIndicator().show(context: context);
-
         case Status.success:
-          GlobalLoadingIndicator().hide();
-
           final GoRouterState route = GoRouter.of(context).routerDelegate.state;
           if (route.name == AppRoutes.findPasswordStep1.name) {
             context.pushNamed(
@@ -64,8 +59,6 @@ class _FindPasswordStep1State extends ConsumerState<FindPasswordStep1> {
           break;
 
         case Status.failure:
-          GlobalLoadingIndicator().hide();
-
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -84,48 +77,51 @@ class _FindPasswordStep1State extends ConsumerState<FindPasswordStep1> {
       }
     });
 
-    return CustomFindPasswordWrapper(
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    '가입하셨던 이메일 주소를 알려주세요',
-                    style: textTheme.titleLarge?.copyWith(
-                      color: ScaleColorConfig.primary5,
+    return CustomLoadingOverlay(
+      isLoading: state.postVerificationRequestStatus.isLoading,
+      child: CustomFindPasswordWrapper(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      '가입하셨던 이메일 주소를 알려주세요',
+                      style: textTheme.titleLarge?.copyWith(
+                        color: ScaleColorConfig.primary5,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 45),
-                  CustomInputBox(
-                    controller: _emailController,
-                    closeControll: true,
-                    hintText: '이메일을 입력해 주세요',
-                  ),
-                ],
+                    const SizedBox(height: 45),
+                    CustomInputBox(
+                      controller: _emailController,
+                      closeControll: true,
+                      hintText: '이메일을 입력해 주세요',
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          CustomFillButton.large(
-            label: '다음',
-            disabled:
-                state.postVerificationRequestStatus.isLoading ||
-                !_emailController.text.isEmail,
-            onPressed: () {
-              ref
-                  .read(findPasswordViewModelProvider.notifier)
-                  .postVerificationRequest(
-                    params: EmailVerificationRequestParams(
-                      email: _emailController.text,
-                      purpose: EmailPurpose.passwordReset.value,
-                    ),
-                  );
-            },
-          ),
-          SizedBox(height: MediaQuery.of(context).padding.bottom + 32),
-        ],
+            CustomFillButton.large(
+              label: '다음',
+              disabled:
+                  state.postVerificationRequestStatus.isLoading ||
+                  !_emailController.text.isEmail,
+              onPressed: () {
+                ref
+                    .read(findPasswordViewModelProvider.notifier)
+                    .postVerificationRequest(
+                      params: EmailVerificationRequestParams(
+                        email: _emailController.text,
+                        purpose: EmailPurpose.passwordReset.value,
+                      ),
+                    );
+              },
+            ),
+            SizedBox(height: MediaQuery.of(context).padding.bottom + 32),
+          ],
+        ),
       ),
     );
   }
