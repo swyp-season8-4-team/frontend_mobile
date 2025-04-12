@@ -119,8 +119,11 @@ class $AssetImageGen {
   /// File path: asset/image/logo.png
   AssetGenImage get logo => const AssetGenImage('asset/image/logo.png');
 
+  /// File path: asset/image/logo_bee.png
+  AssetGenImage get logoBee => const AssetGenImage('asset/image/logo_bee.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [logo];
+  List<AssetGenImage> get values => [logo, logoBee];
 }
 
 class $AssetIconArrowGen {
@@ -448,6 +451,18 @@ class $AssetIconEtcGen {
   SvgGenImage get flowerLine =>
       const SvgGenImage('asset/icon/etc/flower_line.svg');
 
+  /// File path: asset/icon/etc/hexagon_11.svg
+  SvgGenImage get hexagon11 =>
+      const SvgGenImage('asset/icon/etc/hexagon_11.svg');
+
+  /// File path: asset/icon/etc/hexagon_12.svg
+  SvgGenImage get hexagon12 =>
+      const SvgGenImage('asset/icon/etc/hexagon_12.svg');
+
+  /// File path: asset/icon/etc/hexagon_13.svg
+  SvgGenImage get hexagon13 =>
+      const SvgGenImage('asset/icon/etc/hexagon_13.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
     a16CloseFilled1,
@@ -475,6 +490,9 @@ class $AssetIconEtcGen {
     flowerFilled,
     flowerFilledSelected,
     flowerLine,
+    hexagon11,
+    hexagon12,
+    hexagon13,
   ];
 }
 
