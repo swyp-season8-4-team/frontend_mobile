@@ -21,4 +21,16 @@ abstract class AppRoutes {
 
   // 지도 화면
   static const RouteInfo map = RouteInfo(name: '/map', path: '/map');
+
+  /// 디저트 메이트
+  static RouteInfo dessert = const RouteInfo(
+    name: '/dessert',
+    path: '/dessert',
+  );
+
+  /// 디저트 메이트 > 메인 화면
+  static RouteInfo dessertMain = RouteInfo(
+    name: '${dessert.name}/main',
+    path: '/main',
+  );
 }
