@@ -10,6 +10,7 @@ import 'package:frontend_mobile/data/mapper/search_mapper.dart';
 import 'package:frontend_mobile/data/query_param/search/get_search_popular_query_param.dart';
 import 'package:frontend_mobile/domain/model/search/popular_searchs_model.dart';
 import 'package:frontend_mobile/domain/model/search/recent_search_model.dart';
+import 'package:frontend_mobile/domain/param/search/delete_recent_search_params.dart';
 import 'package:frontend_mobile/domain/param/search/get_popular_searches_params.dart';
 import 'package:frontend_mobile/domain/repository/search_repository.dart';
 
@@ -45,6 +46,28 @@ class SearchRepositoryImpl implements SearchRepository {
           query: GetSearchPopularQueryParam(limit: params.limit),
         );
         return result.toModel();
+      },
+    );
+  }
+
+  @override
+  Future<Result<void, CustomException>> deleteRecentSearch({
+    required DeleteRecentSearchParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        return await _api.deleteSearchRecent(searchId: params.searchId);
+      },
+    );
+  }
+
+  @override
+  Future<Result<void, CustomException>> deleteRecentSearchAll({
+    required NoParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        return await _api.deleteSearchRecentAll();
       },
     );
   }
