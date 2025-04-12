@@ -7,14 +7,16 @@ class CustomPillButton extends StatelessWidget {
   const CustomPillButton({
     required this.label,
     required this.onPressed,
-    required this.svg,
+    this.width,
+    this.svg,
     this.disabled = false,
     super.key,
   });
 
   final String label;
   final VoidCallback? onPressed;
-  final SvgGenImage svg;
+  final double? width;
+  final SvgGenImage? svg;
   final bool disabled;
 
   WidgetStateProperty<Color?> get _foregroundColor =>
@@ -53,35 +55,42 @@ class CustomPillButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    return FilledButton(
-      onPressed: !disabled ? onPressed : null,
-      style: FilledButton.styleFrom(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(99)),
-        minimumSize: Size.zero,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        elevation: 0,
-        textStyle: textTheme.titleMedium,
-      ).copyWith(
-        foregroundColor: _foregroundColor,
-        backgroundColor: _backgroundColor,
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          SvgPicture.asset(
-            svg.path,
-            colorFilter:
-                !disabled
-                    ? null
-                    : const ColorFilter.mode(
-                      ScaleColorConfig.neutral50,
-                      BlendMode.srcIn,
-                    ),
+    return SizedBox(
+      width: width ?? double.infinity,
+      child: FilledButton(
+        onPressed: !disabled ? onPressed : null,
+        style: FilledButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(99),
           ),
-          const SizedBox(width: 10),
-          Text(label, textAlign: TextAlign.center),
-        ],
+          minimumSize: Size.zero,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          elevation: 0,
+          textStyle: textTheme.titleMedium,
+        ).copyWith(
+          foregroundColor: _foregroundColor,
+          backgroundColor: _backgroundColor,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            if (svg != null) ...<Widget>[
+              SvgPicture.asset(
+                svg!.path,
+                colorFilter:
+                    !disabled
+                        ? null
+                        : const ColorFilter.mode(
+                          ScaleColorConfig.neutral50,
+                          BlendMode.srcIn,
+                        ),
+              ),
+              const SizedBox(width: 10),
+            ],
+            Text(label, textAlign: TextAlign.center),
+          ],
+        ),
       ),
     );
   }
