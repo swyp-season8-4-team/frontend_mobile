@@ -32,4 +32,18 @@ class AuthRepositoryImpl implements AuthRepository {
       },
     );
   }
+
+  @override
+  Future<Result<LocalLoginModel, CustomException>> postLocalLogin({
+    required LocalLoginParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        final LocalLoginEntity result = await api.postLocalLogin(
+          body: params.toBody(),
+        );
+        return result.toModel();
+      },
+    );
+  }
 }

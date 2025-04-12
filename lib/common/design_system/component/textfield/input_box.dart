@@ -210,6 +210,7 @@ class _CustomInputBoxState extends State<CustomInputBox> {
     if (_textEditingController.text.isEmpty) {
       return const SizedBox.shrink();
     }
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
@@ -224,6 +225,7 @@ class _CustomInputBoxState extends State<CustomInputBox> {
     if (!widget.visibilityControll) {
       return const SizedBox.shrink();
     }
+
     return Padding(
       padding: const EdgeInsets.only(left: 10),
       child: GestureDetector(

@@ -16,7 +16,7 @@ final Provider<PostDevLocalLoginUsecase> postDevLocalLoginUsecaseProvider =
 
 class PostDevLocalLoginUsecase
     extends Usecase<LocalLoginModel, LocalLoginParams> {
-  /// [Dev 로그인(domain)](https://api.desserbee.com/swagger-ui/index.html#/Authentication/devlogin)
+  /// Dev 로그인(domain)
   PostDevLocalLoginUsecase({required this.repository});
 
   final AuthRepository repository;
