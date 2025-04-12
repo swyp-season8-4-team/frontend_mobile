@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
@@ -25,14 +27,40 @@ typedef _HexagonPosition = ({int row, int column});
 
 typedef _HexagonRowsAndColumns = ({int rows, int columns});
 
-class CustomHexagonGrid extends StatelessWidget {
+class CustomHexagonGrid extends StatefulWidget {
   const CustomHexagonGrid({required this.hexagons, super.key});
 
   // 헥사곤 목록
   final List<CustomHexagon> hexagons;
 
+  @override
+  State<CustomHexagonGrid> createState() => _CustomHexagonGridState();
+}
+
+class _CustomHexagonGridState extends State<CustomHexagonGrid> {
+  double _gridHeight = 999;
+  final GlobalKey _gridKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _getHeight();
+    });
+  }
+
+  void _getHeight() {
+    final BuildContext? context = _gridKey.currentContext;
+    if (context == null) return;
+
+    final RenderBox box = context.findRenderObject() as RenderBox;
+    setState(() {
+      _gridHeight = box.size.height;
+    });
+  }
+
   double get _cornerRadius {
-    return switch (hexagons.length) {
+    return switch (widget.hexagons.length) {
       1 => 20,
       2 => 15,
       3 => 15,
@@ -43,7 +71,7 @@ class CustomHexagonGrid extends StatelessWidget {
   }
 
   _HexagonRowsAndColumns get _rowsAndColumns {
-    return switch (hexagons.length) {
+    return switch (widget.hexagons.length) {
       1 => (rows: 1, columns: 1),
       2 => (rows: 1, columns: 2),
       3 => (rows: 2, columns: 2),
@@ -55,22 +83,22 @@ class CustomHexagonGrid extends StatelessWidget {
   }
 
   _HexagonSize get _size {
-    return switch (hexagons.length) {
+    return switch (widget.hexagons.length) {
       1 => (width: 200, height: 200),
       2 => (width: 270, height: 230),
-      3 => (width: 270, height: 300),
-      4 => (width: 294, height: 249),
-      5 => (width: 270, height: 229),
+      3 => (width: 270, height: 267),
+      4 => (width: 294, height: 204),
+      5 => (width: 270, height: 187),
       6 => (width: 270, height: 250),
-      7 || 8 => (width: 270, height: 300),
+      7 || 8 => (width: 270, height: 280),
       9 => (width: 270, height: 350),
-      10 || 11 => (width: 270, height: 400),
+      10 || 11 => (width: 270, height: 375),
       _ => throw Exception(),
     };
   }
 
   List<_HexagonPosition> get _positions {
-    return switch (hexagons.length) {
+    return switch (widget.hexagons.length) {
       1 => <_HexagonPosition>[(row: 0, column: 0)],
       2 => <_HexagonPosition>[(row: 0, column: 0), (row: 0, column: 1)],
       3 => <_HexagonPosition>[
@@ -161,7 +189,7 @@ class CustomHexagonGrid extends StatelessWidget {
   TextStyle? getTextStyle(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    return switch (hexagons.length) {
+    return switch (widget.hexagons.length) {
       1 => textTheme.displaySmall?.copyWith(color: ScaleColorConfig.primary40),
       2 ||
       3 => textTheme.headlineSmall?.copyWith(color: ScaleColorConfig.primary40),
@@ -179,58 +207,82 @@ class CustomHexagonGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double heightFactor = _size.height / _gridHeight;
+
     final _HexagonRowsAndColumns rowsAndColumns = _rowsAndColumns;
 
-    return SizedBox(
-      width: _size.width,
-      child: HexagonOffsetGrid.oddFlat(
-        columns: rowsAndColumns.columns,
-        rows: rowsAndColumns.rows,
-        buildTile: (int col, int row) {
-          final List<_HexagonPosition> positions = _positions;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(
+          width: _size.width,
+          child: ClipRect(
+            child: Align(
+              alignment:
+                  widget.hexagons.length == 4
+                      ? Alignment.bottomCenter
+                      : Alignment.topCenter,
+              heightFactor: min(heightFactor, 1),
+              child: SizedBox(
+                key: _gridKey,
+                child: HexagonOffsetGrid.oddFlat(
+                  columns: rowsAndColumns.columns,
+                  rows: rowsAndColumns.rows,
+                  buildTile: (int col, int row) {
+                    final List<_HexagonPosition> positions = _positions;
 
-          final int index = positions.indexOf((row: row, column: col));
+                    final int index = positions.indexOf((
+                      row: row,
+                      column: col,
+                    ));
 
-          if (index == -1) {
-            return HexagonWidgetBuilder.transparent();
-          }
+                    if (index == -1) {
+                      return HexagonWidgetBuilder.transparent();
+                    }
 
-          final CustomHexagon hexagon = hexagons[index];
+                    final CustomHexagon hexagon = widget.hexagons[index];
 
-          return HexagonWidgetBuilder(
-            cornerRadius: _cornerRadius,
-            padding: 5,
-            child: Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(7),
-                    child: SizedBox(child: Assets.icon.etc.hexagon.svg()),
-                  ),
-                ),
-                Align(
-                  child:
-                      hexagon.text != null
-                          ? Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: Text(
-                              hexagon.text!,
-                              style: getTextStyle(context),
+                    return HexagonWidgetBuilder(
+                      cornerRadius: _cornerRadius,
+                      padding: 5,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.5),
+                              child: SizedBox(
+                                child: Assets.icon.etc.hexagon.svg(),
+                              ),
                             ),
-                          )
-                          : CachedNetworkImage(
-                            width: 200,
-                            height: 200,
-                            fit: BoxFit.cover,
-                            imageUrl: hexagon.imageUrl!,
                           ),
+                          Align(
+                            child:
+                                hexagon.text != null
+                                    ? Padding(
+                                      padding: const EdgeInsets.all(5.5),
+                                      child: Text(
+                                        hexagon.text!,
+                                        style: getTextStyle(context),
+                                      ),
+                                    )
+                                    : CachedNetworkImage(
+                                      width: 200,
+                                      height: 200,
+                                      fit: BoxFit.cover,
+                                      imageUrl: hexagon.imageUrl!,
+                                    ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
-              ],
+              ),
             ),
-          );
-        },
-      ),
+          ),
+        ),
+      ],
     );
   }
 }
