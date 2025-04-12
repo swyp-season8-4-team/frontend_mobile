@@ -21,4 +21,10 @@ abstract class AppRoutes {
 
   // 지도 화면
   static const RouteInfo map = RouteInfo(name: '/map', path: '/map');
+
+  // 지도 > 검색 화면
+  static final RouteInfo searchStore = RouteInfo(
+    name: '${map.name}/search-store',
+    path: 'search-store',
+  );
 }
