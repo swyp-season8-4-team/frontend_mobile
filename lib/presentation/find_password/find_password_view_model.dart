@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:frontend_mobile/core/resource/enum.dart';
 import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
 import 'package:frontend_mobile/core/resource/exception/exception_model.dart';
 import 'package:frontend_mobile/core/resource/result.dart';
+import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/email/email_verification_request_model.dart';
 import 'package:frontend_mobile/domain/model/email/email_verify_model.dart';
