@@ -153,6 +153,14 @@ class $AssetIconArrowGen {
   SvgGenImage get a18RightLine =>
       const SvgGenImage('asset/icon/arrow/18_right_line.svg');
 
+  /// File path: asset/icon/arrow/20x20_arrow_down_filled.svg
+  SvgGenImage get a20x20ArrowDownFilled =>
+      const SvgGenImage('asset/icon/arrow/20x20_arrow_down_filled.svg');
+
+  /// File path: asset/icon/arrow/20x20_arrow_up_filled.svg
+  SvgGenImage get a20x20ArrowUpFilled =>
+      const SvgGenImage('asset/icon/arrow/20x20_arrow_up_filled.svg');
+
   /// File path: asset/icon/arrow/arrow_down_line.svg
   SvgGenImage get arrowDownLine =>
       const SvgGenImage('asset/icon/arrow/arrow_down_line.svg');
@@ -195,6 +203,8 @@ class $AssetIconArrowGen {
   /// List of all assets
   List<SvgGenImage> get values => [
     a18RightLine,
+    a20x20ArrowDownFilled,
+    a20x20ArrowUpFilled,
     arrowDownLine,
     arrowLeftDownLine,
     arrowLeftLine,
