@@ -16,6 +16,7 @@ class CustomBottomSheet {
     required this.child,
     this.leftButton,
     this.rightButton,
+    this.barrierColor,
   }) : height = 298,
        padding = const EdgeInsets.only(
          top: 10,
@@ -39,6 +40,7 @@ class CustomBottomSheet {
     required this.child,
     this.leftButton,
     this.rightButton,
+    this.barrierColor,
   }) : height = 134,
        padding = const EdgeInsets.all(10),
        assert(
@@ -58,11 +60,13 @@ class CustomBottomSheet {
   final EdgeInsets padding;
   final BottomSheetButton? rightButton;
   final BottomSheetButton? leftButton;
+  final Color? barrierColor;
 
   void _show() {
     showModalBottomSheet(
       context: context,
       backgroundColor: ScaleColorConfig.white,
+      barrierColor: barrierColor,
       constraints: const BoxConstraints(minWidth: double.infinity),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(28)),

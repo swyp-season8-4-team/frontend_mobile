@@ -1,9 +1,11 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/common/design_system/component/bottom_sheet/bottom_sheet.dart';
 import 'package:frontend_mobile/common/design_system/component/button/dessert_mate_button.dart';
 import 'package:frontend_mobile/common/design_system/component/chip/floating_chip.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/map/map_icon_button.dart';
@@ -13,16 +15,19 @@ import 'package:frontend_mobile/common/design_system/foundation/color/scale_colo
 import 'package:frontend_mobile/common/design_system/foundation/shadow/shadow_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/manager/geolocation/geo_location_service_impl.dart';
+import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
+import 'package:frontend_mobile/domain/model/store/store_operating_hour_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_summary_model.dart';
 import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:frontend_mobile/presentation/widget/scaffold_with_navigation_bar.dart';
 import 'package:geolocator/geolocator.dart';
 
-part 'map_view_extensions.dart';
+part 'extension/map_view_extensions.dart';
+part 'extension/map_method_extensions.dart';
 
 class MapView extends ConsumerStatefulWidget {
   const MapView({super.key});
@@ -55,8 +60,21 @@ class _MapViewState extends ConsumerState<MapView> {
       },
     );
 
+    ref.listen(
+      mapViewModelProvider.select(
+        (MapState state) => state.getStoreSummaryStatus,
+      ),
+      (_, Status next) {
+        if (next.isFailure) {
+          // TODO: 가게 간략 정보 조회 실패시 에러 UI 필요
+        }
+      },
+    );
+
     return CustomLoadingOverlay(
-      isLoading: state.getAllPreferencesStatus.isLoading,
+      isLoading:
+          state.getAllPreferencesStatus.isLoading ||
+          state.getStoresByLocationStatus.isLoading,
       child: ScaffoldWithNavigationBar(
         appBar: const CustomMainTopBar(),
         body: Stack(

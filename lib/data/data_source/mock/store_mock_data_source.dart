@@ -25,19 +25,59 @@ class StoreMockDataSource implements StoreRemoteDataSource {
   Future<StoreSummaryEntity> getStoreSummary({
     required String storeUuid,
   }) async {
+    await Future<void>.delayed(const Duration(seconds: 3));
+
     return StoreSummaryEntity(
       storeId: 123,
       storeUuid: storeUuid,
       name: '디저비 가게1',
       tags: <String>[],
       averageRating: 4.5,
+      animalYn: true,
+      tumblerYn: true,
       storeImages: <String>[
         'https://picsum.photos/250?image=5',
         'https://picsum.photos/250?image=5',
       ],
       operatingHours: <StoreOperatingHourEntity>[
         const StoreOperatingHourEntity(
-          dayOfWeek: '월',
+          dayOfWeek: 'MONDAY',
+          openingTime: '09:00',
+          closingTime: '17:00',
+          isClosed: false,
+        ),
+        const StoreOperatingHourEntity(
+          dayOfWeek: 'TUESDAY',
+          openingTime: '09:00',
+          closingTime: '17:00',
+          isClosed: false,
+        ),
+        const StoreOperatingHourEntity(
+          dayOfWeek: 'WEDNSDAY',
+          openingTime: '09:00',
+          closingTime: '17:00',
+          isClosed: false,
+        ),
+        const StoreOperatingHourEntity(
+          dayOfWeek: 'THURSDAY',
+          openingTime: '09:00',
+          closingTime: '17:00',
+          isClosed: false,
+        ),
+        const StoreOperatingHourEntity(
+          dayOfWeek: 'FRIDAY',
+          openingTime: '09:00',
+          closingTime: '17:00',
+          isClosed: false,
+        ),
+        const StoreOperatingHourEntity(
+          dayOfWeek: 'SATURDAY',
+          openingTime: '09:00',
+          closingTime: '17:00',
+          isClosed: true,
+        ),
+        const StoreOperatingHourEntity(
+          dayOfWeek: 'SUNDAY',
           openingTime: '09:00',
           closingTime: '17:00',
           isClosed: false,
@@ -52,6 +92,7 @@ class StoreMockDataSource implements StoreRemoteDataSource {
   Future<List<StoreByLocationEntity>> getStoresByLocation({
     required GetStoresByLocationQueryParam query,
   }) async {
+    await Future<void>.delayed(const Duration(seconds: 3));
     return <StoreByLocationEntity>[
       const StoreByLocationEntity(
         storeId: 1,

@@ -1,3 +1,5 @@
+import 'package:frontend_mobile/core/resource/constant.dart';
+
 class StoreOperatingHourModel {
   const StoreOperatingHourModel({
     required this.dayOfWeek,
@@ -10,7 +12,7 @@ class StoreOperatingHourModel {
     required this.breakTimes,
   });
 
-  final String dayOfWeek;
+  final DayOfWeek dayOfWeek;
   final String openingTime;
   final String closingTime;
   final String? lastOrderTime;

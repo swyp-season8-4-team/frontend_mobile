@@ -1,3 +1,4 @@
+import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/data/entity/store/store_by_location_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_holiday_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_operating_hour_entity.dart';
@@ -17,7 +18,7 @@ extension StoreHolidayEntityExt on StoreHolidayEntity {
 
 extension StoreOperatingHourEntityExt on StoreOperatingHourEntity {
   StoreOperatingHourModel toModel() => StoreOperatingHourModel(
-    dayOfWeek: dayOfWeek,
+    dayOfWeek: DayOfWeek.fromText(text: dayOfWeek),
     openingTime: openingTime,
     closingTime: closingTime,
     isClosed: isClosed,
