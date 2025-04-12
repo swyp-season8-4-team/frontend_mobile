@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class GlobalLoadingIndicator {
-  factory GlobalLoadingIndicator() {
+class GlobalLoadingOverlay {
+  factory GlobalLoadingOverlay() {
     return _instance;
   }
-  GlobalLoadingIndicator._();
+  GlobalLoadingOverlay._();
 
-  static final GlobalLoadingIndicator _instance = GlobalLoadingIndicator._();
+  static final GlobalLoadingOverlay _instance = GlobalLoadingOverlay._();
 
   OverlayEntry? _overlayEntry;
 
