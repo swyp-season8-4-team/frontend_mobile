@@ -21,6 +21,7 @@ class AppRouter {
     initialLocation: AppRoutes.localLogin.name,
     navigatorKey: rootNavigatorKey,
     routes: <RouteBase>[
+      /// 인증
       GoRoute(
         path: AppRoutes.auth.path,
         name: AppRoutes.auth.name,
@@ -33,39 +34,55 @@ class AppRouter {
           return null;
         },
         routes: <RouteBase>[
+          /// 로컬 로그인
           GoRoute(
             path: AppRoutes.localLogin.path,
             name: AppRoutes.localLogin.name,
-            builder:
-                (BuildContext context, GoRouterState state) =>
-                    const LocalLoginView(),
-          ),
-
-          GoRoute(
-            path: AppRoutes.findPasswordStep1.path,
-            name: AppRoutes.findPasswordStep1.name,
-            builder:
-                (BuildContext context, GoRouterState state) =>
-                    const FindPasswordStep1(),
-          ),
-          GoRoute(
-            path: AppRoutes.findPasswordStep2.path,
-            name: AppRoutes.findPasswordStep2.name,
             builder: (BuildContext context, GoRouterState state) {
-              final String email = state.extra as String;
-
-              return FindPasswordStep2(email: email);
+              return const LocalLoginView();
             },
           ),
+
+          /// 비밀번호 찾기
           GoRoute(
-            path: AppRoutes.findPasswordStep3.path,
-            name: AppRoutes.findPasswordStep3.name,
-            builder:
-                (BuildContext context, GoRouterState state) =>
-                    const FindPasswordStep3(),
+            path: AppRoutes.findPassword.path,
+            name: AppRoutes.findPassword.name,
+            redirect: (_, __) => null,
+            routes: <RouteBase>[
+              /// step1
+              GoRoute(
+                path: AppRoutes.findPasswordStep1.path,
+                name: AppRoutes.findPasswordStep1.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const FindPasswordStep1();
+                },
+              ),
+
+              /// step2
+              GoRoute(
+                path: AppRoutes.findPasswordStep2.path,
+                name: AppRoutes.findPasswordStep2.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  final String email = state.extra as String;
+
+                  return FindPasswordStep2(email: email);
+                },
+              ),
+
+              /// step3
+              GoRoute(
+                path: AppRoutes.findPasswordStep3.path,
+                name: AppRoutes.findPasswordStep3.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const FindPasswordStep3();
+                },
+              ),
+            ],
           ),
         ],
       ),
+
+      /// 지도
       GoRoute(
         path: AppRoutes.map.path,
         name: AppRoutes.map.name,
