@@ -232,16 +232,36 @@ extension MapViewWidgetExt on _MapViewState {
                             const SizedBox(height: 10),
                             Row(
                               children: <Widget>[
-                                const Expanded(
+                                Expanded(
                                   flex: 164,
                                   child: CustomHexagonGrid(
                                     hexagons: <CustomHexagon>[
-                                      CustomHexagon(text: '123'),
-                                      CustomHexagon(text: '123'),
-                                      CustomHexagon(text: '123'),
-                                      CustomHexagon(text: '123'),
-                                      CustomHexagon(text: '123'),
-                                      CustomHexagon(text: '123'),
+                                      ...List<CustomHexagon>.generate(3, (
+                                        int index,
+                                      ) {
+                                        if (storeSummary.tags.length > index) {
+                                          return CustomHexagon(
+                                            text: storeSummary.tags[index],
+                                          );
+                                        } else {
+                                          return const CustomHexagon(text: '');
+                                        }
+                                      }),
+                                      ...List<CustomHexagon>.generate(3, (
+                                        int index,
+                                      ) {
+                                        if (storeSummary.storeImages != null &&
+                                            storeSummary.storeImages!.length >
+                                                index) {
+                                          return CustomHexagon(
+                                            imageUrl:
+                                                storeSummary
+                                                    .storeImages![index],
+                                          );
+                                        } else {
+                                          return const CustomHexagon(text: '');
+                                        }
+                                      }),
                                     ],
                                   ),
                                 ),
