@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step1.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step2.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step3.dart';
@@ -102,6 +103,35 @@ class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return const MapView();
         },
+      ),
+
+      /// 디저트 메이트
+      GoRoute(
+        path: AppRoutes.dessert.path,
+        name: AppRoutes.dessert.name,
+        redirect: (_, __) => null,
+        routes: <RouteBase>[
+          /// 게시판
+          GoRoute(
+            path: AppRoutes.dessertBoard.path,
+            name: AppRoutes.dessertBoard.name,
+            builder: (BuildContext context, GoRouterState state) {
+              // /// FIXME: 나중에 합치면 적용하면 됨
+              // return const DessertBoard();
+              return Container();
+            },
+            routes: <RouteBase>[
+              /// 게시글
+              GoRoute(
+                path: AppRoutes.dessertPost.path,
+                name: AppRoutes.dessertPost.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const DessertPost();
+                },
+              ),
+            ],
+          ),
+        ],
       ),
     ],
   );

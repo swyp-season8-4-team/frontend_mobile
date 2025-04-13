@@ -45,4 +45,22 @@ abstract class AppRoutes {
     name: '${findPassword.name}/step3',
     path: 'step3',
   );
+
+  /// 디저트 메이트
+  static RouteInfo dessert = const RouteInfo(
+    name: '/dessert',
+    path: '/dessert',
+  );
+
+  /// 디저트 메이트 > 게시판
+  static RouteInfo dessertBoard = RouteInfo(
+    name: '${dessert.name}/board',
+    path: 'board',
+  );
+
+  /// 디저트 메이트 > 게시판 > 게시글
+  static RouteInfo dessertPost = RouteInfo(
+    name: '${dessertBoard.name}/post',
+    path: 'post',
+  );
 }
