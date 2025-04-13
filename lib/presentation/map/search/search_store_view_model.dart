@@ -29,7 +29,10 @@ searchStoreViewModelProvider =
 class SearchStoreViewModel extends StateNotifier<SearchStoreState> {
   SearchStoreViewModel({required Ref<Object?> ref})
     : _ref = ref,
-      super(SearchStoreState());
+      super(SearchStoreState()) {
+    getRecentSearches();
+    getPopularSearches();
+  }
 
   final Ref _ref;
 

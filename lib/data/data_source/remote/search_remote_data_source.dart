@@ -5,6 +5,7 @@ import 'package:frontend_mobile/data/entity/search/search_popular_entity.dart';
 import 'package:frontend_mobile/data/entity/search/search_recent_entity.dart';
 import 'package:frontend_mobile/data/query_param/search/get_search_popular_query_param.dart';
 import 'package:retrofit/http.dart';
+import 'package:retrofit/error_logger.dart';
 
 part 'generated/search_remote_data_source.g.dart';
 

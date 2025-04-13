@@ -253,7 +253,7 @@ class __$$SearchStoreStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SearchStoreStateImpl implements _SearchStoreState {
+class _$SearchStoreStateImpl extends _SearchStoreState {
   _$SearchStoreStateImpl({
     final List<RecentSearchModel> recentSearches = const <RecentSearchModel>[],
     this.getRecentSearchesStatus = Status.loading,
@@ -285,7 +285,8 @@ class _$SearchStoreStateImpl implements _SearchStoreState {
       message: '',
       timestamp: '',
     ),
-  }) : _recentSearches = recentSearches;
+  }) : _recentSearches = recentSearches,
+       super._();
 
   final List<RecentSearchModel> _recentSearches;
   @override
@@ -413,7 +414,7 @@ class _$SearchStoreStateImpl implements _SearchStoreState {
       );
 }
 
-abstract class _SearchStoreState implements SearchStoreState {
+abstract class _SearchStoreState extends SearchStoreState {
   factory _SearchStoreState({
     final List<RecentSearchModel> recentSearches,
     final Status getRecentSearchesStatus,
@@ -426,6 +427,7 @@ abstract class _SearchStoreState implements SearchStoreState {
     final Status deleteRecentSearchAllStatus,
     final ExceptionModel deleteRecentSearchAllException,
   }) = _$SearchStoreStateImpl;
+  _SearchStoreState._() : super._();
 
   @override
   List<RecentSearchModel> get recentSearches;
