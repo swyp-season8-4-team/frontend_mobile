@@ -7,12 +7,14 @@ class CustomSubTopBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     required this.actions,
     this.primary = true,
+    this.leading,
     super.key,
   });
 
   final String title;
   final bool primary;
   final List<Widget> actions;
+  final Widget? leading;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class CustomSubTopBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         backgroundColor: Colors.transparent,
         leadingWidth: 24 + 7,
-        leading: icon.leftLine(onTap: () => Navigator.pop(context)),
+        leading: leading ?? icon.leftLine(onTap: () => Navigator.pop(context)),
         title: Text(title, style: textTheme.titleLarge),
         centerTitle: true,
         actions: actions,

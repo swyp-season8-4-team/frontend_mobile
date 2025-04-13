@@ -12,6 +12,17 @@ part 'add_user_store_list_state.dart';
 
 part 'generated/add_user_store_list_view_model.freezed.dart';
 
+final AutoDisposeStateNotifierProvider<
+  AddUserStoreListViewModel,
+  AddUserStoreListState
+>
+addUserStoreListViewModelProvider = StateNotifierProvider.autoDispose<
+  AddUserStoreListViewModel,
+  AddUserStoreListState
+>((Ref ref) {
+  return AddUserStoreListViewModel(ref: ref);
+});
+
 class AddUserStoreListViewModel extends StateNotifier<AddUserStoreListState> {
   AddUserStoreListViewModel({required Ref<Object?> ref})
     : _ref = ref,
@@ -31,7 +42,7 @@ class AddUserStoreListViewModel extends StateNotifier<AddUserStoreListState> {
   Future<AddUserStoreListState> addUserStoreList({
     required String userUuid,
   }) async {
-    state = state.copyWith(addUserStoreListStatus: Status.loading);
+    state = state.copyWith(addUserStoreListStatus: Status.success);
 
     final Result<void, CustomException> result = await Usecase.execute(
       usecase: _ref.read(addUserStoreListUsecaseProvider),

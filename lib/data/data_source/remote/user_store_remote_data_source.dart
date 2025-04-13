@@ -7,6 +7,7 @@ import 'package:frontend_mobile/data/entity/user_store/user_store_location_entit
 import 'package:frontend_mobile/data/query_param/user_store/add_user_store_list_query_param.dart';
 import 'package:frontend_mobile/data/query_param/user_store/update_user_store_list_query_param.dart';
 import 'package:retrofit/http.dart';
+import 'package:retrofit/error_logger.dart';
 
 part 'generated/user_store_remote_data_source.g.dart';
 
