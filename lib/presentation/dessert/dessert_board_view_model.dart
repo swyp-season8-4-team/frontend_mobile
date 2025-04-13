@@ -1,0 +1,48 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
+import 'package:frontend_mobile/core/resource/exception/exception_model.dart';
+import 'package:frontend_mobile/core/resource/result.dart';
+import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/core/resource/usecase.dart';
+import 'package:frontend_mobile/domain/model/mate/mate_detail_model.dart';
+import 'package:frontend_mobile/domain/model/mate/mate_model.dart';
+import 'package:frontend_mobile/domain/param/mate/get_mate_params.dart';
+import 'package:frontend_mobile/domain/usecase/mate/get_mate_usecase.dart';
+
+part 'dessert_board_state.dart';
+part 'generated/dessert_board_view_model.freezed.dart';
+
+final AutoDisposeStateNotifierProvider<DessertBoardViewModel, DessertBoardState>
+dessertBoardViewModelProvider =
+    StateNotifierProvider.autoDispose<DessertBoardViewModel, DessertBoardState>(
+      (Ref ref) => DessertBoardViewModel(ref: ref),
+    );
+
+class DessertBoardViewModel extends StateNotifier<DessertBoardState> {
+  DessertBoardViewModel({required this.ref}) : super(const DessertBoardState());
+
+  final Ref ref;
+
+  /// 메이트 전체 조회
+  Future<void> getMate({required GetMateParams params}) async {
+    state = state.copyWith(status: Status.loading);
+
+    final Result<MateModel, CustomException> response = await Usecase.execute(
+      usecase: ref.read(getMateUsecaseProvider),
+      params: params,
+    );
+
+    response.map(
+      success: (Success<MateModel, CustomException> success) {
+        state = state.copyWith(status: Status.success, data: success.data);
+      },
+      failure: (Failure<MateModel, CustomException> failure) {
+        state = state.copyWith(
+          status: Status.failure,
+          exception: failure.exception.model,
+        );
+      },
+    );
+  }
+}
