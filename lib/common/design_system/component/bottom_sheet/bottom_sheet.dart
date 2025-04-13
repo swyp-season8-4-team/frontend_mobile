@@ -72,24 +72,32 @@ class CustomBottomSheet {
         borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
       ),
       builder: (BuildContext context) {
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              _header,
-              Container(
-                width: double.infinity,
-                height: height,
-                padding: padding,
-                child: SingleChildScrollView(child: child),
-              ),
-              if (leftButton != null && rightButton != null) _button,
-            ],
-          ),
+        return CustomBottomSheetContent(
+          height: height,
+          padding: padding,
+          leftButton: leftButton,
+          rightButton: rightButton,
+          child: child,
         );
       },
     );
   }
+}
+
+class CustomBottomSheetContent extends StatelessWidget {
+  const CustomBottomSheetContent({
+    required this.child,
+    required this.height,
+    super.key,
+    this.padding,
+    this.rightButton,
+    this.leftButton,
+  });
+  final Widget child;
+  final double height;
+  final EdgeInsets? padding;
+  final BottomSheetButton? rightButton;
+  final BottomSheetButton? leftButton;
 
   /// Drag handle
   Widget get _header => Container(
@@ -130,4 +138,23 @@ class CustomBottomSheet {
       ],
     ),
   );
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          _header,
+          Container(
+            width: double.infinity,
+            height: height,
+            padding: padding,
+            child: SingleChildScrollView(child: child),
+          ),
+          if (leftButton != null && rightButton != null) _button,
+        ],
+      ),
+    );
+  }
 }

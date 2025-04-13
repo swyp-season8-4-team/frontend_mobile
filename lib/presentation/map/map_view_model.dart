@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
@@ -207,13 +208,16 @@ class MapViewModel extends StateNotifier<MapState> {
   }
 
   // 가게 간략 정보 조회
-  Future<MapState> getStoreSummary({required String storeUuid}) async {
-    state = state.copyWith(getStoreSummaryStatus: Status.loading);
+  Future<MapState> getStoreSummary({required NMarker overlay}) async {
+    state = state.copyWith(
+      selectedMarker: overlay,
+      getStoreSummaryStatus: Status.loading,
+    );
 
     final Result<StoreSummaryModel, CustomException> result =
         await Usecase.execute(
           usecase: _ref.read(getStoreSummaryUsecaseProvider),
-          params: GetStoreSummaryParams(storeUuid: storeUuid),
+          params: GetStoreSummaryParams(storeUuid: overlay.info.id),
         );
 
     result.map(

@@ -149,328 +149,395 @@ extension MapViewWidgetExt on _MapViewState {
   }
 
   // 가게 간략 정보를 표시하기 위한 바텀시트 표출
-  Future<void> _showStoreSummary() async {
-    CustomBottomSheet.middle(
+  Future<void> _showStoreSummary({required String storeUuid}) async {
+    await showModalBottomSheet(
       context: context,
+      backgroundColor: ScaleColorConfig.white,
       barrierColor: Colors.transparent,
-      child: Consumer(
-        builder: (BuildContext context, WidgetRef ref, Widget? child) {
-          final MapState state = ref.watch(mapViewModelProvider);
-          final TextTheme textTheme = Theme.of(context).textTheme;
-          final ColorScheme colorScheme = Theme.of(context).colorScheme;
-          final DayOfWeek today = DayOfWeek.values[DateTime.now().weekday - 1];
+      constraints: const BoxConstraints(minWidth: double.infinity),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      builder: (BuildContext context) {
+        return Consumer(
+          builder: (BuildContext context, WidgetRef ref, Widget? child) {
+            final MapState state = ref.watch(mapViewModelProvider);
+            final TextTheme textTheme = Theme.of(context).textTheme;
+            final ColorScheme colorScheme = Theme.of(context).colorScheme;
+            final DayOfWeek today =
+                DayOfWeek.values[DateTime.now().weekday - 1];
 
-          return Padding(
-            padding: const EdgeInsets.all(0),
-            child:
-                state.getStoreSummaryStatus.isLoading ||
-                        state.getStoreSummaryStatus.isInitial
-                    ? const SizedBox(
-                      height: 298 - 32,
-                      child: Center(child: CircularProgressIndicator()),
-                    )
-                    : Builder(
-                      builder: (BuildContext context) {
-                        final StoreSummaryModel storeSummary =
-                            state.storeSummary!;
-
-                        // 오늘 가게 영업 여부
-                        final StoreOperatingHourModel todayOperatingInfo =
-                            storeSummary.operatingHours.firstWhere(
-                              (StoreOperatingHourModel e) =>
-                                  e.dayOfWeek == today,
-                            );
-
-                        final DayOfWeek nextDay =
-                            DayOfWeek.values[(today.index + 1) %
-                                DayOfWeek.values.length];
-
-                        final StoreOperatingHourModel? nextDayOperatingInfo =
-                            storeSummary.operatingHours.firstWhereOrNull(
-                              (StoreOperatingHourModel e) =>
-                                  e.dayOfWeek == nextDay,
-                            );
-                        return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  storeSummary.name,
-                                  style: textTheme.titleMedium?.copyWith(
-                                    color: ScaleColorConfig.primary20,
-                                  ),
+            return CustomBottomSheetContent(
+              height:
+                  state.getStoreSummaryStatus.isLoading ||
+                          state.getStoreSummaryStatus.isFailure
+                      ? 134
+                      : 298,
+              padding: const EdgeInsets.all(10),
+              child:
+                  state.getStoreSummaryStatus.isLoading ||
+                          state.getStoreSummaryStatus.isInitial
+                      ? const SizedBox(
+                        height: 134,
+                        child: Center(child: CircularProgressIndicator()),
+                      )
+                      : state.getStoreSummaryStatus.isFailure
+                      ? SizedBox(
+                        height: 114,
+                        child: Center(
+                          child: Column(
+                            children: <Widget>[
+                              const SizedBox(height: 2.57),
+                              Assets.icon.system.warningFill.svg(
+                                width: 30.9,
+                                height: 30.9,
+                                colorFilter: const ColorFilter.mode(
+                                  ScaleColorConfig.primary80,
+                                  BlendMode.srcIn,
                                 ),
+                              ),
+                              const SizedBox(height: 6.57),
+                              Text(
+                                '일시적인 오류로 정보를 불러올 수 없어요',
+                                style: textTheme.titleSmall?.copyWith(
+                                  color: ScaleColorConfig.primary20,
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              CustomOutlineButton.xSmall(
+                                label: '다시 시도',
+                                onPressed: () {
+                                  ref
+                                      .read(mapViewModelProvider.notifier)
+                                      .getStoreSummary(
+                                        overlay:
+                                            ref
+                                                .read(mapViewModelProvider)
+                                                .selectedMarker!,
+                                      );
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                      : Builder(
+                        builder: (BuildContext context) {
+                          final StoreSummaryModel storeSummary =
+                              state.storeSummary!;
 
-                                // TODO: Outline Button(xsmall)를 이용하여 구현 예정
-                                GestureDetector(
-                                  onTap: () {},
-                                  behavior: HitTestBehavior.translucent,
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 10,
+                          // 오늘 가게 영업 여부
+                          final StoreOperatingHourModel todayOperatingInfo =
+                              storeSummary.operatingHours.firstWhere(
+                                (StoreOperatingHourModel e) =>
+                                    e.dayOfWeek == today,
+                              );
+
+                          final DayOfWeek nextDay =
+                              DayOfWeek.values[(today.index + 1) %
+                                  DayOfWeek.values.length];
+
+                          final StoreOperatingHourModel? nextDayOperatingInfo =
+                              storeSummary.operatingHours.firstWhereOrNull(
+                                (StoreOperatingHourModel e) =>
+                                    e.dayOfWeek == nextDay,
+                              );
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    storeSummary.name,
+                                    style: textTheme.titleMedium?.copyWith(
+                                      color: ScaleColorConfig.primary20,
                                     ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(99),
-                                      border: Border.all(
-                                        color: colorScheme.outline,
+                                  ),
+
+                                  // TODO: Outline Button(xsmall)를 이용하여 구현 예정
+                                  GestureDetector(
+                                    onTap: () {},
+                                    behavior: HitTestBehavior.translucent,
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 10,
                                       ),
-                                    ),
-                                    child: Text(
-                                      '상세보기',
-                                      style: textTheme.labelLarge?.copyWith(
-                                        color: ScaleColorConfig.neutral20,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            Row(
-                              children: <Widget>[
-                                Expanded(
-                                  flex: 164,
-                                  child: CustomHexagonGrid(
-                                    hexagons: <CustomHexagon>[
-                                      ...List<CustomHexagon>.generate(3, (
-                                        int index,
-                                      ) {
-                                        if (storeSummary.tags.length > index) {
-                                          return CustomHexagon(
-                                            text: storeSummary.tags[index],
-                                          );
-                                        } else {
-                                          return const CustomHexagon(text: '');
-                                        }
-                                      }),
-                                      ...List<CustomHexagon>.generate(3, (
-                                        int index,
-                                      ) {
-                                        if (storeSummary.storeImages != null &&
-                                            storeSummary.storeImages!.length >
-                                                index) {
-                                          return CustomHexagon(
-                                            imageUrl:
-                                                storeSummary
-                                                    .storeImages![index],
-                                          );
-                                        } else {
-                                          return const CustomHexagon(text: '');
-                                        }
-                                      }),
-                                    ],
-                                  ),
-                                ),
-                                const Expanded(
-                                  flex: 10,
-                                  child: SizedBox(width: 10),
-                                ),
-                                Expanded(
-                                  flex: 154,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        storeSummary.tags.join(' | '),
-                                        style: textTheme.labelSmall?.copyWith(
-                                          color: ScaleColorConfig.neutral30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(99),
+                                        border: Border.all(
+                                          color: colorScheme.outline,
                                         ),
-                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      const SizedBox(height: 8),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Assets.icon.map.a14x14AddressLine
-                                              .svg(),
-                                          const SizedBox(width: 6),
-                                          Text(
-                                            storeSummary.address,
-                                            style: textTheme.labelSmall
-                                                ?.copyWith(
-                                                  color:
-                                                      ScaleColorConfig
-                                                          .neutral40,
-                                                ),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ],
+                                      child: Text(
+                                        '상세보기',
+                                        style: textTheme.labelLarge?.copyWith(
+                                          color: ScaleColorConfig.neutral20,
+                                        ),
                                       ),
-                                      const SizedBox(height: 8),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-
-                                        children: <Widget>[
-                                          Assets.icon.system.timeLine.svg(
-                                            width: 14,
-                                            height: 14,
-                                            colorFilter: const ColorFilter.mode(
-                                              ScaleColorConfig.neutral50,
-                                              BlendMode.srcIn,
-                                            ),
-                                          ),
-                                          const SizedBox(width: 6),
-                                          Text(
-                                            todayOperatingInfo.isClosed
-                                                ? '영업중'
-                                                : '영업 종료',
-                                            style: textTheme.labelSmall
-                                                ?.copyWith(
-                                                  color:
-                                                      ScaleColorConfig
-                                                          .neutral30,
-                                                ),
-                                          ),
-                                          const SizedBox(width: 4),
-                                          Text(
-                                            todayOperatingInfo.isClosed
-                                                ? '${todayOperatingInfo.closingTime} 영업 종료'
-                                                : '${nextDayOperatingInfo?.openingTime} 영업 시작',
-                                            style: textTheme.labelSmall
-                                                ?.copyWith(
-                                                  color:
-                                                      ScaleColorConfig
-                                                          .neutral40,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 8),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-
-                                        children: <Widget>[
-                                          Assets.icon.contact.phone1Line.svg(
-                                            width: 14,
-                                            height: 14,
-                                            colorFilter: const ColorFilter.mode(
-                                              ScaleColorConfig.neutral50,
-                                              BlendMode.srcIn,
-                                            ),
-                                          ),
-                                          const SizedBox(width: 6),
-                                          Text(
-                                            storeSummary.phone,
-                                            style: textTheme.labelSmall
-                                                ?.copyWith(
-                                                  color:
-                                                      ScaleColorConfig
-                                                          .neutral40,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-
-                                        children: <Widget>[
-                                          if (storeSummary.parkingYn == true)
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                right: 10,
-                                              ),
-                                              child: _CircleImg(
-                                                svg:
-                                                    Assets
-                                                        .icon
-                                                        .etc
-                                                        .a20CarFilled,
-                                              ),
-                                            ),
-                                          if (storeSummary.tumblerYn == true)
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                right: 10,
-                                              ),
-                                              child: _CircleImg(
-                                                svg:
-                                                    Assets
-                                                        .icon
-                                                        .etc
-                                                        .a20TumblrFilled,
-                                              ),
-                                            ),
-                                          if (storeSummary.animalYn == true)
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                right: 10,
-                                              ),
-                                              child: _CircleImg(
-                                                svg:
-                                                    Assets
-                                                        .icon
-                                                        .etc
-                                                        .a20PetFilled,
-                                              ),
-                                            ),
-                                        ],
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            SizedBox(
-                              height: 70,
-                              child:
-                                  storeSummary.storeImages != null
-                                      ? Row(
-                                        children: List<Widget>.generate(3, (
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    flex: 164,
+                                    child: CustomHexagonGrid(
+                                      hexagons: <CustomHexagon>[
+                                        ...List<CustomHexagon>.generate(3, (
                                           int index,
                                         ) {
-                                          final int imageCount =
-                                              storeSummary.storeImages!.length;
-
-                                          // 이미지가 없는 경우 빈 공간 유지
-                                          if (index >= imageCount) {
-                                            return const Expanded(
-                                              child: SizedBox(),
+                                          if (storeSummary.tags.length >
+                                              index) {
+                                            return CustomHexagon(
+                                              text: storeSummary.tags[index],
+                                            );
+                                          } else {
+                                            return const CustomHexagon(
+                                              text: '',
                                             );
                                           }
-
-                                          final String imageUrl =
-                                              storeSummary.storeImages![index];
-
-                                          // 마지막 이미지에 남은 수가 있으면 표시
-                                          final int? numberOfImages =
-                                              (index == 2 && imageCount > 3)
-                                                  ? imageCount - 3
-                                                  : null;
-
-                                          return Expanded(
-                                            child: Padding(
-                                              padding: EdgeInsets.only(
-                                                right: index < 2 ? 6 : 0,
-                                              ),
-                                              child: _StoreImage(
-                                                imageUrl: imageUrl,
-                                                numberOfImages: numberOfImages,
-                                              ),
-                                            ),
-                                          );
                                         }),
-                                      )
-                                      : const SizedBox.shrink(),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-          );
-        },
-      ),
+                                        ...List<CustomHexagon>.generate(3, (
+                                          int index,
+                                        ) {
+                                          if (storeSummary.storeImages !=
+                                                  null &&
+                                              storeSummary.storeImages!.length >
+                                                  index) {
+                                            return CustomHexagon(
+                                              imageUrl:
+                                                  storeSummary
+                                                      .storeImages![index],
+                                            );
+                                          } else {
+                                            return const CustomHexagon(
+                                              text: '',
+                                            );
+                                          }
+                                        }),
+                                      ],
+                                    ),
+                                  ),
+                                  const Expanded(
+                                    flex: 10,
+                                    child: SizedBox(width: 10),
+                                  ),
+                                  Expanded(
+                                    flex: 154,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          storeSummary.tags.join(' | '),
+                                          style: textTheme.labelSmall?.copyWith(
+                                            color: ScaleColorConfig.neutral30,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Assets.icon.map.a14x14AddressLine
+                                                .svg(),
+                                            const SizedBox(width: 6),
+                                            Text(
+                                              storeSummary.address,
+                                              style: textTheme.labelSmall
+                                                  ?.copyWith(
+                                                    color:
+                                                        ScaleColorConfig
+                                                            .neutral40,
+                                                  ),
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+
+                                          children: <Widget>[
+                                            Assets.icon.system.timeLine.svg(
+                                              width: 14,
+                                              height: 14,
+                                              colorFilter:
+                                                  const ColorFilter.mode(
+                                                    ScaleColorConfig.neutral50,
+                                                    BlendMode.srcIn,
+                                                  ),
+                                            ),
+                                            const SizedBox(width: 6),
+                                            Text(
+                                              todayOperatingInfo.isClosed
+                                                  ? '영업중'
+                                                  : '영업 종료',
+                                              style: textTheme.labelSmall
+                                                  ?.copyWith(
+                                                    color:
+                                                        ScaleColorConfig
+                                                            .neutral30,
+                                                  ),
+                                            ),
+                                            const SizedBox(width: 4),
+                                            Text(
+                                              todayOperatingInfo.isClosed
+                                                  ? '${todayOperatingInfo.closingTime} 영업 종료'
+                                                  : '${nextDayOperatingInfo?.openingTime} 영업 시작',
+                                              style: textTheme.labelSmall
+                                                  ?.copyWith(
+                                                    color:
+                                                        ScaleColorConfig
+                                                            .neutral40,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+
+                                          children: <Widget>[
+                                            Assets.icon.contact.phone1Line.svg(
+                                              width: 14,
+                                              height: 14,
+                                              colorFilter:
+                                                  const ColorFilter.mode(
+                                                    ScaleColorConfig.neutral50,
+                                                    BlendMode.srcIn,
+                                                  ),
+                                            ),
+                                            const SizedBox(width: 6),
+                                            Text(
+                                              storeSummary.phone,
+                                              style: textTheme.labelSmall
+                                                  ?.copyWith(
+                                                    color:
+                                                        ScaleColorConfig
+                                                            .neutral40,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 10),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+
+                                          children: <Widget>[
+                                            if (storeSummary.parkingYn == true)
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  right: 10,
+                                                ),
+                                                child: _CircleImg(
+                                                  svg:
+                                                      Assets
+                                                          .icon
+                                                          .etc
+                                                          .a20CarFilled,
+                                                ),
+                                              ),
+                                            if (storeSummary.tumblerYn == true)
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  right: 10,
+                                                ),
+                                                child: _CircleImg(
+                                                  svg:
+                                                      Assets
+                                                          .icon
+                                                          .etc
+                                                          .a20TumblrFilled,
+                                                ),
+                                              ),
+                                            if (storeSummary.animalYn == true)
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  right: 10,
+                                                ),
+                                                child: _CircleImg(
+                                                  svg:
+                                                      Assets
+                                                          .icon
+                                                          .etc
+                                                          .a20PetFilled,
+                                                ),
+                                              ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              SizedBox(
+                                height: 70,
+                                child:
+                                    storeSummary.storeImages != null
+                                        ? Row(
+                                          children: List<Widget>.generate(3, (
+                                            int index,
+                                          ) {
+                                            final int imageCount =
+                                                storeSummary
+                                                    .storeImages!
+                                                    .length;
+
+                                            // 이미지가 없는 경우 빈 공간 유지
+                                            if (index >= imageCount) {
+                                              return const Expanded(
+                                                child: SizedBox(),
+                                              );
+                                            }
+
+                                            final String imageUrl =
+                                                storeSummary
+                                                    .storeImages![index];
+
+                                            // 마지막 이미지에 남은 수가 있으면 표시
+                                            final int? numberOfImages =
+                                                (index == 2 && imageCount > 3)
+                                                    ? imageCount - 3
+                                                    : null;
+
+                                            return Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsets.only(
+                                                  right: index < 2 ? 6 : 0,
+                                                ),
+                                                child: _StoreImage(
+                                                  imageUrl: imageUrl,
+                                                  numberOfImages:
+                                                      numberOfImages,
+                                                ),
+                                              ),
+                                            );
+                                          }),
+                                        )
+                                        : const SizedBox.shrink(),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+            );
+          },
+        );
+      },
     );
+    await _clearSelectedShop();
   }
 }
 

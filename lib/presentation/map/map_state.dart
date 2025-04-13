@@ -25,5 +25,6 @@ class MapState with _$MapState {
     @Default(Status.initial) Status getStoreSummaryStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel getStoreSummaryExceptionModel,
+    NMarker? selectedMarker,
   }) = _MapState;
 }

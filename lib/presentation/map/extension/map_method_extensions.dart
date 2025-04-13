@@ -80,24 +80,10 @@ extension MapViewMethodExt on _MapViewState {
 
       // 선택한 마커에 해당하는 가게 간략 정보 조회
       //ignore: unawaited_futures
-      viewmodel.getStoreSummary(storeUuid: overlay.info.id);
+      viewmodel.getStoreSummary(overlay: overlay);
 
       // 이전에 선택된 마커가 있다면 초기화
       await _clearSelectedShop();
-
-      await _mapController.deleteOverlay(
-        NOverlayInfo(type: NOverlayType.marker, id: overlay.info.id),
-      );
-
-      final NMarker newMarker = NMarker(
-        id: overlay.info.id,
-        position: overlay.position,
-        anchor: overlay.anchor,
-        size: const Size(60, 66),
-        icon: NOverlayImage.fromAssetImage(Assets.image.markerSelected.path),
-      );
-
-      await _mapController.addOverlay(newMarker);
 
       await NaverMapUtil.moveCameraToLocation(
         controller: _mapController,
@@ -106,22 +92,25 @@ extension MapViewMethodExt on _MapViewState {
       );
 
       //ignore: unawaited_futures
-      _showStoreSummary();
+      _showStoreSummary(storeUuid: overlay.info.id);
     });
   }
 
   Future<void> _clearSelectedShop() async {
     final MapState state = ref.read(mapViewModelProvider);
-    final StoreSummaryModel? selectedStore = state.storeSummary;
 
-    if (selectedStore != null) {
+    if (state.selectedMarker != null) {
       await _mapController.deleteOverlay(
-        NOverlayInfo(type: NOverlayType.marker, id: selectedStore.storeUuid),
+        NOverlayInfo(
+          type: NOverlayType.marker,
+          id: state.selectedMarker!.info.id,
+        ),
       );
 
       final StoreByLocationModel? storeByLocation = state.storesByLocation
           .firstWhereOrNull(
-            (StoreByLocationModel e) => e.storeUuid == selectedStore.storeUuid,
+            (StoreByLocationModel e) =>
+                e.storeUuid == state.selectedMarker!.info.id,
           );
 
       if (storeByLocation != null) {

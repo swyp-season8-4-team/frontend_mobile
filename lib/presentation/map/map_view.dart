@@ -5,6 +5,7 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/bottom_sheet/bottom_sheet.dart';
 import 'package:frontend_mobile/common/design_system/component/button/dessert_mate_button.dart';
+import 'package:frontend_mobile/common/design_system/component/button/outline_button.dart';
 import 'package:frontend_mobile/common/design_system/component/chip/floating_chip.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/map/map_icon_button.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/marker/default_marker.dart';
@@ -64,9 +65,27 @@ class _MapViewState extends ConsumerState<MapView> {
       mapViewModelProvider.select(
         (MapState state) => state.getStoreSummaryStatus,
       ),
-      (_, Status next) {
-        if (next.isFailure) {
-          // TODO: 가게 간략 정보 조회 실패시 에러 UI 필요
+      (_, Status next) async {
+        if (next.isSuccess) {
+          final MapState state = ref.read(mapViewModelProvider);
+          await _mapController.deleteOverlay(
+            NOverlayInfo(
+              type: NOverlayType.marker,
+              id: state.selectedMarker!.info.id,
+            ),
+          );
+
+          final NMarker newMarker = NMarker(
+            id: state.selectedMarker!.info.id,
+            position: state.selectedMarker!.position,
+            anchor: state.selectedMarker!.anchor,
+            size: const Size(60, 66),
+            icon: NOverlayImage.fromAssetImage(
+              Assets.image.markerSelected.path,
+            ),
+          );
+
+          await _mapController.addOverlay(newMarker);
         }
       },
     );

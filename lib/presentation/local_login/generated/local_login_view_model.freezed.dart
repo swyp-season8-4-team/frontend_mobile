@@ -53,14 +53,14 @@ class _$LocalLoginStateCopyWithImpl<$Res, $Val extends LocalLoginState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = freezed,
+    Object? status = null,
     Object? data = null,
     Object? exception = null,
   }) {
     return _then(
       _value.copyWith(
             status:
-                freezed == status
+                null == status
                     ? _value.status
                     : status // ignore: cast_nullable_to_non_nullable
                         as Status,
@@ -106,14 +106,14 @@ class __$$LocalLoginStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = freezed,
+    Object? status = null,
     Object? data = null,
     Object? exception = null,
   }) {
     return _then(
       _$LocalLoginStateImpl(
         status:
-            freezed == status
+            null == status
                 ? _value.status
                 : status // ignore: cast_nullable_to_non_nullable
                     as Status,
@@ -177,19 +177,14 @@ class _$LocalLoginStateImpl implements _LocalLoginState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LocalLoginStateImpl &&
-            const DeepCollectionEquality().equals(other.status, status) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.data, data) || other.data == data) &&
             (identical(other.exception, exception) ||
                 other.exception == exception));
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(status),
-    data,
-    exception,
-  );
+  int get hashCode => Object.hash(runtimeType, status, data, exception);
 
   /// Create a copy of LocalLoginState
   /// with the given fields replaced by the non-null parameter values.
