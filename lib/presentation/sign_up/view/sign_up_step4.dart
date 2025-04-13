@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
+import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_gender_option_button.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/core/util/text_line_break.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/sign_up/widget/sign_up_wrapper.dart';
+import 'package:go_router/go_router.dart';
 
-class SignUpStep4 extends StatelessWidget {
+class SignUpStep4 extends StatefulWidget {
   const SignUpStep4({super.key});
+
+  @override
+  State<SignUpStep4> createState() => _SignUpStep4State();
+}
+
+class _SignUpStep4State extends State<SignUpStep4> {
+  bool _isSelectedGirl = false;
+  bool _isSelectedBoy = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,25 +39,40 @@ class SignUpStep4 extends StatelessWidget {
                   ),
                   const SizedBox(height: 45),
 
-                  /// TODO: profile photo 적용할 예정
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[Text('남자'), Text('여자')],
+                    children: <Widget>[
+                      CustomProfilePhotoGenderOptionButton.girl(
+                        onPressed: () {
+                          setState(() {
+                            _isSelectedGirl = true;
+                            _isSelectedBoy = false;
+                          });
+                        },
+                        isSelected: _isSelectedGirl,
+                      ),
+                      const SizedBox(width: 18),
+                      CustomProfilePhotoGenderOptionButton.boy(
+                        onPressed: () {
+                          setState(() {
+                            _isSelectedGirl = false;
+                            _isSelectedBoy = true;
+                          });
+                        },
+                        isSelected: _isSelectedBoy,
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
           ),
 
-          /// TODO:
           CustomFillButton.large(
             label: '다음',
-            // disabled: !_isValidEmail,
+            disabled: !_isSelectedGirl && !_isSelectedBoy,
             onPressed: () {
-              // context.pushNamed(
-              //   AppRoutes.signUpStep2.name,
-              //   extra: _emailController.text,
-              // );
+              context.pushNamed(AppRoutes.signUpStep5.name);
             },
           ),
           SizedBox(height: MediaQuery.of(context).padding.bottom + 32),
