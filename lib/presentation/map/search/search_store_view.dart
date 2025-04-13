@@ -251,22 +251,25 @@ class _PopularSearch extends StatelessWidget {
       height: 1.20,
       letterSpacing: -0.18,
     );
-    return Row(
-      children: <Widget>[
-        SizedBox(
-          width: 21,
-          child: Text(search.rank.toString(), style: rankTextStyle),
-        ),
-
-        Expanded(
-          child: Text(
-            search.keyword,
-            style: rankTextStyle.copyWith(fontWeight: FontWeight.w400),
+    return SizedBox(
+      height: 20,
+      child: Row(
+        children: <Widget>[
+          SizedBox(
+            width: 21,
+            child: Text(search.rank.toString(), style: rankTextStyle),
           ),
-        ),
-        const SizedBox(width: 8),
-        _buildDifference(context),
-      ],
+
+          Expanded(
+            child: Text(
+              search.keyword,
+              style: rankTextStyle.copyWith(fontWeight: FontWeight.w400),
+            ),
+          ),
+          const SizedBox(width: 8),
+          _buildDifference(context),
+        ],
+      ),
     );
   }
 

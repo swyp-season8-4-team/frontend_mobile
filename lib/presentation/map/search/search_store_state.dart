@@ -23,8 +23,5 @@ class SearchStoreState with _$SearchStoreState {
 
   // 페이지 전환에 따른 첫로딩
   bool get isFirstLoading =>
-      getPopularSearchesStatus.isLoading ||
-      getRecentSearchesStatus.isLoading ||
-      deleteRecentSearchAllStatus.isInitial ||
-      deleteRecentSearchStatus.isInitial;
+      getPopularSearchesStatus.isLoading || getRecentSearchesStatus.isLoading;
 }
