@@ -20,6 +20,12 @@ abstract interface class AuthRemoteDataSource {
   factory AuthRemoteDataSource(Dio dio, {String? baseUrl}) =
       _AuthRemoteDataSource;
 
+  /// 회원가입
+  // @POST('/api/auth/signup')
+  // Future<LocalLoginEntity> postSignUp({
+  //   @Body() required PostSignUpRequestBody body,
+  // });
+
   /// Dev 로그인(data)
   @POST('/api/auth/dev/login')
   Future<LocalLoginEntity> postDevLocalLogin({
