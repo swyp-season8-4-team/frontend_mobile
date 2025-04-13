@@ -136,6 +136,14 @@ class $AssetImageGen {
   /// File path: asset/image/marker_1.png
   AssetGenImage get marker1 => const AssetGenImage('asset/image/marker_1.png');
 
+  /// File path: asset/image/profile_boy.png
+  AssetGenImage get profileBoy =>
+      const AssetGenImage('asset/image/profile_boy.png');
+
+  /// File path: asset/image/profile_girl.png
+  AssetGenImage get profileGirl =>
+      const AssetGenImage('asset/image/profile_girl.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     bee,
@@ -143,6 +151,8 @@ class $AssetImageGen {
     currentLocation,
     logo,
     marker1,
+    profileBoy,
+    profileGirl,
   ];
 }
 
