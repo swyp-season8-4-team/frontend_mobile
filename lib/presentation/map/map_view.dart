@@ -8,6 +8,7 @@ import 'package:frontend_mobile/common/design_system/component/button/dessert_ma
 import 'package:frontend_mobile/common/design_system/component/chip/floating_chip.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/map/map_icon_button.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/marker/default_marker.dart';
+import 'package:frontend_mobile/common/design_system/component/hexagon_grid/hexagon_grid.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/main_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/design_system/foundation/shadow/shadow_config.dart';

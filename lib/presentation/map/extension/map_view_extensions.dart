@@ -161,7 +161,7 @@ extension MapViewWidgetExt on _MapViewState {
           final DayOfWeek today = DayOfWeek.values[DateTime.now().weekday - 1];
 
           return Padding(
-            padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
+            padding: const EdgeInsets.all(0),
             child:
                 state.getStoreSummaryStatus.isLoading ||
                         state.getStoreSummaryStatus.isInitial
@@ -232,134 +232,171 @@ extension MapViewWidgetExt on _MapViewState {
                             const SizedBox(height: 10),
                             Row(
                               children: <Widget>[
-                                // TODO: Hexagon Grid를 이용한 가게 이미지 표시 예정
-                                Container(
-                                  width: 164,
-                                  height: 150,
-                                  color: Colors.red,
+                                const Expanded(
+                                  flex: 164,
+                                  child: CustomHexagonGrid(
+                                    hexagons: <CustomHexagon>[
+                                      CustomHexagon(text: '123'),
+                                      CustomHexagon(text: '123'),
+                                      CustomHexagon(text: '123'),
+                                      CustomHexagon(text: '123'),
+                                      CustomHexagon(text: '123'),
+                                      CustomHexagon(text: '123'),
+                                    ],
+                                  ),
                                 ),
-                                const SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      storeSummary.tags.join(' | '),
-                                      style: textTheme.labelSmall?.copyWith(
-                                        color: ScaleColorConfig.neutral30,
+                                const Expanded(
+                                  flex: 10,
+                                  child: SizedBox(width: 10),
+                                ),
+                                Expanded(
+                                  flex: 154,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        storeSummary.tags.join(' | '),
+                                        style: textTheme.labelSmall?.copyWith(
+                                          color: ScaleColorConfig.neutral30,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Assets.icon.map.a14x14AddressLine.svg(),
-                                        const SizedBox(width: 6),
-                                        Text(
-                                          storeSummary.address,
-                                          style: textTheme.labelSmall?.copyWith(
-                                            color: ScaleColorConfig.neutral40,
+                                      const SizedBox(height: 8),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Assets.icon.map.a14x14AddressLine
+                                              .svg(),
+                                          const SizedBox(width: 6),
+                                          Text(
+                                            storeSummary.address,
+                                            style: textTheme.labelSmall
+                                                ?.copyWith(
+                                                  color:
+                                                      ScaleColorConfig
+                                                          .neutral40,
+                                                ),
+                                            overflow: TextOverflow.ellipsis,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                        ],
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
 
-                                      children: <Widget>[
-                                        Assets.icon.system.timeLine.svg(
-                                          width: 14,
-                                          height: 14,
-                                          colorFilter: const ColorFilter.mode(
-                                            ScaleColorConfig.neutral50,
-                                            BlendMode.srcIn,
+                                        children: <Widget>[
+                                          Assets.icon.system.timeLine.svg(
+                                            width: 14,
+                                            height: 14,
+                                            colorFilter: const ColorFilter.mode(
+                                              ScaleColorConfig.neutral50,
+                                              BlendMode.srcIn,
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(width: 6),
-                                        Text(
-                                          todayOperatingInfo.isClosed
-                                              ? '영업중'
-                                              : '영업 종료',
-                                          style: textTheme.labelSmall?.copyWith(
-                                            color: ScaleColorConfig.neutral30,
+                                          const SizedBox(width: 6),
+                                          Text(
+                                            todayOperatingInfo.isClosed
+                                                ? '영업중'
+                                                : '영업 종료',
+                                            style: textTheme.labelSmall
+                                                ?.copyWith(
+                                                  color:
+                                                      ScaleColorConfig
+                                                          .neutral30,
+                                                ),
                                           ),
-                                        ),
-                                        const SizedBox(width: 4),
-                                        Text(
-                                          todayOperatingInfo.isClosed
-                                              ? '${todayOperatingInfo.closingTime} 영업 종료'
-                                              : '${nextDayOperatingInfo?.openingTime} 영업 시작',
-                                          style: textTheme.labelSmall?.copyWith(
-                                            color: ScaleColorConfig.neutral40,
+                                          const SizedBox(width: 4),
+                                          Text(
+                                            todayOperatingInfo.isClosed
+                                                ? '${todayOperatingInfo.closingTime} 영업 종료'
+                                                : '${nextDayOperatingInfo?.openingTime} 영업 시작',
+                                            style: textTheme.labelSmall
+                                                ?.copyWith(
+                                                  color:
+                                                      ScaleColorConfig
+                                                          .neutral40,
+                                                ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                        ],
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
 
-                                      children: <Widget>[
-                                        Assets.icon.contact.phone1Line.svg(
-                                          width: 14,
-                                          height: 14,
-                                          colorFilter: const ColorFilter.mode(
-                                            ScaleColorConfig.neutral50,
-                                            BlendMode.srcIn,
+                                        children: <Widget>[
+                                          Assets.icon.contact.phone1Line.svg(
+                                            width: 14,
+                                            height: 14,
+                                            colorFilter: const ColorFilter.mode(
+                                              ScaleColorConfig.neutral50,
+                                              BlendMode.srcIn,
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(width: 6),
-                                        Text(
-                                          storeSummary.phone,
-                                          style: textTheme.labelSmall?.copyWith(
-                                            color: ScaleColorConfig.neutral40,
+                                          const SizedBox(width: 6),
+                                          Text(
+                                            storeSummary.phone,
+                                            style: textTheme.labelSmall
+                                                ?.copyWith(
+                                                  color:
+                                                      ScaleColorConfig
+                                                          .neutral40,
+                                                ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                        ],
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
 
-                                      children: <Widget>[
-                                        if (storeSummary.parkingYn == true)
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              right: 10,
+                                        children: <Widget>[
+                                          if (storeSummary.parkingYn == true)
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                right: 10,
+                                              ),
+                                              child: _CircleImg(
+                                                svg:
+                                                    Assets
+                                                        .icon
+                                                        .etc
+                                                        .a20CarFilled,
+                                              ),
                                             ),
-                                            child: _CircleImg(
-                                              svg: Assets.icon.etc.a20CarFilled,
+                                          if (storeSummary.tumblerYn == true)
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                right: 10,
+                                              ),
+                                              child: _CircleImg(
+                                                svg:
+                                                    Assets
+                                                        .icon
+                                                        .etc
+                                                        .a20TumblrFilled,
+                                              ),
                                             ),
-                                          ),
-                                        if (storeSummary.tumblerYn == true)
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              right: 10,
+                                          if (storeSummary.animalYn == true)
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                right: 10,
+                                              ),
+                                              child: _CircleImg(
+                                                svg:
+                                                    Assets
+                                                        .icon
+                                                        .etc
+                                                        .a20PetFilled,
+                                              ),
                                             ),
-                                            child: _CircleImg(
-                                              svg:
-                                                  Assets
-                                                      .icon
-                                                      .etc
-                                                      .a20TumblrFilled,
-                                            ),
-                                          ),
-                                        if (storeSummary.animalYn == true)
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              right: 10,
-                                            ),
-                                            child: _CircleImg(
-                                              svg: Assets.icon.etc.a20PetFilled,
-                                            ),
-                                          ),
-                                      ],
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
