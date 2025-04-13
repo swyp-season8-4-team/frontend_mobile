@@ -5,6 +5,11 @@ import 'package:frontend_mobile/core/resource/route_info.dart';
 abstract class AppRoutes {
   AppRoutes._();
 
+  static const RouteInfo splash = RouteInfo(name: '/splash', path: '/splash');
+
+  // 로그인 성공시, 이동하는 화면 (테스트용 페이지)
+  static const RouteInfo home = RouteInfo(name: '/home', path: '/home');
+
   // 인증 관련 페이지의 기반 Route Info
   static const RouteInfo auth = RouteInfo(name: '/auth', path: '/auth');
 
@@ -16,6 +21,30 @@ abstract class AppRoutes {
 
   // 지도 화면
   static const RouteInfo map = RouteInfo(name: '/map', path: '/map');
+
+  // 인증 > 비밀번호 찾기
+  static final RouteInfo findPassword = RouteInfo(
+    name: '${auth.name}/find_password',
+    path: 'find_password',
+  );
+
+  // 인증 > 비밀번호 찾기 > step1
+  static final RouteInfo findPasswordStep1 = RouteInfo(
+    name: '${findPassword.name}/step1',
+    path: 'step1',
+  );
+
+  // 인증 > 비밀번호 찾기 > step2
+  static final RouteInfo findPasswordStep2 = RouteInfo(
+    name: '${findPassword.name}/step2',
+    path: 'step2',
+  );
+
+  // 인증 > 비밀번호 찾기 > step3
+  static final RouteInfo findPasswordStep3 = RouteInfo(
+    name: '${findPassword.name}/step3',
+    path: 'step3',
+  );
 
   /// 취향선택
   static const RouteInfo taste = RouteInfo(name: '/taste', path: '/taste');

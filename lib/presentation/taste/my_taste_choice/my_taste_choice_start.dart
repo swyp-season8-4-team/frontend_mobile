@@ -46,7 +46,7 @@ class MyTasteChoiceStart extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
 
-                CustomFillButton(
+                CustomFillButton.large(
                   label: '내 취향 설정하기',
                   onPressed: () {
                     context.pushNamed(AppRoutes.myTasteChoiceStep1.name);

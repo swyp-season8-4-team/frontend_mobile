@@ -1,4 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'generated/local_login_entity.g.dart';
 
@@ -12,7 +12,8 @@ class LocalLoginEntity {
     this.userUuid = '',
     this.email = '',
     this.nickname = '',
-    this.profileImageUrl = '',
+    this.profileImageUrl,
+    this.deviceId = '',
     this.preferenceSet = false,
   });
 
@@ -26,6 +27,7 @@ class LocalLoginEntity {
   final String userUuid;
   final String email;
   final String nickname;
-  final String profileImageUrl;
+  final String? profileImageUrl;
+  final String deviceId;
   final bool preferenceSet;
 }

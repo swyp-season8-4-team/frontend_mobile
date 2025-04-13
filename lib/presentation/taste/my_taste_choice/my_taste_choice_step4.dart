@@ -88,7 +88,7 @@ class _MyTasteChoiceStep4State extends State<MyTasteChoiceStep4> {
                     ),
                     const SizedBox(height: 16),
 
-                    CustomPillOutlineButton(
+                    CustomPillOutlineButton.medium(
                       label: '특정 시즌에만 나오는 시즌 디저트 🍧',
                       isSelected: _selected1,
                       onPressed: () {
@@ -102,7 +102,7 @@ class _MyTasteChoiceStep4State extends State<MyTasteChoiceStep4> {
                     ),
                     const SizedBox(height: 16),
 
-                    CustomPillOutlineButton(
+                    CustomPillOutlineButton.medium(
                       label: '여행 에서만 맛볼 수 있는 특별한 디저트 🍡',
                       isSelected: _selected2,
                       onPressed: () {
@@ -116,7 +116,7 @@ class _MyTasteChoiceStep4State extends State<MyTasteChoiceStep4> {
                     ),
                     const SizedBox(height: 16),
 
-                    CustomPillOutlineButton(
+                    CustomPillOutlineButton.medium(
                       label: "믿고 먹는 ‘크로플+아이스크림'과 같은 꿀조합 디저트 🧇",
                       isSelected: _selected3,
                       onPressed: () {
@@ -130,7 +130,7 @@ class _MyTasteChoiceStep4State extends State<MyTasteChoiceStep4> {
                     ),
                     const SizedBox(height: 16),
 
-                    CustomPillOutlineButton(
+                    CustomPillOutlineButton.medium(
                       label: '특별히 중요하게 여기는 부분은 없어요 🙅',
                       isSelected: _selected4,
                       onPressed: () {
@@ -148,7 +148,7 @@ class _MyTasteChoiceStep4State extends State<MyTasteChoiceStep4> {
               ),
             ),
 
-            CustomFillButton(
+            CustomFillButton.large(
               label: '결과보기',
               disabled: _disabled,
               onPressed: () {

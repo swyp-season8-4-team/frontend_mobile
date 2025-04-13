@@ -73,7 +73,7 @@ class _TasteResultLoadingState extends State<TasteResultLoading>
         child: child,
       );
     },
-    child: Assets.image.logoBee.image(width: _step),
+    child: Assets.image.logoBeeInversion.image(width: _step),
   );
 
   @override

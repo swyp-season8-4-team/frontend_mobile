@@ -48,15 +48,12 @@ class CustomCouponIncludeMarker extends StatelessWidget {
             children: <Widget>[
               Align(
                 alignment: Alignment.topRight,
-                child: Assets.icon.etc.a18CouponBedge.svg(
-                  width: 16,
-                  height: 16,
-                ),
+                child: Assets.image.couponBedge.image(width: 16, height: 16),
               ),
             ],
           ),
         ),
-        Assets.icon.map.a22x30Marker1.svg(),
+        Assets.image.marker1.image(width: 22, height: 30),
       ],
     );
   }

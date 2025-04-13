@@ -13,7 +13,7 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
     this.drawer,
     super.key,
   });
-  final AppBar? appBar;
+  final PreferredSizeWidget? appBar;
   final Widget? body;
   final Widget? floatingActionButton;
   final Widget? drawer;

@@ -88,7 +88,7 @@ class _MyTasteChoiceStep3State extends State<MyTasteChoiceStep3> {
                     ),
                     const SizedBox(height: 16),
 
-                    CustomPillOutlineButton(
+                    CustomPillOutlineButton.medium(
                       label: '쑥, 인절미, 흑임자 같은 할매니얼st 선호해요 👵🏻',
                       isSelected: _selected1,
                       onPressed: () {
@@ -102,7 +102,7 @@ class _MyTasteChoiceStep3State extends State<MyTasteChoiceStep3> {
                     ),
                     const SizedBox(height: 16),
 
-                    CustomPillOutlineButton(
+                    CustomPillOutlineButton.medium(
                       label: '새로운 건 뭐든 시도해보는 편이에요 ✈️',
                       isSelected: _selected2,
                       onPressed: () {
@@ -116,7 +116,7 @@ class _MyTasteChoiceStep3State extends State<MyTasteChoiceStep3> {
                     ),
                     const SizedBox(height: 16),
 
-                    CustomPillOutlineButton(
+                    CustomPillOutlineButton.medium(
                       label: '비주얼 ! 예쁜 플레이팅이 더 맛있게 느껴져요 🍮',
                       isSelected: _selected3,
                       onPressed: () {
@@ -130,7 +130,7 @@ class _MyTasteChoiceStep3State extends State<MyTasteChoiceStep3> {
                     ),
                     const SizedBox(height: 16),
 
-                    CustomPillOutlineButton(
+                    CustomPillOutlineButton.medium(
                       label: '딱히 선호하는 맛이나 스타일이 없어요 🙅️',
                       isSelected: _selected4,
                       onPressed: () {
@@ -148,7 +148,7 @@ class _MyTasteChoiceStep3State extends State<MyTasteChoiceStep3> {
               ),
             ),
 
-            CustomFillButton(
+            CustomFillButton.large(
               label: '다음',
               disabled: _disabled,
               onPressed: () {
