@@ -3,23 +3,46 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
+enum CustomPillOutlineButtonSize { medium, small, xSmall }
+
 class CustomPillOutlineButton extends StatelessWidget {
-  const CustomPillOutlineButton({
+  const CustomPillOutlineButton.medium({
     required this.label,
     required this.onPressed,
     required this.isSelected,
+    this.svg,
     this.width,
     this.disabled = false,
-    this.svg,
     super.key,
-  });
+  }) : size = CustomPillOutlineButtonSize.medium;
+
+  const CustomPillOutlineButton.small({
+    required this.label,
+    required this.onPressed,
+    required this.isSelected,
+    this.svg,
+    this.width,
+    this.disabled = false,
+    super.key,
+  }) : size = CustomPillOutlineButtonSize.small;
+
+  const CustomPillOutlineButton.xSmall({
+    required this.label,
+    required this.onPressed,
+    required this.isSelected,
+    this.svg,
+    this.width,
+    this.disabled = false,
+    super.key,
+  }) : size = CustomPillOutlineButtonSize.xSmall;
 
   final String label;
   final VoidCallback? onPressed;
   final bool isSelected;
+  final SvgGenImage? svg;
   final double? width;
   final bool disabled;
-  final SvgGenImage? svg;
+  final CustomPillOutlineButtonSize size;
 
   WidgetStateProperty<Color?> get _foregroundColor =>
       WidgetStateProperty.resolveWith((Set<WidgetState> states) {

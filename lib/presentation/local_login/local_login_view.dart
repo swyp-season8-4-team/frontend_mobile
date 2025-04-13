@@ -253,7 +253,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                   //   ],
                   // ),
                   // const SizedBox(height: 44),
-                  CustomFillButton(
+                  CustomFillButton.large(
                     label: '로그인',
                     disabled:
                         !_emailController.text.isEmail ||
