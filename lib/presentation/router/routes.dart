@@ -28,9 +28,9 @@ abstract class AppRoutes {
     path: '/dessert',
   );
 
-  /// 디저트 메이트 > 메인 화면
-  static RouteInfo dessertMain = RouteInfo(
-    name: '${dessert.name}/main',
-    path: '/main',
+  /// 디저트 메이트 > 게시판
+  static RouteInfo dessertBoard = RouteInfo(
+    name: '${dessert.name}/board',
+    path: '/board',
   );
 }

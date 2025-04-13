@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend_mobile/presentation/dessert/dessert_main.dart';
+import 'package:frontend_mobile/presentation/dessert/dessert_board_view.dart';
 import 'package:frontend_mobile/presentation/home.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
 import 'package:frontend_mobile/presentation/map/map_view.dart';
@@ -68,12 +68,12 @@ class AppRouter {
         name: AppRoutes.dessert.name,
         redirect: (_, __) => null,
         routes: <RouteBase>[
-          /// 메인 화면
+          /// 게시판
           GoRoute(
-            path: AppRoutes.dessertMain.path,
-            name: AppRoutes.dessertMain.name,
+            path: AppRoutes.dessertBoard.path,
+            name: AppRoutes.dessertBoard.name,
             builder: (BuildContext context, GoRouterState state) {
-              return const DessertMain();
+              return const DessertBoard();
             },
           ),
         ],
