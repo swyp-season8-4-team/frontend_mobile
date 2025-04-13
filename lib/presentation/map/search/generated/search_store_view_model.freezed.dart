@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SearchStoreState {
-  List<RecentSearchModel> get recentSearches =>
+  List<RecentSearchModel>? get recentSearches =>
       throw _privateConstructorUsedError;
   Status get getRecentSearchesStatus => throw _privateConstructorUsedError;
   ExceptionModel get getRecentSearchesException =>
@@ -49,7 +49,7 @@ abstract class $SearchStoreStateCopyWith<$Res> {
   ) = _$SearchStoreStateCopyWithImpl<$Res, SearchStoreState>;
   @useResult
   $Res call({
-    List<RecentSearchModel> recentSearches,
+    List<RecentSearchModel>? recentSearches,
     Status getRecentSearchesStatus,
     ExceptionModel getRecentSearchesException,
     PopularSearchesModel? popularSearches,
@@ -77,7 +77,7 @@ class _$SearchStoreStateCopyWithImpl<$Res, $Val extends SearchStoreState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? recentSearches = null,
+    Object? recentSearches = freezed,
     Object? getRecentSearchesStatus = null,
     Object? getRecentSearchesException = null,
     Object? popularSearches = freezed,
@@ -91,10 +91,10 @@ class _$SearchStoreStateCopyWithImpl<$Res, $Val extends SearchStoreState>
     return _then(
       _value.copyWith(
             recentSearches:
-                null == recentSearches
+                freezed == recentSearches
                     ? _value.recentSearches
                     : recentSearches // ignore: cast_nullable_to_non_nullable
-                        as List<RecentSearchModel>,
+                        as List<RecentSearchModel>?,
             getRecentSearchesStatus:
                 null == getRecentSearchesStatus
                     ? _value.getRecentSearchesStatus
@@ -156,7 +156,7 @@ abstract class _$$SearchStoreStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    List<RecentSearchModel> recentSearches,
+    List<RecentSearchModel>? recentSearches,
     Status getRecentSearchesStatus,
     ExceptionModel getRecentSearchesException,
     PopularSearchesModel? popularSearches,
@@ -183,7 +183,7 @@ class __$$SearchStoreStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? recentSearches = null,
+    Object? recentSearches = freezed,
     Object? getRecentSearchesStatus = null,
     Object? getRecentSearchesException = null,
     Object? popularSearches = freezed,
@@ -197,10 +197,10 @@ class __$$SearchStoreStateImplCopyWithImpl<$Res>
     return _then(
       _$SearchStoreStateImpl(
         recentSearches:
-            null == recentSearches
+            freezed == recentSearches
                 ? _value._recentSearches
                 : recentSearches // ignore: cast_nullable_to_non_nullable
-                    as List<RecentSearchModel>,
+                    as List<RecentSearchModel>?,
         getRecentSearchesStatus:
             null == getRecentSearchesStatus
                 ? _value.getRecentSearchesStatus
@@ -255,7 +255,7 @@ class __$$SearchStoreStateImplCopyWithImpl<$Res>
 
 class _$SearchStoreStateImpl extends _SearchStoreState {
   _$SearchStoreStateImpl({
-    final List<RecentSearchModel> recentSearches = const <RecentSearchModel>[],
+    final List<RecentSearchModel>? recentSearches,
     this.getRecentSearchesStatus = Status.loading,
     this.getRecentSearchesException = const ExceptionModel(
       status: -1,
@@ -288,13 +288,14 @@ class _$SearchStoreStateImpl extends _SearchStoreState {
   }) : _recentSearches = recentSearches,
        super._();
 
-  final List<RecentSearchModel> _recentSearches;
+  final List<RecentSearchModel>? _recentSearches;
   @override
-  @JsonKey()
-  List<RecentSearchModel> get recentSearches {
+  List<RecentSearchModel>? get recentSearches {
+    final value = _recentSearches;
+    if (value == null) return null;
     if (_recentSearches is EqualUnmodifiableListView) return _recentSearches;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_recentSearches);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -416,7 +417,7 @@ class _$SearchStoreStateImpl extends _SearchStoreState {
 
 abstract class _SearchStoreState extends SearchStoreState {
   factory _SearchStoreState({
-    final List<RecentSearchModel> recentSearches,
+    final List<RecentSearchModel>? recentSearches,
     final Status getRecentSearchesStatus,
     final ExceptionModel getRecentSearchesException,
     final PopularSearchesModel? popularSearches,
@@ -430,7 +431,7 @@ abstract class _SearchStoreState extends SearchStoreState {
   _SearchStoreState._() : super._();
 
   @override
-  List<RecentSearchModel> get recentSearches;
+  List<RecentSearchModel>? get recentSearches;
   @override
   Status get getRecentSearchesStatus;
   @override

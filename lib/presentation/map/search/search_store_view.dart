@@ -113,7 +113,7 @@ class _SearchStoreViewState extends ConsumerState<SearchStoreView> {
                       scrollDirection: Axis.horizontal,
                       children: <Widget>[
                         const SizedBox(width: 16),
-                        ...state.recentSearches.map(
+                        ...state.recentSearches!.map(
                           (RecentSearchModel e) => Padding(
                             padding: const EdgeInsets.only(right: 6),
                             child: CustomInputChip(
