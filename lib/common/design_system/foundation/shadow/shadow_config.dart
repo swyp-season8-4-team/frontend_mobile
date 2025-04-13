@@ -54,7 +54,7 @@ class Level3 implements Level {
   ShadowType first = ShadowType(
     dx: 0,
     dy: 2,
-    blurRadius: 6,
+    blurRadius: 8,
     spreadRadius: 2,
     color: const Color.fromRGBO(40, 32, 20, 0.15),
   );
@@ -62,10 +62,10 @@ class Level3 implements Level {
   @override
   ShadowType second = ShadowType(
     dx: 0,
-    dy: 1,
-    blurRadius: 2,
+    dy: 2,
+    blurRadius: 3,
     spreadRadius: 0,
-    color: const Color.fromRGBO(40, 32, 20, 0.3),
+    color: const Color.fromRGBO(40, 32, 20, 0.12),
   );
 }
 
