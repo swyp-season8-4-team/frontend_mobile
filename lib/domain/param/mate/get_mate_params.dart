@@ -1,5 +1,5 @@
 class GetMateParams {
-  GetMateParams({required this.keyword, required this.mateCategoryId});
+  GetMateParams({this.keyword, this.mateCategoryId});
 
   final String? keyword;
   final int? mateCategoryId;
