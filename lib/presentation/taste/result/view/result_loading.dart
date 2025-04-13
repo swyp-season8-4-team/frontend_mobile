@@ -1,17 +1,28 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
+import 'package:frontend_mobile/domain/model/user/user_detail_model.dart';
+import 'package:frontend_mobile/domain/param/user/patch_me_params.dart';
+import 'package:frontend_mobile/presentation/preference/preference_view_model.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:frontend_mobile/presentation/taste/my_taste_choice/my_taste_choice_view_model.dart';
+import 'package:frontend_mobile/presentation/user/user_view_model.dart';
+import 'package:go_router/go_router.dart';
 
-class TasteResultLoading extends StatefulWidget {
+class TasteResultLoading extends ConsumerStatefulWidget {
   const TasteResultLoading({super.key});
 
   @override
-  State<TasteResultLoading> createState() => _TasteResultLoadingState();
+  ConsumerState<TasteResultLoading> createState() => _TasteResultLoadingState();
 }
 
-class _TasteResultLoadingState extends State<TasteResultLoading>
+class _TasteResultLoadingState extends ConsumerState<TasteResultLoading>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _offsetAnimation;
@@ -37,6 +48,22 @@ class _TasteResultLoadingState extends State<TasteResultLoading>
       begin: _begin,
       end: _end,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final MyTasteChoiceState state = ref.read(myTasteChoiceViewModelProvider);
+
+      final List<int> totalPreference =
+          state.preferenceStep1 +
+          state.preferenceStep2 +
+          state.preferenceStep3 +
+          state.preferenceStep4;
+
+      ref
+          .read(userViewModelProvider.notifier)
+          .patchMe(params: PatchMeParams(preferences: totalPreference));
+
+      ref.invalidate(myTasteChoiceViewModelProvider);
+    });
   }
 
   void _startTimer() {
@@ -78,7 +105,57 @@ class _TasteResultLoadingState extends State<TasteResultLoading>
 
   @override
   Widget build(BuildContext context) {
+    final PreferenceState state = ref.watch(preferenceViewModelProvider);
     final TextTheme textTheme = Theme.of(context).textTheme;
+
+    ref.listen(userViewModelProvider, (_, UserState next) {
+      switch (next.status) {
+        case Status.success:
+          final UserDetailModel user = next.data;
+          final List<PreferenceModel> result = <PreferenceModel>[];
+
+          for (final int item in user.preferences) {
+            final List<PreferenceModel> preference =
+                state.data
+                    .where((PreferenceModel element) => element.id == item)
+                    .toList();
+
+            if (preference.isNotEmpty) {
+              result.add(preference[0]);
+            }
+          }
+
+          Future<void>.delayed(const Duration(milliseconds: 1500), () {
+            if (context.mounted) {
+              context.goNamed(
+                AppRoutes.tasteResult.name,
+                extra: <String, Object>{
+                  'nickname': user.nickname,
+                  'preferences': result,
+                },
+              );
+            }
+          });
+          break;
+
+        case Status.failure:
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap: () => context.pop(),
+                ),
+              );
+            },
+          );
+          break;
+
+        default:
+      }
+    });
 
     return Material(
       child: Center(
