@@ -13,16 +13,13 @@ class TokenInfo {
     required this.accessToken,
     required this.refreshToken,
     required this.expiresIn,
-    required this.email,
-    required this.password,
-  }) : startTime = DateTime.now();
+    required this.deviceId,
+  });
 
   final String accessToken;
   final String refreshToken;
   final int expiresIn;
-  final DateTime startTime;
-  final String email;
-  final String password;
+  final String deviceId;
 
   Map<String, dynamic> toJson() => _$TokenInfoToJson(this);
 

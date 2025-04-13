@@ -10,14 +10,12 @@ TokenInfo _$TokenInfoFromJson(Map<String, dynamic> json) => TokenInfo(
   accessToken: json['accessToken'] as String,
   refreshToken: json['refreshToken'] as String,
   expiresIn: (json['expiresIn'] as num).toInt(),
-  email: json['email'] as String,
-  password: json['password'] as String,
+  deviceId: json['deviceId'] as String,
 );
 
 Map<String, dynamic> _$TokenInfoToJson(TokenInfo instance) => <String, dynamic>{
   'accessToken': instance.accessToken,
   'refreshToken': instance.refreshToken,
   'expiresIn': instance.expiresIn,
-  'email': instance.email,
-  'password': instance.password,
+  'deviceId': instance.deviceId,
 };
