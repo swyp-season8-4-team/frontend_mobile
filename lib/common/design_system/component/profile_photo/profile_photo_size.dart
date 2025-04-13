@@ -5,20 +5,17 @@ enum CustomProfilePhotoSizeEnum { xl, l, m, s, xs, xxs }
 
 class CustomProfilePhotoSize extends StatelessWidget {
   CustomProfilePhotoSize.girl({
-    required this.onPressed,
     this.size = CustomProfilePhotoSizeEnum.xl,
     super.key,
   }) : image = Assets.image.profileGirl.image();
 
   CustomProfilePhotoSize.boy({
-    required this.onPressed,
     this.size = CustomProfilePhotoSizeEnum.xl,
     super.key,
   }) : image = Assets.image.profileBoy.image();
 
   final Image image;
   final CustomProfilePhotoSizeEnum size;
-  final VoidCallback? onPressed;
 
   double get _size {
     switch (size) {
@@ -67,7 +64,7 @@ class CustomProfilePhotoSize extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FilledButton(
-      onPressed: onPressed,
+      onPressed: null,
       style: FilledButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(99)),
         minimumSize: Size.zero,
