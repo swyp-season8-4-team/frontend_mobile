@@ -572,6 +572,10 @@ class $AssetIconFileGen {
 class $AssetIconMapGen {
   const $AssetIconMapGen();
 
+  /// File path: asset/icon/map/14x14_address_line.svg
+  SvgGenImage get a14x14AddressLine =>
+      const SvgGenImage('asset/icon/map/14x14_address_line.svg');
+
   /// File path: asset/icon/map/22x30_marker_1.svg
   SvgGenImage get a22x30Marker1 =>
       const SvgGenImage('asset/icon/map/22x30_marker_1.svg');
@@ -605,6 +609,7 @@ class $AssetIconMapGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+    a14x14AddressLine,
     a22x30Marker1,
     a50CurrentLocation,
     a60x69SelectedMarker1,

@@ -253,6 +253,8 @@ extension MapViewWidgetExt on _MapViewState {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
+                                        Assets.icon.map.a14x14AddressLine.svg(),
+                                        const SizedBox(width: 6),
                                         Text(
                                           storeSummary.address,
                                           style: textTheme.labelSmall?.copyWith(
@@ -267,6 +269,15 @@ extension MapViewWidgetExt on _MapViewState {
                                           CrossAxisAlignment.start,
 
                                       children: <Widget>[
+                                        Assets.icon.system.timeLine.svg(
+                                          width: 14,
+                                          height: 14,
+                                          colorFilter: const ColorFilter.mode(
+                                            ScaleColorConfig.neutral50,
+                                            BlendMode.srcIn,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 6),
                                         Text(
                                           todayOperatingInfo.isClosed
                                               ? '영업중'
@@ -292,6 +303,15 @@ extension MapViewWidgetExt on _MapViewState {
                                           CrossAxisAlignment.start,
 
                                       children: <Widget>[
+                                        Assets.icon.contact.phone1Line.svg(
+                                          width: 14,
+                                          height: 14,
+                                          colorFilter: const ColorFilter.mode(
+                                            ScaleColorConfig.neutral50,
+                                            BlendMode.srcIn,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 6),
                                         Text(
                                           storeSummary.phone,
                                           style: textTheme.labelSmall?.copyWith(
