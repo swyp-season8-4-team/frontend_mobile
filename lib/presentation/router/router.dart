@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step1.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step2.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step3.dart';
@@ -8,13 +9,13 @@ import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
 import 'package:frontend_mobile/presentation/map/map_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/splash_view.dart';
-import 'package:frontend_mobile/presentation/taste/my_taste_choice/my_taste_choice_start.dart';
-import 'package:frontend_mobile/presentation/taste/my_taste_choice/my_taste_choice_step1.dart';
-import 'package:frontend_mobile/presentation/taste/my_taste_choice/my_taste_choice_step2.dart';
-import 'package:frontend_mobile/presentation/taste/my_taste_choice/my_taste_choice_step3.dart';
-import 'package:frontend_mobile/presentation/taste/my_taste_choice/my_taste_choice_step4.dart';
-import 'package:frontend_mobile/presentation/taste/result/result.dart';
-import 'package:frontend_mobile/presentation/taste/result/result_loading.dart';
+import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_start.dart';
+import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_step1.dart';
+import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_step2.dart';
+import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_step3.dart';
+import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_step4.dart';
+import 'package:frontend_mobile/presentation/taste/result/view/result.dart';
+import 'package:frontend_mobile/presentation/taste/result/view/result_loading.dart';
 import 'package:go_router/go_router.dart';
 
 final Provider<AppRouter> appRouterProvider = Provider<AppRouter>((Ref ref) {
@@ -184,7 +185,14 @@ class AppRouter {
             path: AppRoutes.tasteResult.path,
             name: AppRoutes.tasteResult.name,
             builder: (BuildContext context, GoRouterState state) {
-              return const TasteResult();
+              final Map<String, Object> object =
+                  state.extra as Map<String, Object>;
+
+              final String nickname = object['nickname'] as String;
+              final List<PreferenceModel> preferences =
+                  object['preferences'] as List<PreferenceModel>;
+
+              return TasteResult(nickname: nickname, preferences: preferences);
             },
           ),
         ],
