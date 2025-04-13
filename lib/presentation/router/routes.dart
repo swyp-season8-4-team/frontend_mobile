@@ -22,6 +22,12 @@ abstract class AppRoutes {
   // 지도 화면
   static const RouteInfo map = RouteInfo(name: '/map', path: '/map');
 
+  // 저장 리스트 생성
+  static final RouteInfo addUserStoreList = RouteInfo(
+    name: '${map.name}/add_user_store_list',
+    path: 'add_user_store_list',
+  );
+
   // 인증 > 비밀번호 찾기
   static final RouteInfo findPassword = RouteInfo(
     name: '${auth.name}/find_password',
