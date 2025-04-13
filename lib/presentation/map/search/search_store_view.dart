@@ -109,27 +109,37 @@ class _SearchStoreViewState extends ConsumerState<SearchStoreView> {
                   ),
                   SizedBox(
                     height: 28,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        const SizedBox(width: 16),
-                        ...state.recentSearches!.map(
-                          (RecentSearchModel e) => Padding(
-                            padding: const EdgeInsets.only(right: 6),
-                            child: CustomInputChip(
-                              label: e.keyword,
-                              onPressed: () {
-                                viewmodel.deleteRecentSearch(
-                                  searchId: e.id.toString(),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
+                    child:
+                        state.recentSearches!.isEmpty
+                            ? Center(
+                              child: Text(
+                                '최근 검색어가 없어요',
+                                style: textTheme.labelMedium?.copyWith(
+                                  color: ScaleColorConfig.neutral40,
+                                ),
+                              ),
+                            )
+                            : ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: <Widget>[
+                                const SizedBox(width: 16),
+                                ...state.recentSearches!.map(
+                                  (RecentSearchModel e) => Padding(
+                                    padding: const EdgeInsets.only(right: 6),
+                                    child: CustomInputChip(
+                                      label: e.keyword,
+                                      onPressed: () {
+                                        viewmodel.deleteRecentSearch(
+                                          searchId: e.id.toString(),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
 
-                        const SizedBox(width: 10),
-                      ],
-                    ),
+                                const SizedBox(width: 10),
+                              ],
+                            ),
                   ),
                   const SizedBox(height: 10),
                   Padding(
@@ -153,13 +163,8 @@ class _SearchStoreViewState extends ConsumerState<SearchStoreView> {
                               ),
                               Text(
                                 '${DateFormat('MM.dd').format(state.popularSearches!.lastUpdatedTime)} 업데이트',
-                                // TODO: 타이포 그래피 적용 필요
-                                style: const TextStyle(
+                                style: textTheme.labelLarge?.copyWith(
                                   color: ScaleColorConfig.neutral40,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.30,
-                                  letterSpacing: -0.15,
                                 ),
                               ),
                             ],
@@ -243,27 +248,28 @@ class _PopularSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: 타이포 그래피 사용 필요
-    const TextStyle rankTextStyle = TextStyle(
-      color: ScaleColorConfig.primary20,
-      fontSize: 12,
-      fontWeight: FontWeight.w600,
-      height: 1.20,
-      letterSpacing: -0.18,
-    );
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
     return SizedBox(
       height: 20,
       child: Row(
         children: <Widget>[
           SizedBox(
             width: 21,
-            child: Text(search.rank.toString(), style: rankTextStyle),
+            child: Text(
+              search.rank.toString(),
+              style: textTheme.labelLarge?.copyWith(
+                color: ScaleColorConfig.primary20,
+              ),
+            ),
           ),
 
           Expanded(
             child: Text(
               search.keyword,
-              style: rankTextStyle.copyWith(fontWeight: FontWeight.w400),
+              style: textTheme.bodySmall?.copyWith(
+                color: ScaleColorConfig.primary20,
+              ),
             ),
           ),
           const SizedBox(width: 8),
