@@ -4,7 +4,7 @@ part 'generated/local_login_entity.g.dart';
 
 @JsonSerializable()
 class LocalLoginEntity {
-  LocalLoginEntity({
+  const LocalLoginEntity({
     this.accessToken = '',
     this.refreshToken = '',
     this.tokenType = '',
