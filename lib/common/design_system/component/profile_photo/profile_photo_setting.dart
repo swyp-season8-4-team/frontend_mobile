@@ -23,10 +23,10 @@ class _CustomProfilePhotoSettingState extends State<CustomProfilePhotoSetting> {
 
   Widget get _image {
     if (widget.isGirl) {
-      return CustomProfilePhotoSize.girl(onPressed: null);
+      return CustomProfilePhotoSize.girl();
     }
 
-    return CustomProfilePhotoSize.boy(onPressed: null);
+    return CustomProfilePhotoSize.boy();
   }
 
   @override
