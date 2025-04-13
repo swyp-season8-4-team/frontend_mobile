@@ -87,6 +87,9 @@ class _SearchStoreViewState extends ConsumerState<SearchStoreView> {
                         const Spacer(),
                         GestureDetector(
                           onTap: () {
+                            if (state.recentSearches.isEmpty) {
+                              return;
+                            }
                             viewmodel.deleteRecentSearchAll();
                           },
                           behavior: HitTestBehavior.translucent,
@@ -110,7 +113,7 @@ class _SearchStoreViewState extends ConsumerState<SearchStoreView> {
                   SizedBox(
                     height: 28,
                     child:
-                        state.recentSearches!.isEmpty
+                        state.recentSearches.isEmpty
                             ? Center(
                               child: Text(
                                 '최근 검색어가 없어요',
@@ -123,7 +126,7 @@ class _SearchStoreViewState extends ConsumerState<SearchStoreView> {
                               scrollDirection: Axis.horizontal,
                               children: <Widget>[
                                 const SizedBox(width: 16),
-                                ...state.recentSearches!.map(
+                                ...state.recentSearches.map(
                                   (RecentSearchModel e) => Padding(
                                     padding: const EdgeInsets.only(right: 6),
                                     child: CustomInputChip(

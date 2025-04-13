@@ -4,53 +4,34 @@ import 'package:frontend_mobile/data/entity/search/search_recent_entity.dart';
 import 'package:frontend_mobile/data/query_param/search/get_search_popular_query_param.dart';
 
 class SearchMockDataSource implements SearchRemoteDataSource {
+  List<RecentSearchEntity> _recentSearches = <RecentSearchEntity>[
+    RecentSearchEntity(id: 1, keyword: 'keyword 1', createdAt: DateTime.now()),
+    RecentSearchEntity(id: 2, keyword: 'keyword 2', createdAt: DateTime.now()),
+    RecentSearchEntity(id: 3, keyword: 'keyword 3', createdAt: DateTime.now()),
+    RecentSearchEntity(id: 4, keyword: 'keyword 4', createdAt: DateTime.now()),
+    RecentSearchEntity(id: 5, keyword: 'keyword 5', createdAt: DateTime.now()),
+    RecentSearchEntity(id: 6, keyword: 'keyword 6', createdAt: DateTime.now()),
+  ];
+
   @override
-  Future<void> deleteSearchRecent({required String searchId}) {
-    // TODO: implement deleteSearchRecent
-    throw UnimplementedError();
+  Future<void> deleteSearchRecent({required String searchId}) async {
+    await Future<void>.delayed(const Duration(seconds: 2));
+    _recentSearches =
+        _recentSearches
+            .where((RecentSearchEntity e) => e.id != int.parse(searchId))
+            .toList();
   }
 
   @override
-  Future<void> deleteSearchRecentAll() {
-    // TODO: implement deleteSearchRecentAll
-    throw UnimplementedError();
+  Future<void> deleteSearchRecentAll() async {
+    await Future<void>.delayed(const Duration(seconds: 2));
+    _recentSearches = <RecentSearchEntity>[];
   }
 
   @override
   Future<List<RecentSearchEntity>> getRecentSearches() async {
     await Future<void>.delayed(const Duration(seconds: 2));
-    return <RecentSearchEntity>[
-      RecentSearchEntity(
-        id: 1,
-        keyword: 'keyword 1',
-        createdAt: DateTime.now(),
-      ),
-      RecentSearchEntity(
-        id: 2,
-        keyword: 'keyword 2',
-        createdAt: DateTime.now(),
-      ),
-      RecentSearchEntity(
-        id: 3,
-        keyword: 'keyword 3',
-        createdAt: DateTime.now(),
-      ),
-      RecentSearchEntity(
-        id: 4,
-        keyword: 'keyword 4',
-        createdAt: DateTime.now(),
-      ),
-      RecentSearchEntity(
-        id: 5,
-        keyword: 'keyword 5',
-        createdAt: DateTime.now(),
-      ),
-      RecentSearchEntity(
-        id: 6,
-        keyword: 'keyword 6',
-        createdAt: DateTime.now(),
-      ),
-    ];
+    return _recentSearches;
   }
 
   @override

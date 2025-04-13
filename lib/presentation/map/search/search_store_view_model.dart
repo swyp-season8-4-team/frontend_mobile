@@ -103,8 +103,9 @@ class SearchStoreViewModel extends StateNotifier<SearchStoreState> {
       params: DeleteRecentSearchParams(searchId: searchId),
     );
 
-    result.map(
-      success: (Success<void, CustomException> success) {
+    await result.map(
+      success: (Success<void, CustomException> success) async {
+        await getRecentSearches();
         state = state.copyWith(deleteRecentSearchStatus: Status.success);
       },
       failure: (Failure<void, CustomException> failure) {
@@ -127,8 +128,9 @@ class SearchStoreViewModel extends StateNotifier<SearchStoreState> {
       params: NoParams(),
     );
 
-    result.map(
-      success: (Success<void, CustomException> success) {
+    await result.map(
+      success: (Success<void, CustomException> success) async {
+        await getRecentSearches();
         state = state.copyWith(deleteRecentSearchAllStatus: Status.success);
       },
       failure: (Failure<void, CustomException> failure) {
