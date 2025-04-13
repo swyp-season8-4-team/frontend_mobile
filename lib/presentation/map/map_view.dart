@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +16,7 @@ import 'package:frontend_mobile/core/manager/geolocation/geo_location_service_im
 import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
+import 'package:frontend_mobile/core/util/naver_map_util.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_operating_hour_model.dart';
@@ -56,7 +55,7 @@ class _MapViewState extends ConsumerState<MapView> {
 
         await _mapController.addOverlayAll(markers.toSet());
 
-        await _setCustomLocationOverlay();
+        await NaverMapUtil.setMyLocationOverlay(controller: _mapController);
       },
     );
 
@@ -92,7 +91,9 @@ class _MapViewState extends ConsumerState<MapView> {
 
                 await _goToCurrentLocation();
 
-                await _setCustomLocationOverlay();
+                await NaverMapUtil.setMyLocationOverlay(
+                  controller: _mapController,
+                );
 
                 setState(() {});
               },

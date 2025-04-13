@@ -29,64 +29,13 @@ extension MapViewMethodExt on _MapViewState {
     }
   }
 
-  Future<void> _setCustomLocationOverlay() async {
-    if (mounted) {
-      final NLocationOverlay locationOverlay =
-          _mapController.getLocationOverlay();
-
-      // NOverlayImage.fromAssetImage는 svg를 지원하지 않음
-      const NOverlayImage locationOverlayImage = NOverlayImage.fromAssetImage(
-        'asset/image/current_location.png',
-      );
-
-      locationOverlay
-        ..setIcon(locationOverlayImage)
-        ..setIconSize(const Size.square(50))
-        ..setCircleColor(Colors.transparent)
-        ..setIsVisible(false)
-        ..setIsVisible(true);
-    }
-  }
-
-  Future<({double lat, double lng, double radius})> _getQueryOption() async {
-    // 위도 1도의 거리
-    const double killometerPerLatitude = 6400 * 2 * pi / 360;
-
-    final NCameraPosition nCameraPosition =
-        await _mapController.getCameraPosition();
-
-    final NLatLngBounds latLngBounds = await _mapController.getContentBounds();
-
-    final double latRadius =
-        latLngBounds.northLatitude - nCameraPosition.target.latitude;
-
-    // 위도 간 거리 (킬로미터 단위)
-    final double latDistance = latRadius * killometerPerLatitude;
-
-    final double lngRadius =
-        latLngBounds.eastLongitude - nCameraPosition.target.longitude;
-    final double latitudeInRadian = nCameraPosition.target.latitude * pi / 180;
-
-    // 경도 간 거리 (킬로미터 단위)
-    final double lngDistance =
-        lngRadius * cos(latitudeInRadian) * killometerPerLatitude;
-
-    final double radiusDistance = min(latDistance, lngDistance);
-
-    return (
-      lat: nCameraPosition.target.latitude,
-      lng: nCameraPosition.target.longitude,
-      radius: radiusDistance,
-    );
-  }
-
   Future<void> _getShopWithCurrentLocation() async {
     try {
       final Position positon =
           await ref.read(geoLocationManagerProvider).getCurrentPosition();
 
       final ({double lat, double lng, double radius}) queryOption =
-          await _getQueryOption();
+          await NaverMapUtil.getLocationInfo(controller: _mapController);
 
       ref
           .read(mapViewModelProvider.notifier)
@@ -97,7 +46,7 @@ extension MapViewMethodExt on _MapViewState {
           );
     } catch (e) {
       final ({double lat, double lng, double radius}) queryOption =
-          await _getQueryOption();
+          await NaverMapUtil.getLocationInfo(controller: _mapController);
 
       ref
           .read(mapViewModelProvider.notifier)
@@ -150,13 +99,10 @@ extension MapViewMethodExt on _MapViewState {
 
       await _mapController.addOverlay(newMarker);
 
-      final NCameraPosition cameraPosition =
-          await _mapController.getCameraPosition();
-
-      await _mapController.updateCamera(
-        NCameraUpdate.fromCameraPosition(
-          NCameraPosition(target: overlay.position, zoom: cameraPosition.zoom),
-        ),
+      await NaverMapUtil.moveCameraToLocation(
+        controller: _mapController,
+        lat: overlay.position.latitude,
+        lng: overlay.position.longitude,
       );
 
       //ignore: unawaited_futures

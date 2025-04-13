@@ -20,7 +20,9 @@ extension MapViewWidgetExt on _MapViewState {
                 selected: state.myPreferenceFilterSelected,
                 onPressed: () async {
                   final ({double lat, double lng, double radius}) queryOption =
-                      await _getQueryOption();
+                      await NaverMapUtil.getLocationInfo(
+                        controller: _mapController,
+                      );
 
                   viewmodel.updateMyPreferenceFilter(
                     lat: queryOption.lat,
@@ -37,7 +39,9 @@ extension MapViewWidgetExt on _MapViewState {
                     selected: state.preferenceTagIds.contains(e.id),
                     onPressed: () async {
                       final ({double lat, double lng, double radius})
-                      queryOption = await _getQueryOption();
+                      queryOption = await NaverMapUtil.getLocationInfo(
+                        controller: _mapController,
+                      );
                       viewmodel.updatePreferenceFilter(
                         lat: queryOption.lat,
                         lng: queryOption.lng,
@@ -70,7 +74,9 @@ extension MapViewWidgetExt on _MapViewState {
             child: CustomMapIconButton.filterReset(
               onPressed: () async {
                 final ({double lat, double lng, double radius}) queryOption =
-                    await _getQueryOption();
+                    await NaverMapUtil.getLocationInfo(
+                      controller: _mapController,
+                    );
                 viewmodel.clearAllFilter(
                   lng: queryOption.lng,
                   lat: queryOption.lat,
@@ -102,7 +108,7 @@ extension MapViewWidgetExt on _MapViewState {
       child: GestureDetector(
         onTap: () async {
           final ({double lat, double lng, double radius}) queryOption =
-              await _getQueryOption();
+              await NaverMapUtil.getLocationInfo(controller: _mapController);
           viewmodel.getStoresByCameraPosition(
             lat: queryOption.lat,
             lng: queryOption.lng,
