@@ -30,11 +30,18 @@ class SearchStoreViewModel extends StateNotifier<SearchStoreState> {
   SearchStoreViewModel({required Ref<Object?> ref})
     : _ref = ref,
       super(SearchStoreState()) {
-    getRecentSearches();
-    getPopularSearches();
+    init();
   }
 
   final Ref _ref;
+
+  Future<void> init() async {
+    await Future.wait(<Future<SearchStoreState>>[
+      getRecentSearches(),
+      getPopularSearches(),
+    ]);
+    state = state.copyWith(isFirstPageLoading: false);
+  }
 
   // 최근 검색어 조회
   Future<SearchStoreState> getRecentSearches() async {

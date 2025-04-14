@@ -3,6 +3,7 @@ part of 'search_store_view_model.dart';
 @freezed
 class SearchStoreState with _$SearchStoreState {
   factory SearchStoreState({
+    @Default(true) bool isFirstPageLoading,
     @Default(<RecentSearchModel>[]) List<RecentSearchModel> recentSearches,
     @Default(Status.loading) Status getRecentSearchesStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
@@ -21,10 +22,15 @@ class SearchStoreState with _$SearchStoreState {
 
   const SearchStoreState._();
 
-  // 페이지 전환에 따른 첫로딩
-  bool get isFirstLoading =>
-      getPopularSearchesStatus.isLoading &&
-      getRecentSearchesStatus.isLoading &&
-      deleteRecentSearchStatus.isInitial &&
-      deleteRecentSearchAllStatus.isInitial;
+  bool get isFailure =>
+      getPopularSearchesStatus.isFailure ||
+      getRecentSearchesStatus.isFailure ||
+      deleteRecentSearchStatus.isFailure ||
+      deleteRecentSearchAllStatus.isFailure;
+
+  bool get isLoading =>
+      getPopularSearchesStatus.isLoading ||
+      getRecentSearchesStatus.isLoading ||
+      deleteRecentSearchStatus.isLoading ||
+      deleteRecentSearchAllStatus.isLoading;
 }

@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SearchStoreState {
+  bool get isFirstPageLoading => throw _privateConstructorUsedError;
   List<RecentSearchModel> get recentSearches =>
       throw _privateConstructorUsedError;
   Status get getRecentSearchesStatus => throw _privateConstructorUsedError;
@@ -49,6 +50,7 @@ abstract class $SearchStoreStateCopyWith<$Res> {
   ) = _$SearchStoreStateCopyWithImpl<$Res, SearchStoreState>;
   @useResult
   $Res call({
+    bool isFirstPageLoading,
     List<RecentSearchModel> recentSearches,
     Status getRecentSearchesStatus,
     ExceptionModel getRecentSearchesException,
@@ -77,6 +79,7 @@ class _$SearchStoreStateCopyWithImpl<$Res, $Val extends SearchStoreState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isFirstPageLoading = null,
     Object? recentSearches = null,
     Object? getRecentSearchesStatus = null,
     Object? getRecentSearchesException = null,
@@ -90,6 +93,11 @@ class _$SearchStoreStateCopyWithImpl<$Res, $Val extends SearchStoreState>
   }) {
     return _then(
       _value.copyWith(
+            isFirstPageLoading:
+                null == isFirstPageLoading
+                    ? _value.isFirstPageLoading
+                    : isFirstPageLoading // ignore: cast_nullable_to_non_nullable
+                        as bool,
             recentSearches:
                 null == recentSearches
                     ? _value.recentSearches
@@ -156,6 +164,7 @@ abstract class _$$SearchStoreStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
+    bool isFirstPageLoading,
     List<RecentSearchModel> recentSearches,
     Status getRecentSearchesStatus,
     ExceptionModel getRecentSearchesException,
@@ -183,6 +192,7 @@ class __$$SearchStoreStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isFirstPageLoading = null,
     Object? recentSearches = null,
     Object? getRecentSearchesStatus = null,
     Object? getRecentSearchesException = null,
@@ -196,6 +206,11 @@ class __$$SearchStoreStateImplCopyWithImpl<$Res>
   }) {
     return _then(
       _$SearchStoreStateImpl(
+        isFirstPageLoading:
+            null == isFirstPageLoading
+                ? _value.isFirstPageLoading
+                : isFirstPageLoading // ignore: cast_nullable_to_non_nullable
+                    as bool,
         recentSearches:
             null == recentSearches
                 ? _value._recentSearches
@@ -255,6 +270,7 @@ class __$$SearchStoreStateImplCopyWithImpl<$Res>
 
 class _$SearchStoreStateImpl extends _SearchStoreState {
   _$SearchStoreStateImpl({
+    this.isFirstPageLoading = true,
     final List<RecentSearchModel> recentSearches = const <RecentSearchModel>[],
     this.getRecentSearchesStatus = Status.loading,
     this.getRecentSearchesException = const ExceptionModel(
@@ -288,6 +304,9 @@ class _$SearchStoreStateImpl extends _SearchStoreState {
   }) : _recentSearches = recentSearches,
        super._();
 
+  @override
+  @JsonKey()
+  final bool isFirstPageLoading;
   final List<RecentSearchModel> _recentSearches;
   @override
   @JsonKey()
@@ -326,7 +345,7 @@ class _$SearchStoreStateImpl extends _SearchStoreState {
 
   @override
   String toString() {
-    return 'SearchStoreState(recentSearches: $recentSearches, getRecentSearchesStatus: $getRecentSearchesStatus, getRecentSearchesException: $getRecentSearchesException, popularSearches: $popularSearches, getPopularSearchesStatus: $getPopularSearchesStatus, getPopularSearchesException: $getPopularSearchesException, deleteRecentSearchStatus: $deleteRecentSearchStatus, deleteRecentSearchException: $deleteRecentSearchException, deleteRecentSearchAllStatus: $deleteRecentSearchAllStatus, deleteRecentSearchAllException: $deleteRecentSearchAllException)';
+    return 'SearchStoreState(isFirstPageLoading: $isFirstPageLoading, recentSearches: $recentSearches, getRecentSearchesStatus: $getRecentSearchesStatus, getRecentSearchesException: $getRecentSearchesException, popularSearches: $popularSearches, getPopularSearchesStatus: $getPopularSearchesStatus, getPopularSearchesException: $getPopularSearchesException, deleteRecentSearchStatus: $deleteRecentSearchStatus, deleteRecentSearchException: $deleteRecentSearchException, deleteRecentSearchAllStatus: $deleteRecentSearchAllStatus, deleteRecentSearchAllException: $deleteRecentSearchAllException)';
   }
 
   @override
@@ -334,6 +353,8 @@ class _$SearchStoreStateImpl extends _SearchStoreState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchStoreStateImpl &&
+            (identical(other.isFirstPageLoading, isFirstPageLoading) ||
+                other.isFirstPageLoading == isFirstPageLoading) &&
             const DeepCollectionEquality().equals(
               other._recentSearches,
               _recentSearches,
@@ -390,6 +411,7 @@ class _$SearchStoreStateImpl extends _SearchStoreState {
   @override
   int get hashCode => Object.hash(
     runtimeType,
+    isFirstPageLoading,
     const DeepCollectionEquality().hash(_recentSearches),
     getRecentSearchesStatus,
     getRecentSearchesException,
@@ -416,6 +438,7 @@ class _$SearchStoreStateImpl extends _SearchStoreState {
 
 abstract class _SearchStoreState extends SearchStoreState {
   factory _SearchStoreState({
+    final bool isFirstPageLoading,
     final List<RecentSearchModel> recentSearches,
     final Status getRecentSearchesStatus,
     final ExceptionModel getRecentSearchesException,
@@ -429,6 +452,8 @@ abstract class _SearchStoreState extends SearchStoreState {
   }) = _$SearchStoreStateImpl;
   _SearchStoreState._() : super._();
 
+  @override
+  bool get isFirstPageLoading;
   @override
   List<RecentSearchModel> get recentSearches;
   @override
