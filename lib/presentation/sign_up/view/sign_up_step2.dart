@@ -86,36 +86,31 @@ class _SignUpStep2State extends ConsumerState<SignUpStep2> {
     final SignUpState state = ref.watch(signUpViewModelProvider);
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    ref.listen(
-      signUpViewModelProvider.select(
-        (SignUpState state) => state.postVerifyStatus,
-      ),
-      (_, Status status) {
-        switch (status) {
-          case Status.success:
-            ref.read(signUpProvider.notifier).state = ref
-                .read(signUpProvider)
-                .copyWith(emailToken: _codeController.text);
+    ref.listen(signUpViewModelProvider, (_, SignUpState state) {
+      switch (state.postVerifyStatus) {
+        case Status.success:
+          ref.read(signUpProvider.notifier).state = ref
+              .read(signUpProvider)
+              .copyWith(emailToken: state.verifyData.verificationToken);
 
-            setState(() {
-              _isValidCode = true;
-              _success = true;
-              _successText = '인증이 완료되었습니다.';
-            });
-            break;
+          setState(() {
+            _isValidCode = true;
+            _success = true;
+            _successText = '인증이 완료되었습니다.';
+          });
+          break;
 
-          case Status.failure:
-            setState(() {
-              _isValidCode = false;
-              _error = true;
-              _errorText = '잘못된 인증코드입니다.';
-            });
-            break;
+        case Status.failure:
+          setState(() {
+            _isValidCode = false;
+            _error = true;
+            _errorText = '잘못된 인증코드입니다.';
+          });
+          break;
 
-          default:
-        }
-      },
-    );
+        default:
+      }
+    });
 
     return CustomLoadingOverlay(
       isLoading: state.postVerifyStatus.isLoading,
