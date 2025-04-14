@@ -62,7 +62,9 @@ StoreDetailEntity _$StoreDetailEntityFromJson(
           .toList(),
   topPreferences:
       (json['topPreferences'] as List<dynamic>?)
-          ?.map((e) => e as String)
+          ?.map(
+            (e) => StoreTopPreferenceEntity.fromJson(e as Map<String, dynamic>),
+          )
           .toList(),
   description: json['description'] as String?,
   animalYn: json['animalYn'] as bool?,
