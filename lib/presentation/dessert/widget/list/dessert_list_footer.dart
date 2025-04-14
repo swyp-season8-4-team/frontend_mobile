@@ -1,8 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_size.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/core/resource/extension.dart';
+import 'package:frontend_mobile/domain/model/mate/mate_detail_model.dart';
 
 class DessertListFooter extends StatelessWidget {
-  const DessertListFooter({super.key});
+  const DessertListFooter({required this.mate, super.key});
+
+  final MateDetailModel mate;
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +19,29 @@ class DessertListFooter extends StatelessWidget {
       children: <Widget>[
         Row(
           children: <Widget>[
-            /// TODO: profile_photo 컴포넌트 적용하기
-            Container(width: 16, height: 16, color: const Color(0xFFDFDFDF)),
+            if (mate.profileImage.isEmpty)
+              if (mate.gender == 'FEMALE')
+                CustomProfilePhotoSize.girl(
+                  size: CustomProfilePhotoSizeEnum.xxs,
+                )
+              else
+                CustomProfilePhotoSize.boy(size: CustomProfilePhotoSizeEnum.xxs)
+            else
+              Container(
+                width: 15,
+                height: 15,
+                clipBehavior: Clip.hardEdge,
+                decoration: const BoxDecoration(shape: BoxShape.circle),
+
+                /// FIXME: 이미지 에러 처리 필요
+                child: CachedNetworkImage(
+                  imageUrl: mate.profileImage,
+                  fit: BoxFit.cover,
+                ),
+              ),
             const SizedBox(width: 4),
             Text(
-              '찌삐사우르스',
+              mate.nickname,
               style: textTheme.labelLarge?.copyWith(
                 color: ScaleColorConfig.neutral30,
               ),
@@ -25,7 +49,7 @@ class DessertListFooter extends StatelessWidget {
           ],
         ),
         Text(
-          '2025.01.28',
+          mate.createdAt.toDate(),
           style: textTheme.labelLarge?.copyWith(
             color: ScaleColorConfig.neutral50,
           ),
