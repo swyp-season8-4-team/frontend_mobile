@@ -3,6 +3,7 @@ import 'package:frontend_mobile/data/entity/store/store_by_location_entity.dart'
 import 'package:frontend_mobile/data/entity/store/store_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_operating_hour_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_summary_entity.dart';
+import 'package:frontend_mobile/data/entity/store/store_top_preference_entity.dart';
 import 'package:frontend_mobile/data/query_param/store/get_my_preferences_stores_by_location_query_param.dart';
 import 'package:frontend_mobile/data/query_param/store/get_stores_by_location_query_param.dart';
 
@@ -35,6 +36,11 @@ class StoreMockDataSource implements StoreRemoteDataSource {
       averageRating: 4.5,
       animalYn: true,
       tumblerYn: true,
+      topPreferences: <StoreTopPreferenceEntity>[
+        const StoreTopPreferenceEntity(tagId: 1, name: '비건', rank: 2),
+        const StoreTopPreferenceEntity(tagId: 2, name: '락토프리', rank: 2),
+        const StoreTopPreferenceEntity(tagId: 3, name: '글루텐프리', rank: 2),
+      ],
       storeImages: <String>[
         'https://picsum.photos/250?image=5',
         'https://picsum.photos/250?image=5',

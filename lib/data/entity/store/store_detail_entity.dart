@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:frontend_mobile/data/entity/store/store_summary_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_holiday_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_operating_hour_entity.dart';
+import 'package:frontend_mobile/data/entity/store/store_top_preference_entity.dart';
 part 'generated/store_detail_entity.g.dart';
 
 //ignore_for_file: library_private_types_in_public_api

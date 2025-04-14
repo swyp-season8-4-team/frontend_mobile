@@ -1,5 +1,6 @@
 import 'package:frontend_mobile/domain/model/store/store_holiday_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_operating_hour_model.dart';
+import 'package:frontend_mobile/domain/model/store/store_top_preference_model.dart';
 
 class StoreSummaryModel {
   const StoreSummaryModel({
@@ -33,7 +34,7 @@ class StoreSummaryModel {
   final List<String>? storeLinks;
   final List<StoreOperatingHourModel> operatingHours;
   final List<StoreHolidayModel>? holidays;
-  final List<String>? topPreferences;
+  final List<StoreTopPreferenceModel>? topPreferences;
   final String address;
   final String phone;
   final String? description;

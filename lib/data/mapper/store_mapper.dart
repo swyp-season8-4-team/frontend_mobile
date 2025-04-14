@@ -3,12 +3,14 @@ import 'package:frontend_mobile/data/entity/store/store_by_location_entity.dart'
 import 'package:frontend_mobile/data/entity/store/store_holiday_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_operating_hour_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_summary_entity.dart';
+import 'package:frontend_mobile/data/entity/store/store_top_preference_entity.dart';
 import 'package:frontend_mobile/data/query_param/store/get_my_preferences_stores_by_location_query_param.dart';
 import 'package:frontend_mobile/data/query_param/store/get_stores_by_location_query_param.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_holiday_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_operating_hour_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_summary_model.dart';
+import 'package:frontend_mobile/domain/model/store/store_top_preference_model.dart';
 import 'package:frontend_mobile/domain/param/store/get_my_preferences_stores_by_location_params.dart';
 import 'package:frontend_mobile/domain/param/store/get_stores_by_location_params.dart';
 
@@ -75,7 +77,10 @@ extension StoreSummaryEntityExt on StoreSummaryEntity {
     primaryStoreLink: primaryStoreLink,
     storeLinks: storeLinks,
     holidays: holidays?.map((StoreHolidayEntity e) => e.toModel()).toList(),
-    topPreferences: topPreferences,
+    topPreferences:
+        topPreferences
+            ?.map((StoreTopPreferenceEntity e) => e.toModel())
+            .toList(),
     description: description,
     animalYn: animalYn,
     tumblerYn: tumblerYn,
@@ -101,4 +106,9 @@ extension GetMyPreferencesStoresByLocationParamsExt
         longitude: longitude,
         radius: radius,
       );
+}
+
+extension StoreTopPreferenceEntityExt on StoreTopPreferenceEntity {
+  StoreTopPreferenceModel toModel() =>
+      StoreTopPreferenceModel(tagId: tagId, name: name, rank: rank);
 }

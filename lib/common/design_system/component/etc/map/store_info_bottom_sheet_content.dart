@@ -9,6 +9,7 @@ import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/domain/model/store/store_operating_hour_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_summary_model.dart';
+import 'package:frontend_mobile/domain/model/store/store_top_preference_model.dart';
 
 /// 가게 간략 정보 바텀 시트
 /// https://www.figma.com/design/S1zkOn7DjDJ0b1mcPVJRil/SWYP_%E1%84%8B%E1%85%A2%E1%86%B8_1%E1%84%80%E1%85%B5_%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A5%E1%84%87%E1%85%B5?node-id=40000687-196006&m=dev
@@ -133,27 +134,17 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
                             flex: 164,
                             child: CustomHexagonGrid(
                               hexagons: <CustomHexagon>[
-                                ...List<CustomHexagon>.generate(3, (int index) {
-                                  if (storeSummary!.tags.length > index) {
-                                    return CustomHexagon(
-                                      text: storeSummary!.tags[index],
-                                    );
-                                  } else {
-                                    return const CustomHexagon(text: '');
-                                  }
-                                }),
-                                ...List<CustomHexagon>.generate(3, (int index) {
-                                  if (storeSummary!.storeImages != null &&
-                                      storeSummary!.storeImages!.length >
-                                          index) {
-                                    return CustomHexagon(
-                                      imageUrl:
-                                          storeSummary!.storeImages![index],
-                                    );
-                                  } else {
-                                    return const CustomHexagon(text: '');
-                                  }
-                                }),
+                                ..._normalizeToLength3<StoreTopPreferenceModel>(
+                                  storeSummary!.topPreferences,
+                                ).map(
+                                  (StoreTopPreferenceModel? e) =>
+                                      CustomHexagon(text: e?.name),
+                                ),
+                                ..._normalizeToLength3<String>(
+                                  storeSummary!.storeImages,
+                                ).map(
+                                  (String? e) => CustomHexagon(imageUrl: e),
+                                ),
                               ],
                             ),
                           ),
@@ -325,6 +316,18 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
                 },
               ),
     );
+  }
+
+  List<T?> _normalizeToLength3<T>(List<T>? input) {
+    if (input == null || input.isEmpty) {
+      return List<T?>.filled(3, null);
+    } else if (input.length == 1) {
+      return <T?>[input[0], input[0], input[0]];
+    } else if (input.length == 2) {
+      return <T?>[input[0], input[1], input[0]];
+    } else {
+      return input.sublist(0, 3);
+    }
   }
 }
 
