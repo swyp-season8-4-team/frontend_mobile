@@ -7,7 +7,8 @@ import 'package:frontend_mobile/common/design_system/component/textfield/input_b
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
-import 'package:frontend_mobile/common/design_system/foundation/foundation.dart';
+import 'package:frontend_mobile/core/resource/constant.dart';
+import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
 import 'package:frontend_mobile/presentation/map/add_user_store_list/add_user_store_list_view_model.dart';
@@ -28,7 +29,6 @@ class _AddUserStoreListViewState extends ConsumerState<AddUserStoreListView> {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     final AddUserStoreListState state = ref.watch(
       addUserStoreListViewModelProvider,
@@ -117,17 +117,19 @@ class _AddUserStoreListViewState extends ConsumerState<AddUserStoreListView> {
                     ),
                     const SizedBox(height: 7),
 
-                    // TODO: 색깔 고를 수 있도록 수정 필요
                     Row(
                       children: <Widget>[
-                        ...<Color>[
-                          colorScheme.accentYellow,
-                          colorScheme.accentOrange,
-                          colorScheme.accentGreen,
-                          colorScheme.accentOcean,
-                        ].map(
-                          (Color e) =>
-                              StoreListColorChip(color: e, onTap: () {}),
+                        ...StoreListIconColor.values.map(
+                          (StoreListIconColor e) => Padding(
+                            padding: const EdgeInsets.only(right: 16),
+                            child: StoreListColorChip(
+                              color: e.color,
+                              isSelected: state.iconColorId == e.id,
+                              onTap: () {
+                                viewmodel.updateIconColorId(iconColorId: e.id);
+                              },
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -194,10 +196,13 @@ class _AddUserStoreListViewState extends ConsumerState<AddUserStoreListView> {
 
                 child: CustomFillButton.large(
                   label: '완료',
-                  onPressed: () {
-                    // TODO: userUuid 값 수정 예정
-                    viewmodel.addUserStoreList(userUuid: '1234');
-                  },
+                  onPressed:
+                      state.listName?.isNotEmpty == true
+                          ? () {
+                            // TODO: userUuid 값 수정 예정
+                            viewmodel.addUserStoreList(userUuid: '1234');
+                          }
+                          : null,
                 ),
               ),
             ],
