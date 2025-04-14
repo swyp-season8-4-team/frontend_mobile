@@ -5,7 +5,7 @@ abstract class Constant {
 enum DayOfWeek {
   monday,
   tuesday,
-  wednsday,
+  wednesday,
   thursday,
   friday,
   saturday,

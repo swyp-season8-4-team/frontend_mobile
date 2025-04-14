@@ -28,7 +28,7 @@ mixin _$MapState {
   double get radius => throw _privateConstructorUsedError;
   bool get myPreferenceFilterSelected => throw _privateConstructorUsedError;
   List<int> get preferenceTagIds => throw _privateConstructorUsedError;
-  String get searchKeyword => throw _privateConstructorUsedError;
+  String? get searchKeyword => throw _privateConstructorUsedError;
   Status get getStoresByLocationStatus => throw _privateConstructorUsedError;
   Status get getMyPreferencesStoresByLocationStatus =>
       throw _privateConstructorUsedError;
@@ -64,7 +64,7 @@ abstract class $MapStateCopyWith<$Res> {
     double radius,
     bool myPreferenceFilterSelected,
     List<int> preferenceTagIds,
-    String searchKeyword,
+    String? searchKeyword,
     Status getStoresByLocationStatus,
     Status getMyPreferencesStoresByLocationStatus,
     ExceptionModel getStoresByLocationExceptionModel,
@@ -100,7 +100,7 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
     Object? radius = null,
     Object? myPreferenceFilterSelected = null,
     Object? preferenceTagIds = null,
-    Object? searchKeyword = null,
+    Object? searchKeyword = freezed,
     Object? getStoresByLocationStatus = null,
     Object? getMyPreferencesStoresByLocationStatus = null,
     Object? getStoresByLocationExceptionModel = null,
@@ -158,10 +158,10 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
                     : preferenceTagIds // ignore: cast_nullable_to_non_nullable
                         as List<int>,
             searchKeyword:
-                null == searchKeyword
+                freezed == searchKeyword
                     ? _value.searchKeyword
                     : searchKeyword // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as String?,
             getStoresByLocationStatus:
                 null == getStoresByLocationStatus
                     ? _value.getStoresByLocationStatus
@@ -227,7 +227,7 @@ abstract class _$$MapStateImplCopyWith<$Res>
     double radius,
     bool myPreferenceFilterSelected,
     List<int> preferenceTagIds,
-    String searchKeyword,
+    String? searchKeyword,
     Status getStoresByLocationStatus,
     Status getMyPreferencesStoresByLocationStatus,
     ExceptionModel getStoresByLocationExceptionModel,
@@ -262,7 +262,7 @@ class __$$MapStateImplCopyWithImpl<$Res>
     Object? radius = null,
     Object? myPreferenceFilterSelected = null,
     Object? preferenceTagIds = null,
-    Object? searchKeyword = null,
+    Object? searchKeyword = freezed,
     Object? getStoresByLocationStatus = null,
     Object? getMyPreferencesStoresByLocationStatus = null,
     Object? getStoresByLocationExceptionModel = null,
@@ -320,10 +320,10 @@ class __$$MapStateImplCopyWithImpl<$Res>
                 : preferenceTagIds // ignore: cast_nullable_to_non_nullable
                     as List<int>,
         searchKeyword:
-            null == searchKeyword
+            freezed == searchKeyword
                 ? _value.searchKeyword
                 : searchKeyword // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as String?,
         getStoresByLocationStatus:
             null == getStoresByLocationStatus
                 ? _value.getStoresByLocationStatus
@@ -388,7 +388,7 @@ class _$MapStateImpl implements _MapState {
     this.radius = 5,
     this.myPreferenceFilterSelected = false,
     final List<int> preferenceTagIds = const <int>[],
-    this.searchKeyword = '',
+    this.searchKeyword,
     this.getStoresByLocationStatus = Status.loading,
     this.getMyPreferencesStoresByLocationStatus = Status.loading,
     this.getStoresByLocationExceptionModel = const ExceptionModel(
@@ -464,8 +464,7 @@ class _$MapStateImpl implements _MapState {
   }
 
   @override
-  @JsonKey()
-  final String searchKeyword;
+  final String? searchKeyword;
   @override
   @JsonKey()
   final Status getStoresByLocationStatus;
@@ -613,7 +612,7 @@ abstract class _MapState implements MapState {
     final double radius,
     final bool myPreferenceFilterSelected,
     final List<int> preferenceTagIds,
-    final String searchKeyword,
+    final String? searchKeyword,
     final Status getStoresByLocationStatus,
     final Status getMyPreferencesStoresByLocationStatus,
     final ExceptionModel getStoresByLocationExceptionModel,
@@ -643,7 +642,7 @@ abstract class _MapState implements MapState {
   @override
   List<int> get preferenceTagIds;
   @override
-  String get searchKeyword;
+  String? get searchKeyword;
   @override
   Status get getStoresByLocationStatus;
   @override

@@ -138,7 +138,7 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
                                   storeSummary!.topPreferences,
                                 ).map(
                                   (StoreTopPreferenceModel? e) =>
-                                      CustomHexagon(text: e?.name),
+                                      CustomHexagon(text: e?.name ?? ''),
                                 ),
                                 ..._normalizeToLength3<String>(
                                   storeSummary!.storeImages,

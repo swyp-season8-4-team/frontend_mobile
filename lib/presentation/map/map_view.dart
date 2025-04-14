@@ -41,17 +41,25 @@ class _MapViewState extends ConsumerState<MapView> {
     final MapState state = ref.watch(mapViewModelProvider);
 
     ref.listen(
-      mapViewModelProvider.select((MapState state) => state.storesByLocation),
-      (_, List<StoreByLocationModel> next) async {
-        await _mapController.clearOverlays();
+      mapViewModelProvider.select(
+        (MapState state) => state.getStoresByLocationStatus,
+      ),
+      (_, Status next) async {
+        if (next.isSuccess) {
+          final MapState state = ref.read(mapViewModelProvider);
 
-        final List<NMarker> markers = await Future.wait(<Future<NMarker>>[
-          ...next.map((StoreByLocationModel e) => _storeToMarker(model: e)),
-        ]);
+          await _mapController.clearOverlays();
 
-        await _mapController.addOverlayAll(markers.toSet());
+          final List<NMarker> markers = await Future.wait(<Future<NMarker>>[
+            ...state.storesByLocation.map(
+              (StoreByLocationModel e) => _storeToMarker(model: e),
+            ),
+          ]);
 
-        await NaverMapUtil.setMyLocationOverlay(controller: _mapController);
+          await _mapController.addOverlayAll(markers.toSet());
+
+          await NaverMapUtil.setMyLocationOverlay(controller: _mapController);
+        }
       },
     );
 
