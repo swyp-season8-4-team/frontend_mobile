@@ -33,6 +33,7 @@ class StoreDetailEntity extends StoreSummaryEntity {
     this.mate,
     this.saved,
     this.savedListId,
+    this.notices,
     super.averageRating,
     super.storeImages,
     super.ownerPickImages,
@@ -52,20 +53,22 @@ class StoreDetailEntity extends StoreSummaryEntity {
   final String ownerUuid;
   final double latitude;
   final double longitude;
-  final List<_Menu> menus;
+  final List<StoreDetailMenu> menus;
   final int totalReviewCount;
-  final List<_StoreReview>? storeReviews;
-  final List<_CommunityReview>? communityReviews;
-  final List<_Mate>? mate;
+  final List<StoreDetailReview>? storeReviews;
+  final List<StoreDetailCommunityReview>? communityReviews;
+  final List<StoreDetailMate>? mate;
   final bool? saved;
   final int? savedListId;
+  final List<StoreDetailNoticeEntity>? notices;
 }
 
 @JsonSerializable()
-class _Menu {
-  factory _Menu.fromJson(Map<String, dynamic> json) => _$MenuFromJson(json);
+class StoreDetailMenu {
+  factory StoreDetailMenu.fromJson(Map<String, dynamic> json) =>
+      _$StoreDetailMenuFromJson(json);
 
-  const _Menu({
+  const StoreDetailMenu({
     required this.menuUuid,
     required this.name,
     required this.price,
@@ -82,8 +85,8 @@ class _Menu {
 }
 
 @JsonSerializable()
-class _StoreReview {
-  const _StoreReview({
+class StoreDetailReview {
+  const StoreDetailReview({
     required this.reviewUuid,
     required this.storeId,
     required this.userUuid,
@@ -95,8 +98,9 @@ class _StoreReview {
     this.images,
   });
 
-  factory _StoreReview.fromJson(Map<String, dynamic> json) =>
-      _$StoreReviewFromJson(json);
+  factory StoreDetailReview.fromJson(Map<String, dynamic> json) =>
+      _$StoreDetailReviewFromJson(json);
+
   final String reviewUuid;
   final int storeId;
   final String userUuid;
@@ -109,11 +113,11 @@ class _StoreReview {
 }
 
 @JsonSerializable()
-class _CommunityReview {
-  factory _CommunityReview.fromJson(Map<String, dynamic> json) =>
-      _$CommunityReviewFromJson(json);
+class StoreDetailCommunityReview {
+  factory StoreDetailCommunityReview.fromJson(Map<String, dynamic> json) =>
+      _$StoreDetailCommunityReviewFromJson(json);
 
-  const _CommunityReview({
+  const StoreDetailCommunityReview({
     required this.reviewUuid,
     required this.userUuid,
     required this.nickname,
@@ -136,8 +140,8 @@ class _CommunityReview {
 }
 
 @JsonSerializable()
-class _Mate {
-  const _Mate({
+class StoreDetailMate {
+  const StoreDetailMate({
     required this.mateUuid,
     required this.mateCategory,
     required this.thumbnail,
@@ -145,10 +149,12 @@ class _Mate {
     required this.content,
     required this.nickname,
     required this.recruitYn,
-    required this.saved,
+    this.saved,
   });
 
-  factory _Mate.fromJson(Map<String, dynamic> json) => _$MateFromJson(json);
+  factory StoreDetailMate.fromJson(Map<String, dynamic> json) =>
+      _$StoreDetailMateFromJson(json);
+
   final String mateUuid;
   final String mateCategory;
   final String thumbnail;
@@ -156,5 +162,25 @@ class _Mate {
   final String content;
   final String nickname;
   final bool recruitYn;
-  final bool saved;
+  final bool? saved;
+}
+
+@JsonSerializable()
+class StoreDetailNoticeEntity {
+  factory StoreDetailNoticeEntity.fromJson(Map<String, dynamic> json) =>
+      _$StoreDetailNoticeEntityFromJson(json);
+  const StoreDetailNoticeEntity({
+    required this.noticeId,
+    required this.tag,
+    required this.title,
+    required this.content,
+    required this.createdAt,
+    this.updatedAt,
+  });
+  final int noticeId;
+  final String tag;
+  final String title;
+  final String content;
+  final DateTime createdAt;
+  final DateTime? updatedAt;
 }
