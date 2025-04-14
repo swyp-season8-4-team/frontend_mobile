@@ -70,4 +70,10 @@ class TopBarIcon {
     onTap: () {},
     child: SvgPicture.asset(Assets.icon.system.share2Line.path),
   );
+
+  /// 닫기
+  GestureDetector close({required VoidCallback? onTap}) => GestureDetector(
+    onTap: onTap,
+    child: SvgPicture.asset(Assets.icon.system.closeLine.path),
+  );
 }

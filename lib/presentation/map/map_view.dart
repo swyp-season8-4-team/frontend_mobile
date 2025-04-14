@@ -3,9 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/dessert_mate_button.dart';
+import 'package:frontend_mobile/common/design_system/component/button/outline_button.dart';
 import 'package:frontend_mobile/common/design_system/component/chip/floating_chip.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/map/map_icon_button.dart';
+import 'package:frontend_mobile/common/design_system/component/etc/map/saved_store_list.dart';
+import 'package:frontend_mobile/common/design_system/component/etc/option_menu_dropdown.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/main_top_bar.dart';
+import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
+import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
+import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/manager/geolocation/geo_location_service_impl.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
@@ -24,6 +31,37 @@ class _MapViewState extends ConsumerState<MapView> {
   final double _zoom = 12;
 
   late final NaverMapController _mapController;
+  late final DraggableScrollableController _draggableScrollableController;
+
+  bool _isStoreListAppbarVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _draggableScrollableController = DraggableScrollableController();
+    _draggableScrollableController.addListener(_draggableScrollableListener);
+  }
+
+  void _draggableScrollableListener() {
+    final Size size = MediaQuery.of(context).size;
+    final EdgeInsets mediaQueryPadding = MediaQuery.of(context).padding;
+    final double maxChildSize =
+        1 - (kToolbarHeight + mediaQueryPadding.top) / size.height - 0.05;
+
+    if (_draggableScrollableController.size >= maxChildSize) {
+      if (!_isStoreListAppbarVisible) {
+        setState(() {
+          _isStoreListAppbarVisible = true;
+        });
+      }
+    } else {
+      if (_isStoreListAppbarVisible) {
+        setState(() {
+          _isStoreListAppbarVisible = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +73,27 @@ class _MapViewState extends ConsumerState<MapView> {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
+    final TopBarIcon topBarIcon = TopBarIcon();
+
     return ScaffoldWithNavigationBar(
-      appBar: const CustomMainTopBar(),
+      appBar:
+          _isStoreListAppbarVisible
+              ? CustomSubTopBar(
+                title: '찜한 가게',
+                primary: false,
+                actions: <Widget>[
+                  topBarIcon.close(
+                    onTap: () {
+                      _draggableScrollableController.animateTo(
+                        0.4,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeIn,
+                      );
+                    },
+                  ),
+                ],
+              )
+              : const CustomMainTopBar(),
       body: Stack(
         children: <Widget>[
           NaverMap(
@@ -98,7 +155,9 @@ class _MapViewState extends ConsumerState<MapView> {
               children: <Widget>[
                 CustomMapIconButton.saveStore(
                   isSelected: true,
-                  onPressed: () {},
+                  onPressed: () async {
+                    await _showStoreList();
+                  },
                 ),
                 const SizedBox(height: 10),
                 CustomMapIconButton.myLocation(
@@ -110,6 +169,8 @@ class _MapViewState extends ConsumerState<MapView> {
               ],
             ),
           ),
+          if (_isStoreListAppbarVisible)
+            Positioned.fill(child: Container(color: ScaleColorConfig.white)),
         ],
       ),
     );
@@ -158,9 +219,131 @@ class _MapViewState extends ConsumerState<MapView> {
     }
   }
 
+  Future<void> _showStoreList() async {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final EdgeInsets mediaQueryPadding = MediaQuery.of(context).padding;
+
+    await showModalBottomSheet(
+      context: context,
+      backgroundColor: ScaleColorConfig.white,
+      barrierColor: Colors.transparent,
+      constraints: const BoxConstraints(minWidth: double.infinity),
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return DraggableScrollableSheet(
+          controller: _draggableScrollableController,
+          minChildSize: 0.4,
+          initialChildSize: 0.4,
+          maxChildSize:
+              1 - (kToolbarHeight + mediaQueryPadding.top) / size.height,
+          snap: true,
+          expand: false,
+          snapSizes: const <double>[0.4],
+          builder: (BuildContext context, ScrollController scrollController) {
+            return SafeArea(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft:
+                        _isStoreListAppbarVisible
+                            ? Radius.zero
+                            : const Radius.circular(28),
+                    topRight:
+                        _isStoreListAppbarVisible
+                            ? Radius.zero
+                            : const Radius.circular(28),
+                  ),
+                ),
+                child: CustomScrollView(
+                  controller: scrollController,
+                  slivers: <Widget>[
+                    SliverToBoxAdapter(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        alignment: Alignment.center,
+                        child: Container(
+                          width: 32,
+                          height: 4,
+                          decoration: BoxDecoration(
+                            color: ScaleColorConfig.neutral30,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 10,
+                          bottom: 6,
+                          right: 16,
+                          left: 16,
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              '전체 리스트',
+                              style: textTheme.titleMedium?.copyWith(
+                                color: ScaleColorConfig.primary20,
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              '9',
+                              style: textTheme.titleMedium?.copyWith(
+                                color: ScaleColorConfig.success50,
+                              ),
+                            ),
+                            const Spacer(),
+                            CustomOutlineButton.xSmall(
+                              label: '새 리스트 추가',
+                              onPressed: () {},
+                              svg: Assets.icon.system.addCircleLine,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SliverList(
+                      delegate: SliverChildListDelegate(
+                        List<Widget>.generate(20, (int index) {
+                          return Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                ),
+                                child: CustomSavedStoreListItem.withOptionMenus(
+                                  leftIconColor: Colors.red,
+                                  name: '디저트 가게 모음 $index',
+                                  storeLength: 4,
+                                  optionMenus: const <CustomOptionMenu>[],
+                                  optionMenusVisible: false,
+                                  onOptionMenusTap: () {},
+                                  onTap: () {},
+                                ),
+                              ),
+                              const Divider(color: ScaleColorConfig.neutral50),
+                            ],
+                          );
+                        }),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   void dispose() {
     _mapController.dispose();
+    _draggableScrollableController.dispose();
     super.dispose();
   }
 }
