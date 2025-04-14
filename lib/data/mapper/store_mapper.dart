@@ -1,5 +1,6 @@
 import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/data/entity/store/store_by_location_entity.dart';
+import 'package:frontend_mobile/data/entity/store/store_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_holiday_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_operating_hour_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_summary_entity.dart';
@@ -7,6 +8,7 @@ import 'package:frontend_mobile/data/entity/store/store_top_preference_entity.da
 import 'package:frontend_mobile/data/query_param/store/get_my_preferences_stores_by_location_query_param.dart';
 import 'package:frontend_mobile/data/query_param/store/get_stores_by_location_query_param.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
+import 'package:frontend_mobile/domain/model/store/store_detail_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_holiday_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_operating_hour_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_summary_model.dart';
@@ -59,6 +61,69 @@ extension StoreByLocationEntityExt on StoreByLocationEntity {
   );
 }
 
+extension StoreDetailMenuEntityExt on StoreDetailMenu {
+  StoreDetailMenuModel toModel() => StoreDetailMenuModel(
+    menuUuid: menuUuid,
+    name: name,
+    price: price,
+    isPopular: isPopular,
+    description: description,
+    images: images,
+  );
+}
+
+extension StoreDetailReviewEntityExt on StoreDetailReview {
+  StoreDetailReviewModel toModel() => StoreDetailReviewModel(
+    reviewUuid: reviewUuid,
+    storeId: storeId,
+    userUuid: userUuid,
+    nickname: nickname,
+    content: content,
+    rating: rating,
+    createdAt: createdAt,
+    profileImage: profileImage,
+    images: images,
+  );
+}
+
+extension StoreDetailCommunityReviewEntityExt on StoreDetailCommunityReview {
+  StoreDetailCommunityReviewModel toModel() => StoreDetailCommunityReviewModel(
+    reviewUuid: reviewUuid,
+    userUuid: userUuid,
+    nickname: nickname,
+    profileImage: profileImage,
+    thumbnail: thumbnail,
+    title: title,
+    content: content,
+    createdAt: createdAt,
+    updatedAt: updatedAt,
+  );
+}
+
+extension StoreDetailMateEntityExt on StoreDetailMate {
+  StoreDetailMateModel toModel() => StoreDetailMateModel(
+    mateUuid: mateUuid,
+    mateCategory: mateCategory,
+    thumbnail: thumbnail,
+    title: title,
+    content: content,
+    nickname: nickname,
+    recruitYn: recruitYn,
+    saved: saved,
+  );
+}
+
+extension StoreDetailNoticeEntityExt on StoreDetailNoticeEntity {
+  StoreDetailNoticeModel toModel() => StoreDetailNoticeModel(
+    noticeId: noticeId,
+    tag: tag,
+    title: title,
+    content: content,
+    createdAt: createdAt,
+    updatedAt: updatedAt,
+  );
+}
+
 extension StoreSummaryEntityExt on StoreSummaryEntity {
   StoreSummaryModel toModel() => StoreSummaryModel(
     storeId: storeId,
@@ -71,6 +136,53 @@ extension StoreSummaryEntityExt on StoreSummaryEntity {
             .toList(),
     address: address,
     phone: phone,
+    averageRating: averageRating,
+    storeImages: storeImages,
+    ownerPickImages: ownerPickImages,
+    primaryStoreLink: primaryStoreLink,
+    storeLinks: storeLinks,
+    holidays: holidays?.map((StoreHolidayEntity e) => e.toModel()).toList(),
+    topPreferences:
+        topPreferences
+            ?.map((StoreTopPreferenceEntity e) => e.toModel())
+            .toList(),
+    description: description,
+    animalYn: animalYn,
+    tumblerYn: tumblerYn,
+    parkingYn: parkingYn,
+  );
+}
+
+extension StoreDetailEntityExt on StoreDetailEntity {
+  StoreDetailModel toModel() => StoreDetailModel(
+    storeId: storeId,
+    storeUuid: storeUuid,
+    name: name,
+    tags: tags,
+    operatingHours:
+        operatingHours
+            .map((StoreOperatingHourEntity e) => e.toModel())
+            .toList(),
+    address: address,
+    phone: phone,
+    ownerId: ownerId,
+    ownerUuid: ownerUuid,
+    latitude: latitude,
+    longitude: longitude,
+    menus: menus.map((StoreDetailMenu e) => e.toModel()).toList(),
+    totalReviewCount: totalReviewCount,
+    userId: userId,
+    userUuid: userUuid,
+    storeReviews:
+        storeReviews?.map((StoreDetailReview e) => e.toModel()).toList(),
+    communityReviews:
+        communityReviews
+            ?.map((StoreDetailCommunityReview e) => e.toModel())
+            .toList(),
+    mate: mate?.map((StoreDetailMate e) => e.toModel()).toList(),
+    saved: saved,
+    savedListId: savedListId,
+    notices: notices?.map((StoreDetailNoticeEntity e) => e.toModel()).toList(),
     averageRating: averageRating,
     storeImages: storeImages,
     ownerPickImages: ownerPickImages,
