@@ -22,6 +22,9 @@ import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 
+part 'local_widget/store_list_sheet.dart';
+part 'local_widget/bottom_navigation_bar.dart';
+
 class MapView extends ConsumerStatefulWidget {
   const MapView({super.key});
 
@@ -74,7 +77,6 @@ class _MapViewState extends ConsumerState<MapView> {
     }
 
     final TopBarIcon topBarIcon = TopBarIcon();
-    final TextTheme textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
       appBar:
@@ -189,142 +191,11 @@ class _MapViewState extends ConsumerState<MapView> {
               ],
             ),
           ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            left: 0,
-            child: CustomNavigationBar(
-              list: <NavigationBarType>[
-                NavigationBarType(
-                  svg: Assets.icon.map.mapLine,
-                  label: '지도',
-                  onTap: () {
-                    context.goNamed(AppRoutes.map.name);
-                  },
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            top: 0,
-            child: DraggableScrollableSheet(
-              controller: _draggableScrollableController,
-              minChildSize: 0,
-              initialChildSize: 0,
-              snap: true,
-              expand: false,
-              snapSizes: <double>[_snapSize],
-              builder: (
-                BuildContext context,
-                ScrollController scrollController,
-              ) {
-                return SafeArea(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft:
-                            _isStoreListAppbarVisible
-                                ? Radius.zero
-                                : const Radius.circular(28),
-                        topRight:
-                            _isStoreListAppbarVisible
-                                ? Radius.zero
-                                : const Radius.circular(28),
-                      ),
-                      color: ScaleColorConfig.white,
-                    ),
-                    child: CustomScrollView(
-                      controller: scrollController,
-                      slivers: <Widget>[
-                        _isStoreListAppbarVisible
-                            ? const SliverToBoxAdapter(child: SizedBox.shrink())
-                            : SliverToBoxAdapter(
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 16,
-                                ),
-                                alignment: Alignment.center,
-                                child: Container(
-                                  width: 32,
-                                  height: 4,
-                                  decoration: BoxDecoration(
-                                    color: ScaleColorConfig.neutral30,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                ),
-                              ),
-                            ),
-                        SliverToBoxAdapter(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              top: 10,
-                              bottom: 6,
-                              right: 16,
-                              left: 16,
-                            ),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  '전체 리스트',
-                                  style: textTheme.titleMedium?.copyWith(
-                                    color: ScaleColorConfig.primary20,
-                                  ),
-                                ),
-                                const SizedBox(width: 6),
-                                Text(
-                                  '9',
-                                  style: textTheme.titleMedium?.copyWith(
-                                    color: ScaleColorConfig.success50,
-                                  ),
-                                ),
-                                const Spacer(),
-                                CustomOutlineButton.xSmall(
-                                  label: '새 리스트 추가',
-                                  onPressed: () {},
-                                  svg: Assets.icon.system.addCircleLine,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SliverList(
-                          delegate: SliverChildListDelegate(
-                            List<Widget>.generate(20, (int index) {
-                              return Column(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                    ),
-                                    child:
-                                        CustomSavedStoreListItem.withOptionMenus(
-                                          leftIconColor: Colors.red,
-                                          name: '디저트 가게 모음 $index',
-                                          storeLength: 4,
-                                          optionMenus:
-                                              const <CustomOptionMenu>[],
-                                          optionMenusVisible: false,
-                                          onOptionMenusTap: () {},
-                                          onTap: () {},
-                                        ),
-                                  ),
-                                  const Divider(
-                                    color: ScaleColorConfig.neutral50,
-                                  ),
-                                ],
-                              );
-                            }),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
+          const _BottomNavigation(),
+          _StoreListSheet(
+            draggableScrollableController: _draggableScrollableController,
+            snapSize: _snapSize,
+            isStoreListAppBarVisible: _isStoreListAppbarVisible,
           ),
         ],
       ),
