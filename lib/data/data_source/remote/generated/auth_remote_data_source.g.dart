@@ -18,6 +18,40 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
   final ParseErrorLogger? errorLogger;
 
   @override
+  Future<LocalLoginEntity> postSignUp({
+    required String emailToken,
+    required PostSignUpRequestBody body,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'X-Email-Verification-Token': emailToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<LocalLoginEntity>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/auth/signup',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late LocalLoginEntity _value;
+    try {
+      _value = LocalLoginEntity.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<LocalLoginEntity> postDevLocalLogin({
     required LocalLoginRequestBody body,
   }) async {

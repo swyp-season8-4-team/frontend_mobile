@@ -17,10 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SignUpState {
+  Status get postSignUpStatus => throw _privateConstructorUsedError;
   Status get postVerificationRequestStatus =>
       throw _privateConstructorUsedError;
   Status get postVerifyStatus => throw _privateConstructorUsedError;
   Status get postNicknameStatus => throw _privateConstructorUsedError;
+  LocalLoginModel get signUpData => throw _privateConstructorUsedError;
   EmailVerificationRequestModel get verificationRequestData =>
       throw _privateConstructorUsedError;
   EmailVerifyModel get verifyData => throw _privateConstructorUsedError;
@@ -43,9 +45,11 @@ abstract class $SignUpStateCopyWith<$Res> {
   ) = _$SignUpStateCopyWithImpl<$Res, SignUpState>;
   @useResult
   $Res call({
+    Status postSignUpStatus,
     Status postVerificationRequestStatus,
     Status postVerifyStatus,
     Status postNicknameStatus,
+    LocalLoginModel signUpData,
     EmailVerificationRequestModel verificationRequestData,
     EmailVerifyModel verifyData,
     NicknameAvailabilityModel nicknameAvailabilityData,
@@ -68,9 +72,11 @@ class _$SignUpStateCopyWithImpl<$Res, $Val extends SignUpState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? postSignUpStatus = null,
     Object? postVerificationRequestStatus = null,
     Object? postVerifyStatus = null,
     Object? postNicknameStatus = null,
+    Object? signUpData = null,
     Object? verificationRequestData = null,
     Object? verifyData = null,
     Object? nicknameAvailabilityData = null,
@@ -78,6 +84,11 @@ class _$SignUpStateCopyWithImpl<$Res, $Val extends SignUpState>
   }) {
     return _then(
       _value.copyWith(
+            postSignUpStatus:
+                null == postSignUpStatus
+                    ? _value.postSignUpStatus
+                    : postSignUpStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
             postVerificationRequestStatus:
                 null == postVerificationRequestStatus
                     ? _value.postVerificationRequestStatus
@@ -93,6 +104,11 @@ class _$SignUpStateCopyWithImpl<$Res, $Val extends SignUpState>
                     ? _value.postNicknameStatus
                     : postNicknameStatus // ignore: cast_nullable_to_non_nullable
                         as Status,
+            signUpData:
+                null == signUpData
+                    ? _value.signUpData
+                    : signUpData // ignore: cast_nullable_to_non_nullable
+                        as LocalLoginModel,
             verificationRequestData:
                 null == verificationRequestData
                     ? _value.verificationRequestData
@@ -129,9 +145,11 @@ abstract class _$$SignUpStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
+    Status postSignUpStatus,
     Status postVerificationRequestStatus,
     Status postVerifyStatus,
     Status postNicknameStatus,
+    LocalLoginModel signUpData,
     EmailVerificationRequestModel verificationRequestData,
     EmailVerifyModel verifyData,
     NicknameAvailabilityModel nicknameAvailabilityData,
@@ -153,9 +171,11 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? postSignUpStatus = null,
     Object? postVerificationRequestStatus = null,
     Object? postVerifyStatus = null,
     Object? postNicknameStatus = null,
+    Object? signUpData = null,
     Object? verificationRequestData = null,
     Object? verifyData = null,
     Object? nicknameAvailabilityData = null,
@@ -163,6 +183,11 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
   }) {
     return _then(
       _$SignUpStateImpl(
+        postSignUpStatus:
+            null == postSignUpStatus
+                ? _value.postSignUpStatus
+                : postSignUpStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
         postVerificationRequestStatus:
             null == postVerificationRequestStatus
                 ? _value.postVerificationRequestStatus
@@ -178,6 +203,11 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
                 ? _value.postNicknameStatus
                 : postNicknameStatus // ignore: cast_nullable_to_non_nullable
                     as Status,
+        signUpData:
+            null == signUpData
+                ? _value.signUpData
+                : signUpData // ignore: cast_nullable_to_non_nullable
+                    as LocalLoginModel,
         verificationRequestData:
             null == verificationRequestData
                 ? _value.verificationRequestData
@@ -207,9 +237,22 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
 
 class _$SignUpStateImpl implements _SignUpState {
   const _$SignUpStateImpl({
+    this.postSignUpStatus = Status.initial,
     this.postVerificationRequestStatus = Status.initial,
     this.postVerifyStatus = Status.initial,
     this.postNicknameStatus = Status.initial,
+    this.signUpData = const LocalLoginModel(
+      accessToken: '',
+      refreshToken: '',
+      tokenType: '',
+      expiresIn: -1,
+      userUuid: '',
+      email: '',
+      nickname: '',
+      profileImageUrl: null,
+      deviceId: '',
+      preferenceSet: false,
+    ),
     this.verificationRequestData = const EmailVerificationRequestModel(
       message: '',
       expirationMinutes: -1,
@@ -231,6 +274,9 @@ class _$SignUpStateImpl implements _SignUpState {
 
   @override
   @JsonKey()
+  final Status postSignUpStatus;
+  @override
+  @JsonKey()
   final Status postVerificationRequestStatus;
   @override
   @JsonKey()
@@ -238,6 +284,9 @@ class _$SignUpStateImpl implements _SignUpState {
   @override
   @JsonKey()
   final Status postNicknameStatus;
+  @override
+  @JsonKey()
+  final LocalLoginModel signUpData;
   @override
   @JsonKey()
   final EmailVerificationRequestModel verificationRequestData;
@@ -253,7 +302,7 @@ class _$SignUpStateImpl implements _SignUpState {
 
   @override
   String toString() {
-    return 'SignUpState(postVerificationRequestStatus: $postVerificationRequestStatus, postVerifyStatus: $postVerifyStatus, postNicknameStatus: $postNicknameStatus, verificationRequestData: $verificationRequestData, verifyData: $verifyData, nicknameAvailabilityData: $nicknameAvailabilityData, exception: $exception)';
+    return 'SignUpState(postSignUpStatus: $postSignUpStatus, postVerificationRequestStatus: $postVerificationRequestStatus, postVerifyStatus: $postVerifyStatus, postNicknameStatus: $postNicknameStatus, signUpData: $signUpData, verificationRequestData: $verificationRequestData, verifyData: $verifyData, nicknameAvailabilityData: $nicknameAvailabilityData, exception: $exception)';
   }
 
   @override
@@ -261,6 +310,8 @@ class _$SignUpStateImpl implements _SignUpState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SignUpStateImpl &&
+            (identical(other.postSignUpStatus, postSignUpStatus) ||
+                other.postSignUpStatus == postSignUpStatus) &&
             (identical(
                   other.postVerificationRequestStatus,
                   postVerificationRequestStatus,
@@ -271,6 +322,8 @@ class _$SignUpStateImpl implements _SignUpState {
                 other.postVerifyStatus == postVerifyStatus) &&
             (identical(other.postNicknameStatus, postNicknameStatus) ||
                 other.postNicknameStatus == postNicknameStatus) &&
+            (identical(other.signUpData, signUpData) ||
+                other.signUpData == signUpData) &&
             (identical(
                   other.verificationRequestData,
                   verificationRequestData,
@@ -290,9 +343,11 @@ class _$SignUpStateImpl implements _SignUpState {
   @override
   int get hashCode => Object.hash(
     runtimeType,
+    postSignUpStatus,
     postVerificationRequestStatus,
     postVerifyStatus,
     postNicknameStatus,
+    signUpData,
     verificationRequestData,
     verifyData,
     nicknameAvailabilityData,
@@ -310,9 +365,11 @@ class _$SignUpStateImpl implements _SignUpState {
 
 abstract class _SignUpState implements SignUpState {
   const factory _SignUpState({
+    final Status postSignUpStatus,
     final Status postVerificationRequestStatus,
     final Status postVerifyStatus,
     final Status postNicknameStatus,
+    final LocalLoginModel signUpData,
     final EmailVerificationRequestModel verificationRequestData,
     final EmailVerifyModel verifyData,
     final NicknameAvailabilityModel nicknameAvailabilityData,
@@ -320,11 +377,15 @@ abstract class _SignUpState implements SignUpState {
   }) = _$SignUpStateImpl;
 
   @override
+  Status get postSignUpStatus;
+  @override
   Status get postVerificationRequestStatus;
   @override
   Status get postVerifyStatus;
   @override
   Status get postNicknameStatus;
+  @override
+  LocalLoginModel get signUpData;
   @override
   EmailVerificationRequestModel get verificationRequestData;
   @override
