@@ -25,7 +25,7 @@ class CustomSubTopBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         backgroundColor: Colors.transparent,
         leadingWidth: 24 + 7,
-        leading: icon.leftLine(onTap: () {}),
+        leading: icon.leftLine(onTap: () => Navigator.pop(context)),
         title: Text(title, style: textTheme.titleLarge),
         centerTitle: true,
         actions: actions,

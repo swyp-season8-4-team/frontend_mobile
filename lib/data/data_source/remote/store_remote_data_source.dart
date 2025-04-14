@@ -7,6 +7,7 @@ import 'package:frontend_mobile/data/entity/store/store_summary_entity.dart';
 import 'package:frontend_mobile/data/query_param/store/get_my_preferences_stores_by_location_query_param.dart';
 import 'package:frontend_mobile/data/query_param/store/get_stores_by_location_query_param.dart';
 import 'package:retrofit/http.dart';
+import 'package:retrofit/error_logger.dart';
 
 part 'generated/store_remote_data_source.g.dart';
 

@@ -3,26 +3,68 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
+enum CustomOutlineButtonSize { medium, small, xSmall }
+
 class CustomOutlineButton extends StatelessWidget {
-  const CustomOutlineButton({
+  const CustomOutlineButton.medium({
     required this.label,
     required this.onPressed,
     this.svg,
     this.width,
     this.disabled = false,
-    this.large = true,
     super.key,
-  });
+  }) : size = CustomOutlineButtonSize.medium;
+
+  const CustomOutlineButton.small({
+    required this.label,
+    required this.onPressed,
+    this.svg,
+    this.width,
+    this.disabled = false,
+    super.key,
+  }) : size = CustomOutlineButtonSize.small;
+
+  const CustomOutlineButton.xSmall({
+    required this.label,
+    required this.onPressed,
+    this.svg,
+    this.width,
+    this.disabled = false,
+    super.key,
+  }) : size = CustomOutlineButtonSize.xSmall;
 
   final String label;
   final VoidCallback? onPressed;
   final SvgGenImage? svg;
   final double? width;
   final bool disabled;
+  final CustomOutlineButtonSize size;
 
-  /// 사이즈를 구분할 때 사용하는 변수
-  /// large, small 있음
-  final bool large;
+  double get _iconSize {
+    switch (size) {
+      case CustomOutlineButtonSize.medium:
+        return 24;
+
+      case CustomOutlineButtonSize.small:
+      case CustomOutlineButtonSize.xSmall:
+        return 18;
+    }
+  }
+
+  TextStyle? _textStyle({required BuildContext context}) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    switch (size) {
+      case CustomOutlineButtonSize.medium:
+        return textTheme.titleMedium;
+
+      case CustomOutlineButtonSize.small:
+        return textTheme.titleSmall;
+
+      case CustomOutlineButtonSize.xSmall:
+        return textTheme.labelLarge;
+    }
+  }
 
   WidgetStateProperty<Color?> get _foregroundColor =>
       WidgetStateProperty.resolveWith((Set<WidgetState> states) {
@@ -74,8 +116,6 @@ class CustomOutlineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
     return SizedBox(
       width: width,
       child: OutlinedButton(
@@ -86,7 +126,7 @@ class CustomOutlineButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           elevation: 0,
-          textStyle: large ? textTheme.titleMedium : textTheme.titleSmall,
+          textStyle: _textStyle(context: context),
         ).copyWith(
           foregroundColor: _foregroundColor,
           backgroundColor: _backgroundColor,
@@ -98,7 +138,7 @@ class CustomOutlineButton extends StatelessWidget {
             if (svg != null) ...<Widget>[
               SvgPicture.asset(
                 svg!.path,
-                width: large ? null : 18,
+                width: _iconSize,
                 colorFilter:
                     !disabled
                         ? null

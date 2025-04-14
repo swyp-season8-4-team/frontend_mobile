@@ -168,7 +168,9 @@ class _CustomInputBoxState extends State<CustomInputBox> {
             ),
           ),
         ),
-        if (widget.error && widget.errorText != null)
+        if (widget.error &&
+            widget.errorText != null &&
+            widget.errorText!.isNotEmpty)
           Padding(
             padding: const EdgeInsets.only(top: 12),
             child: Row(
