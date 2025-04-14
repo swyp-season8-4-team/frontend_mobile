@@ -27,9 +27,9 @@ class MateDetailModel {
   final bool recruitYn;
   final String mateImage;
   final String profileImage;
-  final PlaceModel place;
+  final PlaceModel? place;
   final String createdAt;
-  final String updatedAt;
+  final String? updatedAt;
   final bool saved;
   final String applyStatus;
   final String gender;
@@ -44,8 +44,8 @@ class PlaceModel {
     required this.longitude,
   });
 
-  final String placeName;
-  final String address;
-  final int latitude;
-  final int longitude;
+  final String? placeName;
+  final String? address;
+  final int? latitude;
+  final int? longitude;
 }

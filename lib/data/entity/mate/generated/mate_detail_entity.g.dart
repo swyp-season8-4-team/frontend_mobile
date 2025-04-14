@@ -22,7 +22,7 @@ MateDetailEntity _$MateDetailEntityFromJson(Map<String, dynamic> json) =>
               ? const PlaceEntity()
               : PlaceEntity.fromJson(json['place'] as Map<String, dynamic>),
       createdAt: json['createdAt'] as String? ?? '',
-      updatedAt: json['updatedAt'] as String? ?? '',
+      updatedAt: json['updatedAt'] as String?,
       saved: json['saved'] as bool? ?? false,
       applyStatus: json['applyStatus'] as String? ?? '',
       gender: json['gender'] as String? ?? '',
@@ -50,10 +50,10 @@ Map<String, dynamic> _$MateDetailEntityToJson(MateDetailEntity instance) =>
     };
 
 PlaceEntity _$PlaceEntityFromJson(Map<String, dynamic> json) => PlaceEntity(
-  placeName: json['placeName'] as String? ?? '',
-  address: json['address'] as String? ?? '',
-  latitude: (json['latitude'] as num?)?.toInt() ?? -1,
-  longitude: (json['longitude'] as num?)?.toInt() ?? -1,
+  placeName: json['placeName'] as String?,
+  address: json['address'] as String?,
+  latitude: (json['latitude'] as num?)?.toInt(),
+  longitude: (json['longitude'] as num?)?.toInt(),
 );
 
 Map<String, dynamic> _$PlaceEntityToJson(PlaceEntity instance) =>

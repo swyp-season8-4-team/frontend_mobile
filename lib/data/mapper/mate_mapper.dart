@@ -26,7 +26,7 @@ extension MateDetailEntityExt on MateDetailEntity {
       recruitYn: recruitYn,
       mateImage: mateImage,
       profileImage: profileImage,
-      place: place.toModel(),
+      place: place?.toModel(),
       createdAt: createdAt,
       updatedAt: updatedAt,
       saved: saved,

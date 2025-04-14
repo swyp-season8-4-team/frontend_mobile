@@ -16,7 +16,7 @@ class MateDetailEntity {
     this.profileImage = '',
     this.place = const PlaceEntity(),
     this.createdAt = '',
-    this.updatedAt = '',
+    this.updatedAt,
     this.saved = false,
     this.applyStatus = '',
     this.gender = '',
@@ -35,9 +35,9 @@ class MateDetailEntity {
   final bool recruitYn;
   final String mateImage;
   final String profileImage;
-  final PlaceEntity place;
+  final PlaceEntity? place;
   final String createdAt;
-  final String updatedAt;
+  final String? updatedAt;
   final bool saved;
   final String applyStatus;
   final String gender;
@@ -47,17 +47,17 @@ class MateDetailEntity {
 @JsonSerializable()
 class PlaceEntity {
   const PlaceEntity({
-    this.placeName = '',
-    this.address = '',
-    this.latitude = -1,
-    this.longitude = -1,
+    this.placeName,
+    this.address,
+    this.latitude,
+    this.longitude,
   });
 
   factory PlaceEntity.fromJson(Map<String, dynamic> json) =>
       _$PlaceEntityFromJson(json);
 
-  final String placeName;
-  final String address;
-  final int latitude;
-  final int longitude;
+  final String? placeName;
+  final String? address;
+  final int? latitude;
+  final int? longitude;
 }
