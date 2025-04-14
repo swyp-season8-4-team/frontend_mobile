@@ -35,7 +35,12 @@ class DessertBoardViewModel extends StateNotifier<DessertBoardState> {
 
     response.map(
       success: (Success<MateModel, CustomException> success) {
-        state = state.copyWith(status: Status.success, data: success.data);
+        state = state.copyWith(
+          status: Status.success,
+          data: success.data,
+          backupData:
+              state.backupData.mates.isEmpty ? success.data : state.backupData,
+        );
       },
       failure: (Failure<MateModel, CustomException> failure) {
         state = state.copyWith(

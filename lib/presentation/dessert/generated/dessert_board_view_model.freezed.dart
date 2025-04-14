@@ -19,6 +19,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$DessertBoardState {
   Status get status => throw _privateConstructorUsedError;
   MateModel get data => throw _privateConstructorUsedError;
+  MateModel get backupData => throw _privateConstructorUsedError;
   ExceptionModel get exception => throw _privateConstructorUsedError;
 
   /// Create a copy of DessertBoardState
@@ -35,7 +36,12 @@ abstract class $DessertBoardStateCopyWith<$Res> {
     $Res Function(DessertBoardState) then,
   ) = _$DessertBoardStateCopyWithImpl<$Res, DessertBoardState>;
   @useResult
-  $Res call({Status status, MateModel data, ExceptionModel exception});
+  $Res call({
+    Status status,
+    MateModel data,
+    MateModel backupData,
+    ExceptionModel exception,
+  });
 }
 
 /// @nodoc
@@ -55,6 +61,7 @@ class _$DessertBoardStateCopyWithImpl<$Res, $Val extends DessertBoardState>
   $Res call({
     Object? status = null,
     Object? data = null,
+    Object? backupData = null,
     Object? exception = null,
   }) {
     return _then(
@@ -68,6 +75,11 @@ class _$DessertBoardStateCopyWithImpl<$Res, $Val extends DessertBoardState>
                 null == data
                     ? _value.data
                     : data // ignore: cast_nullable_to_non_nullable
+                        as MateModel,
+            backupData:
+                null == backupData
+                    ? _value.backupData
+                    : backupData // ignore: cast_nullable_to_non_nullable
                         as MateModel,
             exception:
                 null == exception
@@ -89,7 +101,12 @@ abstract class _$$DessertBoardStateImplCopyWith<$Res>
   ) = __$$DessertBoardStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Status status, MateModel data, ExceptionModel exception});
+  $Res call({
+    Status status,
+    MateModel data,
+    MateModel backupData,
+    ExceptionModel exception,
+  });
 }
 
 /// @nodoc
@@ -108,6 +125,7 @@ class __$$DessertBoardStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? data = null,
+    Object? backupData = null,
     Object? exception = null,
   }) {
     return _then(
@@ -121,6 +139,11 @@ class __$$DessertBoardStateImplCopyWithImpl<$Res>
             null == data
                 ? _value.data
                 : data // ignore: cast_nullable_to_non_nullable
+                    as MateModel,
+        backupData:
+            null == backupData
+                ? _value.backupData
+                : backupData // ignore: cast_nullable_to_non_nullable
                     as MateModel,
         exception:
             null == exception
@@ -138,6 +161,7 @@ class _$DessertBoardStateImpl implements _DessertBoardState {
   const _$DessertBoardStateImpl({
     this.status = Status.initial,
     this.data = const MateModel(mates: <MateDetailModel>[], last: false),
+    this.backupData = const MateModel(mates: <MateDetailModel>[], last: false),
     this.exception = const ExceptionModel(
       status: -1,
       code: '',
@@ -154,11 +178,14 @@ class _$DessertBoardStateImpl implements _DessertBoardState {
   final MateModel data;
   @override
   @JsonKey()
+  final MateModel backupData;
+  @override
+  @JsonKey()
   final ExceptionModel exception;
 
   @override
   String toString() {
-    return 'DessertBoardState(status: $status, data: $data, exception: $exception)';
+    return 'DessertBoardState(status: $status, data: $data, backupData: $backupData, exception: $exception)';
   }
 
   @override
@@ -168,12 +195,15 @@ class _$DessertBoardStateImpl implements _DessertBoardState {
             other is _$DessertBoardStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.data, data) || other.data == data) &&
+            (identical(other.backupData, backupData) ||
+                other.backupData == backupData) &&
             (identical(other.exception, exception) ||
                 other.exception == exception));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, data, exception);
+  int get hashCode =>
+      Object.hash(runtimeType, status, data, backupData, exception);
 
   /// Create a copy of DessertBoardState
   /// with the given fields replaced by the non-null parameter values.
@@ -191,6 +221,7 @@ abstract class _DessertBoardState implements DessertBoardState {
   const factory _DessertBoardState({
     final Status status,
     final MateModel data,
+    final MateModel backupData,
     final ExceptionModel exception,
   }) = _$DessertBoardStateImpl;
 
@@ -198,6 +229,8 @@ abstract class _DessertBoardState implements DessertBoardState {
   Status get status;
   @override
   MateModel get data;
+  @override
+  MateModel get backupData;
   @override
   ExceptionModel get exception;
 
