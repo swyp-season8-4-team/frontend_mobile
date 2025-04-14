@@ -61,6 +61,10 @@ class _SignUpStep1State extends ConsumerState<SignUpStep1> {
     ref.listen(signUpViewModelProvider, (_, SignUpState next) {
       switch (next.postVerificationRequestStatus) {
         case Status.success:
+          ref.read(signUpProvider.notifier).state = ref
+              .read(signUpProvider)
+              .copyWith(email: _emailController.text);
+
           setState(() {
             _isValidEmail = true;
             _success = true;

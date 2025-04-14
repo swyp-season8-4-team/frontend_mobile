@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
 import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_gender_option_button.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/core/util/text_line_break.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:frontend_mobile/presentation/sign_up/sign_up_view_model.dart';
 import 'package:frontend_mobile/presentation/sign_up/widget/sign_up_wrapper.dart';
 import 'package:go_router/go_router.dart';
 
-class SignUpStep4 extends StatefulWidget {
+class SignUpStep4 extends ConsumerStatefulWidget {
   const SignUpStep4({super.key});
 
   @override
-  State<SignUpStep4> createState() => _SignUpStep4State();
+  ConsumerState<SignUpStep4> createState() => _SignUpStep4State();
 }
 
-class _SignUpStep4State extends State<SignUpStep4> {
+class _SignUpStep4State extends ConsumerState<SignUpStep4> {
   bool _isSelectedGirl = false;
   bool _isSelectedBoy = false;
 
@@ -72,6 +74,10 @@ class _SignUpStep4State extends State<SignUpStep4> {
             label: '다음',
             disabled: !_isSelectedGirl && !_isSelectedBoy,
             onPressed: () {
+              ref.read(signUpProvider.notifier).state = ref
+                  .read(signUpProvider)
+                  .copyWith(gender: _isSelectedBoy ? 'MALE' : 'FEMALE');
+
               context.pushNamed(AppRoutes.signUpStep5.name);
             },
           ),

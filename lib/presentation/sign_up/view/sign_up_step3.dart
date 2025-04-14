@@ -5,6 +5,7 @@ import 'package:frontend_mobile/common/design_system/component/textfield/input_b
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:frontend_mobile/presentation/sign_up/sign_up_view_model.dart';
 import 'package:frontend_mobile/presentation/sign_up/widget/sign_up_wrapper.dart';
 import 'package:go_router/go_router.dart';
 
@@ -38,7 +39,37 @@ class _SignUpStep3State extends ConsumerState<SignUpStep3> {
   }
 
   void _onPasswordRender() {
-    setState(() {});
+    /// 비밀번호가 비어있지 않은 경우
+    if (_passwordController.text.isNotEmpty) {
+      /// 유효하지 않은 비밀번호인 경우
+      if (!_passwordController.text.isPasswordValid) {
+        setState(() {
+          _realTimePasswordCheckError = true;
+          _realTimePasswordCheckSuccess = false;
+        });
+      }
+      /// 비밀번호가 서로 다른 경우
+      else if (_passwordController.text != _passwordCheckController.text) {
+        setState(() {
+          _realTimePasswordCheckError = true;
+          _realTimePasswordCheckSuccess = false;
+        });
+      }
+      /// 유효한 비밀번호인 경우
+      else {
+        setState(() {
+          _realTimePasswordCheckError = false;
+          _realTimePasswordCheckSuccess = true;
+        });
+      }
+    }
+    /// 비밀번호가 비어있는 경우
+    else {
+      setState(() {
+        _realTimePasswordCheckError = false;
+        _realTimePasswordCheckSuccess = false;
+      });
+    }
   }
 
   void _onPasswordCheckRender() {
@@ -154,6 +185,13 @@ class _SignUpStep3State extends ConsumerState<SignUpStep3> {
                     _passwordController.text == _passwordCheckController.text &&
                     !_realTimePasswordCheckError),
             onPressed: () {
+              ref.read(signUpProvider.notifier).state = ref
+                  .read(signUpProvider)
+                  .copyWith(
+                    password: _passwordController.text,
+                    confirmPassword: _passwordCheckController.text,
+                  );
+
               context.pushNamed(AppRoutes.signUpStep4.name);
             },
           ),

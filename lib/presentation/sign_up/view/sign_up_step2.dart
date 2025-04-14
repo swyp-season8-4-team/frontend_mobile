@@ -93,6 +93,10 @@ class _SignUpStep2State extends ConsumerState<SignUpStep2> {
       (_, Status status) {
         switch (status) {
           case Status.success:
+            ref.read(signUpProvider.notifier).state = ref
+                .read(signUpProvider)
+                .copyWith(emailToken: _codeController.text);
+
             setState(() {
               _isValidCode = true;
               _success = true;

@@ -9,6 +9,7 @@ import 'package:frontend_mobile/core/resource/nickname.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/core/util/text_line_break.dart';
+import 'package:frontend_mobile/domain/param/auth/post_sign_up_params.dart';
 import 'package:frontend_mobile/domain/param/user/post_nickname_params.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/sign_up/sign_up_view_model.dart';
@@ -59,9 +60,36 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     ref.listen(signUpViewModelProvider, (_, SignUpState next) {
+      switch (next.postSignUpStatus) {
+        case Status.success:
+          context.pushNamed(AppRoutes.signUpStep6.name);
+          break;
+
+        case Status.failure:
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap: () => context.pop(),
+                ),
+              );
+            },
+          );
+          break;
+
+        default:
+      }
+
       switch (next.postNicknameStatus) {
         case Status.success:
           if (next.nicknameAvailabilityData.available) {
+            ref.read(signUpProvider.notifier).state = ref
+                .read(signUpProvider)
+                .copyWith(nickname: _nicknameController.text);
+
             setState(() {
               _error = false;
               _success = true;
@@ -124,6 +152,7 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
                     const SizedBox(height: 30),
 
                     /// TODO: 이미지 cropper 적용해야 됨
+                    /// TODO: 회원가입시, 이미지를 바꿔도 보낼 수 없음
                     const Align(child: CustomProfilePhotoSetting.girl()),
                     const SizedBox(height: 26),
 
@@ -172,8 +201,14 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
               label: '다음',
               disabled: !_isValidNickname,
               onPressed: () {
-                /// TODO: 회원가입 로직
-                context.pushNamed(AppRoutes.signUpStep6.name);
+                final PostSignUpParams state = ref.read(signUpProvider);
+
+                ref
+                    .read(signUpViewModelProvider.notifier)
+                    .postSignUp(params: state);
+
+                // print('asfsafd');
+                // context.pushNamed(AppRoutes.signUpStep6.name);
               },
             ),
             SizedBox(height: MediaQuery.of(context).padding.bottom + 32),
