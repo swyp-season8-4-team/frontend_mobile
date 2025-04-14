@@ -56,11 +56,11 @@ class _SearchStoreViewState extends ConsumerState<SearchStoreView> {
                   children: <Widget>[
                     Expanded(child: CustomSearch(onSubmitted: (String val) {})),
                     const SizedBox(width: 10),
-                    CustomFillButton(
+                    CustomFillButton.small(
                       label: '검색',
-                      primary: false,
                       width: 74,
                       onPressed: () {},
+                      backgroundColor: CustomFillButtonColor.olive,
                     ),
                   ],
                 ),
@@ -91,7 +91,7 @@ class _SearchStoreViewState extends ConsumerState<SearchStoreView> {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 14),
-                        CustomPillOutlineButton(
+                        CustomPillOutlineButton.medium(
                           width: 126,
                           label: '다시 시도',
                           onPressed: () {

@@ -16,6 +16,7 @@ class CustomBottomSheet {
     required this.child,
     this.leftButton,
     this.rightButton,
+    this.barrierColor,
   }) : height = 298,
        padding = const EdgeInsets.only(
          top: 10,
@@ -39,6 +40,7 @@ class CustomBottomSheet {
     required this.child,
     this.leftButton,
     this.rightButton,
+    this.barrierColor,
   }) : height = 134,
        padding = const EdgeInsets.all(10),
        assert(
@@ -58,34 +60,44 @@ class CustomBottomSheet {
   final EdgeInsets padding;
   final BottomSheetButton? rightButton;
   final BottomSheetButton? leftButton;
+  final Color? barrierColor;
 
   void _show() {
     showModalBottomSheet(
       context: context,
       backgroundColor: ScaleColorConfig.white,
+      barrierColor: barrierColor,
       constraints: const BoxConstraints(minWidth: double.infinity),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
       ),
       builder: (BuildContext context) {
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              _header,
-              Container(
-                width: double.infinity,
-                height: height,
-                padding: padding,
-                child: SingleChildScrollView(child: child),
-              ),
-              if (leftButton != null && rightButton != null) _button,
-            ],
-          ),
+        return CustomBottomSheetContent(
+          height: height,
+          padding: padding,
+          leftButton: leftButton,
+          rightButton: rightButton,
+          child: child,
         );
       },
     );
   }
+}
+
+class CustomBottomSheetContent extends StatelessWidget {
+  const CustomBottomSheetContent({
+    required this.child,
+    required this.height,
+    super.key,
+    this.padding,
+    this.rightButton,
+    this.leftButton,
+  });
+  final Widget child;
+  final double height;
+  final EdgeInsets? padding;
+  final BottomSheetButton? rightButton;
+  final BottomSheetButton? leftButton;
 
   /// Drag handle
   Widget get _header => Container(
@@ -111,14 +123,14 @@ class CustomBottomSheet {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Expanded(
-          child: CustomOutlineButton(
+          child: CustomOutlineButton.medium(
             label: leftButton!.label,
             onPressed: leftButton!.onPressed,
           ),
         ),
         const SizedBox(width: 10),
         Expanded(
-          child: CustomFillButton(
+          child: CustomFillButton.medium(
             label: rightButton!.label,
             onPressed: rightButton!.onPressed,
           ),
@@ -126,4 +138,23 @@ class CustomBottomSheet {
       ],
     ),
   );
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          _header,
+          Container(
+            width: double.infinity,
+            height: height,
+            padding: padding,
+            child: SingleChildScrollView(child: child),
+          ),
+          if (leftButton != null && rightButton != null) _button,
+        ],
+      ),
+    );
+  }
 }

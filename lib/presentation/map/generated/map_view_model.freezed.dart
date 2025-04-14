@@ -21,6 +21,26 @@ mixin _$MapState {
   Status get getAllPreferencesStatus => throw _privateConstructorUsedError;
   ExceptionModel get getAllPreferencesException =>
       throw _privateConstructorUsedError;
+  List<StoreByLocationModel> get storesByLocation =>
+      throw _privateConstructorUsedError;
+  double get lat => throw _privateConstructorUsedError;
+  double get lng => throw _privateConstructorUsedError;
+  double get radius => throw _privateConstructorUsedError;
+  bool get myPreferenceFilterSelected => throw _privateConstructorUsedError;
+  List<int>? get preferenceTagIds => throw _privateConstructorUsedError;
+  String? get searchKeyword => throw _privateConstructorUsedError;
+  Status get getStoresByLocationStatus => throw _privateConstructorUsedError;
+  Status get getMyPreferencesStoresByLocationStatus =>
+      throw _privateConstructorUsedError;
+  ExceptionModel get getStoresByLocationExceptionModel =>
+      throw _privateConstructorUsedError;
+  ExceptionModel get getMyPreferencesStoresByLocationExceptionModel =>
+      throw _privateConstructorUsedError;
+  StoreSummaryModel? get storeSummary => throw _privateConstructorUsedError;
+  Status get getStoreSummaryStatus => throw _privateConstructorUsedError;
+  ExceptionModel get getStoreSummaryExceptionModel =>
+      throw _privateConstructorUsedError;
+  NMarker? get selectedMarker => throw _privateConstructorUsedError;
 
   /// Create a copy of MapState
   /// with the given fields replaced by the non-null parameter values.
@@ -38,6 +58,21 @@ abstract class $MapStateCopyWith<$Res> {
     List<PreferenceModel> preferences,
     Status getAllPreferencesStatus,
     ExceptionModel getAllPreferencesException,
+    List<StoreByLocationModel> storesByLocation,
+    double lat,
+    double lng,
+    double radius,
+    bool myPreferenceFilterSelected,
+    List<int>? preferenceTagIds,
+    String? searchKeyword,
+    Status getStoresByLocationStatus,
+    Status getMyPreferencesStoresByLocationStatus,
+    ExceptionModel getStoresByLocationExceptionModel,
+    ExceptionModel getMyPreferencesStoresByLocationExceptionModel,
+    StoreSummaryModel? storeSummary,
+    Status getStoreSummaryStatus,
+    ExceptionModel getStoreSummaryExceptionModel,
+    NMarker? selectedMarker,
   });
 }
 
@@ -59,6 +94,21 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
     Object? preferences = null,
     Object? getAllPreferencesStatus = null,
     Object? getAllPreferencesException = null,
+    Object? storesByLocation = null,
+    Object? lat = null,
+    Object? lng = null,
+    Object? radius = null,
+    Object? myPreferenceFilterSelected = null,
+    Object? preferenceTagIds = freezed,
+    Object? searchKeyword = freezed,
+    Object? getStoresByLocationStatus = null,
+    Object? getMyPreferencesStoresByLocationStatus = null,
+    Object? getStoresByLocationExceptionModel = null,
+    Object? getMyPreferencesStoresByLocationExceptionModel = null,
+    Object? storeSummary = freezed,
+    Object? getStoreSummaryStatus = null,
+    Object? getStoreSummaryExceptionModel = null,
+    Object? selectedMarker = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -77,6 +127,81 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
                     ? _value.getAllPreferencesException
                     : getAllPreferencesException // ignore: cast_nullable_to_non_nullable
                         as ExceptionModel,
+            storesByLocation:
+                null == storesByLocation
+                    ? _value.storesByLocation
+                    : storesByLocation // ignore: cast_nullable_to_non_nullable
+                        as List<StoreByLocationModel>,
+            lat:
+                null == lat
+                    ? _value.lat
+                    : lat // ignore: cast_nullable_to_non_nullable
+                        as double,
+            lng:
+                null == lng
+                    ? _value.lng
+                    : lng // ignore: cast_nullable_to_non_nullable
+                        as double,
+            radius:
+                null == radius
+                    ? _value.radius
+                    : radius // ignore: cast_nullable_to_non_nullable
+                        as double,
+            myPreferenceFilterSelected:
+                null == myPreferenceFilterSelected
+                    ? _value.myPreferenceFilterSelected
+                    : myPreferenceFilterSelected // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            preferenceTagIds:
+                freezed == preferenceTagIds
+                    ? _value.preferenceTagIds
+                    : preferenceTagIds // ignore: cast_nullable_to_non_nullable
+                        as List<int>?,
+            searchKeyword:
+                freezed == searchKeyword
+                    ? _value.searchKeyword
+                    : searchKeyword // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            getStoresByLocationStatus:
+                null == getStoresByLocationStatus
+                    ? _value.getStoresByLocationStatus
+                    : getStoresByLocationStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            getMyPreferencesStoresByLocationStatus:
+                null == getMyPreferencesStoresByLocationStatus
+                    ? _value.getMyPreferencesStoresByLocationStatus
+                    : getMyPreferencesStoresByLocationStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            getStoresByLocationExceptionModel:
+                null == getStoresByLocationExceptionModel
+                    ? _value.getStoresByLocationExceptionModel
+                    : getStoresByLocationExceptionModel // ignore: cast_nullable_to_non_nullable
+                        as ExceptionModel,
+            getMyPreferencesStoresByLocationExceptionModel:
+                null == getMyPreferencesStoresByLocationExceptionModel
+                    ? _value.getMyPreferencesStoresByLocationExceptionModel
+                    : getMyPreferencesStoresByLocationExceptionModel // ignore: cast_nullable_to_non_nullable
+                        as ExceptionModel,
+            storeSummary:
+                freezed == storeSummary
+                    ? _value.storeSummary
+                    : storeSummary // ignore: cast_nullable_to_non_nullable
+                        as StoreSummaryModel?,
+            getStoreSummaryStatus:
+                null == getStoreSummaryStatus
+                    ? _value.getStoreSummaryStatus
+                    : getStoreSummaryStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            getStoreSummaryExceptionModel:
+                null == getStoreSummaryExceptionModel
+                    ? _value.getStoreSummaryExceptionModel
+                    : getStoreSummaryExceptionModel // ignore: cast_nullable_to_non_nullable
+                        as ExceptionModel,
+            selectedMarker:
+                freezed == selectedMarker
+                    ? _value.selectedMarker
+                    : selectedMarker // ignore: cast_nullable_to_non_nullable
+                        as NMarker?,
           )
           as $Val,
     );
@@ -96,6 +221,21 @@ abstract class _$$MapStateImplCopyWith<$Res>
     List<PreferenceModel> preferences,
     Status getAllPreferencesStatus,
     ExceptionModel getAllPreferencesException,
+    List<StoreByLocationModel> storesByLocation,
+    double lat,
+    double lng,
+    double radius,
+    bool myPreferenceFilterSelected,
+    List<int>? preferenceTagIds,
+    String? searchKeyword,
+    Status getStoresByLocationStatus,
+    Status getMyPreferencesStoresByLocationStatus,
+    ExceptionModel getStoresByLocationExceptionModel,
+    ExceptionModel getMyPreferencesStoresByLocationExceptionModel,
+    StoreSummaryModel? storeSummary,
+    Status getStoreSummaryStatus,
+    ExceptionModel getStoreSummaryExceptionModel,
+    NMarker? selectedMarker,
   });
 }
 
@@ -116,6 +256,21 @@ class __$$MapStateImplCopyWithImpl<$Res>
     Object? preferences = null,
     Object? getAllPreferencesStatus = null,
     Object? getAllPreferencesException = null,
+    Object? storesByLocation = null,
+    Object? lat = null,
+    Object? lng = null,
+    Object? radius = null,
+    Object? myPreferenceFilterSelected = null,
+    Object? preferenceTagIds = freezed,
+    Object? searchKeyword = freezed,
+    Object? getStoresByLocationStatus = null,
+    Object? getMyPreferencesStoresByLocationStatus = null,
+    Object? getStoresByLocationExceptionModel = null,
+    Object? getMyPreferencesStoresByLocationExceptionModel = null,
+    Object? storeSummary = freezed,
+    Object? getStoreSummaryStatus = null,
+    Object? getStoreSummaryExceptionModel = null,
+    Object? selectedMarker = freezed,
   }) {
     return _then(
       _$MapStateImpl(
@@ -134,6 +289,81 @@ class __$$MapStateImplCopyWithImpl<$Res>
                 ? _value.getAllPreferencesException
                 : getAllPreferencesException // ignore: cast_nullable_to_non_nullable
                     as ExceptionModel,
+        storesByLocation:
+            null == storesByLocation
+                ? _value._storesByLocation
+                : storesByLocation // ignore: cast_nullable_to_non_nullable
+                    as List<StoreByLocationModel>,
+        lat:
+            null == lat
+                ? _value.lat
+                : lat // ignore: cast_nullable_to_non_nullable
+                    as double,
+        lng:
+            null == lng
+                ? _value.lng
+                : lng // ignore: cast_nullable_to_non_nullable
+                    as double,
+        radius:
+            null == radius
+                ? _value.radius
+                : radius // ignore: cast_nullable_to_non_nullable
+                    as double,
+        myPreferenceFilterSelected:
+            null == myPreferenceFilterSelected
+                ? _value.myPreferenceFilterSelected
+                : myPreferenceFilterSelected // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        preferenceTagIds:
+            freezed == preferenceTagIds
+                ? _value._preferenceTagIds
+                : preferenceTagIds // ignore: cast_nullable_to_non_nullable
+                    as List<int>?,
+        searchKeyword:
+            freezed == searchKeyword
+                ? _value.searchKeyword
+                : searchKeyword // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        getStoresByLocationStatus:
+            null == getStoresByLocationStatus
+                ? _value.getStoresByLocationStatus
+                : getStoresByLocationStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        getMyPreferencesStoresByLocationStatus:
+            null == getMyPreferencesStoresByLocationStatus
+                ? _value.getMyPreferencesStoresByLocationStatus
+                : getMyPreferencesStoresByLocationStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        getStoresByLocationExceptionModel:
+            null == getStoresByLocationExceptionModel
+                ? _value.getStoresByLocationExceptionModel
+                : getStoresByLocationExceptionModel // ignore: cast_nullable_to_non_nullable
+                    as ExceptionModel,
+        getMyPreferencesStoresByLocationExceptionModel:
+            null == getMyPreferencesStoresByLocationExceptionModel
+                ? _value.getMyPreferencesStoresByLocationExceptionModel
+                : getMyPreferencesStoresByLocationExceptionModel // ignore: cast_nullable_to_non_nullable
+                    as ExceptionModel,
+        storeSummary:
+            freezed == storeSummary
+                ? _value.storeSummary
+                : storeSummary // ignore: cast_nullable_to_non_nullable
+                    as StoreSummaryModel?,
+        getStoreSummaryStatus:
+            null == getStoreSummaryStatus
+                ? _value.getStoreSummaryStatus
+                : getStoreSummaryStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        getStoreSummaryExceptionModel:
+            null == getStoreSummaryExceptionModel
+                ? _value.getStoreSummaryExceptionModel
+                : getStoreSummaryExceptionModel // ignore: cast_nullable_to_non_nullable
+                    as ExceptionModel,
+        selectedMarker:
+            freezed == selectedMarker
+                ? _value.selectedMarker
+                : selectedMarker // ignore: cast_nullable_to_non_nullable
+                    as NMarker?,
       ),
     );
   }
@@ -151,7 +381,40 @@ class _$MapStateImpl implements _MapState {
       message: '',
       timestamp: '',
     ),
-  }) : _preferences = preferences;
+    final List<StoreByLocationModel> storesByLocation =
+        const <StoreByLocationModel>[],
+    this.lat = 37.514575,
+    this.lng = 127.0495556,
+    this.radius = 5,
+    this.myPreferenceFilterSelected = false,
+    final List<int>? preferenceTagIds,
+    this.searchKeyword,
+    this.getStoresByLocationStatus = Status.loading,
+    this.getMyPreferencesStoresByLocationStatus = Status.loading,
+    this.getStoresByLocationExceptionModel = const ExceptionModel(
+      status: -1,
+      code: '',
+      message: '',
+      timestamp: '',
+    ),
+    this.getMyPreferencesStoresByLocationExceptionModel = const ExceptionModel(
+      status: -1,
+      code: '',
+      message: '',
+      timestamp: '',
+    ),
+    this.storeSummary,
+    this.getStoreSummaryStatus = Status.initial,
+    this.getStoreSummaryExceptionModel = const ExceptionModel(
+      status: -1,
+      code: '',
+      message: '',
+      timestamp: '',
+    ),
+    this.selectedMarker,
+  }) : _preferences = preferences,
+       _storesByLocation = storesByLocation,
+       _preferenceTagIds = preferenceTagIds;
 
   final List<PreferenceModel> _preferences;
   @override
@@ -168,10 +431,67 @@ class _$MapStateImpl implements _MapState {
   @override
   @JsonKey()
   final ExceptionModel getAllPreferencesException;
+  final List<StoreByLocationModel> _storesByLocation;
+  @override
+  @JsonKey()
+  List<StoreByLocationModel> get storesByLocation {
+    if (_storesByLocation is EqualUnmodifiableListView)
+      return _storesByLocation;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_storesByLocation);
+  }
+
+  @override
+  @JsonKey()
+  final double lat;
+  @override
+  @JsonKey()
+  final double lng;
+  @override
+  @JsonKey()
+  final double radius;
+  @override
+  @JsonKey()
+  final bool myPreferenceFilterSelected;
+  final List<int>? _preferenceTagIds;
+  @override
+  List<int>? get preferenceTagIds {
+    final value = _preferenceTagIds;
+    if (value == null) return null;
+    if (_preferenceTagIds is EqualUnmodifiableListView)
+      return _preferenceTagIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final String? searchKeyword;
+  @override
+  @JsonKey()
+  final Status getStoresByLocationStatus;
+  @override
+  @JsonKey()
+  final Status getMyPreferencesStoresByLocationStatus;
+  @override
+  @JsonKey()
+  final ExceptionModel getStoresByLocationExceptionModel;
+  @override
+  @JsonKey()
+  final ExceptionModel getMyPreferencesStoresByLocationExceptionModel;
+  @override
+  final StoreSummaryModel? storeSummary;
+  @override
+  @JsonKey()
+  final Status getStoreSummaryStatus;
+  @override
+  @JsonKey()
+  final ExceptionModel getStoreSummaryExceptionModel;
+  @override
+  final NMarker? selectedMarker;
 
   @override
   String toString() {
-    return 'MapState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException)';
+    return 'MapState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, myPreferenceFilterSelected: $myPreferenceFilterSelected, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel, storeSummary: $storeSummary, getStoreSummaryStatus: $getStoreSummaryStatus, getStoreSummaryExceptionModel: $getStoreSummaryExceptionModel, selectedMarker: $selectedMarker)';
   }
 
   @override
@@ -193,7 +513,61 @@ class _$MapStateImpl implements _MapState {
                   getAllPreferencesException,
                 ) ||
                 other.getAllPreferencesException ==
-                    getAllPreferencesException));
+                    getAllPreferencesException) &&
+            const DeepCollectionEquality().equals(
+              other._storesByLocation,
+              _storesByLocation,
+            ) &&
+            (identical(other.lat, lat) || other.lat == lat) &&
+            (identical(other.lng, lng) || other.lng == lng) &&
+            (identical(other.radius, radius) || other.radius == radius) &&
+            (identical(
+                  other.myPreferenceFilterSelected,
+                  myPreferenceFilterSelected,
+                ) ||
+                other.myPreferenceFilterSelected ==
+                    myPreferenceFilterSelected) &&
+            const DeepCollectionEquality().equals(
+              other._preferenceTagIds,
+              _preferenceTagIds,
+            ) &&
+            (identical(other.searchKeyword, searchKeyword) ||
+                other.searchKeyword == searchKeyword) &&
+            (identical(
+                  other.getStoresByLocationStatus,
+                  getStoresByLocationStatus,
+                ) ||
+                other.getStoresByLocationStatus == getStoresByLocationStatus) &&
+            (identical(
+                  other.getMyPreferencesStoresByLocationStatus,
+                  getMyPreferencesStoresByLocationStatus,
+                ) ||
+                other.getMyPreferencesStoresByLocationStatus ==
+                    getMyPreferencesStoresByLocationStatus) &&
+            (identical(
+                  other.getStoresByLocationExceptionModel,
+                  getStoresByLocationExceptionModel,
+                ) ||
+                other.getStoresByLocationExceptionModel ==
+                    getStoresByLocationExceptionModel) &&
+            (identical(
+                  other.getMyPreferencesStoresByLocationExceptionModel,
+                  getMyPreferencesStoresByLocationExceptionModel,
+                ) ||
+                other.getMyPreferencesStoresByLocationExceptionModel ==
+                    getMyPreferencesStoresByLocationExceptionModel) &&
+            (identical(other.storeSummary, storeSummary) ||
+                other.storeSummary == storeSummary) &&
+            (identical(other.getStoreSummaryStatus, getStoreSummaryStatus) ||
+                other.getStoreSummaryStatus == getStoreSummaryStatus) &&
+            (identical(
+                  other.getStoreSummaryExceptionModel,
+                  getStoreSummaryExceptionModel,
+                ) ||
+                other.getStoreSummaryExceptionModel ==
+                    getStoreSummaryExceptionModel) &&
+            (identical(other.selectedMarker, selectedMarker) ||
+                other.selectedMarker == selectedMarker));
   }
 
   @override
@@ -202,6 +576,21 @@ class _$MapStateImpl implements _MapState {
     const DeepCollectionEquality().hash(_preferences),
     getAllPreferencesStatus,
     getAllPreferencesException,
+    const DeepCollectionEquality().hash(_storesByLocation),
+    lat,
+    lng,
+    radius,
+    myPreferenceFilterSelected,
+    const DeepCollectionEquality().hash(_preferenceTagIds),
+    searchKeyword,
+    getStoresByLocationStatus,
+    getMyPreferencesStoresByLocationStatus,
+    getStoresByLocationExceptionModel,
+    getMyPreferencesStoresByLocationExceptionModel,
+    storeSummary,
+    getStoreSummaryStatus,
+    getStoreSummaryExceptionModel,
+    selectedMarker,
   );
 
   /// Create a copy of MapState
@@ -218,6 +607,21 @@ abstract class _MapState implements MapState {
     final List<PreferenceModel> preferences,
     final Status getAllPreferencesStatus,
     final ExceptionModel getAllPreferencesException,
+    final List<StoreByLocationModel> storesByLocation,
+    final double lat,
+    final double lng,
+    final double radius,
+    final bool myPreferenceFilterSelected,
+    final List<int>? preferenceTagIds,
+    final String? searchKeyword,
+    final Status getStoresByLocationStatus,
+    final Status getMyPreferencesStoresByLocationStatus,
+    final ExceptionModel getStoresByLocationExceptionModel,
+    final ExceptionModel getMyPreferencesStoresByLocationExceptionModel,
+    final StoreSummaryModel? storeSummary,
+    final Status getStoreSummaryStatus,
+    final ExceptionModel getStoreSummaryExceptionModel,
+    final NMarker? selectedMarker,
   }) = _$MapStateImpl;
 
   @override
@@ -226,6 +630,36 @@ abstract class _MapState implements MapState {
   Status get getAllPreferencesStatus;
   @override
   ExceptionModel get getAllPreferencesException;
+  @override
+  List<StoreByLocationModel> get storesByLocation;
+  @override
+  double get lat;
+  @override
+  double get lng;
+  @override
+  double get radius;
+  @override
+  bool get myPreferenceFilterSelected;
+  @override
+  List<int>? get preferenceTagIds;
+  @override
+  String? get searchKeyword;
+  @override
+  Status get getStoresByLocationStatus;
+  @override
+  Status get getMyPreferencesStoresByLocationStatus;
+  @override
+  ExceptionModel get getStoresByLocationExceptionModel;
+  @override
+  ExceptionModel get getMyPreferencesStoresByLocationExceptionModel;
+  @override
+  StoreSummaryModel? get storeSummary;
+  @override
+  Status get getStoreSummaryStatus;
+  @override
+  ExceptionModel get getStoreSummaryExceptionModel;
+  @override
+  NMarker? get selectedMarker;
 
   /// Create a copy of MapState
   /// with the given fields replaced by the non-null parameter values.
