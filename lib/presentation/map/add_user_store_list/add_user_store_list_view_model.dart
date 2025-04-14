@@ -42,7 +42,7 @@ class AddUserStoreListViewModel extends StateNotifier<AddUserStoreListState> {
   Future<AddUserStoreListState> addUserStoreList({
     required String userUuid,
   }) async {
-    state = state.copyWith(addUserStoreListStatus: Status.success);
+    state = state.copyWith(addUserStoreListStatus: Status.loading);
 
     final Result<void, CustomException> result = await Usecase.execute(
       usecase: _ref.read(addUserStoreListUsecaseProvider),
