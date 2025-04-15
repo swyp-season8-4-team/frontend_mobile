@@ -156,12 +156,22 @@ extension StoreSummaryEntityExt on StoreSummaryEntity {
   );
 }
 
+extension StoreDetailTagCategoryEntityExt on StoreDetailTagCategoryEntity {
+  StoreDetailTagCategoryModel toModel() =>
+      StoreDetailTagCategoryModel(id: id, name: name);
+}
+
+extension StoreDetailTagEntityExt on StoreDetailTagEntity {
+  StoreDetailTagModel toModel() =>
+      StoreDetailTagModel(id: id, name: name, category: category?.toModel());
+}
+
 extension StoreDetailEntityExt on StoreDetailEntity {
   StoreDetailModel toModel() => StoreDetailModel(
     storeId: storeId,
     storeUuid: storeUuid,
     name: name,
-    tags: tags,
+    tags: tags.map((StoreDetailTagEntity e) => e.toModel()).toList(),
     operatingHours:
         operatingHours
             .map((StoreOperatingHourEntity e) => e.toModel())

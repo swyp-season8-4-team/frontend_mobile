@@ -1,14 +1,16 @@
-import 'package:frontend_mobile/domain/model/store/store_summary_model.dart';
+import 'package:frontend_mobile/domain/model/store/store_holiday_model.dart';
+import 'package:frontend_mobile/domain/model/store/store_operating_hour_model.dart';
+import 'package:frontend_mobile/domain/model/store/store_top_preference_model.dart';
 
-class StoreDetailModel extends StoreSummaryModel {
+class StoreDetailModel {
   StoreDetailModel({
-    required super.storeId,
-    required super.storeUuid,
-    required super.name,
-    required super.tags,
-    required super.operatingHours,
-    required super.address,
-    required super.phone,
+    required this.storeId,
+    required this.storeUuid,
+    required this.name,
+    required this.tags,
+    required this.operatingHours,
+    required this.address,
+    required this.phone,
     required this.ownerId,
     required this.ownerUuid,
     required this.latitude,
@@ -23,19 +25,37 @@ class StoreDetailModel extends StoreSummaryModel {
     required this.saved,
     required this.savedListId,
     required this.notices,
-    required super.averageRating,
-    required super.storeImages,
-    required super.ownerPickImages,
-    required super.primaryStoreLink,
-    required super.storeLinks,
-    required super.holidays,
-    required super.topPreferences,
-    required super.description,
-    required super.animalYn,
-    required super.tumblerYn,
-    required super.parkingYn,
+    required this.averageRating,
+    required this.storeImages,
+    required this.ownerPickImages,
+    required this.primaryStoreLink,
+    required this.storeLinks,
+    required this.holidays,
+    required this.topPreferences,
+    required this.description,
+    required this.animalYn,
+    required this.tumblerYn,
+    required this.parkingYn,
   });
 
+  final int storeId;
+  final String storeUuid;
+  final String name;
+  final double? averageRating;
+  final List<String>? storeImages;
+  final List<String>? ownerPickImages;
+  final List<StoreDetailTagModel> tags;
+  final String? primaryStoreLink;
+  final List<String>? storeLinks;
+  final List<StoreOperatingHourModel> operatingHours;
+  final List<StoreHolidayModel>? holidays;
+  final List<StoreTopPreferenceModel>? topPreferences;
+  final String address;
+  final String phone;
+  final String? description;
+  final bool? animalYn;
+  final bool? tumblerYn;
+  final bool? parkingYn;
   final int? userId;
   final String? userUuid;
   final int ownerId;
@@ -153,4 +173,23 @@ class StoreDetailNoticeModel {
   final String content;
   final DateTime createdAt;
   final DateTime? updatedAt;
+}
+
+class StoreDetailTagModel {
+  const StoreDetailTagModel({
+    required this.id,
+    required this.name,
+    required this.category,
+  });
+
+  final int id;
+  final String name;
+  final StoreDetailTagCategoryModel? category;
+}
+
+class StoreDetailTagCategoryModel {
+  const StoreDetailTagCategoryModel({required this.id, required this.name});
+
+  final int id;
+  final String name;
 }

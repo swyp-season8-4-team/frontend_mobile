@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:frontend_mobile/data/entity/store/store_summary_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_holiday_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_operating_hour_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_top_preference_entity.dart';
@@ -8,18 +7,18 @@ part 'generated/store_detail_entity.g.dart';
 //ignore_for_file: library_private_types_in_public_api
 
 @JsonSerializable()
-class StoreDetailEntity extends StoreSummaryEntity {
+class StoreDetailEntity {
   factory StoreDetailEntity.fromJson(Map<String, dynamic> json) =>
       _$StoreDetailEntityFromJson(json);
 
   StoreDetailEntity({
-    required super.storeId,
-    required super.storeUuid,
-    required super.name,
-    required super.tags,
-    required super.operatingHours,
-    required super.address,
-    required super.phone,
+    required this.storeId,
+    required this.storeUuid,
+    required this.name,
+    required this.tags,
+    required this.operatingHours,
+    required this.address,
+    required this.phone,
     required this.ownerId,
     required this.ownerUuid,
     required this.latitude,
@@ -34,19 +33,37 @@ class StoreDetailEntity extends StoreSummaryEntity {
     this.saved,
     this.savedListId,
     this.notices,
-    super.averageRating,
-    super.storeImages,
-    super.ownerPickImages,
-    super.primaryStoreLink,
-    super.storeLinks,
-    super.holidays,
-    super.topPreferences,
-    super.description,
-    super.animalYn,
-    super.tumblerYn,
-    super.parkingYn,
+    this.averageRating,
+    this.storeImages,
+    this.ownerPickImages,
+    this.primaryStoreLink,
+    this.storeLinks,
+    this.holidays,
+    this.topPreferences,
+    this.description,
+    this.animalYn,
+    this.tumblerYn,
+    this.parkingYn,
   });
 
+  final int storeId;
+  final String storeUuid;
+  final String name;
+  final double? averageRating;
+  final List<String>? storeImages;
+  final List<String>? ownerPickImages;
+  final List<StoreDetailTagEntity> tags;
+  final String? primaryStoreLink;
+  final List<String>? storeLinks;
+  final List<StoreOperatingHourEntity> operatingHours;
+  final List<StoreHolidayEntity>? holidays;
+  final List<StoreTopPreferenceEntity>? topPreferences;
+  final String address;
+  final String phone;
+  final String? description;
+  final bool? animalYn;
+  final bool? tumblerYn;
+  final bool? parkingYn;
   final int? userId;
   final String? userUuid;
   final int ownerId;
@@ -183,4 +200,29 @@ class StoreDetailNoticeEntity {
   final String content;
   final DateTime createdAt;
   final DateTime? updatedAt;
+}
+
+@JsonSerializable()
+class StoreDetailTagEntity {
+  const StoreDetailTagEntity({
+    required this.id,
+    required this.name,
+    this.category,
+  });
+
+  factory StoreDetailTagEntity.fromJson(Map<String, dynamic> json) =>
+      _$StoreDetailTagEntityFromJson(json);
+  final int id;
+  final String name;
+  final StoreDetailTagCategoryEntity? category;
+}
+
+@JsonSerializable()
+class StoreDetailTagCategoryEntity {
+  const StoreDetailTagCategoryEntity({required this.id, required this.name});
+
+  factory StoreDetailTagCategoryEntity.fromJson(Map<String, dynamic> json) =>
+      _$StoreDetailTagCategoryEntityFromJson(json);
+  final int id;
+  final String name;
 }

@@ -12,7 +12,10 @@ StoreDetailEntity _$StoreDetailEntityFromJson(
   storeId: (json['storeId'] as num).toInt(),
   storeUuid: json['storeUuid'] as String,
   name: json['name'] as String,
-  tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
+  tags:
+      (json['tags'] as List<dynamic>)
+          .map((e) => StoreDetailTagEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
   operatingHours:
       (json['operatingHours'] as List<dynamic>)
           .map(
@@ -241,3 +244,35 @@ Map<String, dynamic> _$StoreDetailNoticeEntityToJson(
   'createdAt': instance.createdAt.toIso8601String(),
   'updatedAt': instance.updatedAt?.toIso8601String(),
 };
+
+StoreDetailTagEntity _$StoreDetailTagEntityFromJson(
+  Map<String, dynamic> json,
+) => StoreDetailTagEntity(
+  id: (json['id'] as num).toInt(),
+  name: json['name'] as String,
+  category:
+      json['category'] == null
+          ? null
+          : StoreDetailTagCategoryEntity.fromJson(
+            json['category'] as Map<String, dynamic>,
+          ),
+);
+
+Map<String, dynamic> _$StoreDetailTagEntityToJson(
+  StoreDetailTagEntity instance,
+) => <String, dynamic>{
+  'id': instance.id,
+  'name': instance.name,
+  'category': instance.category,
+};
+
+StoreDetailTagCategoryEntity _$StoreDetailTagCategoryEntityFromJson(
+  Map<String, dynamic> json,
+) => StoreDetailTagCategoryEntity(
+  id: (json['id'] as num).toInt(),
+  name: json['name'] as String,
+);
+
+Map<String, dynamic> _$StoreDetailTagCategoryEntityToJson(
+  StoreDetailTagCategoryEntity instance,
+) => <String, dynamic>{'id': instance.id, 'name': instance.name};

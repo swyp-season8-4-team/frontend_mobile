@@ -27,7 +27,7 @@ class _StoreRepresentiveInfo extends ConsumerWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            storeDetail.tags.join(' | '),
+            storeDetail.tags.map((StoreDetailTagModel e) => e.name).join(' | '),
             style: textTheme.labelSmall?.copyWith(
               color: const Color(0xFF6F6F6F),
             ),

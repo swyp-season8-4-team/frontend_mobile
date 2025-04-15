@@ -24,7 +24,7 @@ class StoreMockDataSource implements StoreRemoteDataSource {
       storeId: 123,
       storeUuid: storeUuid,
       name: '디저비 가게1',
-      tags: <String>['케이크', '디저트', '구움 과자', '건강 디저트'],
+      tags: <StoreDetailTagEntity>[],
       averageRating: 4.5,
       animalYn: true,
       tumblerYn: true,

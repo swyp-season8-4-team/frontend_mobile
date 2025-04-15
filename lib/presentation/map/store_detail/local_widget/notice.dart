@@ -39,7 +39,10 @@ class _RecentNotice extends ConsumerWidget {
                 hasNotice
                     ? '${storeDetail.notices!.first.title}\n${storeDetail.notices!.first.content}'
                     : '등록된 공지가 없습니다.',
-            dateTime: storeDetail.notices!.first.createdAt,
+            dateTime:
+                hasNotice
+                    ? storeDetail.notices!.first.createdAt
+                    : DateTime.now(),
           ),
         ],
       ),
