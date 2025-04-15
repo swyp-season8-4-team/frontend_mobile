@@ -15,9 +15,15 @@ class _StoreDetailInfo extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Assets.icon.map.a14x14AddressLine.svg(),
+              Assets.icon.map.a14x14AddressLine.svg(
+                width: 14,
+                height: 14,
+                colorFilter: const ColorFilter.mode(
+                  ScaleColorConfig.neutral30,
+                  BlendMode.srcIn,
+                ),
+              ),
               const SizedBox(width: 10),
               Container(
                 constraints: const BoxConstraints(maxWidth: 210),
@@ -30,16 +36,89 @@ class _StoreDetailInfo extends ConsumerWidget {
                 ),
               ),
               const SizedBox(width: 6),
-              Text(
-                '길찾기',
-                style: textTheme.labelMedium?.copyWith(
-                  color: ScaleColorConfig.secondary60,
+              GestureDetector(
+                onTap: () {
+                  context.pushNamed(
+                    AppRoutes.findPlaceByMap.name,
+                    pathParameters: <String, String>{
+                      'id': storeDetail.storeUuid,
+                    },
+                  );
+                },
+                child: Text(
+                  '길찾기',
+                  style: textTheme.labelMedium?.copyWith(
+                    color: ScaleColorConfig.secondary60,
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 8),
           _OperatingHours(storeDetail: storeDetail),
+          const SizedBox(height: 8),
+          Row(
+            children: <Widget>[
+              Assets.icon.contact.phone1Line.svg(
+                width: 14,
+                height: 14,
+                colorFilter: const ColorFilter.mode(
+                  ScaleColorConfig.neutral30,
+                  BlendMode.srcIn,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                storeDetail.phone,
+                style: textTheme.labelMedium?.copyWith(
+                  color: ScaleColorConfig.neutral30,
+                ),
+              ),
+              const SizedBox(width: 6),
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  launchUrlString(
+                    'tel://${storeDetail.phone}',
+                    mode: LaunchMode.externalApplication,
+                  );
+                },
+                child: Text(
+                  '전화',
+                  style: textTheme.labelMedium?.copyWith(
+                    color: ScaleColorConfig.secondary60,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          _StoreLinks(storeDetail: storeDetail),
+          const SizedBox(height: 12),
+          Row(
+            children: <Widget>[
+              if (storeDetail.parkingYn == true)
+                const Padding(
+                  padding: EdgeInsets.only(left: 12),
+                  child: CanParkingTag(),
+                ),
+
+              if (storeDetail.animalYn == true)
+                const Padding(
+                  padding: EdgeInsets.only(left: 12),
+
+                  child: PetTag(),
+                ),
+              if (storeDetail.tumblerYn == true)
+                const Padding(
+                  padding: EdgeInsets.only(left: 12),
+
+                  child: DiscountTumblerTag(),
+                ),
+            ],
+          ),
         ],
       ),
     );
@@ -254,15 +333,107 @@ class _OpenButton extends StatelessWidget {
       child:
           isOpen
               ? Assets.icon.arrow.upLine.svg(
-                width: 12.8,
-                height: 12.8,
+                width: 8,
+                height: 8,
                 colorFilter: svgColorFilter,
               )
               : Assets.icon.arrow.downLine.svg(
-                width: 12.8,
-                height: 12.8,
+                width: 8,
+                height: 8,
                 colorFilter: svgColorFilter,
               ),
+    );
+  }
+}
+
+// 가게 링크 정보 위젯
+class _StoreLinks extends StatefulWidget {
+  const _StoreLinks({required this.storeDetail});
+  final StoreDetailModel storeDetail;
+
+  @override
+  State<_StoreLinks> createState() => _StoreLinksState();
+}
+
+class _StoreLinksState extends State<_StoreLinks> {
+  bool _isExpanded = false;
+
+  void _toggle() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            Assets.icon.file.link2Line.svg(
+              width: 14,
+              height: 14,
+              colorFilter: const ColorFilter.mode(
+                ScaleColorConfig.neutral30,
+                BlendMode.srcIn,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                widget.storeDetail.primaryStoreLink ?? '',
+                maxLines: _isExpanded ? null : 1,
+                style: textTheme.labelMedium?.copyWith(
+                  color: ScaleColorConfig.neutral30,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const SizedBox(width: 10),
+            GestureDetector(
+              onTap: () {
+                _toggle();
+              },
+              child: _OpenButton(isOpen: _isExpanded),
+            ),
+          ],
+        ),
+        _isExpanded
+            ? Padding(
+              padding: const EdgeInsets.only(left: 24),
+              child: Wrap(
+                children: <Widget>[
+                  // TODO: 링크 표시 수정 예정
+                  if (widget.storeDetail.storeLinks?.isNotEmpty == true)
+                    ...widget.storeDetail.storeLinks!.map(
+                      (String e) => Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTap: () async {
+                            final Uri url = Uri.parse(e);
+                            if (await canLaunchUrl(url)) {
+                              await launchUrl(url);
+                            }
+                          },
+                          child: Text(
+                            '링크',
+                            style: textTheme.labelMedium?.copyWith(
+                              color: ScaleColorConfig.neutral30,
+                              decoration: TextDecoration.underline,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            )
+            : const SizedBox.shrink(),
+      ],
     );
   }
 }

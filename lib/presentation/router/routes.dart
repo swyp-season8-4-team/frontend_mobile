@@ -28,6 +28,12 @@ abstract class AppRoutes {
     path: 'store/:id',
   );
 
+  // 지도 > 가게 상세 > 길찾기
+  static final RouteInfo findPlaceByMap = RouteInfo(
+    name: '${storeDetail.name}/find-place-by-map',
+    path: 'find-place-by-map',
+  );
+
   // 인증 > 비밀번호 찾기
   static final RouteInfo findPassword = RouteInfo(
     name: '${auth.name}/find_password',

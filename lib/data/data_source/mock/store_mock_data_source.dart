@@ -28,6 +28,11 @@ class StoreMockDataSource implements StoreRemoteDataSource {
       averageRating: 4.5,
       animalYn: true,
       tumblerYn: true,
+      primaryStoreLink: 'https://www.youtube.com',
+      storeLinks: <String>[
+        'https://www.instagram.com/',
+        'https://section.blog.naver.com/BlogHome.naver?directoryNo=0&currentPage=1&groupId=0',
+      ],
       topPreferences: <StoreTopPreferenceEntity>[
         const StoreTopPreferenceEntity(tagId: 1, name: '비건', rank: 2),
         const StoreTopPreferenceEntity(tagId: 2, name: '락토프리', rank: 2),

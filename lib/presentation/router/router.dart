@@ -6,6 +6,7 @@ import 'package:frontend_mobile/presentation/find_password/view/find_password_st
 import 'package:frontend_mobile/presentation/home.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
 import 'package:frontend_mobile/presentation/map/map_view.dart';
+import 'package:frontend_mobile/presentation/map/store_detail/find_place_by_map_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/splash_view.dart';
@@ -115,6 +116,16 @@ class AppRouter {
               }
               return StoreDetailView(storeUuid: storeUuid);
             },
+            routes: <RouteBase>[
+              /// 길찾기
+              GoRoute(
+                path: AppRoutes.findPlaceByMap.path,
+                name: AppRoutes.findPlaceByMap.name,
+                builder:
+                    (BuildContext context, GoRouterState state) =>
+                        const FindPlaceByMapView(),
+              ),
+            ],
           ),
         ],
       ),
