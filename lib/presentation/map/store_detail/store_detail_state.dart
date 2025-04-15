@@ -8,4 +8,17 @@ class StoreDetailState with _$StoreDetailState {
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel getStoreDetailException,
   }) = _StoreDetailState;
+
+  const StoreDetailState._();
+
+  List<String> get thumbnailImageUrls => <String>[
+    ...storeDetail!.ownerPickImages ?? <String>[],
+    ...storeDetail!.menus
+        .map((StoreDetailMenuModel e) => e.images ?? <String>[])
+        .expand((List<String> e) => e),
+    ...storeDetail!.storeReviews
+            ?.map((StoreDetailReviewModel e) => e.images ?? <String>[])
+            .expand((List<String> e) => e) ??
+        <String>[],
+  ];
 }

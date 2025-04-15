@@ -165,6 +165,14 @@ extension MapViewWidgetExt on _MapViewState {
 
             return CustomStoreInfoBottomSheetContent(
               storeSummary: state.storeSummary,
+              onViewDetailTap: () {
+                context.pushNamed(
+                  AppRoutes.storeDetail.name,
+                  pathParameters: <String, String>{
+                    'id': state.storeSummary!.storeUuid,
+                  },
+                );
+              },
               isLoading:
                   state.getStoreSummaryStatus.isLoading ||
                   state.getStoreSummaryStatus.isInitial,

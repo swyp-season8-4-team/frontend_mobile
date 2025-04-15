@@ -1,16 +1,18 @@
 part of '../store_detail_view.dart';
 
-class _OwnerPickImage extends StatelessWidget {
-  const _OwnerPickImage({required this.imageUrls});
-  final List<String> imageUrls;
+class _OwnerPickImage extends ConsumerWidget {
+  const _OwnerPickImage();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // Case 정리
     // 1. 이미지가 3개 이하인 경우
     // 2. 이미지가 4개 이상 6개 미만인 경우
     // 3. 이미지가 6개인 경우
     // 4. 이미지가 7개 이상인 경우
+    final StoreDetailState state = ref.watch(storeDetailViewModelProvider);
+
+    final List<String> imageUrls = state.thumbnailImageUrls;
 
     if (imageUrls.length <= 3) {
       return Row(

@@ -143,7 +143,7 @@ class __$$StoreDetailStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$StoreDetailStateImpl implements _StoreDetailState {
+class _$StoreDetailStateImpl extends _StoreDetailState {
   _$StoreDetailStateImpl({
     this.storeDetail,
     this.getStoreDetailStatus = Status.loading,
@@ -153,7 +153,7 @@ class _$StoreDetailStateImpl implements _StoreDetailState {
       message: '',
       timestamp: '',
     ),
-  });
+  }) : super._();
 
   @override
   final StoreDetailModel? storeDetail;
@@ -205,12 +205,13 @@ class _$StoreDetailStateImpl implements _StoreDetailState {
       );
 }
 
-abstract class _StoreDetailState implements StoreDetailState {
+abstract class _StoreDetailState extends StoreDetailState {
   factory _StoreDetailState({
     final StoreDetailModel? storeDetail,
     final Status getStoreDetailStatus,
     final ExceptionModel getStoreDetailException,
   }) = _$StoreDetailStateImpl;
+  _StoreDetailState._() : super._();
 
   @override
   StoreDetailModel? get storeDetail;
