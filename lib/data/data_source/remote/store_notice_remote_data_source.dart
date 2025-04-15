@@ -15,6 +15,7 @@ final Provider<StoreNoticeRemoteDataSource> storeNoticeApiProvider =
 abstract class StoreNoticeRemoteDataSource {
   factory StoreNoticeRemoteDataSource(Dio dio) = _StoreNoticeRemoteDataSource;
 
+  /// 공지 리스트 조회
   @GET('/api/stores/{storeUuid}/notices')
   Future<List<StoreNoticeEntity>> getStoreNotices({
     @Path() required String storeUuid,
