@@ -57,6 +57,7 @@ class StoreMockDataSource implements StoreRemoteDataSource {
           dayOfWeek: 'MONDAY',
           openingTime: '09:00',
           closingTime: '17:00',
+          lastOrderTime: '17:30',
           isClosed: false,
         ),
         const StoreOperatingHourEntity(
@@ -69,6 +70,7 @@ class StoreMockDataSource implements StoreRemoteDataSource {
           dayOfWeek: 'WEDNESDAY',
           openingTime: '09:00',
           closingTime: '17:00',
+          regularClosureType: 'WEEKLY',
           isClosed: false,
         ),
         const StoreOperatingHourEntity(
@@ -81,12 +83,14 @@ class StoreMockDataSource implements StoreRemoteDataSource {
           dayOfWeek: 'FRIDAY',
           openingTime: '09:00',
           closingTime: '17:00',
+          regularClosureType: 'WEEKLY',
           isClosed: false,
         ),
         const StoreOperatingHourEntity(
           dayOfWeek: 'SATURDAY',
           openingTime: '09:00',
           closingTime: '17:00',
+          lastOrderTime: '19:30',
           isClosed: true,
         ),
         const StoreOperatingHourEntity(

@@ -6,13 +6,16 @@ import 'package:frontend_mobile/common/design_system/component/hexagon_grid/hexa
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/store/store_detail_model.dart';
+import 'package:frontend_mobile/domain/model/store/store_operating_hour_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_top_preference_model.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view_model.dart';
 
 part 'local_widget/owner_pick_image.dart';
 part 'local_widget/store_representive_info.dart';
+part 'local_widget/store_detail_info.dart';
 
 class StoreDetailView extends ConsumerStatefulWidget {
   const StoreDetailView({required this.storeUuid, super.key});
@@ -57,6 +60,7 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView> {
             // TODO: 실제 이미지 데이터 지정 예정
             const SliverToBoxAdapter(child: _OwnerPickImage()),
             const SliverToBoxAdapter(child: _StoreRepresentiveInfo()),
+            const SliverToBoxAdapter(child: _StoreDetailInfo()),
           ];
         },
         body: const Column(),

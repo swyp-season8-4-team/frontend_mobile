@@ -199,7 +199,7 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
                                     ),
                                     const SizedBox(width: 6),
                                     Text(
-                                      todayOperatingInfo.isClosed
+                                      !todayOperatingInfo.isClosed
                                           ? '영업중'
                                           : '영업 종료',
                                       style: textTheme.labelSmall?.copyWith(

@@ -27,7 +27,10 @@ extension StoreOperatingHourEntityExt on StoreOperatingHourEntity {
     closingTime: closingTime,
     isClosed: isClosed,
     lastOrderTime: lastOrderTime,
-    regularClosureType: regularClosureType,
+    regularClosureType:
+        regularClosureType == null
+            ? null
+            : RegularClosureType.fromText(text: regularClosureType!),
     regularClosureWeeks: regularClosureWeeks,
     breakTimes:
         breakTimes
