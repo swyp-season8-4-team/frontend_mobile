@@ -6,6 +6,7 @@ import 'package:frontend_mobile/common/design_system/component/hexagon_grid/hexa
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/store/store_detail_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_top_preference_model.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view_model.dart';
@@ -34,6 +35,20 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView> {
 
   @override
   Widget build(BuildContext context) {
+    final StoreDetailState state = ref.watch(storeDetailViewModelProvider);
+
+    // TODO: 페이지 전환 로딩 UI 구현 필요
+    if (state.getStoreDetailStatus.isLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
+    // TODO: 페이지 에러 UI 구현 필요
+    if (state.getStoreDetailStatus.isFailure) {
+      return Scaffold(
+        body: Center(child: Text(state.getStoreDetailException.code)),
+      );
+    }
+
     return Scaffold(
       appBar: const CustomSubTopBar(title: '', actions: <Widget>[]),
       body: NestedScrollView(
