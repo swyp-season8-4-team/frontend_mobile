@@ -40,6 +40,15 @@ class StoreMockDataSource implements StoreRemoteDataSource {
         const StoreTopPreferenceEntity(tagId: 2, name: '락토프리', rank: 2),
         const StoreTopPreferenceEntity(tagId: 3, name: '글루텐프리', rank: 2),
       ],
+      notices: <StoreDetailNoticeEntity>[
+        StoreDetailNoticeEntity(
+          noticeId: 1234,
+          tag: '태그',
+          title: '공지사항 타이틀',
+          content: '공지사항 입니다',
+          createdAt: DateTime.now(),
+        ),
+      ],
       storeImages: <String>[
         'https://picsum.photos/250?image=5',
         'https://picsum.photos/250?image=5',

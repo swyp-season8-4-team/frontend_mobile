@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/common/design_system/component/button/outline_button.dart';
+import 'package:frontend_mobile/common/design_system/component/etc/expandable_text.dart';
 import 'package:frontend_mobile/common/design_system/component/hexagon_grid/hexagon_grid.dart';
 import 'package:frontend_mobile/common/design_system/component/tag/etc_tag.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
@@ -23,6 +25,7 @@ part 'local_widget/owner_pick_image.dart';
 part 'local_widget/store_representive_info.dart';
 part 'local_widget/store_detail_info.dart';
 part 'local_widget/introduce.dart';
+part 'local_widget/notice.dart';
 
 class StoreDetailView extends ConsumerStatefulWidget {
   const StoreDetailView({required this.storeUuid, super.key});
@@ -64,11 +67,11 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView> {
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
-            // TODO: 실제 이미지 데이터 지정 예정
             const SliverToBoxAdapter(child: _OwnerPickImage()),
             const SliverToBoxAdapter(child: _StoreRepresentiveInfo()),
             const SliverToBoxAdapter(child: _StoreDetailInfo()),
             const SliverToBoxAdapter(child: _Introduce()),
+            const SliverToBoxAdapter(child: _RecentNotice()),
           ];
         },
         body: const Column(),
