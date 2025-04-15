@@ -33,6 +33,8 @@ class StoreMockDataSource implements StoreRemoteDataSource {
         'https://www.instagram.com/',
         'https://section.blog.naver.com/BlogHome.naver?directoryNo=0&currentPage=1&groupId=0',
       ],
+      description:
+          '디저비 가게1에 대한 소개 문구입니다. 디저비 가게1에 대한 소개 문구입니다. 디저비 가게1에 대한 소개 문구입니다. 디저비 가게1에 대한 소개 문구입니다. 디저비 가게1에 대한 소개 문구입니다. ',
       topPreferences: <StoreTopPreferenceEntity>[
         const StoreTopPreferenceEntity(tagId: 1, name: '비건', rank: 2),
         const StoreTopPreferenceEntity(tagId: 2, name: '락토프리', rank: 2),

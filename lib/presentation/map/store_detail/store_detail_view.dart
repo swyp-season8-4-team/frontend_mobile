@@ -15,12 +15,14 @@ import 'package:frontend_mobile/domain/model/store/store_top_preference_model.da
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 part 'local_widget/owner_pick_image.dart';
 part 'local_widget/store_representive_info.dart';
 part 'local_widget/store_detail_info.dart';
+part 'local_widget/introduce.dart';
 
 class StoreDetailView extends ConsumerStatefulWidget {
   const StoreDetailView({required this.storeUuid, super.key});
@@ -66,6 +68,7 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView> {
             const SliverToBoxAdapter(child: _OwnerPickImage()),
             const SliverToBoxAdapter(child: _StoreRepresentiveInfo()),
             const SliverToBoxAdapter(child: _StoreDetailInfo()),
+            const SliverToBoxAdapter(child: _Introduce()),
           ];
         },
         body: const Column(),

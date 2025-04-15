@@ -8,9 +8,13 @@ class _StoreDetailInfo extends ConsumerWidget {
     final StoreDetailState state = ref.watch(storeDetailViewModelProvider);
     final StoreDetailModel storeDetail = state.storeDetail!;
     final TextTheme textTheme = Theme.of(context).textTheme;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: colorScheme.outlineVariant)),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
