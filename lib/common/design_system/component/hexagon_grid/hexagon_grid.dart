@@ -260,7 +260,7 @@ class _CustomHexagonGridState extends State<CustomHexagonGrid> {
                             child:
                                 hexagon.text != null
                                     ? Padding(
-                                      padding: const EdgeInsets.all(5.5),
+                                      padding: const EdgeInsets.all(8),
                                       child: Text(
                                         hexagon.text!,
                                         style: getTextStyle(context),

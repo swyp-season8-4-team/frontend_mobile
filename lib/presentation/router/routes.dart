@@ -28,6 +28,12 @@ abstract class AppRoutes {
     path: 'add_user_store_list',
   );
 
+  // 지도 > 검색 화면
+  static final RouteInfo searchStore = RouteInfo(
+    name: '${map.name}/search-store',
+    path: 'search-store',
+  );
+
   // 인증 > 비밀번호 찾기
   static final RouteInfo findPassword = RouteInfo(
     name: '${auth.name}/find_password',

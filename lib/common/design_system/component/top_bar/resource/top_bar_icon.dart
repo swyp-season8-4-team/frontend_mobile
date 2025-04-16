@@ -61,7 +61,7 @@ class TopBarIcon {
 
   /// 검색
   GestureDetector search({required VoidCallback? onTap}) => GestureDetector(
-    onTap: () {},
+    onTap: onTap,
     child: SvgPicture.asset(Assets.icon.file.search1Line.path),
   );
 

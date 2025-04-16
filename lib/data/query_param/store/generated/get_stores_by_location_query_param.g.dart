@@ -25,6 +25,6 @@ Map<String, dynamic> _$GetStoresByLocationQueryParamToJson(
   'latitude': instance.latitude,
   'longitude': instance.longitude,
   'radius': instance.radius,
-  'preferenceTagIds': instance.preferenceTagIds,
-  'searchKeyword': instance.searchKeyword,
+  if (instance.preferenceTagIds case final value?) 'preferenceTagIds': value,
+  if (instance.searchKeyword case final value?) 'searchKeyword': value,
 };

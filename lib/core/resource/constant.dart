@@ -13,3 +13,22 @@ enum StoreListIconColor {
 
   final int id;
 }
+
+enum DayOfWeek {
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
+  sunday;
+
+  static DayOfWeek fromText({required String text}) {
+    return DayOfWeek.values.firstWhere(
+      (DayOfWeek day) => day.name == text.toLowerCase(),
+      orElse: () {
+        throw ArgumentError('Invalid day of week: $text');
+      },
+    );
+  }
+}
