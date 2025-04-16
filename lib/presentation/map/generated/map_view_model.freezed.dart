@@ -41,6 +41,10 @@ mixin _$MapState {
   ExceptionModel get getStoreSummaryExceptionModel =>
       throw _privateConstructorUsedError;
   NMarker? get selectedMarker => throw _privateConstructorUsedError;
+  List<UserStoreListModel> get userStores => throw _privateConstructorUsedError;
+  Status get getUserStoreListAllStatus => throw _privateConstructorUsedError;
+  ExceptionModel get getUserStoreListAllException =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of MapState
   /// with the given fields replaced by the non-null parameter values.
@@ -73,6 +77,9 @@ abstract class $MapStateCopyWith<$Res> {
     Status getStoreSummaryStatus,
     ExceptionModel getStoreSummaryExceptionModel,
     NMarker? selectedMarker,
+    List<UserStoreListModel> userStores,
+    Status getUserStoreListAllStatus,
+    ExceptionModel getUserStoreListAllException,
   });
 }
 
@@ -109,6 +116,9 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
     Object? getStoreSummaryStatus = null,
     Object? getStoreSummaryExceptionModel = null,
     Object? selectedMarker = freezed,
+    Object? userStores = null,
+    Object? getUserStoreListAllStatus = null,
+    Object? getUserStoreListAllException = null,
   }) {
     return _then(
       _value.copyWith(
@@ -202,6 +212,21 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
                     ? _value.selectedMarker
                     : selectedMarker // ignore: cast_nullable_to_non_nullable
                         as NMarker?,
+            userStores:
+                null == userStores
+                    ? _value.userStores
+                    : userStores // ignore: cast_nullable_to_non_nullable
+                        as List<UserStoreListModel>,
+            getUserStoreListAllStatus:
+                null == getUserStoreListAllStatus
+                    ? _value.getUserStoreListAllStatus
+                    : getUserStoreListAllStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            getUserStoreListAllException:
+                null == getUserStoreListAllException
+                    ? _value.getUserStoreListAllException
+                    : getUserStoreListAllException // ignore: cast_nullable_to_non_nullable
+                        as ExceptionModel,
           )
           as $Val,
     );
@@ -236,6 +261,9 @@ abstract class _$$MapStateImplCopyWith<$Res>
     Status getStoreSummaryStatus,
     ExceptionModel getStoreSummaryExceptionModel,
     NMarker? selectedMarker,
+    List<UserStoreListModel> userStores,
+    Status getUserStoreListAllStatus,
+    ExceptionModel getUserStoreListAllException,
   });
 }
 
@@ -271,6 +299,9 @@ class __$$MapStateImplCopyWithImpl<$Res>
     Object? getStoreSummaryStatus = null,
     Object? getStoreSummaryExceptionModel = null,
     Object? selectedMarker = freezed,
+    Object? userStores = null,
+    Object? getUserStoreListAllStatus = null,
+    Object? getUserStoreListAllException = null,
   }) {
     return _then(
       _$MapStateImpl(
@@ -364,6 +395,21 @@ class __$$MapStateImplCopyWithImpl<$Res>
                 ? _value.selectedMarker
                 : selectedMarker // ignore: cast_nullable_to_non_nullable
                     as NMarker?,
+        userStores:
+            null == userStores
+                ? _value._userStores
+                : userStores // ignore: cast_nullable_to_non_nullable
+                    as List<UserStoreListModel>,
+        getUserStoreListAllStatus:
+            null == getUserStoreListAllStatus
+                ? _value.getUserStoreListAllStatus
+                : getUserStoreListAllStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        getUserStoreListAllException:
+            null == getUserStoreListAllException
+                ? _value.getUserStoreListAllException
+                : getUserStoreListAllException // ignore: cast_nullable_to_non_nullable
+                    as ExceptionModel,
       ),
     );
   }
@@ -412,9 +458,18 @@ class _$MapStateImpl implements _MapState {
       timestamp: '',
     ),
     this.selectedMarker,
+    final List<UserStoreListModel> userStores = const <UserStoreListModel>[],
+    this.getUserStoreListAllStatus = Status.initial,
+    this.getUserStoreListAllException = const ExceptionModel(
+      status: -1,
+      code: '',
+      message: '',
+      timestamp: '',
+    ),
   }) : _preferences = preferences,
        _storesByLocation = storesByLocation,
-       _preferenceTagIds = preferenceTagIds;
+       _preferenceTagIds = preferenceTagIds,
+       _userStores = userStores;
 
   final List<PreferenceModel> _preferences;
   @override
@@ -488,10 +543,25 @@ class _$MapStateImpl implements _MapState {
   final ExceptionModel getStoreSummaryExceptionModel;
   @override
   final NMarker? selectedMarker;
+  final List<UserStoreListModel> _userStores;
+  @override
+  @JsonKey()
+  List<UserStoreListModel> get userStores {
+    if (_userStores is EqualUnmodifiableListView) return _userStores;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userStores);
+  }
+
+  @override
+  @JsonKey()
+  final Status getUserStoreListAllStatus;
+  @override
+  @JsonKey()
+  final ExceptionModel getUserStoreListAllException;
 
   @override
   String toString() {
-    return 'MapState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, myPreferenceFilterSelected: $myPreferenceFilterSelected, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel, storeSummary: $storeSummary, getStoreSummaryStatus: $getStoreSummaryStatus, getStoreSummaryExceptionModel: $getStoreSummaryExceptionModel, selectedMarker: $selectedMarker)';
+    return 'MapState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, myPreferenceFilterSelected: $myPreferenceFilterSelected, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel, storeSummary: $storeSummary, getStoreSummaryStatus: $getStoreSummaryStatus, getStoreSummaryExceptionModel: $getStoreSummaryExceptionModel, selectedMarker: $selectedMarker, userStores: $userStores, getUserStoreListAllStatus: $getUserStoreListAllStatus, getUserStoreListAllException: $getUserStoreListAllException)';
   }
 
   @override
@@ -567,11 +637,26 @@ class _$MapStateImpl implements _MapState {
                 other.getStoreSummaryExceptionModel ==
                     getStoreSummaryExceptionModel) &&
             (identical(other.selectedMarker, selectedMarker) ||
-                other.selectedMarker == selectedMarker));
+                other.selectedMarker == selectedMarker) &&
+            const DeepCollectionEquality().equals(
+              other._userStores,
+              _userStores,
+            ) &&
+            (identical(
+                  other.getUserStoreListAllStatus,
+                  getUserStoreListAllStatus,
+                ) ||
+                other.getUserStoreListAllStatus == getUserStoreListAllStatus) &&
+            (identical(
+                  other.getUserStoreListAllException,
+                  getUserStoreListAllException,
+                ) ||
+                other.getUserStoreListAllException ==
+                    getUserStoreListAllException));
   }
 
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     runtimeType,
     const DeepCollectionEquality().hash(_preferences),
     getAllPreferencesStatus,
@@ -591,7 +676,10 @@ class _$MapStateImpl implements _MapState {
     getStoreSummaryStatus,
     getStoreSummaryExceptionModel,
     selectedMarker,
-  );
+    const DeepCollectionEquality().hash(_userStores),
+    getUserStoreListAllStatus,
+    getUserStoreListAllException,
+  ]);
 
   /// Create a copy of MapState
   /// with the given fields replaced by the non-null parameter values.
@@ -622,6 +710,9 @@ abstract class _MapState implements MapState {
     final Status getStoreSummaryStatus,
     final ExceptionModel getStoreSummaryExceptionModel,
     final NMarker? selectedMarker,
+    final List<UserStoreListModel> userStores,
+    final Status getUserStoreListAllStatus,
+    final ExceptionModel getUserStoreListAllException,
   }) = _$MapStateImpl;
 
   @override
@@ -660,6 +751,12 @@ abstract class _MapState implements MapState {
   ExceptionModel get getStoreSummaryExceptionModel;
   @override
   NMarker? get selectedMarker;
+  @override
+  List<UserStoreListModel> get userStores;
+  @override
+  Status get getUserStoreListAllStatus;
+  @override
+  ExceptionModel get getUserStoreListAllException;
 
   /// Create a copy of MapState
   /// with the given fields replaced by the non-null parameter values.
