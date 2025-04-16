@@ -6,6 +6,7 @@ import 'package:frontend_mobile/data/entity/user_coupon/coupon_entity.dart';
 import 'package:frontend_mobile/data/entity/user_coupon/coupon_usage_status_entity.dart';
 import 'package:frontend_mobile/data/request_body/user_coupon/issue_coupon_request_body.dart';
 import 'package:retrofit/http.dart';
+import 'package:retrofit/error_logger.dart';
 
 part 'generated/user_coupon_remote_data_source.g.dart';
 
