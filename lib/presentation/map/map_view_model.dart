@@ -176,7 +176,7 @@ class MapViewModel extends StateNotifier<MapState> {
       state = state.copyWith(myPreferenceFilterSelected: false);
     }
 
-    final int? selectablePreference = state.preferenceTagIds.firstWhereOrNull(
+    final int? selectablePreference = state.preferenceTagIds?.firstWhereOrNull(
       (int e) => e == preference.id,
     );
 
@@ -184,12 +184,15 @@ class MapViewModel extends StateNotifier<MapState> {
       state = state.copyWith(
         preferenceTagIds:
             state.preferenceTagIds
-                .where((int e) => e != selectablePreference)
+                ?.where((int e) => e != selectablePreference)
                 .toList(),
       );
     } else {
       state = state.copyWith(
-        preferenceTagIds: <int>[...state.preferenceTagIds, preference.id],
+        preferenceTagIds: <int>[
+          ...state.preferenceTagIds ?? <int>[],
+          preference.id,
+        ],
       );
     }
 

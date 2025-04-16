@@ -27,7 +27,7 @@ mixin _$MapState {
   double get lng => throw _privateConstructorUsedError;
   double get radius => throw _privateConstructorUsedError;
   bool get myPreferenceFilterSelected => throw _privateConstructorUsedError;
-  List<int> get preferenceTagIds => throw _privateConstructorUsedError;
+  List<int>? get preferenceTagIds => throw _privateConstructorUsedError;
   String? get searchKeyword => throw _privateConstructorUsedError;
   Status get getStoresByLocationStatus => throw _privateConstructorUsedError;
   Status get getMyPreferencesStoresByLocationStatus =>
@@ -63,7 +63,7 @@ abstract class $MapStateCopyWith<$Res> {
     double lng,
     double radius,
     bool myPreferenceFilterSelected,
-    List<int> preferenceTagIds,
+    List<int>? preferenceTagIds,
     String? searchKeyword,
     Status getStoresByLocationStatus,
     Status getMyPreferencesStoresByLocationStatus,
@@ -99,7 +99,7 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
     Object? lng = null,
     Object? radius = null,
     Object? myPreferenceFilterSelected = null,
-    Object? preferenceTagIds = null,
+    Object? preferenceTagIds = freezed,
     Object? searchKeyword = freezed,
     Object? getStoresByLocationStatus = null,
     Object? getMyPreferencesStoresByLocationStatus = null,
@@ -153,10 +153,10 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
                     : myPreferenceFilterSelected // ignore: cast_nullable_to_non_nullable
                         as bool,
             preferenceTagIds:
-                null == preferenceTagIds
+                freezed == preferenceTagIds
                     ? _value.preferenceTagIds
                     : preferenceTagIds // ignore: cast_nullable_to_non_nullable
-                        as List<int>,
+                        as List<int>?,
             searchKeyword:
                 freezed == searchKeyword
                     ? _value.searchKeyword
@@ -226,7 +226,7 @@ abstract class _$$MapStateImplCopyWith<$Res>
     double lng,
     double radius,
     bool myPreferenceFilterSelected,
-    List<int> preferenceTagIds,
+    List<int>? preferenceTagIds,
     String? searchKeyword,
     Status getStoresByLocationStatus,
     Status getMyPreferencesStoresByLocationStatus,
@@ -261,7 +261,7 @@ class __$$MapStateImplCopyWithImpl<$Res>
     Object? lng = null,
     Object? radius = null,
     Object? myPreferenceFilterSelected = null,
-    Object? preferenceTagIds = null,
+    Object? preferenceTagIds = freezed,
     Object? searchKeyword = freezed,
     Object? getStoresByLocationStatus = null,
     Object? getMyPreferencesStoresByLocationStatus = null,
@@ -315,10 +315,10 @@ class __$$MapStateImplCopyWithImpl<$Res>
                 : myPreferenceFilterSelected // ignore: cast_nullable_to_non_nullable
                     as bool,
         preferenceTagIds:
-            null == preferenceTagIds
+            freezed == preferenceTagIds
                 ? _value._preferenceTagIds
                 : preferenceTagIds // ignore: cast_nullable_to_non_nullable
-                    as List<int>,
+                    as List<int>?,
         searchKeyword:
             freezed == searchKeyword
                 ? _value.searchKeyword
@@ -387,7 +387,7 @@ class _$MapStateImpl implements _MapState {
     this.lng = 127.0495556,
     this.radius = 5,
     this.myPreferenceFilterSelected = false,
-    final List<int> preferenceTagIds = const <int>[],
+    final List<int>? preferenceTagIds,
     this.searchKeyword,
     this.getStoresByLocationStatus = Status.loading,
     this.getMyPreferencesStoresByLocationStatus = Status.loading,
@@ -453,14 +453,15 @@ class _$MapStateImpl implements _MapState {
   @override
   @JsonKey()
   final bool myPreferenceFilterSelected;
-  final List<int> _preferenceTagIds;
+  final List<int>? _preferenceTagIds;
   @override
-  @JsonKey()
-  List<int> get preferenceTagIds {
+  List<int>? get preferenceTagIds {
+    final value = _preferenceTagIds;
+    if (value == null) return null;
     if (_preferenceTagIds is EqualUnmodifiableListView)
       return _preferenceTagIds;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_preferenceTagIds);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -611,7 +612,7 @@ abstract class _MapState implements MapState {
     final double lng,
     final double radius,
     final bool myPreferenceFilterSelected,
-    final List<int> preferenceTagIds,
+    final List<int>? preferenceTagIds,
     final String? searchKeyword,
     final Status getStoresByLocationStatus,
     final Status getMyPreferencesStoresByLocationStatus,
@@ -640,7 +641,7 @@ abstract class _MapState implements MapState {
   @override
   bool get myPreferenceFilterSelected;
   @override
-  List<int> get preferenceTagIds;
+  List<int>? get preferenceTagIds;
   @override
   String? get searchKeyword;
   @override

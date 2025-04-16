@@ -13,7 +13,7 @@ class MapState with _$MapState {
     @Default(127.0495556) double lng,
     @Default(5) double radius,
     @Default(false) bool myPreferenceFilterSelected,
-    @Default(<int>[]) List<int> preferenceTagIds,
+    List<int>? preferenceTagIds,
     String? searchKeyword,
     @Default(Status.loading) Status getStoresByLocationStatus,
     @Default(Status.loading) Status getMyPreferencesStoresByLocationStatus,

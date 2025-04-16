@@ -6,6 +6,7 @@ import 'package:frontend_mobile/presentation/find_password/view/find_password_st
 import 'package:frontend_mobile/presentation/home.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
 import 'package:frontend_mobile/presentation/map/map_view.dart';
+import 'package:frontend_mobile/presentation/map/search/search_store_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/find_place_by_map_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
@@ -105,6 +106,15 @@ class AppRouter {
           return const MapView();
         },
         routes: <RouteBase>[
+          /// 지도 > 검섹
+          GoRoute(
+            path: AppRoutes.searchStore.path,
+            name: AppRoutes.searchStore.name,
+            builder:
+                (BuildContext context, GoRouterState state) =>
+                    const SearchStoreView(),
+          ),
+
           /// 가게 정보 상세
           GoRoute(
             path: AppRoutes.storeDetail.path,

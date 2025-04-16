@@ -40,6 +40,7 @@ class _MapViewState extends ConsumerState<MapView> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Viewmodel을 통한 상태관리 필요
     final MapState state = ref.watch(mapViewModelProvider);
 
     ref.listen(
@@ -99,7 +100,11 @@ class _MapViewState extends ConsumerState<MapView> {
           state.getAllPreferencesStatus.isLoading ||
           state.getStoresByLocationStatus.isLoading,
       child: ScaffoldWithNavigationBar(
-        appBar: const CustomMainTopBar(),
+        appBar: CustomMainTopBar(
+          onSearchIconTap: () {
+            context.pushNamed(AppRoutes.searchStore.name);
+          },
+        ),
         body: Stack(
           children: <Widget>[
             NaverMap(
