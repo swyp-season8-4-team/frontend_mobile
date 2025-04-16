@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/data/entity/user_store/user_store_list_entity.dart';
 import 'package:frontend_mobile/data/entity/user_store/user_store_list_summary_entity.dart';
 import 'package:frontend_mobile/data/entity/user_store/user_store_location_entity.dart';
@@ -10,7 +12,11 @@ extension UserStoreListEntityExt on UserStoreListEntity {
     listId: listId,
     userUuid: userUuid,
     listName: listName,
-    iconColorId: iconColorId,
+    iconColor:
+        StoreListIconColor.values.firstWhereOrNull(
+          (StoreListIconColor e) => e.id == iconColorId,
+        ) ??
+        StoreListIconColor.yellow,
     storeCount: storeCount,
     storeData:
         storeData

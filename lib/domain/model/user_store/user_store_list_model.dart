@@ -1,9 +1,11 @@
+import 'package:frontend_mobile/core/resource/constant.dart';
+
 class UserStoreListModel {
   const UserStoreListModel({
     required this.listId,
     required this.userUuid,
     required this.listName,
-    required this.iconColorId,
+    required this.iconColor,
     required this.storeCount,
     required this.storeData,
   });
@@ -11,7 +13,7 @@ class UserStoreListModel {
   final int listId;
   final String userUuid;
   final String listName;
-  final int iconColorId;
+  final StoreListIconColor iconColor;
   final int storeCount;
   final List<UserStoreModel>? storeData;
 }

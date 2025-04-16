@@ -15,7 +15,9 @@ UserStoreListEntity _$UserStoreListEntityFromJson(Map<String, dynamic> json) =>
       storeCount: (json['storeCount'] as num).toInt(),
       storeData:
           (json['storeData'] as List<dynamic>?)
-              ?.map((e) => _StoreData.fromJson(e as Map<String, dynamic>))
+              ?.map(
+                (e) => UserStoreDataEntity.fromJson(e as Map<String, dynamic>),
+              )
               .toList(),
     );
 
@@ -30,33 +32,37 @@ Map<String, dynamic> _$UserStoreListEntityToJson(
   'storeData': instance.storeData,
 };
 
-_StoreData _$StoreDataFromJson(Map<String, dynamic> json) => _StoreData(
-  userUuid: json['userUuid'] as String,
-  storeUuid: json['storeUuid'] as String,
-  listId: (json['listId'] as num).toInt(),
-  listName: json['listName'] as String,
-  storeName: json['storeName'] as String,
-  storeAddress: json['storeAddress'] as String,
-  latitude: (json['latitude'] as num).toDouble(),
-  longitude: (json['longitude'] as num).toDouble(),
-  imageUrls:
-      (json['imageUrls'] as List<dynamic>?)?.map((e) => e as String).toList(),
-  userPreferences:
-      (json['userPreferences'] as List<dynamic>?)
-          ?.map((e) => (e as num).toInt())
-          .toList(),
-);
+UserStoreDataEntity _$UserStoreDataEntityFromJson(Map<String, dynamic> json) =>
+    UserStoreDataEntity(
+      userUuid: json['userUuid'] as String,
+      storeUuid: json['storeUuid'] as String,
+      listId: (json['listId'] as num).toInt(),
+      listName: json['listName'] as String,
+      storeName: json['storeName'] as String,
+      storeAddress: json['storeAddress'] as String,
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+      imageUrls:
+          (json['imageUrls'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
+      userPreferences:
+          (json['userPreferences'] as List<dynamic>?)
+              ?.map((e) => (e as num).toInt())
+              .toList(),
+    );
 
-Map<String, dynamic> _$StoreDataToJson(_StoreData instance) =>
-    <String, dynamic>{
-      'userUuid': instance.userUuid,
-      'storeUuid': instance.storeUuid,
-      'listId': instance.listId,
-      'listName': instance.listName,
-      'storeName': instance.storeName,
-      'storeAddress': instance.storeAddress,
-      'latitude': instance.latitude,
-      'longitude': instance.longitude,
-      'imageUrls': instance.imageUrls,
-      'userPreferences': instance.userPreferences,
-    };
+Map<String, dynamic> _$UserStoreDataEntityToJson(
+  UserStoreDataEntity instance,
+) => <String, dynamic>{
+  'userUuid': instance.userUuid,
+  'storeUuid': instance.storeUuid,
+  'listId': instance.listId,
+  'listName': instance.listName,
+  'storeName': instance.storeName,
+  'storeAddress': instance.storeAddress,
+  'latitude': instance.latitude,
+  'longitude': instance.longitude,
+  'imageUrls': instance.imageUrls,
+  'userPreferences': instance.userPreferences,
+};
