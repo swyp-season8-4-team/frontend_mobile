@@ -90,7 +90,6 @@ class _OperatingHoursState extends State<_OperatingHours> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Assets.icon.system.timeLine.svg(
                 width: 14,
@@ -113,7 +112,7 @@ class _OperatingHoursState extends State<_OperatingHours> {
                     ? '${todayOperatingInfo.closingTime} 영업 종료'
                     : '${nextDayOperatingInfo?.openingTime} 영업 시작',
                 style: textTheme.labelMedium?.copyWith(
-                  color: ScaleColorConfig.neutral40,
+                  color: ScaleColorConfig.neutral30,
                 ),
               ),
               const SizedBox(width: 4),
@@ -179,7 +178,7 @@ class _OperatingHoursState extends State<_OperatingHours> {
                                             top: 4,
                                           ),
                                           child: Text(
-                                            '${e.breakTimes![0].startTime} - ${e.breakTimes![0].endTime}',
+                                            '${e.breakTimes![0].startTime} - ${e.breakTimes![0].endTime} 브레이크 타임',
                                             style: textTheme.labelMedium
                                                 ?.copyWith(
                                                   color:
@@ -194,7 +193,7 @@ class _OperatingHoursState extends State<_OperatingHours> {
                                             top: 4,
                                           ),
                                           child: Text(
-                                            '라스트 오더 ${e.lastOrderTime}',
+                                            '${e.lastOrderTime} 라스트 오더',
                                             style: textTheme.labelMedium
                                                 ?.copyWith(
                                                   color:
