@@ -7,7 +7,6 @@ class _StoreDetailInfo extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final StoreDetailState state = ref.watch(storeDetailViewModelProvider);
     final StoreDetailModel storeDetail = state.storeDetail!;
-    final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Container(
@@ -18,111 +17,15 @@ class _StoreDetailInfo extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Assets.icon.map.a14x14AddressLine.svg(
-                width: 14,
-                height: 14,
-                colorFilter: const ColorFilter.mode(
-                  ScaleColorConfig.neutral30,
-                  BlendMode.srcIn,
-                ),
-              ),
-              const SizedBox(width: 10),
-              Container(
-                constraints: const BoxConstraints(maxWidth: 210),
-                child: Text(
-                  storeDetail.address,
-                  style: textTheme.labelMedium?.copyWith(
-                    color: ScaleColorConfig.neutral30,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              const SizedBox(width: 6),
-              GestureDetector(
-                onTap: () {
-                  context.pushNamed(
-                    AppRoutes.findPlaceByMap.name,
-                    pathParameters: <String, String>{
-                      'id': storeDetail.storeUuid,
-                    },
-                  );
-                },
-                child: Text(
-                  '길찾기',
-                  style: textTheme.labelMedium?.copyWith(
-                    color: ScaleColorConfig.secondary60,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          _Address(storeDetail: storeDetail),
           const SizedBox(height: 8),
           _OperatingHours(storeDetail: storeDetail),
           const SizedBox(height: 8),
-          Row(
-            children: <Widget>[
-              Assets.icon.contact.phone1Line.svg(
-                width: 14,
-                height: 14,
-                colorFilter: const ColorFilter.mode(
-                  ScaleColorConfig.neutral30,
-                  BlendMode.srcIn,
-                ),
-              ),
-              const SizedBox(width: 10),
-              Text(
-                storeDetail.phone,
-                style: textTheme.labelMedium?.copyWith(
-                  color: ScaleColorConfig.neutral30,
-                ),
-              ),
-              const SizedBox(width: 6),
-              GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: () {
-                  launchUrlString(
-                    'tel://${storeDetail.phone}',
-                    mode: LaunchMode.externalApplication,
-                  );
-                },
-                child: Text(
-                  '전화',
-                  style: textTheme.labelMedium?.copyWith(
-                    color: ScaleColorConfig.secondary60,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          _Phone(storeDetail: storeDetail),
           const SizedBox(height: 8),
           _StoreLinks(storeDetail: storeDetail),
           const SizedBox(height: 12),
-          Row(
-            children: <Widget>[
-              if (storeDetail.parkingYn == true)
-                const Padding(
-                  padding: EdgeInsets.only(left: 12),
-                  child: CanParkingTag(),
-                ),
-
-              if (storeDetail.animalYn == true)
-                const Padding(
-                  padding: EdgeInsets.only(left: 12),
-
-                  child: PetTag(),
-                ),
-              if (storeDetail.tumblerYn == true)
-                const Padding(
-                  padding: EdgeInsets.only(left: 12),
-
-                  child: DiscountTumblerTag(),
-                ),
-            ],
-          ),
+          _AttributeTags(storeDetail: storeDetail),
         ],
       ),
     );
@@ -316,6 +219,7 @@ class _OperatingHoursState extends State<_OperatingHours> {
   }
 }
 
+// 축소/확장 버튼
 class _OpenButton extends StatelessWidget {
   const _OpenButton({this.isOpen = false});
   final bool isOpen;
@@ -490,5 +394,131 @@ class _StoreLinksState extends State<_StoreLinks> {
     }
 
     return matched.toList();
+  }
+}
+
+// 주소 정보 UI
+class _Address extends StatelessWidget {
+  const _Address({required this.storeDetail});
+  final StoreDetailModel storeDetail;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    return Row(
+      children: <Widget>[
+        Assets.icon.map.a14x14AddressLine.svg(
+          width: 14,
+          height: 14,
+          colorFilter: const ColorFilter.mode(
+            ScaleColorConfig.neutral30,
+            BlendMode.srcIn,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Container(
+          constraints: const BoxConstraints(maxWidth: 210),
+          child: Text(
+            storeDetail.address,
+            style: textTheme.labelMedium?.copyWith(
+              color: ScaleColorConfig.neutral30,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        const SizedBox(width: 6),
+        GestureDetector(
+          onTap: () {
+            context.pushNamed(
+              AppRoutes.findPlaceByMap.name,
+              pathParameters: <String, String>{'id': storeDetail.storeUuid},
+            );
+          },
+          child: Text(
+            '길찾기',
+            style: textTheme.labelMedium?.copyWith(
+              color: ScaleColorConfig.secondary60,
+              decoration: TextDecoration.underline,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// 전화 정보 UI
+class _Phone extends StatelessWidget {
+  const _Phone({required this.storeDetail});
+  final StoreDetailModel storeDetail;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    return Row(
+      children: <Widget>[
+        Assets.icon.contact.phone1Line.svg(
+          width: 14,
+          height: 14,
+          colorFilter: const ColorFilter.mode(
+            ScaleColorConfig.neutral30,
+            BlendMode.srcIn,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Text(
+          storeDetail.phone,
+          style: textTheme.labelMedium?.copyWith(
+            color: ScaleColorConfig.neutral30,
+          ),
+        ),
+        const SizedBox(width: 6),
+        GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            launchUrlString(
+              'tel://${storeDetail.phone}',
+              mode: LaunchMode.externalApplication,
+            );
+          },
+          child: Text(
+            '전화',
+            style: textTheme.labelMedium?.copyWith(
+              color: ScaleColorConfig.secondary60,
+              decoration: TextDecoration.underline,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// 태그 정보 UI
+class _AttributeTags extends StatelessWidget {
+  const _AttributeTags({required this.storeDetail});
+  final StoreDetailModel storeDetail;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        if (storeDetail.parkingYn == true)
+          const Padding(
+            padding: EdgeInsets.only(left: 12),
+            child: CanParkingTag(),
+          ),
+
+        if (storeDetail.animalYn == true)
+          const Padding(padding: EdgeInsets.only(left: 12), child: PetTag()),
+        if (storeDetail.tumblerYn == true)
+          const Padding(
+            padding: EdgeInsets.only(left: 12),
+
+            child: DiscountTumblerTag(),
+          ),
+      ],
+    );
   }
 }
