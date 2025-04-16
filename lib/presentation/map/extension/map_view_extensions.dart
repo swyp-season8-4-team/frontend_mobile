@@ -36,7 +36,7 @@ extension MapViewWidgetExt on _MapViewState {
                   padding: const EdgeInsets.only(left: 6),
                   child: CustomFloatingChip(
                     label: e.preferenceName,
-                    selected: state.preferenceTagIds.contains(e.id),
+                    selected: state.preferenceTagIds?.contains(e.id) == true,
                     onPressed: () async {
                       final ({double lat, double lng, double radius})
                       queryOption = await NaverMapUtil.getLocationInfo(
@@ -68,7 +68,7 @@ extension MapViewWidgetExt on _MapViewState {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         if (!state.myPreferenceFilterSelected &&
-            state.preferenceTagIds.isNotEmpty)
+            state.preferenceTagIds?.isNotEmpty == true)
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: CustomMapIconButton.filterReset(

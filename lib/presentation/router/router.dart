@@ -6,6 +6,7 @@ import 'package:frontend_mobile/presentation/find_password/view/find_password_st
 import 'package:frontend_mobile/presentation/home.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
 import 'package:frontend_mobile/presentation/map/map_view.dart';
+import 'package:frontend_mobile/presentation/map/search/search_store_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/splash_view.dart';
 import 'package:go_router/go_router.dart';
@@ -102,6 +103,15 @@ class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return const MapView();
         },
+        routes: <RouteBase>[
+          GoRoute(
+            path: AppRoutes.searchStore.path,
+            name: AppRoutes.searchStore.name,
+            builder:
+                (BuildContext context, GoRouterState state) =>
+                    const SearchStoreView(),
+          ),
+        ],
       ),
     ],
   );
