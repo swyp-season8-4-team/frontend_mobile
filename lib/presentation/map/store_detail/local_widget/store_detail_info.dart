@@ -386,13 +386,23 @@ class _StoreLinksState extends State<_StoreLinks> {
             ),
             const SizedBox(width: 10),
             Expanded(
-              child: Text(
-                widget.storeDetail.primaryStoreLink ?? '',
-                maxLines: _isExpanded ? null : 1,
-                style: textTheme.labelMedium?.copyWith(
-                  color: ScaleColorConfig.neutral30,
+              child: GestureDetector(
+                onTap: () async {
+                  final Uri url = Uri.parse(
+                    widget.storeDetail.primaryStoreLink ?? '',
+                  );
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url);
+                  }
+                },
+                child: Text(
+                  widget.storeDetail.primaryStoreLink ?? '',
+                  maxLines: _isExpanded ? null : 1,
+                  style: textTheme.labelMedium?.copyWith(
+                    color: ScaleColorConfig.neutral30,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
-                overflow: TextOverflow.ellipsis,
               ),
             ),
             const SizedBox(width: 10),
@@ -409,21 +419,22 @@ class _StoreLinksState extends State<_StoreLinks> {
               padding: const EdgeInsets.only(left: 24),
               child: Wrap(
                 children: <Widget>[
-                  // TODO: 링크 표시 수정 예정
                   if (widget.storeDetail.storeLinks?.isNotEmpty == true)
-                    ...widget.storeDetail.storeLinks!.map(
-                      (String e) => Padding(
+                    ...formattedStoreLink.mapIndexed(
+                      (int index, String e) => Padding(
                         padding: const EdgeInsets.only(right: 4),
                         child: GestureDetector(
                           behavior: HitTestBehavior.translucent,
                           onTap: () async {
-                            final Uri url = Uri.parse(e);
+                            final Uri url = Uri.parse(
+                              widget.storeDetail.storeLinks![index],
+                            );
                             if (await canLaunchUrl(url)) {
                               await launchUrl(url);
                             }
                           },
                           child: Text(
-                            '링크',
+                            e,
                             style: textTheme.labelMedium?.copyWith(
                               color: ScaleColorConfig.neutral30,
                               decoration: TextDecoration.underline,
@@ -439,5 +450,45 @@ class _StoreLinksState extends State<_StoreLinks> {
             : const SizedBox.shrink(),
       ],
     );
+  }
+
+  List<String> get formattedStoreLink {
+    final Map<String, List<String>> certainLinks = <String, List<String>>{
+      '인스타그램': <String>['https://www.instagram.com/'],
+      '블로그': <String>[
+        'https://blog.naver.com/',
+        'https://section.blog.naver.com/',
+      ],
+      '카카오채널': <String>['https://pf.kakao.com/'],
+      '스마트스토어': <String>[
+        'https://shopping.naver.com/',
+        'https://brand.naver.com/',
+        'https://smartstore.naver.com/',
+      ],
+      '캐치테이블': <String>['https://app.catchtable.co.kr/'],
+    };
+
+    final Set<String> matched = <String>{};
+
+    for (final String link in widget.storeDetail.storeLinks ?? <String>[]) {
+      bool isMatched = false;
+
+      for (final MapEntry<String, List<String>> entry in certainLinks.entries) {
+        final String serviceName = entry.key;
+        final List<String> prefixes = entry.value;
+
+        if (prefixes.any((String prefix) => link.startsWith(prefix))) {
+          matched.add(serviceName);
+          isMatched = true;
+          break;
+        }
+      }
+
+      if (!isMatched) {
+        matched.add('링크');
+      }
+    }
+
+    return matched.toList();
   }
 }
