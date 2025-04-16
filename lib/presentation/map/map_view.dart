@@ -204,32 +204,6 @@ class _MapViewState extends ConsumerState<MapView> {
               alignment: Alignment.bottomCenter,
               child: _buildRefreshButton(),
             ),
-            Positioned(
-              top: 56,
-              right: 16,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  CustomMapIconButton.saveStore(
-                    isSelected: true,
-                    onPressed: () async {
-                      await _draggableScrollableController.animateTo(
-                        _snapSize,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeIn,
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  CustomMapIconButton.myLocation(
-                    isSelected: false,
-                    onPressed: () {
-                      _goToCurrentLocation();
-                    },
-                  ),
-                ],
-              ),
-            ),
             const _BottomNavigation(),
             _StoreListSheet(
               draggableScrollableController: _draggableScrollableController,

@@ -80,7 +80,7 @@ extension MapViewWidgetExt on _MapViewState {
                 viewmodel.clearAllFilter(
                   lng: queryOption.lng,
                   lat: queryOption.lat,
-                  radius: queryOption.lng,
+                  radius: queryOption.radius,
                 );
               },
             ),
