@@ -8,7 +8,6 @@ import 'package:frontend_mobile/common/design_system/component/chip/floating_chi
 import 'package:frontend_mobile/common/design_system/component/etc/map/map_icon_button.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/map/saved_store_list.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/option_menu_dropdown.dart';
-import 'package:frontend_mobile/common/design_system/component/navigation_bar/navigation_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/main_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
@@ -25,12 +24,12 @@ import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
 import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:frontend_mobile/presentation/widget/desserbee_bottom_navigation.dart';
 
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 
 part 'local_widget/store_list_sheet.dart';
-part 'local_widget/bottom_navigation_bar.dart';
 
 part 'extension/map_view_extensions.dart';
 part 'extension/map_method_extensions.dart';
@@ -204,7 +203,12 @@ class _MapViewState extends ConsumerState<MapView> {
               alignment: Alignment.bottomCenter,
               child: _buildRefreshButton(),
             ),
-            const _BottomNavigation(),
+            const Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: DesserbeeBottomNavigation(),
+            ),
             _StoreListSheet(
               draggableScrollableController: _draggableScrollableController,
               snapSize: _snapSize,
