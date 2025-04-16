@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of '../post_sign_up_params.dart';
+part of '../post_sign_up_with_profile_params.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 /// @nodoc
-mixin _$PostSignUpParams {
+mixin _$PostSignUpWithProfileParams {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get confirmPassword => throw _privateConstructorUsedError;
@@ -28,20 +28,25 @@ mixin _$PostSignUpParams {
   String? get gender => throw _privateConstructorUsedError;
   List<int>? get preferenceIds => throw _privateConstructorUsedError;
   String? get role => throw _privateConstructorUsedError;
+  MultipartFile? get profileImage => throw _privateConstructorUsedError;
 
-  /// Create a copy of PostSignUpParams
+  /// Create a copy of PostSignUpWithProfileParams
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PostSignUpParamsCopyWith<PostSignUpParams> get copyWith =>
-      throw _privateConstructorUsedError;
+  $PostSignUpWithProfileParamsCopyWith<PostSignUpWithProfileParams>
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PostSignUpParamsCopyWith<$Res> {
-  factory $PostSignUpParamsCopyWith(
-    PostSignUpParams value,
-    $Res Function(PostSignUpParams) then,
-  ) = _$PostSignUpParamsCopyWithImpl<$Res, PostSignUpParams>;
+abstract class $PostSignUpWithProfileParamsCopyWith<$Res> {
+  factory $PostSignUpWithProfileParamsCopyWith(
+    PostSignUpWithProfileParams value,
+    $Res Function(PostSignUpWithProfileParams) then,
+  ) =
+      _$PostSignUpWithProfileParamsCopyWithImpl<
+        $Res,
+        PostSignUpWithProfileParams
+      >;
   @useResult
   $Res call({
     String email,
@@ -55,20 +60,24 @@ abstract class $PostSignUpParamsCopyWith<$Res> {
     String? gender,
     List<int>? preferenceIds,
     String? role,
+    MultipartFile? profileImage,
   });
 }
 
 /// @nodoc
-class _$PostSignUpParamsCopyWithImpl<$Res, $Val extends PostSignUpParams>
-    implements $PostSignUpParamsCopyWith<$Res> {
-  _$PostSignUpParamsCopyWithImpl(this._value, this._then);
+class _$PostSignUpWithProfileParamsCopyWithImpl<
+  $Res,
+  $Val extends PostSignUpWithProfileParams
+>
+    implements $PostSignUpWithProfileParamsCopyWith<$Res> {
+  _$PostSignUpWithProfileParamsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PostSignUpParams
+  /// Create a copy of PostSignUpWithProfileParams
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -84,6 +93,7 @@ class _$PostSignUpParamsCopyWithImpl<$Res, $Val extends PostSignUpParams>
     Object? gender = freezed,
     Object? preferenceIds = freezed,
     Object? role = freezed,
+    Object? profileImage = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -142,6 +152,11 @@ class _$PostSignUpParamsCopyWithImpl<$Res, $Val extends PostSignUpParams>
                     ? _value.role
                     : role // ignore: cast_nullable_to_non_nullable
                         as String?,
+            profileImage:
+                freezed == profileImage
+                    ? _value.profileImage
+                    : profileImage // ignore: cast_nullable_to_non_nullable
+                        as MultipartFile?,
           )
           as $Val,
     );
@@ -149,12 +164,12 @@ class _$PostSignUpParamsCopyWithImpl<$Res, $Val extends PostSignUpParams>
 }
 
 /// @nodoc
-abstract class _$$PostSignUpParamsImplCopyWith<$Res>
-    implements $PostSignUpParamsCopyWith<$Res> {
-  factory _$$PostSignUpParamsImplCopyWith(
-    _$PostSignUpParamsImpl value,
-    $Res Function(_$PostSignUpParamsImpl) then,
-  ) = __$$PostSignUpParamsImplCopyWithImpl<$Res>;
+abstract class _$$PostSignUpWithProfileParamsImplCopyWith<$Res>
+    implements $PostSignUpWithProfileParamsCopyWith<$Res> {
+  factory _$$PostSignUpWithProfileParamsImplCopyWith(
+    _$PostSignUpWithProfileParamsImpl value,
+    $Res Function(_$PostSignUpWithProfileParamsImpl) then,
+  ) = __$$PostSignUpWithProfileParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -169,19 +184,24 @@ abstract class _$$PostSignUpParamsImplCopyWith<$Res>
     String? gender,
     List<int>? preferenceIds,
     String? role,
+    MultipartFile? profileImage,
   });
 }
 
 /// @nodoc
-class __$$PostSignUpParamsImplCopyWithImpl<$Res>
-    extends _$PostSignUpParamsCopyWithImpl<$Res, _$PostSignUpParamsImpl>
-    implements _$$PostSignUpParamsImplCopyWith<$Res> {
-  __$$PostSignUpParamsImplCopyWithImpl(
-    _$PostSignUpParamsImpl _value,
-    $Res Function(_$PostSignUpParamsImpl) _then,
+class __$$PostSignUpWithProfileParamsImplCopyWithImpl<$Res>
+    extends
+        _$PostSignUpWithProfileParamsCopyWithImpl<
+          $Res,
+          _$PostSignUpWithProfileParamsImpl
+        >
+    implements _$$PostSignUpWithProfileParamsImplCopyWith<$Res> {
+  __$$PostSignUpWithProfileParamsImplCopyWithImpl(
+    _$PostSignUpWithProfileParamsImpl _value,
+    $Res Function(_$PostSignUpWithProfileParamsImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of PostSignUpParams
+  /// Create a copy of PostSignUpWithProfileParams
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -197,9 +217,10 @@ class __$$PostSignUpParamsImplCopyWithImpl<$Res>
     Object? gender = freezed,
     Object? preferenceIds = freezed,
     Object? role = freezed,
+    Object? profileImage = freezed,
   }) {
     return _then(
-      _$PostSignUpParamsImpl(
+      _$PostSignUpWithProfileParamsImpl(
         email:
             null == email
                 ? _value.email
@@ -255,6 +276,11 @@ class __$$PostSignUpParamsImplCopyWithImpl<$Res>
                 ? _value.role
                 : role // ignore: cast_nullable_to_non_nullable
                     as String?,
+        profileImage:
+            freezed == profileImage
+                ? _value.profileImage
+                : profileImage // ignore: cast_nullable_to_non_nullable
+                    as MultipartFile?,
       ),
     );
   }
@@ -262,8 +288,9 @@ class __$$PostSignUpParamsImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PostSignUpParamsImpl implements _PostSignUpParams {
-  const _$PostSignUpParamsImpl({
+class _$PostSignUpWithProfileParamsImpl
+    implements _PostSignUpWithProfileParams {
+  const _$PostSignUpWithProfileParamsImpl({
     required this.email,
     required this.password,
     required this.confirmPassword,
@@ -275,6 +302,7 @@ class _$PostSignUpParamsImpl implements _PostSignUpParams {
     this.gender,
     final List<int>? preferenceIds,
     this.role,
+    this.profileImage,
   }) : _preferenceIds = preferenceIds;
 
   @override
@@ -307,17 +335,19 @@ class _$PostSignUpParamsImpl implements _PostSignUpParams {
 
   @override
   final String? role;
+  @override
+  final MultipartFile? profileImage;
 
   @override
   String toString() {
-    return 'PostSignUpParams(email: $email, password: $password, confirmPassword: $confirmPassword, nickname: $nickname, emailToken: $emailToken, name: $name, phoneNumber: $phoneNumber, address: $address, gender: $gender, preferenceIds: $preferenceIds, role: $role)';
+    return 'PostSignUpWithProfileParams(email: $email, password: $password, confirmPassword: $confirmPassword, nickname: $nickname, emailToken: $emailToken, name: $name, phoneNumber: $phoneNumber, address: $address, gender: $gender, preferenceIds: $preferenceIds, role: $role, profileImage: $profileImage)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PostSignUpParamsImpl &&
+            other is _$PostSignUpWithProfileParamsImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password) &&
@@ -336,7 +366,9 @@ class _$PostSignUpParamsImpl implements _PostSignUpParams {
               other._preferenceIds,
               _preferenceIds,
             ) &&
-            (identical(other.role, role) || other.role == role));
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.profileImage, profileImage) ||
+                other.profileImage == profileImage));
   }
 
   @override
@@ -353,22 +385,23 @@ class _$PostSignUpParamsImpl implements _PostSignUpParams {
     gender,
     const DeepCollectionEquality().hash(_preferenceIds),
     role,
+    profileImage,
   );
 
-  /// Create a copy of PostSignUpParams
+  /// Create a copy of PostSignUpWithProfileParams
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$PostSignUpParamsImplCopyWith<_$PostSignUpParamsImpl> get copyWith =>
-      __$$PostSignUpParamsImplCopyWithImpl<_$PostSignUpParamsImpl>(
-        this,
-        _$identity,
-      );
+  _$$PostSignUpWithProfileParamsImplCopyWith<_$PostSignUpWithProfileParamsImpl>
+  get copyWith => __$$PostSignUpWithProfileParamsImplCopyWithImpl<
+    _$PostSignUpWithProfileParamsImpl
+  >(this, _$identity);
 }
 
-abstract class _PostSignUpParams implements PostSignUpParams {
-  const factory _PostSignUpParams({
+abstract class _PostSignUpWithProfileParams
+    implements PostSignUpWithProfileParams {
+  const factory _PostSignUpWithProfileParams({
     required final String email,
     required final String password,
     required final String confirmPassword,
@@ -380,7 +413,8 @@ abstract class _PostSignUpParams implements PostSignUpParams {
     final String? gender,
     final List<int>? preferenceIds,
     final String? role,
-  }) = _$PostSignUpParamsImpl;
+    final MultipartFile? profileImage,
+  }) = _$PostSignUpWithProfileParamsImpl;
 
   @override
   String get email;
@@ -404,11 +438,13 @@ abstract class _PostSignUpParams implements PostSignUpParams {
   List<int>? get preferenceIds;
   @override
   String? get role;
+  @override
+  MultipartFile? get profileImage;
 
-  /// Create a copy of PostSignUpParams
+  /// Create a copy of PostSignUpWithProfileParams
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PostSignUpParamsImplCopyWith<_$PostSignUpParamsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PostSignUpWithProfileParamsImplCopyWith<_$PostSignUpWithProfileParamsImpl>
+  get copyWith => throw _privateConstructorUsedError;
 }

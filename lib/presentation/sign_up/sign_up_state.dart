@@ -3,7 +3,7 @@ part of 'sign_up_view_model.dart';
 @freezed
 class SignUpState with _$SignUpState {
   const factory SignUpState({
-    @Default(Status.initial) Status postSignUpStatus,
+    @Default(Status.initial) Status postSignUpWithProfileStatus,
     @Default(Status.initial) Status postVerificationRequestStatus,
     @Default(Status.initial) Status postVerifyStatus,
     @Default(Status.initial) Status postNicknameStatus,

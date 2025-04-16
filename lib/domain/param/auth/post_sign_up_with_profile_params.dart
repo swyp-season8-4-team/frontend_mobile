@@ -1,10 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'generated/post_sign_up_params.freezed.dart';
+part 'generated/post_sign_up_with_profile_params.freezed.dart';
 
 @freezed
-class PostSignUpParams with _$PostSignUpParams {
-  const factory PostSignUpParams({
+class PostSignUpWithProfileParams with _$PostSignUpWithProfileParams {
+  const factory PostSignUpWithProfileParams({
     required String email,
     required String password,
     required String confirmPassword,
@@ -16,5 +17,6 @@ class PostSignUpParams with _$PostSignUpParams {
     String? gender,
     List<int>? preferenceIds,
     String? role,
-  }) = _PostSignUpParams;
+    MultipartFile? profileImage,
+  }) = _PostSignUpWithProfileParams;
 }

@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../post_sign_up_request_body.dart';
+part of '../post_sign_up_with_profile_request_body.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PostSignUpRequestBody _$PostSignUpRequestBodyFromJson(
+PostSignUpWithProfileRequestBody _$PostSignUpWithProfileRequestBodyFromJson(
   Map<String, dynamic> json,
-) => PostSignUpRequestBody(
+) => PostSignUpWithProfileRequestBody(
   email: json['email'] as String,
   password: json['password'] as String,
   confirmPassword: json['confirmPassword'] as String,
@@ -24,8 +24,8 @@ PostSignUpRequestBody _$PostSignUpRequestBodyFromJson(
   role: json['role'] as String?,
 );
 
-Map<String, dynamic> _$PostSignUpRequestBodyToJson(
-  PostSignUpRequestBody instance,
+Map<String, dynamic> _$PostSignUpWithProfileRequestBodyToJson(
+  PostSignUpWithProfileRequestBody instance,
 ) => <String, dynamic>{
   'email': instance.email,
   'password': instance.password,

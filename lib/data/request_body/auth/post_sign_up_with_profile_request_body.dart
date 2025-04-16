@@ -1,10 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'generated/post_sign_up_request_body.g.dart';
+part 'generated/post_sign_up_with_profile_request_body.g.dart';
 
 @JsonSerializable()
-class PostSignUpRequestBody {
-  PostSignUpRequestBody({
+class PostSignUpWithProfileRequestBody {
+  PostSignUpWithProfileRequestBody({
     required this.email,
     required this.password,
     required this.confirmPassword,
@@ -15,6 +16,7 @@ class PostSignUpRequestBody {
     required this.gender,
     required this.preferenceIds,
     required this.role,
+    this.profileImage,
   });
 
   final String email;
@@ -27,6 +29,9 @@ class PostSignUpRequestBody {
   final String? gender;
   final List<int>? preferenceIds;
   final String? role;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final MultipartFile? profileImage;
 
-  Map<String, dynamic> toJson() => _$PostSignUpRequestBodyToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$PostSignUpWithProfileRequestBodyToJson(this);
 }

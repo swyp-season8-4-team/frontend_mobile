@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SignUpState {
-  Status get postSignUpStatus => throw _privateConstructorUsedError;
+  Status get postSignUpWithProfileStatus => throw _privateConstructorUsedError;
   Status get postVerificationRequestStatus =>
       throw _privateConstructorUsedError;
   Status get postVerifyStatus => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $SignUpStateCopyWith<$Res> {
   ) = _$SignUpStateCopyWithImpl<$Res, SignUpState>;
   @useResult
   $Res call({
-    Status postSignUpStatus,
+    Status postSignUpWithProfileStatus,
     Status postVerificationRequestStatus,
     Status postVerifyStatus,
     Status postNicknameStatus,
@@ -72,7 +72,7 @@ class _$SignUpStateCopyWithImpl<$Res, $Val extends SignUpState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? postSignUpStatus = null,
+    Object? postSignUpWithProfileStatus = null,
     Object? postVerificationRequestStatus = null,
     Object? postVerifyStatus = null,
     Object? postNicknameStatus = null,
@@ -84,10 +84,10 @@ class _$SignUpStateCopyWithImpl<$Res, $Val extends SignUpState>
   }) {
     return _then(
       _value.copyWith(
-            postSignUpStatus:
-                null == postSignUpStatus
-                    ? _value.postSignUpStatus
-                    : postSignUpStatus // ignore: cast_nullable_to_non_nullable
+            postSignUpWithProfileStatus:
+                null == postSignUpWithProfileStatus
+                    ? _value.postSignUpWithProfileStatus
+                    : postSignUpWithProfileStatus // ignore: cast_nullable_to_non_nullable
                         as Status,
             postVerificationRequestStatus:
                 null == postVerificationRequestStatus
@@ -145,7 +145,7 @@ abstract class _$$SignUpStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    Status postSignUpStatus,
+    Status postSignUpWithProfileStatus,
     Status postVerificationRequestStatus,
     Status postVerifyStatus,
     Status postNicknameStatus,
@@ -171,7 +171,7 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? postSignUpStatus = null,
+    Object? postSignUpWithProfileStatus = null,
     Object? postVerificationRequestStatus = null,
     Object? postVerifyStatus = null,
     Object? postNicknameStatus = null,
@@ -183,10 +183,10 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
   }) {
     return _then(
       _$SignUpStateImpl(
-        postSignUpStatus:
-            null == postSignUpStatus
-                ? _value.postSignUpStatus
-                : postSignUpStatus // ignore: cast_nullable_to_non_nullable
+        postSignUpWithProfileStatus:
+            null == postSignUpWithProfileStatus
+                ? _value.postSignUpWithProfileStatus
+                : postSignUpWithProfileStatus // ignore: cast_nullable_to_non_nullable
                     as Status,
         postVerificationRequestStatus:
             null == postVerificationRequestStatus
@@ -237,7 +237,7 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
 
 class _$SignUpStateImpl implements _SignUpState {
   const _$SignUpStateImpl({
-    this.postSignUpStatus = Status.initial,
+    this.postSignUpWithProfileStatus = Status.initial,
     this.postVerificationRequestStatus = Status.initial,
     this.postVerifyStatus = Status.initial,
     this.postNicknameStatus = Status.initial,
@@ -274,7 +274,7 @@ class _$SignUpStateImpl implements _SignUpState {
 
   @override
   @JsonKey()
-  final Status postSignUpStatus;
+  final Status postSignUpWithProfileStatus;
   @override
   @JsonKey()
   final Status postVerificationRequestStatus;
@@ -302,7 +302,7 @@ class _$SignUpStateImpl implements _SignUpState {
 
   @override
   String toString() {
-    return 'SignUpState(postSignUpStatus: $postSignUpStatus, postVerificationRequestStatus: $postVerificationRequestStatus, postVerifyStatus: $postVerifyStatus, postNicknameStatus: $postNicknameStatus, signUpData: $signUpData, verificationRequestData: $verificationRequestData, verifyData: $verifyData, nicknameAvailabilityData: $nicknameAvailabilityData, exception: $exception)';
+    return 'SignUpState(postSignUpWithProfileStatus: $postSignUpWithProfileStatus, postVerificationRequestStatus: $postVerificationRequestStatus, postVerifyStatus: $postVerifyStatus, postNicknameStatus: $postNicknameStatus, signUpData: $signUpData, verificationRequestData: $verificationRequestData, verifyData: $verifyData, nicknameAvailabilityData: $nicknameAvailabilityData, exception: $exception)';
   }
 
   @override
@@ -310,8 +310,12 @@ class _$SignUpStateImpl implements _SignUpState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SignUpStateImpl &&
-            (identical(other.postSignUpStatus, postSignUpStatus) ||
-                other.postSignUpStatus == postSignUpStatus) &&
+            (identical(
+                  other.postSignUpWithProfileStatus,
+                  postSignUpWithProfileStatus,
+                ) ||
+                other.postSignUpWithProfileStatus ==
+                    postSignUpWithProfileStatus) &&
             (identical(
                   other.postVerificationRequestStatus,
                   postVerificationRequestStatus,
@@ -343,7 +347,7 @@ class _$SignUpStateImpl implements _SignUpState {
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    postSignUpStatus,
+    postSignUpWithProfileStatus,
     postVerificationRequestStatus,
     postVerifyStatus,
     postNicknameStatus,
@@ -365,7 +369,7 @@ class _$SignUpStateImpl implements _SignUpState {
 
 abstract class _SignUpState implements SignUpState {
   const factory _SignUpState({
-    final Status postSignUpStatus,
+    final Status postSignUpWithProfileStatus,
     final Status postVerificationRequestStatus,
     final Status postVerifyStatus,
     final Status postNicknameStatus,
@@ -377,7 +381,7 @@ abstract class _SignUpState implements SignUpState {
   }) = _$SignUpStateImpl;
 
   @override
-  Status get postSignUpStatus;
+  Status get postSignUpWithProfileStatus;
   @override
   Status get postVerificationRequestStatus;
   @override

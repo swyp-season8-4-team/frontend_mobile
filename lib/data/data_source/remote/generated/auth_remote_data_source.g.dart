@@ -20,7 +20,7 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
   @override
   Future<LocalLoginEntity> postSignUp({
     required String emailToken,
-    required PostSignUpRequestBody body,
+    required FormData formData,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -28,13 +28,17 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
       r'X-Email-Verification-Token': emailToken,
     };
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    final _data = formData;
     final _options = _setStreamType<LocalLoginEntity>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
+      Options(
+            method: 'POST',
+            headers: _headers,
+            extra: _extra,
+            contentType: 'multipart/form-data',
+          )
           .compose(
             _dio.options,
-            '/api/auth/signup',
+            '/api/auth/signup-with-profile',
             queryParameters: queryParameters,
             data: _data,
           )

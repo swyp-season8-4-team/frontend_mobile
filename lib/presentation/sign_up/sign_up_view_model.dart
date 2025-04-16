@@ -9,11 +9,11 @@ import 'package:frontend_mobile/domain/model/auth/local_login_model.dart';
 import 'package:frontend_mobile/domain/model/email/email_verification_request_model.dart';
 import 'package:frontend_mobile/domain/model/email/email_verify_model.dart';
 import 'package:frontend_mobile/domain/model/user/nickname_availability_model.dart';
-import 'package:frontend_mobile/domain/param/auth/post_sign_up_params.dart';
+import 'package:frontend_mobile/domain/param/auth/post_sign_up_with_profile_params.dart';
 import 'package:frontend_mobile/domain/param/email/email_verification_request_params.dart';
 import 'package:frontend_mobile/domain/param/email/email_verify_params.dart';
 import 'package:frontend_mobile/domain/param/user/post_nickname_params.dart';
-import 'package:frontend_mobile/domain/usecase/auth/post_sign_up_usecase.dart';
+import 'package:frontend_mobile/domain/usecase/auth/post_sign_up_with_profile_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/email/post_email_verification_request_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/email/post_email_verify_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/user/post_nickname_usecase.dart';
@@ -31,9 +31,11 @@ class SignUpViewModel extends StateNotifier<SignUpState> {
 
   final Ref ref;
 
-  /// 회원가입
-  void postSignUp({required PostSignUpParams params}) async {
-    state = state.copyWith(postSignUpStatus: Status.loading);
+  /// 프로필 이미지 포함 회원가입
+  void postSignUpWithProfile({
+    required PostSignUpWithProfileParams params,
+  }) async {
+    state = state.copyWith(postSignUpWithProfileStatus: Status.loading);
 
     final Result<LocalLoginModel, CustomException> response =
         await Usecase.execute(
@@ -44,13 +46,13 @@ class SignUpViewModel extends StateNotifier<SignUpState> {
     response.map(
       success: (Success<LocalLoginModel, CustomException> success) {
         state = state.copyWith(
-          postSignUpStatus: Status.success,
+          postSignUpWithProfileStatus: Status.success,
           signUpData: success.data,
         );
       },
       failure: (Failure<LocalLoginModel, CustomException> failure) {
         state = state.copyWith(
-          postSignUpStatus: Status.failure,
+          postSignUpWithProfileStatus: Status.failure,
           exception: failure.exception.model,
         );
       },
@@ -149,9 +151,9 @@ class SignUpViewModel extends StateNotifier<SignUpState> {
 }
 
 /// 선택한 내용들을 저장하는 provider
-final StateProvider<PostSignUpParams> signUpProvider =
-    StateProvider<PostSignUpParams>(
-      (Ref ref) => const PostSignUpParams(
+final StateProvider<PostSignUpWithProfileParams> signUpProvider =
+    StateProvider<PostSignUpWithProfileParams>(
+      (Ref ref) => const PostSignUpWithProfileParams(
         email: '',
         password: '',
         confirmPassword: '',
