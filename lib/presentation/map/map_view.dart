@@ -7,6 +7,7 @@ import 'package:frontend_mobile/common/design_system/component/button/outline_bu
 import 'package:frontend_mobile/common/design_system/component/chip/floating_chip.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/map/map_icon_button.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/map/saved_store_list.dart';
+import 'package:frontend_mobile/common/design_system/component/etc/marker/saved_marker.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/option_menu_dropdown.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/main_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
@@ -14,14 +15,17 @@ import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_b
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/map/store_info_bottom_sheet_content.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/marker/default_marker.dart';
+import 'package:frontend_mobile/common/design_system/foundation/foundation.dart';
 import 'package:frontend_mobile/common/design_system/foundation/shadow/shadow_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/manager/geolocation/geo_location_service_impl.dart';
+import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
 import 'package:frontend_mobile/core/util/naver_map_util.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
+import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
 import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/widget/desserbee_bottom_navigation.dart';
@@ -81,18 +85,157 @@ class _MapViewState extends ConsumerState<MapView> {
     final MapState state = ref.watch(mapViewModelProvider);
 
     final TopBarIcon topBarIcon = TopBarIcon();
+
     ref.listen(
       mapViewModelProvider.select((MapState state) => state.storesByLocation),
       (_, List<StoreByLocationModel> next) async {
         await _mapController.clearOverlays();
 
-        final List<NMarker> markers = await Future.wait(<Future<NMarker>>[
-          ...next.map((StoreByLocationModel e) => _storeToMarker(model: e)),
+        final MapState state = ref.read(mapViewModelProvider);
+
+        // default markers
+        final List<Future<NMarker>> markers = <Future<NMarker>>[];
+
+        for (final StoreByLocationModel e in next) {
+          final UserStoreModel? savedStore = _findUserStoreModelByStoreUuid(
+            state.userStores,
+            e.storeUuid,
+          );
+
+          if (savedStore == null) {
+            markers.add(
+              _storeToMarker(
+                storeName: e.name,
+                storeUuid: e.storeUuid,
+                latitude: e.latitude,
+                longitude: e.longitude,
+                isSavedStore: false,
+                userStoreMode: state.userStoresEnabled,
+                backgroundColor:
+                    _findUserStoreListModelByStoreUuid(
+                      state.userStores,
+                      e.storeUuid,
+                    )?.iconColor.color,
+              ),
+            );
+          }
+        }
+
+        // saved markers
+        final List<Future<NMarker>> savedMarkers = <Future<NMarker>>[];
+
+        if (state.userStoresEnabled) {
+          for (final UserStoreListModel e in state.userStores) {
+            final UserStoreModel? savedStore =
+                e.storeData?.isNotEmpty == true ? e.storeData![0] : null;
+
+            if (savedStore != null) {
+              savedMarkers.add(
+                _storeToMarker(
+                  storeName: savedStore.storeName,
+                  storeUuid: savedStore.storeUuid,
+                  latitude: savedStore.latitude,
+                  longitude: savedStore.longitude,
+                  isSavedStore: true,
+                  userStoreMode: state.userStoresEnabled,
+                  backgroundColor: e.iconColor.color,
+                ),
+              );
+            }
+          }
+        }
+
+        final List<NMarker> totalMarkers = await Future.wait(<Future<NMarker>>[
+          ...markers,
+          ...savedMarkers,
         ]);
 
-        await _mapController.addOverlayAll(markers.toSet());
+        await _mapController.addOverlayAll(totalMarkers.toSet());
 
         await NaverMapUtil.setMyLocationOverlay(controller: _mapController);
+      },
+    );
+
+    ref.listen(
+      mapViewModelProvider.select((MapState state) => state.userStores),
+      (_, List<UserStoreListModel> next) async {
+        await _mapController.clearOverlays();
+
+        final MapState state = ref.read(mapViewModelProvider);
+
+        // default markers
+        final List<Future<NMarker>> markers = <Future<NMarker>>[];
+
+        for (final StoreByLocationModel e in state.storesByLocation) {
+          final UserStoreModel? savedStore = _findUserStoreModelByStoreUuid(
+            state.userStores,
+            e.storeUuid,
+          );
+
+          if (savedStore == null) {
+            markers.add(
+              _storeToMarker(
+                storeName: e.name,
+                storeUuid: e.storeUuid,
+                latitude: e.latitude,
+                longitude: e.longitude,
+                isSavedStore: false,
+                userStoreMode: state.userStoresEnabled,
+                backgroundColor:
+                    _findUserStoreListModelByStoreUuid(
+                      state.userStores,
+                      e.storeUuid,
+                    )?.iconColor.color,
+              ),
+            );
+          }
+        }
+
+        // saved markers
+        final List<Future<NMarker>> savedMarkers = <Future<NMarker>>[];
+
+        if (state.userStoresEnabled) {
+          for (final UserStoreListModel e in next) {
+            final UserStoreModel? savedStore =
+                e.storeData?.isNotEmpty == true ? e.storeData![0] : null;
+
+            if (savedStore != null) {
+              savedMarkers.add(
+                _storeToMarker(
+                  storeName: savedStore.storeName,
+                  storeUuid: savedStore.storeUuid,
+                  latitude: savedStore.latitude,
+                  longitude: savedStore.longitude,
+                  isSavedStore: true,
+                  userStoreMode: state.userStoresEnabled,
+                  backgroundColor: e.iconColor.color,
+                ),
+              );
+            }
+          }
+        }
+
+        final List<NMarker> totalMarkers = await Future.wait(<Future<NMarker>>[
+          ...markers,
+          ...savedMarkers,
+        ]);
+
+        await _mapController.addOverlayAll(totalMarkers.toSet());
+
+        await NaverMapUtil.setMyLocationOverlay(controller: _mapController);
+      },
+    );
+
+    ref.listen(
+      mapViewModelProvider.select((MapState e) => e.userStoresEnabled),
+      (_, bool next) {
+        final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
+        if (next) {
+          // TODO: 추후 실제 데이터 연결 예정
+          viewmodel.getUserStoreListAll(userUuid: '123');
+        } else {
+          viewmodel.getStoresByLocation();
+        }
       },
     );
 
@@ -128,7 +271,8 @@ class _MapViewState extends ConsumerState<MapView> {
     return CustomLoadingOverlay(
       isLoading:
           state.getAllPreferencesStatus.isLoading ||
-          state.getStoresByLocationStatus.isLoading,
+          state.getStoresByLocationStatus.isLoading ||
+          state.getUserStoreListAllStatus.isLoading,
       child: Scaffold(
         appBar:
             _isStoreListAppbarVisible
@@ -167,7 +311,7 @@ class _MapViewState extends ConsumerState<MapView> {
               top: 0,
               left: 0,
               right: 0,
-              bottom: 80,
+              bottom: 80 + MediaQuery.of(context).padding.bottom,
               child: NaverMap(
                 options: NaverMapViewOptions(
                   initialCameraPosition: NCameraPosition(
@@ -199,10 +343,16 @@ class _MapViewState extends ConsumerState<MapView> {
               child: CustomDessertMateButton(onPressed: () {}),
             ),
             Positioned(top: 56, right: 16, child: _buildControlButtons()),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: _buildRefreshButton(),
-            ),
+            if (!state.userStoresEnabled)
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: _buildRefreshButton(),
+              )
+            else
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: _buildUserStoreListButton(),
+              ),
             const Positioned(
               bottom: 0,
               right: 0,

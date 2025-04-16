@@ -78,7 +78,10 @@ class MapViewModel extends StateNotifier<MapState> {
 
   // 반경 내 가게 조회
   Future<MapState> getStoresByLocation() async {
-    state = state.copyWith(getStoresByLocationStatus: Status.loading);
+    state = state.copyWith(
+      selectedMarker: null,
+      getStoresByLocationStatus: Status.loading,
+    );
 
     final Result<List<StoreByLocationModel>, CustomException> result =
         await Usecase.execute(
@@ -242,6 +245,11 @@ class MapViewModel extends StateNotifier<MapState> {
     );
 
     return state;
+  }
+
+  // 저장된 가게 리스트 모드 수정
+  void updateUserStoreMode({required bool userStoresEnabled}) {
+    state = state.copyWith(userStoresEnabled: userStoresEnabled);
   }
 
   // 저장 리스트 전체 조회

@@ -26,6 +26,7 @@ class MapState with _$MapState {
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel getStoreSummaryExceptionModel,
     NMarker? selectedMarker,
+    @Default(false) bool userStoresEnabled,
     @Default(<UserStoreListModel>[]) List<UserStoreListModel> userStores,
     @Default(Status.initial) Status getUserStoreListAllStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
