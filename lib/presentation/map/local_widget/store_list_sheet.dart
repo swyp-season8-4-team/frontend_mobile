@@ -1,6 +1,6 @@
 part of '../map_view.dart';
 
-class _StoreListSheet extends StatelessWidget {
+class _StoreListSheet extends ConsumerWidget {
   const _StoreListSheet({
     required this.draggableScrollableController,
     required this.snapSize,
@@ -11,8 +11,9 @@ class _StoreListSheet extends StatelessWidget {
   final bool isStoreListAppBarVisible;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final TextTheme textTheme = Theme.of(context).textTheme;
+    final MapState state = ref.watch(mapViewModelProvider);
 
     return Positioned.fill(
       child: DraggableScrollableSheet(
@@ -74,7 +75,7 @@ class _StoreListSheet extends StatelessWidget {
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            '9',
+                            '${state.userStores.length}',
                             style: textTheme.titleMedium?.copyWith(
                               color: ScaleColorConfig.success50,
                             ),
@@ -82,7 +83,11 @@ class _StoreListSheet extends StatelessWidget {
                           const Spacer(),
                           CustomOutlineButton.xSmall(
                             label: '새 리스트 추가',
-                            onPressed: () {},
+                            onPressed: () {
+                              context.pushNamed(
+                                AppRoutes.addUserStoreList.name,
+                              );
+                            },
                             svg: Assets.icon.system.addCircleLine,
                           ),
                         ],
@@ -90,29 +95,32 @@ class _StoreListSheet extends StatelessWidget {
                     ),
                   ),
                   SliverList(
-                    delegate: SliverChildListDelegate(
-                      List<Widget>.generate(20, (int index) {
-                        return Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              child: CustomSavedStoreListItem.withOptionMenus(
-                                leftIconColor: Colors.red,
-                                name: '디저트 가게 모음 $index',
-                                storeLength: 4,
-                                optionMenus: const <CustomOptionMenu>[],
-                                optionMenusVisible: false,
-                                onOptionMenusTap: () {},
-                                onTap: () {},
-                              ),
+                    delegate: SliverChildBuilderDelegate((
+                      BuildContext context,
+                      int index,
+                    ) {
+                      final UserStoreListModel userStoreList =
+                          state.userStores[index];
+                      return Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: CustomSavedStoreListItem.withOptionMenus(
+                              leftIconColor: userStoreList.iconColor.color,
+                              name: userStoreList.listName,
+                              storeLength: userStoreList.storeData?.length ?? 0,
+
+                              // TODO: 옵션 기능은 추후 구현 예정
+                              optionMenus: const <CustomOptionMenu>[],
+                              optionMenusVisible: false,
+                              onOptionMenusTap: () {},
+                              onTap: () {},
                             ),
-                            const Divider(color: ScaleColorConfig.neutral50),
-                          ],
-                        );
-                      }),
-                    ),
+                          ),
+                          const Divider(color: ScaleColorConfig.neutral50),
+                        ],
+                      );
+                    }, childCount: state.userStores.length),
                   ),
                 ],
               ),
