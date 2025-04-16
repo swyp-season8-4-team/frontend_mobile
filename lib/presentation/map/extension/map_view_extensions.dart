@@ -85,7 +85,16 @@ extension MapViewWidgetExt on _MapViewState {
               },
             ),
           ),
-        CustomMapIconButton.saveStore(isSelected: true, onPressed: () {}),
+        CustomMapIconButton.saveStore(
+          isSelected: true,
+          onPressed: () {
+            _draggableScrollableController.animateTo(
+              _snapSize,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeIn,
+            );
+          },
+        ),
         const SizedBox(height: 10),
         CustomMapIconButton.myLocation(
           isSelected: false,

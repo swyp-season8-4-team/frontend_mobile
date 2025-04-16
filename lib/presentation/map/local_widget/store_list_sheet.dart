@@ -20,8 +20,7 @@ class _StoreListSheet extends StatelessWidget {
         minChildSize: 0,
         initialChildSize: 0,
         snap: true,
-        expand: false,
-        snapSizes: <double>[snapSize],
+        snapSizes: const <double>[0.5],
         builder: (BuildContext context, ScrollController scrollController) {
           return SafeArea(
             child: Container(
