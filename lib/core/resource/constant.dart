@@ -20,3 +20,21 @@ enum DayOfWeek {
     );
   }
 }
+
+// 쿠폰 조건 타입
+enum CouponConditionType {
+  ammount,
+  timeDay,
+  exclusive,
+  custom;
+
+  static CouponConditionType fromText({required String text}) {
+    return switch (text) {
+      'AMOUNT' => CouponConditionType.ammount,
+      'TIME_DAY' => CouponConditionType.timeDay,
+      'EXCLUSIVE' => CouponConditionType.exclusive,
+      'CUSTOM' => CouponConditionType.custom,
+      _ => throw ArgumentError('Invalid coupon condition type : $text'),
+    };
+  }
+}
