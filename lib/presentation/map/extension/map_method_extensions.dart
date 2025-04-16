@@ -216,4 +216,68 @@ extension MapViewMethodExt on _MapViewState {
     }
     return null;
   }
+
+  // 지도에 표시할 마커 생성
+  Future<List<NMarker>> _createMarkers() async {
+    final MapState state = ref.read(mapViewModelProvider);
+
+    // default markers
+    final List<Future<NMarker>> markers = <Future<NMarker>>[];
+
+    for (final StoreByLocationModel e in state.storesByLocation) {
+      final UserStoreModel? savedStore = _findUserStoreModelByStoreUuid(
+        state.userStores,
+        e.storeUuid,
+      );
+
+      if (savedStore == null) {
+        markers.add(
+          _storeToMarker(
+            storeName: e.name,
+            storeUuid: e.storeUuid,
+            latitude: e.latitude,
+            longitude: e.longitude,
+            isSavedStore: false,
+            userStoreMode: state.userStoresEnabled,
+            backgroundColor:
+                _findUserStoreListModelByStoreUuid(
+                  state.userStores,
+                  e.storeUuid,
+                )?.iconColor.color,
+          ),
+        );
+      }
+    }
+
+    // saved markers
+    final List<Future<NMarker>> savedMarkers = <Future<NMarker>>[];
+
+    if (state.userStoresEnabled) {
+      for (final UserStoreListModel e in state.userStores) {
+        final UserStoreModel? savedStore =
+            e.storeData?.isNotEmpty == true ? e.storeData![0] : null;
+
+        if (savedStore != null) {
+          savedMarkers.add(
+            _storeToMarker(
+              storeName: savedStore.storeName,
+              storeUuid: savedStore.storeUuid,
+              latitude: savedStore.latitude,
+              longitude: savedStore.longitude,
+              isSavedStore: true,
+              userStoreMode: state.userStoresEnabled,
+              backgroundColor: e.iconColor.color,
+            ),
+          );
+        }
+      }
+    }
+
+    final List<NMarker> totalMarkers = await Future.wait(<Future<NMarker>>[
+      ...markers,
+      ...savedMarkers,
+    ]);
+
+    return totalMarkers;
+  }
 }

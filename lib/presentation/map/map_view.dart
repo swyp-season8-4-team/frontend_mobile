@@ -90,68 +90,8 @@ class _MapViewState extends ConsumerState<MapView> {
       mapViewModelProvider.select((MapState state) => state.storesByLocation),
       (_, List<StoreByLocationModel> next) async {
         await _mapController.clearOverlays();
-
-        final MapState state = ref.read(mapViewModelProvider);
-
-        // default markers
-        final List<Future<NMarker>> markers = <Future<NMarker>>[];
-
-        for (final StoreByLocationModel e in next) {
-          final UserStoreModel? savedStore = _findUserStoreModelByStoreUuid(
-            state.userStores,
-            e.storeUuid,
-          );
-
-          if (savedStore == null) {
-            markers.add(
-              _storeToMarker(
-                storeName: e.name,
-                storeUuid: e.storeUuid,
-                latitude: e.latitude,
-                longitude: e.longitude,
-                isSavedStore: false,
-                userStoreMode: state.userStoresEnabled,
-                backgroundColor:
-                    _findUserStoreListModelByStoreUuid(
-                      state.userStores,
-                      e.storeUuid,
-                    )?.iconColor.color,
-              ),
-            );
-          }
-        }
-
-        // saved markers
-        final List<Future<NMarker>> savedMarkers = <Future<NMarker>>[];
-
-        if (state.userStoresEnabled) {
-          for (final UserStoreListModel e in state.userStores) {
-            final UserStoreModel? savedStore =
-                e.storeData?.isNotEmpty == true ? e.storeData![0] : null;
-
-            if (savedStore != null) {
-              savedMarkers.add(
-                _storeToMarker(
-                  storeName: savedStore.storeName,
-                  storeUuid: savedStore.storeUuid,
-                  latitude: savedStore.latitude,
-                  longitude: savedStore.longitude,
-                  isSavedStore: true,
-                  userStoreMode: state.userStoresEnabled,
-                  backgroundColor: e.iconColor.color,
-                ),
-              );
-            }
-          }
-        }
-
-        final List<NMarker> totalMarkers = await Future.wait(<Future<NMarker>>[
-          ...markers,
-          ...savedMarkers,
-        ]);
-
-        await _mapController.addOverlayAll(totalMarkers.toSet());
-
+        final List<NMarker> markers = await _createMarkers();
+        await _mapController.addOverlayAll(markers.toSet());
         await NaverMapUtil.setMyLocationOverlay(controller: _mapController);
       },
     );
@@ -160,68 +100,8 @@ class _MapViewState extends ConsumerState<MapView> {
       mapViewModelProvider.select((MapState state) => state.userStores),
       (_, List<UserStoreListModel> next) async {
         await _mapController.clearOverlays();
-
-        final MapState state = ref.read(mapViewModelProvider);
-
-        // default markers
-        final List<Future<NMarker>> markers = <Future<NMarker>>[];
-
-        for (final StoreByLocationModel e in state.storesByLocation) {
-          final UserStoreModel? savedStore = _findUserStoreModelByStoreUuid(
-            state.userStores,
-            e.storeUuid,
-          );
-
-          if (savedStore == null) {
-            markers.add(
-              _storeToMarker(
-                storeName: e.name,
-                storeUuid: e.storeUuid,
-                latitude: e.latitude,
-                longitude: e.longitude,
-                isSavedStore: false,
-                userStoreMode: state.userStoresEnabled,
-                backgroundColor:
-                    _findUserStoreListModelByStoreUuid(
-                      state.userStores,
-                      e.storeUuid,
-                    )?.iconColor.color,
-              ),
-            );
-          }
-        }
-
-        // saved markers
-        final List<Future<NMarker>> savedMarkers = <Future<NMarker>>[];
-
-        if (state.userStoresEnabled) {
-          for (final UserStoreListModel e in next) {
-            final UserStoreModel? savedStore =
-                e.storeData?.isNotEmpty == true ? e.storeData![0] : null;
-
-            if (savedStore != null) {
-              savedMarkers.add(
-                _storeToMarker(
-                  storeName: savedStore.storeName,
-                  storeUuid: savedStore.storeUuid,
-                  latitude: savedStore.latitude,
-                  longitude: savedStore.longitude,
-                  isSavedStore: true,
-                  userStoreMode: state.userStoresEnabled,
-                  backgroundColor: e.iconColor.color,
-                ),
-              );
-            }
-          }
-        }
-
-        final List<NMarker> totalMarkers = await Future.wait(<Future<NMarker>>[
-          ...markers,
-          ...savedMarkers,
-        ]);
-
-        await _mapController.addOverlayAll(totalMarkers.toSet());
-
+        final List<NMarker> markers = await _createMarkers();
+        await _mapController.addOverlayAll(markers.toSet());
         await NaverMapUtil.setMyLocationOverlay(controller: _mapController);
       },
     );
