@@ -78,7 +78,10 @@ class _SignUpStep4State extends ConsumerState<SignUpStep4> {
                   .read(signUpProvider)
                   .copyWith(gender: _isSelectedBoy ? 'MALE' : 'FEMALE');
 
-              context.pushNamed(AppRoutes.signUpStep5.name);
+              context.pushNamed(
+                AppRoutes.signUpStep5.name,
+                extra: _isSelectedBoy,
+              );
             },
           ),
           SizedBox(height: MediaQuery.of(context).padding.bottom + 32),

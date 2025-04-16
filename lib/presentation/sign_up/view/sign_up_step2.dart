@@ -163,7 +163,7 @@ class _SignUpStep2State extends ConsumerState<SignUpStep2> {
                               state.postVerificationRequestStatus.isLoading ||
                               state.postVerifyStatus.isLoading ||
                               _codeController.text.length < 6,
-                          width: 100,
+                          width: 110,
                           onPressed: () {
                             ref
                                 .read(signUpViewModelProvider.notifier)

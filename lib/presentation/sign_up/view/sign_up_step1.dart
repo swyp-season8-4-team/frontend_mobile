@@ -137,7 +137,7 @@ class _SignUpStep1State extends ConsumerState<SignUpStep1> {
                           label: '중복확인',
                           backgroundColor: CustomFillButtonColor.olive,
                           disabled: !_emailController.text.isEmail,
-                          width: 100,
+                          width: 110,
                           onPressed: () {
                             ref
                                 .read(signUpViewModelProvider.notifier)

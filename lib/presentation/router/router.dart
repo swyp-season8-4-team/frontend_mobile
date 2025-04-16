@@ -148,7 +148,9 @@ class AppRouter {
                 path: AppRoutes.signUpStep5.path,
                 name: AppRoutes.signUpStep5.name,
                 builder: (BuildContext context, GoRouterState state) {
-                  return const SignUpStep5();
+                  final bool isSelectedBoy = state.extra as bool;
+
+                  return SignUpStep5(isSelectedBoy: isSelectedBoy);
                 },
               ),
 

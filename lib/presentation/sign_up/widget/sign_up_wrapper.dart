@@ -24,6 +24,7 @@ class CustomSignUpWrapper extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: child,
       ),
+      resizeToAvoidBottomInset: false,
     );
   }
 }

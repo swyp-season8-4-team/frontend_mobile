@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
@@ -9,7 +12,7 @@ import 'package:frontend_mobile/core/resource/nickname.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/core/util/text_line_break.dart';
-import 'package:frontend_mobile/domain/param/auth/post_sign_up_params.dart';
+import 'package:frontend_mobile/domain/param/auth/post_sign_up_with_profile_params.dart';
 import 'package:frontend_mobile/domain/param/user/post_nickname_params.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/sign_up/sign_up_view_model.dart';
@@ -17,7 +20,9 @@ import 'package:frontend_mobile/presentation/sign_up/widget/sign_up_wrapper.dart
 import 'package:go_router/go_router.dart';
 
 class SignUpStep5 extends ConsumerStatefulWidget {
-  const SignUpStep5({super.key});
+  const SignUpStep5({required this.isSelectedBoy, super.key});
+
+  final bool isSelectedBoy;
 
   @override
   ConsumerState<SignUpStep5> createState() => _SignUpStep5State();
@@ -33,6 +38,8 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
 
   bool _isValidNickname = false;
 
+  MultipartFile? profileImage;
+
   @override
   void initState() {
     super.initState();
@@ -45,6 +52,16 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
       _success = false;
       _isValidNickname = false;
     });
+  }
+
+  void onCameraTap(Uint8List imageBytes) async {
+    final MultipartFile multipartFile = MultipartFile.fromBytes(
+      imageBytes,
+      filename: 'profile_${DateTime.now().toIso8601String()}',
+      contentType: DioMediaType('image', 'png'),
+    );
+
+    profileImage = multipartFile;
   }
 
   @override
@@ -60,7 +77,7 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     ref.listen(signUpViewModelProvider, (_, SignUpState next) {
-      switch (next.postSignUpStatus) {
+      switch (next.postSignUpWithProfileStatus) {
         case Status.success:
           context.pushNamed(AppRoutes.signUpStep6.name);
           break;
@@ -151,9 +168,16 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
                     ),
                     const SizedBox(height: 30),
 
-                    /// TODO: 이미지 cropper 적용해야 됨
-                    /// TODO: 회원가입시, 이미지를 바꿔도 보낼 수 없음
-                    const Align(child: CustomProfilePhotoSetting.girl()),
+                    Align(
+                      child:
+                          widget.isSelectedBoy
+                              ? CustomProfilePhotoSetting.boy(
+                                onCameraTap: onCameraTap,
+                              )
+                              : CustomProfilePhotoSetting.girl(
+                                onCameraTap: onCameraTap,
+                              ),
+                    ),
                     const SizedBox(height: 26),
 
                     Row(
@@ -178,7 +202,7 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
                           label: '중복확인',
                           backgroundColor: CustomFillButtonColor.olive,
                           disabled: _nicknameController.text.isEmpty,
-                          width: 100,
+                          width: 110,
                           onPressed: () {
                             ref
                                 .read(signUpViewModelProvider.notifier)
@@ -201,13 +225,16 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
               label: '다음',
               disabled: !_isValidNickname,
               onPressed: () {
-                final PostSignUpParams state = ref.read(signUpProvider);
+                final PostSignUpWithProfileParams state = ref.read(
+                  signUpProvider,
+                );
 
                 ref
                     .read(signUpViewModelProvider.notifier)
-                    .postSignUp(params: state);
+                    .postSignUpWithProfile(
+                      params: state.copyWith(profileImage: profileImage),
+                    );
 
-                // print('asfsafd');
                 // context.pushNamed(AppRoutes.signUpStep6.name);
               },
             ),
