@@ -57,7 +57,7 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
   void onCameraTap(Uint8List imageBytes) async {
     final MultipartFile multipartFile = MultipartFile.fromBytes(
       imageBytes,
-      filename: 'profile_${DateTime.now().toIso8601String()}',
+      filename: 'profile_${DateTime.now().toIso8601String()}.png',
       contentType: DioMediaType('image', 'png'),
     );
 
