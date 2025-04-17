@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:frontend_mobile/common/design_system/component/badge/number_badge.dart';
 import 'package:frontend_mobile/common/design_system/component/button/outline_button.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/expandable_text.dart';
@@ -27,6 +28,8 @@ part 'local_widget/store_representive_info.dart';
 part 'local_widget/store_detail_info.dart';
 part 'local_widget/introduce.dart';
 part 'local_widget/notice.dart';
+part 'local_widget/menus.dart';
+part 'local_widget/dessert_images.dart';
 
 class StoreDetailView extends ConsumerStatefulWidget {
   const StoreDetailView({required this.storeUuid, super.key});
@@ -72,31 +75,33 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
 
     return Scaffold(
       appBar: const CustomSubTopBar(title: '', actions: <Widget>[]),
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            const SliverToBoxAdapter(child: _OwnerPickImage()),
-            const SliverToBoxAdapter(child: _StoreRepresentiveInfo()),
-            const SliverToBoxAdapter(child: _StoreDetailInfo()),
-            const SliverToBoxAdapter(child: _Introduce()),
-            const SliverToBoxAdapter(child: _RecentNotice()),
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: _TabBarDelegate(
-                storeDetail: state.storeDetail!,
-                tabController: _tabController,
+      body: SafeArea(
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              const SliverToBoxAdapter(child: _OwnerPickImage()),
+              const SliverToBoxAdapter(child: _StoreRepresentiveInfo()),
+              const SliverToBoxAdapter(child: _StoreDetailInfo()),
+              const SliverToBoxAdapter(child: _Introduce()),
+              const SliverToBoxAdapter(child: _RecentNotice()),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _TabBarDelegate(
+                  storeDetail: state.storeDetail!,
+                  tabController: _tabController,
+                ),
               ),
-            ),
-          ];
-        },
-        body: TabBarView(
-          controller: _tabController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: const <Widget>[
-            Center(child: Text('1')),
-            Center(child: Text('2')),
-            Center(child: Text('3')),
-          ],
+            ];
+          },
+          body: TabBarView(
+            controller: _tabController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: const <Widget>[
+              _Menus(),
+              _DessertImages(),
+              Center(child: Text('3')),
+            ],
+          ),
         ),
       ),
     );
@@ -128,6 +133,7 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
     return Container(
       height: 40,
       decoration: const BoxDecoration(
+        color: ScaleColorConfig.surface90,
         border: Border(bottom: BorderSide(color: ScaleColorConfig.surface70)),
       ),
       child: TabBar(
