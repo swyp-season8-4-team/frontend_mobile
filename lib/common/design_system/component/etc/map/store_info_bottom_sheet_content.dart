@@ -18,6 +18,7 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
     required this.isLoading,
     required this.isFailure,
     required this.onRefreshTap,
+    required this.onViewDetailTap,
     this.storeSummary,
     super.key,
   });
@@ -25,6 +26,10 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
 
   // 다시 시도 버튼 클릭 이벤트 콜백
   final VoidCallback onRefreshTap;
+
+  // 상세 보기 버튼 클릭 이벤트 콜백
+  final VoidCallback onViewDetailTap;
+
   final bool isLoading;
   final bool isFailure;
 
@@ -104,9 +109,8 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
                             ),
                           ),
 
-                          // TODO: Outline Button(xsmall)를 이용하여 구현 예정
                           GestureDetector(
-                            onTap: () {},
+                            onTap: onViewDetailTap,
                             behavior: HitTestBehavior.translucent,
                             child: Container(
                               padding: const EdgeInsets.symmetric(
@@ -143,10 +147,11 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
                                 ..._normalizeToLength3<String>(
                                   storeSummary!.storeImages,
                                 ).map((String? e) {
-                                  if (e == null) {
-                                    return const CustomHexagon(text: '');
+                                  if (e != null) {
+                                    return CustomHexagon(imageUrl: e);
                                   }
-                                  return CustomHexagon(imageUrl: e);
+
+                                  return const CustomHexagon(text: '');
                                 }),
                               ],
                             ),
@@ -194,7 +199,7 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
                                     ),
                                     const SizedBox(width: 6),
                                     Text(
-                                      todayOperatingInfo.isClosed
+                                      !todayOperatingInfo.isClosed
                                           ? '영업중'
                                           : '영업 종료',
                                       style: textTheme.labelSmall?.copyWith(

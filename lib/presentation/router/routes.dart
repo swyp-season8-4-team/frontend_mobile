@@ -28,6 +28,18 @@ abstract class AppRoutes {
     path: 'add_user_store_list',
   );
 
+  // 지도 > 가게 상세
+  static final RouteInfo storeDetail = RouteInfo(
+    name: '${map.name}/store/:id',
+    path: 'store/:id',
+  );
+
+  // 지도 > 가게 상세 > 길찾기
+  static final RouteInfo findPlaceByMap = RouteInfo(
+    name: '${storeDetail.name}/find-place-by-map',
+    path: 'find-place-by-map',
+  );
+
   // 지도 > 검색 화면
   static final RouteInfo searchStore = RouteInfo(
     name: '${map.name}/search-store',
