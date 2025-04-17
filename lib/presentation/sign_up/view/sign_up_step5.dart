@@ -142,7 +142,9 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
     });
 
     return CustomLoadingOverlay(
-      isLoading: state.postNicknameStatus.isLoading,
+      isLoading:
+          state.postNicknameStatus.isLoading ||
+          state.postSignUpWithProfileStatus.isLoading,
       child: CustomSignUpWrapper(
         title: '기본 프로필',
         child: Column(
@@ -234,8 +236,6 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
                     .postSignUpWithProfile(
                       params: state.copyWith(profileImage: profileImage),
                     );
-
-                // context.pushNamed(AppRoutes.signUpStep6.name);
               },
             ),
             SizedBox(height: MediaQuery.of(context).padding.bottom + 32),
