@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:frontend_mobile/common/design_system/component/badge/number_badge.dart';
 import 'package:frontend_mobile/common/design_system/component/button/outline_button.dart';
+import 'package:frontend_mobile/common/design_system/component/button/pill_outline_button.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/expandable_text.dart';
 import 'package:frontend_mobile/common/design_system/component/hexagon_grid/hexagon_grid.dart';
 import 'package:frontend_mobile/common/design_system/component/tag/etc_tag.dart';
@@ -62,16 +63,56 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
   @override
   Widget build(BuildContext context) {
     final StoreDetailState state = ref.watch(storeDetailViewModelProvider);
+    final StoreDetailViewModel viewmodel = ref.read(
+      storeDetailViewModelProvider.notifier,
+    );
+
+    final TextTheme textTheme = Theme.of(context).textTheme;
 
     // TODO: 페이지 전환 로딩 UI 구현 필요
     if (state.getStoreDetailStatus.isLoading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return const Scaffold(
+        appBar: CustomSubTopBar(title: '', actions: <Widget>[]),
+
+        body: Center(child: CircularProgressIndicator()),
+      );
     }
 
-    // TODO: 페이지 에러 UI 구현 필요
     if (state.getStoreDetailStatus.isFailure) {
       return Scaffold(
-        body: Center(child: Text(state.getStoreDetailException.code)),
+        appBar: const CustomSubTopBar(title: '', actions: <Widget>[]),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              const SizedBox(height: 223),
+              Assets.icon.system.warningFill.svg(
+                width: 42.8,
+                height: 42.8,
+                colorFilter: const ColorFilter.mode(
+                  ScaleColorConfig.primary80,
+                  BlendMode.srcIn,
+                ),
+              ),
+              const SizedBox(height: 8.29),
+              Text(
+                '일시적인 오류로\n정보를 불러올 수 없어요',
+                style: textTheme.titleMedium?.copyWith(
+                  color: ScaleColorConfig.primary20,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 14),
+              CustomPillOutlineButton.medium(
+                label: '다시 시도',
+                width: 126,
+                onPressed: () {
+                  viewmodel.getStoreDetail(storeUuid: widget.storeUuid);
+                },
+                isSelected: false,
+              ),
+            ],
+          ),
+        ),
       );
     }
 
@@ -115,7 +156,7 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
             children: const <Widget>[
               _Menus(),
               _DessertImages(),
-              Center(child: Text('3')),
+              Center(child: Text('디저트 메이트')),
             ],
           ),
         ),

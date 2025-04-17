@@ -76,11 +76,14 @@ class _Menu extends StatelessWidget {
           if (menu.images != null && menu.images!.isNotEmpty)
             Padding(
               padding: const EdgeInsets.only(left: 8),
-              child: CachedNetworkImage(
-                imageUrl: menu.images![0],
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: CachedNetworkImage(
+                  imageUrl: menu.images![0],
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
         ],
