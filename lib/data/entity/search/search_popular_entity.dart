@@ -11,19 +11,19 @@ class PopularSearchesEntity {
 
   const PopularSearchesEntity({required this.lastUpdatedTime, this.searches});
   final DateTime lastUpdatedTime;
-  final List<_PopularSearch>? searches;
+  final List<PopularSearch>? searches;
 }
 
 @JsonSerializable()
-class _PopularSearch {
-  const _PopularSearch({
+class PopularSearch {
+  const PopularSearch({
     required this.keyword,
     required this.searchCount,
     required this.rank,
     required this.difference,
   });
 
-  factory _PopularSearch.fromJson(Map<String, dynamic> json) =>
+  factory PopularSearch.fromJson(Map<String, dynamic> json) =>
       _$PopularSearchFromJson(json);
   final String keyword;
   final int searchCount;

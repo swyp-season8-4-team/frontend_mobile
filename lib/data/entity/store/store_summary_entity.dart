@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:frontend_mobile/data/entity/store/store_holiday_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_operating_hour_entity.dart';
+import 'package:frontend_mobile/data/entity/store/store_top_preference_entity.dart';
 
 part 'generated/store_summary_entity.g.dart';
 
@@ -40,7 +41,7 @@ class StoreSummaryEntity {
   final List<String>? storeLinks;
   final List<StoreOperatingHourEntity> operatingHours;
   final List<StoreHolidayEntity>? holidays;
-  final List<String>? topPreferences;
+  final List<StoreTopPreferenceEntity>? topPreferences;
   final String address;
   final String phone;
   final String? description;

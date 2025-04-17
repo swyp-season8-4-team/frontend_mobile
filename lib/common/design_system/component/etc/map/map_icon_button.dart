@@ -11,7 +11,7 @@ enum MapIconButtonType { filterReset, saveStore, myLocation }
 class CustomMapIconButton extends StatefulWidget {
   CustomMapIconButton.filterReset({required this.onPressed, super.key})
     : isSelected = false,
-      svg = Assets.icon.map.aiming2Line,
+      svg = Assets.icon.system.refresh1Line,
       disabled = false,
       iconColor = ScaleColorConfig.success50,
       type = MapIconButtonType.filterReset,

@@ -31,6 +31,7 @@ dependencies:
   native_image_cropper: ^0.6.0
   pretty_dio_logger: ^1.4.0
   retrofit: ^4.4.2
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   build_runner: ^2.4.15
