@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
 import 'package:frontend_mobile/data/entity/store_notice/store_notice_entity.dart';
 import 'package:retrofit/http.dart';
+import 'package:retrofit/error_logger.dart';
 
 part 'generated/store_notice_remote_data_source.g.dart';
 
