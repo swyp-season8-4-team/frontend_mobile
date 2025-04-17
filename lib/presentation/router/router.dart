@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step1.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step2.dart';
@@ -7,6 +7,8 @@ import 'package:frontend_mobile/presentation/home.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
 import 'package:frontend_mobile/presentation/map/map_view.dart';
 import 'package:frontend_mobile/presentation/map/search/search_store_view.dart';
+import 'package:frontend_mobile/presentation/map/store_detail/find_place_by_map_view.dart';
+import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/splash_view.dart';
 import 'package:go_router/go_router.dart';
@@ -104,12 +106,36 @@ class AppRouter {
           return const MapView();
         },
         routes: <RouteBase>[
+          /// 지도 > 검섹
           GoRoute(
             path: AppRoutes.searchStore.path,
             name: AppRoutes.searchStore.name,
             builder:
                 (BuildContext context, GoRouterState state) =>
                     const SearchStoreView(),
+          ),
+
+          /// 가게 정보 상세
+          GoRoute(
+            path: AppRoutes.storeDetail.path,
+            name: AppRoutes.storeDetail.name,
+            builder: (BuildContext context, GoRouterState state) {
+              final String? storeUuid = state.pathParameters['id'];
+              if (storeUuid == null) {
+                return const Scaffold();
+              }
+              return StoreDetailView(storeUuid: storeUuid);
+            },
+            routes: <RouteBase>[
+              /// 길찾기
+              GoRoute(
+                path: AppRoutes.findPlaceByMap.path,
+                name: AppRoutes.findPlaceByMap.name,
+                builder:
+                    (BuildContext context, GoRouterState state) =>
+                        const FindPlaceByMapView(),
+              ),
+            ],
           ),
         ],
       ),
