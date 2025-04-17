@@ -30,6 +30,7 @@ part 'local_widget/introduce.dart';
 part 'local_widget/notice.dart';
 part 'local_widget/menus.dart';
 part 'local_widget/dessert_images.dart';
+part 'local_widget/tab_bar.dart';
 
 class StoreDetailView extends ConsumerStatefulWidget {
   const StoreDetailView({required this.storeUuid, super.key});
@@ -42,6 +43,7 @@ class StoreDetailView extends ConsumerStatefulWidget {
 class _StoreDetailViewState extends ConsumerState<StoreDetailView>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
+  bool _isTabBarPinned = false;
 
   @override
   void initState() {
@@ -74,7 +76,11 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
     }
 
     return Scaffold(
-      appBar: const CustomSubTopBar(title: '', actions: <Widget>[]),
+      appBar: CustomSubTopBar(
+        primary: !_isTabBarPinned,
+        title: _isTabBarPinned ? state.storeDetail!.name : '',
+        actions: const <Widget>[],
+      ),
       body: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -89,6 +95,16 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
                 delegate: _TabBarDelegate(
                   storeDetail: state.storeDetail!,
                   tabController: _tabController,
+                  onPinnedChanged: (bool isPinned) {
+                    if (_isTabBarPinned == isPinned) {
+                      return;
+                    }
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      setState(() {
+                        _isTabBarPinned = isPinned;
+                      });
+                    });
+                  },
                 ),
               ),
             ];
@@ -112,105 +128,4 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
     _tabController.dispose();
     super.dispose();
   }
-}
-
-class _TabBarDelegate extends SliverPersistentHeaderDelegate {
-  const _TabBarDelegate({
-    required this.storeDetail,
-    required this.tabController,
-  });
-
-  final StoreDetailModel storeDetail;
-  final TabController tabController;
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-    return Container(
-      height: 40,
-      decoration: const BoxDecoration(
-        color: ScaleColorConfig.surface90,
-        border: Border(bottom: BorderSide(color: ScaleColorConfig.surface70)),
-      ),
-      child: TabBar(
-        controller: tabController,
-        indicatorSize: TabBarIndicatorSize.tab,
-        indicator: const BoxDecoration(
-          color: ScaleColorConfig.surface90,
-          border: Border(
-            bottom: BorderSide(color: ScaleColorConfig.primary70, width: 2.5),
-          ),
-        ),
-        dividerColor: Colors.transparent,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        labelStyle: textTheme.labelLarge?.copyWith(
-          color: ScaleColorConfig.neutral30,
-        ),
-        unselectedLabelStyle: textTheme.labelLarge?.copyWith(
-          color: ScaleColorConfig.neutral30,
-        ),
-        overlayColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
-          return Colors.transparent;
-        }),
-        tabs: <Widget>[
-          _tab(
-            context: context,
-            label: '메뉴',
-            index: 0,
-            count: storeDetail.menus.length,
-          ),
-          _tab(
-            context: context,
-            label: '사진',
-            index: 1,
-            count: storeDetail.storeImages?.length ?? 0,
-          ),
-          _tab(context: context, label: '디저트메이트', index: 2),
-        ],
-      ),
-    );
-  }
-
-  Widget _tab({
-    required BuildContext context,
-    required int index,
-    required String label,
-    int? count,
-  }) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
-    return Tab(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(label),
-          if (count != null) ...<Widget>[
-            const SizedBox(width: 4),
-            tabController.index == index
-                ? CustomNumberBadge(number: count, error: false)
-                : Text(
-                  count >= 1000 ? '999+' : count.toString(),
-                  style: textTheme.labelSmall?.copyWith(
-                    color: ScaleColorConfig.neutral50,
-                  ),
-                ),
-          ],
-        ],
-      ),
-    );
-  }
-
-  @override
-  double get maxExtent => 40;
-
-  @override
-  double get minExtent => 40;
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      true;
 }
