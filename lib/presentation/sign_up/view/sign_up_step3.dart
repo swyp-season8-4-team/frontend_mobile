@@ -26,7 +26,7 @@ class _SignUpStep3State extends ConsumerState<SignUpStep3> {
 
   /// 실시간 입력과 관련된 비밀번호
   bool _realTimePasswordCheckError = false;
-  final String _realTimePasswordCheckErrorText = '비밀번호가 서로 일치하지 않습니다';
+  String _realTimePasswordCheckErrorText = '';
 
   bool _realTimePasswordCheckSuccess = false;
   final String _realTimePasswordCheckSuccessText = '비밀번호가 서로 일치합니다';
@@ -45,6 +45,8 @@ class _SignUpStep3State extends ConsumerState<SignUpStep3> {
       if (!_passwordController.text.isPasswordValid) {
         setState(() {
           _realTimePasswordCheckError = true;
+          _realTimePasswordCheckErrorText =
+              '최소 8자, 영문 소문자, 숫자, 특수문자 조합를 지켜주세요.';
           _realTimePasswordCheckSuccess = false;
         });
       }
@@ -52,6 +54,7 @@ class _SignUpStep3State extends ConsumerState<SignUpStep3> {
       else if (_passwordController.text != _passwordCheckController.text) {
         setState(() {
           _realTimePasswordCheckError = true;
+          _realTimePasswordCheckErrorText = '비밀번호가 서로 일치하지 않습니다';
           _realTimePasswordCheckSuccess = false;
         });
       }
