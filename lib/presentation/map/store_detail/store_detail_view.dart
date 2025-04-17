@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/common/design_system/component/badge/number_badge.dart';
 import 'package:frontend_mobile/common/design_system/component/button/outline_button.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/expandable_text.dart';
 import 'package:frontend_mobile/common/design_system/component/hexagon_grid/hexagon_grid.dart';
@@ -35,10 +36,17 @@ class StoreDetailView extends ConsumerStatefulWidget {
   ConsumerState<StoreDetailView> createState() => _StoreDetailViewState();
 }
 
-class _StoreDetailViewState extends ConsumerState<StoreDetailView> {
+class _StoreDetailViewState extends ConsumerState<StoreDetailView>
+    with SingleTickerProviderStateMixin {
+  late final TabController _tabController;
+
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(() {
+      setState(() {});
+    });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref
           .read(storeDetailViewModelProvider.notifier)
@@ -72,10 +80,131 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView> {
             const SliverToBoxAdapter(child: _StoreDetailInfo()),
             const SliverToBoxAdapter(child: _Introduce()),
             const SliverToBoxAdapter(child: _RecentNotice()),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: _TabBarDelegate(
+                storeDetail: state.storeDetail!,
+                tabController: _tabController,
+              ),
+            ),
           ];
         },
-        body: const Column(),
+        body: TabBarView(
+          controller: _tabController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: const <Widget>[
+            Center(child: Text('1')),
+            Center(child: Text('2')),
+            Center(child: Text('3')),
+          ],
+        ),
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+}
+
+class _TabBarDelegate extends SliverPersistentHeaderDelegate {
+  const _TabBarDelegate({
+    required this.storeDetail,
+    required this.tabController,
+  });
+
+  final StoreDetailModel storeDetail;
+  final TabController tabController;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    return Container(
+      height: 40,
+      decoration: const BoxDecoration(
+        border: Border(bottom: BorderSide(color: ScaleColorConfig.surface70)),
+      ),
+      child: TabBar(
+        controller: tabController,
+        indicatorSize: TabBarIndicatorSize.tab,
+        indicator: const BoxDecoration(
+          color: ScaleColorConfig.surface90,
+          border: Border(
+            bottom: BorderSide(color: ScaleColorConfig.primary70, width: 2.5),
+          ),
+        ),
+        dividerColor: Colors.transparent,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        labelStyle: textTheme.labelLarge?.copyWith(
+          color: ScaleColorConfig.neutral30,
+        ),
+        unselectedLabelStyle: textTheme.labelLarge?.copyWith(
+          color: ScaleColorConfig.neutral30,
+        ),
+        overlayColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
+          return Colors.transparent;
+        }),
+        tabs: <Widget>[
+          _tab(
+            context: context,
+            label: '메뉴',
+            index: 0,
+            count: storeDetail.menus.length,
+          ),
+          _tab(
+            context: context,
+            label: '사진',
+            index: 1,
+            count: storeDetail.storeImages?.length ?? 0,
+          ),
+          _tab(context: context, label: '디저트메이트', index: 2),
+        ],
+      ),
+    );
+  }
+
+  Widget _tab({
+    required BuildContext context,
+    required int index,
+    required String label,
+    int? count,
+  }) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    return Tab(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(label),
+          if (count != null) ...<Widget>[
+            const SizedBox(width: 4),
+            tabController.index == index
+                ? CustomNumberBadge(number: count, error: false)
+                : Text(
+                  count >= 1000 ? '999+' : count.toString(),
+                  style: textTheme.labelSmall?.copyWith(
+                    color: ScaleColorConfig.neutral50,
+                  ),
+                ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  @override
+  double get maxExtent => 40;
+
+  @override
+  double get minExtent => 40;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
+      true;
 }
