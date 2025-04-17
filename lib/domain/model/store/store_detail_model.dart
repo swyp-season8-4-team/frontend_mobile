@@ -33,6 +33,7 @@ class StoreDetailModel {
     required this.holidays,
     required this.topPreferences,
     required this.description,
+    required this.descriptionUpdateTime,
     required this.animalYn,
     required this.tumblerYn,
     required this.parkingYn,
@@ -53,6 +54,7 @@ class StoreDetailModel {
   final String address;
   final String phone;
   final String? description;
+  final DateTime? descriptionUpdateTime;
   final bool? animalYn;
   final bool? tumblerYn;
   final bool? parkingYn;
