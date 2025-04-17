@@ -34,6 +34,12 @@ abstract class AppRoutes {
     path: 'find-place-by-map',
   );
 
+  // 지도 > 가게 상세 > 모든 공지
+  static final RouteInfo storeNotice = RouteInfo(
+    name: '${storeDetail.name}/notice',
+    path: 'notice',
+  );
+
   // 지도 > 검색 화면
   static final RouteInfo searchStore = RouteInfo(
     name: '${map.name}/search-store',
