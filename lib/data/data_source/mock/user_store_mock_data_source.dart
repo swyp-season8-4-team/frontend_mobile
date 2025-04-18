@@ -12,8 +12,7 @@ class UserStoreMockDataSource implements UserStoreRemoteDataSource {
     required String storeUuid,
     required List<int> preferenceIds,
   }) {
-    // TODO: implement addStoreToUserStoreList
-    throw UnimplementedError();
+    return Future<void>.value();
   }
 
   @override
@@ -21,8 +20,7 @@ class UserStoreMockDataSource implements UserStoreRemoteDataSource {
     required String userUuid,
     required AddUserStoreListQueryParam query,
   }) {
-    // TODO: implement addUserStoreList
-    throw UnimplementedError();
+    return Future<void>.value();
   }
 
   @override

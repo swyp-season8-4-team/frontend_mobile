@@ -85,10 +85,14 @@ class _StoreListSheet extends ConsumerWidget {
                           if (state.userStores.isNotEmpty)
                             CustomOutlineButton.xSmall(
                               label: '새 리스트 추가',
-                              onPressed: () {
-                                context.pushNamed(
+                              onPressed: () async {
+                                final Object? result = await context.pushNamed(
                                   AppRoutes.addUserStoreList.name,
                                 );
+
+                                if (result == true && context.mounted) {
+                                  _showSuccessAddStoreList(context, ref);
+                                }
                               },
                               svg: Assets.icon.system.addCircleLine,
                             ),
@@ -112,10 +116,14 @@ class _StoreListSheet extends ConsumerWidget {
                             const SizedBox(height: 16),
                             CustomOutlineButton.xSmall(
                               label: '새 리스트 추가',
-                              onPressed: () {
-                                context.pushNamed(
+                              onPressed: () async {
+                                final Object? result = await context.pushNamed(
                                   AppRoutes.addUserStoreList.name,
                                 );
+
+                                if (result == true && context.mounted) {
+                                  _showSuccessAddStoreList(context, ref);
+                                }
                               },
                               svg: Assets.icon.system.addCircleLine,
                             ),
@@ -160,6 +168,22 @@ class _StoreListSheet extends ConsumerWidget {
             ),
           );
         },
+      ),
+    );
+  }
+
+  void _showSuccessAddStoreList(BuildContext context, WidgetRef ref) {
+    final ToastManager toastManager = ref.read(toastManagerProvider);
+    toastManager.show(
+      context: context,
+      toastWidget: CustomSnackBar(
+        description: '새 리스트 추가를 완료했습니다',
+        actionButton: SnackBarActionButton(
+          onTap: () {
+            toastManager.remove();
+          },
+          label: '닫기',
+        ),
       ),
     );
   }

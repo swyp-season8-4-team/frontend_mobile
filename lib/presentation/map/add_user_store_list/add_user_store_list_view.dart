@@ -12,6 +12,7 @@ import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
 import 'package:frontend_mobile/presentation/map/add_user_store_list/add_user_store_list_view_model.dart';
+import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:go_router/go_router.dart';
 
 class AddUserStoreListView extends ConsumerStatefulWidget {
@@ -44,7 +45,11 @@ class _AddUserStoreListViewState extends ConsumerState<AddUserStoreListView> {
       ),
       (_, Status next) {
         if (next.isSuccess) {
-          context.pop();
+          // TODO: userUuid 설정 예정
+          ref
+              .read(mapViewModelProvider.notifier)
+              .getUserStoreListAll(userUuid: '1234');
+          context.pop(true);
         }
       },
     );
@@ -178,12 +183,14 @@ class _AddUserStoreListViewState extends ConsumerState<AddUserStoreListView> {
                     ),
                     const SizedBox(height: 7),
 
-                    // TODO: 리스트 이름 중복 에러 메세지 표시 필요
                     CustomInputBox(
                       maxLength: 20,
                       onChanged: (String val) {
                         viewmodel.updateListName(listName: val);
                       },
+                      // TODO: 디테일한 에러 핸들링이 필요할 수 있음
+                      error: state.addUserStoreListStatus.isFailure,
+                      errorText: state.addUserStoreListException.message,
                       hintText: '새 리스트 이름을 입력해주세요',
                     ),
                   ],

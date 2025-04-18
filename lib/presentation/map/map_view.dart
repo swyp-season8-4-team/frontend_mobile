@@ -10,6 +10,8 @@ import 'package:frontend_mobile/common/design_system/component/etc/map/map_icon_
 import 'package:frontend_mobile/common/design_system/component/etc/map/saved_store_list.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/marker/saved_marker.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/option_menu_dropdown.dart';
+import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar.dart';
+import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar_right_item.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/main_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
@@ -20,6 +22,7 @@ import 'package:frontend_mobile/common/design_system/foundation/foundation.dart'
 import 'package:frontend_mobile/common/design_system/foundation/shadow/shadow_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/manager/geolocation/geo_location_service_impl.dart';
+import 'package:frontend_mobile/core/manager/toast/toast_manager.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
