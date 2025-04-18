@@ -6,6 +6,65 @@ import 'package:frontend_mobile/data/query_param/user_store/add_user_store_list_
 import 'package:frontend_mobile/data/query_param/user_store/update_user_store_list_query_param.dart';
 
 class UserStoreMockDataSource implements UserStoreRemoteDataSource {
+  List<UserStoreDataEntity> stores = <UserStoreDataEntity>[
+    const UserStoreDataEntity(
+      userUuid: '123',
+      storeUuid: '1',
+      listId: 123,
+      listName: '리스트 이름 1',
+      storeName: '가게 이름 1',
+      storeAddress: '서울시 강남구 역삼동',
+      latitude: 37,
+      longitude: 127,
+      imageUrls: <String>['https://picsum.photos/250?image=5'],
+    ),
+    const UserStoreDataEntity(
+      userUuid: '123',
+      storeUuid: '2',
+      listId: 123,
+      listName: '리스트 이름 1',
+      storeName: '가게 이름 1',
+      storeAddress: '서울시 강남구 역삼동',
+      latitude: 37,
+      longitude: 127,
+      userPreferences: <int>[3, 7, 8],
+      imageUrls: <String>['https://picsum.photos/250?image=6'],
+    ),
+    const UserStoreDataEntity(
+      userUuid: '123',
+      storeUuid: '3',
+      listId: 123,
+      listName: '리스트 이름 1',
+      storeName: '가게 이름 1',
+      storeAddress: '서울시 강남구 역삼동',
+      latitude: 37,
+      longitude: 127,
+      imageUrls: <String>['https://picsum.photos/250?image=7'],
+    ),
+    const UserStoreDataEntity(
+      userUuid: '123',
+      storeUuid: '4',
+      listId: 123,
+      listName: '리스트 이름 1',
+      storeName: '가게 이름 1',
+      storeAddress: '서울시 강남구 역삼동',
+      latitude: 37,
+      longitude: 127,
+      imageUrls: <String>['https://picsum.photos/250?image=9'],
+    ),
+    const UserStoreDataEntity(
+      userUuid: '123',
+      storeUuid: '5',
+      listId: 123,
+      listName: '리스트 이름 1',
+      storeName: '가게 이름 1',
+      storeAddress: '서울시 강남구 역삼동',
+      latitude: 37,
+      longitude: 127,
+      imageUrls: <String>['https://picsum.photos/250?image=8'],
+    ),
+  ];
+
   @override
   Future<void> addStoreToUserStoreList({
     required int listId,
@@ -27,9 +86,12 @@ class UserStoreMockDataSource implements UserStoreRemoteDataSource {
   Future<void> deleteStoreFromUserStoreList({
     required int listId,
     required String storeUuid,
-  }) {
-    // TODO: implement deleteStoreFromUserStoreList
-    throw UnimplementedError();
+  }) async {
+    await Future<void>.delayed(const Duration(seconds: 2));
+    stores =
+        stores
+            .where((UserStoreDataEntity e) => e.storeUuid != storeUuid)
+            .toList();
   }
 
   @override
@@ -48,64 +110,7 @@ class UserStoreMockDataSource implements UserStoreRemoteDataSource {
       listName: '리스트 이름 1',
       iconColorId: 2,
       storeCount: 2,
-      storeData: <UserStoreDataEntity>[
-        UserStoreDataEntity(
-          userUuid: '123',
-          storeUuid: '1',
-          listId: listId,
-          listName: '리스트 이름 1',
-          storeName: '가게 이름 1',
-          storeAddress: '서울시 강남구 역삼동',
-          latitude: 37,
-          longitude: 127,
-          imageUrls: <String>['https://picsum.photos/250?image=5'],
-        ),
-        UserStoreDataEntity(
-          userUuid: '123',
-          storeUuid: '2',
-          listId: listId,
-          listName: '리스트 이름 1',
-          storeName: '가게 이름 1',
-          storeAddress: '서울시 강남구 역삼동',
-          latitude: 37,
-          longitude: 127,
-          userPreferences: <int>[3, 7, 8],
-          imageUrls: <String>['https://picsum.photos/250?image=6'],
-        ),
-        UserStoreDataEntity(
-          userUuid: '123',
-          storeUuid: '3',
-          listId: listId,
-          listName: '리스트 이름 1',
-          storeName: '가게 이름 1',
-          storeAddress: '서울시 강남구 역삼동',
-          latitude: 37,
-          longitude: 127,
-          imageUrls: <String>['https://picsum.photos/250?image=7'],
-        ),
-        UserStoreDataEntity(
-          userUuid: '123',
-          storeUuid: '4',
-          listId: listId,
-          listName: '리스트 이름 1',
-          storeName: '가게 이름 1',
-          storeAddress: '서울시 강남구 역삼동',
-          latitude: 37,
-          longitude: 127,
-          imageUrls: <String>['https://picsum.photos/250?image=9'],
-        ),
-        UserStoreDataEntity(
-          userUuid: '123',
-          storeUuid: '5',
-          listId: listId,
-          listName: '리스트 이름 1',
-          storeName: '가게 이름 1',
-          storeAddress: '서울시 강남구 역삼동',
-          latitude: 37,
-          longitude: 127,
-          imageUrls: <String>['https://picsum.photos/250?image=8'],
-        ),
-      ],
+      storeData: stores,
     );
   }
 

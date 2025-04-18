@@ -92,7 +92,39 @@ class _StoreCard extends ConsumerWidget {
                             CustomOptionMenu(
                               svg: Assets.icon.system.closeCircleLine,
                               text: '삭제하기',
-                              onTap: () {},
+                              onTap: () {
+                                viewmodel.updateStoreOptionMenuVisible(
+                                  storeUuid: store.storeUuid,
+                                  isVisible: false,
+                                );
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return CustomDialog.basic(
+                                      title: '가게 저장을 삭제하시겠어요?',
+                                      description:
+                                          '저장 삭제한 가게는 더이상\n리스트에 표시되지않습니다.',
+                                      primaryButton: CustomDialogButton(
+                                        text: '삭제하기',
+                                        warning: true,
+                                        onTap: () {
+                                          viewmodel.deleteStore(
+                                            listId: store.listId,
+                                            storeUuid: store.storeUuid,
+                                          );
+                                          context.pop();
+                                        },
+                                      ),
+                                      secondaryButton: CustomDialogButton(
+                                        text: '취소',
+                                        onTap: () {
+                                          context.pop();
+                                        },
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
                             ),
                           ],
                         ),

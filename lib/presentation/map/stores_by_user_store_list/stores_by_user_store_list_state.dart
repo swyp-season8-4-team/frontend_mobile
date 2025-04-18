@@ -30,6 +30,7 @@ class StoresByUserStoreListState with _$StoresByUserStoreListState {
       (getStoresByUserStoreListStatus.isLoading ||
           getAllPreferencesStatus.isLoading);
 
+  // 가게 조회 로딩중 || 취향 정보 로딩중
   bool get isFailure =>
       getStoresByUserStoreListStatus.isFailure ||
       getAllPreferencesStatus.isFailure;

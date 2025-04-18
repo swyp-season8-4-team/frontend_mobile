@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/pill_outline_button.dart';
+import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/option_menu_dropdown.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
@@ -47,6 +48,19 @@ class _StoresByUserStoreListViewState
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(
+      storesByUserStoreListViewModelProvider.select(
+        (StoresByUserStoreListState state) => state.deleteStoreStatus,
+      ),
+      (_, Status next) {
+        if (next.isSuccess) {
+          ref
+              .read(storesByUserStoreListViewModelProvider.notifier)
+              .getStores(listId: widget.listId);
+        }
+      },
+    );
+
     final UserStoreListModel storeList = ref
         .watch(mapViewModelProvider)
         .userStores
@@ -79,7 +93,8 @@ class _StoresByUserStoreListViewState
     return CustomLoadingOverlay(
       isLoading:
           state.getAllPreferencesStatus.isLoading ||
-          state.getStoresByUserStoreListStatus.isLoading,
+          state.getStoresByUserStoreListStatus.isLoading ||
+          state.deleteStoreStatus.isLoading,
       child: GestureDetector(
         onTap: () {
           viewmodel.invisibleAllStoreOptionMenu();
