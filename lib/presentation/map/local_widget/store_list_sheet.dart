@@ -57,8 +57,9 @@ class _StoreListSheet extends ConsumerWidget {
                           ),
                         ),
                       ),
-                  SliverToBoxAdapter(
-                    child: Padding(
+                  SliverPinnedToBoxAdapter(
+                    child: Container(
+                      color: Colors.white,
                       padding: const EdgeInsets.only(
                         top: 10,
                         bottom: 6,
@@ -81,47 +82,79 @@ class _StoreListSheet extends ConsumerWidget {
                             ),
                           ),
                           const Spacer(),
-                          CustomOutlineButton.xSmall(
-                            label: '새 리스트 추가',
-                            onPressed: () {
-                              context.pushNamed(
-                                AppRoutes.addUserStoreList.name,
-                              );
-                            },
-                            svg: Assets.icon.system.addCircleLine,
-                          ),
+                          if (state.userStores.isNotEmpty)
+                            CustomOutlineButton.xSmall(
+                              label: '새 리스트 추가',
+                              onPressed: () {
+                                context.pushNamed(
+                                  AppRoutes.addUserStoreList.name,
+                                );
+                              },
+                              svg: Assets.icon.system.addCircleLine,
+                            ),
                         ],
                       ),
                     ),
                   ),
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate((
-                      BuildContext context,
-                      int index,
-                    ) {
-                      final UserStoreListModel userStoreList =
-                          state.userStores[index];
-                      return Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: CustomSavedStoreListItem.withOptionMenus(
-                              leftIconColor: userStoreList.iconColor.color,
-                              name: userStoreList.listName,
-                              storeLength: userStoreList.storeData?.length ?? 0,
-
-                              // TODO: 옵션 기능은 추후 구현 예정
-                              optionMenus: const <CustomOptionMenu>[],
-                              optionMenusVisible: false,
-                              onOptionMenusTap: () {},
-                              onTap: () {},
+                  if (state.userStores.isEmpty)
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 74),
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              '아직 찜한 리스트가 없어요\n새로운 리스트를 추가해보는 건 어떠세요?',
+                              style: textTheme.bodyMedium?.copyWith(
+                                color: ScaleColorConfig.neutral30,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                          ),
-                          const Divider(color: ScaleColorConfig.neutral50),
-                        ],
-                      );
-                    }, childCount: state.userStores.length),
-                  ),
+                            const SizedBox(height: 16),
+                            CustomOutlineButton.xSmall(
+                              label: '새 리스트 추가',
+                              onPressed: () {
+                                context.pushNamed(
+                                  AppRoutes.addUserStoreList.name,
+                                );
+                              },
+                              svg: Assets.icon.system.addCircleLine,
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  else
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate((
+                        BuildContext context,
+                        int index,
+                      ) {
+                        final UserStoreListModel userStoreList =
+                            state.userStores[index];
+                        return Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              child: CustomSavedStoreListItem.withOptionMenus(
+                                leftIconColor: userStoreList.iconColor.color,
+                                name: userStoreList.listName,
+                                storeLength:
+                                    userStoreList.storeData?.length ?? 0,
+
+                                // TODO: 옵션 기능은 추후 구현 예정
+                                optionMenus: const <CustomOptionMenu>[],
+                                optionMenusVisible: false,
+                                onOptionMenusTap: () {},
+                                onTap: () {},
+                              ),
+                            ),
+                            const Divider(color: ScaleColorConfig.neutral50),
+                          ],
+                        );
+                      }, childCount: state.userStores.length),
+                    ),
                 ],
               ),
             ),
