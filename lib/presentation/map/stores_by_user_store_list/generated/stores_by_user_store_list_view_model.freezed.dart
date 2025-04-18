@@ -17,6 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$StoresByUserStoreListState {
+  List<PreferenceModel> get preferences => throw _privateConstructorUsedError;
+  Status get getAllPreferencesStatus => throw _privateConstructorUsedError;
+  ExceptionModel get getAllPreferencesException =>
+      throw _privateConstructorUsedError;
   UserStoreListModel? get stores => throw _privateConstructorUsedError;
   Status get getStoresByUserStoreListStatus =>
       throw _privateConstructorUsedError;
@@ -42,6 +46,9 @@ abstract class $StoresByUserStoreListStateCopyWith<$Res> {
       >;
   @useResult
   $Res call({
+    List<PreferenceModel> preferences,
+    Status getAllPreferencesStatus,
+    ExceptionModel getAllPreferencesException,
     UserStoreListModel? stores,
     Status getStoresByUserStoreListStatus,
     ExceptionModel getStoresByUserStoreListException,
@@ -66,12 +73,30 @@ class _$StoresByUserStoreListStateCopyWithImpl<
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? preferences = null,
+    Object? getAllPreferencesStatus = null,
+    Object? getAllPreferencesException = null,
     Object? stores = freezed,
     Object? getStoresByUserStoreListStatus = null,
     Object? getStoresByUserStoreListException = null,
   }) {
     return _then(
       _value.copyWith(
+            preferences:
+                null == preferences
+                    ? _value.preferences
+                    : preferences // ignore: cast_nullable_to_non_nullable
+                        as List<PreferenceModel>,
+            getAllPreferencesStatus:
+                null == getAllPreferencesStatus
+                    ? _value.getAllPreferencesStatus
+                    : getAllPreferencesStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            getAllPreferencesException:
+                null == getAllPreferencesException
+                    ? _value.getAllPreferencesException
+                    : getAllPreferencesException // ignore: cast_nullable_to_non_nullable
+                        as ExceptionModel,
             stores:
                 freezed == stores
                     ? _value.stores
@@ -103,6 +128,9 @@ abstract class _$$StoresByUserStoreListStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
+    List<PreferenceModel> preferences,
+    Status getAllPreferencesStatus,
+    ExceptionModel getAllPreferencesException,
     UserStoreListModel? stores,
     Status getStoresByUserStoreListStatus,
     ExceptionModel getStoresByUserStoreListException,
@@ -127,12 +155,30 @@ class __$$StoresByUserStoreListStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? preferences = null,
+    Object? getAllPreferencesStatus = null,
+    Object? getAllPreferencesException = null,
     Object? stores = freezed,
     Object? getStoresByUserStoreListStatus = null,
     Object? getStoresByUserStoreListException = null,
   }) {
     return _then(
       _$StoresByUserStoreListStateImpl(
+        preferences:
+            null == preferences
+                ? _value._preferences
+                : preferences // ignore: cast_nullable_to_non_nullable
+                    as List<PreferenceModel>,
+        getAllPreferencesStatus:
+            null == getAllPreferencesStatus
+                ? _value.getAllPreferencesStatus
+                : getAllPreferencesStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        getAllPreferencesException:
+            null == getAllPreferencesException
+                ? _value.getAllPreferencesException
+                : getAllPreferencesException // ignore: cast_nullable_to_non_nullable
+                    as ExceptionModel,
         stores:
             freezed == stores
                 ? _value.stores
@@ -157,6 +203,14 @@ class __$$StoresByUserStoreListStateImplCopyWithImpl<$Res>
 
 class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
   _$StoresByUserStoreListStateImpl({
+    final List<PreferenceModel> preferences = const <PreferenceModel>[],
+    this.getAllPreferencesStatus = Status.loading,
+    this.getAllPreferencesException = const ExceptionModel(
+      status: -1,
+      code: '',
+      message: '',
+      timestamp: '',
+    ),
     this.stores,
     this.getStoresByUserStoreListStatus = Status.loading,
     this.getStoresByUserStoreListException = const ExceptionModel(
@@ -165,8 +219,24 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
       message: '',
       timestamp: '',
     ),
-  }) : super._();
+  }) : _preferences = preferences,
+       super._();
 
+  final List<PreferenceModel> _preferences;
+  @override
+  @JsonKey()
+  List<PreferenceModel> get preferences {
+    if (_preferences is EqualUnmodifiableListView) return _preferences;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_preferences);
+  }
+
+  @override
+  @JsonKey()
+  final Status getAllPreferencesStatus;
+  @override
+  @JsonKey()
+  final ExceptionModel getAllPreferencesException;
   @override
   final UserStoreListModel? stores;
   @override
@@ -178,7 +248,7 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
 
   @override
   String toString() {
-    return 'StoresByUserStoreListState(stores: $stores, getStoresByUserStoreListStatus: $getStoresByUserStoreListStatus, getStoresByUserStoreListException: $getStoresByUserStoreListException)';
+    return 'StoresByUserStoreListState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, stores: $stores, getStoresByUserStoreListStatus: $getStoresByUserStoreListStatus, getStoresByUserStoreListException: $getStoresByUserStoreListException)';
   }
 
   @override
@@ -186,6 +256,21 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StoresByUserStoreListStateImpl &&
+            const DeepCollectionEquality().equals(
+              other._preferences,
+              _preferences,
+            ) &&
+            (identical(
+                  other.getAllPreferencesStatus,
+                  getAllPreferencesStatus,
+                ) ||
+                other.getAllPreferencesStatus == getAllPreferencesStatus) &&
+            (identical(
+                  other.getAllPreferencesException,
+                  getAllPreferencesException,
+                ) ||
+                other.getAllPreferencesException ==
+                    getAllPreferencesException) &&
             (identical(other.stores, stores) || other.stores == stores) &&
             (identical(
                   other.getStoresByUserStoreListStatus,
@@ -204,6 +289,9 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
   @override
   int get hashCode => Object.hash(
     runtimeType,
+    const DeepCollectionEquality().hash(_preferences),
+    getAllPreferencesStatus,
+    getAllPreferencesException,
     stores,
     getStoresByUserStoreListStatus,
     getStoresByUserStoreListException,
@@ -222,12 +310,21 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
 
 abstract class _StoresByUserStoreListState extends StoresByUserStoreListState {
   factory _StoresByUserStoreListState({
+    final List<PreferenceModel> preferences,
+    final Status getAllPreferencesStatus,
+    final ExceptionModel getAllPreferencesException,
     final UserStoreListModel? stores,
     final Status getStoresByUserStoreListStatus,
     final ExceptionModel getStoresByUserStoreListException,
   }) = _$StoresByUserStoreListStateImpl;
   _StoresByUserStoreListState._() : super._();
 
+  @override
+  List<PreferenceModel> get preferences;
+  @override
+  Status get getAllPreferencesStatus;
+  @override
+  ExceptionModel get getAllPreferencesException;
   @override
   UserStoreListModel? get stores;
   @override
