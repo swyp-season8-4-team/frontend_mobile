@@ -22,6 +22,12 @@ abstract class AppRoutes {
   // 지도 화면
   static const RouteInfo map = RouteInfo(name: '/map', path: '/map');
 
+  // 지도 > 저장 리스트 내 가게 조회
+  static final RouteInfo storesByUserStoreList = RouteInfo(
+    name: '${map.name}/:listId/stores',
+    path: ':listId/stores',
+  );
+
   // 저장 리스트 생성
   static final RouteInfo addUserStoreList = RouteInfo(
     name: '${map.name}/add_user_store_list',
