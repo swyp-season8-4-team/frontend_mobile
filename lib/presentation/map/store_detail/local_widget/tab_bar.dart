@@ -3,11 +3,13 @@ part of '../store_detail_view.dart';
 class _TabBarDelegate extends SliverPersistentHeaderDelegate {
   const _TabBarDelegate({
     required this.storeDetail,
+    required this.thumbnailImageUrls,
     required this.tabController,
     required this.onPinnedChanged,
   });
 
   final StoreDetailModel storeDetail;
+  final List<String> thumbnailImageUrls;
   final TabController tabController;
   final void Function(bool isPinned) onPinnedChanged;
 
@@ -58,7 +60,7 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
             context: context,
             label: '사진',
             index: 1,
-            count: storeDetail.storeImages?.length ?? 0,
+            count: thumbnailImageUrls.length,
           ),
           _tab(context: context, label: '디저트메이트', index: 2),
         ],

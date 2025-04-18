@@ -98,6 +98,7 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
                 delegate: _TabBarDelegate(
                   storeDetail: state.storeDetail!,
                   tabController: _tabController,
+                  thumbnailImageUrls: state.thumbnailImageUrls,
                   onPinnedChanged: (bool isPinned) {
                     if (_isTabBarPinned == isPinned) {
                       return;

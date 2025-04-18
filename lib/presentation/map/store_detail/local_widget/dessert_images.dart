@@ -18,11 +18,13 @@ class _DessertImages extends ConsumerWidget {
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    final List<String> dessertImages =
-        state.storeDetail!.menus
-            .map((StoreDetailMenuModel e) => e.images ?? <String>[])
-            .expand((List<String> e) => e)
-            .toList();
+    // final List<String> dessertImages =
+    //     state.storeDetail!.menus
+    //         .map((StoreDetailMenuModel e) => e.images ?? <String>[])
+    //         .expand((List<String> e) => e)
+    //         .toList();
+
+    final List<String> dessertImages = state.thumbnailImageUrls;
     return CustomScrollView(
       slivers: <Widget>[
         SliverToBoxAdapter(
