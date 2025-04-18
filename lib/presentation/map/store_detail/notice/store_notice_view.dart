@@ -7,6 +7,8 @@ import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/store_notice/store_notice_model.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/notice/store_notice_view_model.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 part 'local_widget/notice.dart';
@@ -114,7 +116,19 @@ class _StoreNoticeViewState extends ConsumerState<StoreNoticeView> {
                       ) {
                         final StoreNoticeModel storeNotice =
                             state.storeNotices[index];
-                        return _StoreNoticeCard(storeNotice: storeNotice);
+                        return GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTap: () {
+                            context.pushNamed(
+                              AppRoutes.storeNoticeDetail.name,
+                              pathParameters: <String, String>{
+                                'id': widget.storeUuid,
+                                'noticeId': storeNotice.noticeId.toString(),
+                              },
+                            );
+                          },
+                          child: _StoreNoticeCard(storeNotice: storeNotice),
+                        );
                       }, childCount: state.storeNotices.length),
                     ),
                   ],

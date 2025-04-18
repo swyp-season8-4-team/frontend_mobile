@@ -40,6 +40,12 @@ abstract class AppRoutes {
     path: 'notice',
   );
 
+  // 지도 > 가게 상세 > 모든 공지 > 공지 상세
+  static final RouteInfo storeNoticeDetail = RouteInfo(
+    name: '${storeNotice.name}/:noticeId',
+    path: ':noticeId',
+  );
+
   // 지도 > 검색 화면
   static final RouteInfo searchStore = RouteInfo(
     name: '${map.name}/search-store',

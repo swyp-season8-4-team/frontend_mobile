@@ -25,6 +25,8 @@ extension MapViewMethodExt on _MapViewState {
       // 현재 위치에서 가게를 조회.
       await _getShopWithCurrentLocation();
     } catch (e) {
+      // 현재 위치에서 가게를 조회.
+      await _getShopWithCurrentLocation();
       return;
     }
   }
