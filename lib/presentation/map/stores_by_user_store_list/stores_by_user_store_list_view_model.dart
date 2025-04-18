@@ -77,7 +77,18 @@ class StoresByUserStoreListViewModel
       success: (Success<UserStoreListModel, CustomException> success) {
         state = state.copyWith(
           getStoresByUserStoreListStatus: Status.success,
-          stores: success.data,
+          storeList: success.data,
+          storeOptionMenuVisibleList:
+              success.data.storeData != null
+                  ? success.data.storeData!
+                      .map(
+                        (UserStoreModel e) => (
+                          storeUuid: e.storeUuid,
+                          isOptionMenuVisible: false,
+                        ),
+                      )
+                      .toList()
+                  : <({bool isOptionMenuVisible, String storeUuid})>[],
         );
       },
       failure: (Failure<UserStoreListModel, CustomException> failure) {
@@ -89,5 +100,38 @@ class StoresByUserStoreListViewModel
     );
 
     return state;
+  }
+
+  // 표시되고 있는 모든 옵션 메뉴들을 제거
+  void invisibleAllStoreOptionMenu() {
+    state = state.copyWith(
+      storeOptionMenuVisibleList:
+          state.storeOptionMenuVisibleList
+              .map(
+                (({bool isOptionMenuVisible, String storeUuid}) e) => (
+                  storeUuid: e.storeUuid,
+                  isOptionMenuVisible: false,
+                ),
+              )
+              .toList(),
+    );
+  }
+
+  // 특정 가게의 옵션 메뉴 표시 여부 수정
+  void updateStoreOptionMenuVisible({
+    required String storeUuid,
+    required bool isVisible,
+  }) async {
+    state = state.copyWith(
+      storeOptionMenuVisibleList:
+          state.storeOptionMenuVisibleList
+              .map(
+                (({bool isOptionMenuVisible, String storeUuid}) e) =>
+                    e.storeUuid == storeUuid
+                        ? (storeUuid: storeUuid, isOptionMenuVisible: isVisible)
+                        : e,
+              )
+              .toList(),
+    );
   }
 }

@@ -155,7 +155,14 @@ class _StoreListSheet extends ConsumerWidget {
                                 optionMenus: const <CustomOptionMenu>[],
                                 optionMenusVisible: false,
                                 onOptionMenusTap: () {},
-                                onTap: () {},
+                                onTap: () {
+                                  context.pushNamed(
+                                    AppRoutes.storesByUserStoreList.name,
+                                    pathParameters: <String, String>{
+                                      'listId': userStoreList.listId.toString(),
+                                    },
+                                  );
+                                },
                               ),
                             ),
                             const Divider(color: ScaleColorConfig.neutral50),

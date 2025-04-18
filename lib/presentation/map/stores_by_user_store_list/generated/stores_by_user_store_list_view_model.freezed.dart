@@ -21,11 +21,13 @@ mixin _$StoresByUserStoreListState {
   Status get getAllPreferencesStatus => throw _privateConstructorUsedError;
   ExceptionModel get getAllPreferencesException =>
       throw _privateConstructorUsedError;
-  UserStoreListModel? get stores => throw _privateConstructorUsedError;
+  UserStoreListModel? get storeList => throw _privateConstructorUsedError;
   Status get getStoresByUserStoreListStatus =>
       throw _privateConstructorUsedError;
   ExceptionModel get getStoresByUserStoreListException =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // 가게들의 옵션 메뉴 표시 여부
+  List<({bool isOptionMenuVisible, String storeUuid})>
+  get storeOptionMenuVisibleList => throw _privateConstructorUsedError;
 
   /// Create a copy of StoresByUserStoreListState
   /// with the given fields replaced by the non-null parameter values.
@@ -49,9 +51,11 @@ abstract class $StoresByUserStoreListStateCopyWith<$Res> {
     List<PreferenceModel> preferences,
     Status getAllPreferencesStatus,
     ExceptionModel getAllPreferencesException,
-    UserStoreListModel? stores,
+    UserStoreListModel? storeList,
     Status getStoresByUserStoreListStatus,
     ExceptionModel getStoresByUserStoreListException,
+    List<({bool isOptionMenuVisible, String storeUuid})>
+    storeOptionMenuVisibleList,
   });
 }
 
@@ -76,9 +80,10 @@ class _$StoresByUserStoreListStateCopyWithImpl<
     Object? preferences = null,
     Object? getAllPreferencesStatus = null,
     Object? getAllPreferencesException = null,
-    Object? stores = freezed,
+    Object? storeList = freezed,
     Object? getStoresByUserStoreListStatus = null,
     Object? getStoresByUserStoreListException = null,
+    Object? storeOptionMenuVisibleList = null,
   }) {
     return _then(
       _value.copyWith(
@@ -97,10 +102,10 @@ class _$StoresByUserStoreListStateCopyWithImpl<
                     ? _value.getAllPreferencesException
                     : getAllPreferencesException // ignore: cast_nullable_to_non_nullable
                         as ExceptionModel,
-            stores:
-                freezed == stores
-                    ? _value.stores
-                    : stores // ignore: cast_nullable_to_non_nullable
+            storeList:
+                freezed == storeList
+                    ? _value.storeList
+                    : storeList // ignore: cast_nullable_to_non_nullable
                         as UserStoreListModel?,
             getStoresByUserStoreListStatus:
                 null == getStoresByUserStoreListStatus
@@ -112,6 +117,11 @@ class _$StoresByUserStoreListStateCopyWithImpl<
                     ? _value.getStoresByUserStoreListException
                     : getStoresByUserStoreListException // ignore: cast_nullable_to_non_nullable
                         as ExceptionModel,
+            storeOptionMenuVisibleList:
+                null == storeOptionMenuVisibleList
+                    ? _value.storeOptionMenuVisibleList
+                    : storeOptionMenuVisibleList // ignore: cast_nullable_to_non_nullable
+                        as List<({bool isOptionMenuVisible, String storeUuid})>,
           )
           as $Val,
     );
@@ -131,9 +141,11 @@ abstract class _$$StoresByUserStoreListStateImplCopyWith<$Res>
     List<PreferenceModel> preferences,
     Status getAllPreferencesStatus,
     ExceptionModel getAllPreferencesException,
-    UserStoreListModel? stores,
+    UserStoreListModel? storeList,
     Status getStoresByUserStoreListStatus,
     ExceptionModel getStoresByUserStoreListException,
+    List<({bool isOptionMenuVisible, String storeUuid})>
+    storeOptionMenuVisibleList,
   });
 }
 
@@ -158,9 +170,10 @@ class __$$StoresByUserStoreListStateImplCopyWithImpl<$Res>
     Object? preferences = null,
     Object? getAllPreferencesStatus = null,
     Object? getAllPreferencesException = null,
-    Object? stores = freezed,
+    Object? storeList = freezed,
     Object? getStoresByUserStoreListStatus = null,
     Object? getStoresByUserStoreListException = null,
+    Object? storeOptionMenuVisibleList = null,
   }) {
     return _then(
       _$StoresByUserStoreListStateImpl(
@@ -179,10 +192,10 @@ class __$$StoresByUserStoreListStateImplCopyWithImpl<$Res>
                 ? _value.getAllPreferencesException
                 : getAllPreferencesException // ignore: cast_nullable_to_non_nullable
                     as ExceptionModel,
-        stores:
-            freezed == stores
-                ? _value.stores
-                : stores // ignore: cast_nullable_to_non_nullable
+        storeList:
+            freezed == storeList
+                ? _value.storeList
+                : storeList // ignore: cast_nullable_to_non_nullable
                     as UserStoreListModel?,
         getStoresByUserStoreListStatus:
             null == getStoresByUserStoreListStatus
@@ -194,6 +207,11 @@ class __$$StoresByUserStoreListStateImplCopyWithImpl<$Res>
                 ? _value.getStoresByUserStoreListException
                 : getStoresByUserStoreListException // ignore: cast_nullable_to_non_nullable
                     as ExceptionModel,
+        storeOptionMenuVisibleList:
+            null == storeOptionMenuVisibleList
+                ? _value._storeOptionMenuVisibleList
+                : storeOptionMenuVisibleList // ignore: cast_nullable_to_non_nullable
+                    as List<({bool isOptionMenuVisible, String storeUuid})>,
       ),
     );
   }
@@ -211,7 +229,7 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
       message: '',
       timestamp: '',
     ),
-    this.stores,
+    this.storeList,
     this.getStoresByUserStoreListStatus = Status.loading,
     this.getStoresByUserStoreListException = const ExceptionModel(
       status: -1,
@@ -219,7 +237,11 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
       message: '',
       timestamp: '',
     ),
+    final List<({bool isOptionMenuVisible, String storeUuid})>
+        storeOptionMenuVisibleList =
+        const <StoreOptionMenuVisible>[],
   }) : _preferences = preferences,
+       _storeOptionMenuVisibleList = storeOptionMenuVisibleList,
        super._();
 
   final List<PreferenceModel> _preferences;
@@ -238,17 +260,30 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
   @JsonKey()
   final ExceptionModel getAllPreferencesException;
   @override
-  final UserStoreListModel? stores;
+  final UserStoreListModel? storeList;
   @override
   @JsonKey()
   final Status getStoresByUserStoreListStatus;
   @override
   @JsonKey()
   final ExceptionModel getStoresByUserStoreListException;
+  // 가게들의 옵션 메뉴 표시 여부
+  final List<({bool isOptionMenuVisible, String storeUuid})>
+  _storeOptionMenuVisibleList;
+  // 가게들의 옵션 메뉴 표시 여부
+  @override
+  @JsonKey()
+  List<({bool isOptionMenuVisible, String storeUuid})>
+  get storeOptionMenuVisibleList {
+    if (_storeOptionMenuVisibleList is EqualUnmodifiableListView)
+      return _storeOptionMenuVisibleList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_storeOptionMenuVisibleList);
+  }
 
   @override
   String toString() {
-    return 'StoresByUserStoreListState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, stores: $stores, getStoresByUserStoreListStatus: $getStoresByUserStoreListStatus, getStoresByUserStoreListException: $getStoresByUserStoreListException)';
+    return 'StoresByUserStoreListState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storeList: $storeList, getStoresByUserStoreListStatus: $getStoresByUserStoreListStatus, getStoresByUserStoreListException: $getStoresByUserStoreListException, storeOptionMenuVisibleList: $storeOptionMenuVisibleList)';
   }
 
   @override
@@ -271,7 +306,8 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
                 ) ||
                 other.getAllPreferencesException ==
                     getAllPreferencesException) &&
-            (identical(other.stores, stores) || other.stores == stores) &&
+            (identical(other.storeList, storeList) ||
+                other.storeList == storeList) &&
             (identical(
                   other.getStoresByUserStoreListStatus,
                   getStoresByUserStoreListStatus,
@@ -283,7 +319,11 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
                   getStoresByUserStoreListException,
                 ) ||
                 other.getStoresByUserStoreListException ==
-                    getStoresByUserStoreListException));
+                    getStoresByUserStoreListException) &&
+            const DeepCollectionEquality().equals(
+              other._storeOptionMenuVisibleList,
+              _storeOptionMenuVisibleList,
+            ));
   }
 
   @override
@@ -292,9 +332,10 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
     const DeepCollectionEquality().hash(_preferences),
     getAllPreferencesStatus,
     getAllPreferencesException,
-    stores,
+    storeList,
     getStoresByUserStoreListStatus,
     getStoresByUserStoreListException,
+    const DeepCollectionEquality().hash(_storeOptionMenuVisibleList),
   );
 
   /// Create a copy of StoresByUserStoreListState
@@ -313,9 +354,11 @@ abstract class _StoresByUserStoreListState extends StoresByUserStoreListState {
     final List<PreferenceModel> preferences,
     final Status getAllPreferencesStatus,
     final ExceptionModel getAllPreferencesException,
-    final UserStoreListModel? stores,
+    final UserStoreListModel? storeList,
     final Status getStoresByUserStoreListStatus,
     final ExceptionModel getStoresByUserStoreListException,
+    final List<({bool isOptionMenuVisible, String storeUuid})>
+    storeOptionMenuVisibleList,
   }) = _$StoresByUserStoreListStateImpl;
   _StoresByUserStoreListState._() : super._();
 
@@ -326,11 +369,14 @@ abstract class _StoresByUserStoreListState extends StoresByUserStoreListState {
   @override
   ExceptionModel get getAllPreferencesException;
   @override
-  UserStoreListModel? get stores;
+  UserStoreListModel? get storeList;
   @override
   Status get getStoresByUserStoreListStatus;
   @override
-  ExceptionModel get getStoresByUserStoreListException;
+  ExceptionModel get getStoresByUserStoreListException; // 가게들의 옵션 메뉴 표시 여부
+  @override
+  List<({bool isOptionMenuVisible, String storeUuid})>
+  get storeOptionMenuVisibleList;
 
   /// Create a copy of StoresByUserStoreListState
   /// with the given fields replaced by the non-null parameter values.
