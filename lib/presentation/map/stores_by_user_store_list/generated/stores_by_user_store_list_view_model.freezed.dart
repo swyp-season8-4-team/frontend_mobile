@@ -28,6 +28,8 @@ mixin _$StoresByUserStoreListState {
       throw _privateConstructorUsedError; // 가게들의 옵션 메뉴 표시 여부
   List<({bool isOptionMenuVisible, String storeUuid})>
   get storeOptionMenuVisibleList => throw _privateConstructorUsedError;
+  Status get deleteStoreStatus => throw _privateConstructorUsedError;
+  ExceptionModel get deleteStoreException => throw _privateConstructorUsedError;
 
   /// Create a copy of StoresByUserStoreListState
   /// with the given fields replaced by the non-null parameter values.
@@ -56,6 +58,8 @@ abstract class $StoresByUserStoreListStateCopyWith<$Res> {
     ExceptionModel getStoresByUserStoreListException,
     List<({bool isOptionMenuVisible, String storeUuid})>
     storeOptionMenuVisibleList,
+    Status deleteStoreStatus,
+    ExceptionModel deleteStoreException,
   });
 }
 
@@ -84,6 +88,8 @@ class _$StoresByUserStoreListStateCopyWithImpl<
     Object? getStoresByUserStoreListStatus = null,
     Object? getStoresByUserStoreListException = null,
     Object? storeOptionMenuVisibleList = null,
+    Object? deleteStoreStatus = null,
+    Object? deleteStoreException = null,
   }) {
     return _then(
       _value.copyWith(
@@ -122,6 +128,16 @@ class _$StoresByUserStoreListStateCopyWithImpl<
                     ? _value.storeOptionMenuVisibleList
                     : storeOptionMenuVisibleList // ignore: cast_nullable_to_non_nullable
                         as List<({bool isOptionMenuVisible, String storeUuid})>,
+            deleteStoreStatus:
+                null == deleteStoreStatus
+                    ? _value.deleteStoreStatus
+                    : deleteStoreStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            deleteStoreException:
+                null == deleteStoreException
+                    ? _value.deleteStoreException
+                    : deleteStoreException // ignore: cast_nullable_to_non_nullable
+                        as ExceptionModel,
           )
           as $Val,
     );
@@ -146,6 +162,8 @@ abstract class _$$StoresByUserStoreListStateImplCopyWith<$Res>
     ExceptionModel getStoresByUserStoreListException,
     List<({bool isOptionMenuVisible, String storeUuid})>
     storeOptionMenuVisibleList,
+    Status deleteStoreStatus,
+    ExceptionModel deleteStoreException,
   });
 }
 
@@ -174,6 +192,8 @@ class __$$StoresByUserStoreListStateImplCopyWithImpl<$Res>
     Object? getStoresByUserStoreListStatus = null,
     Object? getStoresByUserStoreListException = null,
     Object? storeOptionMenuVisibleList = null,
+    Object? deleteStoreStatus = null,
+    Object? deleteStoreException = null,
   }) {
     return _then(
       _$StoresByUserStoreListStateImpl(
@@ -212,6 +232,16 @@ class __$$StoresByUserStoreListStateImplCopyWithImpl<$Res>
                 ? _value._storeOptionMenuVisibleList
                 : storeOptionMenuVisibleList // ignore: cast_nullable_to_non_nullable
                     as List<({bool isOptionMenuVisible, String storeUuid})>,
+        deleteStoreStatus:
+            null == deleteStoreStatus
+                ? _value.deleteStoreStatus
+                : deleteStoreStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        deleteStoreException:
+            null == deleteStoreException
+                ? _value.deleteStoreException
+                : deleteStoreException // ignore: cast_nullable_to_non_nullable
+                    as ExceptionModel,
       ),
     );
   }
@@ -240,6 +270,13 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
     final List<({bool isOptionMenuVisible, String storeUuid})>
         storeOptionMenuVisibleList =
         const <StoreOptionMenuVisible>[],
+    this.deleteStoreStatus = Status.initial,
+    this.deleteStoreException = const ExceptionModel(
+      status: -1,
+      code: '',
+      message: '',
+      timestamp: '',
+    ),
   }) : _preferences = preferences,
        _storeOptionMenuVisibleList = storeOptionMenuVisibleList,
        super._();
@@ -282,8 +319,15 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
   }
 
   @override
+  @JsonKey()
+  final Status deleteStoreStatus;
+  @override
+  @JsonKey()
+  final ExceptionModel deleteStoreException;
+
+  @override
   String toString() {
-    return 'StoresByUserStoreListState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storeList: $storeList, getStoresByUserStoreListStatus: $getStoresByUserStoreListStatus, getStoresByUserStoreListException: $getStoresByUserStoreListException, storeOptionMenuVisibleList: $storeOptionMenuVisibleList)';
+    return 'StoresByUserStoreListState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storeList: $storeList, getStoresByUserStoreListStatus: $getStoresByUserStoreListStatus, getStoresByUserStoreListException: $getStoresByUserStoreListException, storeOptionMenuVisibleList: $storeOptionMenuVisibleList, deleteStoreStatus: $deleteStoreStatus, deleteStoreException: $deleteStoreException)';
   }
 
   @override
@@ -323,7 +367,11 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
             const DeepCollectionEquality().equals(
               other._storeOptionMenuVisibleList,
               _storeOptionMenuVisibleList,
-            ));
+            ) &&
+            (identical(other.deleteStoreStatus, deleteStoreStatus) ||
+                other.deleteStoreStatus == deleteStoreStatus) &&
+            (identical(other.deleteStoreException, deleteStoreException) ||
+                other.deleteStoreException == deleteStoreException));
   }
 
   @override
@@ -336,6 +384,8 @@ class _$StoresByUserStoreListStateImpl extends _StoresByUserStoreListState {
     getStoresByUserStoreListStatus,
     getStoresByUserStoreListException,
     const DeepCollectionEquality().hash(_storeOptionMenuVisibleList),
+    deleteStoreStatus,
+    deleteStoreException,
   );
 
   /// Create a copy of StoresByUserStoreListState
@@ -359,6 +409,8 @@ abstract class _StoresByUserStoreListState extends StoresByUserStoreListState {
     final ExceptionModel getStoresByUserStoreListException,
     final List<({bool isOptionMenuVisible, String storeUuid})>
     storeOptionMenuVisibleList,
+    final Status deleteStoreStatus,
+    final ExceptionModel deleteStoreException,
   }) = _$StoresByUserStoreListStateImpl;
   _StoresByUserStoreListState._() : super._();
 
@@ -377,6 +429,10 @@ abstract class _StoresByUserStoreListState extends StoresByUserStoreListState {
   @override
   List<({bool isOptionMenuVisible, String storeUuid})>
   get storeOptionMenuVisibleList;
+  @override
+  Status get deleteStoreStatus;
+  @override
+  ExceptionModel get deleteStoreException;
 
   /// Create a copy of StoresByUserStoreListState
   /// with the given fields replaced by the non-null parameter values.

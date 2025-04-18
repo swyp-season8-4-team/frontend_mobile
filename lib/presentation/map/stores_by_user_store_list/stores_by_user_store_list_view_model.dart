@@ -8,8 +8,10 @@ import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
+import 'package:frontend_mobile/domain/param/user_store/delete_store_from_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/get_stores_by_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/usecase/preference/get_all_preferences_usecase.dart';
+import 'package:frontend_mobile/domain/usecase/user_store/delete_store_from_user_store_list_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/user_store/get_stores_by_user_store_list_usecase.dart';
 
 part 'stores_by_user_store_list_state.dart';
@@ -133,5 +135,35 @@ class StoresByUserStoreListViewModel
               )
               .toList(),
     );
+  }
+
+  // 저장 리스트 내 가게 삭제
+  Future<StoresByUserStoreListState> deleteStore({
+    required int listId,
+    required String storeUuid,
+  }) async {
+    state = state.copyWith(deleteStoreStatus: Status.loading);
+
+    final Result<void, CustomException> result = await Usecase.execute(
+      usecase: _ref.read(deleteStoreFromUserStoreListUsecaseProvider),
+      params: DeleteStoreFromUserStoreListParams(
+        listId: listId,
+        storeUuid: storeUuid,
+      ),
+    );
+
+    result.map(
+      success: (Success<void, CustomException> success) {
+        state = state.copyWith(deleteStoreStatus: Status.success);
+      },
+      failure: (Failure<void, CustomException> failure) {
+        state = state.copyWith(
+          deleteStoreStatus: Status.failure,
+          deleteStoreException: failure.exception.model,
+        );
+      },
+    );
+
+    return state;
   }
 }

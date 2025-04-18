@@ -17,6 +17,10 @@ class StoresByUserStoreListState with _$StoresByUserStoreListState {
     // 가게들의 옵션 메뉴 표시 여부
     @Default(<StoreOptionMenuVisible>[])
     List<StoreOptionMenuVisible> storeOptionMenuVisibleList,
+
+    @Default(Status.initial) Status deleteStoreStatus,
+    @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
+    ExceptionModel deleteStoreException,
   }) = _StoresByUserStoreListState;
 
   const StoresByUserStoreListState._();
