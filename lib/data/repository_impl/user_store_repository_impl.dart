@@ -8,6 +8,7 @@ import 'package:frontend_mobile/data/mapper/user_store_mapper.dart';
 import 'package:frontend_mobile/data/query_param/user_store/add_user_store_list_query_param.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
 import 'package:frontend_mobile/domain/param/user_store/add_user_store_list_params.dart';
+import 'package:frontend_mobile/domain/param/user_store/delete_store_from_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/get_stores_by_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/get_user_store_list_all_params.dart';
 import 'package:frontend_mobile/domain/repository/user_store_repository.dart';
@@ -62,6 +63,20 @@ class UserStoreRepositoryImpl implements UserStoreRepository {
           listId: params.listId,
         );
         return result.toModel();
+      },
+    );
+  }
+
+  @override
+  Future<Result<void, CustomException>> deleteStoreFromUserStoreList({
+    required DeleteStoreFromUserStoreListParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        return await _api.deleteStoreFromUserStoreList(
+          listId: params.listId,
+          storeUuid: params.storeUuid,
+        );
       },
     );
   }
