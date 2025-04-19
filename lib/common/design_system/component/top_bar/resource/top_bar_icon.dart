@@ -71,8 +71,6 @@ class TopBarIcon {
   );
 
   /// 닫기
-  GestureDetector close({required VoidCallback? onTap}) => GestureDetector(
-    onTap: onTap,
-    child: SvgPicture.asset(Assets.icon.system.closeLine.path),
-  );
+  GestureDetector close({required VoidCallback? onTap}) =>
+      GestureDetector(onTap: onTap, child: Assets.icon.system.closeLine.svg());
 }
