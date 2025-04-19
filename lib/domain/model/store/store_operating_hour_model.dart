@@ -17,7 +17,7 @@ class StoreOperatingHourModel {
   final String closingTime;
   final String? lastOrderTime;
   final bool isClosed;
-  final String? regularClosureType;
+  final RegularClosureType? regularClosureType;
   final String? regularClosureWeeks;
 
   //ignore: library_private_types_in_public_api

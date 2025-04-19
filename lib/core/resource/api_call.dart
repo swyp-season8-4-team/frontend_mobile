@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
 import 'package:frontend_mobile/core/resource/exception/exception_model.dart';
@@ -376,6 +378,7 @@ Future<Result<T, CustomException>> apiCall<T>({
   }
   /// dio 에러를 제외한 모든 에러
   catch (exception) {
+    log(exception.toString());
     return Failure<T, CustomException>(
       exception: CustomException.unknownError(
         model: ExceptionModel(
