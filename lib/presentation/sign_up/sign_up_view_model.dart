@@ -31,6 +31,22 @@ class SignUpViewModel extends StateNotifier<SignUpState> {
 
   final Ref ref;
 
+  void resetPostSignUpWithProfileStatus() {
+    state = state.copyWith(postSignUpWithProfileStatus: Status.initial);
+  }
+
+  void resetPostVerificationRequestStatus() {
+    state = state.copyWith(postVerificationRequestStatus: Status.initial);
+  }
+
+  void resetPostVerifyStatus() {
+    state = state.copyWith(postVerifyStatus: Status.initial);
+  }
+
+  void resetPostNicknameStatus() {
+    state = state.copyWith(postNicknameStatus: Status.initial);
+  }
+
   /// 프로필 이미지 포함 회원가입
   void postSignUpWithProfile({
     required PostSignUpWithProfileParams params,

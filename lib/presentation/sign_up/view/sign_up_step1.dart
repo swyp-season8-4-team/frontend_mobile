@@ -99,75 +99,82 @@ class _SignUpStep1State extends ConsumerState<SignUpStep1> {
       }
     });
 
-    return CustomLoadingOverlay(
-      isLoading: state.postVerificationRequestStatus.isLoading,
-      child: CustomSignUpWrapper(
-        title: '이메일',
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    TextLineBreak(
-                      text: '회원가입을 위해 이메일 주소를 입력해주세요',
-                      style: textTheme.titleLarge?.copyWith(
-                        color: ScaleColorConfig.primary5,
+    return PopScope(
+      onPopInvokedWithResult: (_, __) {
+        ref
+            .read(signUpViewModelProvider.notifier)
+            .resetPostVerificationRequestStatus();
+      },
+      child: CustomLoadingOverlay(
+        isLoading: state.postVerificationRequestStatus.isLoading,
+        child: CustomSignUpWrapper(
+          title: '이메일',
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      TextLineBreak(
+                        text: '회원가입을 위해 이메일 주소를 입력해주세요',
+                        style: textTheme.titleLarge?.copyWith(
+                          color: ScaleColorConfig.primary5,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 45),
+                      const SizedBox(height: 45),
 
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Expanded(
-                          child: CustomInputBox(
-                            controller: _emailController,
-                            closeControll: true,
-                            hintText: '이메일',
-                            success: _success,
-                            successText: _successText,
-                            error: _error,
-                            errorText: _errorText,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            child: CustomInputBox(
+                              controller: _emailController,
+                              closeControll: true,
+                              hintText: '이메일',
+                              success: _success,
+                              successText: _successText,
+                              error: _error,
+                              errorText: _errorText,
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 10),
-                        CustomFillButton.medium(
-                          label: '중복확인',
-                          backgroundColor: CustomFillButtonColor.olive,
-                          disabled: !_emailController.text.isEmail,
-                          width: 110,
-                          onPressed: () {
-                            ref
-                                .read(signUpViewModelProvider.notifier)
-                                .postVerificationRequest(
-                                  params: EmailVerificationRequestParams(
-                                    email: _emailController.text,
-                                    purpose: EmailPurpose.signUp.value,
-                                  ),
-                                );
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
+                          const SizedBox(width: 10),
+                          CustomFillButton.medium(
+                            label: '중복확인',
+                            backgroundColor: CustomFillButtonColor.olive,
+                            disabled: !_emailController.text.isEmail,
+                            width: 110,
+                            onPressed: () {
+                              ref
+                                  .read(signUpViewModelProvider.notifier)
+                                  .postVerificationRequest(
+                                    params: EmailVerificationRequestParams(
+                                      email: _emailController.text,
+                                      purpose: EmailPurpose.signUp.value,
+                                    ),
+                                  );
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
 
-            CustomFillButton.large(
-              label: '다음',
-              disabled: !_isValidEmail,
-              onPressed: () {
-                context.pushNamed(
-                  AppRoutes.signUpStep2.name,
-                  extra: _emailController.text,
-                );
-              },
-            ),
-            SizedBox(height: MediaQuery.of(context).padding.bottom + 32),
-          ],
+              CustomFillButton.large(
+                label: '다음',
+                disabled: !_isValidEmail,
+                onPressed: () {
+                  context.pushNamed(
+                    AppRoutes.signUpStep2.name,
+                    extra: _emailController.text,
+                  );
+                },
+              ),
+              SizedBox(height: MediaQuery.of(context).padding.bottom + 32),
+            ],
+          ),
         ),
       ),
     );

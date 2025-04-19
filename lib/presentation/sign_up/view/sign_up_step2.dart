@@ -112,102 +112,107 @@ class _SignUpStep2State extends ConsumerState<SignUpStep2> {
       }
     });
 
-    return CustomLoadingOverlay(
-      isLoading: state.postVerifyStatus.isLoading,
-      child: CustomSignUpWrapper(
-        title: '인증코드',
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      widget.email,
-                      style: textTheme.titleLarge?.copyWith(
-                        color: ScaleColorConfig.primary60,
+    return PopScope(
+      onPopInvokedWithResult: (_, __) {
+        ref.read(signUpViewModelProvider.notifier).resetPostVerifyStatus();
+      },
+      child: CustomLoadingOverlay(
+        isLoading: state.postVerifyStatus.isLoading,
+        child: CustomSignUpWrapper(
+          title: '인증코드',
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        widget.email,
+                        style: textTheme.titleLarge?.copyWith(
+                          color: ScaleColorConfig.primary60,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '인증코드를 보내드렸어요!',
-                      style: textTheme.titleLarge?.copyWith(
-                        color: ScaleColorConfig.primary5,
+                      Text(
+                        '인증코드를 보내드렸어요!',
+                        style: textTheme.titleLarge?.copyWith(
+                          color: ScaleColorConfig.primary5,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 45),
+                      const SizedBox(height: 45),
 
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Expanded(
-                          child: CustomInputBox(
-                            controller: _codeController,
-                            hintText: '인증번호 N자리',
-                            closeControll: true,
-                            success: _success,
-                            successText: _successText,
-                            error: _error,
-                            errorText: _errorText,
-                            onCloseButtonTap: () {
-                              _isValidCode = false;
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            child: CustomInputBox(
+                              controller: _codeController,
+                              hintText: '인증번호 N자리',
+                              closeControll: true,
+                              success: _success,
+                              successText: _successText,
+                              error: _error,
+                              errorText: _errorText,
+                              onCloseButtonTap: () {
+                                _isValidCode = false;
+                              },
+                              keyboardType: TextInputType.number,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          CustomFillButton.medium(
+                            label: '인증확인',
+                            backgroundColor: CustomFillButtonColor.olive,
+                            disabled:
+                                state.postVerificationRequestStatus.isLoading ||
+                                state.postVerifyStatus.isLoading ||
+                                _codeController.text.length < 6,
+                            width: 110,
+                            onPressed: () {
+                              ref
+                                  .read(signUpViewModelProvider.notifier)
+                                  .postVerify(
+                                    params: EmailVerifyParams(
+                                      email: widget.email,
+                                      code: _codeController.text,
+                                      purpose: EmailPurpose.signUp.value,
+                                    ),
+                                  );
                             },
-                            keyboardType: TextInputType.number,
                           ),
-                        ),
-                        const SizedBox(width: 10),
-                        CustomFillButton.medium(
-                          label: '인증확인',
-                          backgroundColor: CustomFillButtonColor.olive,
-                          disabled:
-                              state.postVerificationRequestStatus.isLoading ||
-                              state.postVerifyStatus.isLoading ||
-                              _codeController.text.length < 6,
-                          width: 110,
-                          onPressed: () {
-                            ref
-                                .read(signUpViewModelProvider.notifier)
-                                .postVerify(
-                                  params: EmailVerifyParams(
-                                    email: widget.email,
-                                    code: _codeController.text,
-                                    purpose: EmailPurpose.signUp.value,
-                                  ),
-                                );
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 45),
+                        ],
+                      ),
+                      const SizedBox(height: 45),
 
-                    Row(
-                      children: <Widget>[
-                        Text(
-                          '인증코드를 아직 받지 못하셨나요?',
-                          style: textTheme.bodyLarge?.copyWith(
-                            color: ScaleColorConfig.neutral30,
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            '인증코드를 아직 받지 못하셨나요?',
+                            style: textTheme.bodyLarge?.copyWith(
+                              color: ScaleColorConfig.neutral30,
+                            ),
                           ),
-                        ),
-                        CustomTextButton.underline(
-                          label: '재전송',
-                          disabled: state.postVerifyStatus.isLoading,
-                          onPressed: _onSendAgain,
-                        ),
-                      ],
-                    ),
-                  ],
+                          CustomTextButton.underline(
+                            label: '재전송',
+                            disabled: state.postVerifyStatus.isLoading,
+                            onPressed: _onSendAgain,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            CustomFillButton.large(
-              label: '다음',
-              disabled: !_isValidCode,
-              onPressed: () {
-                context.pushNamed(AppRoutes.signUpStep3.name);
-              },
-            ),
-            SizedBox(height: MediaQuery.of(context).padding.bottom + 32),
-          ],
+              CustomFillButton.large(
+                label: '다음',
+                disabled: !_isValidCode,
+                onPressed: () {
+                  context.pushNamed(AppRoutes.signUpStep3.name);
+                },
+              ),
+              SizedBox(height: MediaQuery.of(context).padding.bottom + 32),
+            ],
+          ),
         ),
       ),
     );
