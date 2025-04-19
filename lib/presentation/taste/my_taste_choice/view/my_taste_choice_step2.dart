@@ -7,7 +7,7 @@ import 'package:frontend_mobile/common/design_system/component/progress_indicato
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/core/util/text_line_break.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
-import 'package:frontend_mobile/presentation/preference/preference_view_model.dart';
+import 'package:frontend_mobile/presentation/global/preference/preference_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/taste/my_taste_choice/my_taste_choice_view_model.dart';
 import 'package:frontend_mobile/presentation/taste/my_taste_choice/widget/my_taste_wrapper.dart';

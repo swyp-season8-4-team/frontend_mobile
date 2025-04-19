@@ -9,10 +9,10 @@ import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/user/user_detail_model.dart';
 import 'package:frontend_mobile/domain/param/user/patch_me_params.dart';
-import 'package:frontend_mobile/presentation/preference/preference_view_model.dart';
+import 'package:frontend_mobile/presentation/global/preference/preference_view_model.dart';
+import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/taste/my_taste_choice/my_taste_choice_view_model.dart';
-import 'package:frontend_mobile/presentation/user/user_view_model.dart';
 import 'package:go_router/go_router.dart';
 
 class TasteResultLoading extends ConsumerStatefulWidget {

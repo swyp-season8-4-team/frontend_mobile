@@ -16,9 +16,9 @@ import 'package:frontend_mobile/core/resource/token_info.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/presentation/global/login/login_view_model.dart';
+import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
-import 'package:frontend_mobile/presentation/user/user_view_model.dart';
 import 'package:go_router/go_router.dart';
 
 class LocalLoginView extends ConsumerStatefulWidget {

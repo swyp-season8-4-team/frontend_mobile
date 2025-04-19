@@ -7,7 +7,7 @@ import 'package:frontend_mobile/common/design_system/component/button/text_butto
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
-import 'package:frontend_mobile/presentation/preference/preference_view_model.dart';
+import 'package:frontend_mobile/presentation/global/preference/preference_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
 
