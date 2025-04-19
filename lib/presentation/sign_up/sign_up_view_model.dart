@@ -167,8 +167,8 @@ class SignUpViewModel extends StateNotifier<SignUpState> {
 }
 
 /// 선택한 내용들을 저장하는 provider
-final StateProvider<PostSignUpWithProfileParams> signUpProvider =
-    StateProvider<PostSignUpWithProfileParams>(
+final AutoDisposeStateProvider<PostSignUpWithProfileParams> signUpProvider =
+    StateProvider.autoDispose<PostSignUpWithProfileParams>(
       (Ref ref) => const PostSignUpWithProfileParams(
         email: '',
         password: '',
