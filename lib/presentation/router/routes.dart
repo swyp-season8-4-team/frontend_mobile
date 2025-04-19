@@ -28,10 +28,16 @@ abstract class AppRoutes {
     path: ':listId/stores',
   );
 
-  // 저장 리스트 생성
+  // 지도 > 저장 리스트 생성
   static final RouteInfo addUserStoreList = RouteInfo(
     name: '${map.name}/add_user_store_list',
     path: 'add_user_store_list',
+  );
+
+  // 지도 > 저장 리스트 수정
+  static final RouteInfo updateUserStoreList = RouteInfo(
+    name: '${map.name}/:listId/update',
+    path: ':listId/update',
   );
 
   // 지도 > 가게 상세

@@ -11,6 +11,7 @@ import 'package:frontend_mobile/presentation/map/store_detail/find_place_by_map_
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view.dart';
 import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/stores_by_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view.dart';
+import 'package:frontend_mobile/presentation/map/user_store/update/update_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/splash_view.dart';
 import 'package:go_router/go_router.dart';
@@ -108,6 +109,20 @@ class AppRouter {
           return const MapView();
         },
         routes: <RouteBase>[
+          /// 저장 리스트 수정
+          GoRoute(
+            path: AppRoutes.updateUserStoreList.path,
+            name: AppRoutes.updateUserStoreList.name,
+            builder: (BuildContext context, GoRouterState state) {
+              final String? listId = state.pathParameters['listId'];
+              if (listId == null) {
+                return const Scaffold();
+              }
+              return UpdateUserStoreListView(listId: int.parse(listId));
+            },
+          ),
+
+          /// 저장 리스트 내 가게 조회
           GoRoute(
             path: AppRoutes.storesByUserStoreList.path,
             name: AppRoutes.storesByUserStoreList.name,
