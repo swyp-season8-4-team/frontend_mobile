@@ -23,6 +23,7 @@ import 'package:frontend_mobile/domain/usecase/store/get_store_summary_usecase.d
 import 'package:frontend_mobile/domain/usecase/store/get_stores_by_location_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/user_store/delete_user_store_list_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/user_store/get_user_store_list_all_usecase.dart';
+import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 
 part 'map_state.dart';
 part 'generated/map_view_model.freezed.dart';
@@ -159,7 +160,8 @@ class MapViewModel extends StateNotifier<MapState> {
     if (state.myPreferenceFilterSelected) {
       state = state.copyWith(preferenceTagIds: <int>[]);
     } else {
-      // TODO: preferenceTagIds에 맞춤 취향 지정 예정
+      final UserState userState = _ref.read(userViewModelProvider);
+      state = state.copyWith(preferenceTagIds: userState.data.preferences);
     }
 
     state = state.copyWith(

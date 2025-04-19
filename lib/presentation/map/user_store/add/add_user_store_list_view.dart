@@ -11,6 +11,7 @@ import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
+import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view_model.dart';
 import 'package:go_router/go_router.dart';
@@ -45,10 +46,10 @@ class _AddUserStoreListViewState extends ConsumerState<AddUserStoreListView> {
       ),
       (_, Status next) {
         if (next.isSuccess) {
-          // TODO: userUuid 설정 예정
+          final UserState userState = ref.read(userViewModelProvider);
           ref
               .read(mapViewModelProvider.notifier)
-              .getUserStoreListAll(userUuid: '1234');
+              .getUserStoreListAll(userUuid: userState.data.userUuid);
           context.pop(true);
         }
       },

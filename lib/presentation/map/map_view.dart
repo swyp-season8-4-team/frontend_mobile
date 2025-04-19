@@ -31,6 +31,7 @@ import 'package:frontend_mobile/core/util/naver_map_util.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
+import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/widget/desserbee_bottom_navigation.dart';
@@ -229,8 +230,8 @@ class _MapViewState extends ConsumerState<MapView> {
       (_, bool next) {
         final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
         if (next) {
-          // TODO: 추후 실제 데이터 연결 예정
-          viewmodel.getUserStoreListAll(userUuid: '123');
+          final UserState userState = ref.read(userViewModelProvider);
+          viewmodel.getUserStoreListAll(userUuid: userState.data.userUuid);
         } else {
           viewmodel.getStoresByLocation();
         }
@@ -273,7 +274,8 @@ class _MapViewState extends ConsumerState<MapView> {
       (_, Status next) {
         if (next.isSuccess) {
           // TODO: 실제 useruuid 지정 필요
-          viewmodel.getUserStoreListAll(userUuid: '1234');
+          final UserState userState = ref.read(userViewModelProvider);
+          viewmodel.getUserStoreListAll(userUuid: userState.data.userUuid);
         }
       },
     );
