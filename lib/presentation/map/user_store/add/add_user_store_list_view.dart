@@ -11,8 +11,8 @@ import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading_overlay.dart';
-import 'package:frontend_mobile/presentation/map/add_user_store_list/add_user_store_list_view_model.dart';
 import 'package:frontend_mobile/presentation/map/map_view_model.dart';
+import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view_model.dart';
 import 'package:go_router/go_router.dart';
 
 class AddUserStoreListView extends ConsumerStatefulWidget {

@@ -91,80 +91,7 @@ class _MapViewState extends ConsumerState<MapView> {
 
     final TopBarIcon topBarIcon = TopBarIcon();
 
-    ref.listen(
-      mapViewModelProvider.select((MapState state) => state.storesByLocation),
-      (_, List<StoreByLocationModel> next) async {
-        await _mapController.clearOverlays();
-        final List<NMarker> markers = await _createMarkers();
-        await _mapController.addOverlayAll(markers.toSet());
-        await NaverMapUtil.setMyLocationOverlay(controller: _mapController);
-      },
-    );
-
-    ref.listen(
-      mapViewModelProvider.select((MapState state) => state.userStoreLists),
-      (_, List<UserStoreListModel> next) async {
-        await _mapController.clearOverlays();
-        final List<NMarker> markers = await _createMarkers();
-
-        await _mapController.addOverlayAll(markers.toSet());
-        await NaverMapUtil.setMyLocationOverlay(controller: _mapController);
-      },
-    );
-
-    ref.listen(
-      mapViewModelProvider.select((MapState e) => e.userStoresEnabled),
-      (_, bool next) {
-        final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
-        if (next) {
-          // TODO: 추후 실제 데이터 연결 예정
-          viewmodel.getUserStoreListAll(userUuid: '123');
-        } else {
-          viewmodel.getStoresByLocation();
-        }
-      },
-    );
-
-    ref.listen(
-      mapViewModelProvider.select(
-        (MapState state) => state.getStoreSummaryStatus,
-      ),
-      (_, Status next) async {
-        if (next.isSuccess) {
-          final MapState state = ref.read(mapViewModelProvider);
-          await _mapController.deleteOverlay(
-            NOverlayInfo(
-              type: NOverlayType.marker,
-              id: state.selectedMarker!.info.id,
-            ),
-          );
-
-          final NMarker newMarker = NMarker(
-            id: state.selectedMarker!.info.id,
-            position: state.selectedMarker!.position,
-            anchor: state.selectedMarker!.anchor,
-            size: const Size(60, 66),
-            icon: NOverlayImage.fromAssetImage(
-              Assets.image.markerSelected.path,
-            ),
-          );
-
-          await _mapController.addOverlay(newMarker);
-        }
-      },
-    );
-
-    ref.listen(
-      mapViewModelProvider.select(
-        (MapState state) => state.deleteUserStoreListStatus,
-      ),
-      (_, Status next) {
-        if (next.isSuccess) {
-          // TODO: 실제 useruuid 지정 필요
-          viewmodel.getUserStoreListAll(userUuid: '1234');
-        }
-      },
-    );
+    _listenProvider();
 
     return GestureDetector(
       onTap: () {
@@ -271,6 +198,84 @@ class _MapViewState extends ConsumerState<MapView> {
           ),
         ),
       ),
+    );
+  }
+
+  void _listenProvider() {
+    final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
+    ref.listen(
+      mapViewModelProvider.select((MapState state) => state.storesByLocation),
+      (_, List<StoreByLocationModel> next) async {
+        await _mapController.clearOverlays();
+        final List<NMarker> markers = await _createMarkers();
+        await _mapController.addOverlayAll(markers.toSet());
+        await NaverMapUtil.setMyLocationOverlay(controller: _mapController);
+      },
+    );
+
+    ref.listen(
+      mapViewModelProvider.select((MapState state) => state.userStoreLists),
+      (_, List<UserStoreListModel> next) async {
+        await _mapController.clearOverlays();
+        final List<NMarker> markers = await _createMarkers();
+
+        await _mapController.addOverlayAll(markers.toSet());
+        await NaverMapUtil.setMyLocationOverlay(controller: _mapController);
+      },
+    );
+
+    ref.listen(
+      mapViewModelProvider.select((MapState e) => e.userStoresEnabled),
+      (_, bool next) {
+        final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
+        if (next) {
+          // TODO: 추후 실제 데이터 연결 예정
+          viewmodel.getUserStoreListAll(userUuid: '123');
+        } else {
+          viewmodel.getStoresByLocation();
+        }
+      },
+    );
+
+    ref.listen(
+      mapViewModelProvider.select(
+        (MapState state) => state.getStoreSummaryStatus,
+      ),
+      (_, Status next) async {
+        if (next.isSuccess) {
+          final MapState state = ref.read(mapViewModelProvider);
+          await _mapController.deleteOverlay(
+            NOverlayInfo(
+              type: NOverlayType.marker,
+              id: state.selectedMarker!.info.id,
+            ),
+          );
+
+          final NMarker newMarker = NMarker(
+            id: state.selectedMarker!.info.id,
+            position: state.selectedMarker!.position,
+            anchor: state.selectedMarker!.anchor,
+            size: const Size(60, 66),
+            icon: NOverlayImage.fromAssetImage(
+              Assets.image.markerSelected.path,
+            ),
+          );
+
+          await _mapController.addOverlay(newMarker);
+        }
+      },
+    );
+
+    ref.listen(
+      mapViewModelProvider.select(
+        (MapState state) => state.deleteUserStoreListStatus,
+      ),
+      (_, Status next) {
+        if (next.isSuccess) {
+          // TODO: 실제 useruuid 지정 필요
+          viewmodel.getUserStoreListAll(userUuid: '1234');
+        }
+      },
     );
   }
 
