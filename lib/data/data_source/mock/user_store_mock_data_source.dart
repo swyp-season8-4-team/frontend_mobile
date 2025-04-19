@@ -206,8 +206,8 @@ class UserStoreMockDataSource implements UserStoreRemoteDataSource {
   Future<void> updateUserStoreList({
     required int listId,
     required UpdateUserStoreListQueryParam query,
-  }) {
-    // TODO: implement updateUserStoreList
-    throw UnimplementedError();
+  }) async {
+    await Future<void>.delayed(const Duration(seconds: 2));
+    return;
   }
 }

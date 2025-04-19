@@ -10,7 +10,7 @@ import 'package:frontend_mobile/common/design_system/foundation/color/scale_colo
 import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
-import 'package:frontend_mobile/core/util/loading_overlay.dart';
+import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view_model.dart';
 import 'package:go_router/go_router.dart';

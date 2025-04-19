@@ -160,13 +160,19 @@ class _StoreListSheet extends ConsumerWidget {
                                 storeLength:
                                     userStoreList.storeData?.length ?? 0,
 
-                                // TODO: 옵션 기능은 추후 구현 예정
                                 optionMenus: <CustomOptionMenu>[
                                   CustomOptionMenu(
                                     svg: Assets.icon.editor.pencil1Line,
                                     text: '수정하기',
                                     onTap: () {
                                       viewmodel.invisibleAllOptionMenu();
+                                      context.pushNamed(
+                                        AppRoutes.updateUserStoreList.name,
+                                        pathParameters: <String, String>{
+                                          'listId':
+                                              userStoreList.listId.toString(),
+                                        },
+                                      );
                                     },
                                   ),
                                   CustomOptionMenu(

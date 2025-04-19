@@ -84,19 +84,18 @@ class _StoreCard extends ConsumerWidget {
                         padding: const EdgeInsets.only(top: 4, right: 4),
                         child: CustomOptionMenuDropdown(
                           optionMenus: <CustomOptionMenu>[
-                            CustomOptionMenu(
-                              svg: Assets.icon.editor.pencil1Line,
-                              text: '수정하기',
-                              onTap: () {},
-                            ),
+                            // TODO: 추후 추가 예정
+                            // CustomOptionMenu(
+                            //   svg: Assets.icon.editor.pencil1Line,
+                            //   text: '수정하기',
+                            //   onTap: () {},
+                            // ),
                             CustomOptionMenu(
                               svg: Assets.icon.system.closeCircleLine,
                               text: '삭제하기',
                               onTap: () {
-                                viewmodel.updateStoreOptionMenuVisible(
-                                  storeUuid: store.storeUuid,
-                                  isVisible: false,
-                                );
+                                viewmodel.invisibleAllStoreOptionMenu();
+
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
