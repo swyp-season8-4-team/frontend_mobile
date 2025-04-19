@@ -6,12 +6,14 @@ import 'package:frontend_mobile/data/data_source/remote/user_store_remote_data_s
 import 'package:frontend_mobile/data/entity/user_store/user_store_list_entity.dart';
 import 'package:frontend_mobile/data/mapper/user_store_mapper.dart';
 import 'package:frontend_mobile/data/query_param/user_store/add_user_store_list_query_param.dart';
+import 'package:frontend_mobile/data/query_param/user_store/update_user_store_list_query_param.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
 import 'package:frontend_mobile/domain/param/user_store/add_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/delete_store_from_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/delete_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/get_stores_by_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/get_user_store_list_all_params.dart';
+import 'package:frontend_mobile/domain/param/user_store/update_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/repository/user_store_repository.dart';
 
 final Provider<UserStoreRepository> userStoreRepositoryProvider =
@@ -89,6 +91,23 @@ class UserStoreRepositoryImpl implements UserStoreRepository {
     return await apiCall(
       api: () async {
         return await _api.deleteUserStoreList(listId: params.listId);
+      },
+    );
+  }
+
+  @override
+  Future<Result<void, CustomException>> updateUserStoreList({
+    required UpdateUserStoreListParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        return await _api.updateUserStoreList(
+          listId: params.listId,
+          query: UpdateUserStoreListQueryParam(
+            newName: params.newName,
+            newIconColorId: params.newIconColorId,
+          ),
+        );
       },
     );
   }
