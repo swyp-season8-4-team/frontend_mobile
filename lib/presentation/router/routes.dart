@@ -22,28 +22,88 @@ abstract class AppRoutes {
   // 지도 화면
   static const RouteInfo map = RouteInfo(name: '/map', path: '/map');
 
+  // 지도 > 가게 상세
+  static final RouteInfo storeDetail = RouteInfo(
+    name: '${map.name}/store/:id',
+    path: 'store/:id',
+  );
+
+  // 지도 > 가게 상세 > 길찾기
+  static final RouteInfo findPlaceByMap = RouteInfo(
+    name: '${storeDetail.name}/find-place-by-map',
+    path: 'find-place-by-map',
+  );
+
+  // 지도 > 검색 화면
+  static final RouteInfo searchStore = RouteInfo(
+    name: '${map.name}/search-store',
+    path: 'search-store',
+  );
+
   // 인증 > 비밀번호 찾기
   static final RouteInfo findPassword = RouteInfo(
     name: '${auth.name}/find_password',
     path: 'find_password',
   );
 
-  // 인증 > 비밀번호 찾기 > step1
+  /// 인증 > 비밀번호 찾기 > step1
   static final RouteInfo findPasswordStep1 = RouteInfo(
     name: '${findPassword.name}/step1',
     path: 'step1',
   );
 
-  // 인증 > 비밀번호 찾기 > step2
+  /// 인증 > 비밀번호 찾기 > step2
   static final RouteInfo findPasswordStep2 = RouteInfo(
     name: '${findPassword.name}/step2',
     path: 'step2',
   );
 
-  // 인증 > 비밀번호 찾기 > step3
+  /// 인증 > 비밀번호 찾기 > step3
   static final RouteInfo findPasswordStep3 = RouteInfo(
     name: '${findPassword.name}/step3',
     path: 'step3',
+  );
+
+  /// 인증 > 회원가입
+  static final RouteInfo signUp = RouteInfo(
+    name: '${auth.name}/sign_up',
+    path: 'sign_up',
+  );
+
+  /// 인증 > 회원가입 > step1
+  static final RouteInfo signUpStep1 = RouteInfo(
+    name: '${signUp.name}/step1',
+    path: 'step1',
+  );
+
+  /// 인증 > 회원가입 > step2
+  static final RouteInfo signUpStep2 = RouteInfo(
+    name: '${signUp.name}/step2',
+    path: 'step2',
+  );
+
+  /// 인증 > 회원가입 > step3
+  static final RouteInfo signUpStep3 = RouteInfo(
+    name: '${signUp.name}/step3',
+    path: 'step3',
+  );
+
+  /// 인증 > 회원가입 > step4
+  static final RouteInfo signUpStep4 = RouteInfo(
+    name: '${signUp.name}/step4',
+    path: 'step4',
+  );
+
+  /// 인증 > 회원가입 > step5
+  static final RouteInfo signUpStep5 = RouteInfo(
+    name: '${signUp.name}/step5',
+    path: 'step5',
+  );
+
+  /// 인증 > 회원가입 > step6
+  static final RouteInfo signUpStep6 = RouteInfo(
+    name: '${signUp.name}/step6',
+    path: 'step6',
   );
 
   /// 취향선택

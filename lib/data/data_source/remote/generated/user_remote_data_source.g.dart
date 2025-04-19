@@ -18,6 +18,36 @@ class _UserRemoteDataSource implements UserRemoteDataSource {
   final ParseErrorLogger? errorLogger;
 
   @override
+  Future<NicknameAvailabilityEntity> postNickname({
+    required PostNicknameRequestBody body,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<NicknameAvailabilityEntity>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/users/validate/nickname',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late NicknameAvailabilityEntity _value;
+    try {
+      _value = NicknameAvailabilityEntity.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<UserDetailEntity> getMe() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

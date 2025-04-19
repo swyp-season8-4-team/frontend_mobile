@@ -12,7 +12,7 @@ PopularSearchesEntity _$PopularSearchesEntityFromJson(
   lastUpdatedTime: DateTime.parse(json['lastUpdatedTime'] as String),
   searches:
       (json['searches'] as List<dynamic>?)
-          ?.map((e) => _PopularSearch.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => PopularSearch.fromJson(e as Map<String, dynamic>))
           .toList(),
 );
 
@@ -23,15 +23,15 @@ Map<String, dynamic> _$PopularSearchesEntityToJson(
   'searches': instance.searches,
 };
 
-_PopularSearch _$PopularSearchFromJson(Map<String, dynamic> json) =>
-    _PopularSearch(
+PopularSearch _$PopularSearchFromJson(Map<String, dynamic> json) =>
+    PopularSearch(
       keyword: json['keyword'] as String,
       searchCount: (json['searchCount'] as num).toInt(),
       rank: (json['rank'] as num).toInt(),
       difference: (json['difference'] as num).toInt(),
     );
 
-Map<String, dynamic> _$PopularSearchToJson(_PopularSearch instance) =>
+Map<String, dynamic> _$PopularSearchToJson(PopularSearch instance) =>
     <String, dynamic>{
       'keyword': instance.keyword,
       'searchCount': instance.searchCount,

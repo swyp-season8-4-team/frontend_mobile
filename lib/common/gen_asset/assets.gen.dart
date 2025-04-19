@@ -143,6 +143,18 @@ class $AssetImageGen {
   /// File path: asset/image/marker_1.png
   AssetGenImage get marker1 => const AssetGenImage('asset/image/marker_1.png');
 
+  /// File path: asset/image/marker_selected.png
+  AssetGenImage get markerSelected =>
+      const AssetGenImage('asset/image/marker_selected.png');
+
+  /// File path: asset/image/profile_boy.png
+  AssetGenImage get profileBoy =>
+      const AssetGenImage('asset/image/profile_boy.png');
+
+  /// File path: asset/image/profile_girl.png
+  AssetGenImage get profileGirl =>
+      const AssetGenImage('asset/image/profile_girl.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     bee,
@@ -152,6 +164,9 @@ class $AssetImageGen {
     logoBee,
     logoBeeInversion,
     marker1,
+    markerSelected,
+    profileBoy,
+    profileGirl,
   ];
 }
 
@@ -161,6 +176,14 @@ class $AssetIconArrowGen {
   /// File path: asset/icon/arrow/18_right_line.svg
   SvgGenImage get a18RightLine =>
       const SvgGenImage('asset/icon/arrow/18_right_line.svg');
+
+  /// File path: asset/icon/arrow/20x20_arrow_down_filled.svg
+  SvgGenImage get a20x20ArrowDownFilled =>
+      const SvgGenImage('asset/icon/arrow/20x20_arrow_down_filled.svg');
+
+  /// File path: asset/icon/arrow/20x20_arrow_up_filled.svg
+  SvgGenImage get a20x20ArrowUpFilled =>
+      const SvgGenImage('asset/icon/arrow/20x20_arrow_up_filled.svg');
 
   /// File path: asset/icon/arrow/arrow_down_line.svg
   SvgGenImage get arrowDownLine =>
@@ -204,6 +227,8 @@ class $AssetIconArrowGen {
   /// List of all assets
   List<SvgGenImage> get values => [
     a18RightLine,
+    a20x20ArrowDownFilled,
+    a20x20ArrowUpFilled,
     arrowDownLine,
     arrowLeftDownLine,
     arrowLeftLine,
@@ -595,6 +620,10 @@ class $AssetIconFileGen {
 class $AssetIconMapGen {
   const $AssetIconMapGen();
 
+  /// File path: asset/icon/map/14x14_address_line.svg
+  SvgGenImage get a14x14AddressLine =>
+      const SvgGenImage('asset/icon/map/14x14_address_line.svg');
+
   /// File path: asset/icon/map/22x30_marker_1.svg
   SvgGenImage get a22x30Marker1 =>
       const SvgGenImage('asset/icon/map/22x30_marker_1.svg');
@@ -628,6 +657,7 @@ class $AssetIconMapGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+    a14x14AddressLine,
     a22x30Marker1,
     a50CurrentLocation,
     a60x69SelectedMarker1,

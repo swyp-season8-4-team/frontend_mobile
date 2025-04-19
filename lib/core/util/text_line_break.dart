@@ -8,12 +8,15 @@ class TextLineBreak extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      children:
-          text
-              .split(' ')
-              .map((String word) => Text('$word ', style: style))
-              .toList(),
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Wrap(
+        children:
+            text
+                .split(' ')
+                .map((String word) => Text('$word ', style: style))
+                .toList(),
+      ),
     );
   }
 }

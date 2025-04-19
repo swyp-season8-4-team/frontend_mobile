@@ -1,3 +1,4 @@
+import 'package:dio/src/form_data.dart';
 import 'package:frontend_mobile/data/data_source/remote/auth_remote_data_source.dart';
 import 'package:frontend_mobile/data/entity/auth/local_login_entity.dart';
 import 'package:frontend_mobile/data/request_body/auth/local_login_request_body.dart';
@@ -43,5 +44,14 @@ class AuthMockDataSource implements AuthRemoteDataSource {
         preferenceSet: true,
       ),
     );
+  }
+
+  @override
+  Future<LocalLoginEntity> postSignUp({
+    required String emailToken,
+    required FormData formData,
+  }) {
+    // TODO: implement postSignUp
+    throw UnimplementedError();
   }
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step1.dart';
@@ -7,7 +7,16 @@ import 'package:frontend_mobile/presentation/find_password/view/find_password_st
 import 'package:frontend_mobile/presentation/home.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
 import 'package:frontend_mobile/presentation/map/map_view.dart';
+import 'package:frontend_mobile/presentation/map/search/search_store_view.dart';
+import 'package:frontend_mobile/presentation/map/store_detail/find_place_by_map_view.dart';
+import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step1.dart';
+import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step2.dart';
+import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step3.dart';
+import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step4.dart';
+import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step5.dart';
+import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step6.dart';
 import 'package:frontend_mobile/presentation/splash_view.dart';
 import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_start.dart';
 import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_step1.dart';
@@ -29,7 +38,7 @@ class AppRouter {
   final GoRouter _router = GoRouter(
     // TODO: 화면 플로우에 맞춰 initialLocation 수정 필요
     // 일단 splashView를 초기 location으로 적용
-    initialLocation: AppRoutes.splash.name,
+    initialLocation: AppRoutes.map.name,
     navigatorKey: rootNavigatorKey,
     routes: <RouteBase>[
       GoRoute(
@@ -100,6 +109,72 @@ class AppRouter {
               ),
             ],
           ),
+
+          /// 회원가입
+          GoRoute(
+            path: AppRoutes.signUp.path,
+            name: AppRoutes.signUp.name,
+            redirect: (_, __) => null,
+            routes: <RouteBase>[
+              /// step1
+              GoRoute(
+                path: AppRoutes.signUpStep1.path,
+                name: AppRoutes.signUpStep1.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const SignUpStep1();
+                },
+              ),
+
+              /// step2
+              GoRoute(
+                path: AppRoutes.signUpStep2.path,
+                name: AppRoutes.signUpStep2.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  final String email = state.extra as String;
+
+                  return SignUpStep2(email: email);
+                },
+              ),
+
+              /// step3
+              GoRoute(
+                path: AppRoutes.signUpStep3.path,
+                name: AppRoutes.signUpStep3.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const SignUpStep3();
+                },
+              ),
+
+              /// step4
+              GoRoute(
+                path: AppRoutes.signUpStep4.path,
+                name: AppRoutes.signUpStep4.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const SignUpStep4();
+                },
+              ),
+
+              /// step5
+              GoRoute(
+                path: AppRoutes.signUpStep5.path,
+                name: AppRoutes.signUpStep5.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  final bool isSelectedBoy = state.extra as bool;
+
+                  return SignUpStep5(isSelectedBoy: isSelectedBoy);
+                },
+              ),
+
+              /// step6
+              GoRoute(
+                path: AppRoutes.signUpStep6.path,
+                name: AppRoutes.signUpStep6.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const SignUpStep6();
+                },
+              ),
+            ],
+          ),
         ],
       ),
 
@@ -110,6 +185,39 @@ class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return const MapView();
         },
+        routes: <RouteBase>[
+          /// 지도 > 검섹
+          GoRoute(
+            path: AppRoutes.searchStore.path,
+            name: AppRoutes.searchStore.name,
+            builder:
+                (BuildContext context, GoRouterState state) =>
+                    const SearchStoreView(),
+          ),
+
+          /// 가게 정보 상세
+          GoRoute(
+            path: AppRoutes.storeDetail.path,
+            name: AppRoutes.storeDetail.name,
+            builder: (BuildContext context, GoRouterState state) {
+              final String? storeUuid = state.pathParameters['id'];
+              if (storeUuid == null) {
+                return const Scaffold();
+              }
+              return StoreDetailView(storeUuid: storeUuid);
+            },
+            routes: <RouteBase>[
+              /// 길찾기
+              GoRoute(
+                path: AppRoutes.findPlaceByMap.path,
+                name: AppRoutes.findPlaceByMap.name,
+                builder:
+                    (BuildContext context, GoRouterState state) =>
+                        const FindPlaceByMapView(),
+              ),
+            ],
+          ),
+        ],
       ),
 
       /// 취향선택
