@@ -18,6 +18,12 @@ class SearchStoreState with _$SearchStoreState {
     @Default(Status.initial) Status deleteRecentSearchAllStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel deleteRecentSearchAllException,
+
+    String? searchKeyword,
+    @Default(<StoreByLocationModel>[]) List<StoreByLocationModel> stores,
+    @Default(Status.initial) Status getStoresStatus,
+    @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
+    ExceptionModel getStoresException,
   }) = _SearchStoreState;
 
   const SearchStoreState._();
@@ -31,6 +37,7 @@ class SearchStoreState with _$SearchStoreState {
   bool get isLoading =>
       getPopularSearchesStatus.isLoading ||
       getRecentSearchesStatus.isLoading ||
+      getStoresStatus.isLoading ||
       deleteRecentSearchStatus.isLoading ||
       deleteRecentSearchAllStatus.isLoading;
 }

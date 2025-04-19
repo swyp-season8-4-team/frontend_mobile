@@ -34,6 +34,10 @@ mixin _$SearchStoreState {
   Status get deleteRecentSearchAllStatus => throw _privateConstructorUsedError;
   ExceptionModel get deleteRecentSearchAllException =>
       throw _privateConstructorUsedError;
+  String? get searchKeyword => throw _privateConstructorUsedError;
+  List<StoreByLocationModel> get stores => throw _privateConstructorUsedError;
+  Status get getStoresStatus => throw _privateConstructorUsedError;
+  ExceptionModel get getStoresException => throw _privateConstructorUsedError;
 
   /// Create a copy of SearchStoreState
   /// with the given fields replaced by the non-null parameter values.
@@ -61,6 +65,10 @@ abstract class $SearchStoreStateCopyWith<$Res> {
     ExceptionModel deleteRecentSearchException,
     Status deleteRecentSearchAllStatus,
     ExceptionModel deleteRecentSearchAllException,
+    String? searchKeyword,
+    List<StoreByLocationModel> stores,
+    Status getStoresStatus,
+    ExceptionModel getStoresException,
   });
 }
 
@@ -90,6 +98,10 @@ class _$SearchStoreStateCopyWithImpl<$Res, $Val extends SearchStoreState>
     Object? deleteRecentSearchException = null,
     Object? deleteRecentSearchAllStatus = null,
     Object? deleteRecentSearchAllException = null,
+    Object? searchKeyword = freezed,
+    Object? stores = null,
+    Object? getStoresStatus = null,
+    Object? getStoresException = null,
   }) {
     return _then(
       _value.copyWith(
@@ -148,6 +160,26 @@ class _$SearchStoreStateCopyWithImpl<$Res, $Val extends SearchStoreState>
                     ? _value.deleteRecentSearchAllException
                     : deleteRecentSearchAllException // ignore: cast_nullable_to_non_nullable
                         as ExceptionModel,
+            searchKeyword:
+                freezed == searchKeyword
+                    ? _value.searchKeyword
+                    : searchKeyword // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            stores:
+                null == stores
+                    ? _value.stores
+                    : stores // ignore: cast_nullable_to_non_nullable
+                        as List<StoreByLocationModel>,
+            getStoresStatus:
+                null == getStoresStatus
+                    ? _value.getStoresStatus
+                    : getStoresStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            getStoresException:
+                null == getStoresException
+                    ? _value.getStoresException
+                    : getStoresException // ignore: cast_nullable_to_non_nullable
+                        as ExceptionModel,
           )
           as $Val,
     );
@@ -175,6 +207,10 @@ abstract class _$$SearchStoreStateImplCopyWith<$Res>
     ExceptionModel deleteRecentSearchException,
     Status deleteRecentSearchAllStatus,
     ExceptionModel deleteRecentSearchAllException,
+    String? searchKeyword,
+    List<StoreByLocationModel> stores,
+    Status getStoresStatus,
+    ExceptionModel getStoresException,
   });
 }
 
@@ -203,6 +239,10 @@ class __$$SearchStoreStateImplCopyWithImpl<$Res>
     Object? deleteRecentSearchException = null,
     Object? deleteRecentSearchAllStatus = null,
     Object? deleteRecentSearchAllException = null,
+    Object? searchKeyword = freezed,
+    Object? stores = null,
+    Object? getStoresStatus = null,
+    Object? getStoresException = null,
   }) {
     return _then(
       _$SearchStoreStateImpl(
@@ -261,6 +301,26 @@ class __$$SearchStoreStateImplCopyWithImpl<$Res>
                 ? _value.deleteRecentSearchAllException
                 : deleteRecentSearchAllException // ignore: cast_nullable_to_non_nullable
                     as ExceptionModel,
+        searchKeyword:
+            freezed == searchKeyword
+                ? _value.searchKeyword
+                : searchKeyword // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        stores:
+            null == stores
+                ? _value._stores
+                : stores // ignore: cast_nullable_to_non_nullable
+                    as List<StoreByLocationModel>,
+        getStoresStatus:
+            null == getStoresStatus
+                ? _value.getStoresStatus
+                : getStoresStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        getStoresException:
+            null == getStoresException
+                ? _value.getStoresException
+                : getStoresException // ignore: cast_nullable_to_non_nullable
+                    as ExceptionModel,
       ),
     );
   }
@@ -301,7 +361,17 @@ class _$SearchStoreStateImpl extends _SearchStoreState {
       message: '',
       timestamp: '',
     ),
+    this.searchKeyword,
+    final List<StoreByLocationModel> stores = const <StoreByLocationModel>[],
+    this.getStoresStatus = Status.initial,
+    this.getStoresException = const ExceptionModel(
+      status: -1,
+      code: '',
+      message: '',
+      timestamp: '',
+    ),
   }) : _recentSearches = recentSearches,
+       _stores = stores,
        super._();
 
   @override
@@ -342,10 +412,27 @@ class _$SearchStoreStateImpl extends _SearchStoreState {
   @override
   @JsonKey()
   final ExceptionModel deleteRecentSearchAllException;
+  @override
+  final String? searchKeyword;
+  final List<StoreByLocationModel> _stores;
+  @override
+  @JsonKey()
+  List<StoreByLocationModel> get stores {
+    if (_stores is EqualUnmodifiableListView) return _stores;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_stores);
+  }
+
+  @override
+  @JsonKey()
+  final Status getStoresStatus;
+  @override
+  @JsonKey()
+  final ExceptionModel getStoresException;
 
   @override
   String toString() {
-    return 'SearchStoreState(isFirstPageLoading: $isFirstPageLoading, recentSearches: $recentSearches, getRecentSearchesStatus: $getRecentSearchesStatus, getRecentSearchesException: $getRecentSearchesException, popularSearches: $popularSearches, getPopularSearchesStatus: $getPopularSearchesStatus, getPopularSearchesException: $getPopularSearchesException, deleteRecentSearchStatus: $deleteRecentSearchStatus, deleteRecentSearchException: $deleteRecentSearchException, deleteRecentSearchAllStatus: $deleteRecentSearchAllStatus, deleteRecentSearchAllException: $deleteRecentSearchAllException)';
+    return 'SearchStoreState(isFirstPageLoading: $isFirstPageLoading, recentSearches: $recentSearches, getRecentSearchesStatus: $getRecentSearchesStatus, getRecentSearchesException: $getRecentSearchesException, popularSearches: $popularSearches, getPopularSearchesStatus: $getPopularSearchesStatus, getPopularSearchesException: $getPopularSearchesException, deleteRecentSearchStatus: $deleteRecentSearchStatus, deleteRecentSearchException: $deleteRecentSearchException, deleteRecentSearchAllStatus: $deleteRecentSearchAllStatus, deleteRecentSearchAllException: $deleteRecentSearchAllException, searchKeyword: $searchKeyword, stores: $stores, getStoresStatus: $getStoresStatus, getStoresException: $getStoresException)';
   }
 
   @override
@@ -405,7 +492,14 @@ class _$SearchStoreStateImpl extends _SearchStoreState {
                   deleteRecentSearchAllException,
                 ) ||
                 other.deleteRecentSearchAllException ==
-                    deleteRecentSearchAllException));
+                    deleteRecentSearchAllException) &&
+            (identical(other.searchKeyword, searchKeyword) ||
+                other.searchKeyword == searchKeyword) &&
+            const DeepCollectionEquality().equals(other._stores, _stores) &&
+            (identical(other.getStoresStatus, getStoresStatus) ||
+                other.getStoresStatus == getStoresStatus) &&
+            (identical(other.getStoresException, getStoresException) ||
+                other.getStoresException == getStoresException));
   }
 
   @override
@@ -422,6 +516,10 @@ class _$SearchStoreStateImpl extends _SearchStoreState {
     deleteRecentSearchException,
     deleteRecentSearchAllStatus,
     deleteRecentSearchAllException,
+    searchKeyword,
+    const DeepCollectionEquality().hash(_stores),
+    getStoresStatus,
+    getStoresException,
   );
 
   /// Create a copy of SearchStoreState
@@ -449,6 +547,10 @@ abstract class _SearchStoreState extends SearchStoreState {
     final ExceptionModel deleteRecentSearchException,
     final Status deleteRecentSearchAllStatus,
     final ExceptionModel deleteRecentSearchAllException,
+    final String? searchKeyword,
+    final List<StoreByLocationModel> stores,
+    final Status getStoresStatus,
+    final ExceptionModel getStoresException,
   }) = _$SearchStoreStateImpl;
   _SearchStoreState._() : super._();
 
@@ -474,6 +576,14 @@ abstract class _SearchStoreState extends SearchStoreState {
   Status get deleteRecentSearchAllStatus;
   @override
   ExceptionModel get deleteRecentSearchAllException;
+  @override
+  String? get searchKeyword;
+  @override
+  List<StoreByLocationModel> get stores;
+  @override
+  Status get getStoresStatus;
+  @override
+  ExceptionModel get getStoresException;
 
   /// Create a copy of SearchStoreState
   /// with the given fields replaced by the non-null parameter values.
