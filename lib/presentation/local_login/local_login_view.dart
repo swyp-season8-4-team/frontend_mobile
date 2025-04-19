@@ -154,26 +154,6 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
 
           /// 현재 로그인한 유저 정보
           ref.read(userViewModelProvider.notifier).getMe();
-
-          // TODO: 개발 하기 편하게 하려고 pushNamed 사용했고, 추후에 goNamed로 바꿀 예정
-          unawaited(context.pushNamed(AppRoutes.home.name));
-
-          // /// 로그인 유지가 활성화된 경우
-          // if (_keepLoggedIn) {
-          //   final TokenInfo tokenInfo = TokenInfo(
-          //     accessToken: next.data.accessToken,
-          //     refreshToken: next.data.refreshToken,
-          //     expiresIn: next.data.expiresIn,
-          //     email: _emailController.text,
-          //     password: _passwordController.text,
-          //   );
-
-          //   const FlutterSecureStorage storage = FlutterSecureStorage();
-          //   await storage.write(
-          //     key: Constant.tokenInfo,
-          //     value: TokenInfo.serialize(tokenInfo: tokenInfo),
-          //   );
-          // }
           break;
 
         case Status.failure:
@@ -215,8 +195,39 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
       }
     });
 
+    ref.listen(userViewModelProvider, (_, UserState next) {
+      switch (next.status) {
+        case Status.success:
+          context.goNamed(AppRoutes.myTasteChoiceStart.name);
+          // if (next.data.isPreferencesSet) {
+          //   context.goNamed(AppRoutes.map.name);
+          // } else {
+          //   context.goNamed(AppRoutes.myTasteChoiceStart.name);
+          // }
+
+          break;
+
+        case Status.failure:
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap: () => context.pop(),
+                ),
+              );
+            },
+          );
+          break;
+
+        default:
+      }
+    });
+
     return CustomLoadingOverlay(
-      isLoading: state.status == Status.loading,
+      isLoading: state.status.isLoading,
       child: Material(
         child: Align(
           child: Padding(
@@ -260,13 +271,6 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                   ),
                   const SizedBox(height: 12),
 
-                  FilledButton(
-                    onPressed: () {
-                      context.pushNamed(AppRoutes.myTasteChoiceStart.name);
-                    },
-                    child: const Text('내 취향 선택'),
-                  ),
-
                   /// TODO: 추후에 작업 진행
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -293,7 +297,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                         !_emailController.text.isEmail ||
                         _passwordController.text.length < 8 ||
                         !_passwordController.text.isPasswordValid ||
-                        state.status == Status.loading,
+                        state.status.isLoading,
                     onPressed: _onSubmit,
                   ),
                   // Container(
