@@ -156,6 +156,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
           ref.read(userViewModelProvider.notifier).getMe();
 
           // TODO: 개발 하기 편하게 하려고 pushNamed 사용했고, 추후에 goNamed로 바꿀 예정
+          // ignore: use_build_context_synchronously
           unawaited(context.pushNamed(AppRoutes.home.name));
 
           // /// 로그인 유지가 활성화된 경우
