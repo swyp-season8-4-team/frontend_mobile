@@ -6,7 +6,7 @@ import 'package:frontend_mobile/data/repository_impl/user_store_repository_impl.
 import 'package:frontend_mobile/domain/param/user_store/update_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/repository/user_store_repository.dart';
 
-final Provider<UpdateUserStoreListUsecase> updateUserStoreListUsecase =
+final Provider<UpdateUserStoreListUsecase> updateUserStoreListUsecaseProvider =
     Provider<UpdateUserStoreListUsecase>((Ref ref) {
       return UpdateUserStoreListUsecase(
         repository: ref.read(userStoreRepositoryProvider),
