@@ -1,9 +1,11 @@
 import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/data/entity/user_coupon/coupon_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/user_coupon/coupon_entity.dart';
+import 'package:frontend_mobile/data/entity/user_coupon/coupon_issue_status_entity.dart';
 import 'package:frontend_mobile/data/entity/user_coupon/coupon_usage_status_entity.dart';
 import 'package:frontend_mobile/data/request_body/user_coupon/issue_coupon_request_body.dart';
 import 'package:frontend_mobile/domain/model/user_coupon/coupon_detail_model.dart';
+import 'package:frontend_mobile/domain/model/user_coupon/coupon_issue_status_model.dart';
 import 'package:frontend_mobile/domain/model/user_coupon/coupon_model.dart';
 import 'package:frontend_mobile/domain/model/user_coupon/coupon_usage_status_model.dart';
 import 'package:frontend_mobile/domain/param/user_coupon/issue_coupon_params.dart';
@@ -32,6 +34,14 @@ extension CouponDetailEntityExt on UserCouponDetailEntity {
     storeUuid: storeUuid,
     couponUuid: couponUuid,
     expired: expired,
+  );
+}
+
+extension IssueStatusEntityExt on CouponIssueStatusEntity {
+  UserCouponIssueStatusModel toModel() => UserCouponIssueStatusModel(
+    couponId: couponId,
+    couponName: couponName,
+    issued: issued,
   );
 }
 

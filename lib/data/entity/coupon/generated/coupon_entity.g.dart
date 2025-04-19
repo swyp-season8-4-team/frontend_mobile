@@ -7,15 +7,6 @@ part of '../coupon_entity.dart';
 // **************************************************************************
 
 CouponEntity _$CouponEntityFromJson(Map<String, dynamic> json) => CouponEntity(
-  couponId: (json['couponId'] as num).toInt(),
-  couponUuid: json['couponUuid'] as String,
-  storeUuid: json['storeUuid'] as String,
-  name: json['name'] as String,
-  status: json['status'] as String,
-  target: json['target'] as String,
-  hasExposureDate: json['hasExposureDate'] as bool,
-  hasExpiryDate: json['hasExpiryDate'] as bool,
-  hasQuantity: json['hasQuantity'] as bool,
   couponType: CouponTypeEntity.fromJson(
     json['couponType'] as Map<String, dynamic>,
   ),
@@ -23,6 +14,13 @@ CouponEntity _$CouponEntityFromJson(Map<String, dynamic> json) => CouponEntity(
     json['condition'] as Map<String, dynamic>,
   ),
   createdAt: DateTime.parse(json['createdAt'] as String),
+  couponId: (json['couponId'] as num?)?.toInt() ?? -1,
+  couponUuid: json['couponUuid'] as String? ?? '',
+  storeUuid: json['storeUuid'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  status: json['status'] as String? ?? '',
+  target: json['target'] as String? ?? '',
+  hasExposureDate: json['hasExposureDate'] as bool? ?? false,
   exposureStartAt:
       json['exposureStartAt'] == null
           ? null
@@ -31,10 +29,12 @@ CouponEntity _$CouponEntityFromJson(Map<String, dynamic> json) => CouponEntity(
       json['exposureEndAt'] == null
           ? null
           : DateTime.parse(json['exposureEndAt'] as String),
+  hasExpiryDate: json['hasExpiryDate'] as bool? ?? false,
   expiryDate:
       json['expiryDate'] == null
           ? null
           : DateTime.parse(json['expiryDate'] as String),
+  hasQuantity: json['hasQuantity'] as bool? ?? false,
   quantity: (json['quantity'] as num?)?.toInt(),
 );
 

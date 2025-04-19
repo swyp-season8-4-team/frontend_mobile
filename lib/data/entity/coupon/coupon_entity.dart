@@ -5,24 +5,23 @@ part 'generated/coupon_entity.g.dart';
 @JsonSerializable()
 class CouponEntity {
   const CouponEntity({
-    required this.couponId,
-    required this.couponUuid,
-    required this.storeUuid,
-    required this.name,
-    required this.status,
-    required this.target,
-    required this.hasExposureDate,
-    required this.hasExpiryDate,
-    required this.hasQuantity,
     required this.couponType,
     required this.condition,
     required this.createdAt,
+    this.couponId = -1,
+    this.couponUuid = '',
+    this.storeUuid = '',
+    this.name = '',
+    this.status = '',
+    this.target = '',
+    this.hasExposureDate = false,
     this.exposureStartAt,
     this.exposureEndAt,
+    this.hasExpiryDate = false,
     this.expiryDate,
+    this.hasQuantity = false,
     this.quantity,
   });
-
   factory CouponEntity.fromJson(Map<String, dynamic> json) =>
       _$CouponEntityFromJson(json);
   final int couponId;
