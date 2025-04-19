@@ -4,7 +4,8 @@ import 'package:frontend_mobile/common/design_system/foundation/color/scale_colo
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
 class CustomMainTopBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomMainTopBar({super.key});
+  const CustomMainTopBar({required this.onSearchIconTap, super.key});
+  final VoidCallback onSearchIconTap;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class CustomMainTopBar extends StatelessWidget implements PreferredSizeWidget {
         leading: Assets.image.logo.image(),
         actions: TopBarIcon.toList(<Widget>[
           icon.notification(onTap: () {}, alert: true),
-          icon.search(onTap: () {}),
+          icon.search(onTap: onSearchIconTap),
         ]),
       ),
     );

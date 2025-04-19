@@ -37,7 +37,7 @@ abstract class NaverMapUtil {
     return (
       lat: nCameraPosition.target.latitude,
       lng: nCameraPosition.target.longitude,
-      radius: radiusDistance,
+      radius: radiusDistance * 1000,
     );
   }
 

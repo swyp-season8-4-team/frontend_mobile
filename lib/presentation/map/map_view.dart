@@ -18,8 +18,10 @@ import 'package:frontend_mobile/core/util/naver_map_util.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
 import 'package:frontend_mobile/presentation/map/map_view_model.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/widget/scaffold_with_navigation_bar.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:go_router/go_router.dart';
 
 part 'extension/map_view_extensions.dart';
 part 'extension/map_method_extensions.dart';
@@ -38,20 +40,29 @@ class _MapViewState extends ConsumerState<MapView> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Viewmodel을 통한 상태관리 필요
     final MapState state = ref.watch(mapViewModelProvider);
 
     ref.listen(
-      mapViewModelProvider.select((MapState state) => state.storesByLocation),
-      (_, List<StoreByLocationModel> next) async {
-        await _mapController.clearOverlays();
+      mapViewModelProvider.select(
+        (MapState state) => state.getStoresByLocationStatus,
+      ),
+      (_, Status next) async {
+        if (next.isSuccess) {
+          final MapState state = ref.read(mapViewModelProvider);
 
-        final List<NMarker> markers = await Future.wait(<Future<NMarker>>[
-          ...next.map((StoreByLocationModel e) => _storeToMarker(model: e)),
-        ]);
+          await _mapController.clearOverlays();
 
-        await _mapController.addOverlayAll(markers.toSet());
+          final List<NMarker> markers = await Future.wait(<Future<NMarker>>[
+            ...state.storesByLocation.map(
+              (StoreByLocationModel e) => _storeToMarker(model: e),
+            ),
+          ]);
 
-        await NaverMapUtil.setMyLocationOverlay(controller: _mapController);
+          await _mapController.addOverlayAll(markers.toSet());
+
+          await NaverMapUtil.setMyLocationOverlay(controller: _mapController);
+        }
       },
     );
 
@@ -89,7 +100,11 @@ class _MapViewState extends ConsumerState<MapView> {
           state.getAllPreferencesStatus.isLoading ||
           state.getStoresByLocationStatus.isLoading,
       child: ScaffoldWithNavigationBar(
-        appBar: const CustomMainTopBar(),
+        appBar: CustomMainTopBar(
+          onSearchIconTap: () {
+            context.pushNamed(AppRoutes.searchStore.name);
+          },
+        ),
         body: Stack(
           children: <Widget>[
             NaverMap(

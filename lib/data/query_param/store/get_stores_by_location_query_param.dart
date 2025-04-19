@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'generated/get_stores_by_location_query_param.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class GetStoresByLocationQueryParam {
   const GetStoresByLocationQueryParam({
     required this.latitude,

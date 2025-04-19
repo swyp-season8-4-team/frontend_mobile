@@ -13,8 +13,8 @@ class MapState with _$MapState {
     @Default(127.0495556) double lng,
     @Default(5) double radius,
     @Default(false) bool myPreferenceFilterSelected,
-    @Default(<int>[]) List<int> preferenceTagIds,
-    @Default('') String searchKeyword,
+    List<int>? preferenceTagIds,
+    String? searchKeyword,
     @Default(Status.loading) Status getStoresByLocationStatus,
     @Default(Status.loading) Status getMyPreferencesStoresByLocationStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
