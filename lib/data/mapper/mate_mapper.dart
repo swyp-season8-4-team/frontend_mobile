@@ -50,6 +50,12 @@ extension PlaceEntityExt on PlaceEntity {
 
 extension GetMateParamsExt on GetMateParams {
   GetMateQueryParam toQuery() {
-    return GetMateQueryParam(keyword: keyword, mateCategoryId: mateCategoryId);
+    return GetMateQueryParam(
+      from: from,
+      to: to,
+      keyword: keyword,
+      mateCategoryId: mateCategoryId,
+      recruit: recruit,
+    );
   }
 }
