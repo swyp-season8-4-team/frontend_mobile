@@ -169,7 +169,11 @@ class SearchStoreViewModel extends StateNotifier<SearchStoreState> {
 
   // 가게 검색
   // 서울시 강남구 기준(37.514575, 127.0495556)으로 반경 400키로 거리에 있는 가게 전체 조회
-  Future<SearchStoreState> getStores() async {
+  Future<SearchStoreState> getStores({String? popularKeyword}) async {
+    if (popularKeyword != null) {
+      updateSearchKeyword(searchKeyword: popularKeyword);
+    }
+
     state = state.copyWith(getStoresStatus: Status.loading);
 
     final Result<List<StoreByLocationModel>, CustomException> result =
