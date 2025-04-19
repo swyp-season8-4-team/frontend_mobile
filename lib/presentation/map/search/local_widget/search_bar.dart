@@ -1,10 +1,29 @@
 part of '../search_store_view.dart';
 
-class _SearchBar extends ConsumerWidget {
+class _SearchBar extends ConsumerStatefulWidget {
   const _SearchBar();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_SearchBar> createState() => _SearchBarState();
+}
+
+class _SearchBarState extends ConsumerState<_SearchBar> {
+  final TextEditingController _textEditingController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    ref.listen(
+      searchStoreViewModelProvider.select(
+        (SearchStoreState state) => state.getStoresStatus,
+      ),
+      (_, Status next) {
+        if (next.isSuccess) {
+          final SearchStoreState state = ref.read(searchStoreViewModelProvider);
+          _textEditingController.text = state.searchKeyword ?? '';
+        }
+      },
+    );
+
     final SearchStoreState state = ref.watch(searchStoreViewModelProvider);
     final SearchStoreViewModel viewmodel = ref.read(
       searchStoreViewModelProvider.notifier,
@@ -23,6 +42,7 @@ class _SearchBar extends ConsumerWidget {
                 viewmodel.updateSearchKeyword(searchKeyword: '');
               },
               onSubmitted: (String val) {},
+              controller: _textEditingController,
             ),
           ),
           const SizedBox(width: 10),
@@ -57,5 +77,11 @@ class _SearchBar extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 }

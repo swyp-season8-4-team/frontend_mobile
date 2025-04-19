@@ -10,7 +10,7 @@ class AuthMockDataSource implements AuthRemoteDataSource {
     required LocalLoginRequestBody body,
   }) {
     return Future<LocalLoginEntity>(
-      () => LocalLoginEntity(
+      () => const LocalLoginEntity(
         accessToken:
             'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZXNzZXJ0YmVlLmNvbSIsImlhdCI6MTc0Mzg1ODkzNywiZXhwIjoxNzQzODU5MTE3LCJqdGkiOiJlMDhhMzRmYy03NDYyLTRmYzgtYTI4Zi02YTkyY2Y2Nzc5N2MiLCJ0eXBlIjoiQUNDRVNTIiwic3ViIjoiODcyYjI4MWItZmQzOS00ZTg4LTlmMmYtMTIzNDQxM2YyZGUwIiwicm9sZXMiOlsiUk9MRV9VU0VSIl19.W3MMfgoo4UKqslrfTkMMSxO3fobkDfkteriX7ZMrU5o',
         refreshToken:
@@ -31,7 +31,7 @@ class AuthMockDataSource implements AuthRemoteDataSource {
     required LocalLoginRequestBody body,
   }) {
     return Future<LocalLoginEntity>(
-      () => LocalLoginEntity(
+      () => const LocalLoginEntity(
         accessToken:
             'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZXNzZXJ0YmVlLmNvbSIsImlhdCI6MTc0Mzg1ODkzNywiZXhwIjoxNzQzODU5MTE3LCJqdGkiOiJlMDhhMzRmYy03NDYyLTRmYzgtYTI4Zi02YTkyY2Y2Nzc5N2MiLCJ0eXBlIjoiQUNDRVNTIiwic3ViIjoiODcyYjI4MWItZmQzOS00ZTg4LTlmMmYtMTIzNDQxM2YyZGUwIiwicm9sZXMiOlsiUk9MRV9VU0VSIl19.W3MMfgoo4UKqslrfTkMMSxO3fobkDfkteriX7ZMrU5o',
         refreshToken:

@@ -157,7 +157,7 @@ class _SearchKeywordList extends ConsumerWidget {
   }
 }
 
-class _PopularSearches extends StatelessWidget {
+class _PopularSearches extends ConsumerWidget {
   const _PopularSearches({
     required this.startIndex,
     required this.popularSearchLength,
@@ -168,7 +168,7 @@ class _PopularSearches extends StatelessWidget {
   final List<PopularSearchModel> searches;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Expanded(
       child: Column(
         children: <Widget>[
@@ -180,12 +180,20 @@ class _PopularSearches extends StatelessWidget {
                 final PopularSearchModel popularSearch = searches[currentIndex];
                 return Padding(
                   padding: EdgeInsets.only(bottom: isLastItem ? 0 : 12),
-                  child: _PopularSearch(
-                    search: PopularSearchModel(
-                      keyword: popularSearch.keyword,
-                      searchCount: popularSearch.searchCount,
-                      rank: popularSearch.rank,
-                      difference: popularSearch.difference,
+                  child: GestureDetector(
+                    onTap: () {
+                      ref
+                          .read(searchStoreViewModelProvider.notifier)
+                          .getStores(popularKeyword: popularSearch.keyword);
+                    },
+                    behavior: HitTestBehavior.translucent,
+                    child: _PopularSearch(
+                      search: PopularSearchModel(
+                        keyword: popularSearch.keyword,
+                        searchCount: popularSearch.searchCount,
+                        rank: popularSearch.rank,
+                        difference: popularSearch.difference,
+                      ),
                     ),
                   ),
                 );

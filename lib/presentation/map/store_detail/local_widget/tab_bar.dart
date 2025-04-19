@@ -62,7 +62,8 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
             index: 1,
             count: thumbnailImageUrls.length,
           ),
-          _tab(context: context, label: '디저트메이트', index: 2),
+          // TODO: 추후 구현 예정
+          // _tab(context: context, label: '디저트메이트', index: 2),
         ],
       ),
     );
