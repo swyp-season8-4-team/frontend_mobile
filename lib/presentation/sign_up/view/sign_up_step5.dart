@@ -215,6 +215,10 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
                             onPressed: () {
                               ref
                                   .read(signUpViewModelProvider.notifier)
+                                  .resetPostSignUpWithProfileStatus();
+
+                              ref
+                                  .read(signUpViewModelProvider.notifier)
                                   .postNickname(
                                     params: PostNicknameParams(
                                       nickname: _nicknameController.text,
