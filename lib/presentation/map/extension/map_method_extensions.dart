@@ -141,12 +141,12 @@ extension MapViewMethodExt on _MapViewState {
 
       final UserStoreListModel? savedStoreList =
           _findUserStoreListModelByStoreUuid(
-            state.userStores,
+            state.userStoreLists,
             state.selectedMarker!.info.id,
           );
 
       final UserStoreModel? savedStore = _findUserStoreModelByStoreUuid(
-        state.userStores,
+        state.userStoreLists,
         state.selectedMarker!.info.id,
       );
 
@@ -226,7 +226,7 @@ extension MapViewMethodExt on _MapViewState {
 
     for (final StoreByLocationModel e in state.storesByLocation) {
       final UserStoreModel? savedStore = _findUserStoreModelByStoreUuid(
-        state.userStores,
+        state.userStoreLists,
         e.storeUuid,
       );
 
@@ -241,7 +241,7 @@ extension MapViewMethodExt on _MapViewState {
             userStoreMode: state.userStoresEnabled,
             backgroundColor:
                 _findUserStoreListModelByStoreUuid(
-                  state.userStores,
+                  state.userStoreLists,
                   e.storeUuid,
                 )?.iconColor.color,
           ),
@@ -253,7 +253,7 @@ extension MapViewMethodExt on _MapViewState {
     final List<Future<NMarker>> savedMarkers = <Future<NMarker>>[];
 
     if (state.userStoresEnabled) {
-      for (final UserStoreListModel e in state.userStores) {
+      for (final UserStoreListModel e in state.userStoreLists) {
         final UserStoreModel? savedStore =
             e.storeData?.isNotEmpty == true ? e.storeData![0] : null;
 

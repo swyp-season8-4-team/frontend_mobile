@@ -101,7 +101,7 @@ class _MapViewState extends ConsumerState<MapView> {
     );
 
     ref.listen(
-      mapViewModelProvider.select((MapState state) => state.userStores),
+      mapViewModelProvider.select((MapState state) => state.userStoreLists),
       (_, List<UserStoreListModel> next) async {
         await _mapController.clearOverlays();
         final List<NMarker> markers = await _createMarkers();

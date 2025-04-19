@@ -63,7 +63,7 @@ class _StoresByUserStoreListViewState
 
     final UserStoreListModel storeList = ref
         .watch(mapViewModelProvider)
-        .userStores
+        .userStoreLists
         .firstWhere((UserStoreListModel e) => e.listId == widget.listId);
 
     final StoresByUserStoreListState state = ref.watch(

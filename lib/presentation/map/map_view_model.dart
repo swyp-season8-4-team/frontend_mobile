@@ -15,11 +15,13 @@ import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.da
 import 'package:frontend_mobile/domain/param/store/get_my_preferences_stores_by_location_params.dart';
 import 'package:frontend_mobile/domain/param/store/get_store_summary_params.dart';
 import 'package:frontend_mobile/domain/param/store/get_stores_by_location_params.dart';
+import 'package:frontend_mobile/domain/param/user_store/delete_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/get_user_store_list_all_params.dart';
 import 'package:frontend_mobile/domain/usecase/preference/get_all_preferences_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/store/get_my_preferences_stores_by_location_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/store/get_store_summary_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/store/get_stores_by_location_usecase.dart';
+import 'package:frontend_mobile/domain/usecase/user_store/delete_user_store_list_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/user_store/get_user_store_list_all_usecase.dart';
 
 part 'map_state.dart';
@@ -266,13 +268,46 @@ class MapViewModel extends StateNotifier<MapState> {
       success: (Success<List<UserStoreListModel>, CustomException> success) {
         state = state.copyWith(
           getUserStoreListAllStatus: Status.success,
-          userStores: success.data,
+          userStoreLists: success.data,
+          userStoreListOptionMenuVisible:
+              success.data
+                  .map(
+                    (UserStoreListModel e) => (
+                      listId: e.listId,
+                      isOptionMenuVisible: false,
+                    ),
+                  )
+                  .toList(),
         );
       },
       failure: (Failure<List<UserStoreListModel>, CustomException> failure) {
         state = state.copyWith(
           getUserStoreListAllStatus: Status.failure,
           getUserStoreListAllException: failure.exception.model,
+        );
+      },
+    );
+
+    return state;
+  }
+
+  // 저장 리스트 삭제
+  Future<MapState> deleteUserStoreList({required int listId}) async {
+    state = state.copyWith(deleteUserStoreListStatus: Status.loading);
+
+    final Result<void, CustomException> result = await Usecase.execute(
+      usecase: _ref.read(deleteUserStoreListUsecaseProvider),
+      params: DeleteUserStoreListParams(listId: listId),
+    );
+
+    result.map(
+      success: (Success<void, CustomException> success) {
+        state = state.copyWith(deleteUserStoreListStatus: Status.success);
+      },
+      failure: (Failure<void, CustomException> failure) {
+        state = state.copyWith(
+          deleteUserStoreListStatus: Status.failure,
+          deleteUserStoreListException: failure.exception.model,
         );
       },
     );

@@ -76,13 +76,13 @@ class _StoreListSheet extends ConsumerWidget {
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            '${state.userStores.length}',
+                            '${state.userStoreLists.length}',
                             style: textTheme.titleMedium?.copyWith(
                               color: ScaleColorConfig.success50,
                             ),
                           ),
                           const Spacer(),
-                          if (state.userStores.isNotEmpty)
+                          if (state.userStoreLists.isNotEmpty)
                             CustomOutlineButton.xSmall(
                               label: '새 리스트 추가',
                               onPressed: () async {
@@ -100,7 +100,7 @@ class _StoreListSheet extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  if (state.userStores.isEmpty)
+                  if (state.userStoreLists.isEmpty)
                     SliverToBoxAdapter(
                       child: Padding(
                         padding: const EdgeInsets.only(top: 74),
@@ -138,7 +138,7 @@ class _StoreListSheet extends ConsumerWidget {
                         int index,
                       ) {
                         final UserStoreListModel userStoreList =
-                            state.userStores[index];
+                            state.userStoreLists[index];
                         return Column(
                           children: <Widget>[
                             Padding(
@@ -168,7 +168,7 @@ class _StoreListSheet extends ConsumerWidget {
                             const Divider(color: ScaleColorConfig.neutral50),
                           ],
                         );
-                      }, childCount: state.userStores.length),
+                      }, childCount: state.userStoreLists.length),
                     ),
                 ],
               ),

@@ -8,7 +8,7 @@ class _Failure extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final UserStoreListModel storeList = ref
         .watch(mapViewModelProvider)
-        .userStores
+        .userStoreLists
         .firstWhere((UserStoreListModel e) => e.listId == listId);
 
     final StoresByUserStoreListViewModel viewmodel = ref.read(
