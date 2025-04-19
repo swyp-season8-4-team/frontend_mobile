@@ -3,8 +3,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'generated/coupon_entity.g.dart';
 
 @JsonSerializable()
-class CouponEntity {
-  const CouponEntity({
+class UserCouponEntity {
+  const UserCouponEntity({
     required this.userCouponId,
     required this.couponName,
     required this.couponCode,
@@ -14,8 +14,9 @@ class CouponEntity {
     this.used,
   });
 
-  factory CouponEntity.fromJson(Map<String, dynamic> json) =>
-      _$CouponEntityFromJson(json);
+  factory UserCouponEntity.fromJson(Map<String, dynamic> json) =>
+      _$UserCouponEntityFromJson(json);
+
   final int userCouponId;
   final String couponName;
   final String couponCode;

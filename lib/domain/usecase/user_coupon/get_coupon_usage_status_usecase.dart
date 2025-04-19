@@ -17,13 +17,13 @@ getCouponUsageStatusUsecaseProvider = Provider<GetCouponUsageStatusUsecase>((
 });
 
 class GetCouponUsageStatusUsecase
-    implements Usecase<CouponUsageStatusModel, NoParams> {
+    implements Usecase<UserCouponUsageStatusModel, NoParams> {
   const GetCouponUsageStatusUsecase({required UserCouponRepository repository})
     : _repository = repository;
   final UserCouponRepository _repository;
 
   @override
-  Future<Result<CouponUsageStatusModel, CustomException>> call({
+  Future<Result<UserCouponUsageStatusModel, CustomException>> call({
     required NoParams params,
   }) async {
     return await _repository.getCouponUsageStatus(params: params);

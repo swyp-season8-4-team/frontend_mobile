@@ -9,6 +9,8 @@ import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
 import 'package:frontend_mobile/presentation/map/map_view.dart';
 import 'package:frontend_mobile/presentation/map/search/search_store_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/find_place_by_map_view.dart';
+import 'package:frontend_mobile/presentation/map/store_detail/notice/store_notice_detail_view.dart';
+import 'package:frontend_mobile/presentation/map/store_detail/notice/store_notice_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view.dart';
 import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/stores_by_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view.dart';
@@ -252,6 +254,38 @@ class AppRouter {
                 builder:
                     (BuildContext context, GoRouterState state) =>
                         const FindPlaceByMapView(),
+              ),
+
+              /// 모든 공지
+              GoRoute(
+                path: AppRoutes.storeNotice.path,
+                name: AppRoutes.storeNotice.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  final String? storeUuid = state.pathParameters['id'];
+                  if (storeUuid == null) {
+                    return const Scaffold();
+                  }
+
+                  return StoreNoticeView(storeUuid: storeUuid);
+                },
+                routes: <RouteBase>[
+                  /// 공지 상세
+                  GoRoute(
+                    path: AppRoutes.storeNoticeDetail.path,
+                    name: AppRoutes.storeNoticeDetail.name,
+                    builder: (BuildContext context, GoRouterState state) {
+                      final String? storeUuid = state.pathParameters['id'];
+                      final String? noticeId = state.pathParameters['noticeId'];
+                      if (storeUuid == null || noticeId == null) {
+                        return const Scaffold();
+                      }
+
+                      return StoreNoticeDetailView(
+                        noticeId: int.parse(noticeId),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),

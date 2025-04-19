@@ -48,7 +48,9 @@ class _Introduce extends ConsumerWidget {
                     vertical: 6,
                   ),
                   child: Text(
-                    DateFormat('yyyy.MM.dd').format(DateTime.now()),
+                    DateFormat('yyyy.MM.dd').format(
+                      storeDetail.descriptionUpdateTime ?? DateTime.now(),
+                    ),
                     style: textTheme.labelSmall?.copyWith(
                       color: ScaleColorConfig.neutral40,
                     ),
