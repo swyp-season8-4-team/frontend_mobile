@@ -8,7 +8,7 @@ import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dar
 import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_setting.dart';
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
-import 'package:frontend_mobile/core/resource/nickname.dart';
+import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/core/util/text_line_break.dart';
