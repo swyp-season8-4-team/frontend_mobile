@@ -34,6 +34,7 @@ class _MainAppState extends ConsumerState<MainApp> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       precacheImage(Assets.image.marker1.provider(), context);
       precacheImage(Assets.image.couponBedge.provider(), context);
+      precacheImage(Assets.image.flowerFilled.provider(), context);
     });
   }
 

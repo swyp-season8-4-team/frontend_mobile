@@ -10,6 +10,9 @@ import 'package:frontend_mobile/presentation/map/map_view.dart';
 import 'package:frontend_mobile/presentation/map/search/search_store_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/find_place_by_map_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view.dart';
+import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/stores_by_user_store_list_view.dart';
+import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view.dart';
+import 'package:frontend_mobile/presentation/map/user_store/update/update_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step1.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step2.dart';
@@ -186,7 +189,42 @@ class AppRouter {
           return const MapView();
         },
         routes: <RouteBase>[
-          /// 지도 > 검섹
+          /// 저장 리스트 수정
+          GoRoute(
+            path: AppRoutes.updateUserStoreList.path,
+            name: AppRoutes.updateUserStoreList.name,
+            builder: (BuildContext context, GoRouterState state) {
+              final String? listId = state.pathParameters['listId'];
+              if (listId == null) {
+                return const Scaffold();
+              }
+              return UpdateUserStoreListView(listId: int.parse(listId));
+            },
+          ),
+
+          /// 저장 리스트 내 가게 조회
+          GoRoute(
+            path: AppRoutes.storesByUserStoreList.path,
+            name: AppRoutes.storesByUserStoreList.name,
+            builder: (BuildContext context, GoRouterState state) {
+              final String? listId = state.pathParameters['listId'];
+              if (listId == null) {
+                return const Scaffold();
+              }
+              return StoresByUserStoreListView(listId: int.parse(listId));
+            },
+          ),
+
+          /// 지도 > 저장 리스트 생성
+          GoRoute(
+            path: AppRoutes.addUserStoreList.path,
+            name: AppRoutes.addUserStoreList.name,
+            builder:
+                (BuildContext context, GoRouterState state) =>
+                    const AddUserStoreListView(),
+          ),
+
+          /// 지도 > 검색
           GoRoute(
             path: AppRoutes.searchStore.path,
             name: AppRoutes.searchStore.name,

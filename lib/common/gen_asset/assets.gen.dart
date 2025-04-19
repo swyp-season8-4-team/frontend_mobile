@@ -130,6 +130,10 @@ class $AssetImageGen {
   AssetGenImage get currentLocation =>
       const AssetGenImage('asset/image/current_location.png');
 
+  /// File path: asset/image/flower_filled.png
+  AssetGenImage get flowerFilled =>
+      const AssetGenImage('asset/image/flower_filled.png');
+
   /// File path: asset/image/logo.png
   AssetGenImage get logo => const AssetGenImage('asset/image/logo.png');
 
@@ -160,6 +164,7 @@ class $AssetImageGen {
     bee,
     couponBedge,
     currentLocation,
+    flowerFilled,
     logo,
     logoBee,
     logoBeeInversion,
@@ -518,18 +523,6 @@ class $AssetIconEtcGen {
   SvgGenImage get a48RadioButtonUncheckedPressed =>
       const SvgGenImage('asset/icon/etc/48_radio_button_unchecked_pressed.svg');
 
-  /// File path: asset/icon/etc/flower_filled.svg
-  SvgGenImage get flowerFilled =>
-      const SvgGenImage('asset/icon/etc/flower_filled.svg');
-
-  /// File path: asset/icon/etc/flower_filled_selected.svg
-  SvgGenImage get flowerFilledSelected =>
-      const SvgGenImage('asset/icon/etc/flower_filled_selected.svg');
-
-  /// File path: asset/icon/etc/flower_line.svg
-  SvgGenImage get flowerLine =>
-      const SvgGenImage('asset/icon/etc/flower_line.svg');
-
   /// File path: asset/icon/etc/hexagon.svg
   SvgGenImage get hexagon => const SvgGenImage('asset/icon/etc/hexagon.svg');
 
@@ -575,9 +568,6 @@ class $AssetIconEtcGen {
     a48RadioButtonUnchecked,
     a48RadioButtonUncheckedDisabled,
     a48RadioButtonUncheckedPressed,
-    flowerFilled,
-    flowerFilledSelected,
-    flowerLine,
     hexagon,
     hexagon11,
     hexagon12,

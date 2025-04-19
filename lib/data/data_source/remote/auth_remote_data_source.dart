@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
 import 'package:frontend_mobile/data/entity/auth/local_login_entity.dart';
 import 'package:frontend_mobile/data/request_body/auth/local_login_request_body.dart';
-import 'package:frontend_mobile/data/request_body/auth/post_sign_up_with_profile_request_body.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'generated/auth_remote_data_source.g.dart';

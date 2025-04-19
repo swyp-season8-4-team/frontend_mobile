@@ -1,3 +1,6 @@
+import 'package:frontend_mobile/core/resource/constant.dart';
+import 'package:flutter/material.dart';
+
 extension StringValidationExt on String {
   bool get isEmail =>
       RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(this);
@@ -5,4 +8,16 @@ extension StringValidationExt on String {
   bool get isPasswordValid => RegExp(
     r'^(?=.*[a-z])(?=.*\d)(?=.*[!@#\$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$',
   ).hasMatch(this);
+}
+
+extension StoreListIconColorExt on StoreListIconColor {
+  Color get color {
+    return switch (id) {
+      1 => const Color(0xFFFFC803),
+      2 => const Color(0xFFFF8803),
+      3 => const Color(0xFF05D352),
+      4 => const Color(0xFF00C6D8),
+      _ => throw Exception(),
+    };
+  }
 }

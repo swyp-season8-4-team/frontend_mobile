@@ -1,3 +1,4 @@
+//ignore: implementation_imports
 import 'package:dio/src/form_data.dart';
 import 'package:frontend_mobile/data/data_source/remote/auth_remote_data_source.dart';
 import 'package:frontend_mobile/data/entity/auth/local_login_entity.dart';

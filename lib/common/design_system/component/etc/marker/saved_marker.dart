@@ -20,11 +20,10 @@ class CustomSavedMarker extends StatelessWidget {
       width: 32,
       height: 32,
       alignment: Alignment.center,
-      child: Assets.icon.etc.flowerLine.svg(
-        colorFilter: const ColorFilter.mode(
-          ScaleColorConfig.primary100,
-          BlendMode.srcIn,
-        ),
+      child: Assets.image.flowerFilled.image(
+        width: 24,
+        height: 24,
+        color: ScaleColorConfig.primary100,
       ),
     );
   }

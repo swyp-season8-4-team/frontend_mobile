@@ -85,7 +85,16 @@ extension MapViewWidgetExt on _MapViewState {
               },
             ),
           ),
-        CustomMapIconButton.saveStore(isSelected: true, onPressed: () {}),
+        CustomMapIconButton.saveStore(
+          isSelected: state.userStoresEnabled,
+          onPressed: () {
+            if (state.userStoresEnabled) {
+              viewmodel.updateUserStoreMode(userStoresEnabled: false);
+            } else {
+              viewmodel.updateUserStoreMode(userStoresEnabled: true);
+            }
+          },
+        ),
         const SizedBox(height: 10),
         CustomMapIconButton.myLocation(
           isSelected: false,
@@ -102,9 +111,11 @@ extension MapViewWidgetExt on _MapViewState {
     final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final double bottmNavigationBarHeight =
+        MediaQuery.of(context).padding.bottom + 80;
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.only(bottom: 16 + bottmNavigationBarHeight),
       child: GestureDetector(
         onTap: () async {
           final ({double lat, double lng, double radius}) queryOption =
@@ -139,6 +150,56 @@ extension MapViewWidgetExt on _MapViewState {
                 '현 위치에서 새로고침',
                 style: textTheme.labelLarge?.copyWith(
                   color: ScaleColorConfig.success50,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // 저장 리스트 목록 버튼 (찜한목록)
+  Widget _buildUserStoreListButton() {
+    final double bottmNavigationBarHeight =
+        MediaQuery.of(context).padding.bottom + 80;
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    return Padding(
+      padding: EdgeInsets.only(bottom: 16 + bottmNavigationBarHeight),
+      child: GestureDetector(
+        onTap: () async {
+          await _draggableScrollableController.animateTo(
+            _snapSize,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeIn,
+          );
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          decoration: BoxDecoration(
+            border: Border.all(color: colorScheme.outline),
+            boxShadow: ShadowConfig().level1,
+            borderRadius: BorderRadius.circular(99),
+            color: ScaleColorConfig.primary100,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Assets.icon.menu.more1Fill.svg(
+                width: 18,
+                height: 18,
+                colorFilter: const ColorFilter.mode(
+                  ScaleColorConfig.primary40,
+                  BlendMode.srcIn,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                '찜한목록',
+                style: textTheme.labelLarge?.copyWith(
+                  color: ScaleColorConfig.primary40,
                 ),
               ),
             ],
