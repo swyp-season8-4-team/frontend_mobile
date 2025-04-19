@@ -58,7 +58,7 @@ class TopBarIcon {
 
   /// 검색
   GestureDetector search({required VoidCallback? onTap}) =>
-      GestureDetector(onTap: () {}, child: Assets.icon.file.search1Line.svg());
+      GestureDetector(onTap: onTap, child: Assets.icon.file.search1Line.svg());
 
   /// 공유
   GestureDetector share({required VoidCallback? onTap}) =>
