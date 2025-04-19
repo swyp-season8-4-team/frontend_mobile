@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
@@ -28,10 +27,8 @@ class TopBarIcon {
   }
 
   /// 뒤로가기
-  GestureDetector leftLine({required VoidCallback? onTap}) => GestureDetector(
-    onTap: onTap,
-    child: SvgPicture.asset(Assets.icon.arrow.leftLine.path),
-  );
+  GestureDetector leftLine({required VoidCallback? onTap}) =>
+      GestureDetector(onTap: onTap, child: Assets.icon.arrow.leftLine.svg());
 
   /// 알림
   GestureDetector notification({
@@ -41,7 +38,7 @@ class TopBarIcon {
     onTap: onTap,
     child: Stack(
       children: <Widget>[
-        SvgPicture.asset(Assets.icon.media.notificationLine.path),
+        Assets.icon.media.notificationLine.svg(),
         if (alert)
           Positioned(
             top: 2,
@@ -60,20 +57,20 @@ class TopBarIcon {
   );
 
   /// 검색
-  GestureDetector search({required VoidCallback? onTap}) => GestureDetector(
-    onTap: onTap,
-    child: SvgPicture.asset(Assets.icon.file.search1Line.path),
-  );
+  GestureDetector search({required VoidCallback? onTap}) =>
+      GestureDetector(onTap: () {}, child: Assets.icon.file.search1Line.svg());
 
   /// 공유
-  GestureDetector share({required VoidCallback? onTap}) => GestureDetector(
+  GestureDetector share({required VoidCallback? onTap}) =>
+      GestureDetector(onTap: () {}, child: Assets.icon.system.share2Line.svg());
+
+  /// 북마크
+  GestureDetector bookMark({required VoidCallback? onTap}) => GestureDetector(
     onTap: () {},
-    child: SvgPicture.asset(Assets.icon.system.share2Line.path),
+    child: Assets.icon.editor.bookmarkLine.svg(),
   );
 
   /// 닫기
-  GestureDetector close({required VoidCallback? onTap}) => GestureDetector(
-    onTap: onTap,
-    child: SvgPicture.asset(Assets.icon.system.closeLine.path),
-  );
+  GestureDetector close({required VoidCallback? onTap}) =>
+      GestureDetector(onTap: onTap, child: Assets.icon.system.closeLine.svg());
 }

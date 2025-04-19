@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
+import 'package:frontend_mobile/presentation/dessert/dessert_board_view.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step1.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step2.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step3.dart';
@@ -8,10 +8,6 @@ import 'package:frontend_mobile/presentation/home.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
 import 'package:frontend_mobile/presentation/map/map_view.dart';
 import 'package:frontend_mobile/presentation/map/search/search_store_view.dart';
-import 'package:frontend_mobile/presentation/map/store_detail/find_place_by_map_view.dart';
-import 'package:frontend_mobile/presentation/map/store_detail/notice/store_notice_detail_view.dart';
-import 'package:frontend_mobile/presentation/map/store_detail/notice/store_notice_view.dart';
-import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view.dart';
 import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/stores_by_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/update/update_user_store_list_view.dart';
@@ -23,13 +19,6 @@ import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step4.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step5.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step6.dart';
 import 'package:frontend_mobile/presentation/splash_view.dart';
-import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_start.dart';
-import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_step1.dart';
-import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_step2.dart';
-import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_step3.dart';
-import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_step4.dart';
-import 'package:frontend_mobile/presentation/taste/result/view/result.dart';
-import 'package:frontend_mobile/presentation/taste/result/view/result_loading.dart';
 import 'package:go_router/go_router.dart';
 
 final Provider<AppRouter> appRouterProvider = Provider<AppRouter>((Ref ref) {
@@ -234,145 +223,21 @@ class AppRouter {
                 (BuildContext context, GoRouterState state) =>
                     const SearchStoreView(),
           ),
-
-          /// 가게 정보 상세
-          GoRoute(
-            path: AppRoutes.storeDetail.path,
-            name: AppRoutes.storeDetail.name,
-            builder: (BuildContext context, GoRouterState state) {
-              final String? storeUuid = state.pathParameters['id'];
-              if (storeUuid == null) {
-                return const Scaffold();
-              }
-              return StoreDetailView(storeUuid: storeUuid);
-            },
-            routes: <RouteBase>[
-              /// 길찾기
-              GoRoute(
-                path: AppRoutes.findPlaceByMap.path,
-                name: AppRoutes.findPlaceByMap.name,
-                builder:
-                    (BuildContext context, GoRouterState state) =>
-                        const FindPlaceByMapView(),
-              ),
-
-              /// 모든 공지
-              GoRoute(
-                path: AppRoutes.storeNotice.path,
-                name: AppRoutes.storeNotice.name,
-                builder: (BuildContext context, GoRouterState state) {
-                  final String? storeUuid = state.pathParameters['id'];
-                  if (storeUuid == null) {
-                    return const Scaffold();
-                  }
-
-                  return StoreNoticeView(storeUuid: storeUuid);
-                },
-                routes: <RouteBase>[
-                  /// 공지 상세
-                  GoRoute(
-                    path: AppRoutes.storeNoticeDetail.path,
-                    name: AppRoutes.storeNoticeDetail.name,
-                    builder: (BuildContext context, GoRouterState state) {
-                      final String? storeUuid = state.pathParameters['id'];
-                      final String? noticeId = state.pathParameters['noticeId'];
-                      if (storeUuid == null || noticeId == null) {
-                        return const Scaffold();
-                      }
-
-                      return StoreNoticeDetailView(
-                        noticeId: int.parse(noticeId),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
         ],
       ),
 
-      /// 취향선택
+      /// 디저트 메이트
       GoRoute(
-        path: AppRoutes.taste.path,
-        name: AppRoutes.taste.name,
+        path: AppRoutes.dessert.path,
+        name: AppRoutes.dessert.name,
         redirect: (_, __) => null,
         routes: <RouteBase>[
-          /// 내 취향 선택
+          /// 게시판
           GoRoute(
-            path: AppRoutes.myTasteChoice.path,
-            name: AppRoutes.myTasteChoice.name,
-            redirect: (_, __) => null,
-            routes: <RouteBase>[
-              /// 시작 페이지
-              GoRoute(
-                path: AppRoutes.myTasteChoiceStart.path,
-                name: AppRoutes.myTasteChoiceStart.name,
-                builder: (BuildContext context, GoRouterState state) {
-                  return const MyTasteChoiceStart();
-                },
-              ),
-
-              /// step1
-              GoRoute(
-                path: AppRoutes.myTasteChoiceStep1.path,
-                name: AppRoutes.myTasteChoiceStep1.name,
-                builder: (BuildContext context, GoRouterState state) {
-                  return const MyTasteChoiceStep1();
-                },
-              ),
-
-              /// step2
-              GoRoute(
-                path: AppRoutes.myTasteChoiceStep2.path,
-                name: AppRoutes.myTasteChoiceStep2.name,
-                builder: (BuildContext context, GoRouterState state) {
-                  return const MyTasteChoiceStep2();
-                },
-              ),
-
-              /// step3
-              GoRoute(
-                path: AppRoutes.myTasteChoiceStep3.path,
-                name: AppRoutes.myTasteChoiceStep3.name,
-                builder: (BuildContext context, GoRouterState state) {
-                  return const MyTasteChoiceStep3();
-                },
-              ),
-
-              /// step4
-              GoRoute(
-                path: AppRoutes.myTasteChoiceStep4.path,
-                name: AppRoutes.myTasteChoiceStep4.name,
-                builder: (BuildContext context, GoRouterState state) {
-                  return const MyTasteChoiceStep4();
-                },
-              ),
-            ],
-          ),
-
-          /// 결과 로딩 화면
-          GoRoute(
-            path: AppRoutes.tasteResultLoading.path,
-            name: AppRoutes.tasteResultLoading.name,
+            path: AppRoutes.dessertBoard.path,
+            name: AppRoutes.dessertBoard.name,
             builder: (BuildContext context, GoRouterState state) {
-              return const TasteResultLoading();
-            },
-          ),
-
-          /// 결과 화면
-          GoRoute(
-            path: AppRoutes.tasteResult.path,
-            name: AppRoutes.tasteResult.name,
-            builder: (BuildContext context, GoRouterState state) {
-              final Map<String, Object> object =
-                  state.extra as Map<String, Object>;
-
-              final String nickname = object['nickname'] as String;
-              final List<PreferenceModel> preferences =
-                  object['preferences'] as List<PreferenceModel>;
-
-              return TasteResult(nickname: nickname, preferences: preferences);
+              return const DessertBoard();
             },
           ),
         ],

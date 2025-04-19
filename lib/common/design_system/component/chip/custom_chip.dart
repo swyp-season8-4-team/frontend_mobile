@@ -7,6 +7,7 @@ class CustomChip extends StatelessWidget {
     required this.label,
     required this.onPressed,
     required this.side,
+    this.labelColor,
     this.trailing,
     super.key,
   });
@@ -17,6 +18,8 @@ class CustomChip extends StatelessWidget {
 
   /// border 스타일
   final BorderSide side;
+
+  final Color? labelColor;
 
   /// label 뒤에 오는 위젯
   /// ex. close 아이콘, 숫자 등
@@ -35,15 +38,17 @@ class CustomChip extends StatelessWidget {
       label: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(label),
+          Text(
+            label,
+            style: textTheme.labelLarge?.copyWith(
+              color: labelColor ?? ScaleColorConfig.primary20,
+            ),
+          ),
           if (trailing != null) ...<Widget>[
             const SizedBox(width: 4),
             trailing!,
           ],
         ],
-      ),
-      labelStyle: textTheme.labelLarge?.copyWith(
-        color: ScaleColorConfig.primary20,
       ),
       onPressed: onPressed,
       visualDensity: const VisualDensity(vertical: -4),
