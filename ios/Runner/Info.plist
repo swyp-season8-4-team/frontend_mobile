@@ -72,16 +72,16 @@
         </dict>
     </array>
     <key>NSUserTrackingUsageDescription</key>
-    <string>개인 맞춤형 광고를 게재하는 데 사용됩니다</string>
+    <string>개인 맞춤형 광고를 제공하기 위해 정보를 수집하려 합니다.</string>
     <key>ITSAppUsesNonExemptEncryption</key>
     <false/>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>This app required NSPhotoLibraryUsageDescription permission</string>
+    <string>프로필 이미지를 설정하기 위해 사진 접근 권한이 필요합니다.</string>
     <key>NSCameraUsageDescription</key>
-    <string>This app required NSCameraUsageDescription permission</string>
+    <string>프로필 이미지를 설정하기 위해 사진 접근 권한이 필요합니다.</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>This app needs permission to access location information to display your current location on the map.</string>
+    <string>사용자의 위치를 기반으로 가게 정보를 제공하기 위해 권한이 필요합니다.</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>This app needs permission to access location information to display your current location on the map.</string>
+    <string>사용자의 위치를 기반으로 가게 정보를 제공하기 위해 권한이 필요합니다.</string>
 </dict>
 </plist>

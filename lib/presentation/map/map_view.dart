@@ -146,7 +146,7 @@ class _MapViewState extends ConsumerState<MapView> {
                 child: NaverMap(
                   options: NaverMapViewOptions(
                     initialCameraPosition: NCameraPosition(
-                      // TODO: 첫 로딩 시 카메라의 위치를 임의로 강남구로 지정
+                      // 첫 로딩 시 카메라의 위치를 임의로 강남구로 지정
                       target: const NLatLng(37.514575, 127.0495556),
                       zoom: _zoom,
                     ),
@@ -273,7 +273,6 @@ class _MapViewState extends ConsumerState<MapView> {
       ),
       (_, Status next) {
         if (next.isSuccess) {
-          // TODO: 실제 useruuid 지정 필요
           final UserState userState = ref.read(userViewModelProvider);
           viewmodel.getUserStoreListAll(userUuid: userState.data.userUuid);
         }

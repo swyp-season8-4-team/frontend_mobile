@@ -2,24 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/component/chip/custom_chip.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 
-class CustomSuggestiveChip extends StatefulWidget {
+class CustomSuggestiveChip extends StatelessWidget {
   const CustomSuggestiveChip({
     required this.label,
     required this.onPressed,
+    required this.isSelected,
+    this.labelColor,
     this.number,
     super.key,
   });
 
   final String label;
   final VoidCallback? onPressed;
+  final bool isSelected;
+  final Color? labelColor;
   final int? number;
-
-  @override
-  State<CustomSuggestiveChip> createState() => _CustomSuggestiveChipState();
-}
-
-class _CustomSuggestiveChipState extends State<CustomSuggestiveChip> {
-  bool _isSelected = false;
 
   WidgetStateProperty<Color?> get _color =>
       WidgetStateProperty.resolveWith((Set<WidgetState> states) {
@@ -29,22 +26,12 @@ class _CustomSuggestiveChipState extends State<CustomSuggestiveChip> {
         }
 
         /// Selected
-        if (_isSelected) {
+        if (isSelected) {
           return ScaleColorConfig.primary90;
         }
 
         return ScaleColorConfig.primary100;
       });
-
-  void _onPressed() {
-    if (widget.onPressed != null) {
-      widget.onPressed!();
-    }
-
-    setState(() {
-      _isSelected = !_isSelected;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,18 +39,19 @@ class _CustomSuggestiveChipState extends State<CustomSuggestiveChip> {
 
     return CustomChip(
       color: _color,
-      label: widget.label,
-      onPressed: _onPressed,
+      label: label,
+      labelColor: labelColor,
+      onPressed: onPressed,
       side: BorderSide(
         color:
-            !_isSelected
+            !isSelected
                 ? ScaleColorConfig.neutral50
                 : ScaleColorConfig.primary70,
       ),
       trailing:
-          widget.number != null
+          number != null
               ? Text(
-                widget.number! >= 1000 ? '999+' : widget.number.toString(),
+                number! >= 1000 ? '999+' : number.toString(),
                 style: textTheme.labelMedium?.copyWith(
                   color: ScaleColorConfig.success40,
                 ),

@@ -11,16 +11,10 @@ class CustomProfilePhotoEdit extends StatelessWidget {
 
   Widget get _image {
     if (isGirl) {
-      return CustomProfilePhotoSize.girl(
-        size: CustomProfilePhotoSizeEnum.l,
-        onPressed: null,
-      );
+      return CustomProfilePhotoSize.girl(size: CustomProfilePhotoSizeEnum.l);
     }
 
-    return CustomProfilePhotoSize.boy(
-      size: CustomProfilePhotoSizeEnum.l,
-      onPressed: null,
-    );
+    return CustomProfilePhotoSize.boy(size: CustomProfilePhotoSizeEnum.l);
   }
 
   @override

@@ -186,4 +186,16 @@ abstract class AppRoutes {
     name: '${taste.name}/result',
     path: 'result',
   );
+
+  /// 디저트 메이트
+  static RouteInfo dessert = const RouteInfo(
+    name: '/dessert',
+    path: '/dessert',
+  );
+
+  /// 디저트 메이트 > 게시판
+  static RouteInfo dessertBoard = RouteInfo(
+    name: '${dessert.name}/board',
+    path: '/board',
+  );
 }

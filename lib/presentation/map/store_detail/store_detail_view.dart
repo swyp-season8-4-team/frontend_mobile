@@ -50,7 +50,7 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(() {
       setState(() {});
     });
@@ -119,7 +119,8 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
             children: const <Widget>[
               _Menus(),
               _DessertImages(),
-              Center(child: Text('디저트 메이트')),
+              // TODO: 추후 구현 에정
+              // Center(child: Text('디저트 메이트')),
             ],
           ),
         ),

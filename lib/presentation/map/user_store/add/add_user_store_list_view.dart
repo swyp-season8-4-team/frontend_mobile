@@ -207,8 +207,12 @@ class _AddUserStoreListViewState extends ConsumerState<AddUserStoreListView> {
                   onPressed:
                       state.listName?.isNotEmpty == true
                           ? () {
-                            // TODO: userUuid 값 수정 예정
-                            viewmodel.addUserStoreList(userUuid: '1234');
+                            final UserState userState = ref.read(
+                              userViewModelProvider,
+                            );
+                            viewmodel.addUserStoreList(
+                              userUuid: userState.data.userUuid,
+                            );
                           }
                           : null,
                 ),

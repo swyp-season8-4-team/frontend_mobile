@@ -527,6 +527,14 @@ class $AssetIconEtcGen {
   SvgGenImage get a48RadioButtonUncheckedPressed =>
       const SvgGenImage('asset/icon/etc/48_radio_button_unchecked_pressed.svg');
 
+  /// File path: asset/icon/etc/bookmark_selected.svg
+  SvgGenImage get bookmarkSelected =>
+      const SvgGenImage('asset/icon/etc/bookmark_selected.svg');
+
+  /// File path: asset/icon/etc/bookmark_unselected.svg
+  SvgGenImage get bookmarkUnselected =>
+      const SvgGenImage('asset/icon/etc/bookmark_unselected.svg');
+
   /// File path: asset/icon/etc/hexagon.svg
   SvgGenImage get hexagon => const SvgGenImage('asset/icon/etc/hexagon.svg');
 
@@ -572,6 +580,8 @@ class $AssetIconEtcGen {
     a48RadioButtonUnchecked,
     a48RadioButtonUncheckedDisabled,
     a48RadioButtonUncheckedPressed,
+    bookmarkSelected,
+    bookmarkUnselected,
     hexagon,
     hexagon11,
     hexagon12,
@@ -590,6 +600,10 @@ class $AssetIconFileGen {
   SvgGenImage get link2Line =>
       const SvgGenImage('asset/icon/file/link_2_line.svg');
 
+  /// File path: asset/icon/file/no_image_status.svg
+  SvgGenImage get noImageStatus =>
+      const SvgGenImage('asset/icon/file/no_image_status.svg');
+
   /// File path: asset/icon/file/pic_line.svg
   SvgGenImage get picLine => const SvgGenImage('asset/icon/file/pic_line.svg');
 
@@ -605,6 +619,7 @@ class $AssetIconFileGen {
   List<SvgGenImage> get values => [
     download2Line,
     link2Line,
+    noImageStatus,
     picLine,
     search1Line,
     upload2Line,

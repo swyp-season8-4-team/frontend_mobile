@@ -198,12 +198,11 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
     ref.listen(userViewModelProvider, (_, UserState next) {
       switch (next.status) {
         case Status.success:
-          context.goNamed(AppRoutes.myTasteChoiceStart.name);
-          // if (next.data.isPreferencesSet) {
-          //   context.goNamed(AppRoutes.map.name);
-          // } else {
-          //   context.goNamed(AppRoutes.myTasteChoiceStart.name);
-          // }
+          if (next.data.isPreferencesSet) {
+            context.goNamed(AppRoutes.map.name);
+          } else {
+            context.goNamed(AppRoutes.myTasteChoiceStart.name);
+          }
 
           break;
 

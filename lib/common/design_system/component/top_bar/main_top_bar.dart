@@ -19,7 +19,8 @@ class CustomMainTopBar extends StatelessWidget implements PreferredSizeWidget {
         leadingWidth: 86,
         leading: Assets.image.logo.image(),
         actions: TopBarIcon.toList(<Widget>[
-          icon.notification(onTap: () {}, alert: true),
+          // TODO: 아직 알림 기능이 없어서 임시적으로 주석처리
+          // icon.notification(onTap: () {}, alert: true),
           icon.search(onTap: onSearchIconTap),
         ]),
       ),

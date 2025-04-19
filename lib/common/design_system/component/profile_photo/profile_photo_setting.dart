@@ -41,8 +41,8 @@ class _CustomProfilePhotoSettingState extends State<CustomProfilePhotoSetting> {
     }
 
     return widget.isGirl
-        ? CustomProfilePhotoSize.girl(onPressed: null)
-        : CustomProfilePhotoSize.boy(onPressed: null);
+        ? CustomProfilePhotoSize.girl()
+        : CustomProfilePhotoSize.boy();
   }
 
   Future<void> _pickAndCropImage({required BuildContext context}) async {
