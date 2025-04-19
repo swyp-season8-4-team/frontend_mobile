@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/dessert_mate_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/outline_button.dart';
 import 'package:frontend_mobile/common/design_system/component/chip/floating_chip.dart';
+import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/map/map_icon_button.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/map/saved_store_list.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/marker/saved_marker.dart';
@@ -85,8 +86,8 @@ class _MapViewState extends ConsumerState<MapView> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Viewmodel을 통한 상태관리 필요
     final MapState state = ref.watch(mapViewModelProvider);
+    final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
 
     final TopBarIcon topBarIcon = TopBarIcon();
 
@@ -105,6 +106,7 @@ class _MapViewState extends ConsumerState<MapView> {
       (_, List<UserStoreListModel> next) async {
         await _mapController.clearOverlays();
         final List<NMarker> markers = await _createMarkers();
+
         await _mapController.addOverlayAll(markers.toSet());
         await NaverMapUtil.setMyLocationOverlay(controller: _mapController);
       },
@@ -152,103 +154,121 @@ class _MapViewState extends ConsumerState<MapView> {
       },
     );
 
-    return CustomLoadingOverlay(
-      isLoading:
-          state.getAllPreferencesStatus.isLoading ||
-          state.getStoresByLocationStatus.isLoading ||
-          state.getUserStoreListAllStatus.isLoading,
-      child: Scaffold(
-        appBar:
-            _isStoreListAppbarVisible
-                ? CustomSubTopBar(
-                  title: '찜한 가게',
-                  primary: false,
-                  leading: topBarIcon.leftLine(
-                    onTap: () {
-                      _draggableScrollableController.animateTo(
-                        0,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeIn,
-                      );
-                    },
-                  ),
-                  actions: <Widget>[
-                    topBarIcon.close(
+    ref.listen(
+      mapViewModelProvider.select(
+        (MapState state) => state.deleteUserStoreListStatus,
+      ),
+      (_, Status next) {
+        if (next.isSuccess) {
+          // TODO: 실제 useruuid 지정 필요
+          viewmodel.getUserStoreListAll(userUuid: '1234');
+        }
+      },
+    );
+
+    return GestureDetector(
+      onTap: () {
+        viewmodel.invisibleAllOptionMenu();
+      },
+      child: CustomLoadingOverlay(
+        isLoading:
+            state.getAllPreferencesStatus.isLoading ||
+            state.getStoresByLocationStatus.isLoading ||
+            state.getUserStoreListAllStatus.isLoading ||
+            state.deleteUserStoreListStatus.isLoading,
+        child: Scaffold(
+          appBar:
+              _isStoreListAppbarVisible
+                  ? CustomSubTopBar(
+                    title: '찜한 가게',
+                    primary: false,
+                    leading: topBarIcon.leftLine(
                       onTap: () {
                         _draggableScrollableController.animateTo(
-                          _snapSize,
+                          0,
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeIn,
                         );
                       },
                     ),
-                  ],
-                )
-                : CustomMainTopBar(
-                  onSearchIconTap: () {
-                    context.pushNamed(AppRoutes.searchStore.name);
+                    actions: <Widget>[
+                      topBarIcon.close(
+                        onTap: () {
+                          _draggableScrollableController.animateTo(
+                            _snapSize,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeIn,
+                          );
+                        },
+                      ),
+                    ],
+                  )
+                  : CustomMainTopBar(
+                    onSearchIconTap: () {
+                      context.pushNamed(AppRoutes.searchStore.name);
+                    },
+                  ),
+          body: Stack(
+            children: <Widget>[
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 80 + MediaQuery.of(context).padding.bottom,
+                child: NaverMap(
+                  options: NaverMapViewOptions(
+                    initialCameraPosition: NCameraPosition(
+                      // TODO: 첫 로딩 시 카메라의 위치를 임의로 강남구로 지정
+                      target: const NLatLng(37.514575, 127.0495556),
+                      zoom: _zoom,
+                    ),
+                  ),
+                  onMapReady: (NaverMapController controller) async {
+                    _mapController = controller;
+
+                    await _goToCurrentLocation();
+
+                    await NaverMapUtil.setMyLocationOverlay(
+                      controller: _mapController,
+                    );
+
+                    setState(() {});
+                  },
+                  onMapTapped: (_, _) {
+                    _clearSelectedShop();
                   },
                 ),
-        body: Stack(
-          children: <Widget>[
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 80 + MediaQuery.of(context).padding.bottom,
-              child: NaverMap(
-                options: NaverMapViewOptions(
-                  initialCameraPosition: NCameraPosition(
-                    // TODO: 첫 로딩 시 카메라의 위치를 임의로 강남구로 지정
-                    target: const NLatLng(37.514575, 127.0495556),
-                    zoom: _zoom,
-                  ),
+              ),
+              Positioned(top: 16, left: 0, child: _buildFilterList()),
+              Positioned(
+                top: 56,
+                left: 16,
+                child: CustomDessertMateButton(onPressed: () {}),
+              ),
+              Positioned(top: 56, right: 16, child: _buildControlButtons()),
+              if (!state.userStoresEnabled)
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: _buildRefreshButton(),
+                )
+              else
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: _buildUserStoreListButton(),
                 ),
-                onMapReady: (NaverMapController controller) async {
-                  _mapController = controller;
-
-                  await _goToCurrentLocation();
-
-                  await NaverMapUtil.setMyLocationOverlay(
-                    controller: _mapController,
-                  );
-
-                  setState(() {});
-                },
-                onMapTapped: (_, _) {
-                  _clearSelectedShop();
-                },
+              const Positioned(
+                bottom: 0,
+                right: 0,
+                left: 0,
+                child: DesserbeeBottomNavigation(),
               ),
-            ),
-            Positioned(top: 16, left: 0, child: _buildFilterList()),
-            Positioned(
-              top: 56,
-              left: 16,
-              child: CustomDessertMateButton(onPressed: () {}),
-            ),
-            Positioned(top: 56, right: 16, child: _buildControlButtons()),
-            if (!state.userStoresEnabled)
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: _buildRefreshButton(),
-              )
-            else
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: _buildUserStoreListButton(),
+              _StoreListSheet(
+                draggableScrollableController: _draggableScrollableController,
+                snapSize: _snapSize,
+                isStoreListAppBarVisible: _isStoreListAppbarVisible,
               ),
-            const Positioned(
-              bottom: 0,
-              right: 0,
-              left: 0,
-              child: DesserbeeBottomNavigation(),
-            ),
-            _StoreListSheet(
-              draggableScrollableController: _draggableScrollableController,
-              snapSize: _snapSize,
-              isStoreListAppBarVisible: _isStoreListAppbarVisible,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -14,6 +14,7 @@ class _StoreListSheet extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final MapState state = ref.watch(mapViewModelProvider);
+    final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
 
     return Positioned.fill(
       child: DraggableScrollableSheet(
@@ -139,6 +140,14 @@ class _StoreListSheet extends ConsumerWidget {
                       ) {
                         final UserStoreListModel userStoreList =
                             state.userStoreLists[index];
+
+                        final ({bool isOptionMenuVisible, int listId})
+                        userStoreListOptionVisible = state
+                            .userStoreListOptionMenuVisible
+                            .firstWhere(
+                              (({bool isOptionMenuVisible, int listId}) e) =>
+                                  e.listId == userStoreList.listId,
+                            );
                         return Column(
                           children: <Widget>[
                             Padding(
@@ -152,9 +161,57 @@ class _StoreListSheet extends ConsumerWidget {
                                     userStoreList.storeData?.length ?? 0,
 
                                 // TODO: 옵션 기능은 추후 구현 예정
-                                optionMenus: const <CustomOptionMenu>[],
-                                optionMenusVisible: false,
-                                onOptionMenusTap: () {},
+                                optionMenus: <CustomOptionMenu>[
+                                  CustomOptionMenu(
+                                    svg: Assets.icon.editor.pencil1Line,
+                                    text: '수정하기',
+                                    onTap: () {
+                                      viewmodel.invisibleAllOptionMenu();
+                                    },
+                                  ),
+                                  CustomOptionMenu(
+                                    svg: Assets.icon.system.closeCircleLine,
+                                    text: '삭제하기',
+                                    onTap: () {
+                                      viewmodel.invisibleAllOptionMenu();
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return CustomDialog.basic(
+                                            title: '리스트를 삭제하시겠어요?',
+                                            description:
+                                                '삭제한 리스트의 가게는 더이상\n지도에 표시되지않습니다.',
+                                            primaryButton: CustomDialogButton(
+                                              text: '삭제하기',
+                                              warning: true,
+                                              onTap: () {
+                                                viewmodel.deleteUserStoreList(
+                                                  listId: userStoreList.listId,
+                                                );
+                                                context.pop();
+                                              },
+                                            ),
+                                            secondaryButton: CustomDialogButton(
+                                              text: '취소',
+                                              onTap: () {
+                                                context.pop();
+                                              },
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ],
+                                optionMenusVisible:
+                                    userStoreListOptionVisible
+                                        .isOptionMenuVisible,
+                                onOptionMenusTap: () {
+                                  viewmodel.updateStoreListOptionMenuVisible(
+                                    listId: userStoreListOptionVisible.listId,
+                                    isVisible: true,
+                                  );
+                                },
                                 onTap: () {
                                   context.pushNamed(
                                     AppRoutes.storesByUserStoreList.name,

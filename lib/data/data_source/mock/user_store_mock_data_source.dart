@@ -6,6 +6,71 @@ import 'package:frontend_mobile/data/query_param/user_store/add_user_store_list_
 import 'package:frontend_mobile/data/query_param/user_store/update_user_store_list_query_param.dart';
 
 class UserStoreMockDataSource implements UserStoreRemoteDataSource {
+  List<UserStoreListEntity> lists = <UserStoreListEntity>[
+    const UserStoreListEntity(
+      listId: 2423,
+      userUuid: '123',
+      listName: '리스트 이름 1',
+      iconColorId: 2,
+      storeCount: 12,
+      storeData: <UserStoreDataEntity>[
+        UserStoreDataEntity(
+          userUuid: '123',
+          storeUuid: '123',
+          listId: 2423,
+          listName: '리스트 이름 1',
+          storeName: '가게 이름 1',
+          storeAddress: '서울시 강남구 역삼동',
+          latitude: 37.514575,
+          longitude: 127.0495556,
+          imageUrls: <String>['https://picsum.photos/250?image=5'],
+        ),
+        UserStoreDataEntity(
+          userUuid: '123',
+          storeUuid: '456',
+          listId: 2423,
+          listName: '리스트 이름 1',
+          storeName: '가게 이름 2',
+          storeAddress: '서울시 강남구 역삼동',
+          latitude: 37.514575,
+          longitude: 127.0495556,
+          imageUrls: <String>['https://picsum.photos/250?image=5'],
+        ),
+      ],
+    ),
+    const UserStoreListEntity(
+      listId: 2434,
+      userUuid: '123',
+      listName: '리스트 이름 2',
+      iconColorId: 3,
+      storeCount: 12,
+      storeData: <UserStoreDataEntity>[
+        UserStoreDataEntity(
+          userUuid: '123',
+          storeUuid: '1234',
+          listId: 2434,
+          listName: '리스트 이름 1',
+          storeName: '가게 이름 1',
+          storeAddress: '서울시 강남구 역삼동',
+          latitude: 37.524575,
+          longitude: 127.0695556,
+          imageUrls: <String>['https://picsum.photos/250?image=5'],
+        ),
+        UserStoreDataEntity(
+          userUuid: '123',
+          storeUuid: '4565',
+          listId: 2423,
+          listName: '리스트 이름 1',
+          storeName: '가게 이름 2',
+          storeAddress: '서울시 강남구 역삼동',
+          latitude: 37.514575,
+          longitude: 127.0495556,
+          imageUrls: <String>['https://picsum.photos/250?image=5'],
+        ),
+      ],
+    ),
+  ];
+
   List<UserStoreDataEntity> stores = <UserStoreDataEntity>[
     const UserStoreDataEntity(
       userUuid: '123',
@@ -95,9 +160,9 @@ class UserStoreMockDataSource implements UserStoreRemoteDataSource {
   }
 
   @override
-  Future<void> deleteUserStoreList({required int listId}) {
-    // TODO: implement deleteUserStoreList
-    throw UnimplementedError();
+  Future<void> deleteUserStoreList({required int listId}) async {
+    await Future<void>.delayed(const Duration(seconds: 2));
+    lists = lists.where((UserStoreListEntity e) => e.listId != listId).toList();
   }
 
   @override
@@ -118,39 +183,7 @@ class UserStoreMockDataSource implements UserStoreRemoteDataSource {
   Future<List<UserStoreListEntity>> getUserStoreListAll({
     required String userUuid,
   }) async {
-    return <UserStoreListEntity>[
-      UserStoreListEntity(
-        listId: 2423,
-        userUuid: '123',
-        listName: '리스트 이름 1',
-        iconColorId: 2,
-        storeCount: 12,
-        storeData: <UserStoreDataEntity>[
-          UserStoreDataEntity(
-            userUuid: userUuid,
-            storeUuid: '123',
-            listId: 2423,
-            listName: '리스트 이름 1',
-            storeName: '가게 이름 1',
-            storeAddress: '서울시 강남구 역삼동',
-            latitude: 37.514575,
-            longitude: 127.0495556,
-            imageUrls: <String>['https://picsum.photos/250?image=5'],
-          ),
-          UserStoreDataEntity(
-            userUuid: userUuid,
-            storeUuid: '456',
-            listId: 2423,
-            listName: '리스트 이름 1',
-            storeName: '가게 이름 2',
-            storeAddress: '서울시 강남구 역삼동',
-            latitude: 37.514575,
-            longitude: 127.0495556,
-            imageUrls: <String>['https://picsum.photos/250?image=5'],
-          ),
-        ],
-      ),
-    ];
+    return lists;
   }
 
   @override

@@ -314,4 +314,37 @@ class MapViewModel extends StateNotifier<MapState> {
 
     return state;
   }
+
+  // 표시되고 있는 모든 옵션 메뉴들을 제거
+  void invisibleAllOptionMenu() {
+    state = state.copyWith(
+      userStoreListOptionMenuVisible:
+          state.userStoreListOptionMenuVisible
+              .map(
+                (({bool isOptionMenuVisible, int listId}) e) => (
+                  listId: e.listId,
+                  isOptionMenuVisible: false,
+                ),
+              )
+              .toList(),
+    );
+  }
+
+  // 특정 저장리스트의 옵션 메뉴 표시 여부 수정
+  void updateStoreListOptionMenuVisible({
+    required int listId,
+    required bool isVisible,
+  }) async {
+    state = state.copyWith(
+      userStoreListOptionMenuVisible:
+          state.userStoreListOptionMenuVisible
+              .map(
+                (({bool isOptionMenuVisible, int listId}) e) =>
+                    e.listId == listId
+                        ? (listId: listId, isOptionMenuVisible: isVisible)
+                        : e,
+              )
+              .toList(),
+    );
+  }
 }
