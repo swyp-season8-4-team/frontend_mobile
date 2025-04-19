@@ -102,10 +102,12 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
-                            storeSummary!.name,
-                            style: textTheme.titleMedium?.copyWith(
-                              color: ScaleColorConfig.primary20,
+                          Expanded(
+                            child: Text(
+                              storeSummary!.name,
+                              style: textTheme.titleMedium?.copyWith(
+                                color: ScaleColorConfig.primary20,
+                              ),
                             ),
                           ),
 
@@ -168,6 +170,7 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
                                     color: ScaleColorConfig.neutral30,
                                   ),
                                   overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
                                 ),
                                 const SizedBox(height: 8),
                                 Row(
@@ -175,12 +178,15 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
                                   children: <Widget>[
                                     Assets.icon.map.a14x14AddressLine.svg(),
                                     const SizedBox(width: 6),
-                                    Text(
-                                      storeSummary!.address,
-                                      style: textTheme.labelSmall?.copyWith(
-                                        color: ScaleColorConfig.neutral40,
+                                    Expanded(
+                                      child: Text(
+                                        storeSummary!.address,
+                                        style: textTheme.labelSmall?.copyWith(
+                                          color: ScaleColorConfig.neutral40,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
                                       ),
-                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ],
                                 ),
@@ -231,10 +237,14 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(width: 6),
-                                    Text(
-                                      storeSummary!.phone,
-                                      style: textTheme.labelSmall?.copyWith(
-                                        color: ScaleColorConfig.neutral40,
+                                    Expanded(
+                                      child: Text(
+                                        storeSummary!.phone,
+                                        style: textTheme.labelSmall?.copyWith(
+                                          color: ScaleColorConfig.neutral40,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
                                       ),
                                     ),
                                   ],
