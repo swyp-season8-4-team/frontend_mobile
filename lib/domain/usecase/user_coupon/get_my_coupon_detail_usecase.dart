@@ -15,13 +15,13 @@ final Provider<GetMyCouponDetailUsecase> getMyCouponDetailUsecaseProvider =
     });
 
 class GetMyCouponDetailUsecase
-    implements Usecase<CouponDetailModel, GetMyCouponDetailParams> {
+    implements Usecase<UserCouponDetailModel, GetMyCouponDetailParams> {
   const GetMyCouponDetailUsecase({required UserCouponRepository repository})
     : _repository = repository;
   final UserCouponRepository _repository;
 
   @override
-  Future<Result<CouponDetailModel, CustomException>> call({
+  Future<Result<UserCouponDetailModel, CustomException>> call({
     required GetMyCouponDetailParams params,
   }) async {
     return await _repository.getMyCouponDetail(params: params);

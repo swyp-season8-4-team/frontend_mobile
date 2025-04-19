@@ -12,15 +12,14 @@ abstract interface class UserCouponRepository {
     required IssueCouponParams params,
   });
 
-  Future<Result<List<CouponModel>, CustomException>> getMyCoupons({
+  Future<Result<List<UserCouponModel>, CustomException>> getMyCoupons({
     required NoParams params,
   });
 
-  Future<Result<CouponDetailModel, CustomException>> getMyCouponDetail({
+  Future<Result<UserCouponDetailModel, CustomException>> getMyCouponDetail({
     required GetMyCouponDetailParams params,
   });
 
-  Future<Result<CouponUsageStatusModel, CustomException>> getCouponUsageStatus({
-    required NoParams params,
-  });
+  Future<Result<UserCouponUsageStatusModel, CustomException>>
+  getCouponUsageStatus({required NoParams params});
 }

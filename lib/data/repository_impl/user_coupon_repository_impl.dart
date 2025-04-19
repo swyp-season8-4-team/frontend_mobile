@@ -37,24 +37,24 @@ class UserCouponRepositoryImpl implements UserCouponRepository {
   }
 
   @override
-  Future<Result<List<CouponModel>, CustomException>> getMyCoupons({
+  Future<Result<List<UserCouponModel>, CustomException>> getMyCoupons({
     required NoParams params,
   }) async {
     return await apiCall(
       api: () async {
-        final List<CouponEntity> result = await _api.getMyCoupons();
-        return result.map((CouponEntity e) => e.toModel()).toList();
+        final List<UserCouponEntity> result = await _api.getMyCoupons();
+        return result.map((UserCouponEntity e) => e.toModel()).toList();
       },
     );
   }
 
   @override
-  Future<Result<CouponDetailModel, CustomException>> getMyCouponDetail({
+  Future<Result<UserCouponDetailModel, CustomException>> getMyCouponDetail({
     required GetMyCouponDetailParams params,
   }) async {
     return await apiCall(
       api: () async {
-        final CouponDetailEntity result = await _api.getMyCouponDetail(
+        final UserCouponDetailEntity result = await _api.getMyCouponDetail(
           userCouponId: params.userCouponId,
         );
         return result.toModel();
@@ -63,12 +63,11 @@ class UserCouponRepositoryImpl implements UserCouponRepository {
   }
 
   @override
-  Future<Result<CouponUsageStatusModel, CustomException>> getCouponUsageStatus({
-    required NoParams params,
-  }) async {
+  Future<Result<UserCouponUsageStatusModel, CustomException>>
+  getCouponUsageStatus({required NoParams params}) async {
     return await apiCall(
       api: () async {
-        final CouponUsageStatusEntity result =
+        final UserCouponUsageStatusEntity result =
             await _api.getCouponUsageStatus();
         return result.toModel();
       },

@@ -25,15 +25,15 @@ abstract class UserCouponRemoteDataSource {
 
   /// 발급받은 쿠폰 목록 조회
   @GET('/api/users/coupons/my')
-  Future<List<CouponEntity>> getMyCoupons();
+  Future<List<UserCouponEntity>> getMyCoupons();
 
   /// 발급받은 쿠폰 상세 조회
   @GET('/api/users/coupons/my/{userCouponId}')
-  Future<CouponDetailEntity> getMyCouponDetail({
+  Future<UserCouponDetailEntity> getMyCouponDetail({
     @Path() required String userCouponId,
   });
 
   /// 쿠폰 사용 현황 조회
   @GET('/api/users/coupon/usage-status')
-  Future<CouponUsageStatusEntity> getCouponUsageStatus();
+  Future<UserCouponUsageStatusEntity> getCouponUsageStatus();
 }
