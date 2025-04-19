@@ -123,7 +123,7 @@ class TasteResult extends StatelessWidget {
                   CustomFillButton.large(
                     label: '메인으로',
                     onPressed: () {
-                      /// TODO: 어디론가 이동시켜야 함
+                      context.goNamed(AppRoutes.map.name);
                     },
                   ),
                   const SizedBox(height: 12),

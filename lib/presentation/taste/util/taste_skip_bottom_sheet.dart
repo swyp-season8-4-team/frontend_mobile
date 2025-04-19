@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/component/bottom_sheet/bottom_sheet.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
 
 void tasteSkipBottomSheet({
@@ -37,7 +38,11 @@ void tasteSkipBottomSheet({
     ),
     leftButton: BottomSheetButton(label: '취소', onPressed: () => context.pop()),
 
-    /// TODO: 어디로 이동할지 설정
-    rightButton: BottomSheetButton(label: '건너뛰기', onPressed: () {}),
+    rightButton: BottomSheetButton(
+      label: '건너뛰기',
+      onPressed: () {
+        context.goNamed(AppRoutes.map.name);
+      },
+    ),
   );
 }
