@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/floating_action_button.dart';
 import 'package:frontend_mobile/common/design_system/component/chip/suggestive_chip.dart';
 import 'package:frontend_mobile/common/design_system/component/navigation_bar/navigation_bar.dart';
-import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar.dart';
-import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar_right_item.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
@@ -27,7 +25,7 @@ class DessertBoard extends ConsumerStatefulWidget {
 
 class _DessertBoardState extends ConsumerState<DessertBoard> {
   final bool _floatingActionButtonDisabled = false;
-  bool _bookMarkSelected = false;
+  // bool _bookMarkSelected = false;
 
   bool _isRecruit = false;
   int? mateCategoryId;
@@ -61,7 +59,7 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
     WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {
       ref
           .read(dessertBoardViewModelProvider.notifier)
-          .getMate(params: GetMateParams(to: 20));
+          .getMate(params: GetMateParams(to: 100));
     });
   }
 
@@ -282,29 +280,30 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
                         final MateDetailModel mate = state.data.mates[index];
 
                         return DessertListCard(
-                          bookmarkSelected: _bookMarkSelected,
-                          onBookMarkTap: () {
-                            setState(() {
-                              _bookMarkSelected = !_bookMarkSelected;
-                            });
+                          bookmarkSelected: false,
+                          onBookMarkTap: () {},
+                          // onBookMarkTap: () {
+                          //   setState(() {
+                          //     _bookMarkSelected = !_bookMarkSelected;
+                          //   });
 
-                            toastManager.show(
-                              context: context,
-                              aboveBottomNavigation: true,
-                              toastWidget: CustomSnackBar(
-                                description:
-                                    _bookMarkSelected
-                                        ? '디저트 메이트 북마크가 완료되었습니다'
-                                        : '북마크가 해제되었습니다',
+                          //   toastManager.show(
+                          //     context: context,
+                          //     aboveBottomNavigation: true,
+                          //     toastWidget: CustomSnackBar(
+                          //       description:
+                          //           _bookMarkSelected
+                          //               ? '디저트 메이트 북마크가 완료되었습니다'
+                          //               : '북마크가 해제되었습니다',
 
-                                actionButton: SnackBarActionButton(
-                                  /// TODO: 확인 눌렀을 때 이동시켜야 함
-                                  onTap: () {},
-                                  label: '확인',
-                                ),
-                              ),
-                            );
-                          },
+                          //       actionButton: SnackBarActionButton(
+                          //         /// TODO: 확인 눌렀을 때 이동시켜야 함
+                          //         onTap: () {},
+                          //         label: '확인',
+                          //       ),
+                          //     ),
+                          //   );
+                          // },
                           onCardTap: () {},
                           mate: mate,
                         );
