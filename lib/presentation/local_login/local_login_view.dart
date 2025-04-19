@@ -10,7 +10,7 @@ import 'package:frontend_mobile/common/design_system/foundation/color/scale_colo
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
-import 'package:frontend_mobile/core/util/loading_overlay.dart';
+import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/presentation/global/login/login_view_model.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
@@ -152,6 +152,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
           //   );
           // }
           break;
+
         case Status.failure:
           switch (next.exception.code) {
             case 'A013':
@@ -161,12 +162,15 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                 _emailErrorText = next.exception.message;
               });
               break;
+
             case 'A014':
               setState(() {
                 isRealTimePasswordError = false;
                 _passwordError = true;
                 _passwordErrorText = next.exception.message;
               });
+              break;
+
             default:
               unawaited(
                 showDialog(
@@ -316,10 +320,11 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                         ),
                       ),
 
-                      /// TODO: 회원가입 구현해야 됨
                       CustomTextButton.underline(
                         label: '회원가입',
-                        onPressed: () {},
+                        onPressed: () {
+                          context.pushNamed(AppRoutes.signUpStep1.name);
+                        },
                       ),
                     ],
                   ),

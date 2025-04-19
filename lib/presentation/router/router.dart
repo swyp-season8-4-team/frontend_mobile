@@ -13,6 +13,12 @@ import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/store
 import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/update/update_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step1.dart';
+import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step2.dart';
+import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step3.dart';
+import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step4.dart';
+import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step5.dart';
+import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step6.dart';
 import 'package:frontend_mobile/presentation/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
@@ -94,6 +100,72 @@ class AppRouter {
                 name: AppRoutes.findPasswordStep3.name,
                 builder: (BuildContext context, GoRouterState state) {
                   return const FindPasswordStep3();
+                },
+              ),
+            ],
+          ),
+
+          /// 회원가입
+          GoRoute(
+            path: AppRoutes.signUp.path,
+            name: AppRoutes.signUp.name,
+            redirect: (_, __) => null,
+            routes: <RouteBase>[
+              /// step1
+              GoRoute(
+                path: AppRoutes.signUpStep1.path,
+                name: AppRoutes.signUpStep1.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const SignUpStep1();
+                },
+              ),
+
+              /// step2
+              GoRoute(
+                path: AppRoutes.signUpStep2.path,
+                name: AppRoutes.signUpStep2.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  final String email = state.extra as String;
+
+                  return SignUpStep2(email: email);
+                },
+              ),
+
+              /// step3
+              GoRoute(
+                path: AppRoutes.signUpStep3.path,
+                name: AppRoutes.signUpStep3.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const SignUpStep3();
+                },
+              ),
+
+              /// step4
+              GoRoute(
+                path: AppRoutes.signUpStep4.path,
+                name: AppRoutes.signUpStep4.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const SignUpStep4();
+                },
+              ),
+
+              /// step5
+              GoRoute(
+                path: AppRoutes.signUpStep5.path,
+                name: AppRoutes.signUpStep5.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  final bool isSelectedBoy = state.extra as bool;
+
+                  return SignUpStep5(isSelectedBoy: isSelectedBoy);
+                },
+              ),
+
+              /// step6
+              GoRoute(
+                path: AppRoutes.signUpStep6.path,
+                name: AppRoutes.signUpStep6.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const SignUpStep6();
                 },
               ),
             ],

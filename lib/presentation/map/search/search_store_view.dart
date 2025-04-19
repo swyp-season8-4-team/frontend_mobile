@@ -9,7 +9,7 @@ import 'package:frontend_mobile/common/design_system/foundation/color/scale_colo
 import 'package:frontend_mobile/common/design_system/foundation/foundation.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
-import 'package:frontend_mobile/core/util/loading_overlay.dart';
+import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/model/search/popular_searchs_model.dart';
 import 'package:frontend_mobile/domain/model/search/recent_search_model.dart';
 import 'package:frontend_mobile/presentation/map/search/search_store_view_model.dart';

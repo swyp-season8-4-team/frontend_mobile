@@ -816,6 +816,54 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  native_image_cropper:
+    dependency: "direct main"
+    description:
+      name: native_image_cropper
+      sha256: d9cb7c7e5904e5dc28c37ebf0d68d2fed2d46b161960e7770c078e98c80e66b0
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.0"
+  native_image_cropper_android:
+    dependency: transitive
+    description:
+      name: native_image_cropper_android
+      sha256: "77106960beee19fd080dc8bd609709da44e13824175cd6c1d330a8b7178a152e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.1"
+  native_image_cropper_ios:
+    dependency: transitive
+    description:
+      name: native_image_cropper_ios
+      sha256: "4c40ffc8ea1e52078384bba6adfae8a90bef064ebbb25a0d52211b828b3895aa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
+  native_image_cropper_macos:
+    dependency: transitive
+    description:
+      name: native_image_cropper_macos
+      sha256: f3815264a7755047f0b38413c69f5b76ed4ffdd7af28edeacfc134b08b1d5a74
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
+  native_image_cropper_platform_interface:
+    dependency: transitive
+    description:
+      name: native_image_cropper_platform_interface
+      sha256: "3ac1484f83abd62be7ff1d74c475137c59008aa01e671d8678d5e25c46c98d59"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
+  native_image_cropper_web:
+    dependency: transitive
+    description:
+      name: native_image_cropper_web
+      sha256: "4767ca067ff2b5d1d3dd02c14eb00124da5d203ff917c9528b35f294bcf9227e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   octo_image:
     dependency: transitive
     description:
