@@ -20,3 +20,6 @@ enum DayOfWeek {
     );
   }
 }
+
+/// 디저트 메이트 카테고리
+enum DessertBoardCategory { all, amity, photo, study, health, bread, cafe }

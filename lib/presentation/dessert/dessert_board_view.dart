@@ -10,6 +10,7 @@ import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_b
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/manager/toast/toast_manager.dart';
+import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_detail_model.dart';
@@ -28,14 +29,29 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
   final bool _floatingActionButtonDisabled = false;
   bool _bookMarkSelected = false;
 
-  bool _isSelected = false;
-  bool _isSelected1 = true;
-  bool _isSelected2 = false;
-  bool _isSelected3 = false;
-  bool _isSelected4 = false;
-  bool _isSelected5 = false;
-  bool _isSelected6 = false;
-  bool _isSelected7 = false;
+  bool _isRecruit = false;
+  int? mateCategoryId;
+
+  /// 전체
+  bool _isAll = true;
+
+  /// 친목도모
+  bool _isAmity = false;
+
+  /// 사진맛집
+  bool _isPhoto = false;
+
+  /// 카공모임
+  bool _isStudy = false;
+
+  /// 건강맛집
+  bool _isHealth = false;
+
+  /// 빵지순례
+  bool _isBread = false;
+
+  /// 카페투어
+  bool _isCafe = false;
 
   @override
   void initState() {
@@ -45,7 +61,7 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
     WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {
       ref
           .read(dessertBoardViewModelProvider.notifier)
-          .getMate(params: GetMateParams());
+          .getMate(params: GetMateParams(to: 20));
     });
   }
 
@@ -58,31 +74,81 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
         .length;
   }
 
-  unselectHandler() {
-    setState(() {
-      _isSelected = false;
-      _isSelected1 = false;
-      _isSelected2 = false;
-      _isSelected3 = false;
-      _isSelected4 = false;
-      _isSelected5 = false;
-      _isSelected6 = false;
-      _isSelected7 = false;
-    });
+  void onUnselect() {
+    _isAll = false;
+    _isAmity = false;
+    _isPhoto = false;
+    _isStudy = false;
+    _isHealth = false;
+    _isBread = false;
+    _isCafe = false;
   }
 
-  bool selectSingle() {
-    int count = 0;
+  void onRecruit() {
+    setState(() {
+      _isRecruit = !_isRecruit;
+    });
 
-    if (_isSelected1) count += 1;
-    if (_isSelected2) count += 1;
-    if (_isSelected3) count += 1;
-    if (_isSelected4) count += 1;
-    if (_isSelected5) count += 1;
-    if (_isSelected6) count += 1;
-    if (_isSelected7) count += 1;
+    ref
+        .read(dessertBoardViewModelProvider.notifier)
+        .getMate(
+          params: GetMateParams(
+            mateCategoryId: mateCategoryId,
+            recruit: _isRecruit ? true : null,
+          ),
+        );
+  }
 
-    return count == 1 ? true : false;
+  void onCategory({required DessertBoardCategory category}) {
+    onUnselect();
+
+    switch (category) {
+      case DessertBoardCategory.all:
+        mateCategoryId = null;
+        _isAll = !_isAll;
+        break;
+
+      case DessertBoardCategory.amity:
+        mateCategoryId = 1;
+        _isAmity = !_isAmity;
+        break;
+
+      case DessertBoardCategory.photo:
+        mateCategoryId = 2;
+        _isPhoto = !_isPhoto;
+        break;
+
+      case DessertBoardCategory.study:
+        mateCategoryId = 3;
+        _isStudy = !_isStudy;
+        break;
+
+      case DessertBoardCategory.health:
+        mateCategoryId = 4;
+        _isHealth = !_isHealth;
+        break;
+
+      case DessertBoardCategory.bread:
+        mateCategoryId = 5;
+        _isBread = !_isBread;
+        break;
+
+      case DessertBoardCategory.cafe:
+        mateCategoryId = 6;
+        _isCafe = !_isCafe;
+        break;
+    }
+
+    ref
+        .read(dessertBoardViewModelProvider.notifier)
+        .getMate(
+          params: GetMateParams(
+            mateCategoryId: mateCategoryId,
+            recruit: _isRecruit ? true : null,
+          ),
+        );
+
+    setState(() {});
   }
 
   @override
@@ -115,17 +181,9 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
                       children: <Widget>[
                         CustomSuggestiveChip(
                           label: '모집중',
-                          isSelected: _isSelected,
+                          isSelected: _isRecruit,
                           labelColor: ScaleColorConfig.error40,
-                          onPressed: () {
-                            unselectHandler();
-
-                            setState(() {
-                              _isSelected = !_isSelected;
-                            });
-
-                            /// TODO: 파라미터 추가할 예정
-                          },
+                          onPressed: onRecruit,
                         ),
 
                         const SizedBox(width: 10),
@@ -138,173 +196,78 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
 
                         CustomSuggestiveChip(
                           label: '전체',
-                          isSelected: _isSelected1,
+                          isSelected: _isAll,
                           number: state.backupData.mates.length,
-                          onPressed: () {
-                            if (!_isSelected1) {
-                              ref
-                                  .read(dessertBoardViewModelProvider.notifier)
-                                  .getMate(params: GetMateParams());
-                            }
-
-                            unselectHandler();
-
-                            setState(() {
-                              _isSelected1 = true;
-                            });
-                          },
+                          onPressed:
+                              () => onCategory(
+                                category: DessertBoardCategory.all,
+                              ),
                         ),
                         const SizedBox(width: 6),
 
                         CustomSuggestiveChip(
                           label: '친목도모',
-                          isSelected: _isSelected2,
+                          isSelected: _isAmity,
                           number: _categoryCount(target: '친목도모'),
-                          onPressed: () {
-                            if (!_isSelected2) {
-                              ref
-                                  .read(dessertBoardViewModelProvider.notifier)
-                                  .getMate(
-                                    params: GetMateParams(mateCategoryId: 1),
-                                  );
-                            }
-
-                            unselectHandler();
-
-                            setState(() {
-                              if (selectSingle()) {
-                                _isSelected2 = true;
-                              } else {
-                                _isSelected2 = !_isSelected2;
-                              }
-                            });
-                          },
+                          onPressed:
+                              () => onCategory(
+                                category: DessertBoardCategory.amity,
+                              ),
                         ),
                         const SizedBox(width: 6),
 
                         CustomSuggestiveChip(
                           label: '사진맛집',
-                          isSelected: _isSelected3,
+                          isSelected: _isPhoto,
                           number: _categoryCount(target: '사진맛집'),
-                          onPressed: () {
-                            if (!_isSelected3) {
-                              ref
-                                  .read(dessertBoardViewModelProvider.notifier)
-                                  .getMate(
-                                    params: GetMateParams(mateCategoryId: 2),
-                                  );
-                            }
-
-                            unselectHandler();
-
-                            setState(() {
-                              if (selectSingle()) {
-                                _isSelected3 = true;
-                              } else {
-                                _isSelected3 = !_isSelected3;
-                              }
-                            });
-                          },
+                          onPressed:
+                              () => onCategory(
+                                category: DessertBoardCategory.photo,
+                              ),
                         ),
                         const SizedBox(width: 6),
 
                         CustomSuggestiveChip(
                           label: '카공모임',
-                          isSelected: _isSelected4,
+                          isSelected: _isStudy,
                           number: _categoryCount(target: '카공모임'),
-                          onPressed: () {
-                            if (!_isSelected4) {
-                              ref
-                                  .read(dessertBoardViewModelProvider.notifier)
-                                  .getMate(
-                                    params: GetMateParams(mateCategoryId: 3),
-                                  );
-                            }
-
-                            unselectHandler();
-
-                            setState(() {
-                              if (selectSingle()) {
-                                _isSelected4 = true;
-                              } else {
-                                _isSelected4 = !_isSelected4;
-                              }
-                            });
-                          },
+                          onPressed:
+                              () => onCategory(
+                                category: DessertBoardCategory.study,
+                              ),
                         ),
                         const SizedBox(width: 6),
 
                         CustomSuggestiveChip(
                           label: '건강맛집',
-                          isSelected: _isSelected5,
+                          isSelected: _isHealth,
                           number: _categoryCount(target: '건강맛집'),
-                          onPressed: () {
-                            if (!_isSelected5) {
-                              ref
-                                  .read(dessertBoardViewModelProvider.notifier)
-                                  .getMate(
-                                    params: GetMateParams(mateCategoryId: 4),
-                                  );
-                            }
-
-                            unselectHandler();
-
-                            setState(() {
-                              if (selectSingle()) {
-                                _isSelected5 = true;
-                              } else {
-                                _isSelected5 = !_isSelected5;
-                              }
-                            });
-                          },
+                          onPressed:
+                              () => onCategory(
+                                category: DessertBoardCategory.health,
+                              ),
                         ),
                         const SizedBox(width: 6),
 
                         CustomSuggestiveChip(
                           label: '빵지순례',
-                          isSelected: _isSelected6,
+                          isSelected: _isBread,
                           number: _categoryCount(target: '빵지순례'),
-                          onPressed: () {
-                            if (!_isSelected6) {
-                              ref
-                                  .read(dessertBoardViewModelProvider.notifier)
-                                  .getMate(
-                                    params: GetMateParams(mateCategoryId: 5),
-                                  );
-                            }
-
-                            unselectHandler();
-
-                            setState(() {
-                              if (selectSingle()) {
-                                _isSelected6 = true;
-                              } else {
-                                _isSelected6 = !_isSelected6;
-                              }
-                            });
-                          },
+                          onPressed:
+                              () => onCategory(
+                                category: DessertBoardCategory.bread,
+                              ),
                         ),
                         const SizedBox(width: 6),
 
                         CustomSuggestiveChip(
                           label: '카페투어',
-                          isSelected: _isSelected7,
+                          isSelected: _isCafe,
                           number: _categoryCount(target: '카페투어'),
-                          onPressed: () {
-                            if (!_isSelected7) {
-                              ref
-                                  .read(dessertBoardViewModelProvider.notifier)
-                                  .getMate(
-                                    params: GetMateParams(mateCategoryId: 6),
-                                  );
-                            }
-
-                            unselectHandler();
-
-                            setState(() {
-                              _isSelected7 = !_isSelected7;
-                            });
-                          },
+                          onPressed:
+                              () => onCategory(
+                                category: DessertBoardCategory.cafe,
+                              ),
                         ),
                         const SizedBox(width: 6),
                       ],
