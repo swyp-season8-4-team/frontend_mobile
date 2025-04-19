@@ -11,13 +11,19 @@ import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_summary_model.dart';
+import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
 import 'package:frontend_mobile/domain/param/store/get_my_preferences_stores_by_location_params.dart';
 import 'package:frontend_mobile/domain/param/store/get_store_summary_params.dart';
 import 'package:frontend_mobile/domain/param/store/get_stores_by_location_params.dart';
+import 'package:frontend_mobile/domain/param/user_store/delete_user_store_list_params.dart';
+import 'package:frontend_mobile/domain/param/user_store/get_user_store_list_all_params.dart';
 import 'package:frontend_mobile/domain/usecase/preference/get_all_preferences_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/store/get_my_preferences_stores_by_location_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/store/get_store_summary_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/store/get_stores_by_location_usecase.dart';
+import 'package:frontend_mobile/domain/usecase/user_store/delete_user_store_list_usecase.dart';
+import 'package:frontend_mobile/domain/usecase/user_store/get_user_store_list_all_usecase.dart';
+import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 
 part 'map_state.dart';
 part 'generated/map_view_model.freezed.dart';
@@ -75,7 +81,10 @@ class MapViewModel extends StateNotifier<MapState> {
 
   // 반경 내 가게 조회
   Future<MapState> getStoresByLocation() async {
-    state = state.copyWith(getStoresByLocationStatus: Status.loading);
+    state = state.copyWith(
+      selectedMarker: null,
+      getStoresByLocationStatus: Status.loading,
+    );
 
     final Result<List<StoreByLocationModel>, CustomException> result =
         await Usecase.execute(
@@ -151,7 +160,8 @@ class MapViewModel extends StateNotifier<MapState> {
     if (state.myPreferenceFilterSelected) {
       state = state.copyWith(preferenceTagIds: <int>[]);
     } else {
-      // TODO: preferenceTagIds에 맞춤 취향 지정 예정
+      final UserState userState = _ref.read(userViewModelProvider);
+      state = state.copyWith(preferenceTagIds: userState.data.preferences);
     }
 
     state = state.copyWith(
@@ -239,5 +249,104 @@ class MapViewModel extends StateNotifier<MapState> {
     );
 
     return state;
+  }
+
+  // 저장된 가게 리스트 모드 수정
+  void updateUserStoreMode({required bool userStoresEnabled}) {
+    state = state.copyWith(userStoresEnabled: userStoresEnabled);
+  }
+
+  // 저장 리스트 전체 조회
+  Future<MapState> getUserStoreListAll({required String userUuid}) async {
+    state = state.copyWith(getUserStoreListAllStatus: Status.loading);
+
+    final Result<List<UserStoreListModel>, CustomException> result =
+        await Usecase.execute(
+          usecase: _ref.read(getUserStoreListAllUsecaseProvider),
+          params: GetUserStoreListAllParams(userUuid: userUuid),
+        );
+
+    result.map(
+      success: (Success<List<UserStoreListModel>, CustomException> success) {
+        state = state.copyWith(
+          getUserStoreListAllStatus: Status.success,
+          userStoreLists: success.data,
+          userStoreListOptionMenuVisible:
+              success.data
+                  .map(
+                    (UserStoreListModel e) => (
+                      listId: e.listId,
+                      isOptionMenuVisible: false,
+                    ),
+                  )
+                  .toList(),
+        );
+      },
+      failure: (Failure<List<UserStoreListModel>, CustomException> failure) {
+        state = state.copyWith(
+          getUserStoreListAllStatus: Status.failure,
+          getUserStoreListAllException: failure.exception.model,
+        );
+      },
+    );
+
+    return state;
+  }
+
+  // 저장 리스트 삭제
+  Future<MapState> deleteUserStoreList({required int listId}) async {
+    state = state.copyWith(deleteUserStoreListStatus: Status.loading);
+
+    final Result<void, CustomException> result = await Usecase.execute(
+      usecase: _ref.read(deleteUserStoreListUsecaseProvider),
+      params: DeleteUserStoreListParams(listId: listId),
+    );
+
+    result.map(
+      success: (Success<void, CustomException> success) {
+        state = state.copyWith(deleteUserStoreListStatus: Status.success);
+      },
+      failure: (Failure<void, CustomException> failure) {
+        state = state.copyWith(
+          deleteUserStoreListStatus: Status.failure,
+          deleteUserStoreListException: failure.exception.model,
+        );
+      },
+    );
+
+    return state;
+  }
+
+  // 표시되고 있는 모든 옵션 메뉴들을 제거
+  void invisibleAllOptionMenu() {
+    state = state.copyWith(
+      userStoreListOptionMenuVisible:
+          state.userStoreListOptionMenuVisible
+              .map(
+                (({bool isOptionMenuVisible, int listId}) e) => (
+                  listId: e.listId,
+                  isOptionMenuVisible: false,
+                ),
+              )
+              .toList(),
+    );
+  }
+
+  // 특정 저장리스트의 옵션 메뉴 표시 여부 수정
+  void updateStoreListOptionMenuVisible({
+    required int listId,
+    required bool isVisible,
+  }) async {
+    state = state.copyWith(
+      userStoreListOptionMenuVisible:
+          state.userStoreListOptionMenuVisible
+              .map(
+                (({bool isOptionMenuVisible, int listId}) e) =>
+                    e.listId == listId
+                        ? (listId: listId, isOptionMenuVisible: isVisible)
+                        : e,
+              )
+              .toList(),
+    );
   }
 }

@@ -6,9 +6,14 @@ import 'package:frontend_mobile/common/design_system/foundation/shadow/shadow_co
 /// https://www.figma.com/design/S1zkOn7DjDJ0b1mcPVJRil/SWYP_%E1%84%8B%E1%85%A2%E1%86%B8_1%E1%84%80%E1%85%B5_%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A5%E1%84%87%E1%85%B5?node-id=40000088-62443&t=7TVdidIqbT7gZsMY-4
 
 class CustomDialogButton {
-  const CustomDialogButton({required this.text, required this.onTap});
+  const CustomDialogButton({
+    required this.text,
+    required this.onTap,
+    this.warning = false,
+  });
   final String text;
   final VoidCallback onTap;
+  final bool warning;
 }
 
 class CustomDialog extends StatelessWidget {
@@ -139,8 +144,13 @@ class CustomDialog extends StatelessWidget {
 
                   return ScaleColorConfig.neutral100;
                 }),
-                foregroundColor: const WidgetStatePropertyAll<Color>(
-                  ScaleColorConfig.success50,
+                foregroundColor: WidgetStatePropertyAll<Color>(
+                  primaryButton.warning
+                      ? ScaleColorConfig.error40
+                      : ScaleColorConfig.success50,
+                ),
+                textStyle: WidgetStatePropertyAll<TextStyle>(
+                  textTheme.titleMedium!,
                 ),
                 shape: WidgetStatePropertyAll<OutlinedBorder>(
                   RoundedRectangleBorder(
@@ -163,12 +173,7 @@ class CustomDialog extends StatelessWidget {
                   Colors.transparent,
                 ),
               ),
-              child: Text(
-                primaryButton.text,
-                style: textTheme.titleMedium?.copyWith(
-                  color: ScaleColorConfig.success50,
-                ),
-              ),
+              child: Text(primaryButton.text),
             ),
           ),
         ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/design_system/foundation/shadow/shadow_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
@@ -15,17 +14,17 @@ class CustomMapIconButton extends StatefulWidget {
       disabled = false,
       iconColor = ScaleColorConfig.success50,
       type = MapIconButtonType.filterReset,
-      selectedSvg = null;
+      image = null;
 
   CustomMapIconButton.saveStore({
     required this.isSelected,
     required this.onPressed,
     this.disabled = false,
     super.key,
-  }) : svg = Assets.icon.etc.flowerFilled,
+  }) : image = Assets.image.flowerFilled,
        iconColor = null,
        type = MapIconButtonType.saveStore,
-       selectedSvg = Assets.icon.etc.flowerFilledSelected;
+       svg = null;
 
   CustomMapIconButton.myLocation({
     required this.isSelected,
@@ -35,10 +34,10 @@ class CustomMapIconButton extends StatefulWidget {
   }) : svg = Assets.icon.map.aiming2Line,
        iconColor = null,
        type = MapIconButtonType.myLocation,
-       selectedSvg = null;
+       image = null;
   final bool isSelected;
-  final SvgGenImage svg;
-  final SvgGenImage? selectedSvg;
+  final SvgGenImage? svg;
+  final AssetGenImage? image;
   final VoidCallback onPressed;
   final Color? iconColor;
   final bool disabled;
@@ -49,16 +48,10 @@ class CustomMapIconButton extends StatefulWidget {
 }
 
 class _CustomMapIconButtonState extends State<CustomMapIconButton> {
-  Color? _iconColor;
+  Color _iconColor = Colors.black;
 
   void _iconColorHandler({required Set<WidgetState> states}) =>
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (widget.type == MapIconButtonType.saveStore) {
-          setState(() {
-            _iconColor = null;
-          });
-        }
-
         /// Presssed
         if (states.contains(WidgetState.pressed)) {
           setState(() {
@@ -133,15 +126,12 @@ class _CustomMapIconButtonState extends State<CustomMapIconButton> {
         ).copyWith(backgroundColor: _backgroundColor),
         icon: Padding(
           padding: const EdgeInsets.all(4),
-          child: SvgPicture.asset(
-            (widget.isSelected && widget.type == MapIconButtonType.saveStore)
-                ? widget.selectedSvg!.path
-                : widget.svg.path,
-            colorFilter:
-                _iconColor == null
-                    ? null
-                    : ColorFilter.mode(_iconColor!, BlendMode.srcIn),
-          ),
+          child:
+              widget.type == MapIconButtonType.saveStore
+                  ? widget.image!.image(color: _iconColor)
+                  : widget.svg!.svg(
+                    colorFilter: ColorFilter.mode(_iconColor, BlendMode.srcIn),
+                  ),
         ),
       ),
     );

@@ -30,7 +30,17 @@ class _RecentNotice extends ConsumerWidget {
                 ),
               ),
               const Spacer(),
-              CustomOutlineButton.xSmall(label: '모든 공지', onPressed: () {}),
+              CustomOutlineButton.xSmall(
+                label: '모든 공지',
+                onPressed: () {
+                  context.pushNamed(
+                    AppRoutes.storeNotice.name,
+                    pathParameters: <String, String>{
+                      'id': storeDetail.storeUuid,
+                    },
+                  );
+                },
+              ),
             ],
           ),
           const SizedBox(height: 12),

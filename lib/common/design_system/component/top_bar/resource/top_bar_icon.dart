@@ -69,4 +69,10 @@ class TopBarIcon {
     onTap: () {},
     child: Assets.icon.editor.bookmarkLine.svg(),
   );
+
+  /// 닫기
+  GestureDetector close({required VoidCallback? onTap}) => GestureDetector(
+    onTap: onTap,
+    child: SvgPicture.asset(Assets.icon.system.closeLine.path),
+  );
 }

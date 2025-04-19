@@ -23,12 +23,12 @@ class UserStoreListEntity {
   final String listName;
   final int iconColorId;
   final int storeCount;
-  final List<_StoreData>? storeData;
+  final List<UserStoreDataEntity>? storeData;
 }
 
 @JsonSerializable()
-class _StoreData {
-  const _StoreData({
+class UserStoreDataEntity {
+  const UserStoreDataEntity({
     required this.userUuid,
     required this.storeUuid,
     required this.listId,
@@ -41,8 +41,9 @@ class _StoreData {
     this.userPreferences,
   });
 
-  factory _StoreData.fromJson(Map<String, dynamic> json) =>
-      _$StoreDataFromJson(json);
+  factory UserStoreDataEntity.fromJson(Map<String, dynamic> json) =>
+      _$UserStoreDataEntityFromJson(json);
+
   final String userUuid;
   final String storeUuid;
   final int listId;

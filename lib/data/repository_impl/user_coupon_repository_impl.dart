@@ -6,11 +6,14 @@ import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/data/data_source/remote/user_coupon_remote_data_source.dart';
 import 'package:frontend_mobile/data/entity/user_coupon/coupon_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/user_coupon/coupon_entity.dart';
+import 'package:frontend_mobile/data/entity/user_coupon/coupon_issue_status_entity.dart';
 import 'package:frontend_mobile/data/entity/user_coupon/coupon_usage_status_entity.dart';
 import 'package:frontend_mobile/data/mapper/user_coupon_mapper.dart';
 import 'package:frontend_mobile/domain/model/user_coupon/coupon_detail_model.dart';
+import 'package:frontend_mobile/domain/model/user_coupon/coupon_issue_status_model.dart';
 import 'package:frontend_mobile/domain/model/user_coupon/coupon_model.dart';
 import 'package:frontend_mobile/domain/model/user_coupon/coupon_usage_status_model.dart';
+import 'package:frontend_mobile/domain/param/user_coupon/get_coupon_issue_status_params.dart';
 import 'package:frontend_mobile/domain/param/user_coupon/get_my_coupon_detail_params.dart';
 import 'package:frontend_mobile/domain/param/user_coupon/issue_coupon_params.dart';
 import 'package:frontend_mobile/domain/repository/user_coupon_repository.dart';
@@ -37,24 +40,24 @@ class UserCouponRepositoryImpl implements UserCouponRepository {
   }
 
   @override
-  Future<Result<List<CouponModel>, CustomException>> getMyCoupons({
+  Future<Result<List<UserCouponModel>, CustomException>> getMyCoupons({
     required NoParams params,
   }) async {
     return await apiCall(
       api: () async {
-        final List<CouponEntity> result = await _api.getMyCoupons();
-        return result.map((CouponEntity e) => e.toModel()).toList();
+        final List<UserCouponEntity> result = await _api.getMyCoupons();
+        return result.map((UserCouponEntity e) => e.toModel()).toList();
       },
     );
   }
 
   @override
-  Future<Result<CouponDetailModel, CustomException>> getMyCouponDetail({
+  Future<Result<UserCouponDetailModel, CustomException>> getMyCouponDetail({
     required GetMyCouponDetailParams params,
   }) async {
     return await apiCall(
       api: () async {
-        final CouponDetailEntity result = await _api.getMyCouponDetail(
+        final UserCouponDetailEntity result = await _api.getMyCouponDetail(
           userCouponId: params.userCouponId,
         );
         return result.toModel();
@@ -63,14 +66,25 @@ class UserCouponRepositoryImpl implements UserCouponRepository {
   }
 
   @override
-  Future<Result<CouponUsageStatusModel, CustomException>> getCouponUsageStatus({
-    required NoParams params,
-  }) async {
+  Future<Result<UserCouponUsageStatusModel, CustomException>>
+  getCouponUsageStatus({required NoParams params}) async {
     return await apiCall(
       api: () async {
-        final CouponUsageStatusEntity result =
+        final UserCouponUsageStatusEntity result =
             await _api.getCouponUsageStatus();
         return result.toModel();
+      },
+    );
+  }
+
+  @override
+  Future<Result<List<UserCouponIssueStatusModel>, CustomException>>
+  getCouponIssueStatus({required GetCouponIssueStatusParams params}) async {
+    return await apiCall(
+      api: () async {
+        final List<CouponIssueStatusEntity> result = await _api
+            .getCouponIssueStatus(storeUuid: params.storeUuid);
+        return result.map((CouponIssueStatusEntity e) => e.toModel()).toList();
       },
     );
   }

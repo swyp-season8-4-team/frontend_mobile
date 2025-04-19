@@ -1,5 +1,5 @@
-class CouponModel {
-  const CouponModel({
+class UserCouponModel {
+  const UserCouponModel({
     required this.userCouponId,
     required this.couponName,
     required this.couponCode,

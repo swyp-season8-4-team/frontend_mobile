@@ -3,15 +3,16 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'generated/coupon_usage_status_entity.g.dart';
 
 @JsonSerializable()
-class CouponUsageStatusEntity {
-  const CouponUsageStatusEntity({
+class UserCouponUsageStatusEntity {
+  const UserCouponUsageStatusEntity({
     required this.usedCount,
     required this.unusedCount,
     required this.expiredCount,
   });
 
-  factory CouponUsageStatusEntity.fromJson(Map<String, dynamic> json) =>
-      _$CouponUsageStatusEntityFromJson(json);
+  factory UserCouponUsageStatusEntity.fromJson(Map<String, dynamic> json) =>
+      _$UserCouponUsageStatusEntityFromJson(json);
+
   final int usedCount;
   final int unusedCount;
   final int expiredCount;

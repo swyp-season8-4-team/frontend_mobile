@@ -14,13 +14,13 @@ final Provider<GetMyCouponsUsecase> getMyCouponsUsecaseProvider =
       );
     });
 
-class GetMyCouponsUsecase implements Usecase<List<CouponModel>, NoParams> {
+class GetMyCouponsUsecase implements Usecase<List<UserCouponModel>, NoParams> {
   const GetMyCouponsUsecase({required UserCouponRepository repository})
     : _repository = repository;
   final UserCouponRepository _repository;
 
   @override
-  Future<Result<List<CouponModel>, CustomException>> call({
+  Future<Result<List<UserCouponModel>, CustomException>> call({
     required NoParams params,
   }) async {
     return await _repository.getMyCoupons(params: params);

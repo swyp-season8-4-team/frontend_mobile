@@ -22,6 +22,24 @@ abstract class AppRoutes {
   // 지도 화면
   static const RouteInfo map = RouteInfo(name: '/map', path: '/map');
 
+  // 지도 > 저장 리스트 내 가게 조회
+  static final RouteInfo storesByUserStoreList = RouteInfo(
+    name: '${map.name}/:listId/stores',
+    path: ':listId/stores',
+  );
+
+  // 지도 > 저장 리스트 생성
+  static final RouteInfo addUserStoreList = RouteInfo(
+    name: '${map.name}/add_user_store_list',
+    path: 'add_user_store_list',
+  );
+
+  // 지도 > 저장 리스트 수정
+  static final RouteInfo updateUserStoreList = RouteInfo(
+    name: '${map.name}/:listId/update',
+    path: ':listId/update',
+  );
+
   // 지도 > 가게 상세
   static final RouteInfo storeDetail = RouteInfo(
     name: '${map.name}/store/:id',
@@ -32,6 +50,18 @@ abstract class AppRoutes {
   static final RouteInfo findPlaceByMap = RouteInfo(
     name: '${storeDetail.name}/find-place-by-map',
     path: 'find-place-by-map',
+  );
+
+  // 지도 > 가게 상세 > 모든 공지
+  static final RouteInfo storeNotice = RouteInfo(
+    name: '${storeDetail.name}/notice',
+    path: 'notice',
+  );
+
+  // 지도 > 가게 상세 > 모든 공지 > 공지 상세
+  static final RouteInfo storeNoticeDetail = RouteInfo(
+    name: '${storeNotice.name}/:noticeId',
+    path: ':noticeId',
   );
 
   // 지도 > 검색 화면

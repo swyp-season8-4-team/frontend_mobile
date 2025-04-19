@@ -207,6 +207,7 @@ extension StoreDetailEntityExt on StoreDetailEntity {
             ?.map((StoreTopPreferenceEntity e) => e.toModel())
             .toList(),
     description: description,
+    descriptionUpdateTime: descriptionUpdateTime,
     animalYn: animalYn,
     tumblerYn: tumblerYn,
     parkingYn: parkingYn,

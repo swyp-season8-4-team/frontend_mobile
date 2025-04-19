@@ -24,6 +24,7 @@ class CustomInputBox extends StatefulWidget {
     this.closeControll = false,
     this.onCloseButtonTap,
     this.onVisibilityButtonTap,
+    this.maxLength,
     super.key,
   });
 
@@ -51,6 +52,8 @@ class CustomInputBox extends StatefulWidget {
   final VoidCallback? onCloseButtonTap;
   // 텍스트 암호화 탭 이벤트 이벤트 콜백
   final VoidCallback? onVisibilityButtonTap;
+
+  final int? maxLength;
   @override
   State<CustomInputBox> createState() => _CustomInputBoxState();
 }
@@ -102,6 +105,7 @@ class _CustomInputBoxState extends State<CustomInputBox> {
             // 자동으로 unfocus
             FocusManager.instance.primaryFocus?.unfocus();
           },
+          maxLength: widget.maxLength,
           controller: _textEditingController,
           inputFormatters: widget.inputFormatters,
           keyboardType: widget.keyboardType,
@@ -166,6 +170,7 @@ class _CustomInputBoxState extends State<CustomInputBox> {
             hintStyle: textTheme.bodyMedium?.copyWith(
               color: ScaleColorConfig.neutral50,
             ),
+            counterText: '',
           ),
         ),
         if (widget.error &&

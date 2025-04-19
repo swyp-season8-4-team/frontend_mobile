@@ -41,6 +41,7 @@ class StoreDetailEntity {
     this.holidays,
     this.topPreferences,
     this.description,
+    this.descriptionUpdateTime,
     this.animalYn,
     this.tumblerYn,
     this.parkingYn,
@@ -61,6 +62,7 @@ class StoreDetailEntity {
   final String address;
   final String phone;
   final String? description;
+  final DateTime? descriptionUpdateTime;
   final bool? animalYn;
   final bool? tumblerYn;
   final bool? parkingYn;

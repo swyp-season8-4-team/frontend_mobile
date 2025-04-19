@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 
 class CustomNumberBadge extends StatelessWidget {
-  const CustomNumberBadge({required this.number, super.key});
+  const CustomNumberBadge({required this.number, this.error = true, super.key});
 
   final int number;
+  final bool error;
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +14,14 @@ class CustomNumberBadge extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(99),
-        color: ScaleColorConfig.error90,
+        color: error ? ScaleColorConfig.error90 : ScaleColorConfig.success80,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 4),
       child: Text(
         number >= 1000 ? '999+' : number.toString(),
         style: textTheme.labelSmall?.copyWith(
           height: 1,
-          color: ScaleColorConfig.error10,
+          color: error ? ScaleColorConfig.error10 : ScaleColorConfig.success40,
         ),
       ),
     );

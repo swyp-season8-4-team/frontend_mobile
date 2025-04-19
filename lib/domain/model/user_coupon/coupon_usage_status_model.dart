@@ -1,5 +1,5 @@
-class CouponUsageStatusModel {
-  const CouponUsageStatusModel({
+class UserCouponUsageStatusModel {
+  const UserCouponUsageStatusModel({
     required this.usedCount,
     required this.unusedCount,
     required this.expiredCount,

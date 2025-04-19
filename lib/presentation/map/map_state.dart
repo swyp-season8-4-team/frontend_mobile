@@ -1,5 +1,8 @@
 part of 'map_view_model.dart';
 
+typedef UserStoreListOptionMenuVisible =
+    ({int listId, bool isOptionMenuVisible});
+
 @freezed
 class MapState with _$MapState {
   factory MapState({
@@ -7,6 +10,7 @@ class MapState with _$MapState {
     @Default(Status.loading) Status getAllPreferencesStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel getAllPreferencesException,
+
     @Default(<StoreByLocationModel>[])
     List<StoreByLocationModel> storesByLocation,
     @Default(37.514575) double lat,
@@ -21,10 +25,24 @@ class MapState with _$MapState {
     ExceptionModel getStoresByLocationExceptionModel,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel getMyPreferencesStoresByLocationExceptionModel,
+
     StoreSummaryModel? storeSummary,
     @Default(Status.initial) Status getStoreSummaryStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel getStoreSummaryExceptionModel,
+
     NMarker? selectedMarker,
+
+    @Default(false) bool userStoresEnabled,
+    @Default(<UserStoreListModel>[]) List<UserStoreListModel> userStoreLists,
+    @Default(<UserStoreListOptionMenuVisible>[])
+    List<UserStoreListOptionMenuVisible> userStoreListOptionMenuVisible,
+    @Default(Status.initial) Status getUserStoreListAllStatus,
+    @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
+    ExceptionModel getUserStoreListAllException,
+
+    @Default(Status.initial) Status deleteUserStoreListStatus,
+    @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
+    ExceptionModel deleteUserStoreListException,
   }) = _MapState;
 }

@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
-import 'package:go_router/go_router.dart';
 
 class CustomSubTopBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomSubTopBar({
     required this.title,
     required this.actions,
     this.primary = true,
+    this.leading,
     super.key,
   });
 
   final String title;
   final bool primary;
   final List<Widget> actions;
+  final Widget? leading;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +27,7 @@ class CustomSubTopBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         backgroundColor: Colors.transparent,
         leadingWidth: 24 + 7,
-        leading: icon.leftLine(
-          onTap: () {
-            context.pop();
-          },
-        ),
+        leading: leading ?? icon.leftLine(onTap: () => Navigator.pop(context)),
         title: Text(title, style: textTheme.titleLarge),
         centerTitle: true,
         actions: actions,
