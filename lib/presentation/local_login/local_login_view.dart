@@ -2,17 +2,21 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/core/resource/token_info.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/presentation/global/login/login_view_model.dart';
+import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
@@ -130,7 +134,26 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
     ref.listen(localLoginViewModelProvider, (_, LocalLoginState next) async {
       switch (next.status) {
         case Status.success:
+
+          /// 로그인 유무 판단
           ref.read(loginViewModelProvider.notifier).login();
+
+          /// 토큰, 만료시간 및 디바이스 정보 저장
+          final TokenInfo tokenInfo = TokenInfo(
+            accessToken: next.data.accessToken,
+            refreshToken: next.data.refreshToken,
+            expiresIn: next.data.expiresIn,
+            deviceId: next.data.deviceId,
+          );
+
+          const FlutterSecureStorage storage = FlutterSecureStorage();
+          await storage.write(
+            key: Constant.tokenInfo,
+            value: TokenInfo.serialize(tokenInfo: tokenInfo),
+          );
+
+          /// 현재 로그인한 유저 정보
+          ref.read(userViewModelProvider.notifier).getMe();
 
           // TODO: 개발 하기 편하게 하려고 pushNamed 사용했고, 추후에 goNamed로 바꿀 예정
           unawaited(context.pushNamed(AppRoutes.home.name));
@@ -236,6 +259,13 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                     visibilityControll: true,
                   ),
                   const SizedBox(height: 12),
+
+                  FilledButton(
+                    onPressed: () {
+                      context.pushNamed(AppRoutes.myTasteChoiceStart.name);
+                    },
+                    child: const Text('내 취향 선택'),
+                  ),
 
                   /// TODO: 추후에 작업 진행
                   // Row(

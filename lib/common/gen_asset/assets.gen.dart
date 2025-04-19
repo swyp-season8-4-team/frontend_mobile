@@ -133,6 +133,13 @@ class $AssetImageGen {
   /// File path: asset/image/logo.png
   AssetGenImage get logo => const AssetGenImage('asset/image/logo.png');
 
+  /// File path: asset/image/logo_bee.png
+  AssetGenImage get logoBee => const AssetGenImage('asset/image/logo_bee.png');
+
+  /// File path: asset/image/logo_bee_inversion.png
+  AssetGenImage get logoBeeInversion =>
+      const AssetGenImage('asset/image/logo_bee_inversion.png');
+
   /// File path: asset/image/marker_1.png
   AssetGenImage get marker1 => const AssetGenImage('asset/image/marker_1.png');
 
@@ -154,6 +161,8 @@ class $AssetImageGen {
     couponBedge,
     currentLocation,
     logo,
+    logoBee,
+    logoBeeInversion,
     marker1,
     markerSelected,
     profileBoy,
@@ -524,6 +533,18 @@ class $AssetIconEtcGen {
   /// File path: asset/icon/etc/hexagon.svg
   SvgGenImage get hexagon => const SvgGenImage('asset/icon/etc/hexagon.svg');
 
+  /// File path: asset/icon/etc/hexagon_11.svg
+  SvgGenImage get hexagon11 =>
+      const SvgGenImage('asset/icon/etc/hexagon_11.svg');
+
+  /// File path: asset/icon/etc/hexagon_12.svg
+  SvgGenImage get hexagon12 =>
+      const SvgGenImage('asset/icon/etc/hexagon_12.svg');
+
+  /// File path: asset/icon/etc/hexagon_13.svg
+  SvgGenImage get hexagon13 =>
+      const SvgGenImage('asset/icon/etc/hexagon_13.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
     a16CloseFilled1,
@@ -558,6 +579,9 @@ class $AssetIconEtcGen {
     flowerFilledSelected,
     flowerLine,
     hexagon,
+    hexagon11,
+    hexagon12,
+    hexagon13,
   ];
 }
 

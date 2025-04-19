@@ -105,4 +105,55 @@ abstract class AppRoutes {
     name: '${signUp.name}/step6',
     path: 'step6',
   );
+
+  /// 취향선택
+  static const RouteInfo taste = RouteInfo(name: '/taste', path: '/taste');
+
+  /// 취향선택 > 내 취향 선택
+  static final RouteInfo myTasteChoice = RouteInfo(
+    name: '${taste.name}/choice',
+    path: 'choice',
+  );
+
+  /// 취향선택 > 내 취향 선택 > 시작 페이지
+  static final RouteInfo myTasteChoiceStart = RouteInfo(
+    name: '${myTasteChoice.name}/start',
+    path: 'start',
+  );
+
+  /// 취향선택 > 내 취향 선택 > step1
+  static final RouteInfo myTasteChoiceStep1 = RouteInfo(
+    name: '${myTasteChoice.name}/step1',
+    path: 'step1',
+  );
+
+  /// 취향선택 > 내 취향 선택 > step2
+  static final RouteInfo myTasteChoiceStep2 = RouteInfo(
+    name: '${myTasteChoice.name}/step2',
+    path: 'step2',
+  );
+
+  /// 취향 > 내 취향 선택 > step3
+  static final RouteInfo myTasteChoiceStep3 = RouteInfo(
+    name: '${myTasteChoice.name}/step3',
+    path: 'step3',
+  );
+
+  /// 취향선택 > 내 취향 선택 > step4
+  static final RouteInfo myTasteChoiceStep4 = RouteInfo(
+    name: '${myTasteChoice.name}/step4',
+    path: 'step4',
+  );
+
+  /// 취향선택 > 결과 로딩 화면
+  static final RouteInfo tasteResultLoading = RouteInfo(
+    name: '${taste.name}/result_loading',
+    path: 'result_loading',
+  );
+
+  /// 취향선택 > 결과 화면
+  static final RouteInfo tasteResult = RouteInfo(
+    name: '${taste.name}/result',
+    path: 'result',
+  );
 }

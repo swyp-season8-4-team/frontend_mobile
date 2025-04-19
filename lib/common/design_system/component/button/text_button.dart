@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
 class CustomTextButton extends StatelessWidget {
-  const CustomTextButton.svg({
+  const CustomTextButton({
     required this.label,
     required this.onPressed,
-    required this.svg,
+    this.svg,
     this.disabled = false,
     super.key,
   }) : underline = false;
@@ -30,20 +29,20 @@ class CustomTextButton extends StatelessWidget {
       WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         /// Presssed
         if (states.contains(WidgetState.pressed)) {
-          return svg != null
+          return !underline
               ? ScaleColorConfig.primary60
               : ScaleColorConfig.secondary10;
         }
 
         /// Disabled
         if (states.contains(WidgetState.disabled)) {
-          return svg != null
+          return !underline
               ? ScaleColorConfig.neutral50
               : ScaleColorConfig.neutral40;
         }
 
         /// Enabled
-        return svg != null
+        return !underline
             ? ScaleColorConfig.primary60
             : ScaleColorConfig.secondary30;
       });
@@ -52,12 +51,12 @@ class CustomTextButton extends StatelessWidget {
       WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         /// Presssed
         if (states.contains(WidgetState.pressed)) {
-          return svg != null ? ScaleColorConfig.surface80 : Colors.transparent;
+          return !underline ? ScaleColorConfig.surface80 : Colors.transparent;
         }
 
         /// Disabled
         if (states.contains(WidgetState.disabled)) {
-          return svg != null ? Colors.transparent : null;
+          return !underline ? Colors.transparent : null;
         }
 
         /// Enabled
@@ -68,7 +67,7 @@ class CustomTextButton extends StatelessWidget {
       WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         /// Presssed
         if (states.contains(WidgetState.pressed)) {
-          return svg != null
+          return !underline
               ? textTheme.bodySmall
               : textTheme.labelLarge?.copyWith(
                 decoration: TextDecoration.underline,
@@ -78,7 +77,7 @@ class CustomTextButton extends StatelessWidget {
 
         /// Disabled
         if (states.contains(WidgetState.disabled)) {
-          return svg != null
+          return !underline
               ? textTheme.bodySmall
               : textTheme.labelLarge?.copyWith(
                 decoration: TextDecoration.underline,
@@ -87,7 +86,7 @@ class CustomTextButton extends StatelessWidget {
         }
 
         /// Enabled
-        return svg != null
+        return !underline
             ? textTheme.bodySmall
             : textTheme.labelLarge?.copyWith(
               decoration: TextDecoration.underline,
@@ -112,30 +111,11 @@ class CustomTextButton extends StatelessWidget {
         backgroundColor: _backgroundColor,
         textStyle: _textStyle(textTheme: textTheme),
         overlayColor:
-            svg != null ? null : WidgetStateProperty.all(Colors.transparent),
+            underline ? null : WidgetStateProperty.all(Colors.transparent),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          if (svg != null) ...<Widget>[
-            SvgPicture.asset(
-              svg!.path,
-              colorFilter:
-                  !disabled
-                      ? const ColorFilter.mode(
-                        ScaleColorConfig.primary60,
-                        BlendMode.srcIn,
-                      )
-                      : const ColorFilter.mode(
-                        ScaleColorConfig.neutral50,
-                        BlendMode.srcIn,
-                      ),
-              width: 16,
-            ),
-            const SizedBox(width: 10),
-          ],
-          Text(label, textAlign: TextAlign.center),
-        ],
+        children: <Widget>[Text(label, textAlign: TextAlign.center)],
       ),
     );
   }
