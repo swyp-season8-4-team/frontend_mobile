@@ -13,7 +13,7 @@ import 'package:frontend_mobile/common/design_system/foundation/shadow/shadow_co
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/manager/geolocation/geo_location_service_impl.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
-import 'package:frontend_mobile/core/util/loading_overlay.dart';
+import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/core/util/naver_map_util.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
@@ -23,8 +23,8 @@ import 'package:frontend_mobile/presentation/widget/scaffold_with_navigation_bar
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 
-part 'extension/map_view_extensions.dart';
 part 'extension/map_method_extensions.dart';
+part 'extension/map_view_extensions.dart';
 
 class MapView extends ConsumerStatefulWidget {
   const MapView({super.key});
