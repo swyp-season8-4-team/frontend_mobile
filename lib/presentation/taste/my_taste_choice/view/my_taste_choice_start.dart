@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/presentation/global/preference/preference_view_model.dart';
@@ -52,12 +53,7 @@ class _MyTasteChoiceStartState extends ConsumerState<MyTasteChoiceStart> {
                   ),
                   const SizedBox(height: 26),
 
-                  Container(
-                    width: double.infinity,
-                    height: 272,
-                    color: const Color(0xFFE8E8E8),
-                    child: const Align(child: Text('Illust-area')),
-                  ),
+                  Assets.image.honeyPot1.image(),
                   const SizedBox(height: 30),
 
                   CustomFillButton.large(

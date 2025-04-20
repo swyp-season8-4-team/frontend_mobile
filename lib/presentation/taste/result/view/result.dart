@@ -3,6 +3,7 @@ import 'package:frontend_mobile/common/design_system/component/button/fill_butto
 import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
 import 'package:frontend_mobile/common/design_system/component/hexagon_grid/hexagon_grid.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
@@ -42,15 +43,7 @@ class TasteResult extends StatelessWidget {
           ),
           const SizedBox(height: 20),
 
-          Container(
-            height: 417,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Container(
-              width: double.infinity,
-              color: const Color.fromRGBO(232, 232, 232, 1),
-              child: const Align(child: Text('Illust')),
-            ),
-          ),
+          Assets.image.restBee1.image(),
         ],
       );
     }

@@ -130,9 +130,17 @@ class $AssetImageGen {
   AssetGenImage get currentLocation =>
       const AssetGenImage('asset/image/current_location.png');
 
+  /// File path: asset/image/flower_bee_1.png
+  AssetGenImage get flowerBee1 =>
+      const AssetGenImage('asset/image/flower_bee_1.png');
+
   /// File path: asset/image/flower_filled.png
   AssetGenImage get flowerFilled =>
       const AssetGenImage('asset/image/flower_filled.png');
+
+  /// File path: asset/image/honey_pot_1.png
+  AssetGenImage get honeyPot1 =>
+      const AssetGenImage('asset/image/honey_pot_1.png');
 
   /// File path: asset/image/logo.png
   AssetGenImage get logo => const AssetGenImage('asset/image/logo.png');
@@ -159,6 +167,14 @@ class $AssetImageGen {
   AssetGenImage get profileGirl =>
       const AssetGenImage('asset/image/profile_girl.png');
 
+  /// File path: asset/image/register-bee.png
+  AssetGenImage get registerBee =>
+      const AssetGenImage('asset/image/register-bee.png');
+
+  /// File path: asset/image/rest_bee_1.png
+  AssetGenImage get restBee1 =>
+      const AssetGenImage('asset/image/rest_bee_1.png');
+
   /// File path: asset/image/splash.png
   AssetGenImage get splash => const AssetGenImage('asset/image/splash.png');
 
@@ -167,7 +183,9 @@ class $AssetImageGen {
     bee,
     couponBedge,
     currentLocation,
+    flowerBee1,
     flowerFilled,
+    honeyPot1,
     logo,
     logoBee,
     logoBeeInversion,
@@ -175,6 +193,8 @@ class $AssetImageGen {
     markerSelected,
     profileBoy,
     profileGirl,
+    registerBee,
+    restBee1,
     splash,
   ];
 }

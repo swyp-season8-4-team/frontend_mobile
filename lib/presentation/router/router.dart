@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/dessert/dessert_board_view.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step1.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step2.dart';
@@ -24,6 +25,13 @@ import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step4.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step5.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step6.dart';
 import 'package:frontend_mobile/presentation/splash_view.dart';
+import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_start.dart';
+import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_step1.dart';
+import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_step2.dart';
+import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_step3.dart';
+import 'package:frontend_mobile/presentation/taste/my_taste_choice/view/my_taste_choice_step4.dart';
+import 'package:frontend_mobile/presentation/taste/result/view/result.dart';
+import 'package:frontend_mobile/presentation/taste/result/view/result_loading.dart';
 import 'package:go_router/go_router.dart';
 
 final Provider<AppRouter> appRouterProvider = Provider<AppRouter>((Ref ref) {
@@ -40,6 +48,7 @@ class AppRouter {
     initialLocation: AppRoutes.splash.name,
     navigatorKey: rootNavigatorKey,
     routes: <RouteBase>[
+      /// 스플래시
       GoRoute(
         path: AppRoutes.splash.path,
         name: AppRoutes.splash.name,
@@ -51,6 +60,8 @@ class AppRouter {
         name: AppRoutes.home.name,
         builder: (BuildContext context, GoRouterState state) => const Home(),
       ),
+
+      // 인증
       GoRoute(
         path: AppRoutes.auth.path,
         name: AppRoutes.auth.name,
@@ -294,6 +305,92 @@ class AppRouter {
             builder:
                 (BuildContext context, GoRouterState state) =>
                     const SearchStoreView(),
+          ),
+        ],
+      ),
+
+      /// 취향선택
+      GoRoute(
+        path: AppRoutes.taste.path,
+        name: AppRoutes.taste.name,
+        redirect: (_, __) => null,
+        routes: <RouteBase>[
+          /// 내 취향 선택
+          GoRoute(
+            path: AppRoutes.myTasteChoice.path,
+            name: AppRoutes.myTasteChoice.name,
+            redirect: (_, __) => null,
+            routes: <RouteBase>[
+              /// 시작 페이지
+              GoRoute(
+                path: AppRoutes.myTasteChoiceStart.path,
+                name: AppRoutes.myTasteChoiceStart.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MyTasteChoiceStart();
+                },
+              ),
+
+              /// step1
+              GoRoute(
+                path: AppRoutes.myTasteChoiceStep1.path,
+                name: AppRoutes.myTasteChoiceStep1.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MyTasteChoiceStep1();
+                },
+              ),
+
+              /// step2
+              GoRoute(
+                path: AppRoutes.myTasteChoiceStep2.path,
+                name: AppRoutes.myTasteChoiceStep2.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MyTasteChoiceStep2();
+                },
+              ),
+
+              /// step3
+              GoRoute(
+                path: AppRoutes.myTasteChoiceStep3.path,
+                name: AppRoutes.myTasteChoiceStep3.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MyTasteChoiceStep3();
+                },
+              ),
+
+              /// step4
+              GoRoute(
+                path: AppRoutes.myTasteChoiceStep4.path,
+                name: AppRoutes.myTasteChoiceStep4.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MyTasteChoiceStep4();
+                },
+              ),
+            ],
+          ),
+
+          /// 결과 로딩 화면
+          GoRoute(
+            path: AppRoutes.tasteResultLoading.path,
+            name: AppRoutes.tasteResultLoading.name,
+            builder: (BuildContext context, GoRouterState state) {
+              return const TasteResultLoading();
+            },
+          ),
+
+          /// 결과 화면
+          GoRoute(
+            path: AppRoutes.tasteResult.path,
+            name: AppRoutes.tasteResult.name,
+            builder: (BuildContext context, GoRouterState state) {
+              final Map<String, Object> object =
+                  state.extra as Map<String, Object>;
+
+              final String nickname = object['nickname'] as String;
+              final List<PreferenceModel> preferences =
+                  object['preferences'] as List<PreferenceModel>;
+
+              return TasteResult(nickname: nickname, preferences: preferences);
+            },
           ),
         ],
       ),
