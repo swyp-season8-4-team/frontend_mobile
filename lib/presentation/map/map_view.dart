@@ -67,6 +67,13 @@ class _MapViewState extends ConsumerState<MapView> {
     super.initState();
     _draggableScrollableController = DraggableScrollableController();
     _draggableScrollableController.addListener(_draggableScrollableListener);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final UserState userState = ref.read(userViewModelProvider);
+      ref
+          .read(mapViewModelProvider.notifier)
+          .getUserStoreListAll(userUuid: userState.data.userUuid);
+    });
   }
 
   void _draggableScrollableListener() {

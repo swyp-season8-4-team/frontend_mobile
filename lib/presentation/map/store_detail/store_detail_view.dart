@@ -82,7 +82,23 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
       appBar: CustomSubTopBar(
         primary: !_isTabBarPinned,
         title: _isTabBarPinned ? state.storeDetail!.name : '',
-        actions: const <Widget>[],
+        actions: <Widget>[
+          GestureDetector(
+            onTap: () {
+              context.pushNamed(
+                AppRoutes.addStoreToUserStoreList.name,
+                pathParameters: <String, String>{
+                  'id': state.storeDetail!.storeUuid,
+                },
+              );
+            },
+            child: Assets.image.flowerFilled.image(
+              width: 24,
+              height: 24,
+              color: ScaleColorConfig.primary10,
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: NestedScrollView(

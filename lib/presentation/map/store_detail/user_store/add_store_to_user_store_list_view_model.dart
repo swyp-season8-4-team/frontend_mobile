@@ -30,7 +30,7 @@ class AddStoreToUserStoreListViewModel
 
   final Ref _ref;
 
-  void updateList({required int listId}) {
+  void updateList({int? listId}) {
     state = state.copyWith(listId: listId);
   }
 
