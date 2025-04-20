@@ -8,6 +8,7 @@ import 'package:frontend_mobile/data/mapper/user_store_mapper.dart';
 import 'package:frontend_mobile/data/query_param/user_store/add_user_store_list_query_param.dart';
 import 'package:frontend_mobile/data/query_param/user_store/update_user_store_list_query_param.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
+import 'package:frontend_mobile/domain/param/user_store/add_store_to_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/add_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/delete_store_from_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/delete_user_store_list_params.dart';
@@ -107,6 +108,21 @@ class UserStoreRepositoryImpl implements UserStoreRepository {
             newName: params.newName,
             newIconColorId: params.newIconColorId,
           ),
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Result<void, CustomException>> addStoreToUserStoreList({
+    required AddStoreToUserStoreListParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        return await _api.addStoreToUserStoreList(
+          listId: params.listId,
+          storeUuid: params.storeUuid,
+          preferenceIds: params.preferenceIds,
         );
       },
     );
