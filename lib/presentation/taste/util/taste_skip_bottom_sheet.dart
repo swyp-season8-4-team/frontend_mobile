@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/component/bottom_sheet/bottom_sheet.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
 
@@ -28,12 +29,7 @@ void tasteSkipBottomSheet({
         ),
         const SizedBox(height: 16),
 
-        Container(
-          width: double.infinity,
-          height: 180,
-          color: const Color(0xFFE8E8E8),
-          child: const Align(child: Text('Illust')),
-        ),
+        Assets.image.flowerBee1.image(),
       ],
     ),
     leftButton: BottomSheetButton(label: '취소', onPressed: () => context.pop()),

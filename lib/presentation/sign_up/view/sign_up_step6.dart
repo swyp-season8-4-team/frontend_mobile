@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
 
@@ -33,12 +34,7 @@ class SignUpStep6 extends StatelessWidget {
             ),
             const SizedBox(height: 30),
 
-            Container(
-              height: 285,
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              color: const Color.fromRGBO(232, 232, 232, 1),
-              child: const Align(child: Text('Illust-area')),
-            ),
+            Assets.image.registerBee.image(),
             const SizedBox(height: 30),
 
             Container(
