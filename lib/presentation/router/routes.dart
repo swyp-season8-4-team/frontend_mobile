@@ -46,6 +46,12 @@ abstract class AppRoutes {
     path: 'store/:id',
   );
 
+  // 지도 > 가게 상세 > 저장 리스트에 가게 추가
+  static final RouteInfo addStoreToUserStoreList = RouteInfo(
+    name: '${storeDetail.name}/add-store-to-user-store-list',
+    path: 'add-store-to-user-store-list',
+  );
+
   // 지도 > 가게 상세 > 길찾기
   static final RouteInfo findPlaceByMap = RouteInfo(
     name: '${storeDetail.name}/find-place-by-map',
