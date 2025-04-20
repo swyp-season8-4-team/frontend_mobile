@@ -79,6 +79,7 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
     ref.listen(signUpViewModelProvider, (_, SignUpState next) {
       switch (next.postSignUpWithProfileStatus) {
         case Status.success:
+          ref.invalidate(signUpProvider);
           context.pushNamed(AppRoutes.signUpStep6.name);
           return;
 
@@ -216,6 +217,10 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
                               ref
                                   .read(signUpViewModelProvider.notifier)
                                   .resetPostSignUpWithProfileStatus();
+
+                              ref
+                                  .read(signUpViewModelProvider.notifier)
+                                  .resetPostNicknameStatus();
 
                               ref
                                   .read(signUpViewModelProvider.notifier)

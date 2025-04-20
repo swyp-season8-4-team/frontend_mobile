@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
@@ -65,11 +65,8 @@ class _SplashViewState extends ConsumerState<SplashView> {
     ref.watch(localLoginViewModelProvider);
 
     return Material(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: ScaleColorConfig.primary80,
-      ),
+      color: const Color(0xFF723E00),
+      child: Assets.image.splash.image(),
     );
   }
 }

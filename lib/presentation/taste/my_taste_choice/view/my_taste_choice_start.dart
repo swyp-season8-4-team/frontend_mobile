@@ -77,7 +77,12 @@ class _MyTasteChoiceStartState extends ConsumerState<MyTasteChoiceStart> {
                   const SizedBox(height: 12),
 
                   /// TODO: 어디로 이동할지 설정
-                  CustomTextButton(label: '다음에 할래요', onPressed: () {}),
+                  CustomTextButton(
+                    label: '다음에 할래요',
+                    onPressed: () {
+                      context.goNamed(AppRoutes.map.name);
+                    },
+                  ),
                 ],
               ),
             ),
