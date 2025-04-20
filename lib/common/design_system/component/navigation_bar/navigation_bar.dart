@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/util/highlight_painter.dart';
+
+final StateProvider<int> bottomNavigationCurrentIndexProvider =
+    StateProvider<int>((Ref ref) {
+      return 1;
+    });
 
 class NavigationBarType {
   NavigationBarType({
@@ -16,30 +22,31 @@ class NavigationBarType {
   final VoidCallback onTap;
 }
 
-class CustomNavigationBar extends StatefulWidget {
+class CustomNavigationBar extends ConsumerStatefulWidget {
   const CustomNavigationBar({required this.list, super.key})
     : assert(list.length <= 5, 'List length must be 5 or less.');
 
   final List<NavigationBarType> list;
 
   @override
-  State<CustomNavigationBar> createState() => _CustomNavigationBarState();
+  ConsumerState<CustomNavigationBar> createState() =>
+      _CustomNavigationBarState();
 }
 
-class _CustomNavigationBarState extends State<CustomNavigationBar> {
-  int _currentIndex = 0;
+class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
   int? _pressedIndex;
 
   Widget _item({required NavigationBarType item, required int index}) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
+    final int currentIndex = ref.read(bottomNavigationCurrentIndexProvider);
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
-        setState(() {
-          _currentIndex = index;
-        });
+        ref.read(bottomNavigationCurrentIndexProvider.notifier).state = index;
+        item.onTap.call();
       },
       onTapDown: (_) {
         setState(() {
@@ -72,7 +79,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 item.svg.path,
                 colorFilter: ColorFilter.mode(
                   /// TODO: 색 정의되면 수정
-                  _currentIndex == index
+                  currentIndex == index
                       ? ScaleColorConfig.primary70
                       : const Color(0xFF271900),
                   BlendMode.srcIn,
@@ -84,7 +91,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
               item.label,
               style: textTheme.bodySmall?.copyWith(
                 color:
-                    _currentIndex == index
+                    currentIndex == index
                         ? ScaleColorConfig.primary50
                         : colorScheme.onSurfaceVariant,
               ),
