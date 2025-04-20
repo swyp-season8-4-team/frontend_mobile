@@ -13,6 +13,13 @@ class DesserbeeBottomNavigation extends StatelessWidget {
     return CustomNavigationBar(
       list: <NavigationBarType>[
         NavigationBarType(
+          svg: Assets.icon.dessert.donutLine,
+          label: '커뮤니티',
+          onTap: () {
+            context.goNamed(AppRoutes.dessertBoard.name);
+          },
+        ),
+        NavigationBarType(
           svg: Assets.icon.map.mapLine,
           label: '지도',
           onTap: () {

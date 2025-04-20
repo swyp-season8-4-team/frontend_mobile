@@ -180,8 +180,8 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.map.path,
         name: AppRoutes.map.name,
-        builder: (BuildContext context, GoRouterState state) {
-          return const MapView();
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return const NoTransitionPage<dynamic>(child: MapView());
         },
         routes: <RouteBase>[
           /// 가게 상세 조회
@@ -294,8 +294,8 @@ class AppRouter {
           GoRoute(
             path: AppRoutes.dessertBoard.path,
             name: AppRoutes.dessertBoard.name,
-            builder: (BuildContext context, GoRouterState state) {
-              return const DessertBoard();
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return const NoTransitionPage<dynamic>(child: DessertBoard());
             },
           ),
         ],

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/floating_action_button.dart';
 import 'package:frontend_mobile/common/design_system/component/chip/suggestive_chip.dart';
-import 'package:frontend_mobile/common/design_system/component/navigation_bar/navigation_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
@@ -15,6 +14,7 @@ import 'package:frontend_mobile/domain/model/mate/mate_detail_model.dart';
 import 'package:frontend_mobile/domain/param/mate/get_mate_params.dart';
 import 'package:frontend_mobile/presentation/dessert/dessert_board_view_model.dart';
 import 'package:frontend_mobile/presentation/dessert/widget/list/dessert_list_card.dart';
+import 'package:frontend_mobile/presentation/widget/desserbee_bottom_navigation.dart';
 
 class DessertBoard extends ConsumerStatefulWidget {
   const DessertBoard({super.key});
@@ -424,25 +424,7 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
             ),
           ],
         ),
-        bottomNavigationBar: CustomNavigationBar(
-          list: <NavigationBarType>[
-            NavigationBarType(
-              svg: Assets.icon.dessert.donutLine,
-              label: '커뮤니티',
-              onTap: () {},
-            ),
-            NavigationBarType(
-              svg: Assets.icon.map.mapLine,
-              label: '지도',
-              onTap: () {},
-            ),
-            NavigationBarType(
-              svg: Assets.icon.user.user3Line,
-              label: 'MY',
-              onTap: () {},
-            ),
-          ],
-        ),
+        bottomNavigationBar: const DesserbeeBottomNavigation(),
       ),
     );
   }
