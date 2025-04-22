@@ -1,4 +1,4 @@
-package com.example.frontend_mobile
+package com.dessert.desserbee
 
 import io.flutter.embedding.android.FlutterActivity
 
