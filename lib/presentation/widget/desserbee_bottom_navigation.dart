@@ -26,6 +26,13 @@ class DesserbeeBottomNavigation extends StatelessWidget {
             context.goNamed(AppRoutes.map.name);
           },
         ),
+        NavigationBarType(
+          svg: Assets.icon.user.user3Line,
+          label: 'MY',
+          onTap: () {
+            context.goNamed(AppRoutes.myPageDefault.name);
+          },
+        ),
       ],
     );
   }

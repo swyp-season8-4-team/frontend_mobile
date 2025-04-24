@@ -842,6 +842,10 @@ class $AssetIconSystemGen {
   SvgGenImage get refresh1Line =>
       const SvgGenImage('asset/icon/system/refresh_1_line.svg');
 
+  /// File path: asset/icon/system/setting_4_line.svg
+  SvgGenImage get setting4Line =>
+      const SvgGenImage('asset/icon/system/setting_4_line.svg');
+
   /// File path: asset/icon/system/settings_2_line.svg
   SvgGenImage get settings2Line =>
       const SvgGenImage('asset/icon/system/settings_2_line.svg');
@@ -894,6 +898,7 @@ class $AssetIconSystemGen {
     questionFill,
     questionLine,
     refresh1Line,
+    setting4Line,
     settings2Line,
     share2Line,
     shareForwardLine,

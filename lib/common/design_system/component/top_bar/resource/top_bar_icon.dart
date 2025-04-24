@@ -73,4 +73,15 @@ class TopBarIcon {
   /// 닫기
   GestureDetector close({required VoidCallback? onTap}) =>
       GestureDetector(onTap: onTap, child: Assets.icon.system.closeLine.svg());
+
+  /// 설정
+  GestureDetector setting({required VoidCallback? onTap}) => GestureDetector(
+    onTap: onTap,
+    child: Assets.icon.system.setting4Line.svg(
+      colorFilter: const ColorFilter.mode(
+        ScaleColorConfig.primary10,
+        BlendMode.srcIn,
+      ),
+    ),
+  );
 }
