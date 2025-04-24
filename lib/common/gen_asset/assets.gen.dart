@@ -159,6 +159,10 @@ class $AssetImageGen {
   AssetGenImage get markerSelected =>
       const AssetGenImage('asset/image/marker_selected.png');
 
+  /// File path: asset/image/profile_bg.png
+  AssetGenImage get profileBg =>
+      const AssetGenImage('asset/image/profile_bg.png');
+
   /// File path: asset/image/profile_boy.png
   AssetGenImage get profileBoy =>
       const AssetGenImage('asset/image/profile_boy.png');
@@ -191,6 +195,7 @@ class $AssetImageGen {
     logoBeeInversion,
     marker1,
     markerSelected,
+    profileBg,
     profileBoy,
     profileGirl,
     registerBee,
