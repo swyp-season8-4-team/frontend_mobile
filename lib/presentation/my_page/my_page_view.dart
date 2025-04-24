@@ -224,7 +224,14 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
               padding: const EdgeInsets.all(16),
               child: _MenuList(
                 title: '고객 지원',
-                menus: <_MenuType>[_MenuType(label: '약관 및 정책', onTap: () {})],
+                menus: <_MenuType>[
+                  _MenuType(
+                    label: '약관 및 정책',
+                    onTap: () {
+                      context.pushNamed(AppRoutes.myPolicy.name);
+                    },
+                  ),
+                ],
               ),
             ),
           ],
@@ -351,33 +358,40 @@ class _MenuList extends StatelessWidget {
             ),
           ),
           ...menus.map(
-            (_MenuType e) => Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(color: colorScheme.outlineVariant),
+            (_MenuType e) => GestureDetector(
+              onTap: e.onTap,
+              behavior: HitTestBehavior.translucent,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: colorScheme.outlineVariant),
+                  ),
                 ),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      e.label,
-                      style: textTheme.bodySmall?.copyWith(
-                        color: ScaleColorConfig.primary20,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        e.label,
+                        style: textTheme.bodySmall?.copyWith(
+                          color: ScaleColorConfig.primary20,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Assets.icon.arrow.rightLine.svg(
-                    width: 20,
-                    height: 20,
-                    colorFilter: const ColorFilter.mode(
-                      ScaleColorConfig.neutral40,
-                      BlendMode.srcIn,
+                    const SizedBox(width: 10),
+                    Assets.icon.arrow.rightLine.svg(
+                      width: 20,
+                      height: 20,
+                      colorFilter: const ColorFilter.mode(
+                        ScaleColorConfig.neutral40,
+                        BlendMode.srcIn,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
