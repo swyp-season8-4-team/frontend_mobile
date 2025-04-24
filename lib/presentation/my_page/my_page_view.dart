@@ -75,6 +75,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
           actions: <Widget>[],
           leading: SizedBox.shrink(),
         ),
+        bottomNavigationBar: const DesserbeeBottomNavigation(),
         body: Padding(
           padding: const EdgeInsets.only(top: 198),
           child: Center(
@@ -217,6 +218,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(left: 8),
@@ -298,6 +300,7 @@ class _MyActivityMenu extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
         border: Border.all(color: colorScheme.outlineVariant),
+        color: ScaleColorConfig.neutral100,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(

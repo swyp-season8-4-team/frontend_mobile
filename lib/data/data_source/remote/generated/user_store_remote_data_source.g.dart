@@ -192,14 +192,14 @@ class _UserStoreRemoteDataSource implements UserStoreRemoteDataSource {
   }
 
   @override
-  Future<UserStoreListEntity> getStoresByUserStoreList({
+  Future<UserStoreListDetailEntity> getStoresByUserStoreList({
     required int listId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<UserStoreListEntity>(
+    final _options = _setStreamType<UserStoreListDetailEntity>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -210,9 +210,9 @@ class _UserStoreRemoteDataSource implements UserStoreRemoteDataSource {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UserStoreListEntity _value;
+    late UserStoreListDetailEntity _value;
     try {
-      _value = UserStoreListEntity.fromJson(_result.data!);
+      _value = UserStoreListDetailEntity.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

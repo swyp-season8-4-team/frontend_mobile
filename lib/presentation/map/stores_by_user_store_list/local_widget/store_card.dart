@@ -3,7 +3,7 @@ part of '../stores_by_user_store_list_view.dart';
 //ignore: unused_element
 class _StoreCard extends ConsumerWidget {
   const _StoreCard({required this.store});
-  final UserStoreModel store;
+  final UserStoreDetailModel store;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -44,7 +44,7 @@ class _UpdateUserStoreListViewState
       );
 
       viewmodel.updateListName(newListName: storeList.listName);
-      viewmodel.updateIconColorId(newIconColorId: storeList.iconColor.id);
+      viewmodel.updateIconColorId(newIconColorId: storeList.iconColorId);
 
       _textEditingController.text = storeList.listName;
     });

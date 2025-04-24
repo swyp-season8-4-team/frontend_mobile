@@ -2,10 +2,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'generated/user_store_list_entity.g.dart';
 
-//ignore_for_file: library_private_types_in_public_api
-
 @JsonSerializable()
 class UserStoreListEntity {
+  factory UserStoreListEntity.fromJson(Map<String, dynamic> json) =>
+      _$UserStoreListEntityFromJson(json);
   const UserStoreListEntity({
     required this.listId,
     required this.userUuid,
@@ -14,9 +14,6 @@ class UserStoreListEntity {
     required this.storeCount,
     this.storeData,
   });
-
-  factory UserStoreListEntity.fromJson(Map<String, dynamic> json) =>
-      _$UserStoreListEntityFromJson(json);
 
   final int listId;
   final String userUuid;
@@ -29,29 +26,22 @@ class UserStoreListEntity {
 @JsonSerializable()
 class UserStoreDataEntity {
   const UserStoreDataEntity({
-    required this.userUuid,
-    required this.storeUuid,
     required this.listId,
-    required this.listName,
-    required this.storeName,
-    required this.storeAddress,
+    required this.iconColorId,
+    required this.storeId,
+    required this.storeUuid,
+    required this.name,
     required this.latitude,
     required this.longitude,
-    this.imageUrls,
-    this.userPreferences,
   });
 
   factory UserStoreDataEntity.fromJson(Map<String, dynamic> json) =>
       _$UserStoreDataEntityFromJson(json);
-
-  final String userUuid;
-  final String storeUuid;
   final int listId;
-  final String listName;
-  final String storeName;
-  final String storeAddress;
+  final int iconColorId;
+  final int storeId;
+  final String storeUuid;
+  final String name;
   final double latitude;
   final double longitude;
-  final List<String>? imageUrls;
-  final List<int>? userPreferences;
 }

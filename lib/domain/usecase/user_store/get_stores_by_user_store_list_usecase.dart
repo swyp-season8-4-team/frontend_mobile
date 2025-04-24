@@ -3,7 +3,7 @@ import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
 import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/data/repository_impl/user_store_repository_impl.dart';
-import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
+import 'package:frontend_mobile/domain/model/user_store/user_store_list_detail_model.dart';
 import 'package:frontend_mobile/domain/param/user_store/get_stores_by_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/repository/user_store_repository.dart';
 
@@ -16,14 +16,15 @@ getStoresByUserStoreListUsecaseProvider =
     });
 
 class GetStoresByUserStoreListUsecase
-    implements Usecase<UserStoreListModel, GetStoresByUserStoreListParams> {
+    implements
+        Usecase<UserStoreListDetailModel, GetStoresByUserStoreListParams> {
   const GetStoresByUserStoreListUsecase({
     required UserStoreRepository repository,
   }) : _repository = repository;
   final UserStoreRepository _repository;
 
   @override
-  Future<Result<UserStoreListModel, CustomException>> call({
+  Future<Result<UserStoreListDetailModel, CustomException>> call({
     required GetStoresByUserStoreListParams params,
   }) async {
     return await _repository.getStoresByUserStoreList(params: params);

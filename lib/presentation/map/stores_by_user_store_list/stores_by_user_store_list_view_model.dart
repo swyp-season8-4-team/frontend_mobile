@@ -7,7 +7,7 @@ import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
-import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
+import 'package:frontend_mobile/domain/model/user_store/user_store_list_detail_model.dart';
 import 'package:frontend_mobile/domain/param/user_store/delete_store_from_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/get_stores_by_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/usecase/preference/get_all_preferences_usecase.dart';
@@ -69,14 +69,14 @@ class StoresByUserStoreListViewModel
   Future<StoresByUserStoreListState> getStores({required int listId}) async {
     state = state.copyWith(getStoresByUserStoreListStatus: Status.loading);
 
-    final Result<UserStoreListModel, CustomException> result =
+    final Result<UserStoreListDetailModel, CustomException> result =
         await Usecase.execute(
           usecase: _ref.read(getStoresByUserStoreListUsecaseProvider),
           params: GetStoresByUserStoreListParams(listId: listId),
         );
 
     result.map(
-      success: (Success<UserStoreListModel, CustomException> success) {
+      success: (Success<UserStoreListDetailModel, CustomException> success) {
         state = state.copyWith(
           getStoresByUserStoreListStatus: Status.success,
           storeList: success.data,
@@ -84,7 +84,7 @@ class StoresByUserStoreListViewModel
               success.data.storeData != null
                   ? success.data.storeData!
                       .map(
-                        (UserStoreModel e) => (
+                        (UserStoreDetailModel e) => (
                           storeUuid: e.storeUuid,
                           isOptionMenuVisible: false,
                         ),
@@ -93,7 +93,7 @@ class StoresByUserStoreListViewModel
                   : <({bool isOptionMenuVisible, String storeUuid})>[],
         );
       },
-      failure: (Failure<UserStoreListModel, CustomException> failure) {
+      failure: (Failure<UserStoreListDetailModel, CustomException> failure) {
         state = state.copyWith(
           getStoresByUserStoreListStatus: Status.failure,
           getStoresByUserStoreListException: failure.exception.model,

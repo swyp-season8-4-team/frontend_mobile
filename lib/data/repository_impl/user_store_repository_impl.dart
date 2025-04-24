@@ -3,10 +3,12 @@ import 'package:frontend_mobile/core/resource/api_call.dart';
 import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
 import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/data/data_source/remote/user_store_remote_data_source.dart';
+import 'package:frontend_mobile/data/entity/user_store/user_store_list_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/user_store/user_store_list_entity.dart';
 import 'package:frontend_mobile/data/mapper/user_store_mapper.dart';
 import 'package:frontend_mobile/data/query_param/user_store/add_user_store_list_query_param.dart';
 import 'package:frontend_mobile/data/query_param/user_store/update_user_store_list_query_param.dart';
+import 'package:frontend_mobile/domain/model/user_store/user_store_list_detail_model.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
 import 'package:frontend_mobile/domain/param/user_store/add_store_to_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/add_user_store_list_params.dart';
@@ -58,14 +60,14 @@ class UserStoreRepositoryImpl implements UserStoreRepository {
   }
 
   @override
-  Future<Result<UserStoreListModel, CustomException>> getStoresByUserStoreList({
+  Future<Result<UserStoreListDetailModel, CustomException>>
+  getStoresByUserStoreList({
     required GetStoresByUserStoreListParams params,
   }) async {
     return await apiCall(
       api: () async {
-        final UserStoreListEntity result = await _api.getStoresByUserStoreList(
-          listId: params.listId,
-        );
+        final UserStoreListDetailEntity result = await _api
+            .getStoresByUserStoreList(listId: params.listId);
         return result.toModel();
       },
     );

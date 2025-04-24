@@ -1,14 +1,16 @@
 import 'package:collection/collection.dart';
 import 'package:frontend_mobile/core/resource/constant.dart';
+import 'package:frontend_mobile/data/entity/user_store/user_store_list_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/user_store/user_store_list_entity.dart';
 import 'package:frontend_mobile/data/entity/user_store/user_store_list_summary_entity.dart';
 import 'package:frontend_mobile/data/entity/user_store/user_store_location_entity.dart';
+import 'package:frontend_mobile/domain/model/user_store/user_store_list_detail_model.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_summary_model.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_location_model.dart';
 
-extension UserStoreListEntityExt on UserStoreListEntity {
-  UserStoreListModel toModel() => UserStoreListModel(
+extension UserStoreListDetailEntityExt on UserStoreListDetailEntity {
+  UserStoreListDetailModel toModel() => UserStoreListDetailModel(
     listId: listId,
     userUuid: userUuid,
     listName: listName,
@@ -22,7 +24,7 @@ extension UserStoreListEntityExt on UserStoreListEntity {
         storeData
             ?.map(
               //ignore: always_specify_types
-              (e) => UserStoreModel(
+              (e) => UserStoreDetailModel(
                 userUuid: e.userUuid,
                 storeUuid: e.storeUuid,
                 listId: e.listId,
@@ -55,5 +57,29 @@ extension UserStoreLocationEntityExt on UserStoreLocationEntity {
     name: name,
     latitude: latitude,
     longitude: longitude,
+  );
+}
+
+extension UserStoreListEntityExt on UserStoreListEntity {
+  UserStoreListModel toModel() => UserStoreListModel(
+    listId: listId,
+    userUuid: userUuid,
+    listName: listName,
+    iconColorId: iconColorId,
+    storeCount: storeCount,
+    storeData:
+        storeData
+            ?.map(
+              (UserStoreDataEntity e) => UserStoreDataModel(
+                listId: e.listId,
+                iconColorId: e.iconColorId,
+                storeId: e.storeId,
+                storeUuid: e.storeUuid,
+                name: e.name,
+                latitude: e.latitude,
+                longitude: e.longitude,
+              ),
+            )
+            .toList(),
   );
 }

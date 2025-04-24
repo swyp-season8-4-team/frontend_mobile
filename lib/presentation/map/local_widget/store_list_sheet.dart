@@ -155,7 +155,13 @@ class _StoreListSheet extends ConsumerWidget {
                                 horizontal: 16,
                               ),
                               child: CustomSavedStoreListItem.withOptionMenus(
-                                leftIconColor: userStoreList.iconColor.color,
+                                leftIconColor:
+                                    StoreListIconColor.values
+                                        .firstWhere(
+                                          (StoreListIconColor e) =>
+                                              e.id == userStoreList.iconColorId,
+                                        )
+                                        .color,
                                 name: userStoreList.listName,
                                 storeLength:
                                     userStoreList.storeData?.length ?? 0,
