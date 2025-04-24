@@ -213,4 +213,10 @@ abstract class AppRoutes {
     name: '${myPage.name}/default',
     path: 'default',
   );
+
+  /// 마이페이지 > Default > 설정
+  static RouteInfo myPageSetting = RouteInfo(
+    name: '${myPageDefault.name}/setting',
+    path: 'setting',
+  );
 }

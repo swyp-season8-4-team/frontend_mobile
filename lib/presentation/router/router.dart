@@ -18,6 +18,7 @@ import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/store
 import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/update/update_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/my_page/my_page_view.dart';
+import 'package:frontend_mobile/presentation/my_page/setting/my_setting_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step1.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step2.dart';
@@ -437,6 +438,16 @@ class AppRouter {
             pageBuilder:
                 (BuildContext context, GoRouterState state) =>
                     const NoTransitionPage<dynamic>(child: MyPageView()),
+            routes: <RouteBase>[
+              /// 환경설정
+              GoRoute(
+                path: AppRoutes.myPageSetting.path,
+                name: AppRoutes.myPageSetting.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MySettingView();
+                },
+              ),
+            ],
           ),
         ],
       ),
