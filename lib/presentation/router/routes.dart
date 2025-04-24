@@ -204,4 +204,19 @@ abstract class AppRoutes {
     name: '${dessert.name}/board',
     path: '/board',
   );
+
+  /// 마이페이지
+  static RouteInfo myPage = const RouteInfo(name: '/my_page', path: '/my_page');
+
+  /// 마이페이지 > Default
+  static RouteInfo myPageDefault = RouteInfo(
+    name: '${myPage.name}/default',
+    path: 'default',
+  );
+
+  /// 마이페이지 > Default > 설정
+  static RouteInfo myPageSetting = RouteInfo(
+    name: '${myPageDefault.name}/setting',
+    path: 'setting',
+  );
 }

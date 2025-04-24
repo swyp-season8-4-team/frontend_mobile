@@ -13,7 +13,7 @@ class _StoreList extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-          final UserStoreModel store = state.storeList!.storeData![index];
+          final UserStoreDetailModel store = state.storeList!.storeData![index];
           return Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: GestureDetector(

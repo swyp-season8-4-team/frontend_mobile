@@ -6,9 +6,9 @@ part of '../user_store_list_detail_entity.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetUserStoreListEntity _$GetUserStoreListEntityFromJson(
+UserStoreListDetailEntity _$UserStoreListDetailEntityFromJson(
   Map<String, dynamic> json,
-) => GetUserStoreListEntity(
+) => UserStoreListDetailEntity(
   listId: (json['listId'] as num).toInt(),
   userUuid: json['userUuid'] as String,
   listName: json['listName'] as String,
@@ -16,12 +16,15 @@ GetUserStoreListEntity _$GetUserStoreListEntityFromJson(
   storeCount: (json['storeCount'] as num).toInt(),
   storeData:
       (json['storeData'] as List<dynamic>?)
-          ?.map((e) => _StoreData.fromJson(e as Map<String, dynamic>))
+          ?.map(
+            (e) =>
+                UserStoreDataDetailEntity.fromJson(e as Map<String, dynamic>),
+          )
           .toList(),
 );
 
-Map<String, dynamic> _$GetUserStoreListEntityToJson(
-  GetUserStoreListEntity instance,
+Map<String, dynamic> _$UserStoreListDetailEntityToJson(
+  UserStoreListDetailEntity instance,
 ) => <String, dynamic>{
   'listId': instance.listId,
   'userUuid': instance.userUuid,
@@ -31,7 +34,9 @@ Map<String, dynamic> _$GetUserStoreListEntityToJson(
   'storeData': instance.storeData,
 };
 
-_StoreData _$StoreDataFromJson(Map<String, dynamic> json) => _StoreData(
+UserStoreDataDetailEntity _$UserStoreDataDetailEntityFromJson(
+  Map<String, dynamic> json,
+) => UserStoreDataDetailEntity(
   userUuid: json['userUuid'] as String,
   storeUuid: json['storeUuid'] as String,
   listId: (json['listId'] as num).toInt(),
@@ -48,16 +53,17 @@ _StoreData _$StoreDataFromJson(Map<String, dynamic> json) => _StoreData(
           .toList(),
 );
 
-Map<String, dynamic> _$StoreDataToJson(_StoreData instance) =>
-    <String, dynamic>{
-      'userUuid': instance.userUuid,
-      'storeUuid': instance.storeUuid,
-      'listId': instance.listId,
-      'listName': instance.listName,
-      'storeName': instance.storeName,
-      'storeAddress': instance.storeAddress,
-      'latitude': instance.latitude,
-      'longitude': instance.longitude,
-      'imageUrls': instance.imageUrls,
-      'userPreferences': instance.userPreferences,
-    };
+Map<String, dynamic> _$UserStoreDataDetailEntityToJson(
+  UserStoreDataDetailEntity instance,
+) => <String, dynamic>{
+  'userUuid': instance.userUuid,
+  'storeUuid': instance.storeUuid,
+  'listId': instance.listId,
+  'listName': instance.listName,
+  'storeName': instance.storeName,
+  'storeAddress': instance.storeAddress,
+  'latitude': instance.latitude,
+  'longitude': instance.longitude,
+  'imageUrls': instance.imageUrls,
+  'userPreferences': instance.userPreferences,
+};

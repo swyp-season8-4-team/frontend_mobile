@@ -11,15 +11,19 @@ import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
-import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
-import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
-import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:frontend_mobile/presentation/map/user_store/update/update_user_store_list_view_model.dart';
 import 'package:go_router/go_router.dart';
 
 class UpdateUserStoreListView extends ConsumerStatefulWidget {
-  const UpdateUserStoreListView({required this.listId, super.key});
+  const UpdateUserStoreListView({
+    required this.listId,
+    required this.listName,
+    required this.iconColorId,
+    super.key,
+  });
   final int listId;
+  final String listName;
+  final int iconColorId;
 
   @override
   ConsumerState<UpdateUserStoreListView> createState() =>
@@ -34,19 +38,14 @@ class _UpdateUserStoreListViewState
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final MapState mapState = ref.read(mapViewModelProvider);
-
-      final UserStoreListModel storeList = mapState.userStoreLists.firstWhere(
-        (UserStoreListModel e) => e.listId == widget.listId,
-      );
       final UpdateUserStoreListViewModel viewmodel = ref.read(
         updateUserStoreListViewModelProvider.notifier,
       );
 
-      viewmodel.updateListName(newListName: storeList.listName);
-      viewmodel.updateIconColorId(newIconColorId: storeList.iconColor.id);
+      viewmodel.updateListName(newListName: widget.listName);
+      viewmodel.updateIconColorId(newIconColorId: widget.iconColorId);
 
-      _textEditingController.text = storeList.listName;
+      _textEditingController.text = widget.listName;
     });
   }
 
@@ -69,10 +68,6 @@ class _UpdateUserStoreListViewState
       ),
       (_, Status next) {
         if (next.isSuccess) {
-          final UserState userState = ref.read(userViewModelProvider);
-          ref
-              .read(mapViewModelProvider.notifier)
-              .getUserStoreListAll(userUuid: userState.data.userUuid);
           context.pop(true);
         }
       },

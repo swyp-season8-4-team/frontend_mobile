@@ -93,6 +93,14 @@ class _StoreListSheet extends ConsumerWidget {
 
                                 if (result == true && context.mounted) {
                                   _showSuccessAddStoreList(context, ref);
+                                  final UserState userState = ref.read(
+                                    userViewModelProvider,
+                                  );
+                                  await ref
+                                      .read(mapViewModelProvider.notifier)
+                                      .getUserStoreListAll(
+                                        userUuid: userState.data.userUuid,
+                                      );
                                 }
                               },
                               svg: Assets.icon.system.addCircleLine,
@@ -124,6 +132,14 @@ class _StoreListSheet extends ConsumerWidget {
 
                                 if (result == true && context.mounted) {
                                   _showSuccessAddStoreList(context, ref);
+                                  final UserState userState = ref.read(
+                                    userViewModelProvider,
+                                  );
+                                  await ref
+                                      .read(mapViewModelProvider.notifier)
+                                      .getUserStoreListAll(
+                                        userUuid: userState.data.userUuid,
+                                      );
                                 }
                               },
                               svg: Assets.icon.system.addCircleLine,
@@ -155,7 +171,13 @@ class _StoreListSheet extends ConsumerWidget {
                                 horizontal: 16,
                               ),
                               child: CustomSavedStoreListItem.withOptionMenus(
-                                leftIconColor: userStoreList.iconColor.color,
+                                leftIconColor:
+                                    StoreListIconColor.values
+                                        .firstWhere(
+                                          (StoreListIconColor e) =>
+                                              e.id == userStoreList.iconColorId,
+                                        )
+                                        .color,
                                 name: userStoreList.listName,
                                 storeLength:
                                     userStoreList.storeData?.length ?? 0,
@@ -164,15 +186,33 @@ class _StoreListSheet extends ConsumerWidget {
                                   CustomOptionMenu(
                                     svg: Assets.icon.editor.pencil1Line,
                                     text: '수정하기',
-                                    onTap: () {
+                                    onTap: () async {
                                       viewmodel.invisibleAllOptionMenu();
-                                      context.pushNamed(
+                                      final Object?
+                                      result = await context.pushNamed(
                                         AppRoutes.updateUserStoreList.name,
                                         pathParameters: <String, String>{
                                           'listId':
                                               userStoreList.listId.toString(),
                                         },
+                                        queryParameters: <String, String>{
+                                          'listName': userStoreList.listName,
+                                          'iconColorId':
+                                              userStoreList.iconColorId
+                                                  .toString(),
+                                        },
                                       );
+
+                                      if (result == true) {
+                                        final UserState userState = ref.read(
+                                          userViewModelProvider,
+                                        );
+                                        await ref
+                                            .read(mapViewModelProvider.notifier)
+                                            .getUserStoreListAll(
+                                              userUuid: userState.data.userUuid,
+                                            );
+                                      }
                                     },
                                   ),
                                   CustomOptionMenu(
@@ -223,6 +263,9 @@ class _StoreListSheet extends ConsumerWidget {
                                     AppRoutes.storesByUserStoreList.name,
                                     pathParameters: <String, String>{
                                       'listId': userStoreList.listId.toString(),
+                                    },
+                                    queryParameters: <String, String>{
+                                      'listName': userStoreList.listName,
                                     },
                                   );
                                 },

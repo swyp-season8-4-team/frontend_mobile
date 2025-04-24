@@ -132,7 +132,7 @@ class __$$LocalLoginStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LocalLoginStateImpl implements _LocalLoginState {
+class _$LocalLoginStateImpl extends _LocalLoginState {
   const _$LocalLoginStateImpl({
     this.status = Status.initial,
     this.data = const UserDetailModel(
@@ -154,7 +154,7 @@ class _$LocalLoginStateImpl implements _LocalLoginState {
       message: '',
       timestamp: '',
     ),
-  });
+  }) : super._();
 
   @override
   @JsonKey()
@@ -197,12 +197,13 @@ class _$LocalLoginStateImpl implements _LocalLoginState {
       );
 }
 
-abstract class _LocalLoginState implements UserState {
+abstract class _LocalLoginState extends UserState {
   const factory _LocalLoginState({
     final Status status,
     final UserDetailModel data,
     final ExceptionModel exception,
   }) = _$LocalLoginStateImpl;
+  const _LocalLoginState._() : super._();
 
   @override
   Status get status;

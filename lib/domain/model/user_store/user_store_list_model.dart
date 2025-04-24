@@ -1,45 +1,37 @@
-import 'package:frontend_mobile/core/resource/constant.dart';
-
 class UserStoreListModel {
   const UserStoreListModel({
     required this.listId,
     required this.userUuid,
     required this.listName,
-    required this.iconColor,
+    required this.iconColorId,
     required this.storeCount,
-    required this.storeData,
+    this.storeData,
   });
 
   final int listId;
   final String userUuid;
   final String listName;
-  final StoreListIconColor iconColor;
+  final int iconColorId;
   final int storeCount;
-  final List<UserStoreModel>? storeData;
+  final List<UserStoreDataModel>? storeData;
 }
 
-class UserStoreModel {
-  const UserStoreModel({
-    required this.userUuid,
-    required this.storeUuid,
+class UserStoreDataModel {
+  const UserStoreDataModel({
     required this.listId,
-    required this.listName,
-    required this.storeName,
-    required this.storeAddress,
+    required this.iconColorId,
+    required this.storeId,
+    required this.storeUuid,
+    required this.name,
     required this.latitude,
     required this.longitude,
-    required this.imageUrls,
-    required this.userPreferences,
   });
 
-  final String userUuid;
-  final String storeUuid;
   final int listId;
-  final String listName;
-  final String storeName;
-  final String storeAddress;
+  final int iconColorId;
+  final int storeId;
+  final String storeUuid;
+  final String name;
   final double latitude;
   final double longitude;
-  final List<String>? imageUrls;
-  final List<int>? userPreferences;
 }

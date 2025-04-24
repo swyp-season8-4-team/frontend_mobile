@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
+import 'package:frontend_mobile/data/entity/user_store/user_store_list_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/user_store/user_store_list_entity.dart';
 import 'package:frontend_mobile/data/entity/user_store/user_store_list_summary_entity.dart';
 import 'package:frontend_mobile/data/entity/user_store/user_store_location_entity.dart';
@@ -67,7 +68,7 @@ abstract class UserStoreRemoteDataSource {
 
   /// [리스트에 저장된 가게 조회](https://release.desserbee.com/swagger-ui/index.html#/UserStore/getStoresByList)
   @GET('/api/user-store/lists/{listId}/stores')
-  Future<UserStoreListEntity> getStoresByUserStoreList({
+  Future<UserStoreListDetailEntity> getStoresByUserStoreList({
     @Path() required int listId,
   });
 

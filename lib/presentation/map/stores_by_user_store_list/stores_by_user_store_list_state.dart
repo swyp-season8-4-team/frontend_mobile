@@ -9,7 +9,7 @@ class StoresByUserStoreListState with _$StoresByUserStoreListState {
     @Default(Status.loading) Status getAllPreferencesStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel getAllPreferencesException,
-    UserStoreListModel? storeList,
+    UserStoreListDetailModel? storeList,
     @Default(Status.loading) Status getStoresByUserStoreListStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel getStoresByUserStoreListException,

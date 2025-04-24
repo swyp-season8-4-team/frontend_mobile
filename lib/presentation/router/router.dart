@@ -17,6 +17,8 @@ import 'package:frontend_mobile/presentation/map/store_detail/user_store/add_sto
 import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/stores_by_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/update/update_user_store_list_view.dart';
+import 'package:frontend_mobile/presentation/my_page/my_page_view.dart';
+import 'package:frontend_mobile/presentation/my_page/setting/my_setting_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step1.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step2.dart';
@@ -269,10 +271,17 @@ class AppRouter {
             name: AppRoutes.updateUserStoreList.name,
             builder: (BuildContext context, GoRouterState state) {
               final String? listId = state.pathParameters['listId'];
-              if (listId == null) {
+              final String? listName = state.uri.queryParameters['listName'];
+              final String? iconColorId =
+                  state.uri.queryParameters['iconColorId'];
+              if (listId == null || listName == null || iconColorId == null) {
                 return const Scaffold();
               }
-              return UpdateUserStoreListView(listId: int.parse(listId));
+              return UpdateUserStoreListView(
+                listId: int.parse(listId),
+                listName: listName,
+                iconColorId: int.parse(iconColorId),
+              );
             },
           ),
 
@@ -282,10 +291,14 @@ class AppRouter {
             name: AppRoutes.storesByUserStoreList.name,
             builder: (BuildContext context, GoRouterState state) {
               final String? listId = state.pathParameters['listId'];
-              if (listId == null) {
+              final String? listName = state.uri.queryParameters['listName'];
+              if (listId == null || listName == null) {
                 return const Scaffold();
               }
-              return StoresByUserStoreListView(listId: int.parse(listId));
+              return StoresByUserStoreListView(
+                listId: int.parse(listId),
+                listName: listName,
+              );
             },
           ),
 
@@ -408,6 +421,33 @@ class AppRouter {
             pageBuilder: (BuildContext context, GoRouterState state) {
               return const NoTransitionPage<dynamic>(child: DessertBoard());
             },
+          ),
+        ],
+      ),
+
+      /// 마이페이지
+      GoRoute(
+        path: AppRoutes.myPage.path,
+        name: AppRoutes.myPage.name,
+        redirect: (_, __) => null,
+        routes: <RouteBase>[
+          /// Default
+          GoRoute(
+            path: AppRoutes.myPageDefault.path,
+            name: AppRoutes.myPageDefault.name,
+            pageBuilder:
+                (BuildContext context, GoRouterState state) =>
+                    const NoTransitionPage<dynamic>(child: MyPageView()),
+            routes: <RouteBase>[
+              /// 환경설정
+              GoRoute(
+                path: AppRoutes.myPageSetting.path,
+                name: AppRoutes.myPageSetting.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MySettingView();
+                },
+              ),
+            ],
           ),
         ],
       ),

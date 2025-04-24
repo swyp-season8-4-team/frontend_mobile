@@ -122,6 +122,9 @@ class $AssetImageGen {
   /// File path: asset/image/bee.png
   AssetGenImage get bee => const AssetGenImage('asset/image/bee.png');
 
+  /// File path: asset/image/bookmark.png
+  AssetGenImage get bookmark => const AssetGenImage('asset/image/bookmark.png');
+
   /// File path: asset/image/coupon_bedge.png
   AssetGenImage get couponBedge =>
       const AssetGenImage('asset/image/coupon_bedge.png');
@@ -159,6 +162,10 @@ class $AssetImageGen {
   AssetGenImage get markerSelected =>
       const AssetGenImage('asset/image/marker_selected.png');
 
+  /// File path: asset/image/profile_bg.png
+  AssetGenImage get profileBg =>
+      const AssetGenImage('asset/image/profile_bg.png');
+
   /// File path: asset/image/profile_boy.png
   AssetGenImage get profileBoy =>
       const AssetGenImage('asset/image/profile_boy.png');
@@ -181,6 +188,7 @@ class $AssetImageGen {
   /// List of all assets
   List<AssetGenImage> get values => [
     bee,
+    bookmark,
     couponBedge,
     currentLocation,
     flowerBee1,
@@ -191,6 +199,7 @@ class $AssetImageGen {
     logoBeeInversion,
     marker1,
     markerSelected,
+    profileBg,
     profileBoy,
     profileGirl,
     registerBee,
@@ -842,6 +851,10 @@ class $AssetIconSystemGen {
   SvgGenImage get refresh1Line =>
       const SvgGenImage('asset/icon/system/refresh_1_line.svg');
 
+  /// File path: asset/icon/system/setting_4_line.svg
+  SvgGenImage get setting4Line =>
+      const SvgGenImage('asset/icon/system/setting_4_line.svg');
+
   /// File path: asset/icon/system/settings_2_line.svg
   SvgGenImage get settings2Line =>
       const SvgGenImage('asset/icon/system/settings_2_line.svg');
@@ -894,6 +907,7 @@ class $AssetIconSystemGen {
     questionFill,
     questionLine,
     refresh1Line,
+    setting4Line,
     settings2Line,
     share2Line,
     shareForwardLine,

@@ -6,6 +6,7 @@ import 'package:frontend_mobile/common/design_system/component/button/outline_bu
 import 'package:frontend_mobile/common/design_system/component/etc/map/saved_store_list.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
@@ -68,7 +69,8 @@ class _AddStoreToUserStoreListViewState
               (UserStoreListModel e) =>
                   e.storeData == null ||
                   e.storeData!.firstWhereOrNull(
-                        (UserStoreModel e) => e.storeUuid == widget.storeUuid,
+                        (UserStoreDataModel e) =>
+                            e.storeUuid == widget.storeUuid,
                       ) ==
                       null,
             )
@@ -200,7 +202,13 @@ class _AddStoreToUserStoreListViewState
                         vertical: 10,
                       ),
                       child: CustomSavedStoreListItem.withCheckbox(
-                        leftIconColor: storeList.iconColor.color,
+                        leftIconColor:
+                            StoreListIconColor.values
+                                .firstWhere(
+                                  (StoreListIconColor e) =>
+                                      e.id == storeList.iconColorId,
+                                )
+                                .color,
                         name: storeList.listName,
                         storeLength: storeList.storeData?.length ?? 0,
                         onCheckboxTap: () {
