@@ -17,6 +17,7 @@ import 'package:frontend_mobile/presentation/map/store_detail/user_store/add_sto
 import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/stores_by_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/update/update_user_store_list_view.dart';
+import 'package:frontend_mobile/presentation/my_page/my_page_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step1.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step2.dart';
@@ -408,6 +409,23 @@ class AppRouter {
             pageBuilder: (BuildContext context, GoRouterState state) {
               return const NoTransitionPage<dynamic>(child: DessertBoard());
             },
+          ),
+        ],
+      ),
+
+      /// 마이페이지
+      GoRoute(
+        path: AppRoutes.myPage.path,
+        name: AppRoutes.myPage.name,
+        redirect: (_, __) => null,
+        routes: <RouteBase>[
+          /// Default
+          GoRoute(
+            path: AppRoutes.myPageDefault.path,
+            name: AppRoutes.myPageDefault.name,
+            pageBuilder:
+                (BuildContext context, GoRouterState state) =>
+                    const NoTransitionPage<dynamic>(child: MyPageView()),
           ),
         ],
       ),
