@@ -1,17 +1,18 @@
-import 'dart:typed_data';
-
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_setting.dart';
+import 'package:frontend_mobile/common/design_system/component/button/pill_outline_button.dart';
+import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_edit.dart';
 import 'package:frontend_mobile/common/design_system/component/tag/label_tag.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/global/preference/preference_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
+import 'package:frontend_mobile/presentation/my_page/my_page_view_model.dart';
 import 'package:frontend_mobile/presentation/widget/desserbee_bottom_navigation.dart';
 
 class MyPageView extends ConsumerStatefulWidget {
@@ -25,12 +26,24 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
   final TopBarIcon _topBarIcon = TopBarIcon();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final UserState userState = ref.read(userViewModelProvider);
+      await ref
+          .read(myPageViewModelProvider.notifier)
+          .getUserStoreListAll(userUuid: userState.data.userUuid);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     final UserState userState = ref.watch(userViewModelProvider);
     final PreferenceState preferences = ref.watch(preferenceViewModelProvider);
+    final MyPageState state = ref.watch(myPageViewModelProvider);
 
     // 유저의 취향
     final List<PreferenceModel> userPreferences =
@@ -40,11 +53,79 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
             )
             .toList();
 
+    // TODO: 로딩 UI 개선 필요
+    if (userState.status.isLoading ||
+        state.getUserStoreListAllStatus.isLoading) {
+      return const Scaffold(
+        appBar: CustomSubTopBar(
+          leading: SizedBox.shrink(),
+          title: 'MY',
+          actions: <Widget>[],
+        ),
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    // TODO: 에러 UI 개선 필요 (현재는 임의로 설정함)
+    if (userState.status.isFailure ||
+        state.getUserStoreListAllStatus.isFailure) {
+      return Scaffold(
+        appBar: const CustomSubTopBar(
+          title: 'MY',
+          actions: <Widget>[],
+          leading: SizedBox.shrink(),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 198),
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                Assets.icon.system.warningFill.svg(
+                  colorFilter: const ColorFilter.mode(
+                    ScaleColorConfig.primary80,
+                    BlendMode.srcIn,
+                  ),
+                  width: 51.4,
+                  height: 51.4,
+                ),
+                const SizedBox(height: 8.29),
+                Text(
+                  '일시적인 오류로\n정보를 불러올 수 없어요',
+                  style: textTheme.titleMedium?.copyWith(
+                    color: ScaleColorConfig.primary20,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 14),
+                CustomPillOutlineButton.medium(
+                  width: 126,
+                  label: '다시 시도',
+                  onPressed: () {
+                    ref.read(userViewModelProvider.notifier).getMe();
+                    ref
+                        .read(myPageViewModelProvider.notifier)
+                        .getUserStoreListAll(userUuid: userState.data.userUuid);
+                  },
+                  isSelected: false,
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: CustomSubTopBar(
         leading: const SizedBox.shrink(),
         title: 'MY',
-        actions: <Widget>[_topBarIcon.setting(onTap: () {})],
+        actions: <Widget>[
+          _topBarIcon.setting(
+            onTap: () {
+              // TODO: 추가 예정
+            },
+          ),
+        ],
       ),
       bottomNavigationBar: const DesserbeeBottomNavigation(),
       body: SingleChildScrollView(
@@ -54,7 +135,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
             Stack(
               children: <Widget>[
                 Container(
-                  height: 76 + 45,
+                  height: 76 + 31,
                   color: ScaleColorConfig.neutral100,
                   width: MediaQuery.of(context).size.width,
                   child: Column(
@@ -67,7 +148,6 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 45),
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -75,14 +155,12 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      if (userState.isMale)
-                        CustomProfilePhotoSetting.boy(
-                          onCameraTap: (Uint8List a) {},
-                        )
-                      else
-                        CustomProfilePhotoSetting.girl(
-                          onCameraTap: (Uint8List a) {},
-                        ),
+                      GestureDetector(
+                        child:
+                            userState.isMale
+                                ? const CustomProfilePhotoEdit.boy()
+                                : const CustomProfilePhotoEdit.girl(),
+                      ),
                     ],
                   ),
                 ),
@@ -136,6 +214,37 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Text(
+                      '내 활동',
+                      style: textTheme.titleSmall?.copyWith(
+                        color: ScaleColorConfig.primary20,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: _MyActivityMenu(
+                          png: Assets.image.bookmark,
+                          label: '찜한 가게',
+                          count: state.storeAllCount,
+                          onTap: () {
+                            // TODO: 찜한 가게 페이지로 이동
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -163,6 +272,57 @@ class _ViewMoreTag extends StatelessWidget {
           border: Border.all(color: colorScheme.outline),
           color: ScaleColorConfig.neutral100,
         ),
+      ),
+    );
+  }
+}
+
+// 내 활동 메뉴 버튼 UI
+class _MyActivityMenu extends StatelessWidget {
+  const _MyActivityMenu({
+    required this.png,
+    required this.label,
+    required this.count,
+    required this.onTap,
+  });
+  final AssetGenImage png;
+  final String label;
+  final int count;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        border: Border.all(color: colorScheme.outlineVariant),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: <Widget>[
+          SizedBox.square(
+            dimension: 24,
+            child: png.image(width: 20, height: 20, fit: BoxFit.cover),
+          ),
+          const SizedBox(width: 10),
+          Text(
+            label,
+            style: textTheme.labelLarge?.copyWith(
+              color: ScaleColorConfig.neutral20,
+            ),
+          ),
+          const SizedBox(width: 4),
+          Expanded(
+            child: Text(
+              '$count',
+              style: textTheme.labelLarge?.copyWith(
+                color: ScaleColorConfig.success50,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
