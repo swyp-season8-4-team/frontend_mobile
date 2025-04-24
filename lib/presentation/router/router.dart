@@ -19,6 +19,7 @@ import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_l
 import 'package:frontend_mobile/presentation/map/user_store/update/update_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/my_page/my_page_view.dart';
 import 'package:frontend_mobile/presentation/my_page/setting/my_setting_view.dart';
+import 'package:frontend_mobile/presentation/my_page/user_store/my_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step1.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step2.dart';
@@ -445,6 +446,15 @@ class AppRouter {
                 name: AppRoutes.myPageSetting.name,
                 builder: (BuildContext context, GoRouterState state) {
                   return const MySettingView();
+                },
+              ),
+
+              /// 저장 리스트 (찜한 가게)
+              GoRoute(
+                path: AppRoutes.myUserStoreList.path,
+                name: AppRoutes.myUserStoreList.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MyUserStoreListView();
                 },
               ),
             ],

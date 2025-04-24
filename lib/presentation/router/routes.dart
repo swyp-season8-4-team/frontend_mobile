@@ -219,4 +219,10 @@ abstract class AppRoutes {
     name: '${myPageDefault.name}/setting',
     path: 'setting',
   );
+
+  /// 마이페이지 > Default > 저장 리스트 (찜한 가게)
+  static RouteInfo myUserStoreList = RouteInfo(
+    name: '${myPageDefault.name}/user_store_list',
+    path: 'user_store_list',
+  );
 }
