@@ -23,4 +23,8 @@ class UserState with _$UserState {
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel exception,
   }) = _LocalLoginState;
+
+  const UserState._();
+
+  bool get isMale => data.gender == 'MALE';
 }

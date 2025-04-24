@@ -20,7 +20,9 @@ preferenceViewModelProvider =
     );
 
 class PreferenceViewModel extends StateNotifier<PreferenceState> {
-  PreferenceViewModel({required this.ref}) : super(const PreferenceState());
+  PreferenceViewModel({required this.ref}) : super(const PreferenceState()) {
+    getAllPreferences();
+  }
 
   final Ref ref;
 
