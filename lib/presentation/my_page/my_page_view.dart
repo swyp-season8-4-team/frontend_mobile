@@ -13,7 +13,9 @@ import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/global/preference/preference_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/my_page/my_page_view_model.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/widget/desserbee_bottom_navigation.dart';
+import 'package:go_router/go_router.dart';
 
 class MyPageView extends ConsumerStatefulWidget {
   const MyPageView({super.key});
@@ -123,7 +125,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
         actions: <Widget>[
           _topBarIcon.setting(
             onTap: () {
-              // TODO: 추가 예정
+              context.pushNamed(AppRoutes.myPageSetting.name);
             },
           ),
         ],
