@@ -3,7 +3,6 @@ import 'package:extended_sliver/extended_sliver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
-import 'package:frontend_mobile/common/design_system/component/button/pill_outline_button.dart';
 import 'package:frontend_mobile/common/design_system/component/chip/input_chip.dart';
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/search/search.dart';
@@ -18,6 +17,7 @@ import 'package:frontend_mobile/domain/model/search/recent_search_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
 import 'package:frontend_mobile/presentation/map/search/search_store_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:frontend_mobile/presentation/widget/default_error.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 

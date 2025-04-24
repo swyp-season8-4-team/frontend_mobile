@@ -13,6 +13,7 @@ class _StoreListSheet extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final TextTheme textTheme = Theme.of(context).textTheme;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final MapState state = ref.watch(mapViewModelProvider);
     final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
 
@@ -60,12 +61,17 @@ class _StoreListSheet extends ConsumerWidget {
                       ),
                   SliverPinnedToBoxAdapter(
                     child: Container(
-                      color: Colors.white,
                       padding: const EdgeInsets.only(
                         top: 10,
                         bottom: 6,
                         right: 16,
                         left: 16,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border(
+                          bottom: BorderSide(color: colorScheme.outlineVariant),
+                        ),
                       ),
                       child: Row(
                         children: <Widget>[
@@ -169,6 +175,7 @@ class _StoreListSheet extends ConsumerWidget {
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 16,
+                                vertical: 12,
                               ),
                               child: CustomSavedStoreListItem.withOptionMenus(
                                 leftIconColor:
@@ -271,7 +278,10 @@ class _StoreListSheet extends ConsumerWidget {
                                 },
                               ),
                             ),
-                            const Divider(color: ScaleColorConfig.neutral50),
+                            Divider(
+                              color: colorScheme.outlineVariant,
+                              height: 1,
+                            ),
                           ],
                         );
                       }, childCount: state.userStoreLists.length),

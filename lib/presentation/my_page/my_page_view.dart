@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend_mobile/common/design_system/component/button/pill_outline_button.dart';
 import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_edit.dart';
 import 'package:frontend_mobile/common/design_system/component/tag/label_tag.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
@@ -14,6 +13,7 @@ import 'package:frontend_mobile/presentation/global/preference/preference_view_m
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/my_page/my_page_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:frontend_mobile/presentation/widget/default_error.dart';
 import 'package:frontend_mobile/presentation/widget/desserbee_bottom_navigation.dart';
 import 'package:go_router/go_router.dart';
 
@@ -78,42 +78,13 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
           leading: SizedBox.shrink(),
         ),
         bottomNavigationBar: const DesserbeeBottomNavigation(),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 198),
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                Assets.icon.system.warningFill.svg(
-                  colorFilter: const ColorFilter.mode(
-                    ScaleColorConfig.primary80,
-                    BlendMode.srcIn,
-                  ),
-                  width: 51.4,
-                  height: 51.4,
-                ),
-                const SizedBox(height: 8.29),
-                Text(
-                  '일시적인 오류로\n정보를 불러올 수 없어요',
-                  style: textTheme.titleMedium?.copyWith(
-                    color: ScaleColorConfig.primary20,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 14),
-                CustomPillOutlineButton.medium(
-                  width: 126,
-                  label: '다시 시도',
-                  onPressed: () {
-                    ref.read(userViewModelProvider.notifier).getMe();
-                    ref
-                        .read(myPageViewModelProvider.notifier)
-                        .getUserStoreListAll(userUuid: userState.data.userUuid);
-                  },
-                  isSelected: false,
-                ),
-              ],
-            ),
-          ),
+        body: DefaultError(
+          onRetry: () {
+            ref.read(userViewModelProvider.notifier).getMe();
+            ref
+                .read(myPageViewModelProvider.notifier)
+                .getUserStoreListAll(userUuid: userState.data.userUuid);
+          },
         ),
       );
     }
@@ -240,7 +211,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
                           label: '찜한 가게',
                           count: state.storeAllCount,
                           onTap: () {
-                            // TODO: 찜한 가게 페이지로 이동
+                            context.pushNamed(AppRoutes.myUserStoreList.name);
                           },
                         ),
                       ),
@@ -305,36 +276,39 @@ class _MyActivityMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        border: Border.all(color: colorScheme.outlineVariant),
-        color: ScaleColorConfig.neutral100,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: <Widget>[
-          SizedBox.square(
-            dimension: 24,
-            child: png.image(width: 20, height: 20, fit: BoxFit.cover),
-          ),
-          const SizedBox(width: 10),
-          Text(
-            label,
-            style: textTheme.labelLarge?.copyWith(
-              color: ScaleColorConfig.neutral20,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          border: Border.all(color: colorScheme.outlineVariant),
+          color: ScaleColorConfig.neutral100,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          children: <Widget>[
+            SizedBox.square(
+              dimension: 24,
+              child: png.image(width: 20, height: 20, fit: BoxFit.cover),
             ),
-          ),
-          const SizedBox(width: 4),
-          Expanded(
-            child: Text(
-              '$count',
+            const SizedBox(width: 10),
+            Text(
+              label,
               style: textTheme.labelLarge?.copyWith(
-                color: ScaleColorConfig.success50,
+                color: ScaleColorConfig.neutral20,
               ),
             ),
-          ),
-        ],
+            const SizedBox(width: 4),
+            Expanded(
+              child: Text(
+                '$count',
+                style: textTheme.labelLarge?.copyWith(
+                  color: ScaleColorConfig.success50,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
