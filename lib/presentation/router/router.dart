@@ -18,6 +18,7 @@ import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/store
 import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/update/update_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/my_page/my_page_view.dart';
+import 'package:frontend_mobile/presentation/my_page/policy/my_policy_view.dart';
 import 'package:frontend_mobile/presentation/my_page/setting/my_setting_view.dart';
 import 'package:frontend_mobile/presentation/my_page/user_store/my_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
@@ -455,6 +456,15 @@ class AppRouter {
                 name: AppRoutes.myUserStoreList.name,
                 builder: (BuildContext context, GoRouterState state) {
                   return const MyUserStoreListView();
+                },
+              ),
+
+              /// 약관 및 정책
+              GoRoute(
+                path: AppRoutes.myPolicy.path,
+                name: AppRoutes.myPolicy.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MyPolicyView();
                 },
               ),
             ],

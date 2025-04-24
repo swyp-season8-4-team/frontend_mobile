@@ -225,4 +225,10 @@ abstract class AppRoutes {
     name: '${myPageDefault.name}/user_store_list',
     path: 'user_store_list',
   );
+
+  /// 마이페이지 > Default > 약관 및 정책
+  static RouteInfo myPolicy = RouteInfo(
+    name: '${myPageDefault.name}/policy',
+    path: 'policy',
+  );
 }
