@@ -1,15 +1,16 @@
 part of '../stores_by_user_store_list_view.dart';
 
 class _Failure extends ConsumerWidget {
-  const _Failure({required this.listId});
+  const _Failure({required this.listId, required this.listName});
   final int listId;
+  final String listName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final UserStoreListModel storeList = ref
-        .watch(mapViewModelProvider)
-        .userStoreLists
-        .firstWhere((UserStoreListModel e) => e.listId == listId);
+    // final UserStoreListModel storeList = ref
+    //     .watch(mapViewModelProvider)
+    //     .userStoreLists
+    //     .firstWhere((UserStoreListModel e) => e.listId == listId);
 
     final StoresByUserStoreListViewModel viewmodel = ref.read(
       storesByUserStoreListViewModelProvider.notifier,
@@ -18,7 +19,7 @@ class _Failure extends ConsumerWidget {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: CustomSubTopBar(
-        title: storeList.listName,
+        title: listName,
         actions: const <Widget>[],
         primary: false,
       ),

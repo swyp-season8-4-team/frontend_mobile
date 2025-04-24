@@ -270,10 +270,17 @@ class AppRouter {
             name: AppRoutes.updateUserStoreList.name,
             builder: (BuildContext context, GoRouterState state) {
               final String? listId = state.pathParameters['listId'];
-              if (listId == null) {
+              final String? listName = state.uri.queryParameters['listName'];
+              final String? iconColorId =
+                  state.uri.queryParameters['iconColorId'];
+              if (listId == null || listName == null || iconColorId == null) {
                 return const Scaffold();
               }
-              return UpdateUserStoreListView(listId: int.parse(listId));
+              return UpdateUserStoreListView(
+                listId: int.parse(listId),
+                listName: listName,
+                iconColorId: int.parse(iconColorId),
+              );
             },
           ),
 
@@ -283,10 +290,14 @@ class AppRouter {
             name: AppRoutes.storesByUserStoreList.name,
             builder: (BuildContext context, GoRouterState state) {
               final String? listId = state.pathParameters['listId'];
-              if (listId == null) {
+              final String? listName = state.uri.queryParameters['listName'];
+              if (listId == null || listName == null) {
                 return const Scaffold();
               }
-              return StoresByUserStoreListView(listId: int.parse(listId));
+              return StoresByUserStoreListView(
+                listId: int.parse(listId),
+                listName: listName,
+              );
             },
           ),
 

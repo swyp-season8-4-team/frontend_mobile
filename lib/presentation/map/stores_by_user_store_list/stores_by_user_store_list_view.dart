@@ -13,8 +13,6 @@ import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_detail_model.dart';
-import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
-import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/stores_by_user_store_list_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
@@ -25,8 +23,13 @@ part 'local_widget/stores_length.dart';
 part 'local_widget/store_list.dart';
 
 class StoresByUserStoreListView extends ConsumerStatefulWidget {
-  const StoresByUserStoreListView({required this.listId, super.key});
+  const StoresByUserStoreListView({
+    required this.listId,
+    required this.listName,
+    super.key,
+  });
   final int listId;
+  final String listName;
 
   @override
   ConsumerState<StoresByUserStoreListView> createState() =>
@@ -61,11 +64,11 @@ class _StoresByUserStoreListViewState
         }
       },
     );
-
-    final UserStoreListModel storeList = ref
-        .watch(mapViewModelProvider)
-        .userStoreLists
-        .firstWhere((UserStoreListModel e) => e.listId == widget.listId);
+    //
+    // final UserStoreListModel storeList = ref
+    //     .watch(mapViewModelProvider)
+    //     .userStoreLists
+    //     .firstWhere((UserStoreListModel e) => e.listId == widget.listId);
 
     final StoresByUserStoreListState state = ref.watch(
       storesByUserStoreListViewModelProvider,
@@ -79,7 +82,7 @@ class _StoresByUserStoreListViewState
     if (state.isFirstLoading) {
       return Scaffold(
         appBar: CustomSubTopBar(
-          title: storeList.listName,
+          title: widget.listName,
           actions: const <Widget>[],
           primary: false,
         ),
@@ -88,7 +91,7 @@ class _StoresByUserStoreListViewState
     }
 
     if (state.isFailure) {
-      return _Failure(listId: widget.listId);
+      return _Failure(listId: widget.listId, listName: widget.listName);
     }
 
     return CustomLoadingOverlay(
@@ -102,7 +105,7 @@ class _StoresByUserStoreListViewState
         },
         child: Scaffold(
           appBar: CustomSubTopBar(
-            title: storeList.listName,
+            title: widget.listName,
             actions: const <Widget>[],
             primary: false,
           ),
