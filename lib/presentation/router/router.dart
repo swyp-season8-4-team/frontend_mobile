@@ -19,6 +19,7 @@ import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_l
 import 'package:frontend_mobile/presentation/map/user_store/update/update_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/my_page/my_page_view.dart';
 import 'package:frontend_mobile/presentation/my_page/policy/my_policy_view.dart';
+import 'package:frontend_mobile/presentation/my_page/setting/delete_my_info/delete_my_info_view.dart';
 import 'package:frontend_mobile/presentation/my_page/setting/my_setting_view.dart';
 import 'package:frontend_mobile/presentation/my_page/update_profile/update_profile_info_view.dart';
 import 'package:frontend_mobile/presentation/my_page/user_store/my_user_store_list_view.dart';
@@ -449,6 +450,16 @@ class AppRouter {
                 builder: (BuildContext context, GoRouterState state) {
                   return const MySettingView();
                 },
+                routes: <RouteBase>[
+                  /// 회원 탈퇴
+                  GoRoute(
+                    path: AppRoutes.deleteMyInfo.path,
+                    name: AppRoutes.deleteMyInfo.name,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const DeleteMyInfoView();
+                    },
+                  ),
+                ],
               ),
 
               /// 저장 리스트 (찜한 가게)
