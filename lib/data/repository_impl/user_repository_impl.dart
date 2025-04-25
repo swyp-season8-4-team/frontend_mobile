@@ -10,6 +10,7 @@ import 'package:frontend_mobile/domain/model/user/nickname_availability_model.da
 import 'package:frontend_mobile/domain/model/user/user_detail_model.dart';
 import 'package:frontend_mobile/domain/param/user/patch_me_params.dart';
 import 'package:frontend_mobile/domain/param/user/post_nickname_params.dart';
+import 'package:frontend_mobile/domain/param/user/update_profile_image_params.dart';
 import 'package:frontend_mobile/domain/repository/user_repository.dart';
 
 final Provider<UserRepository> userRepositoryProvider =
@@ -59,6 +60,17 @@ class UserRepositoryImpl implements UserRepository {
         );
 
         return result.toModel();
+      },
+    );
+  }
+
+  @override
+  Future<Result<void, CustomException>> updateProfileImage({
+    required UpdateProfileImageParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        return await api.updateProfileImage(image: params.image);
       },
     );
   }

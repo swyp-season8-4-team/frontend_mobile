@@ -4,6 +4,7 @@ import 'package:frontend_mobile/domain/model/user/nickname_availability_model.da
 import 'package:frontend_mobile/domain/model/user/user_detail_model.dart';
 import 'package:frontend_mobile/domain/param/user/patch_me_params.dart';
 import 'package:frontend_mobile/domain/param/user/post_nickname_params.dart';
+import 'package:frontend_mobile/domain/param/user/update_profile_image_params.dart';
 
 abstract interface class UserRepository {
   /// 닉네임 중복 검사
@@ -17,5 +18,10 @@ abstract interface class UserRepository {
   /// 사용자 정보 수정
   Future<Result<UserDetailModel, CustomException>> patchMe({
     required PatchMeParams params,
+  });
+
+  /// 프로필 이미지 수정
+  Future<Result<void, CustomException>> updateProfileImage({
+    required UpdateProfileImageParams params,
   });
 }
