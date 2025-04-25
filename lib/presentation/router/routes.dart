@@ -231,4 +231,10 @@ abstract class AppRoutes {
     name: '${myPageDefault.name}/policy',
     path: 'policy',
   );
+
+  /// 마이페이지 > Default > 프로필 관리
+  static RouteInfo updateProfileInfo = RouteInfo(
+    name: '${myPageDefault.name}/update_profile_info',
+    path: 'update_profile_info',
+  );
 }

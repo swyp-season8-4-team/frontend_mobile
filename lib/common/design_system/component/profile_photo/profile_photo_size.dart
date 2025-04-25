@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
@@ -6,16 +7,19 @@ enum CustomProfilePhotoSizeEnum { xl, l, m, s, xs, xxs }
 class CustomProfilePhotoSize extends StatelessWidget {
   CustomProfilePhotoSize.girl({
     this.size = CustomProfilePhotoSizeEnum.xl,
+    this.imageUrl,
     super.key,
   }) : image = Assets.image.profileGirl.image();
 
   CustomProfilePhotoSize.boy({
     this.size = CustomProfilePhotoSizeEnum.xl,
+    this.imageUrl,
     super.key,
   }) : image = Assets.image.profileBoy.image();
 
   final Image image;
   final CustomProfilePhotoSizeEnum size;
+  final String? imageUrl;
 
   double get _size {
     switch (size) {
@@ -75,5 +79,22 @@ class CustomProfilePhotoSize extends StatelessWidget {
       ),
       child: SizedBox(width: _size, child: image),
     );
+  }
+
+  Widget? getImageFromUrl() {
+    if (imageUrl != null) {
+      return CachedNetworkImage(
+        imageUrl: imageUrl!,
+        width: _size,
+        height: _size,
+        errorWidget: (_, __, ___) {
+          return SizedBox.square(
+            dimension: _size,
+            child: const Icon(Icons.error),
+          );
+        },
+      );
+    }
+    return null;
   }
 }

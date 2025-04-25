@@ -134,8 +134,12 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
                       GestureDetector(
                         child:
                             userState.isMale
-                                ? const CustomProfilePhotoEdit.boy()
-                                : const CustomProfilePhotoEdit.girl(),
+                                ? CustomProfilePhotoEdit.boy(
+                                  imageUrl: userState.data.profileImageUrl,
+                                )
+                                : CustomProfilePhotoEdit.girl(
+                                  imageUrl: userState.data.profileImageUrl,
+                                ),
                       ),
                     ],
                   ),

@@ -20,6 +20,7 @@ import 'package:frontend_mobile/presentation/map/user_store/update/update_user_s
 import 'package:frontend_mobile/presentation/my_page/my_page_view.dart';
 import 'package:frontend_mobile/presentation/my_page/policy/my_policy_view.dart';
 import 'package:frontend_mobile/presentation/my_page/setting/my_setting_view.dart';
+import 'package:frontend_mobile/presentation/my_page/update_profile/update_profile_info_view.dart';
 import 'package:frontend_mobile/presentation/my_page/user_store/my_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step1.dart';
@@ -465,6 +466,15 @@ class AppRouter {
                 name: AppRoutes.myPolicy.name,
                 builder: (BuildContext context, GoRouterState state) {
                   return const MyPolicyView();
+                },
+              ),
+
+              /// 프로필 관리
+              GoRoute(
+                path: AppRoutes.updateProfileInfo.path,
+                name: AppRoutes.updateProfileInfo.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const UpdateProfileInfoView();
                 },
               ),
             ],
