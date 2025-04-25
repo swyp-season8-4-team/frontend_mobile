@@ -36,4 +36,10 @@ class UserMockDataSource implements UserRemoteDataSource {
     // TODO: implement updateProfileImage
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> deleteMe() {
+    // TODO: implement deleteMe
+    throw UnimplementedError();
+  }
 }

@@ -42,4 +42,8 @@ abstract interface class UserRemoteDataSource {
   Future<void> updateProfileImage({
     @Part(name: 'image', contentType: 'image/png') required File image,
   });
+
+  /// 회원 탈퇴
+  @DELETE('/api/users/me')
+  Future<void> deleteMe();
 }
