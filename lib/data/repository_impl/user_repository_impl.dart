@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/api_call.dart';
 import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
+import 'package:frontend_mobile/core/resource/params/no_params.dart';
 import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/data/data_source/remote/user_remote_data_source.dart';
 import 'package:frontend_mobile/data/entity/user/nickname_availability_entity.dart';
@@ -71,6 +72,17 @@ class UserRepositoryImpl implements UserRepository {
     return await apiCall(
       api: () async {
         return await api.updateProfileImage(image: params.image);
+      },
+    );
+  }
+
+  @override
+  Future<Result<void, CustomException>> deleteMe({
+    required NoParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        return await api.deleteMe();
       },
     );
   }
