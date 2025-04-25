@@ -53,7 +53,18 @@ class UpdateProfileInfoViewModel extends StateNotifier<UpdateProfileInfoState> {
 
   /// 닉네임 수정 (API 호출 X)
   void updateNickName({required String nickname}) {
+    clearNicknameStatus();
     state = state.copyWith(nickName: nickname);
+  }
+
+  /// 닉네임 상태 초기화
+  void clearNicknameStatus() {
+    state = state.copyWith(
+      postNicknameStatus: Status.initial,
+      nicknameAvailabilityData: const NicknameAvailabilityModel(
+        available: false,
+      ),
+    );
   }
 
   /// 프로필 이미지 수정 (API 호출 X)

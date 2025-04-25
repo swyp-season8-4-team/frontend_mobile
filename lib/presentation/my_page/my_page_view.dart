@@ -2,11 +2,14 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_edit.dart';
+import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar.dart';
+import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar_right_item.dart';
 import 'package:frontend_mobile/common/design_system/component/tag/label_tag.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/core/manager/toast/toast_manager.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/global/preference/preference_view_model.dart';
@@ -132,6 +135,15 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       GestureDetector(
+                        onTap: () async {
+                          final Object? result = await context.pushNamed(
+                            AppRoutes.updateProfileInfo.name,
+                          );
+
+                          if (result == true) {
+                            _showSuccessUpdateProfileInfo();
+                          }
+                        },
                         child:
                             userState.isMale
                                 ? CustomProfilePhotoEdit.boy(
@@ -270,6 +282,23 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  void _showSuccessUpdateProfileInfo() {
+    final ToastManager toastManager = ref.read(toastManagerProvider);
+    toastManager.show(
+      context: context,
+      aboveBottomNavigation: true,
+      toastWidget: CustomSnackBar(
+        description: '새 프로필이 저장되었습니다',
+        actionButton: SnackBarActionButton(
+          onTap: () {
+            toastManager.remove();
+          },
+          label: '닫기',
         ),
       ),
     );

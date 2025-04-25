@@ -24,44 +24,44 @@ class CustomProfilePhotoSize extends StatelessWidget {
   double get _size {
     switch (size) {
       case CustomProfilePhotoSizeEnum.xl:
-        return 52;
+        return imageUrl != null ? 90 : 52;
 
       case CustomProfilePhotoSizeEnum.l:
-        return 36;
+        return imageUrl != null ? 62 : 36;
 
       case CustomProfilePhotoSizeEnum.m:
-        return 20;
+        return imageUrl != null ? 32 : 20;
 
       case CustomProfilePhotoSizeEnum.s:
-        return 16;
+        return imageUrl != null ? 24 : 16;
 
       case CustomProfilePhotoSizeEnum.xs:
-        return 12;
+        return imageUrl != null ? 20 : 12;
 
       case CustomProfilePhotoSizeEnum.xxs:
-        return 10;
+        return imageUrl != null ? 16 : 10;
     }
   }
 
   EdgeInsets get _padding {
     switch (size) {
       case CustomProfilePhotoSizeEnum.xl:
-        return const EdgeInsets.all(19);
+        return EdgeInsets.all(imageUrl != null ? 0 : 19);
 
       case CustomProfilePhotoSizeEnum.l:
-        return const EdgeInsets.all(13);
+        return EdgeInsets.all(imageUrl != null ? 0 : 13);
 
       case CustomProfilePhotoSizeEnum.m:
-        return const EdgeInsets.all(6);
+        return EdgeInsets.all(imageUrl != null ? 0 : 6);
 
       case CustomProfilePhotoSizeEnum.s:
-        return const EdgeInsets.all(4);
+        return EdgeInsets.all(imageUrl != null ? 0 : 4);
 
       case CustomProfilePhotoSizeEnum.xs:
-        return const EdgeInsets.all(4);
+        return EdgeInsets.all(imageUrl != null ? 0 : 4);
 
       case CustomProfilePhotoSizeEnum.xxs:
-        return const EdgeInsets.all(3);
+        return EdgeInsets.all(imageUrl != null ? 0 : 3);
     }
   }
 
@@ -77,7 +77,7 @@ class CustomProfilePhotoSize extends StatelessWidget {
         elevation: 0,
         backgroundColor: const Color(0xFFDFDFDF),
       ),
-      child: SizedBox(width: _size, child: image),
+      child: SizedBox(width: _size, child: getImageFromUrl() ?? image),
     );
   }
 

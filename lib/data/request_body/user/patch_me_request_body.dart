@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'generated/patch_me_request_body.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class PatchMeRequestBody {
   PatchMeRequestBody({
     required this.nickname,

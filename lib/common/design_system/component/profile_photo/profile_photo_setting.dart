@@ -9,14 +9,21 @@ import 'package:image_picker/image_picker.dart';
 import 'package:native_image_cropper/native_image_cropper.dart';
 
 class CustomProfilePhotoSetting extends StatefulWidget {
-  const CustomProfilePhotoSetting.girl({required this.onCameraTap, super.key})
-    : isGirl = true;
+  const CustomProfilePhotoSetting.girl({
+    required this.onCameraTap,
+    this.imageUrl,
+    super.key,
+  }) : isGirl = true;
 
-  const CustomProfilePhotoSetting.boy({required this.onCameraTap, super.key})
-    : isGirl = false;
+  const CustomProfilePhotoSetting.boy({
+    required this.onCameraTap,
+    this.imageUrl,
+    super.key,
+  }) : isGirl = false;
 
   final bool isGirl;
   final void Function(Uint8List) onCameraTap;
+  final String? imageUrl;
 
   @override
   State<CustomProfilePhotoSetting> createState() =>
@@ -41,8 +48,8 @@ class _CustomProfilePhotoSettingState extends State<CustomProfilePhotoSetting> {
     }
 
     return widget.isGirl
-        ? CustomProfilePhotoSize.girl()
-        : CustomProfilePhotoSize.boy();
+        ? CustomProfilePhotoSize.girl(imageUrl: widget.imageUrl)
+        : CustomProfilePhotoSize.boy(imageUrl: widget.imageUrl);
   }
 
   Future<void> _pickAndCropImage({required BuildContext context}) async {
