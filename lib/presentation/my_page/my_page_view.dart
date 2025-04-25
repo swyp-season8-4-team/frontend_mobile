@@ -27,6 +27,9 @@ class MyPageView extends ConsumerStatefulWidget {
 class _MyPageViewState extends ConsumerState<MyPageView> {
   final TopBarIcon _topBarIcon = TopBarIcon();
 
+  // 내 취향 태그 섹션 확장 여부
+  bool _isTagExpanded = false;
+
   @override
   void initState() {
     super.initState();
@@ -69,8 +72,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
     }
 
     // TODO: 에러 UI 개선 필요 (현재는 임의로 설정함)
-    if (userState.status.isFailure ||
-        state.getUserStoreListAllStatus.isFailure) {
+    if (userState.status.isFailure) {
       return Scaffold(
         appBar: const CustomSubTopBar(
           title: 'MY',
@@ -163,24 +165,53 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
                       padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
                       child: Center(
                         child: Wrap(
+                          runSpacing: 6,
                           children: <Widget>[
-                            ...userPreferences.mapIndexed(
-                              (int index, PreferenceModel e) => Padding(
-                                padding: EdgeInsets.only(
-                                  right:
-                                      index == userPreferences.length - 1
-                                          ? 0
-                                          : 6,
-                                ),
-                                child: CustomLabelTag(
-                                  label: e.preferenceName,
-                                  backgroundColor: ScaleColorConfig.neutral70,
-                                  color: ScaleColorConfig.neutral30,
+                            if (userPreferences.length > 5) ...<Widget>[
+                              ...List<Widget>.generate(
+                                _isTagExpanded ? userPreferences.length : 5,
+                                (int index) {
+                                  final PreferenceModel userPreference =
+                                      userPreferences[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.only(right: 6),
+                                    child: CustomLabelTag(
+                                      label: userPreference.preferenceName,
+                                      backgroundColor:
+                                          ScaleColorConfig.neutral70,
+                                      color: ScaleColorConfig.neutral30,
+                                    ),
+                                  );
+                                },
+                              ),
+                              _ViewMoreTag(
+                                label:
+                                    _isTagExpanded
+                                        ? '접기'
+                                        : '+${userPreferences.length - 5}',
+
+                                onTap: () {
+                                  setState(() {
+                                    _isTagExpanded = !_isTagExpanded;
+                                  });
+                                },
+                              ),
+                            ] else
+                              ...userPreferences.mapIndexed(
+                                (int index, PreferenceModel e) => Padding(
+                                  padding: EdgeInsets.only(
+                                    right:
+                                        index == userPreferences.length - 1
+                                            ? 0
+                                            : 6,
+                                  ),
+                                  child: CustomLabelTag(
+                                    label: e.preferenceName,
+                                    backgroundColor: ScaleColorConfig.neutral70,
+                                    color: ScaleColorConfig.neutral30,
+                                  ),
                                 ),
                               ),
-                            ),
-                            if (userPreferences.length > 5)
-                              _ViewMoreTag(label: '', onTap: () {}),
                           ],
                         ),
                       ),
@@ -250,16 +281,23 @@ class _ViewMoreTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final TextTheme textTheme = Theme.of(context).textTheme;
 
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.translucent,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(99),
           border: Border.all(color: colorScheme.outline),
           color: ScaleColorConfig.neutral100,
+        ),
+        child: Text(
+          label,
+          style: textTheme.labelSmall?.copyWith(
+            color: ScaleColorConfig.neutral20,
+          ),
         ),
       ),
     );
