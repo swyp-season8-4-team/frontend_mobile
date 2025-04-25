@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
@@ -33,4 +35,11 @@ abstract interface class UserRemoteDataSource {
   /// 사용자 정보 수정
   @PATCH('/api/users/me')
   Future<UserDetailEntity> patchMe({@Body() required PatchMeRequestBody body});
+
+  /// 프로필 이미지 수정
+  @POST('/api/users/me/profile-image')
+  @MultiPart()
+  Future<void> updateProfileImage({
+    @Part(name: 'image', contentType: 'image/png') required File image,
+  });
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:frontend_mobile/data/data_source/remote/user_remote_data_source.dart';
 import 'package:frontend_mobile/data/entity/user/nickname_availability_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_detail_entity.dart';
@@ -26,6 +28,12 @@ class UserMockDataSource implements UserRemoteDataSource {
     required PostNicknameRequestBody body,
   }) {
     // TODO: implement postNickname
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateProfileImage({required File image}) {
+    // TODO: implement updateProfileImage
     throw UnimplementedError();
   }
 }

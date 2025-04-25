@@ -158,7 +158,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
                 children: <Widget>[
                   const SizedBox(height: 10),
                   Text(
-                    '프로필 이름',
+                    userState.data.nickname,
                     style: textTheme.titleSmall?.copyWith(
                       color: const Color(0xFF393939),
                     ),
