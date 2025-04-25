@@ -18,20 +18,28 @@ import 'package:frontend_mobile/domain/repository/store_repository.dart';
 
 final Provider<StoreRepository> storeRepositoryProvider =
     Provider<StoreRepository>((Ref ref) {
-      return StoreRepositoryImpl(api: ref.read(storeApiProvider));
+      return StoreRepositoryImpl(
+        api: ref.read(storeApiProvider),
+        getStoresByLocationApi: ref.read(getStoresByLocationApiProvider),
+      );
     });
 
 class StoreRepositoryImpl implements StoreRepository {
-  const StoreRepositoryImpl({required StoreRemoteDataSource api}) : _api = api;
+  const StoreRepositoryImpl({
+    required StoreRemoteDataSource api,
+    required GetStoresByLocation getStoresByLocationApi,
+  }) : _getStoresByLocationApi = getStoresByLocationApi,
+       _api = api;
   final StoreRemoteDataSource _api;
+  final GetStoresByLocation _getStoresByLocationApi;
 
   @override
   Future<Result<List<StoreByLocationModel>, CustomException>>
   getStoresByLocation({required GetStoresByLocationParams params}) async {
     return await apiCall(
       api: () async {
-        final List<StoreByLocationEntity> result = await _api
-            .getStoresByLocation(query: params.toQuery());
+        final List<StoreByLocationEntity> result = await _getStoresByLocationApi
+            .invoke(query: params.toQuery());
         return result.map((StoreByLocationEntity e) => e.toModel()).toList();
       },
     );
