@@ -108,7 +108,9 @@ class MySettingView extends ConsumerWidget {
                     ),
                   ],
                 ),
-                onTap: () {},
+                onTap: () {
+                  context.pushNamed(AppRoutes.deleteMyInfo.name);
+                },
               ),
               Divider(color: colorScheme.outlineVariant, height: 1),
             ],
@@ -150,9 +152,13 @@ class _Menu extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 19),
-        child: widget,
+      behavior: HitTestBehavior.translucent,
+      child: SizedBox(
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 19),
+          child: widget,
+        ),
       ),
     );
   }
