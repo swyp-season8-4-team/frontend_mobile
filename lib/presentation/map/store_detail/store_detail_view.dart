@@ -109,22 +109,29 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
               const SliverToBoxAdapter(child: _StoreDetailInfo()),
               const SliverToBoxAdapter(child: _Introduce()),
               const SliverToBoxAdapter(child: _RecentNotice()),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _TabBarDelegate(
-                  storeDetail: state.storeDetail!,
-                  tabController: _tabController,
-                  thumbnailImageUrls: state.thumbnailImageUrls,
-                  onPinnedChanged: (bool isPinned) {
-                    if (_isTabBarPinned == isPinned) {
-                      return;
-                    }
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      setState(() {
-                        _isTabBarPinned = isPinned;
+
+              //고의적으로 _TabBarDelegate가 TabBarView를 덮도록 설정
+              SliverOverlapAbsorber(
+                handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                  context,
+                ),
+                sliver: SliverPersistentHeader(
+                  pinned: true,
+                  delegate: _TabBarDelegate(
+                    storeDetail: state.storeDetail!,
+                    tabController: _tabController,
+                    thumbnailImageUrls: state.thumbnailImageUrls,
+                    onPinnedChanged: (bool isPinned) {
+                      if (_isTabBarPinned == isPinned) {
+                        return;
+                      }
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        setState(() {
+                          _isTabBarPinned = isPinned;
+                        });
                       });
-                    });
-                  },
+                    },
+                  ),
                 ),
               ),
             ];
