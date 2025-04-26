@@ -27,7 +27,14 @@ class StoreReviewCard extends StatelessWidget {
               size: CustomProfilePhotoSizeEnum.m,
             ),
             const SizedBox(width: 10),
-            Expanded(child: Text(storeReview.nickname)),
+            Expanded(
+              child: Text(
+                storeReview.nickname,
+                style: textTheme.titleSmall?.copyWith(
+                  color: ScaleColorConfig.neutral20,
+                ),
+              ),
+            ),
           ],
         ),
         if (storeReview.images != null && storeReview.images!.isNotEmpty)
