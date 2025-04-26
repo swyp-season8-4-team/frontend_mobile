@@ -14,7 +14,9 @@ import 'package:frontend_mobile/domain/model/mate/mate_detail_model.dart';
 import 'package:frontend_mobile/domain/param/mate/get_mate_params.dart';
 import 'package:frontend_mobile/presentation/dessert/dessert_board_view_model.dart';
 import 'package:frontend_mobile/presentation/dessert/widget/list/dessert_list_card.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/widget/desserbee_bottom_navigation.dart';
+import 'package:go_router/go_router.dart';
 
 class DessertBoard extends ConsumerStatefulWidget {
   const DessertBoard({super.key});
@@ -305,7 +307,12 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
                           //     ),
                           //   );
                           // },
-                          onCardTap: () {},
+                          onCardTap: () {
+                            context.pushNamed(
+                              AppRoutes.dessertPost.name,
+                              extra: mate.mateUuid,
+                            );
+                          },
                           mate: mate,
                         );
                       },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
 import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_size.dart';
 import 'package:frontend_mobile/common/design_system/component/textfield/text_field.dart';
@@ -6,21 +7,39 @@ import 'package:frontend_mobile/common/design_system/component/top_bar/resource/
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/domain/param/mate/get_mate_detail_params.dart';
+import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view_model.dart';
 import 'package:frontend_mobile/presentation/dessert/post/header/info/dessert_post_header_info.dart';
 import 'package:frontend_mobile/presentation/dessert/post/header/location/dessert_post_header_location.dart';
 
-class DessertPost extends StatefulWidget {
-  const DessertPost({super.key});
+class DessertPost extends ConsumerStatefulWidget {
+  const DessertPost({required this.mateUuid, super.key});
+
+  final String mateUuid;
 
   @override
-  State<DessertPost> createState() => _DessertPostState();
+  ConsumerState<DessertPost> createState() => _DessertPostState();
 }
 
-class _DessertPostState extends State<DessertPost> {
+class _DessertPostState extends ConsumerState<DessertPost> {
   final bool _accepted = true;
 
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref
+          .read(dessertPostViewModelProvider.notifier)
+          .getMateDetail(
+            params: GetMateDetailParams(mateUuid: widget.mateUuid),
+          );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final DessertPostState state = ref.watch(dessertPostViewModelProvider);
     final TextTheme textTheme = Theme.of(context).textTheme;
     final TopBarIcon icon = TopBarIcon();
 
