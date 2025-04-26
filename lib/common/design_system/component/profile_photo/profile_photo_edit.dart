@@ -3,18 +3,25 @@ import 'package:frontend_mobile/common/design_system/component/profile_photo/pro
 import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_size.dart';
 
 class CustomProfilePhotoEdit extends StatelessWidget {
-  const CustomProfilePhotoEdit.girl({super.key}) : isGirl = true;
+  const CustomProfilePhotoEdit.girl({this.imageUrl, super.key}) : isGirl = true;
 
-  const CustomProfilePhotoEdit.boy({super.key}) : isGirl = false;
+  const CustomProfilePhotoEdit.boy({this.imageUrl, super.key}) : isGirl = false;
 
   final bool isGirl;
+  final String? imageUrl;
 
   Widget get _image {
     if (isGirl) {
-      return CustomProfilePhotoSize.girl(size: CustomProfilePhotoSizeEnum.l);
+      return CustomProfilePhotoSize.girl(
+        size: CustomProfilePhotoSizeEnum.l,
+        imageUrl: imageUrl,
+      );
     }
 
-    return CustomProfilePhotoSize.boy(size: CustomProfilePhotoSizeEnum.l);
+    return CustomProfilePhotoSize.boy(
+      size: CustomProfilePhotoSizeEnum.l,
+      imageUrl: imageUrl,
+    );
   }
 
   @override

@@ -32,6 +32,7 @@ dependencies:
   json_annotation: ^4.9.0
   lottie: ^3.3.1
   native_image_cropper: ^0.6.0
+  path_provider: ^2.1.5
   pretty_dio_logger: ^1.4.0
   retrofit: ^4.4.2
   url_launcher: ^6.3.1

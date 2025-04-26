@@ -219,4 +219,28 @@ abstract class AppRoutes {
     name: '${myPageDefault.name}/setting',
     path: 'setting',
   );
+
+  /// 마이페이지 > Default > 설정 > 회원 탈퇴
+  static RouteInfo deleteMyInfo = RouteInfo(
+    name: '${myPageSetting.name}/delete_my_info',
+    path: 'delete_my_info',
+  );
+
+  /// 마이페이지 > Default > 저장 리스트 (찜한 가게)
+  static RouteInfo myUserStoreList = RouteInfo(
+    name: '${myPageDefault.name}/user_store_list',
+    path: 'user_store_list',
+  );
+
+  /// 마이페이지 > Default > 약관 및 정책
+  static RouteInfo myPolicy = RouteInfo(
+    name: '${myPageDefault.name}/policy',
+    path: 'policy',
+  );
+
+  /// 마이페이지 > Default > 프로필 관리
+  static RouteInfo updateProfileInfo = RouteInfo(
+    name: '${myPageDefault.name}/update_profile_info',
+    path: 'update_profile_info',
+  );
 }

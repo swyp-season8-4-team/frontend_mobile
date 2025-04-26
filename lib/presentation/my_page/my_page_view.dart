@@ -1,19 +1,22 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend_mobile/common/design_system/component/button/pill_outline_button.dart';
 import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_edit.dart';
+import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar.dart';
+import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar_right_item.dart';
 import 'package:frontend_mobile/common/design_system/component/tag/label_tag.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/core/manager/toast/toast_manager.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/global/preference/preference_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/my_page/my_page_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:frontend_mobile/presentation/widget/default_error.dart';
 import 'package:frontend_mobile/presentation/widget/desserbee_bottom_navigation.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,6 +29,9 @@ class MyPageView extends ConsumerStatefulWidget {
 
 class _MyPageViewState extends ConsumerState<MyPageView> {
   final TopBarIcon _topBarIcon = TopBarIcon();
+
+  // 내 취향 태그 섹션 확장 여부
+  bool _isTagExpanded = false;
 
   @override
   void initState() {
@@ -69,8 +75,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
     }
 
     // TODO: 에러 UI 개선 필요 (현재는 임의로 설정함)
-    if (userState.status.isFailure ||
-        state.getUserStoreListAllStatus.isFailure) {
+    if (userState.status.isFailure) {
       return Scaffold(
         appBar: const CustomSubTopBar(
           title: 'MY',
@@ -78,42 +83,13 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
           leading: SizedBox.shrink(),
         ),
         bottomNavigationBar: const DesserbeeBottomNavigation(),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 198),
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                Assets.icon.system.warningFill.svg(
-                  colorFilter: const ColorFilter.mode(
-                    ScaleColorConfig.primary80,
-                    BlendMode.srcIn,
-                  ),
-                  width: 51.4,
-                  height: 51.4,
-                ),
-                const SizedBox(height: 8.29),
-                Text(
-                  '일시적인 오류로\n정보를 불러올 수 없어요',
-                  style: textTheme.titleMedium?.copyWith(
-                    color: ScaleColorConfig.primary20,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 14),
-                CustomPillOutlineButton.medium(
-                  width: 126,
-                  label: '다시 시도',
-                  onPressed: () {
-                    ref.read(userViewModelProvider.notifier).getMe();
-                    ref
-                        .read(myPageViewModelProvider.notifier)
-                        .getUserStoreListAll(userUuid: userState.data.userUuid);
-                  },
-                  isSelected: false,
-                ),
-              ],
-            ),
-          ),
+        body: DefaultError(
+          onRetry: () {
+            ref.read(userViewModelProvider.notifier).getMe();
+            ref
+                .read(myPageViewModelProvider.notifier)
+                .getUserStoreListAll(userUuid: userState.data.userUuid);
+          },
         ),
       );
     }
@@ -159,10 +135,23 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       GestureDetector(
+                        onTap: () async {
+                          final Object? result = await context.pushNamed(
+                            AppRoutes.updateProfileInfo.name,
+                          );
+
+                          if (result == true) {
+                            _showSuccessUpdateProfileInfo();
+                          }
+                        },
                         child:
                             userState.isMale
-                                ? const CustomProfilePhotoEdit.boy()
-                                : const CustomProfilePhotoEdit.girl(),
+                                ? CustomProfilePhotoEdit.boy(
+                                  imageUrl: userState.data.profileImageUrl,
+                                )
+                                : CustomProfilePhotoEdit.girl(
+                                  imageUrl: userState.data.profileImageUrl,
+                                ),
                       ),
                     ],
                   ),
@@ -181,7 +170,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
                 children: <Widget>[
                   const SizedBox(height: 10),
                   Text(
-                    '프로필 이름',
+                    userState.data.nickname,
                     style: textTheme.titleSmall?.copyWith(
                       color: const Color(0xFF393939),
                     ),
@@ -192,24 +181,53 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
                       padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
                       child: Center(
                         child: Wrap(
+                          runSpacing: 6,
                           children: <Widget>[
-                            ...userPreferences.mapIndexed(
-                              (int index, PreferenceModel e) => Padding(
-                                padding: EdgeInsets.only(
-                                  right:
-                                      index == userPreferences.length - 1
-                                          ? 0
-                                          : 6,
-                                ),
-                                child: CustomLabelTag(
-                                  label: e.preferenceName,
-                                  backgroundColor: ScaleColorConfig.neutral70,
-                                  color: ScaleColorConfig.neutral30,
+                            if (userPreferences.length > 5) ...<Widget>[
+                              ...List<Widget>.generate(
+                                _isTagExpanded ? userPreferences.length : 5,
+                                (int index) {
+                                  final PreferenceModel userPreference =
+                                      userPreferences[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.only(right: 6),
+                                    child: CustomLabelTag(
+                                      label: userPreference.preferenceName,
+                                      backgroundColor:
+                                          ScaleColorConfig.neutral70,
+                                      color: ScaleColorConfig.neutral30,
+                                    ),
+                                  );
+                                },
+                              ),
+                              _ViewMoreTag(
+                                label:
+                                    _isTagExpanded
+                                        ? '접기'
+                                        : '+${userPreferences.length - 5}',
+
+                                onTap: () {
+                                  setState(() {
+                                    _isTagExpanded = !_isTagExpanded;
+                                  });
+                                },
+                              ),
+                            ] else
+                              ...userPreferences.mapIndexed(
+                                (int index, PreferenceModel e) => Padding(
+                                  padding: EdgeInsets.only(
+                                    right:
+                                        index == userPreferences.length - 1
+                                            ? 0
+                                            : 6,
+                                  ),
+                                  child: CustomLabelTag(
+                                    label: e.preferenceName,
+                                    backgroundColor: ScaleColorConfig.neutral70,
+                                    color: ScaleColorConfig.neutral30,
+                                  ),
                                 ),
                               ),
-                            ),
-                            if (userPreferences.length > 5)
-                              _ViewMoreTag(label: '', onTap: () {}),
                           ],
                         ),
                       ),
@@ -240,7 +258,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
                           label: '찜한 가게',
                           count: state.storeAllCount,
                           onTap: () {
-                            // TODO: 찜한 가게 페이지로 이동
+                            context.pushNamed(AppRoutes.myUserStoreList.name);
                           },
                         ),
                       ),
@@ -253,10 +271,34 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
               padding: const EdgeInsets.all(16),
               child: _MenuList(
                 title: '고객 지원',
-                menus: <_MenuType>[_MenuType(label: '약관 및 정책', onTap: () {})],
+                menus: <_MenuType>[
+                  _MenuType(
+                    label: '약관 및 정책',
+                    onTap: () {
+                      context.pushNamed(AppRoutes.myPolicy.name);
+                    },
+                  ),
+                ],
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  void _showSuccessUpdateProfileInfo() {
+    final ToastManager toastManager = ref.read(toastManagerProvider);
+    toastManager.show(
+      context: context,
+      aboveBottomNavigation: true,
+      toastWidget: CustomSnackBar(
+        description: '새 프로필이 저장되었습니다',
+        actionButton: SnackBarActionButton(
+          onTap: () {
+            toastManager.remove();
+          },
+          label: '닫기',
         ),
       ),
     );
@@ -272,16 +314,23 @@ class _ViewMoreTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final TextTheme textTheme = Theme.of(context).textTheme;
 
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.translucent,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(99),
           border: Border.all(color: colorScheme.outline),
           color: ScaleColorConfig.neutral100,
+        ),
+        child: Text(
+          label,
+          style: textTheme.labelSmall?.copyWith(
+            color: ScaleColorConfig.neutral20,
+          ),
         ),
       ),
     );
@@ -305,36 +354,39 @@ class _MyActivityMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        border: Border.all(color: colorScheme.outlineVariant),
-        color: ScaleColorConfig.neutral100,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: <Widget>[
-          SizedBox.square(
-            dimension: 24,
-            child: png.image(width: 20, height: 20, fit: BoxFit.cover),
-          ),
-          const SizedBox(width: 10),
-          Text(
-            label,
-            style: textTheme.labelLarge?.copyWith(
-              color: ScaleColorConfig.neutral20,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          border: Border.all(color: colorScheme.outlineVariant),
+          color: ScaleColorConfig.neutral100,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          children: <Widget>[
+            SizedBox.square(
+              dimension: 24,
+              child: png.image(width: 20, height: 20, fit: BoxFit.cover),
             ),
-          ),
-          const SizedBox(width: 4),
-          Expanded(
-            child: Text(
-              '$count',
+            const SizedBox(width: 10),
+            Text(
+              label,
               style: textTheme.labelLarge?.copyWith(
-                color: ScaleColorConfig.success50,
+                color: ScaleColorConfig.neutral20,
               ),
             ),
-          ),
-        ],
+            const SizedBox(width: 4),
+            Expanded(
+              child: Text(
+                '$count',
+                style: textTheme.labelLarge?.copyWith(
+                  color: ScaleColorConfig.success50,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -377,33 +429,40 @@ class _MenuList extends StatelessWidget {
             ),
           ),
           ...menus.map(
-            (_MenuType e) => Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(color: colorScheme.outlineVariant),
+            (_MenuType e) => GestureDetector(
+              onTap: e.onTap,
+              behavior: HitTestBehavior.translucent,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: colorScheme.outlineVariant),
+                  ),
                 ),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      e.label,
-                      style: textTheme.bodySmall?.copyWith(
-                        color: ScaleColorConfig.primary20,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        e.label,
+                        style: textTheme.bodySmall?.copyWith(
+                          color: ScaleColorConfig.primary20,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Assets.icon.arrow.rightLine.svg(
-                    width: 20,
-                    height: 20,
-                    colorFilter: const ColorFilter.mode(
-                      ScaleColorConfig.neutral40,
-                      BlendMode.srcIn,
+                    const SizedBox(width: 10),
+                    Assets.icon.arrow.rightLine.svg(
+                      width: 20,
+                      height: 20,
+                      colorFilter: const ColorFilter.mode(
+                        ScaleColorConfig.neutral40,
+                        BlendMode.srcIn,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

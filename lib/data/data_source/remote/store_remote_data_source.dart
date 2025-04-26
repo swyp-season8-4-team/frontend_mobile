@@ -16,6 +16,11 @@ final Provider<StoreRemoteDataSource> storeApiProvider =
       return StoreRemoteDataSource(ref.read(appDioProvider));
     });
 
+final Provider<GetStoresByLocation> getStoresByLocationApiProvider =
+    Provider<GetStoresByLocation>((Ref ref) {
+      return GetStoresByLocation(dio: ref.read(appDioProvider));
+    });
+
 @RestApi()
 abstract class StoreRemoteDataSource {
   factory StoreRemoteDataSource(Dio dio) = _StoreRemoteDataSource;
@@ -41,4 +46,36 @@ abstract class StoreRemoteDataSource {
   Future<List<StoreByLocationEntity>> getMyPreferencesStoresByLocation({
     @Queries() required GetMyPreferencesStoresByLocationQueryParam query,
   });
+}
+
+/// 반경 내 가게 조회 (Retrofit 사용 안함)
+class GetStoresByLocation {
+  const GetStoresByLocation({required this.dio});
+  final Dio dio;
+
+  Future<List<StoreByLocationEntity>> invoke({
+    required GetStoresByLocationQueryParam query,
+  }) async {
+    final Response<dynamic> result = await dio.get(
+      '/api/stores/map',
+      queryParameters: <String, dynamic>{
+        'latitude': query.latitude,
+        'longitude': query.longitude,
+        'radius': query.radius,
+        // Query Params에 들어간 comma가 자동으로 인코딩 되는 것을 방지하기 위함
+        if (query.preferenceTagIds case final List<int> value?)
+          'preferenceTagIds': ListParam<int>(value, ListFormat.csv),
+        if (query.searchKeyword case final String value?)
+          'searchKeyword': value,
+      },
+    );
+
+    final List<dynamic> data = result.data as List<dynamic>;
+    return data
+        .map(
+          (dynamic json) =>
+              StoreByLocationEntity.fromJson(json as Map<String, dynamic>),
+        )
+        .toList();
+  }
 }

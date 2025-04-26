@@ -22,11 +22,11 @@ PatchMeRequestBody _$PatchMeRequestBodyFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$PatchMeRequestBodyToJson(PatchMeRequestBody instance) =>
     <String, dynamic>{
-      'nickname': instance.nickname,
-      'preferences': instance.preferences,
-      'name': instance.name,
-      'phoneNumber': instance.phoneNumber,
-      'address': instance.address,
-      'gender': instance.gender,
-      'mbti': instance.mbti,
+      if (instance.nickname case final value?) 'nickname': value,
+      if (instance.preferences case final value?) 'preferences': value,
+      if (instance.name case final value?) 'name': value,
+      if (instance.phoneNumber case final value?) 'phoneNumber': value,
+      if (instance.address case final value?) 'address': value,
+      if (instance.gender case final value?) 'gender': value,
+      if (instance.mbti case final value?) 'mbti': value,
     };

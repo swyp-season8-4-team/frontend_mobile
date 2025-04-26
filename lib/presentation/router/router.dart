@@ -18,7 +18,11 @@ import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/store
 import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/update/update_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/my_page/my_page_view.dart';
+import 'package:frontend_mobile/presentation/my_page/policy/my_policy_view.dart';
+import 'package:frontend_mobile/presentation/my_page/setting/delete_my_info/delete_my_info_view.dart';
 import 'package:frontend_mobile/presentation/my_page/setting/my_setting_view.dart';
+import 'package:frontend_mobile/presentation/my_page/update_profile/update_profile_info_view.dart';
+import 'package:frontend_mobile/presentation/my_page/user_store/my_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step1.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step2.dart';
@@ -445,6 +449,43 @@ class AppRouter {
                 name: AppRoutes.myPageSetting.name,
                 builder: (BuildContext context, GoRouterState state) {
                   return const MySettingView();
+                },
+                routes: <RouteBase>[
+                  /// 회원 탈퇴
+                  GoRoute(
+                    path: AppRoutes.deleteMyInfo.path,
+                    name: AppRoutes.deleteMyInfo.name,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const DeleteMyInfoView();
+                    },
+                  ),
+                ],
+              ),
+
+              /// 저장 리스트 (찜한 가게)
+              GoRoute(
+                path: AppRoutes.myUserStoreList.path,
+                name: AppRoutes.myUserStoreList.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MyUserStoreListView();
+                },
+              ),
+
+              /// 약관 및 정책
+              GoRoute(
+                path: AppRoutes.myPolicy.path,
+                name: AppRoutes.myPolicy.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MyPolicyView();
+                },
+              ),
+
+              /// 프로필 관리
+              GoRoute(
+                path: AppRoutes.updateProfileInfo.path,
+                name: AppRoutes.updateProfileInfo.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const UpdateProfileInfoView();
                 },
               ),
             ],

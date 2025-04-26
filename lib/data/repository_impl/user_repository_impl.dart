@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/api_call.dart';
 import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
+import 'package:frontend_mobile/core/resource/params/no_params.dart';
 import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/data/data_source/remote/user_remote_data_source.dart';
 import 'package:frontend_mobile/data/entity/user/nickname_availability_entity.dart';
@@ -10,6 +11,7 @@ import 'package:frontend_mobile/domain/model/user/nickname_availability_model.da
 import 'package:frontend_mobile/domain/model/user/user_detail_model.dart';
 import 'package:frontend_mobile/domain/param/user/patch_me_params.dart';
 import 'package:frontend_mobile/domain/param/user/post_nickname_params.dart';
+import 'package:frontend_mobile/domain/param/user/update_profile_image_params.dart';
 import 'package:frontend_mobile/domain/repository/user_repository.dart';
 
 final Provider<UserRepository> userRepositoryProvider =
@@ -59,6 +61,28 @@ class UserRepositoryImpl implements UserRepository {
         );
 
         return result.toModel();
+      },
+    );
+  }
+
+  @override
+  Future<Result<void, CustomException>> updateProfileImage({
+    required UpdateProfileImageParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        return await api.updateProfileImage(image: params.image);
+      },
+    );
+  }
+
+  @override
+  Future<Result<void, CustomException>> deleteMe({
+    required NoParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        return await api.deleteMe();
       },
     );
   }
