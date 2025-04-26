@@ -7,15 +7,7 @@ class _DessertImages extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final StoreDetailState state = ref.watch(storeDetailViewModelProvider);
 
-    // TODO: 타이포 그래피 사용 필요
-    const TextStyle baseTextStyle = TextStyle(
-      color: Color(0xFF898989),
-      fontSize: 12,
-      fontWeight: FontWeight.w400,
-      height: 1.30,
-      letterSpacing: -0.18,
-    );
-
+    final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     // final List<String> dessertImages =
@@ -44,8 +36,8 @@ class _DessertImages extends ConsumerWidget {
                       children: <Widget>[
                         Text(
                           '· 최신순',
-                          style: baseTextStyle.copyWith(
-                            color: const Color(0xFF272727),
+                          style: textTheme.bodySmall?.copyWith(
+                            color: ScaleColorConfig.neutral20,
                           ),
                         ),
                         const SizedBox(width: 10),
@@ -53,12 +45,17 @@ class _DessertImages extends ConsumerWidget {
                           width: 16,
                           height: 16,
                           colorFilter: const ColorFilter.mode(
-                            Color(0xFF898989),
+                            ScaleColorConfig.neutral40,
                             BlendMode.srcIn,
                           ),
                         ),
                         const SizedBox(width: 2),
-                        const Text('업데이트 주기: 하루 단위', style: baseTextStyle),
+                        Text(
+                          '업데이트 주기: 하루 단위',
+                          style: textTheme.bodySmall?.copyWith(
+                            color: ScaleColorConfig.neutral40,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -112,10 +109,10 @@ class _ImageHeader extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 77;
+  double get maxExtent => 77.1;
 
   @override
-  double get minExtent => 77;
+  double get minExtent => 77.1;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {

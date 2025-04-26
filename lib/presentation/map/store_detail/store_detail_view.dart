@@ -19,6 +19,7 @@ import 'package:frontend_mobile/domain/model/store/store_operating_hour_model.da
 import 'package:frontend_mobile/domain/model/store/store_top_preference_model.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:frontend_mobile/presentation/widget/store_review_card.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -33,6 +34,7 @@ part 'local_widget/menus.dart';
 part 'local_widget/dessert_images.dart';
 part 'local_widget/tab_bar.dart';
 part 'local_widget/failure.dart';
+part 'local_widget/store_reviews.dart';
 
 class StoreDetailView extends ConsumerStatefulWidget {
   const StoreDetailView({required this.storeUuid, super.key});
@@ -50,7 +52,7 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(() {
       setState(() {});
     });
@@ -141,6 +143,7 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
             physics: const NeverScrollableScrollPhysics(),
             children: const <Widget>[
               _Menus(),
+              _StoreReviews(),
               _DessertImages(),
               // TODO: 추후 구현 에정
               // Center(child: Text('디저트 메이트')),

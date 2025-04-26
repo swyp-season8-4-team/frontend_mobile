@@ -58,8 +58,14 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
           ),
           _tab(
             context: context,
-            label: '사진',
+            label: '리뷰',
             index: 1,
+            count: storeDetail.storeReviews?.length,
+          ),
+          _tab(
+            context: context,
+            label: '사진',
+            index: 2,
             count: thumbnailImageUrls.length,
           ),
           // TODO: 추후 구현 예정
