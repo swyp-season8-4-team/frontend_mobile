@@ -450,6 +450,10 @@ class $AssetIconEtcGen {
   SvgGenImage get a16CloseFilled2 =>
       const SvgGenImage('asset/icon/etc/16_close_filled_2.svg');
 
+  /// File path: asset/icon/etc/16_star_filled.svg
+  SvgGenImage get a16StarFilled =>
+      const SvgGenImage('asset/icon/etc/16_star_filled.svg');
+
   /// File path: asset/icon/etc/18_close_circle_filled_enabled.svg
   SvgGenImage get a18CloseCircleFilledEnabled =>
       const SvgGenImage('asset/icon/etc/18_close_circle_filled_enabled.svg');
@@ -583,6 +587,7 @@ class $AssetIconEtcGen {
   List<SvgGenImage> get values => [
     a16CloseFilled1,
     a16CloseFilled2,
+    a16StarFilled,
     a18CloseCircleFilledEnabled,
     a18CloseCircleFilledPressed,
     a18CloseEyeOutlined,
