@@ -16,6 +16,7 @@ final Provider<StoreReviewRemoteDataSource> storeReviewApiProvider =
 abstract class StoreReviewRemoteDataSource {
   factory StoreReviewRemoteDataSource(Dio dio) = _StoreReviewRemoteDataSource;
 
+  /// 한줄 리뷰 추가
   @POST('/api/stores/{storeUuid}/reviews')
   @MultiPart()
   Future<void> addStoreReview({
@@ -26,19 +27,20 @@ abstract class StoreReviewRemoteDataSource {
     @Part() required int rating,
   });
 
+  /// 한줄 리뷰 삭제
   @DELETE('/api/stores/{storeUuid}/reviews/{reviewUuid}')
   Future<void> deleteStoreReview({
     @Path('storeUuid') required String storeUuid,
     @Path('reviewUuid') required String reviewUuid,
   });
 
+  /// 한줄 리뷰 수정
   @PATCH('/api/stores/{storeUuid}/reviews/{reviewUuid}')
   Future<void> updateStoreReview({
     @Path('storeUuid') required String storeUuid,
     @Path('reviewUuid') required String reviewUuid,
-    @Part(name: 'newImages', contentType: 'image/png')
-    required List<File> newImages,
     @Part() required String content,
     @Part() required int rating,
+    @Part(name: 'newImages', contentType: 'image/png') List<File>? newImages,
   });
 }

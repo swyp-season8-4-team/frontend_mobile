@@ -88,26 +88,29 @@ class _StoreReviewRemoteDataSource implements StoreReviewRemoteDataSource {
   Future<void> updateStoreReview({
     required String storeUuid,
     required String reviewUuid,
-    required List<File> newImages,
+    List<File>? newImages,
     required String content,
     required int rating,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
-    _data.files.addAll(
-      newImages.map(
-        (i) => MapEntry(
-          'newImages',
-          MultipartFile.fromFileSync(
-            i.path,
-            filename: i.path.split(Platform.pathSeparator).last,
-            contentType: DioMediaType.parse('image/png'),
+    if (newImages != null) {
+      _data.files.addAll(
+        newImages.map(
+          (i) => MapEntry(
+            'newImages',
+            MultipartFile.fromFileSync(
+              i.path,
+              filename: i.path.split(Platform.pathSeparator).last,
+              contentType: DioMediaType.parse('image/png'),
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
     _data.fields.add(MapEntry('content', content));
     _data.fields.add(MapEntry('rating', rating.toString()));
     final _options = _setStreamType<void>(
