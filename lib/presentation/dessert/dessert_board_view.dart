@@ -164,8 +164,8 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
           title: '디저트 메이트',
           leading: const SizedBox.shrink(),
           actions: TopBarIcon.toList(<Widget>[
-            icon.bookMark(onTap: () {}),
-            icon.search(onTap: () {}),
+            // icon.bookMark(onTap: () {}),
+            // icon.search(onTap: () {}),
           ]),
         ),
         body: Stack(
