@@ -88,9 +88,14 @@ class _SearchKeywordList extends ConsumerWidget {
                       ...state.recentSearches.map(
                         (RecentSearchModel e) => Padding(
                           padding: const EdgeInsets.only(right: 6),
-                          child: CustomInputChip(
+                          child: _RecentSearchItemChip(
                             label: e.keyword,
                             onPressed: () {
+                              ref
+                                  .read(searchStoreViewModelProvider.notifier)
+                                  .getStores(popularKeyword: e.keyword);
+                            },
+                            onCloseButtonPressed: () {
                               viewmodel.deleteRecentSearch(
                                 searchId: e.id.toString(),
                               );
@@ -134,6 +139,7 @@ class _SearchKeywordList extends ConsumerWidget {
                 const SizedBox(height: 16),
                 if (popularSearchLength > 0)
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       _PopularSearches(
                         startIndex: 0,
@@ -280,5 +286,64 @@ class _PopularSearch extends StatelessWidget {
         ],
       );
     }
+  }
+}
+
+class _RecentSearchItemChip extends StatelessWidget {
+  const _RecentSearchItemChip({
+    required this.label,
+    required this.onPressed,
+    required this.onCloseButtonPressed,
+  });
+  final String label;
+  final VoidCallback onPressed;
+  final VoidCallback onCloseButtonPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        color: ScaleColorConfig.primary100,
+        border: Border.all(color: ScaleColorConfig.neutral50),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          GestureDetector(
+            onTap: onPressed,
+            behavior: HitTestBehavior.translucent,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 12,
+                top: 6,
+                bottom: 6,
+                right: 4,
+              ),
+              child: Text(
+                label,
+                style: textTheme.labelLarge?.copyWith(
+                  color: ScaleColorConfig.primary20,
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: onCloseButtonPressed,
+            behavior: HitTestBehavior.translucent,
+            child: Assets.icon.system.closeCircleFill.svg(
+              width: 16,
+              colorFilter: const ColorFilter.mode(
+                ScaleColorConfig.neutral50,
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+        ],
+      ),
+    );
   }
 }
