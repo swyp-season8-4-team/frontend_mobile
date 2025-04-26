@@ -205,6 +205,12 @@ abstract class AppRoutes {
     path: '/board',
   );
 
+  /// 디저트 메이트 > 게시판 > 게시글
+  static RouteInfo dessertPost = RouteInfo(
+    name: '${dessertBoard.name}/post',
+    path: 'post',
+  );
+
   /// 마이페이지
   static RouteInfo myPage = const RouteInfo(name: '/my_page', path: '/my_page');
 

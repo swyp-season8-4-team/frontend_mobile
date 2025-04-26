@@ -39,6 +39,7 @@ class TopBarIcon {
     child: Stack(
       children: <Widget>[
         Assets.icon.media.notificationLine.svg(),
+        Assets.icon.media.notificationLine.svg(),
         if (alert)
           Positioned(
             top: 2,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/dessert/dessert_board_view.dart';
+import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step1.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step2.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step3.dart';
@@ -425,6 +426,16 @@ class AppRouter {
             pageBuilder: (BuildContext context, GoRouterState state) {
               return const NoTransitionPage<dynamic>(child: DessertBoard());
             },
+            routes: <RouteBase>[
+              /// 게시글
+              GoRoute(
+                path: AppRoutes.dessertPost.path,
+                name: AppRoutes.dessertPost.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const DessertPost();
+                },
+              ),
+            ],
           ),
         ],
       ),
