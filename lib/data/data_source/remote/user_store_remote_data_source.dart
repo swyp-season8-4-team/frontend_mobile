@@ -7,6 +7,7 @@ import 'package:frontend_mobile/data/entity/user_store/user_store_list_summary_e
 import 'package:frontend_mobile/data/entity/user_store/user_store_location_entity.dart';
 import 'package:frontend_mobile/data/query_param/user_store/add_user_store_list_query_param.dart';
 import 'package:frontend_mobile/data/query_param/user_store/update_user_store_list_query_param.dart';
+import 'package:frontend_mobile/data/request_body/user_store/update_user_store_list_request_body.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/error_logger.dart';
 
@@ -47,6 +48,13 @@ abstract class UserStoreRemoteDataSource {
   Future<void> deleteStoreFromUserStoreList({
     @Path() required int listId,
     @Path() required String storeUuid,
+  });
+
+  /// [저장된 가게 수정](https://release.desserbee.com/swagger-ui/index.html#/UserStore/updateSavedStoreLists)
+  @PATCH('/api/user-store/stores/{storeUuid}/lists')
+  Future<void> updateStoresToUserStoreList({
+    @Path('storeUuid') required String storeUuid,
+    @Body() required UpdateUserStoreListRequestBody body,
   });
 
   /// [저장 리스트 정보 조회](https://release.desserbee.com/swagger-ui/index.html#/UserStore/getUserStoreList)
