@@ -14,6 +14,11 @@ extension StringValidationExt on String {
     final DateTime parsedDate = DateTime.parse(this);
     return DateFormat('yyyy.MM.dd').format(parsedDate);
   }
+
+  String toTime() {
+    final DateTime parsedDate = DateTime.parse(this);
+    return DateFormat('yyyy.MM.dd HH:mm').format(parsedDate);
+  }
 }
 
 extension StoreListIconColorExt on StoreListIconColor {
