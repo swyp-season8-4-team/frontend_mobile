@@ -13,6 +13,8 @@ import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_detail_model.dart';
+import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
+import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/stores_by_user_store_list_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
@@ -58,9 +60,14 @@ class _StoresByUserStoreListViewState
       ),
       (_, Status next) {
         if (next.isSuccess) {
+          final UserState userState = ref.read(userViewModelProvider);
           ref
               .read(storesByUserStoreListViewModelProvider.notifier)
               .getStores(listId: widget.listId);
+
+          ref
+              .read(mapViewModelProvider.notifier)
+              .getUserStoreListAll(userUuid: userState.data.userUuid);
         }
       },
     );

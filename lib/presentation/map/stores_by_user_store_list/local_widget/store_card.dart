@@ -125,6 +125,20 @@ class _StoreCard extends ConsumerWidget {
                                 );
                               },
                             ),
+                            CustomOptionMenu(
+                              svg: Assets.icon.editor.pencil1Line,
+                              text: '수정하기',
+                              onTap: () {
+                                viewmodel.invisibleAllStoreOptionMenu();
+                                context.pushNamed(
+                                  AppRoutes.updateStoreToUserStoreList.name,
+                                  pathParameters: <String, String>{
+                                    'listId': store.listId.toString(),
+                                    'storeUuid': store.storeUuid,
+                                  },
+                                );
+                              },
+                            ),
                           ],
                         ),
                       ),
