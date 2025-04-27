@@ -8,6 +8,8 @@ class MateDetailEntity {
     this.mateUuid = '',
     this.storeId = -1,
     this.userUuid = '',
+    this.capacity = -1,
+    this.currentMemberCount = -1,
     this.nickname = '',
     this.title = '',
     this.content = '',
@@ -29,6 +31,8 @@ class MateDetailEntity {
   final String mateUuid;
   final int storeId;
   final String userUuid;
+  final int capacity;
+  final int currentMemberCount;
   final String nickname;
   final String title;
   final String content;

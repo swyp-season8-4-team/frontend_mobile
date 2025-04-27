@@ -432,7 +432,9 @@ class AppRouter {
                 path: AppRoutes.dessertPost.path,
                 name: AppRoutes.dessertPost.name,
                 builder: (BuildContext context, GoRouterState state) {
-                  return const DessertPost();
+                  final String mateUuid = state.extra as String;
+
+                  return DessertPost(mateUuid: mateUuid);
                 },
               ),
             ],

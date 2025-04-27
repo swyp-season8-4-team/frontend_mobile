@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
-import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_detail_model.dart';
 import 'package:frontend_mobile/presentation/dessert/widget/list/dessert_list_body.dart';
 import 'package:frontend_mobile/presentation/dessert/widget/list/dessert_list_footer.dart';
@@ -38,15 +37,15 @@ class DessertListCard extends StatelessWidget {
               children: <Widget>[
                 DessertListImage(imageUrl: mate.mateImage),
 
-                GestureDetector(
-                  onTap: onBookMarkTap,
-                  child: Container(
-                    child:
-                        !bookmarkSelected
-                            ? Assets.icon.etc.bookmarkUnselected.svg()
-                            : Assets.icon.etc.bookmarkSelected.svg(),
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: onBookMarkTap,
+                //   child: Container(
+                //     child:
+                //         !bookmarkSelected
+                //             ? Assets.icon.etc.bookmarkUnselected.svg()
+                //             : Assets.icon.etc.bookmarkSelected.svg(),
+                //   ),
+                // ),
               ],
             ),
             const SizedBox(width: 10),

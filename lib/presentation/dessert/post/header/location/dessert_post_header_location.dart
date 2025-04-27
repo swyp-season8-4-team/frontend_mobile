@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view_model.dart';
 
-class DessertPostHeaderLocation extends StatelessWidget {
+class DessertPostHeaderLocation extends ConsumerWidget {
   const DessertPostHeaderLocation({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final DessertPostState state = ref.watch(dessertPostViewModelProvider);
     final TextTheme textTheme = Theme.of(context).textTheme;
+
+    if (state.data.place?.placeName == null) {
+      return const SizedBox.shrink();
+    }
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -22,7 +28,7 @@ class DessertPostHeaderLocation extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             Text(
-              '망원 베이커리',
+              state.data.place!.placeName.toString(),
               style: textTheme.bodyMedium?.copyWith(
                 color: ScaleColorConfig.neutral20,
               ),
@@ -30,7 +36,7 @@ class DessertPostHeaderLocation extends StatelessWidget {
           ],
         ),
 
-        CustomTextButton.underline(label: '지도에서 위치보기', onPressed: () {}),
+        // CustomTextButton.underline(label: '지도에서 위치보기', onPressed: () {}),
       ],
     );
   }

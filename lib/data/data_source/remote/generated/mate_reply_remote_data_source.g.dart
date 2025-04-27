@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../mate_remote_data_source.dart';
+part of '../mate_reply_remote_data_source.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of '../mate_remote_data_source.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _MateRemoteDataSource implements MateRemoteDataSource {
-  _MateRemoteDataSource(this._dio, {this.baseUrl, this.errorLogger});
+class _MateReplyRemoteDataSource implements MateReplyRemoteDataSource {
+  _MateReplyRemoteDataSource(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 
@@ -18,26 +18,29 @@ class _MateRemoteDataSource implements MateRemoteDataSource {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<MateEntity> getMates({required GetMateQueryParam query}) async {
+  Future<MateReplyEntity> getMateReply({
+    required String mateUuid,
+    required GetMateReplyQueryParam query,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.addAll(query.toJson());
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<MateEntity>(
+    final _options = _setStreamType<MateReplyEntity>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/api/mates',
+            '/api/app/mates/${mateUuid}/reply',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late MateEntity _value;
+    late MateReplyEntity _value;
     try {
-      _value = MateEntity.fromJson(_result.data!);
+      _value = MateReplyEntity.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -46,25 +49,29 @@ class _MateRemoteDataSource implements MateRemoteDataSource {
   }
 
   @override
-  Future<MateDetailEntity> getMateDetail({required String mateUuid}) async {
+  Future<MateReplyDetailEntity> postMateReply({
+    required String mateUuid,
+    required PostMateReplyRequestBody body,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<MateDetailEntity>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<MateReplyDetailEntity>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/api/mates/${mateUuid}',
+            '/api/app/mates/${mateUuid}/reply',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late MateDetailEntity _value;
+    late MateReplyDetailEntity _value;
     try {
-      _value = MateDetailEntity.fromJson(_result.data!);
+      _value = MateReplyDetailEntity.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

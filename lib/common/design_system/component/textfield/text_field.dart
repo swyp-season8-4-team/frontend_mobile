@@ -6,6 +6,7 @@ import 'package:frontend_mobile/common/design_system/foundation/font_weight/font
 /// https://www.figma.com/design/Cmw8GLJYfuUVf9A3QNxqgW/SWYP_%EC%95%B1_1%EA%B8%B0_%EB%94%94%EC%A0%80%EB%B9%84?node-id=400-73177&t=3ArDzZQuJj0XGk5f-4
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
+    this.profile,
     this.label,
     this.hintText = '내용을 입력해주세요',
     this.onChanged,
@@ -13,6 +14,8 @@ class CustomTextField extends StatefulWidget {
     this.controller,
     super.key,
   });
+
+  final Widget? profile;
   final String? label;
   final String hintText;
   final void Function(String)? onChanged;
@@ -64,6 +67,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
             children: <Widget>[
               if (widget.label != null)
                 Expanded(child: Text(widget.label!, style: labelTextStyle)),
+
+              if (widget.profile != null) ...<Widget>[
+                widget.profile!,
+                const Spacer(),
+              ],
 
               // counter 표시
               Text.rich(

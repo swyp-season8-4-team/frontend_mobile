@@ -3,6 +3,8 @@ class MateDetailModel {
     required this.mateUuid,
     required this.storeId,
     required this.userUuid,
+    required this.capacity,
+    required this.currentMemberCount,
     required this.nickname,
     required this.title,
     required this.content,
@@ -21,6 +23,8 @@ class MateDetailModel {
   final String mateUuid;
   final int storeId;
   final String userUuid;
+  final int capacity;
+  final int currentMemberCount;
   final String nickname;
   final String title;
   final String content;

@@ -20,6 +20,8 @@ extension MateDetailEntityExt on MateDetailEntity {
       mateUuid: mateUuid,
       storeId: storeId,
       userUuid: userUuid,
+      capacity: capacity,
+      currentMemberCount: currentMemberCount,
       nickname: nickname,
       title: title,
       content: content,
