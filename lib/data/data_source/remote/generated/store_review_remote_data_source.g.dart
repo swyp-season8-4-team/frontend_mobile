@@ -20,30 +20,33 @@ class _StoreReviewRemoteDataSource implements StoreReviewRemoteDataSource {
   @override
   Future<void> addStoreReview({
     required String storeUuid,
-    required List<File> images,
     required String userUuid,
     required String content,
     required int rating,
+    List<File>? images,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
-    _data.files.addAll(
-      images.map(
-        (i) => MapEntry(
-          'images',
-          MultipartFile.fromFileSync(
-            i.path,
-            filename: i.path.split(Platform.pathSeparator).last,
-            contentType: DioMediaType.parse('image/png'),
-          ),
-        ),
-      ),
-    );
     _data.fields.add(MapEntry('userUuid', userUuid));
     _data.fields.add(MapEntry('content', content));
     _data.fields.add(MapEntry('rating', rating.toString()));
+    if (images != null) {
+      _data.files.addAll(
+        images.map(
+          (i) => MapEntry(
+            'images',
+            MultipartFile.fromFileSync(
+              i.path,
+              filename: i.path.split(Platform.pathSeparator).last,
+              contentType: DioMediaType.parse('image/png'),
+            ),
+          ),
+        ),
+      );
+    }
     final _options = _setStreamType<void>(
       Options(
             method: 'POST',
@@ -88,15 +91,17 @@ class _StoreReviewRemoteDataSource implements StoreReviewRemoteDataSource {
   Future<void> updateStoreReview({
     required String storeUuid,
     required String reviewUuid,
-    List<File>? newImages,
     required String content,
     required int rating,
+    List<File>? newImages,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
+    _data.fields.add(MapEntry('content', content));
+    _data.fields.add(MapEntry('rating', rating.toString()));
     if (newImages != null) {
       _data.files.addAll(
         newImages.map(
@@ -111,8 +116,6 @@ class _StoreReviewRemoteDataSource implements StoreReviewRemoteDataSource {
         ),
       );
     }
-    _data.fields.add(MapEntry('content', content));
-    _data.fields.add(MapEntry('rating', rating.toString()));
     final _options = _setStreamType<void>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(

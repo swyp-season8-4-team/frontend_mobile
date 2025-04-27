@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
 import 'package:retrofit/http.dart';
+import 'package:retrofit/error_logger.dart';
 
 part 'generated/store_review_remote_data_source.g.dart';
 
@@ -21,10 +22,10 @@ abstract class StoreReviewRemoteDataSource {
   @MultiPart()
   Future<void> addStoreReview({
     @Path('storeUuid') required String storeUuid,
-    @Part(name: 'images', contentType: 'image/png') required List<File> images,
     @Part() required String userUuid,
     @Part() required String content,
     @Part() required int rating,
+    @Part(name: 'images', contentType: 'image/png') List<File>? images,
   });
 
   /// 한줄 리뷰 삭제
