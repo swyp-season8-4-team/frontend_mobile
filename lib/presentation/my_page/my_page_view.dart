@@ -38,6 +38,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final UserState userState = ref.read(userViewModelProvider);
+      await ref.read(preferenceViewModelProvider.notifier).getAllPreferences();
       await ref
           .read(myPageViewModelProvider.notifier)
           .getUserStoreListAll(userUuid: userState.data.userUuid);

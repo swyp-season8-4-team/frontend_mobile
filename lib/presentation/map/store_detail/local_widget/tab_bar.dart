@@ -5,13 +5,11 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
     required this.storeDetail,
     required this.thumbnailImageUrls,
     required this.tabController,
-    required this.onPinnedChanged,
   });
 
   final StoreDetailModel storeDetail;
   final List<String> thumbnailImageUrls;
   final TabController tabController;
-  final void Function(bool isPinned) onPinnedChanged;
 
   @override
   Widget build(
@@ -19,9 +17,6 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    final bool isPinned = shrinkOffset >= maxExtent;
-    onPinnedChanged(isPinned);
-
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Container(
       height: 40,
@@ -58,8 +53,14 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
           ),
           _tab(
             context: context,
-            label: '사진',
+            label: '리뷰',
             index: 1,
+            count: storeDetail.storeReviews?.length,
+          ),
+          _tab(
+            context: context,
+            label: '사진',
+            index: 2,
             count: thumbnailImageUrls.length,
           ),
           // TODO: 추후 구현 예정

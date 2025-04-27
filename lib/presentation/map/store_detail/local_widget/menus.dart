@@ -10,7 +10,10 @@ class _Menus extends ConsumerWidget {
     return ListView.separated(
       itemBuilder: (BuildContext context, int index) {
         final StoreDetailMenuModel menu = state.storeDetail!.menus[index];
-        return _Menu(menu: menu);
+        return Padding(
+          padding: EdgeInsets.only(top: index == 0 ? 40 : 0),
+          child: _Menu(menu: menu),
+        );
       },
       separatorBuilder: (BuildContext context, int index) {
         return Divider(

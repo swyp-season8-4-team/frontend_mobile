@@ -7,15 +7,7 @@ class _DessertImages extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final StoreDetailState state = ref.watch(storeDetailViewModelProvider);
 
-    // TODO: 타이포 그래피 사용 필요
-    const TextStyle baseTextStyle = TextStyle(
-      color: Color(0xFF898989),
-      fontSize: 12,
-      fontWeight: FontWeight.w400,
-      height: 1.30,
-      letterSpacing: -0.18,
-    );
-
+    final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     // final List<String> dessertImages =
@@ -27,42 +19,54 @@ class _DessertImages extends ConsumerWidget {
     final List<String> dessertImages = state.thumbnailImageUrls;
     return CustomScrollView(
       slivers: <Widget>[
-        SliverToBoxAdapter(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 10,
-                ),
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      '· 최신순',
-                      style: baseTextStyle.copyWith(
-                        color: const Color(0xFF272727),
-                      ),
+        SliverPersistentHeader(
+          pinned: true,
+          delegate: _ImageHeader(
+            widget: Container(
+              color: ScaleColorConfig.neutral100,
+              child: Column(
+                children: <Widget>[
+                  const SizedBox(height: 40),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 10,
                     ),
-                    const SizedBox(width: 10),
-                    Assets.icon.system.chart1Filled.svg(
-                      width: 16,
-                      height: 16,
-                      colorFilter: const ColorFilter.mode(
-                        Color(0xFF898989),
-                        BlendMode.srcIn,
-                      ),
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          '· 최신순',
+                          style: textTheme.bodySmall?.copyWith(
+                            color: ScaleColorConfig.neutral20,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Assets.icon.system.chart1Filled.svg(
+                          width: 16,
+                          height: 16,
+                          colorFilter: const ColorFilter.mode(
+                            ScaleColorConfig.neutral40,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        Text(
+                          '업데이트 주기: 하루 단위',
+                          style: textTheme.bodySmall?.copyWith(
+                            color: ScaleColorConfig.neutral40,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 2),
-                    const Text('업데이트 주기: 하루 단위', style: baseTextStyle),
-                  ],
-                ),
+                  ),
+                  Divider(
+                    thickness: 1,
+                    height: 1,
+                    color: colorScheme.outlineVariant,
+                  ),
+                ],
               ),
-              Divider(
-                thickness: 1,
-                height: 1,
-                color: colorScheme.outlineVariant,
-              ),
-            ],
+            ),
           ),
         ),
         SliverPadding(
@@ -87,5 +91,31 @@ class _DessertImages extends ConsumerWidget {
         ),
       ],
     );
+  }
+}
+
+class _ImageHeader extends SliverPersistentHeaderDelegate {
+  _ImageHeader({required this.widget});
+
+  Widget widget;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return widget;
+  }
+
+  @override
+  double get maxExtent => 77.1;
+
+  @override
+  double get minExtent => 77.1;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
   }
 }
