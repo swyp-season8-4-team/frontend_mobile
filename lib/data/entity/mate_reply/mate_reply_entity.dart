@@ -6,6 +6,7 @@ part 'generated/mate_reply_entity.g.dart';
 @JsonSerializable()
 class MateReplyEntity {
   MateReplyEntity({
+    this.mateUuid = '',
     this.mateReplies = const <MateReplyDetailEntity>[],
     this.count = -1,
     this.last = false,
@@ -14,6 +15,7 @@ class MateReplyEntity {
   factory MateReplyEntity.fromJson(Map<String, dynamic> json) =>
       _$MateReplyEntityFromJson(json);
 
+  final String mateUuid;
   final List<MateReplyDetailEntity> mateReplies;
   final int count;
   final bool last;

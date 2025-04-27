@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
-import 'package:frontend_mobile/data/entity/mate/mate_entity.dart';
+import 'package:frontend_mobile/data/entity/mate_reply/mate_reply_entity.dart';
+import 'package:frontend_mobile/data/query_param/mate_reply/get_mate_reply_query_param.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'generated/mate_reply_remote_data_source.g.dart';
@@ -17,7 +18,10 @@ abstract interface class MateReplyRemoteDataSource {
   factory MateReplyRemoteDataSource(Dio dio, {String? baseUrl}) =
       _MateReplyRemoteDataSource;
 
-  /// 메이트 댓글 전체 조회
-  @GET('/api/mates/{mateUuid}/reply')
-  Future<MateEntity> getMateReply({@Path() required String mateUuid});
+  /// [App]메이트 댓글 전체 조회
+  @GET('/api/app/mates/{mateUuid}/reply')
+  Future<MateReplyEntity> getMateReply({
+    @Path() required String mateUuid,
+    @Queries() required GetMateReplyQueryParam query,
+  });
 }

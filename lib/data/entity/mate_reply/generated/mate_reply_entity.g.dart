@@ -8,6 +8,7 @@ part of '../mate_reply_entity.dart';
 
 MateReplyEntity _$MateReplyEntityFromJson(Map<String, dynamic> json) =>
     MateReplyEntity(
+      mateUuid: json['mateUuid'] as String? ?? '',
       mateReplies:
           (json['mateReplies'] as List<dynamic>?)
               ?.map(
@@ -22,6 +23,7 @@ MateReplyEntity _$MateReplyEntityFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$MateReplyEntityToJson(MateReplyEntity instance) =>
     <String, dynamic>{
+      'mateUuid': instance.mateUuid,
       'mateReplies': instance.mateReplies,
       'count': instance.count,
       'last': instance.last,
