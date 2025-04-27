@@ -44,12 +44,7 @@ class _StoreReviewRemoteDataSource implements StoreReviewRemoteDataSource {
       );
     }
     final _options = _setStreamType<void>(
-      Options(
-            method: 'POST',
-            headers: _headers,
-            extra: _extra,
-            contentType: 'multipart/form-data',
-          )
+      Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
             '/api/stores/${storeUuid}/reviews',

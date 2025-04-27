@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/api_call.dart';
 import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
@@ -12,13 +10,24 @@ import 'package:frontend_mobile/domain/repository/store_review_repository.dart';
 
 final Provider<StoreReviewRepository> storeReviewRepositoryProvider =
     Provider<StoreReviewRepository>((Ref ref) {
-      return StoreReviewRepositoryImpl(api: ref.read(storeReviewApiProvider));
+      return StoreReviewRepositoryImpl(
+        api: ref.read(storeReviewApiProvider),
+        addStoreReviewApi: ref.read(addStoreReviewApiProvider),
+        updateStoreReviewApi: ref.read(updateStoreReviewApiProvider),
+      );
     });
 
 class StoreReviewRepositoryImpl implements StoreReviewRepository {
-  const StoreReviewRepositoryImpl({required StoreReviewRemoteDataSource api})
-    : _api = api;
+  const StoreReviewRepositoryImpl({
+    required StoreReviewRemoteDataSource api,
+    required AddStoreReviewApi addStoreReviewApi,
+    required UpdateStoreReviewApi updateStoreReviewApi,
+  }) : _updateStoreReviewApi = updateStoreReviewApi,
+       _addStoreReviewApi = addStoreReviewApi,
+       _api = api;
   final StoreReviewRemoteDataSource _api;
+  final AddStoreReviewApi _addStoreReviewApi;
+  final UpdateStoreReviewApi _updateStoreReviewApi;
 
   @override
   Future<Result<void, CustomException>> addStoreReview({
@@ -26,14 +35,14 @@ class StoreReviewRepositoryImpl implements StoreReviewRepository {
   }) async {
     return await apiCall(
       api: () async {
-        return await _api.addStoreReview(
+        return await _addStoreReviewApi.addStoreReview(
           storeUuid: params.storeUuid,
           images: params.images,
-          request: jsonEncode(<String, dynamic>{
+          request: <String, dynamic>{
             'userUuid': params.userUuid,
             'content': params.content,
             'rating': params.rating,
-          }),
+          },
         );
       },
     );
@@ -59,11 +68,13 @@ class StoreReviewRepositoryImpl implements StoreReviewRepository {
   }) async {
     return await apiCall(
       api: () async {
-        return await _api.updateStoreReview(
+        return await _updateStoreReviewApi.updateStoreReview(
           storeUuid: params.storeUuid,
           reviewUuid: params.reviewUuid,
-          content: params.content,
-          rating: params.rating,
+          request: <String, dynamic>{
+            'content': params.content,
+            'rating': params.rating,
+          },
           newImages: params.newImages,
         );
       },
