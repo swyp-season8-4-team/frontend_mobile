@@ -3,9 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/domain/param/mate/get_mate_detail_params.dart';
+import 'package:frontend_mobile/domain/param/mate_reply/get_mate_reply_params.dart';
 import 'package:frontend_mobile/presentation/dessert/comment/dessert_comment_view.dart';
+import 'package:frontend_mobile/presentation/dessert/comment/dessert_comment_view_model.dart';
 import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view_model.dart';
 import 'package:frontend_mobile/presentation/dessert/post/header/info/dessert_post_header_info.dart';
 import 'package:frontend_mobile/presentation/dessert/post/header/location/dessert_post_header_location.dart';
@@ -29,6 +32,12 @@ class _DessertPostState extends ConsumerState<DessertPost> {
           .read(dessertPostViewModelProvider.notifier)
           .getMateDetail(
             params: GetMateDetailParams(mateUuid: widget.mateUuid),
+          );
+
+      ref
+          .read(dessertCommentViewModelProvider.notifier)
+          .getMateReply(
+            params: GetMateReplyParams(mateUuid: widget.mateUuid, to: 1000),
           );
     });
   }
@@ -91,33 +100,35 @@ class _DessertPostState extends ConsumerState<DessertPost> {
                         ),
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          // Row(
-                          //   children: <Widget>[
-                          //     Assets.icon.contact.message1Line.svg(
-                          //       width: 16,
-                          //       colorFilter: const ColorFilter.mode(
-                          //         ScaleColorConfig.neutral50,
-                          //         BlendMode.srcIn,
-                          //       ),
-                          //     ),
-                          //     const SizedBox(width: 4),
-                          //     Text(
-                          //       '3',
-                          //       style: textTheme.labelLarge?.copyWith(
-                          //         color: ScaleColorConfig.neutral50,
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-                          if (state.data.createdAt.isNotEmpty)
+                          if (state.data.applyStatus == 'NONE')
+                            Row(
+                              children: <Widget>[
+                                Assets.icon.contact.message1Line.svg(
+                                  width: 16,
+                                  colorFilter: const ColorFilter.mode(
+                                    ScaleColorConfig.neutral50,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  '3',
+                                  style: textTheme.labelLarge?.copyWith(
+                                    color: ScaleColorConfig.neutral50,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          if (state.data.createdAt.isNotEmpty) ...<Widget>[
+                            const Spacer(),
                             Text(
                               state.data.createdAt.toDate(),
                               style: textTheme.labelLarge?.copyWith(
                                 color: ScaleColorConfig.neutral50,
                               ),
                             ),
+                          ],
                         ],
                       ),
                     ),

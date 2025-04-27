@@ -52,7 +52,7 @@ class DessertCommentViewModel extends StateNotifier<DessertCommentState> {
     );
   }
 
-  /// [App]메이트 댓글 전체 조회
+  /// [App]메이트 댓글 생성
   Future<void> postMateReply({required PostMateReplyParams params}) async {
     state = state.copyWith(status: Status.loading);
 

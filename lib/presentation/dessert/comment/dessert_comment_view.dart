@@ -11,7 +11,6 @@ import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/mate_reply/mate_reply_detail_model.dart';
-import 'package:frontend_mobile/domain/param/mate_reply/get_mate_reply_params.dart';
 import 'package:frontend_mobile/domain/param/mate_reply/post_mate_reply_params.dart';
 import 'package:frontend_mobile/presentation/dessert/comment/dessert_comment_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
@@ -27,25 +26,28 @@ class DessertComment extends ConsumerStatefulWidget {
 }
 
 class _DessertCommentState extends ConsumerState<DessertComment> {
+  int commentMateReplyId = -1;
+
   final TextEditingController _commentController = TextEditingController();
+  final TextEditingController _replyController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
     _commentController.addListener(_onCommentRender);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref
-          .read(dessertCommentViewModelProvider.notifier)
-          .getMateReply(params: GetMateReplyParams(mateUuid: widget.mateUuid));
-    });
+    _replyController.addListener(_onReplyRender);
   }
 
   void _onCommentRender() {
     setState(() {});
   }
 
-  Widget _profile() {
+  void _onReplyRender() {
+    setState(() {});
+  }
+
+  Widget _loggedInProfile() {
     final UserState userState = ref.watch(userViewModelProvider);
 
     if (userState.data.profileImageUrl != null) {
@@ -67,7 +69,34 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
         : CustomProfilePhotoSize.girl(size: CustomProfilePhotoSizeEnum.m);
   }
 
-  Widget _commentItem({required MateReplyDetailModel item}) {
+  Widget _commentProfile({required MateReplyDetailModel item}) {
+    if (item.profileImage.isNotEmpty) {
+      return Container(
+        width: 24,
+        height: 24,
+        clipBehavior: Clip.hardEdge,
+        decoration: const BoxDecoration(shape: BoxShape.circle),
+
+        child: CachedNetworkImage(
+          imageUrl: item.profileImage,
+          fit: BoxFit.cover,
+        ),
+      );
+    }
+
+    return item.gender == 'MALE'
+        ? CustomProfilePhotoSize.boy(size: CustomProfilePhotoSizeEnum.m)
+        : CustomProfilePhotoSize.girl(size: CustomProfilePhotoSizeEnum.m);
+  }
+
+  Widget _commentItem({
+    required MateReplyDetailModel item,
+    bool replyButton = true,
+  }) {
+    final UserState userState = ref.watch(userViewModelProvider);
+    final DessertCommentState state = ref.watch(
+      dessertCommentViewModelProvider,
+    );
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return Column(
@@ -78,7 +107,7 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                CustomProfilePhotoSize.girl(size: CustomProfilePhotoSizeEnum.m),
+                _commentProfile(item: item),
                 const SizedBox(width: 8),
                 Text(
                   item.nickname,
@@ -118,7 +147,61 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
         ),
         const SizedBox(height: 6),
 
-        CustomOutlineButton.xSmall(width: 50, label: '답글', onPressed: () {}),
+        if (replyButton)
+          if (commentMateReplyId != item.mateReplyId)
+            CustomOutlineButton.xSmall(
+              width: 50,
+              label: '답글',
+              onPressed: () {
+                setState(() {
+                  commentMateReplyId = item.mateReplyId;
+                });
+              },
+            )
+          else
+            Column(
+              children: <Widget>[
+                CustomTextField(controller: _replyController),
+                const SizedBox(height: 8),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    CustomOutlineButton.xSmall(
+                      width: 50,
+                      label: '취소',
+                      onPressed: () {
+                        setState(() {
+                          commentMateReplyId = -1;
+                        });
+                      },
+                    ),
+                    const SizedBox(width: 3),
+                    CustomFillButton.xSmall(
+                      width: 50,
+                      label: '등록',
+                      disabled: _replyController.text.isEmpty,
+                      onPressed: () {
+                        ref
+                            .read(dessertCommentViewModelProvider.notifier)
+                            .postMateReply(
+                              params: PostMateReplyParams(
+                                parentMateReplyId: commentMateReplyId,
+                                mateUuid: state.data.mateUuid,
+                                userUuid: userState.data.userUuid,
+                                content: _replyController.text,
+                              ),
+                            );
+
+                        setState(() {
+                          commentMateReplyId = -1;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
       ],
     );
   }
@@ -127,6 +210,8 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
   void dispose() {
     _commentController.removeListener(_onCommentRender);
     _commentController.dispose();
+    _replyController.removeListener(_onReplyRender);
+    _replyController.dispose();
     super.dispose();
   }
 
@@ -140,6 +225,11 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
 
     ref.listen(dessertCommentViewModelProvider, (_, DessertCommentState next) {
       switch (next.status) {
+        case Status.success:
+          _commentController.clear();
+          _replyController.clear();
+          break;
+
         case Status.failure:
           showDialog(
             context: context,
@@ -153,7 +243,6 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
               );
             },
           );
-
           break;
 
         default:
@@ -197,7 +286,7 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
                     controller: _commentController,
                     profile: Row(
                       children: <Widget>[
-                        _profile(),
+                        _loggedInProfile(),
                         const SizedBox(width: 8),
                         Text(
                           userState.data.nickname,
@@ -252,10 +341,8 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
                 child: _commentItem(item: item),
               ),
 
-              ...List<Widget>.generate(state.data.mateReplies.length, (
-                int index,
-              ) {
-                final MateReplyDetailModel item = state.data.mateReplies[index];
+              ...List<Widget>.generate(item.children.length, (int index) {
+                final MateReplyDetailModel childItem = item.children[index];
 
                 return Container(
                   padding: const EdgeInsets.all(16),
@@ -274,17 +361,16 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
                         ),
                       ),
                       const SizedBox(width: 6),
-                      Expanded(child: _commentItem(item: item)),
+                      Expanded(
+                        child: _commentItem(
+                          item: childItem,
+                          replyButton: false,
+                        ),
+                      ),
                     ],
                   ),
                 );
               }),
-
-              // ...List<Widget>.generate(item.children.length, (int index) {
-              //   final MateReplyDetailModel childItem = item.children[index];
-
-              //   return _commentItem(item: childItem);
-              // }),
             ],
           );
         }),
