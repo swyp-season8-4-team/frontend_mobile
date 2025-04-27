@@ -1,6 +1,7 @@
 class MateReplyDetailModel {
   MateReplyDetailModel({
     required this.mateReplyId,
+    required this.mateUuid,
     required this.parentMateReplyId,
     required this.userUuid,
     required this.nickname,
@@ -14,6 +15,7 @@ class MateReplyDetailModel {
   });
 
   final int mateReplyId;
+  final String mateUuid;
   final int? parentMateReplyId;
   final String userUuid;
   final String nickname;

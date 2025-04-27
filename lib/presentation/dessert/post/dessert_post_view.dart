@@ -49,6 +49,7 @@ class _DessertPostState extends ConsumerState<DessertPost> {
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     const Padding(
                       padding: EdgeInsets.all(16),

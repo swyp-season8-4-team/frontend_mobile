@@ -10,6 +10,7 @@ MateReplyDetailEntity _$MateReplyDetailEntityFromJson(
   Map<String, dynamic> json,
 ) => MateReplyDetailEntity(
   mateReplyId: (json['mateReplyId'] as num?)?.toInt() ?? -1,
+  mateUuid: json['mateUuid'] as String? ?? '',
   parentMateReplyId: (json['parentMateReplyId'] as num?)?.toInt(),
   userUuid: json['userUuid'] as String? ?? '',
   nickname: json['nickname'] as String? ?? '',
@@ -32,6 +33,7 @@ Map<String, dynamic> _$MateReplyDetailEntityToJson(
   MateReplyDetailEntity instance,
 ) => <String, dynamic>{
   'mateReplyId': instance.mateReplyId,
+  'mateUuid': instance.mateUuid,
   'parentMateReplyId': instance.parentMateReplyId,
   'userUuid': instance.userUuid,
   'nickname': instance.nickname,

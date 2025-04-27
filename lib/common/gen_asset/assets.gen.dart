@@ -247,6 +247,10 @@ class $AssetIconArrowGen {
   SvgGenImage get backLine =>
       const SvgGenImage('asset/icon/arrow/back_line.svg');
 
+  /// File path: asset/icon/arrow/corner_down_right_line.svg
+  SvgGenImage get cornerDownRightLine =>
+      const SvgGenImage('asset/icon/arrow/corner_down_right_line.svg');
+
   /// File path: asset/icon/arrow/down_line.svg
   SvgGenImage get downLine =>
       const SvgGenImage('asset/icon/arrow/down_line.svg');
@@ -273,6 +277,7 @@ class $AssetIconArrowGen {
     arrowRightLine,
     arrowUpLine,
     backLine,
+    cornerDownRightLine,
     downLine,
     leftLine,
     rightLine,
@@ -856,6 +861,10 @@ class $AssetIconSystemGen {
   SvgGenImage get refresh1Line =>
       const SvgGenImage('asset/icon/system/refresh_1_line.svg');
 
+  /// File path: asset/icon/system/report_line.svg
+  SvgGenImage get reportLine =>
+      const SvgGenImage('asset/icon/system/report_line.svg');
+
   /// File path: asset/icon/system/setting_4_line.svg
   SvgGenImage get setting4Line =>
       const SvgGenImage('asset/icon/system/setting_4_line.svg');
@@ -912,6 +921,7 @@ class $AssetIconSystemGen {
     questionFill,
     questionLine,
     refresh1Line,
+    reportLine,
     setting4Line,
     settings2Line,
     share2Line,
