@@ -46,6 +46,12 @@ abstract class AppRoutes {
     path: 'store/:id',
   );
 
+  // 지도 > 가게 상세 > 리뷰 작성
+  static final RouteInfo addStoreReview = RouteInfo(
+    name: '${storeDetail.name}/add_store_review',
+    path: 'add_store_review',
+  );
+
   // 지도 > 가게 상세 > 저장 리스트에 가게 추가
   static final RouteInfo addStoreToUserStoreList = RouteInfo(
     name: '${storeDetail.name}/add-store-to-user-store-list',
