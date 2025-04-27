@@ -105,6 +105,14 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
       body: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (_isTabBarPinned != innerBoxIsScrolled) {
+                setState(() {
+                  _isTabBarPinned = innerBoxIsScrolled;
+                });
+              }
+            });
+
             return <Widget>[
               const SliverToBoxAdapter(child: _OwnerPickImage()),
               const SliverToBoxAdapter(child: _StoreRepresentiveInfo()),
@@ -123,16 +131,6 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
                     storeDetail: state.storeDetail!,
                     tabController: _tabController,
                     thumbnailImageUrls: state.thumbnailImageUrls,
-                    onPinnedChanged: (bool isPinned) {
-                      if (_isTabBarPinned == isPinned) {
-                        return;
-                      }
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        setState(() {
-                          _isTabBarPinned = isPinned;
-                        });
-                      });
-                    },
                   ),
                 ),
               ),
