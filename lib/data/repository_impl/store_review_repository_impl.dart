@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/api_call.dart';
 import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
@@ -27,9 +29,11 @@ class StoreReviewRepositoryImpl implements StoreReviewRepository {
         return await _api.addStoreReview(
           storeUuid: params.storeUuid,
           images: params.images,
-          userUuid: params.userUuid,
-          content: params.content,
-          rating: params.rating,
+          request: jsonEncode(<String, dynamic>{
+            'userUuid': params.userUuid,
+            'content': params.content,
+            'rating': params.rating,
+          }),
         );
       },
     );

@@ -8,10 +8,13 @@ import 'package:frontend_mobile/common/design_system/component/button/outline_bu
 import 'package:frontend_mobile/common/design_system/component/button/pill_outline_button.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/expandable_text.dart';
 import 'package:frontend_mobile/common/design_system/component/hexagon_grid/hexagon_grid.dart';
+import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar.dart';
+import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar_right_item.dart';
 import 'package:frontend_mobile/common/design_system/component/tag/etc_tag.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/core/manager/toast/toast_manager.dart';
 import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/store/store_detail_model.dart';

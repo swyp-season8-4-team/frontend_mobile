@@ -20,9 +20,7 @@ class _StoreReviewRemoteDataSource implements StoreReviewRemoteDataSource {
   @override
   Future<void> addStoreReview({
     required String storeUuid,
-    required String userUuid,
-    required String content,
-    required int rating,
+    required String request,
     List<File>? images,
   }) async {
     final _extra = <String, dynamic>{};
@@ -30,9 +28,7 @@ class _StoreReviewRemoteDataSource implements StoreReviewRemoteDataSource {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
-    _data.fields.add(MapEntry('userUuid', userUuid));
-    _data.fields.add(MapEntry('content', content));
-    _data.fields.add(MapEntry('rating', rating.toString()));
+    _data.fields.add(MapEntry('request', request));
     if (images != null) {
       _data.files.addAll(
         images.map(

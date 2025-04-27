@@ -22,9 +22,7 @@ abstract class StoreReviewRemoteDataSource {
   @MultiPart()
   Future<void> addStoreReview({
     @Path('storeUuid') required String storeUuid,
-    @Part() required String userUuid,
-    @Part() required String content,
-    @Part() required int rating,
+    @Part() required String request,
     @Part(name: 'images', contentType: 'image/png') List<File>? images,
   });
 

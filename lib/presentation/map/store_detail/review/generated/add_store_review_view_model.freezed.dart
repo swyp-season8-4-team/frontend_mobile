@@ -173,7 +173,7 @@ class __$$AddStoreReviewStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddStoreReviewStateImpl implements _AddStoreReviewState {
+class _$AddStoreReviewStateImpl extends _AddStoreReviewState {
   _$AddStoreReviewStateImpl({
     this.rating = 3,
     this.content = '',
@@ -185,7 +185,7 @@ class _$AddStoreReviewStateImpl implements _AddStoreReviewState {
       message: '',
       timestamp: '',
     ),
-  });
+  }) : super._();
 
   @override
   @JsonKey()
@@ -246,7 +246,7 @@ class _$AddStoreReviewStateImpl implements _AddStoreReviewState {
       );
 }
 
-abstract class _AddStoreReviewState implements AddStoreReviewState {
+abstract class _AddStoreReviewState extends AddStoreReviewState {
   factory _AddStoreReviewState({
     final int rating,
     final String content,
@@ -254,6 +254,7 @@ abstract class _AddStoreReviewState implements AddStoreReviewState {
     final Status addStoreReviewStatus,
     final ExceptionModel addStoreReviewException,
   }) = _$AddStoreReviewStateImpl;
+  _AddStoreReviewState._() : super._();
 
   @override
   int get rating;

@@ -42,7 +42,7 @@ class AddStoreReviewViewModel extends StateNotifier<AddStoreReviewState> {
   }
 
   /// 이미지 수정
-  void updateImage({required File image}) {
+  void updateImage({File? image}) {
     state = state.copyWith(image: image);
   }
 

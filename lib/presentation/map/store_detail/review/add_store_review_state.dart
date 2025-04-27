@@ -10,4 +10,9 @@ class AddStoreReviewState with _$AddStoreReviewState {
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel addStoreReviewException,
   }) = _AddStoreReviewState;
+
+  const AddStoreReviewState._();
+
+  bool get saveButtonEnabled =>
+      content.isNotEmpty && !addStoreReviewStatus.isLoading;
 }
