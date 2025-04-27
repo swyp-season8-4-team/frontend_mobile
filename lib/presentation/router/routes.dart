@@ -28,6 +28,12 @@ abstract class AppRoutes {
     path: ':listId/stores',
   );
 
+  // 지도 > 저장 리스트 내 가게 조회 > 리스트에 가게 저장
+  static final RouteInfo updateStoreToUserStoreList = RouteInfo(
+    name: '${storesByUserStoreList.name}/:storeUuid/update',
+    path: ':storeUuid/update',
+  );
+
   // 지도 > 저장 리스트 생성
   static final RouteInfo addUserStoreList = RouteInfo(
     name: '${map.name}/add_user_store_list',
