@@ -109,8 +109,10 @@ class _AddStoreToUserStoreListViewState
                   width: 50,
                   disabled: state.listId == null,
                   onPressed: () {
+                    final UserState userState = ref.read(userViewModelProvider);
                     viewmodel.addStoreToUserStoreList(
                       storeUuid: widget.storeUuid,
+                      preferencesIds: userState.data.preferences,
                     );
                   },
                 ),
