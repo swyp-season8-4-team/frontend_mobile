@@ -13,7 +13,6 @@ import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user_store/user_store_list_view_model.dart';
-import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/stores_by_user_store_list_view_model.dart';
 import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/update/update_store_to_user_store_list_view_model.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,14 +20,10 @@ class UpdateStoreToUserStoreListView extends ConsumerStatefulWidget {
   const UpdateStoreToUserStoreListView({
     required this.storeUuid,
     required this.storeName,
-    required this.listId,
     super.key,
   });
   final String storeUuid;
   final String storeName;
-
-  // 가게가 저장되어있던 리스트의 id
-  final int listId;
 
   @override
   ConsumerState<UpdateStoreToUserStoreListView> createState() =>
@@ -80,9 +75,6 @@ class _UpdateStoreToUserStoreListViewState
           ref
               .read(userStoreListViewModelProvider.notifier)
               .getUserStoreListAll(userUuid: userState.data.userUuid);
-          ref
-              .read(storesByUserStoreListViewModelProvider.notifier)
-              .getStores(listId: widget.listId);
           context.pop(true);
         }
       },
@@ -107,7 +99,7 @@ class _UpdateStoreToUserStoreListViewState
       isLoading: state.updateStoreToUserStoreListStatus.isLoading,
       child: Scaffold(
         appBar: const CustomSubTopBar(
-          title: '',
+          title: '가게 찜하기',
           actions: <Widget>[],
           primary: false,
         ),

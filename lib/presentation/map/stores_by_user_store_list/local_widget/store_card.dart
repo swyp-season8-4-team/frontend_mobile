@@ -138,6 +138,10 @@ class _StoreCard extends ConsumerWidget {
 
                                 if (result == true && context.mounted) {
                                   _showSuccessUpdateStore(context, ref);
+
+                                  await viewmodel.getStores(
+                                    listId: store.listId,
+                                  );
                                 }
                               },
                             ),
