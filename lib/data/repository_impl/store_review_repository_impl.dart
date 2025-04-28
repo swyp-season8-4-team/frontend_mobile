@@ -3,7 +3,9 @@ import 'package:frontend_mobile/core/resource/api_call.dart';
 import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
 import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/data/data_source/remote/store_review_remote_data_source.dart';
+import 'package:frontend_mobile/data/query_param/store_review/check_today_review_query_params.dart';
 import 'package:frontend_mobile/domain/param/store_review/add_store_review_params.dart';
+import 'package:frontend_mobile/domain/param/store_review/check_today_review_params.dart';
 import 'package:frontend_mobile/domain/param/store_review/delete_store_review_params.dart';
 import 'package:frontend_mobile/domain/param/store_review/update_store_review_params.dart';
 import 'package:frontend_mobile/domain/repository/store_review_repository.dart';
@@ -76,6 +78,20 @@ class StoreReviewRepositoryImpl implements StoreReviewRepository {
             'rating': params.rating,
           },
           newImages: params.newImages,
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Result<bool, CustomException>> checkTodayReview({
+    required CheckTodayReviewParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        return await _api.checkTodayReview(
+          storeUuid: params.storeUuid,
+          query: CheckTodayReviewQueryParams(userUuid: params.userUuid),
         );
       },
     );
