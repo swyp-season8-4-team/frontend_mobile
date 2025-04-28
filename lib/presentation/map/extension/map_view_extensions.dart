@@ -7,7 +7,7 @@ extension MapViewWidgetExt on _MapViewState {
     final MapState state = ref.watch(mapViewModelProvider);
     final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
     return SizedBox(
-      height: 28,
+      height: 56,
       width: MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,

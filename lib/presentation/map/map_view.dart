@@ -182,7 +182,7 @@ class _MapViewState extends ConsumerState<MapView> {
                   },
                 ),
               ),
-              Positioned(top: 16, left: 0, child: _buildFilterList()),
+              Positioned(top: 0, left: 0, child: _buildFilterList()),
               Positioned(
                 top: 56,
                 left: 16,
