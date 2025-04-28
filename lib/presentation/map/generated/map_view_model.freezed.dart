@@ -42,13 +42,6 @@ mixin _$MapState {
       throw _privateConstructorUsedError;
   NMarker? get selectedMarker => throw _privateConstructorUsedError;
   bool get userStoresEnabled => throw _privateConstructorUsedError;
-  List<UserStoreListModel> get userStoreLists =>
-      throw _privateConstructorUsedError;
-  List<({bool isOptionMenuVisible, int listId})>
-  get userStoreListOptionMenuVisible => throw _privateConstructorUsedError;
-  Status get getUserStoreListAllStatus => throw _privateConstructorUsedError;
-  ExceptionModel get getUserStoreListAllException =>
-      throw _privateConstructorUsedError;
   Status get deleteUserStoreListStatus => throw _privateConstructorUsedError;
   ExceptionModel get deleteUserStoreListException =>
       throw _privateConstructorUsedError;
@@ -85,11 +78,6 @@ abstract class $MapStateCopyWith<$Res> {
     ExceptionModel getStoreSummaryExceptionModel,
     NMarker? selectedMarker,
     bool userStoresEnabled,
-    List<UserStoreListModel> userStoreLists,
-    List<({bool isOptionMenuVisible, int listId})>
-    userStoreListOptionMenuVisible,
-    Status getUserStoreListAllStatus,
-    ExceptionModel getUserStoreListAllException,
     Status deleteUserStoreListStatus,
     ExceptionModel deleteUserStoreListException,
   });
@@ -129,10 +117,6 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
     Object? getStoreSummaryExceptionModel = null,
     Object? selectedMarker = freezed,
     Object? userStoresEnabled = null,
-    Object? userStoreLists = null,
-    Object? userStoreListOptionMenuVisible = null,
-    Object? getUserStoreListAllStatus = null,
-    Object? getUserStoreListAllException = null,
     Object? deleteUserStoreListStatus = null,
     Object? deleteUserStoreListException = null,
   }) {
@@ -233,26 +217,6 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
                     ? _value.userStoresEnabled
                     : userStoresEnabled // ignore: cast_nullable_to_non_nullable
                         as bool,
-            userStoreLists:
-                null == userStoreLists
-                    ? _value.userStoreLists
-                    : userStoreLists // ignore: cast_nullable_to_non_nullable
-                        as List<UserStoreListModel>,
-            userStoreListOptionMenuVisible:
-                null == userStoreListOptionMenuVisible
-                    ? _value.userStoreListOptionMenuVisible
-                    : userStoreListOptionMenuVisible // ignore: cast_nullable_to_non_nullable
-                        as List<({bool isOptionMenuVisible, int listId})>,
-            getUserStoreListAllStatus:
-                null == getUserStoreListAllStatus
-                    ? _value.getUserStoreListAllStatus
-                    : getUserStoreListAllStatus // ignore: cast_nullable_to_non_nullable
-                        as Status,
-            getUserStoreListAllException:
-                null == getUserStoreListAllException
-                    ? _value.getUserStoreListAllException
-                    : getUserStoreListAllException // ignore: cast_nullable_to_non_nullable
-                        as ExceptionModel,
             deleteUserStoreListStatus:
                 null == deleteUserStoreListStatus
                     ? _value.deleteUserStoreListStatus
@@ -298,11 +262,6 @@ abstract class _$$MapStateImplCopyWith<$Res>
     ExceptionModel getStoreSummaryExceptionModel,
     NMarker? selectedMarker,
     bool userStoresEnabled,
-    List<UserStoreListModel> userStoreLists,
-    List<({bool isOptionMenuVisible, int listId})>
-    userStoreListOptionMenuVisible,
-    Status getUserStoreListAllStatus,
-    ExceptionModel getUserStoreListAllException,
     Status deleteUserStoreListStatus,
     ExceptionModel deleteUserStoreListException,
   });
@@ -341,10 +300,6 @@ class __$$MapStateImplCopyWithImpl<$Res>
     Object? getStoreSummaryExceptionModel = null,
     Object? selectedMarker = freezed,
     Object? userStoresEnabled = null,
-    Object? userStoreLists = null,
-    Object? userStoreListOptionMenuVisible = null,
-    Object? getUserStoreListAllStatus = null,
-    Object? getUserStoreListAllException = null,
     Object? deleteUserStoreListStatus = null,
     Object? deleteUserStoreListException = null,
   }) {
@@ -445,26 +400,6 @@ class __$$MapStateImplCopyWithImpl<$Res>
                 ? _value.userStoresEnabled
                 : userStoresEnabled // ignore: cast_nullable_to_non_nullable
                     as bool,
-        userStoreLists:
-            null == userStoreLists
-                ? _value._userStoreLists
-                : userStoreLists // ignore: cast_nullable_to_non_nullable
-                    as List<UserStoreListModel>,
-        userStoreListOptionMenuVisible:
-            null == userStoreListOptionMenuVisible
-                ? _value._userStoreListOptionMenuVisible
-                : userStoreListOptionMenuVisible // ignore: cast_nullable_to_non_nullable
-                    as List<({bool isOptionMenuVisible, int listId})>,
-        getUserStoreListAllStatus:
-            null == getUserStoreListAllStatus
-                ? _value.getUserStoreListAllStatus
-                : getUserStoreListAllStatus // ignore: cast_nullable_to_non_nullable
-                    as Status,
-        getUserStoreListAllException:
-            null == getUserStoreListAllException
-                ? _value.getUserStoreListAllException
-                : getUserStoreListAllException // ignore: cast_nullable_to_non_nullable
-                    as ExceptionModel,
         deleteUserStoreListStatus:
             null == deleteUserStoreListStatus
                 ? _value.deleteUserStoreListStatus
@@ -524,18 +459,6 @@ class _$MapStateImpl implements _MapState {
     ),
     this.selectedMarker,
     this.userStoresEnabled = false,
-    final List<UserStoreListModel> userStoreLists =
-        const <UserStoreListModel>[],
-    final List<({bool isOptionMenuVisible, int listId})>
-        userStoreListOptionMenuVisible =
-        const <UserStoreListOptionMenuVisible>[],
-    this.getUserStoreListAllStatus = Status.initial,
-    this.getUserStoreListAllException = const ExceptionModel(
-      status: -1,
-      code: '',
-      message: '',
-      timestamp: '',
-    ),
     this.deleteUserStoreListStatus = Status.initial,
     this.deleteUserStoreListException = const ExceptionModel(
       status: -1,
@@ -545,9 +468,7 @@ class _$MapStateImpl implements _MapState {
     ),
   }) : _preferences = preferences,
        _storesByLocation = storesByLocation,
-       _preferenceTagIds = preferenceTagIds,
-       _userStoreLists = userStoreLists,
-       _userStoreListOptionMenuVisible = userStoreListOptionMenuVisible;
+       _preferenceTagIds = preferenceTagIds;
 
   final List<PreferenceModel> _preferences;
   @override
@@ -624,33 +545,6 @@ class _$MapStateImpl implements _MapState {
   @override
   @JsonKey()
   final bool userStoresEnabled;
-  final List<UserStoreListModel> _userStoreLists;
-  @override
-  @JsonKey()
-  List<UserStoreListModel> get userStoreLists {
-    if (_userStoreLists is EqualUnmodifiableListView) return _userStoreLists;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_userStoreLists);
-  }
-
-  final List<({bool isOptionMenuVisible, int listId})>
-  _userStoreListOptionMenuVisible;
-  @override
-  @JsonKey()
-  List<({bool isOptionMenuVisible, int listId})>
-  get userStoreListOptionMenuVisible {
-    if (_userStoreListOptionMenuVisible is EqualUnmodifiableListView)
-      return _userStoreListOptionMenuVisible;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_userStoreListOptionMenuVisible);
-  }
-
-  @override
-  @JsonKey()
-  final Status getUserStoreListAllStatus;
-  @override
-  @JsonKey()
-  final ExceptionModel getUserStoreListAllException;
   @override
   @JsonKey()
   final Status deleteUserStoreListStatus;
@@ -660,7 +554,7 @@ class _$MapStateImpl implements _MapState {
 
   @override
   String toString() {
-    return 'MapState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, myPreferenceFilterSelected: $myPreferenceFilterSelected, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel, storeSummary: $storeSummary, getStoreSummaryStatus: $getStoreSummaryStatus, getStoreSummaryExceptionModel: $getStoreSummaryExceptionModel, selectedMarker: $selectedMarker, userStoresEnabled: $userStoresEnabled, userStoreLists: $userStoreLists, userStoreListOptionMenuVisible: $userStoreListOptionMenuVisible, getUserStoreListAllStatus: $getUserStoreListAllStatus, getUserStoreListAllException: $getUserStoreListAllException, deleteUserStoreListStatus: $deleteUserStoreListStatus, deleteUserStoreListException: $deleteUserStoreListException)';
+    return 'MapState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, myPreferenceFilterSelected: $myPreferenceFilterSelected, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel, storeSummary: $storeSummary, getStoreSummaryStatus: $getStoreSummaryStatus, getStoreSummaryExceptionModel: $getStoreSummaryExceptionModel, selectedMarker: $selectedMarker, userStoresEnabled: $userStoresEnabled, deleteUserStoreListStatus: $deleteUserStoreListStatus, deleteUserStoreListException: $deleteUserStoreListException)';
   }
 
   @override
@@ -739,25 +633,6 @@ class _$MapStateImpl implements _MapState {
                 other.selectedMarker == selectedMarker) &&
             (identical(other.userStoresEnabled, userStoresEnabled) ||
                 other.userStoresEnabled == userStoresEnabled) &&
-            const DeepCollectionEquality().equals(
-              other._userStoreLists,
-              _userStoreLists,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._userStoreListOptionMenuVisible,
-              _userStoreListOptionMenuVisible,
-            ) &&
-            (identical(
-                  other.getUserStoreListAllStatus,
-                  getUserStoreListAllStatus,
-                ) ||
-                other.getUserStoreListAllStatus == getUserStoreListAllStatus) &&
-            (identical(
-                  other.getUserStoreListAllException,
-                  getUserStoreListAllException,
-                ) ||
-                other.getUserStoreListAllException ==
-                    getUserStoreListAllException) &&
             (identical(
                   other.deleteUserStoreListStatus,
                   deleteUserStoreListStatus,
@@ -793,10 +668,6 @@ class _$MapStateImpl implements _MapState {
     getStoreSummaryExceptionModel,
     selectedMarker,
     userStoresEnabled,
-    const DeepCollectionEquality().hash(_userStoreLists),
-    const DeepCollectionEquality().hash(_userStoreListOptionMenuVisible),
-    getUserStoreListAllStatus,
-    getUserStoreListAllException,
     deleteUserStoreListStatus,
     deleteUserStoreListException,
   ]);
@@ -831,11 +702,6 @@ abstract class _MapState implements MapState {
     final ExceptionModel getStoreSummaryExceptionModel,
     final NMarker? selectedMarker,
     final bool userStoresEnabled,
-    final List<UserStoreListModel> userStoreLists,
-    final List<({bool isOptionMenuVisible, int listId})>
-    userStoreListOptionMenuVisible,
-    final Status getUserStoreListAllStatus,
-    final ExceptionModel getUserStoreListAllException,
     final Status deleteUserStoreListStatus,
     final ExceptionModel deleteUserStoreListException,
   }) = _$MapStateImpl;
@@ -878,15 +744,6 @@ abstract class _MapState implements MapState {
   NMarker? get selectedMarker;
   @override
   bool get userStoresEnabled;
-  @override
-  List<UserStoreListModel> get userStoreLists;
-  @override
-  List<({bool isOptionMenuVisible, int listId})>
-  get userStoreListOptionMenuVisible;
-  @override
-  Status get getUserStoreListAllStatus;
-  @override
-  ExceptionModel get getUserStoreListAllException;
   @override
   Status get deleteUserStoreListStatus;
   @override

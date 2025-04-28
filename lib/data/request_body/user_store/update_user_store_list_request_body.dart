@@ -12,6 +12,8 @@ class UpdateUserStoreListRequestBody {
 
 @JsonSerializable(includeIfNull: false)
 class UpdateUserStoreListSelectedList {
+  factory UpdateUserStoreListSelectedList.fromJson(Map<String, dynamic> json) =>
+      _$UpdateUserStoreListSelectedListFromJson(json);
   const UpdateUserStoreListSelectedList({
     required this.listId,
     this.userPreferences,

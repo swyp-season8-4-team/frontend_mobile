@@ -314,12 +314,22 @@ class AppRouter {
                 builder: (BuildContext context, GoRouterState state) {
                   final String? listId = state.pathParameters['listId'];
                   final String? storeUuid = state.pathParameters['storeUuid'];
+                  final String? storeName =
+                      state.uri.queryParameters['storeName'];
+                  final String? oldListId = state.uri.queryParameters['listId'];
 
-                  if (listId == null || storeUuid == null) {
+                  if (listId == null ||
+                      storeUuid == null ||
+                      storeName == null ||
+                      oldListId == null) {
                     return const Scaffold();
                   }
 
-                  return UpdateStoreToUserStoreListView(storeUuid: storeUuid);
+                  return UpdateStoreToUserStoreListView(
+                    storeUuid: storeUuid,
+                    storeName: storeName,
+                    listId: int.parse(oldListId),
+                  );
                 },
               ),
             ],

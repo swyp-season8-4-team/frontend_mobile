@@ -12,7 +12,7 @@ import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
-import 'package:frontend_mobile/presentation/map/map_view_model.dart';
+import 'package:frontend_mobile/presentation/global/user_store/user_store_list_view_model.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view_model.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/user_store/add_store_to_user_store_list_view_model.dart';
 import 'package:go_router/go_router.dart';
@@ -39,7 +39,7 @@ class _AddStoreToUserStoreListViewState
         if (next.isSuccess) {
           final UserState userState = ref.read(userViewModelProvider);
           ref
-              .read(mapViewModelProvider.notifier)
+              .read(userStoreListViewModelProvider.notifier)
               .getUserStoreListAll(userUuid: userState.data.userUuid);
           context.pop();
         }
@@ -58,13 +58,15 @@ class _AddStoreToUserStoreListViewState
       storeDetailViewModelProvider,
     );
 
-    final MapState mapState = ref.watch(mapViewModelProvider);
+    final UserStoreListState userStoreListState = ref.watch(
+      userStoreListViewModelProvider,
+    );
 
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     final List<UserStoreListModel> filteredStoreLists =
-        mapState.userStoreLists
+        userStoreListState.userStoreLists
             .where(
               (UserStoreListModel e) =>
                   e.storeData == null ||
