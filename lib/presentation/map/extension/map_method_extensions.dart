@@ -126,6 +126,9 @@ extension MapViewMethodExt on _MapViewState {
 
   Future<void> _clearSelectedShop() async {
     final MapState state = ref.read(mapViewModelProvider);
+    final UserStoreListState userStoreListState = ref.read(
+      userStoreListViewModelProvider,
+    );
 
     if (state.selectedMarker != null) {
       await _mapController.deleteOverlay(
@@ -143,12 +146,12 @@ extension MapViewMethodExt on _MapViewState {
 
       final UserStoreListModel? savedStoreList =
           _findUserStoreListModelByStoreUuid(
-            state.userStoreLists,
+            userStoreListState.userStoreLists,
             state.selectedMarker!.info.id,
           );
 
       final UserStoreDataModel? savedStore = _findUserStoreModelByStoreUuid(
-        state.userStoreLists,
+        userStoreListState.userStoreLists,
         state.selectedMarker!.info.id,
       );
 
@@ -230,12 +233,16 @@ extension MapViewMethodExt on _MapViewState {
   Future<List<NMarker>> _createMarkers() async {
     final MapState state = ref.read(mapViewModelProvider);
 
+    final UserStoreListState userStoreListState = ref.read(
+      userStoreListViewModelProvider,
+    );
+
     // default markers
     final List<Future<NMarker>> markers = <Future<NMarker>>[];
 
     for (final StoreByLocationModel e in state.storesByLocation) {
       final UserStoreDataModel? savedStore = _findUserStoreModelByStoreUuid(
-        state.userStoreLists,
+        userStoreListState.userStoreLists,
         e.storeUuid,
       );
 
@@ -254,7 +261,7 @@ extension MapViewMethodExt on _MapViewState {
                       (StoreListIconColor color) =>
                           color.id ==
                           _findUserStoreListModelByStoreUuid(
-                            state.userStoreLists,
+                            userStoreListState.userStoreLists,
                             e.storeUuid,
                           )?.iconColorId,
                     )
@@ -268,7 +275,7 @@ extension MapViewMethodExt on _MapViewState {
     final List<Future<NMarker>> savedMarkers = <Future<NMarker>>[];
 
     if (state.userStoresEnabled) {
-      for (final UserStoreListModel e in state.userStoreLists) {
+      for (final UserStoreListModel e in userStoreListState.userStoreLists) {
         final UserStoreDataModel? savedStore =
             e.storeData?.isNotEmpty == true ? e.storeData![0] : null;
 

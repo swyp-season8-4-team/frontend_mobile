@@ -14,8 +14,14 @@ class _StoreListSheet extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final MapState state = ref.watch(mapViewModelProvider);
     final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
+
+    final UserStoreListState userStoreListState = ref.watch(
+      userStoreListViewModelProvider,
+    );
+    final UserStoreListViewModel userStoreListViewModel = ref.read(
+      userStoreListViewModelProvider.notifier,
+    );
 
     return Positioned.fill(
       child: DraggableScrollableSheet(
@@ -83,13 +89,13 @@ class _StoreListSheet extends ConsumerWidget {
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            '${state.userStoreLists.length}',
+                            '${userStoreListState.userStoreLists.length}',
                             style: textTheme.titleMedium?.copyWith(
                               color: ScaleColorConfig.success50,
                             ),
                           ),
                           const Spacer(),
-                          if (state.userStoreLists.isNotEmpty)
+                          if (userStoreListState.userStoreLists.isNotEmpty)
                             CustomOutlineButton.xSmall(
                               label: '새 리스트 추가',
                               onPressed: () async {
@@ -102,8 +108,7 @@ class _StoreListSheet extends ConsumerWidget {
                                   final UserState userState = ref.read(
                                     userViewModelProvider,
                                   );
-                                  await ref
-                                      .read(mapViewModelProvider.notifier)
+                                  await userStoreListViewModel
                                       .getUserStoreListAll(
                                         userUuid: userState.data.userUuid,
                                       );
@@ -115,7 +120,7 @@ class _StoreListSheet extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  if (state.userStoreLists.isEmpty)
+                  if (userStoreListState.userStoreLists.isEmpty)
                     SliverToBoxAdapter(
                       child: Padding(
                         padding: const EdgeInsets.only(top: 74),
@@ -141,8 +146,7 @@ class _StoreListSheet extends ConsumerWidget {
                                   final UserState userState = ref.read(
                                     userViewModelProvider,
                                   );
-                                  await ref
-                                      .read(mapViewModelProvider.notifier)
+                                  await userStoreListViewModel
                                       .getUserStoreListAll(
                                         userUuid: userState.data.userUuid,
                                       );
@@ -161,10 +165,10 @@ class _StoreListSheet extends ConsumerWidget {
                         int index,
                       ) {
                         final UserStoreListModel userStoreList =
-                            state.userStoreLists[index];
+                            userStoreListState.userStoreLists[index];
 
                         final ({bool isOptionMenuVisible, int listId})
-                        userStoreListOptionVisible = state
+                        userStoreListOptionVisible = userStoreListState
                             .userStoreListOptionMenuVisible
                             .firstWhere(
                               (({bool isOptionMenuVisible, int listId}) e) =>
@@ -194,7 +198,8 @@ class _StoreListSheet extends ConsumerWidget {
                                     svg: Assets.icon.editor.pencil1Line,
                                     text: '수정하기',
                                     onTap: () async {
-                                      viewmodel.invisibleAllOptionMenu();
+                                      userStoreListViewModel
+                                          .invisibleAllOptionMenu();
                                       final Object?
                                       result = await context.pushNamed(
                                         AppRoutes.updateUserStoreList.name,
@@ -214,8 +219,7 @@ class _StoreListSheet extends ConsumerWidget {
                                         final UserState userState = ref.read(
                                           userViewModelProvider,
                                         );
-                                        await ref
-                                            .read(mapViewModelProvider.notifier)
+                                        await userStoreListViewModel
                                             .getUserStoreListAll(
                                               userUuid: userState.data.userUuid,
                                             );
@@ -226,7 +230,8 @@ class _StoreListSheet extends ConsumerWidget {
                                     svg: Assets.icon.system.closeCircleLine,
                                     text: '삭제하기',
                                     onTap: () {
-                                      viewmodel.invisibleAllOptionMenu();
+                                      userStoreListViewModel
+                                          .invisibleAllOptionMenu();
                                       showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
@@ -260,10 +265,12 @@ class _StoreListSheet extends ConsumerWidget {
                                     userStoreListOptionVisible
                                         .isOptionMenuVisible,
                                 onOptionMenusTap: () {
-                                  viewmodel.updateStoreListOptionMenuVisible(
-                                    listId: userStoreListOptionVisible.listId,
-                                    isVisible: true,
-                                  );
+                                  userStoreListViewModel
+                                      .updateStoreListOptionMenuVisible(
+                                        listId:
+                                            userStoreListOptionVisible.listId,
+                                        isVisible: true,
+                                      );
                                 },
                                 onTap: () {
                                   context.pushNamed(
@@ -284,7 +291,7 @@ class _StoreListSheet extends ConsumerWidget {
                             ),
                           ],
                         );
-                      }, childCount: state.userStoreLists.length),
+                      }, childCount: userStoreListState.userStoreLists.length),
                     ),
                 ],
               ),

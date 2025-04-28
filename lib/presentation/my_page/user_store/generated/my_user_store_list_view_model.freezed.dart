@@ -17,13 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MyUserStoreListState {
-  List<UserStoreListModel> get userStoreLists =>
-      throw _privateConstructorUsedError;
-  List<({bool isOptionMenuVisible, int listId})>
-  get userStoreListOptionMenuVisible => throw _privateConstructorUsedError;
-  Status get getUserStoreListAllStatus => throw _privateConstructorUsedError;
-  ExceptionModel get getUserStoreListAllException =>
-      throw _privateConstructorUsedError;
   Status get deleteUserStoreListStatus => throw _privateConstructorUsedError;
   ExceptionModel get deleteUserStoreListException =>
       throw _privateConstructorUsedError;
@@ -43,11 +36,6 @@ abstract class $MyUserStoreListStateCopyWith<$Res> {
   ) = _$MyUserStoreListStateCopyWithImpl<$Res, MyUserStoreListState>;
   @useResult
   $Res call({
-    List<UserStoreListModel> userStoreLists,
-    List<({bool isOptionMenuVisible, int listId})>
-    userStoreListOptionMenuVisible,
-    Status getUserStoreListAllStatus,
-    ExceptionModel getUserStoreListAllException,
     Status deleteUserStoreListStatus,
     ExceptionModel deleteUserStoreListException,
   });
@@ -71,35 +59,11 @@ class _$MyUserStoreListStateCopyWithImpl<
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userStoreLists = null,
-    Object? userStoreListOptionMenuVisible = null,
-    Object? getUserStoreListAllStatus = null,
-    Object? getUserStoreListAllException = null,
     Object? deleteUserStoreListStatus = null,
     Object? deleteUserStoreListException = null,
   }) {
     return _then(
       _value.copyWith(
-            userStoreLists:
-                null == userStoreLists
-                    ? _value.userStoreLists
-                    : userStoreLists // ignore: cast_nullable_to_non_nullable
-                        as List<UserStoreListModel>,
-            userStoreListOptionMenuVisible:
-                null == userStoreListOptionMenuVisible
-                    ? _value.userStoreListOptionMenuVisible
-                    : userStoreListOptionMenuVisible // ignore: cast_nullable_to_non_nullable
-                        as List<({bool isOptionMenuVisible, int listId})>,
-            getUserStoreListAllStatus:
-                null == getUserStoreListAllStatus
-                    ? _value.getUserStoreListAllStatus
-                    : getUserStoreListAllStatus // ignore: cast_nullable_to_non_nullable
-                        as Status,
-            getUserStoreListAllException:
-                null == getUserStoreListAllException
-                    ? _value.getUserStoreListAllException
-                    : getUserStoreListAllException // ignore: cast_nullable_to_non_nullable
-                        as ExceptionModel,
             deleteUserStoreListStatus:
                 null == deleteUserStoreListStatus
                     ? _value.deleteUserStoreListStatus
@@ -126,11 +90,6 @@ abstract class _$$MyUserStoreListStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    List<UserStoreListModel> userStoreLists,
-    List<({bool isOptionMenuVisible, int listId})>
-    userStoreListOptionMenuVisible,
-    Status getUserStoreListAllStatus,
-    ExceptionModel getUserStoreListAllException,
     Status deleteUserStoreListStatus,
     ExceptionModel deleteUserStoreListException,
   });
@@ -150,35 +109,11 @@ class __$$MyUserStoreListStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userStoreLists = null,
-    Object? userStoreListOptionMenuVisible = null,
-    Object? getUserStoreListAllStatus = null,
-    Object? getUserStoreListAllException = null,
     Object? deleteUserStoreListStatus = null,
     Object? deleteUserStoreListException = null,
   }) {
     return _then(
       _$MyUserStoreListStateImpl(
-        userStoreLists:
-            null == userStoreLists
-                ? _value._userStoreLists
-                : userStoreLists // ignore: cast_nullable_to_non_nullable
-                    as List<UserStoreListModel>,
-        userStoreListOptionMenuVisible:
-            null == userStoreListOptionMenuVisible
-                ? _value._userStoreListOptionMenuVisible
-                : userStoreListOptionMenuVisible // ignore: cast_nullable_to_non_nullable
-                    as List<({bool isOptionMenuVisible, int listId})>,
-        getUserStoreListAllStatus:
-            null == getUserStoreListAllStatus
-                ? _value.getUserStoreListAllStatus
-                : getUserStoreListAllStatus // ignore: cast_nullable_to_non_nullable
-                    as Status,
-        getUserStoreListAllException:
-            null == getUserStoreListAllException
-                ? _value.getUserStoreListAllException
-                : getUserStoreListAllException // ignore: cast_nullable_to_non_nullable
-                    as ExceptionModel,
         deleteUserStoreListStatus:
             null == deleteUserStoreListStatus
                 ? _value.deleteUserStoreListStatus
@@ -198,18 +133,6 @@ class __$$MyUserStoreListStateImplCopyWithImpl<$Res>
 
 class _$MyUserStoreListStateImpl implements _MyUserStoreListState {
   _$MyUserStoreListStateImpl({
-    final List<UserStoreListModel> userStoreLists =
-        const <UserStoreListModel>[],
-    final List<({bool isOptionMenuVisible, int listId})>
-        userStoreListOptionMenuVisible =
-        const <UserStoreListOptionMenuVisible>[],
-    this.getUserStoreListAllStatus = Status.loading,
-    this.getUserStoreListAllException = const ExceptionModel(
-      status: -1,
-      code: '',
-      message: '',
-      timestamp: '',
-    ),
     this.deleteUserStoreListStatus = Status.initial,
     this.deleteUserStoreListException = const ExceptionModel(
       status: -1,
@@ -217,36 +140,8 @@ class _$MyUserStoreListStateImpl implements _MyUserStoreListState {
       message: '',
       timestamp: '',
     ),
-  }) : _userStoreLists = userStoreLists,
-       _userStoreListOptionMenuVisible = userStoreListOptionMenuVisible;
+  });
 
-  final List<UserStoreListModel> _userStoreLists;
-  @override
-  @JsonKey()
-  List<UserStoreListModel> get userStoreLists {
-    if (_userStoreLists is EqualUnmodifiableListView) return _userStoreLists;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_userStoreLists);
-  }
-
-  final List<({bool isOptionMenuVisible, int listId})>
-  _userStoreListOptionMenuVisible;
-  @override
-  @JsonKey()
-  List<({bool isOptionMenuVisible, int listId})>
-  get userStoreListOptionMenuVisible {
-    if (_userStoreListOptionMenuVisible is EqualUnmodifiableListView)
-      return _userStoreListOptionMenuVisible;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_userStoreListOptionMenuVisible);
-  }
-
-  @override
-  @JsonKey()
-  final Status getUserStoreListAllStatus;
-  @override
-  @JsonKey()
-  final ExceptionModel getUserStoreListAllException;
   @override
   @JsonKey()
   final Status deleteUserStoreListStatus;
@@ -256,7 +151,7 @@ class _$MyUserStoreListStateImpl implements _MyUserStoreListState {
 
   @override
   String toString() {
-    return 'MyUserStoreListState(userStoreLists: $userStoreLists, userStoreListOptionMenuVisible: $userStoreListOptionMenuVisible, getUserStoreListAllStatus: $getUserStoreListAllStatus, getUserStoreListAllException: $getUserStoreListAllException, deleteUserStoreListStatus: $deleteUserStoreListStatus, deleteUserStoreListException: $deleteUserStoreListException)';
+    return 'MyUserStoreListState(deleteUserStoreListStatus: $deleteUserStoreListStatus, deleteUserStoreListException: $deleteUserStoreListException)';
   }
 
   @override
@@ -264,25 +159,6 @@ class _$MyUserStoreListStateImpl implements _MyUserStoreListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MyUserStoreListStateImpl &&
-            const DeepCollectionEquality().equals(
-              other._userStoreLists,
-              _userStoreLists,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._userStoreListOptionMenuVisible,
-              _userStoreListOptionMenuVisible,
-            ) &&
-            (identical(
-                  other.getUserStoreListAllStatus,
-                  getUserStoreListAllStatus,
-                ) ||
-                other.getUserStoreListAllStatus == getUserStoreListAllStatus) &&
-            (identical(
-                  other.getUserStoreListAllException,
-                  getUserStoreListAllException,
-                ) ||
-                other.getUserStoreListAllException ==
-                    getUserStoreListAllException) &&
             (identical(
                   other.deleteUserStoreListStatus,
                   deleteUserStoreListStatus,
@@ -299,10 +175,6 @@ class _$MyUserStoreListStateImpl implements _MyUserStoreListState {
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    const DeepCollectionEquality().hash(_userStoreLists),
-    const DeepCollectionEquality().hash(_userStoreListOptionMenuVisible),
-    getUserStoreListAllStatus,
-    getUserStoreListAllException,
     deleteUserStoreListStatus,
     deleteUserStoreListException,
   );
@@ -322,24 +194,10 @@ class _$MyUserStoreListStateImpl implements _MyUserStoreListState {
 
 abstract class _MyUserStoreListState implements MyUserStoreListState {
   factory _MyUserStoreListState({
-    final List<UserStoreListModel> userStoreLists,
-    final List<({bool isOptionMenuVisible, int listId})>
-    userStoreListOptionMenuVisible,
-    final Status getUserStoreListAllStatus,
-    final ExceptionModel getUserStoreListAllException,
     final Status deleteUserStoreListStatus,
     final ExceptionModel deleteUserStoreListException,
   }) = _$MyUserStoreListStateImpl;
 
-  @override
-  List<UserStoreListModel> get userStoreLists;
-  @override
-  List<({bool isOptionMenuVisible, int listId})>
-  get userStoreListOptionMenuVisible;
-  @override
-  Status get getUserStoreListAllStatus;
-  @override
-  ExceptionModel get getUserStoreListAllException;
   @override
   Status get deleteUserStoreListStatus;
   @override

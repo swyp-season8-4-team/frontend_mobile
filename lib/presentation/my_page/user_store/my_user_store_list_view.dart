@@ -17,6 +17,7 @@ import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
+import 'package:frontend_mobile/presentation/global/user_store/user_store_list_view_model.dart';
 import 'package:frontend_mobile/presentation/my_page/user_store/my_user_store_list_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/widget/default_error.dart';
@@ -38,7 +39,7 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final UserState userState = ref.read(userViewModelProvider);
       ref
-          .read(myUserStoreListViewModelProvider.notifier)
+          .read(userStoreListViewModelProvider.notifier)
           .getUserStoreListAll(userUuid: userState.data.userUuid);
     });
   }
@@ -48,11 +49,19 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final UserState userState = ref.watch(userViewModelProvider);
-    final MyUserStoreListState state = ref.watch(
-      myUserStoreListViewModelProvider,
-    );
+
     final MyUserStoreListViewModel viewmodel = ref.read(
       myUserStoreListViewModelProvider.notifier,
+    );
+    final UserStoreListState userStoreListState = ref.watch(
+      userStoreListViewModelProvider,
+    );
+    final UserStoreListViewModel userStoreListViewModel = ref.read(
+      userStoreListViewModelProvider.notifier,
+    );
+
+    final MyUserStoreListState state = ref.watch(
+      myUserStoreListViewModelProvider,
     );
 
     ref.listen(
@@ -62,13 +71,15 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
       (_, Status next) {
         if (next.isSuccess) {
           final UserState userState = ref.read(userViewModelProvider);
-          viewmodel.getUserStoreListAll(userUuid: userState.data.userUuid);
+          userStoreListViewModel.getUserStoreListAll(
+            userUuid: userState.data.userUuid,
+          );
         }
       },
     );
 
     // TODO: 로딩 UI 개선 필요
-    if (state.getUserStoreListAllStatus.isLoading) {
+    if (userStoreListState.getUserStoreListAllStatus.isLoading) {
       return const Scaffold(
         appBar: CustomSubTopBar(title: '찜한 가게', actions: <Widget>[]),
         primary: false,
@@ -77,7 +88,7 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
     }
 
     // TODO: 에러 UI 개선 필요 (현재는 임의로 설정함)
-    if (state.getUserStoreListAllStatus.isFailure) {
+    if (userStoreListState.getUserStoreListAllStatus.isFailure) {
       return Scaffold(
         appBar: const CustomSubTopBar(
           title: '찜한 가게',
@@ -87,17 +98,21 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
         bottomNavigationBar: const DesserbeeBottomNavigation(),
         body: DefaultError(
           onRetry: () {
-            viewmodel.getUserStoreListAll(userUuid: userState.data.userUuid);
+            userStoreListViewModel.getUserStoreListAll(
+              userUuid: userState.data.userUuid,
+            );
           },
         ),
       );
     }
 
     return CustomLoadingOverlay(
-      isLoading: state.getUserStoreListAllStatus.isLoading,
+      isLoading:
+          userStoreListState.getUserStoreListAllStatus.isLoading ||
+          state.deleteUserStoreListStatus.isLoading,
       child: GestureDetector(
         onTap: () {
-          viewmodel.invisibleAllOptionMenu();
+          userStoreListViewModel.invisibleAllOptionMenu();
         },
         child: Scaffold(
           appBar: const CustomSubTopBar(
@@ -133,13 +148,13 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          '${state.userStoreLists.length}',
+                          '${userStoreListState.userStoreLists.length}',
                           style: textTheme.titleMedium?.copyWith(
                             color: ScaleColorConfig.success50,
                           ),
                         ),
                         const Spacer(),
-                        if (state.userStoreLists.isNotEmpty)
+                        if (userStoreListState.userStoreLists.isNotEmpty)
                           CustomOutlineButton.xSmall(
                             label: '새 리스트 추가',
                             onPressed: () async {
@@ -152,9 +167,10 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
                                 final UserState userState = ref.read(
                                   userViewModelProvider,
                                 );
-                                await viewmodel.getUserStoreListAll(
-                                  userUuid: userState.data.userUuid,
-                                );
+                                await userStoreListViewModel
+                                    .getUserStoreListAll(
+                                      userUuid: userState.data.userUuid,
+                                    );
                               }
                             },
                             svg: Assets.icon.system.addCircleLine,
@@ -163,7 +179,7 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
                     ),
                   ),
                 ),
-                if (state.userStoreLists.isEmpty)
+                if (userStoreListState.userStoreLists.isEmpty)
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 74),
@@ -189,9 +205,10 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
                                 final UserState userState = ref.read(
                                   userViewModelProvider,
                                 );
-                                await viewmodel.getUserStoreListAll(
-                                  userUuid: userState.data.userUuid,
-                                );
+                                await userStoreListViewModel
+                                    .getUserStoreListAll(
+                                      userUuid: userState.data.userUuid,
+                                    );
                               }
                             },
                             svg: Assets.icon.system.addCircleLine,
@@ -207,10 +224,10 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
                       int index,
                     ) {
                       final UserStoreListModel userStoreList =
-                          state.userStoreLists[index];
+                          userStoreListState.userStoreLists[index];
 
                       final ({bool isOptionMenuVisible, int listId})
-                      userStoreListOptionVisible = state
+                      userStoreListOptionVisible = userStoreListState
                           .userStoreListOptionMenuVisible
                           .firstWhere(
                             (({bool isOptionMenuVisible, int listId}) e) =>
@@ -239,7 +256,8 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
                                   svg: Assets.icon.editor.pencil1Line,
                                   text: '수정하기',
                                   onTap: () async {
-                                    viewmodel.invisibleAllOptionMenu();
+                                    userStoreListViewModel
+                                        .invisibleAllOptionMenu();
                                     final Object? result = await context
                                         .pushNamed(
                                           AppRoutes.updateUserStoreList.name,
@@ -259,9 +277,10 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
                                       final UserState userState = ref.read(
                                         userViewModelProvider,
                                       );
-                                      await viewmodel.getUserStoreListAll(
-                                        userUuid: userState.data.userUuid,
-                                      );
+                                      await userStoreListViewModel
+                                          .getUserStoreListAll(
+                                            userUuid: userState.data.userUuid,
+                                          );
                                     }
                                   },
                                 ),
@@ -269,7 +288,8 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
                                   svg: Assets.icon.system.closeCircleLine,
                                   text: '삭제하기',
                                   onTap: () {
-                                    viewmodel.invisibleAllOptionMenu();
+                                    userStoreListViewModel
+                                        .invisibleAllOptionMenu();
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
@@ -303,10 +323,11 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
                                   userStoreListOptionVisible
                                       .isOptionMenuVisible,
                               onOptionMenusTap: () {
-                                viewmodel.updateStoreListOptionMenuVisible(
-                                  listId: userStoreListOptionVisible.listId,
-                                  isVisible: true,
-                                );
+                                userStoreListViewModel
+                                    .updateStoreListOptionMenuVisible(
+                                      listId: userStoreListOptionVisible.listId,
+                                      isVisible: true,
+                                    );
                               },
                               onTap: () {
                                 context.pushNamed(
@@ -324,7 +345,7 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
                           Divider(color: colorScheme.outlineVariant, height: 1),
                         ],
                       );
-                    }, childCount: state.userStoreLists.length),
+                    }, childCount: userStoreListState.userStoreLists.length),
                   ),
               ],
             ),

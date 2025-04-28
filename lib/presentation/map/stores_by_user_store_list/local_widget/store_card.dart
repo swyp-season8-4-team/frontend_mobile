@@ -84,12 +84,6 @@ class _StoreCard extends ConsumerWidget {
                         padding: const EdgeInsets.only(top: 4, right: 4),
                         child: CustomOptionMenuDropdown(
                           optionMenus: <CustomOptionMenu>[
-                            // TODO: 추후 추가 예정
-                            // CustomOptionMenu(
-                            //   svg: Assets.icon.editor.pencil1Line,
-                            //   text: '수정하기',
-                            //   onTap: () {},
-                            // ),
                             CustomOptionMenu(
                               svg: Assets.icon.system.closeCircleLine,
                               text: '삭제하기',
@@ -123,6 +117,32 @@ class _StoreCard extends ConsumerWidget {
                                     );
                                   },
                                 );
+                              },
+                            ),
+                            CustomOptionMenu(
+                              svg: Assets.icon.editor.pencil1Line,
+                              text: '수정하기',
+                              onTap: () async {
+                                viewmodel.invisibleAllStoreOptionMenu();
+                                final Object? result = await context.pushNamed(
+                                  AppRoutes.updateStoreToUserStoreList.name,
+                                  pathParameters: <String, String>{
+                                    'listId': store.listId.toString(),
+                                    'storeUuid': store.storeUuid,
+                                  },
+                                  queryParameters: <String, String>{
+                                    'storeName': store.storeName,
+                                    'listId': store.listId.toString(),
+                                  },
+                                );
+
+                                if (result == true && context.mounted) {
+                                  _showSuccessUpdateStore(context, ref);
+
+                                  await viewmodel.getStores(
+                                    listId: store.listId,
+                                  );
+                                }
                               },
                             ),
                           ],
@@ -191,6 +211,22 @@ class _StoreCard extends ConsumerWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void _showSuccessUpdateStore(BuildContext context, WidgetRef ref) {
+    final ToastManager toastManager = ref.read(toastManagerProvider);
+    toastManager.show(
+      context: context,
+      toastWidget: CustomSnackBar(
+        description: '찜한 가게 수정을 완료했습니다',
+        actionButton: SnackBarActionButton(
+          onTap: () {
+            toastManager.remove();
+          },
+          label: '닫기',
+        ),
       ),
     );
   }

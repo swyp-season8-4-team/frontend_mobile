@@ -88,9 +88,13 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
           GestureDetector(
             onTap: () {
               context.pushNamed(
-                AppRoutes.addStoreToUserStoreList.name,
+                AppRoutes.updateStoreToUserStoreList.name,
                 pathParameters: <String, String>{
-                  'id': state.storeDetail!.storeUuid,
+                  'listId': '-999',
+                  'storeUuid': widget.storeUuid,
+                },
+                queryParameters: <String, String>{
+                  'storeName': state.storeDetail!.name,
                 },
               );
             },

@@ -8,6 +8,7 @@ import 'package:frontend_mobile/data/entity/user_store/user_store_list_entity.da
 import 'package:frontend_mobile/data/mapper/user_store_mapper.dart';
 import 'package:frontend_mobile/data/query_param/user_store/add_user_store_list_query_param.dart';
 import 'package:frontend_mobile/data/query_param/user_store/update_user_store_list_query_param.dart';
+import 'package:frontend_mobile/data/request_body/user_store/update_user_store_list_request_body.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_detail_model.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
 import 'package:frontend_mobile/domain/param/user_store/add_store_to_user_store_list_params.dart';
@@ -16,6 +17,7 @@ import 'package:frontend_mobile/domain/param/user_store/delete_store_from_user_s
 import 'package:frontend_mobile/domain/param/user_store/delete_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/get_stores_by_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/get_user_store_list_all_params.dart';
+import 'package:frontend_mobile/domain/param/user_store/update_store_to_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/update_user_store_list_params.dart';
 import 'package:frontend_mobile/domain/repository/user_store_repository.dart';
 
@@ -82,6 +84,31 @@ class UserStoreRepositoryImpl implements UserStoreRepository {
         return await _api.deleteStoreFromUserStoreList(
           listId: params.listId,
           storeUuid: params.storeUuid,
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Result<void, CustomException>> updateStoresToUserStoreList({
+    required UpdateStoreToUserStoreListParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        return await _api.updateStoresToUserStoreList(
+          storeUuid: params.storeUuid,
+          body: UpdateUserStoreListRequestBody(
+            selectedLists:
+                params.selectedLists
+                    .map(
+                      (UpdateStoreSelectedList e) =>
+                          UpdateUserStoreListSelectedList(
+                            listId: e.listId,
+                            userPreferences: e.userPreferences,
+                          ),
+                    )
+                    .toList(),
+          ),
         );
       },
     );

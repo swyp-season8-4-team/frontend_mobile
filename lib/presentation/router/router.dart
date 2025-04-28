@@ -16,6 +16,7 @@ import 'package:frontend_mobile/presentation/map/store_detail/notice/store_notic
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/user_store/add_store_to_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/stores_by_user_store_list_view.dart';
+import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/update/update_store_to_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/update/update_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/my_page/my_page_view.dart';
@@ -305,6 +306,30 @@ class AppRouter {
                 listName: listName,
               );
             },
+            routes: <RouteBase>[
+              /// 리스트에 가게 저장
+              GoRoute(
+                path: AppRoutes.updateStoreToUserStoreList.path,
+                name: AppRoutes.updateStoreToUserStoreList.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  final String? listId = state.pathParameters['listId'];
+                  final String? storeUuid = state.pathParameters['storeUuid'];
+                  final String? storeName =
+                      state.uri.queryParameters['storeName'];
+
+                  if (listId == null ||
+                      storeUuid == null ||
+                      storeName == null) {
+                    return const Scaffold();
+                  }
+
+                  return UpdateStoreToUserStoreListView(
+                    storeUuid: storeUuid,
+                    storeName: storeName,
+                  );
+                },
+              ),
+            ],
           ),
 
           /// 지도 > 저장 리스트 생성

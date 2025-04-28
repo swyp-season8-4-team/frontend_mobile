@@ -33,6 +33,7 @@ import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
+import 'package:frontend_mobile/presentation/global/user_store/user_store_list_view_model.dart';
 import 'package:frontend_mobile/presentation/map/map_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/widget/desserbee_bottom_navigation.dart';
@@ -72,7 +73,7 @@ class _MapViewState extends ConsumerState<MapView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final UserState userState = ref.read(userViewModelProvider);
       ref
-          .read(mapViewModelProvider.notifier)
+          .read(userStoreListViewModelProvider.notifier)
           .getUserStoreListAll(userUuid: userState.data.userUuid);
     });
   }
@@ -96,7 +97,13 @@ class _MapViewState extends ConsumerState<MapView> {
   @override
   Widget build(BuildContext context) {
     final MapState state = ref.watch(mapViewModelProvider);
-    final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
+
+    final UserStoreListState userStoreListState = ref.watch(
+      userStoreListViewModelProvider,
+    );
+    final UserStoreListViewModel userStoreListViewModel = ref.read(
+      userStoreListViewModelProvider.notifier,
+    );
 
     final TopBarIcon topBarIcon = TopBarIcon();
 
@@ -104,13 +111,13 @@ class _MapViewState extends ConsumerState<MapView> {
 
     return GestureDetector(
       onTap: () {
-        viewmodel.invisibleAllOptionMenu();
+        userStoreListViewModel.invisibleAllOptionMenu();
       },
       child: CustomLoadingOverlay(
         isLoading:
             state.getAllPreferencesStatus.isLoading ||
             state.getStoresByLocationStatus.isLoading ||
-            state.getUserStoreListAllStatus.isLoading ||
+            userStoreListState.getUserStoreListAllStatus.isLoading ||
             state.deleteUserStoreListStatus.isLoading,
         child: Scaffold(
           appBar:
@@ -223,7 +230,9 @@ class _MapViewState extends ConsumerState<MapView> {
     );
 
     ref.listen(
-      mapViewModelProvider.select((MapState state) => state.userStoreLists),
+      userStoreListViewModelProvider.select(
+        (UserStoreListState state) => state.userStoreLists,
+      ),
       (_, List<UserStoreListModel> next) async {
         await _mapController.clearOverlays();
         final List<NMarker> markers = await _createMarkers();
@@ -236,10 +245,14 @@ class _MapViewState extends ConsumerState<MapView> {
     ref.listen(
       mapViewModelProvider.select((MapState e) => e.userStoresEnabled),
       (_, bool next) {
-        final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
+        final UserStoreListViewModel userStoreListViewModel = ref.read(
+          userStoreListViewModelProvider.notifier,
+        );
         if (next) {
           final UserState userState = ref.read(userViewModelProvider);
-          viewmodel.getUserStoreListAll(userUuid: userState.data.userUuid);
+          userStoreListViewModel.getUserStoreListAll(
+            userUuid: userState.data.userUuid,
+          );
         } else {
           viewmodel.getStoresByLocation();
         }
@@ -282,7 +295,12 @@ class _MapViewState extends ConsumerState<MapView> {
       (_, Status next) {
         if (next.isSuccess) {
           final UserState userState = ref.read(userViewModelProvider);
-          viewmodel.getUserStoreListAll(userUuid: userState.data.userUuid);
+          final UserStoreListViewModel userStoreListViewModel = ref.read(
+            userStoreListViewModelProvider.notifier,
+          );
+          userStoreListViewModel.getUserStoreListAll(
+            userUuid: userState.data.userUuid,
+          );
         }
       },
     );
