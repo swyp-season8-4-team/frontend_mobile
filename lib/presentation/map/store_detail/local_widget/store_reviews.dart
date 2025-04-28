@@ -43,16 +43,33 @@ class _StoreReviews extends ConsumerWidget {
                               label: '리뷰쓰기',
                               svg: Assets.icon.editor.pencil2Line,
                               onPressed: () async {
-                                // TODO: 리뷰 작성 1회 제한 필요
-                                final Object? result = await context.pushNamed(
-                                  AppRoutes.addStoreReview.name,
-                                  pathParameters: <String, String>{
-                                    'id': state.storeDetail!.storeUuid,
-                                  },
-                                );
+                                if (state.todayReviewExist) {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return CustomDialog.basic(
+                                        description: '오늘은 이미 리뷰를 작성하셨어요',
+                                        primaryButton: CustomDialogButton(
+                                          text: '확인',
+                                          onTap: () {
+                                            context.pop();
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  final Object? result = await context
+                                      .pushNamed(
+                                        AppRoutes.addStoreReview.name,
+                                        pathParameters: <String, String>{
+                                          'id': state.storeDetail!.storeUuid,
+                                        },
+                                      );
 
-                                if (result == true && context.mounted) {
-                                  _showSuccessAddStoreReview(context, ref);
+                                  if (result == true && context.mounted) {
+                                    _showSuccessAddStoreReview(context, ref);
+                                  }
                                 }
                               },
                             ),

@@ -56,9 +56,15 @@ class _AddStoreReviewViewState extends ConsumerState<AddStoreReviewView> {
       ),
       (_, Status next) {
         if (next.isSuccess) {
-          ref
-              .read(storeDetailViewModelProvider.notifier)
-              .getStoreDetail(storeUuid: widget.storeUuid);
+          final StoreDetailViewModel storeDetailViewModel = ref.read(
+            storeDetailViewModelProvider.notifier,
+          );
+          final UserState userState = ref.read(userViewModelProvider);
+          storeDetailViewModel.getStoreDetail(storeUuid: widget.storeUuid);
+          storeDetailViewModel.checkTodayReview(
+            storeUuid: widget.storeUuid,
+            userUuid: userState.data.userUuid,
+          );
           context.pop(true);
         }
       },

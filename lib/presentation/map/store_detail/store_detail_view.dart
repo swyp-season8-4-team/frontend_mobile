@@ -6,6 +6,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:frontend_mobile/common/design_system/component/badge/number_badge.dart';
 import 'package:frontend_mobile/common/design_system/component/button/outline_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/pill_outline_button.dart';
+import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/expandable_text.dart';
 import 'package:frontend_mobile/common/design_system/component/hexagon_grid/hexagon_grid.dart';
 import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar.dart';
@@ -20,6 +21,7 @@ import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/store/store_detail_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_operating_hour_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_top_preference_model.dart';
+import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/widget/store_review_card.dart';
@@ -60,9 +62,15 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
       setState(() {});
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref
-          .read(storeDetailViewModelProvider.notifier)
-          .getStoreDetail(storeUuid: widget.storeUuid);
+      final UserState userState = ref.read(userViewModelProvider);
+      final StoreDetailViewModel viewmodel = ref.read(
+        storeDetailViewModelProvider.notifier,
+      );
+      viewmodel.getStoreDetail(storeUuid: widget.storeUuid);
+      viewmodel.checkTodayReview(
+        storeUuid: widget.storeUuid,
+        userUuid: userState.data.userUuid,
+      );
     });
   }
 
@@ -71,7 +79,8 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
     final StoreDetailState state = ref.watch(storeDetailViewModelProvider);
 
     // TODO: 페이지 전환 로딩 UI 구현 필요
-    if (state.getStoreDetailStatus.isLoading) {
+    if (state.getStoreDetailStatus.isLoading ||
+        state.checkTodayReviewStatus.isLoading) {
       return const Scaffold(
         appBar: CustomSubTopBar(title: '', actions: <Widget>[]),
 
@@ -79,7 +88,8 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
       );
     }
 
-    if (state.getStoreDetailStatus.isFailure) {
+    if (state.getStoreDetailStatus.isFailure ||
+        state.checkTodayReviewStatus.isFailure) {
       return _Failure(storeUuid: widget.storeUuid);
     }
 
