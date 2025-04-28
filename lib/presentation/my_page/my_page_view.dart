@@ -14,7 +14,7 @@ import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/global/preference/preference_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
-import 'package:frontend_mobile/presentation/my_page/my_page_view_model.dart';
+import 'package:frontend_mobile/presentation/global/user_store/user_store_list_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/widget/default_error.dart';
 import 'package:frontend_mobile/presentation/widget/desserbee_bottom_navigation.dart';
@@ -40,7 +40,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
       final UserState userState = ref.read(userViewModelProvider);
       await ref.read(preferenceViewModelProvider.notifier).getAllPreferences();
       await ref
-          .read(myPageViewModelProvider.notifier)
+          .read(userStoreListViewModelProvider.notifier)
           .getUserStoreListAll(userUuid: userState.data.userUuid);
     });
   }
@@ -52,7 +52,9 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
 
     final UserState userState = ref.watch(userViewModelProvider);
     final PreferenceState preferences = ref.watch(preferenceViewModelProvider);
-    final MyPageState state = ref.watch(myPageViewModelProvider);
+    final UserStoreListState userStoreListState = ref.watch(
+      userStoreListViewModelProvider,
+    );
 
     // 유저의 취향
     final List<PreferenceModel> userPreferences =
@@ -64,7 +66,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
 
     // TODO: 로딩 UI 개선 필요
     if (userState.status.isLoading ||
-        state.getUserStoreListAllStatus.isLoading) {
+        userStoreListState.getUserStoreListAllStatus.isLoading) {
       return const Scaffold(
         appBar: CustomSubTopBar(
           leading: SizedBox.shrink(),
@@ -88,7 +90,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
           onRetry: () {
             ref.read(userViewModelProvider.notifier).getMe();
             ref
-                .read(myPageViewModelProvider.notifier)
+                .read(userStoreListViewModelProvider.notifier)
                 .getUserStoreListAll(userUuid: userState.data.userUuid);
           },
         ),
@@ -257,7 +259,7 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
                         child: _MyActivityMenu(
                           png: Assets.image.bookmark,
                           label: '찜한 가게',
-                          count: state.storeAllCount,
+                          count: userStoreListState.storeAllCount,
                           onTap: () {
                             context.pushNamed(AppRoutes.myUserStoreList.name);
                           },
