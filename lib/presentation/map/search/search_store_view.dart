@@ -3,7 +3,6 @@ import 'package:extended_sliver/extended_sliver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
-import 'package:frontend_mobile/common/design_system/component/chip/input_chip.dart';
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/search/search.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
@@ -39,6 +38,21 @@ class _SearchStoreViewState extends ConsumerState<SearchStoreView> {
   @override
   Widget build(BuildContext context) {
     final SearchStoreState state = ref.watch(searchStoreViewModelProvider);
+    final SearchStoreViewModel viewmodel = ref.read(
+      searchStoreViewModelProvider.notifier,
+    );
+
+    ref.listen(
+      searchStoreViewModelProvider.select(
+        (SearchStoreState state) => state.getStoresStatus,
+      ),
+      (_, Status next) {
+        if (next.isSuccess) {
+          viewmodel.getRecentSearches();
+          viewmodel.getPopularSearches();
+        }
+      },
+    );
 
     // TODO: 페이지 전환 로딩 UI 구현 필요
     if (state.isFirstPageLoading) {
