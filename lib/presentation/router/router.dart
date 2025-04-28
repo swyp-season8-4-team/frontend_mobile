@@ -13,6 +13,7 @@ import 'package:frontend_mobile/presentation/map/search/search_store_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/find_place_by_map_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/notice/store_notice_detail_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/notice/store_notice_view.dart';
+import 'package:frontend_mobile/presentation/map/store_detail/review/add_store_review_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/user_store/add_store_to_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/stores_by_user_store_list_view.dart';
@@ -216,6 +217,18 @@ class AppRouter {
               return StoreDetailView(storeUuid: id);
             },
             routes: <RouteBase>[
+              GoRoute(
+                path: AppRoutes.addStoreReview.path,
+                name: AppRoutes.addStoreReview.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  final String? id = state.pathParameters['id'];
+                  if (id == null) {
+                    return const Scaffold();
+                  }
+                  return AddStoreReviewView(storeUuid: id);
+                },
+              ),
+
               /// 저장 리스트에 가게 추가
               GoRoute(
                 path: AppRoutes.addStoreToUserStoreList.path,

@@ -21,6 +21,10 @@ mixin _$StoreDetailState {
   Status get getStoreDetailStatus => throw _privateConstructorUsedError;
   ExceptionModel get getStoreDetailException =>
       throw _privateConstructorUsedError;
+  bool get todayReviewExist => throw _privateConstructorUsedError;
+  Status get checkTodayReviewStatus => throw _privateConstructorUsedError;
+  ExceptionModel get checkTodayReviewException =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of StoreDetailState
   /// with the given fields replaced by the non-null parameter values.
@@ -40,6 +44,9 @@ abstract class $StoreDetailStateCopyWith<$Res> {
     StoreDetailModel? storeDetail,
     Status getStoreDetailStatus,
     ExceptionModel getStoreDetailException,
+    bool todayReviewExist,
+    Status checkTodayReviewStatus,
+    ExceptionModel checkTodayReviewException,
   });
 }
 
@@ -61,6 +68,9 @@ class _$StoreDetailStateCopyWithImpl<$Res, $Val extends StoreDetailState>
     Object? storeDetail = freezed,
     Object? getStoreDetailStatus = null,
     Object? getStoreDetailException = null,
+    Object? todayReviewExist = null,
+    Object? checkTodayReviewStatus = null,
+    Object? checkTodayReviewException = null,
   }) {
     return _then(
       _value.copyWith(
@@ -78,6 +88,21 @@ class _$StoreDetailStateCopyWithImpl<$Res, $Val extends StoreDetailState>
                 null == getStoreDetailException
                     ? _value.getStoreDetailException
                     : getStoreDetailException // ignore: cast_nullable_to_non_nullable
+                        as ExceptionModel,
+            todayReviewExist:
+                null == todayReviewExist
+                    ? _value.todayReviewExist
+                    : todayReviewExist // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            checkTodayReviewStatus:
+                null == checkTodayReviewStatus
+                    ? _value.checkTodayReviewStatus
+                    : checkTodayReviewStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            checkTodayReviewException:
+                null == checkTodayReviewException
+                    ? _value.checkTodayReviewException
+                    : checkTodayReviewException // ignore: cast_nullable_to_non_nullable
                         as ExceptionModel,
           )
           as $Val,
@@ -98,6 +123,9 @@ abstract class _$$StoreDetailStateImplCopyWith<$Res>
     StoreDetailModel? storeDetail,
     Status getStoreDetailStatus,
     ExceptionModel getStoreDetailException,
+    bool todayReviewExist,
+    Status checkTodayReviewStatus,
+    ExceptionModel checkTodayReviewException,
   });
 }
 
@@ -118,6 +146,9 @@ class __$$StoreDetailStateImplCopyWithImpl<$Res>
     Object? storeDetail = freezed,
     Object? getStoreDetailStatus = null,
     Object? getStoreDetailException = null,
+    Object? todayReviewExist = null,
+    Object? checkTodayReviewStatus = null,
+    Object? checkTodayReviewException = null,
   }) {
     return _then(
       _$StoreDetailStateImpl(
@@ -136,6 +167,21 @@ class __$$StoreDetailStateImplCopyWithImpl<$Res>
                 ? _value.getStoreDetailException
                 : getStoreDetailException // ignore: cast_nullable_to_non_nullable
                     as ExceptionModel,
+        todayReviewExist:
+            null == todayReviewExist
+                ? _value.todayReviewExist
+                : todayReviewExist // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        checkTodayReviewStatus:
+            null == checkTodayReviewStatus
+                ? _value.checkTodayReviewStatus
+                : checkTodayReviewStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        checkTodayReviewException:
+            null == checkTodayReviewException
+                ? _value.checkTodayReviewException
+                : checkTodayReviewException // ignore: cast_nullable_to_non_nullable
+                    as ExceptionModel,
       ),
     );
   }
@@ -153,6 +199,14 @@ class _$StoreDetailStateImpl extends _StoreDetailState {
       message: '',
       timestamp: '',
     ),
+    this.todayReviewExist = false,
+    this.checkTodayReviewStatus = Status.loading,
+    this.checkTodayReviewException = const ExceptionModel(
+      status: -1,
+      code: '',
+      message: '',
+      timestamp: '',
+    ),
   }) : super._();
 
   @override
@@ -163,10 +217,19 @@ class _$StoreDetailStateImpl extends _StoreDetailState {
   @override
   @JsonKey()
   final ExceptionModel getStoreDetailException;
+  @override
+  @JsonKey()
+  final bool todayReviewExist;
+  @override
+  @JsonKey()
+  final Status checkTodayReviewStatus;
+  @override
+  @JsonKey()
+  final ExceptionModel checkTodayReviewException;
 
   @override
   String toString() {
-    return 'StoreDetailState(storeDetail: $storeDetail, getStoreDetailStatus: $getStoreDetailStatus, getStoreDetailException: $getStoreDetailException)';
+    return 'StoreDetailState(storeDetail: $storeDetail, getStoreDetailStatus: $getStoreDetailStatus, getStoreDetailException: $getStoreDetailException, todayReviewExist: $todayReviewExist, checkTodayReviewStatus: $checkTodayReviewStatus, checkTodayReviewException: $checkTodayReviewException)';
   }
 
   @override
@@ -182,7 +245,16 @@ class _$StoreDetailStateImpl extends _StoreDetailState {
                   other.getStoreDetailException,
                   getStoreDetailException,
                 ) ||
-                other.getStoreDetailException == getStoreDetailException));
+                other.getStoreDetailException == getStoreDetailException) &&
+            (identical(other.todayReviewExist, todayReviewExist) ||
+                other.todayReviewExist == todayReviewExist) &&
+            (identical(other.checkTodayReviewStatus, checkTodayReviewStatus) ||
+                other.checkTodayReviewStatus == checkTodayReviewStatus) &&
+            (identical(
+                  other.checkTodayReviewException,
+                  checkTodayReviewException,
+                ) ||
+                other.checkTodayReviewException == checkTodayReviewException));
   }
 
   @override
@@ -191,6 +263,9 @@ class _$StoreDetailStateImpl extends _StoreDetailState {
     storeDetail,
     getStoreDetailStatus,
     getStoreDetailException,
+    todayReviewExist,
+    checkTodayReviewStatus,
+    checkTodayReviewException,
   );
 
   /// Create a copy of StoreDetailState
@@ -210,6 +285,9 @@ abstract class _StoreDetailState extends StoreDetailState {
     final StoreDetailModel? storeDetail,
     final Status getStoreDetailStatus,
     final ExceptionModel getStoreDetailException,
+    final bool todayReviewExist,
+    final Status checkTodayReviewStatus,
+    final ExceptionModel checkTodayReviewException,
   }) = _$StoreDetailStateImpl;
   _StoreDetailState._() : super._();
 
@@ -219,6 +297,12 @@ abstract class _StoreDetailState extends StoreDetailState {
   Status get getStoreDetailStatus;
   @override
   ExceptionModel get getStoreDetailException;
+  @override
+  bool get todayReviewExist;
+  @override
+  Status get checkTodayReviewStatus;
+  @override
+  ExceptionModel get checkTodayReviewException;
 
   /// Create a copy of StoreDetailState
   /// with the given fields replaced by the non-null parameter values.
