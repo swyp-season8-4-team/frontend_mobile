@@ -29,12 +29,31 @@ class _MyActivity extends ConsumerWidget {
             children: <Widget>[
               Expanded(
                 child: _MyActivityMenu(
-                  png: Assets.image.bookmark,
+                  image: Assets.image.bookmark.image(
+                    width: 24,
+                    height: 24,
+                    fit: BoxFit.cover,
+                  ),
                   label: '찜한 가게',
                   count: userStoreListState.storeAllCount,
                   onTap: () {
                     context.pushNamed(AppRoutes.myUserStoreList.name);
                   },
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _MyActivityMenu(
+                  image: Assets.icon.etc.review.svg(
+                    width: 24,
+                    height: 24,
+                    fit: BoxFit.cover,
+                  ),
+                  label: '리뷰',
+                  onTap: () {
+                    // TODO: 리뷰
+                  },
+                  count: 0,
                 ),
               ),
             ],
@@ -48,12 +67,12 @@ class _MyActivity extends ConsumerWidget {
 // 내 활동 메뉴 버튼 UI
 class _MyActivityMenu extends StatelessWidget {
   const _MyActivityMenu({
-    required this.png,
+    required this.image,
     required this.label,
     required this.count,
     required this.onTap,
   });
-  final AssetGenImage png;
+  final Widget image;
   final String label;
   final int count;
   final VoidCallback onTap;
@@ -73,10 +92,7 @@ class _MyActivityMenu extends StatelessWidget {
         ),
         child: Row(
           children: <Widget>[
-            SizedBox.square(
-              dimension: 24,
-              child: png.image(width: 20, height: 20, fit: BoxFit.cover),
-            ),
+            SizedBox.square(dimension: 24, child: image),
             const SizedBox(width: 10),
             Text(
               label,
