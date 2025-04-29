@@ -1,9 +1,11 @@
 import 'package:frontend_mobile/data/entity/mate/mate_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_entity.dart';
 import 'package:frontend_mobile/data/query_param/mate/get_mate_query_param.dart';
+import 'package:frontend_mobile/data/query_param/mate/get_my_mate_query_param.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_detail_model.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_model.dart';
 import 'package:frontend_mobile/domain/param/mate/get_mate_params.dart';
+import 'package:frontend_mobile/domain/param/mate/get_my_mate_params.dart';
 
 extension MateEntityExt on MateEntity {
   MateModel toModel() {
@@ -59,5 +61,11 @@ extension GetMateParamsExt on GetMateParams {
       mateCategoryId: mateCategoryId,
       recruit: recruit,
     );
+  }
+}
+
+extension GetMyMateParamsExt on GetMyMateParams {
+  GetMyMateQueryParam toQuery() {
+    return GetMyMateQueryParam(from: from, to: to);
   }
 }
