@@ -9,7 +9,9 @@ part of '../search_popular_entity.dart';
 PopularSearchesEntity _$PopularSearchesEntityFromJson(
   Map<String, dynamic> json,
 ) => PopularSearchesEntity(
-  lastUpdatedTime: DateTime.parse(json['lastUpdatedTime'] as String),
+  lastUpdatedTime: const DateTimeJsonConverter().fromJson(
+    json['lastUpdatedTime'] as String?,
+  ),
   searches:
       (json['searches'] as List<dynamic>?)
           ?.map((e) => PopularSearch.fromJson(e as Map<String, dynamic>))
@@ -19,7 +21,9 @@ PopularSearchesEntity _$PopularSearchesEntityFromJson(
 Map<String, dynamic> _$PopularSearchesEntityToJson(
   PopularSearchesEntity instance,
 ) => <String, dynamic>{
-  'lastUpdatedTime': instance.lastUpdatedTime.toIso8601String(),
+  'lastUpdatedTime': const DateTimeJsonConverter().toJson(
+    instance.lastUpdatedTime,
+  ),
   'searches': instance.searches,
 };
 
