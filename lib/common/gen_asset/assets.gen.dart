@@ -588,6 +588,9 @@ class $AssetIconEtcGen {
   SvgGenImage get hexagon13 =>
       const SvgGenImage('asset/icon/etc/hexagon_13.svg');
 
+  /// File path: asset/icon/etc/review.svg
+  SvgGenImage get review => const SvgGenImage('asset/icon/etc/review.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
     a16CloseFilled1,
@@ -625,6 +628,7 @@ class $AssetIconEtcGen {
     hexagon11,
     hexagon12,
     hexagon13,
+    review,
   ];
 }
 
