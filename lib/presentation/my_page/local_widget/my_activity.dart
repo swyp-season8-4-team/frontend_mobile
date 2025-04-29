@@ -58,6 +58,26 @@ class _MyActivity extends ConsumerWidget {
               ),
             ],
           ),
+          const SizedBox(height: 10),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: _MyActivityMenu(
+                  image: Assets.icon.etc.friends.svg(
+                    width: 24,
+                    height: 24,
+                    fit: BoxFit.cover,
+                  ),
+                  label: '디저트메이트',
+                  onTap: () {
+                    context.pushNamed(AppRoutes.myDessertMate.name);
+                  },
+                  count: 0,
+                  showCount: false,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -71,10 +91,12 @@ class _MyActivityMenu extends StatelessWidget {
     required this.label,
     required this.count,
     required this.onTap,
+    this.showCount = true,
   });
   final Widget image;
   final String label;
   final int count;
+  final bool showCount;
   final VoidCallback onTap;
 
   @override
@@ -103,7 +125,7 @@ class _MyActivityMenu extends StatelessWidget {
             const SizedBox(width: 4),
             Expanded(
               child: Text(
-                '$count',
+                showCount ? '$count' : '',
                 style: textTheme.labelLarge?.copyWith(
                   color: ScaleColorConfig.success50,
                 ),

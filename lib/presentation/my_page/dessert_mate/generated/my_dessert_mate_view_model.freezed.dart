@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MyDessertMateState {
+  List<({TabFilterStatus filter, int tabIndex})> get tabsFilter =>
+      throw _privateConstructorUsedError;
   Status get getMyMateStatus => throw _privateConstructorUsedError;
   MateModel get data => throw _privateConstructorUsedError;
   ExceptionModel get getMyMateException => throw _privateConstructorUsedError;
@@ -36,6 +38,7 @@ abstract class $MyDessertMateStateCopyWith<$Res> {
   ) = _$MyDessertMateStateCopyWithImpl<$Res, MyDessertMateState>;
   @useResult
   $Res call({
+    List<({TabFilterStatus filter, int tabIndex})> tabsFilter,
     Status getMyMateStatus,
     MateModel data,
     ExceptionModel getMyMateException,
@@ -57,12 +60,18 @@ class _$MyDessertMateStateCopyWithImpl<$Res, $Val extends MyDessertMateState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? tabsFilter = null,
     Object? getMyMateStatus = null,
     Object? data = null,
     Object? getMyMateException = null,
   }) {
     return _then(
       _value.copyWith(
+            tabsFilter:
+                null == tabsFilter
+                    ? _value.tabsFilter
+                    : tabsFilter // ignore: cast_nullable_to_non_nullable
+                        as List<({TabFilterStatus filter, int tabIndex})>,
             getMyMateStatus:
                 null == getMyMateStatus
                     ? _value.getMyMateStatus
@@ -94,6 +103,7 @@ abstract class _$$MyDessertMateStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
+    List<({TabFilterStatus filter, int tabIndex})> tabsFilter,
     Status getMyMateStatus,
     MateModel data,
     ExceptionModel getMyMateException,
@@ -114,12 +124,18 @@ class __$$MyDessertMateStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? tabsFilter = null,
     Object? getMyMateStatus = null,
     Object? data = null,
     Object? getMyMateException = null,
   }) {
     return _then(
       _$MyDessertMateStateImpl(
+        tabsFilter:
+            null == tabsFilter
+                ? _value._tabsFilter
+                : tabsFilter // ignore: cast_nullable_to_non_nullable
+                    as List<({TabFilterStatus filter, int tabIndex})>,
         getMyMateStatus:
             null == getMyMateStatus
                 ? _value.getMyMateStatus
@@ -142,8 +158,10 @@ class __$$MyDessertMateStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$MyDessertMateStateImpl implements _MyDessertMateState {
+class _$MyDessertMateStateImpl extends _MyDessertMateState {
   _$MyDessertMateStateImpl({
+    final List<({TabFilterStatus filter, int tabIndex})> tabsFilter =
+        const <TabFilter>[],
     this.getMyMateStatus = Status.loading,
     this.data = const MateModel(mates: <MateDetailModel>[], last: false),
     this.getMyMateException = const ExceptionModel(
@@ -152,7 +170,17 @@ class _$MyDessertMateStateImpl implements _MyDessertMateState {
       message: '',
       timestamp: '',
     ),
-  });
+  }) : _tabsFilter = tabsFilter,
+       super._();
+
+  final List<({TabFilterStatus filter, int tabIndex})> _tabsFilter;
+  @override
+  @JsonKey()
+  List<({TabFilterStatus filter, int tabIndex})> get tabsFilter {
+    if (_tabsFilter is EqualUnmodifiableListView) return _tabsFilter;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tabsFilter);
+  }
 
   @override
   @JsonKey()
@@ -166,7 +194,7 @@ class _$MyDessertMateStateImpl implements _MyDessertMateState {
 
   @override
   String toString() {
-    return 'MyDessertMateState(getMyMateStatus: $getMyMateStatus, data: $data, getMyMateException: $getMyMateException)';
+    return 'MyDessertMateState(tabsFilter: $tabsFilter, getMyMateStatus: $getMyMateStatus, data: $data, getMyMateException: $getMyMateException)';
   }
 
   @override
@@ -174,6 +202,10 @@ class _$MyDessertMateStateImpl implements _MyDessertMateState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MyDessertMateStateImpl &&
+            const DeepCollectionEquality().equals(
+              other._tabsFilter,
+              _tabsFilter,
+            ) &&
             (identical(other.getMyMateStatus, getMyMateStatus) ||
                 other.getMyMateStatus == getMyMateStatus) &&
             (identical(other.data, data) || other.data == data) &&
@@ -182,8 +214,13 @@ class _$MyDessertMateStateImpl implements _MyDessertMateState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, getMyMateStatus, data, getMyMateException);
+  int get hashCode => Object.hash(
+    runtimeType,
+    const DeepCollectionEquality().hash(_tabsFilter),
+    getMyMateStatus,
+    data,
+    getMyMateException,
+  );
 
   /// Create a copy of MyDessertMateState
   /// with the given fields replaced by the non-null parameter values.
@@ -197,13 +234,17 @@ class _$MyDessertMateStateImpl implements _MyDessertMateState {
       );
 }
 
-abstract class _MyDessertMateState implements MyDessertMateState {
+abstract class _MyDessertMateState extends MyDessertMateState {
   factory _MyDessertMateState({
+    final List<({TabFilterStatus filter, int tabIndex})> tabsFilter,
     final Status getMyMateStatus,
     final MateModel data,
     final ExceptionModel getMyMateException,
   }) = _$MyDessertMateStateImpl;
+  _MyDessertMateState._() : super._();
 
+  @override
+  List<({TabFilterStatus filter, int tabIndex})> get tabsFilter;
   @override
   Status get getMyMateStatus;
   @override

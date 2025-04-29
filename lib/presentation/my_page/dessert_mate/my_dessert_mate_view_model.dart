@@ -31,6 +31,24 @@ class MyDessertMateViewModel extends StateNotifier<MyDessertMateState> {
 
   final Ref _ref;
 
+  /// 탭의 필터 업데이트
+  void updateTabFilter({
+    required int tabIndex,
+    required TabFilterStatus filter,
+  }) async {
+    state = state.copyWith(
+      tabsFilter:
+          state.tabsFilter
+              .map(
+                (({TabFilterStatus filter, int tabIndex}) e) =>
+                    e.tabIndex == tabIndex
+                        ? (tabIndex: tabIndex, filter: filter)
+                        : e,
+              )
+              .toList(),
+    );
+  }
+
   /// 내가 참여한 메이트 조회
   // TODO: 페이지 네이션 구현 필요
   Future<void> getMate() async {
@@ -46,6 +64,11 @@ class MyDessertMateViewModel extends StateNotifier<MyDessertMateState> {
         state = state.copyWith(
           getMyMateStatus: Status.success,
           data: success.data,
+          tabsFilter: <({TabFilterStatus filter, int tabIndex})>[
+            (tabIndex: 0, filter: TabFilterStatus.all),
+            (tabIndex: 1, filter: TabFilterStatus.all),
+            (tabIndex: 2, filter: TabFilterStatus.all),
+          ],
         );
       },
       failure: (Failure<MateModel, CustomException> failure) {
