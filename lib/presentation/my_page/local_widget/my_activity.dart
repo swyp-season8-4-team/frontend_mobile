@@ -10,6 +10,8 @@ class _MyActivity extends ConsumerWidget {
     final UserStoreListState userStoreListState = ref.watch(
       userStoreListViewModelProvider,
     );
+
+    final MyPageState state = ref.watch(myPageViewModelProvider);
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -51,9 +53,9 @@ class _MyActivity extends ConsumerWidget {
                   ),
                   label: '리뷰',
                   onTap: () {
-                    // TODO: 리뷰
+                    context.pushNamed(AppRoutes.myReview.name);
                   },
-                  count: 0,
+                  count: state.review.reviewCount,
                 ),
               ),
             ],

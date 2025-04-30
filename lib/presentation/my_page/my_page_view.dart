@@ -15,6 +15,7 @@ import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/global/preference/preference_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user_store/user_store_list_view_model.dart';
+import 'package:frontend_mobile/presentation/my_page/my_page_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/widget/default_error.dart';
 import 'package:frontend_mobile/presentation/widget/desserbee_bottom_navigation.dart';
@@ -42,10 +43,14 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final UserState userState = ref.read(userViewModelProvider);
-      await ref.read(preferenceViewModelProvider.notifier).getAllPreferences();
-      await ref
-          .read(userStoreListViewModelProvider.notifier)
-          .getUserStoreListAll(userUuid: userState.data.userUuid);
+
+      await Future.wait(<Future<void>>[
+        ref.read(preferenceViewModelProvider.notifier).getAllPreferences(),
+        ref
+            .read(userStoreListViewModelProvider.notifier)
+            .getUserStoreListAll(userUuid: userState.data.userUuid),
+        ref.read(myPageViewModelProvider.notifier).getMyReviews(),
+      ]);
     });
   }
 
@@ -55,10 +60,12 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
     final UserStoreListState userStoreListState = ref.watch(
       userStoreListViewModelProvider,
     );
+    final MyPageState state = ref.watch(myPageViewModelProvider);
 
     // TODO: 로딩 UI 개선 필요
     if (userState.status.isLoading ||
-        userStoreListState.getUserStoreListAllStatus.isLoading) {
+        userStoreListState.getUserStoreListAllStatus.isLoading ||
+        state.getMyReviewsStatus.isLoading) {
       return const Scaffold(
         appBar: CustomSubTopBar(
           leading: SizedBox.shrink(),
@@ -70,7 +77,9 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
     }
 
     // TODO: 에러 UI 개선 필요 (현재는 임의로 설정함)
-    if (userState.status.isFailure) {
+    if (userState.status.isFailure ||
+        userStoreListState.getUserStoreListAllStatus.isFailure ||
+        state.getMyReviewsStatus.isFailure) {
       return Scaffold(
         appBar: const CustomSubTopBar(
           title: 'MY',
