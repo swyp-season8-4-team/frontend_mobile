@@ -107,6 +107,18 @@ class CustomPillOutlineButton extends StatelessWidget {
         return const BorderSide(color: ScaleColorConfig.neutral50);
       });
 
+  TextStyle? _textStyle({required TextTheme textTheme}) {
+    if (size == CustomPillOutlineButtonSize.medium) {
+      return textTheme.titleMedium;
+    }
+
+    if (size == CustomPillOutlineButtonSize.small) {
+      return textTheme.titleSmall;
+    }
+
+    return textTheme.labelLarge;
+  }
+
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
@@ -123,7 +135,7 @@ class CustomPillOutlineButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           elevation: 0,
-          textStyle: textTheme.titleMedium,
+          textStyle: _textStyle(textTheme: textTheme),
         ).copyWith(
           foregroundColor: _foregroundColor,
           backgroundColor: _backgroundColor,

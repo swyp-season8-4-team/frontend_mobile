@@ -418,7 +418,9 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
               bottom: 16,
               right: 16,
               child: CustomFloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.pushNamed(AppRoutes.dessertWriteStep1.name);
+                },
                 disabled: _floatingActionButtonDisabled,
                 svg: Assets.icon.editor.pencil2Line.svg(
                   colorFilter: ColorFilter.mode(

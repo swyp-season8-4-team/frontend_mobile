@@ -43,12 +43,12 @@ class CustomOptionMenuDropdown extends StatelessWidget {
 
 class CustomOptionMenu extends StatelessWidget {
   const CustomOptionMenu({
-    required this.svg,
     required this.text,
     required this.onTap,
+    this.svg,
     super.key,
   });
-  final SvgGenImage svg;
+  final SvgGenImage? svg;
   final String text;
   final VoidCallback onTap;
 
@@ -66,16 +66,19 @@ class CustomOptionMenu extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              svg.svg(
-                width: 18,
-                height: 18,
-                fit: BoxFit.cover,
-                colorFilter: const ColorFilter.mode(
-                  ScaleColorConfig.neutral20,
-                  BlendMode.srcIn,
+              if (svg != null) ...<Widget>[
+                svg!.svg(
+                  width: 18,
+                  height: 18,
+                  fit: BoxFit.cover,
+                  colorFilter: const ColorFilter.mode(
+                    ScaleColorConfig.neutral20,
+                    BlendMode.srcIn,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 10),
+                const SizedBox(width: 10),
+              ],
+
               Text(
                 text,
                 style: textTheme.bodyMedium?.copyWith(
