@@ -20,6 +20,7 @@ import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/store
 import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/update/update_store_to_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/add/add_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/user_store/update/update_user_store_list_view.dart';
+import 'package:frontend_mobile/presentation/my_page/dessert_mate/my_dessert_mate_view.dart';
 import 'package:frontend_mobile/presentation/my_page/my_page_view.dart';
 import 'package:frontend_mobile/presentation/my_page/policy/my_policy_view.dart';
 import 'package:frontend_mobile/presentation/my_page/setting/delete_my_info/delete_my_info_view.dart';
@@ -519,6 +520,15 @@ class AppRouter {
                 name: AppRoutes.myUserStoreList.name,
                 builder: (BuildContext context, GoRouterState state) {
                   return const MyUserStoreListView();
+                },
+              ),
+
+              /// 디저트 메이트
+              GoRoute(
+                path: AppRoutes.myDessertMate.path,
+                name: AppRoutes.myDessertMate.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MyDessertMateView();
                 },
               ),
 

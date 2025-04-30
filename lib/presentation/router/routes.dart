@@ -250,6 +250,12 @@ abstract class AppRoutes {
     path: 'user_store_list',
   );
 
+  /// 마이페이지 > Default > 디저트 메이트
+  static RouteInfo myDessertMate = RouteInfo(
+    name: '${myPageDefault.name}/dessert_mate',
+    path: 'dessert_mate',
+  );
+
   /// 마이페이지 > Default > 약관 및 정책
   static RouteInfo myPolicy = RouteInfo(
     name: '${myPageDefault.name}/policy',

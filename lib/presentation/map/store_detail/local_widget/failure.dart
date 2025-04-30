@@ -38,7 +38,12 @@ class _Failure extends ConsumerWidget {
               label: '다시 시도',
               width: 126,
               onPressed: () {
+                final UserState userState = ref.read(userViewModelProvider);
                 viewmodel.getStoreDetail(storeUuid: storeUuid);
+                viewmodel.checkTodayReview(
+                  storeUuid: storeUuid,
+                  userUuid: userState.data.userUuid,
+                );
               },
               isSelected: false,
             ),

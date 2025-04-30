@@ -80,6 +80,7 @@ class MapViewModel extends StateNotifier<MapState> {
   Future<MapState> getStoresByLocation() async {
     state = state.copyWith(
       selectedMarker: null,
+      selectedListId: null,
       getStoresByLocationStatus: Status.loading,
     );
 
@@ -218,9 +219,13 @@ class MapViewModel extends StateNotifier<MapState> {
   }
 
   // 가게 간략 정보 조회
-  Future<MapState> getStoreSummary({required NMarker overlay}) async {
+  Future<MapState> getStoreSummary({
+    required NMarker overlay,
+    int? listId,
+  }) async {
     state = state.copyWith(
       selectedMarker: overlay,
+      selectedListId: listId,
       getStoreSummaryStatus: Status.loading,
     );
 

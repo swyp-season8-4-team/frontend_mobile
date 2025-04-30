@@ -11,6 +11,7 @@ import 'package:frontend_mobile/common/design_system/component/etc/map/map_icon_
 import 'package:frontend_mobile/common/design_system/component/etc/map/saved_store_list.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/marker/saved_marker.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/option_menu_dropdown.dart';
+import 'package:frontend_mobile/common/design_system/component/navigation_bar/navigation_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar_right_item.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/main_top_bar.dart';
@@ -182,11 +183,18 @@ class _MapViewState extends ConsumerState<MapView> {
                   },
                 ),
               ),
-              Positioned(top: 16, left: 0, child: _buildFilterList()),
+              Positioned(top: 0, left: 0, child: _buildFilterList()),
               Positioned(
                 top: 56,
                 left: 16,
-                child: CustomDessertMateButton(onPressed: () {}),
+                child: CustomDessertMateButton(
+                  onPressed: () {
+                    ref
+                        .read(bottomNavigationCurrentIndexProvider.notifier)
+                        .state = 0;
+                    context.goNamed(AppRoutes.dessertBoard.name);
+                  },
+                ),
               ),
               Positioned(top: 56, right: 16, child: _buildControlButtons()),
               if (!state.userStoresEnabled)
