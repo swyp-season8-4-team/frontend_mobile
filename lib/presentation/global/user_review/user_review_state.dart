@@ -10,5 +10,9 @@ class UserReviewState with _$UserReviewState {
     @Default(Status.loading) Status getMyShortReviewsStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel getMyShortReviewsException,
+
+    @Default(Status.initial) Status deleteMyShortReviewStatus,
+    @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
+    ExceptionModel deleteMyShortReviewException,
   }) = _UserReviewState;
 }

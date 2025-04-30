@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar_right_item.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
@@ -25,8 +26,23 @@ class MyReviewView extends ConsumerWidget {
       userReviewViewModelProvider,
     );
     final UserReviewModel review = userReviewState.shortReview;
+
+    ref.listen(
+      userReviewViewModelProvider.select(
+        (UserReviewState state) => state.deleteMyShortReviewStatus,
+      ),
+      (_, Status next) {
+        if (next.isSuccess) {
+          ref.read(userReviewViewModelProvider.notifier).getMyShortReviews();
+          _showSuccessDeleteShortReview(context, ref);
+        }
+      },
+    );
+
     return CustomLoadingOverlay(
-      isLoading: userReviewState.getMyShortReviewsStatus.isLoading,
+      isLoading:
+          userReviewState.getMyShortReviewsStatus.isLoading ||
+          userReviewState.deleteMyShortReviewStatus.isLoading,
       child: Scaffold(
         appBar: const CustomSubTopBar(
           title: '리뷰',
@@ -87,7 +103,35 @@ class MyReviewView extends ConsumerWidget {
                           }
                         },
                         onDeleteTap: () {
-                          // TODO: 삭제
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return CustomDialog.basic(
+                                title: '작성한 리뷰를 삭제하시겠어요?',
+                                description: '삭제된 리뷰는 복구 및 재작성이\n불가능합니다.',
+                                primaryButton: CustomDialogButton(
+                                  text: '확인',
+                                  onTap: () {
+                                    ref
+                                        .read(
+                                          userReviewViewModelProvider.notifier,
+                                        )
+                                        .deleteMyShortReview(
+                                          storeUuid: reviewItem.store.storeUuid,
+                                          reviewUuid: reviewItem.reviewUuid,
+                                        );
+                                    context.pop();
+                                  },
+                                ),
+                                secondaryButton: CustomDialogButton(
+                                  text: '취소',
+                                  onTap: () {
+                                    context.pop();
+                                  },
+                                ),
+                              );
+                            },
+                          );
                         },
                         onStoreInfoTap: () {
                           context.pushNamed(
@@ -126,7 +170,23 @@ class MyReviewView extends ConsumerWidget {
           onTap: () {
             toastManager.remove();
           },
-          label: '닫기',
+          label: '확인',
+        ),
+      ),
+    );
+  }
+
+  void _showSuccessDeleteShortReview(BuildContext context, WidgetRef ref) {
+    final ToastManager toastManager = ref.read(toastManagerProvider);
+    toastManager.show(
+      context: context,
+      toastWidget: CustomSnackBar(
+        description: '해당 리뷰가 삭제되었습니다',
+        actionButton: SnackBarActionButton(
+          onTap: () {
+            toastManager.remove();
+          },
+          label: '확인',
         ),
       ),
     );

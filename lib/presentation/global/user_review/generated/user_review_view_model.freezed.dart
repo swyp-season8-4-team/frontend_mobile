@@ -21,6 +21,9 @@ mixin _$UserReviewState {
   Status get getMyShortReviewsStatus => throw _privateConstructorUsedError;
   ExceptionModel get getMyShortReviewsException =>
       throw _privateConstructorUsedError;
+  Status get deleteMyShortReviewStatus => throw _privateConstructorUsedError;
+  ExceptionModel get deleteMyShortReviewException =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of UserReviewState
   /// with the given fields replaced by the non-null parameter values.
@@ -40,6 +43,8 @@ abstract class $UserReviewStateCopyWith<$Res> {
     UserReviewModel shortReview,
     Status getMyShortReviewsStatus,
     ExceptionModel getMyShortReviewsException,
+    Status deleteMyShortReviewStatus,
+    ExceptionModel deleteMyShortReviewException,
   });
 }
 
@@ -61,6 +66,8 @@ class _$UserReviewStateCopyWithImpl<$Res, $Val extends UserReviewState>
     Object? shortReview = null,
     Object? getMyShortReviewsStatus = null,
     Object? getMyShortReviewsException = null,
+    Object? deleteMyShortReviewStatus = null,
+    Object? deleteMyShortReviewException = null,
   }) {
     return _then(
       _value.copyWith(
@@ -78,6 +85,16 @@ class _$UserReviewStateCopyWithImpl<$Res, $Val extends UserReviewState>
                 null == getMyShortReviewsException
                     ? _value.getMyShortReviewsException
                     : getMyShortReviewsException // ignore: cast_nullable_to_non_nullable
+                        as ExceptionModel,
+            deleteMyShortReviewStatus:
+                null == deleteMyShortReviewStatus
+                    ? _value.deleteMyShortReviewStatus
+                    : deleteMyShortReviewStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            deleteMyShortReviewException:
+                null == deleteMyShortReviewException
+                    ? _value.deleteMyShortReviewException
+                    : deleteMyShortReviewException // ignore: cast_nullable_to_non_nullable
                         as ExceptionModel,
           )
           as $Val,
@@ -98,6 +115,8 @@ abstract class _$$UserReviewStateImplCopyWith<$Res>
     UserReviewModel shortReview,
     Status getMyShortReviewsStatus,
     ExceptionModel getMyShortReviewsException,
+    Status deleteMyShortReviewStatus,
+    ExceptionModel deleteMyShortReviewException,
   });
 }
 
@@ -118,6 +137,8 @@ class __$$UserReviewStateImplCopyWithImpl<$Res>
     Object? shortReview = null,
     Object? getMyShortReviewsStatus = null,
     Object? getMyShortReviewsException = null,
+    Object? deleteMyShortReviewStatus = null,
+    Object? deleteMyShortReviewException = null,
   }) {
     return _then(
       _$UserReviewStateImpl(
@@ -135,6 +156,16 @@ class __$$UserReviewStateImplCopyWithImpl<$Res>
             null == getMyShortReviewsException
                 ? _value.getMyShortReviewsException
                 : getMyShortReviewsException // ignore: cast_nullable_to_non_nullable
+                    as ExceptionModel,
+        deleteMyShortReviewStatus:
+            null == deleteMyShortReviewStatus
+                ? _value.deleteMyShortReviewStatus
+                : deleteMyShortReviewStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        deleteMyShortReviewException:
+            null == deleteMyShortReviewException
+                ? _value.deleteMyShortReviewException
+                : deleteMyShortReviewException // ignore: cast_nullable_to_non_nullable
                     as ExceptionModel,
       ),
     );
@@ -156,6 +187,13 @@ class _$UserReviewStateImpl implements _UserReviewState {
       message: '',
       timestamp: '',
     ),
+    this.deleteMyShortReviewStatus = Status.initial,
+    this.deleteMyShortReviewException = const ExceptionModel(
+      status: -1,
+      code: '',
+      message: '',
+      timestamp: '',
+    ),
   });
 
   @override
@@ -167,10 +205,16 @@ class _$UserReviewStateImpl implements _UserReviewState {
   @override
   @JsonKey()
   final ExceptionModel getMyShortReviewsException;
+  @override
+  @JsonKey()
+  final Status deleteMyShortReviewStatus;
+  @override
+  @JsonKey()
+  final ExceptionModel deleteMyShortReviewException;
 
   @override
   String toString() {
-    return 'UserReviewState(shortReview: $shortReview, getMyShortReviewsStatus: $getMyShortReviewsStatus, getMyShortReviewsException: $getMyShortReviewsException)';
+    return 'UserReviewState(shortReview: $shortReview, getMyShortReviewsStatus: $getMyShortReviewsStatus, getMyShortReviewsException: $getMyShortReviewsException, deleteMyShortReviewStatus: $deleteMyShortReviewStatus, deleteMyShortReviewException: $deleteMyShortReviewException)';
   }
 
   @override
@@ -190,7 +234,18 @@ class _$UserReviewStateImpl implements _UserReviewState {
                   getMyShortReviewsException,
                 ) ||
                 other.getMyShortReviewsException ==
-                    getMyShortReviewsException));
+                    getMyShortReviewsException) &&
+            (identical(
+                  other.deleteMyShortReviewStatus,
+                  deleteMyShortReviewStatus,
+                ) ||
+                other.deleteMyShortReviewStatus == deleteMyShortReviewStatus) &&
+            (identical(
+                  other.deleteMyShortReviewException,
+                  deleteMyShortReviewException,
+                ) ||
+                other.deleteMyShortReviewException ==
+                    deleteMyShortReviewException));
   }
 
   @override
@@ -199,6 +254,8 @@ class _$UserReviewStateImpl implements _UserReviewState {
     shortReview,
     getMyShortReviewsStatus,
     getMyShortReviewsException,
+    deleteMyShortReviewStatus,
+    deleteMyShortReviewException,
   );
 
   /// Create a copy of UserReviewState
@@ -218,6 +275,8 @@ abstract class _UserReviewState implements UserReviewState {
     final UserReviewModel shortReview,
     final Status getMyShortReviewsStatus,
     final ExceptionModel getMyShortReviewsException,
+    final Status deleteMyShortReviewStatus,
+    final ExceptionModel deleteMyShortReviewException,
   }) = _$UserReviewStateImpl;
 
   @override
@@ -226,6 +285,10 @@ abstract class _UserReviewState implements UserReviewState {
   Status get getMyShortReviewsStatus;
   @override
   ExceptionModel get getMyShortReviewsException;
+  @override
+  Status get deleteMyShortReviewStatus;
+  @override
+  ExceptionModel get deleteMyShortReviewException;
 
   /// Create a copy of UserReviewState
   /// with the given fields replaced by the non-null parameter values.
