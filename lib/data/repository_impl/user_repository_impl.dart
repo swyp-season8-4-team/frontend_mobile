@@ -6,9 +6,11 @@ import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/data/data_source/remote/user_remote_data_source.dart';
 import 'package:frontend_mobile/data/entity/user/nickname_availability_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_detail_entity.dart';
+import 'package:frontend_mobile/data/entity/user/user_review_entity.dart';
 import 'package:frontend_mobile/data/mapper/user_mapper.dart';
 import 'package:frontend_mobile/domain/model/user/nickname_availability_model.dart';
 import 'package:frontend_mobile/domain/model/user/user_detail_model.dart';
+import 'package:frontend_mobile/domain/model/user/user_review_model.dart';
 import 'package:frontend_mobile/domain/param/user/patch_me_params.dart';
 import 'package:frontend_mobile/domain/param/user/post_nickname_params.dart';
 import 'package:frontend_mobile/domain/param/user/update_profile_image_params.dart';
@@ -83,6 +85,18 @@ class UserRepositoryImpl implements UserRepository {
     return await apiCall(
       api: () async {
         return await api.deleteMe();
+      },
+    );
+  }
+
+  @override
+  Future<Result<UserReviewModel, CustomException>> getNyReviews({
+    required NoParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        final UserReviewEntity result = await api.getMyReviews();
+        return result.toModel();
       },
     );
   }
