@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/domain/model/user/user_review_model.dart';
-import 'package:frontend_mobile/presentation/my_page/my_page_view_model.dart';
+import 'package:frontend_mobile/presentation/global/user_review/user_review_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/widget/my_short_review_card.dart';
 import 'package:go_router/go_router.dart';
@@ -16,8 +16,10 @@ class MyReviewView extends ConsumerWidget {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    final MyPageState state = ref.watch(myPageViewModelProvider);
-    final UserReviewModel review = state.review;
+    final UserReviewState userReviewState = ref.watch(
+      userReviewViewModelProvider,
+    );
+    final UserReviewModel review = userReviewState.shortReview;
     return Scaffold(
       appBar: const CustomSubTopBar(
         title: '리뷰',

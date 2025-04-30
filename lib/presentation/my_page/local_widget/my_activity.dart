@@ -11,7 +11,9 @@ class _MyActivity extends ConsumerWidget {
       userStoreListViewModelProvider,
     );
 
-    final MyPageState state = ref.watch(myPageViewModelProvider);
+    final UserReviewState userReviewState = ref.watch(
+      userReviewViewModelProvider,
+    );
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -55,7 +57,7 @@ class _MyActivity extends ConsumerWidget {
                   onTap: () {
                     context.pushNamed(AppRoutes.myReview.name);
                   },
-                  count: state.review.reviewCount,
+                  count: userReviewState.shortReview.reviewCount,
                 ),
               ),
             ],

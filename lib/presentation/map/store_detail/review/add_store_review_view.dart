@@ -17,6 +17,7 @@ import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/model/store/store_detail_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
+import 'package:frontend_mobile/presentation/global/user_review/user_review_view_model.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/review/add_store_review_view_model.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view_model.dart';
 import 'package:go_router/go_router.dart';
@@ -65,6 +66,7 @@ class _AddStoreReviewViewState extends ConsumerState<AddStoreReviewView> {
             storeUuid: widget.storeUuid,
             userUuid: userState.data.userUuid,
           );
+          ref.read(userReviewViewModelProvider.notifier).getMyShortReviews();
           context.pop(true);
         }
       },

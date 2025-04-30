@@ -9,25 +9,25 @@ import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/user/user_review_model.dart';
 import 'package:frontend_mobile/domain/usecase/user/get_my_reviews_usecase.dart';
 
-part 'generated/my_page_view_model.freezed.dart';
-part 'my_page_state.dart';
+part 'generated/user_review_view_model.freezed.dart';
+part 'user_review_state.dart';
 
-final AutoDisposeStateNotifierProvider<MyPageViewModel, MyPageState>
-myPageViewModelProvider =
-    StateNotifierProvider.autoDispose<MyPageViewModel, MyPageState>((Ref ref) {
-      return MyPageViewModel(ref: ref);
+final StateNotifierProvider<UserReviewViewModel, UserReviewState>
+userReviewViewModelProvider =
+    StateNotifierProvider<UserReviewViewModel, UserReviewState>((Ref ref) {
+      return UserReviewViewModel(ref: ref);
     });
 
-class MyPageViewModel extends StateNotifier<MyPageState> {
-  MyPageViewModel({required Ref<Object?> ref})
+class UserReviewViewModel extends StateNotifier<UserReviewState> {
+  UserReviewViewModel({required Ref<Object?> ref})
     : _ref = ref,
-      super(MyPageState());
+      super(UserReviewState());
 
   final Ref _ref;
 
   /// 내가 작성한 한줄 리뷰 조회
-  Future<void> getMyReviews() async {
-    state = state.copyWith(getMyReviewsStatus: Status.loading);
+  Future<void> getMyShortReviews() async {
+    state = state.copyWith(getMyShortReviewsStatus: Status.loading);
 
     final Result<UserReviewModel, CustomException> result =
         await Usecase.execute(
@@ -38,14 +38,14 @@ class MyPageViewModel extends StateNotifier<MyPageState> {
     result.map(
       success: (Success<UserReviewModel, CustomException> success) {
         state = state.copyWith(
-          getMyReviewsStatus: Status.success,
-          review: success.data,
+          getMyShortReviewsStatus: Status.success,
+          shortReview: success.data,
         );
       },
       failure: (Failure<UserReviewModel, CustomException> failure) {
         state = state.copyWith(
-          getMyReviewsStatus: Status.failure,
-          getMyReviewsException: failure.exception.model,
+          getMyShortReviewsStatus: Status.failure,
+          getMyShortReviewsException: failure.exception.model,
         );
       },
     );
