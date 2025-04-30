@@ -211,6 +211,24 @@ abstract class AppRoutes {
     path: 'post',
   );
 
+  /// 디저트 메이트 > 글쓰기
+  static RouteInfo dessertWrite = RouteInfo(
+    name: '${dessert.name}/write',
+    path: 'write',
+  );
+
+  /// 디저트 메이트 > 글쓰기 > step1
+  static RouteInfo dessertWriteStep1 = RouteInfo(
+    name: '${dessertWrite.name}/step1',
+    path: 'step1',
+  );
+
+  /// 디저트 메이트 > 글쓰기 > step2
+  static RouteInfo dessertWriteStep2 = RouteInfo(
+    name: '${dessertWrite.name}/step2',
+    path: 'step2',
+  );
+
   /// 마이페이지
   static RouteInfo myPage = const RouteInfo(name: '/my_page', path: '/my_page');
 

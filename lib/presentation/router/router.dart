@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/dessert/dessert_board_view.dart';
 import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view.dart';
+import 'package:frontend_mobile/presentation/dessert/write/view/dessert_write_step1.dart';
+import 'package:frontend_mobile/presentation/dessert/write/view/dessert_write_step2.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step1.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step2.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step3.dart';
@@ -435,6 +437,34 @@ class AppRouter {
                   final String mateUuid = state.extra as String;
 
                   return DessertPost(mateUuid: mateUuid);
+                },
+              ),
+            ],
+          ),
+
+          /// 글쓰기
+          GoRoute(
+            path: AppRoutes.dessertWrite.path,
+            name: AppRoutes.dessertWrite.name,
+            redirect: (_, __) => null,
+            routes: <RouteBase>[
+              /// step1
+              GoRoute(
+                path: AppRoutes.dessertWriteStep1.path,
+                name: AppRoutes.dessertWriteStep1.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const DessertWriteStep1();
+                },
+              ),
+
+              /// step2
+              GoRoute(
+                path: AppRoutes.dessertWriteStep2.path,
+                name: AppRoutes.dessertWriteStep2.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  final String subject = state.extra as String;
+
+                  return DessertWriteStep2(subject: subject);
                 },
               ),
             ],
