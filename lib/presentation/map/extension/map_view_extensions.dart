@@ -210,7 +210,10 @@ extension MapViewWidgetExt on _MapViewState {
   }
 
   // 가게 간략 정보를 표시하기 위한 바텀시트 표출
-  Future<void> _showStoreSummary({required String storeUuid}) async {
+  Future<void> _showStoreSummary({
+    required String storeUuid,
+    int? listId,
+  }) async {
     await showModalBottomSheet(
       context: context,
       backgroundColor: ScaleColorConfig.white,
@@ -243,6 +246,7 @@ extension MapViewWidgetExt on _MapViewState {
                     .read(mapViewModelProvider.notifier)
                     .getStoreSummary(
                       overlay: ref.read(mapViewModelProvider).selectedMarker!,
+                      listId: listId,
                     );
               },
             );

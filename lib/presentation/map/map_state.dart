@@ -32,6 +32,7 @@ class MapState with _$MapState {
     ExceptionModel getStoreSummaryExceptionModel,
 
     NMarker? selectedMarker,
+    int? selectedListId,
 
     @Default(false) bool userStoresEnabled,
 
