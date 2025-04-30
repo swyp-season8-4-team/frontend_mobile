@@ -262,6 +262,12 @@ abstract class AppRoutes {
     path: 'store_review',
   );
 
+  /// 마이페이지 > Default > 리뷰 > 한줄 리뷰 수정
+  static RouteInfo updateShortReview = RouteInfo(
+    name: '${myReview.name}/update_short_review',
+    path: 'update_short_review',
+  );
+
   /// 마이페이지 > Default > 약관 및 정책
   static RouteInfo myPolicy = RouteInfo(
     name: '${myPageDefault.name}/policy',

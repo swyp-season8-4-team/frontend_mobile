@@ -24,6 +24,7 @@ import 'package:frontend_mobile/presentation/my_page/dessert_mate/my_dessert_mat
 import 'package:frontend_mobile/presentation/my_page/my_page_view.dart';
 import 'package:frontend_mobile/presentation/my_page/policy/my_policy_view.dart';
 import 'package:frontend_mobile/presentation/my_page/review/my_review_view.dart';
+import 'package:frontend_mobile/presentation/my_page/review/update_short_review/update_short_review_view.dart';
 import 'package:frontend_mobile/presentation/my_page/setting/delete_my_info/delete_my_info_view.dart';
 import 'package:frontend_mobile/presentation/my_page/setting/my_setting_view.dart';
 import 'package:frontend_mobile/presentation/my_page/update_profile/update_profile_info_view.dart';
@@ -540,6 +541,26 @@ class AppRouter {
                 builder: (BuildContext context, GoRouterState state) {
                   return const MyReviewView();
                 },
+                routes: <RouteBase>[
+                  GoRoute(
+                    path: AppRoutes.updateShortReview.path,
+                    name: AppRoutes.updateShortReview.name,
+                    builder: (BuildContext context, GoRouterState state) {
+                      final String? reviewUuid =
+                          state.uri.queryParameters['reviewUuid'];
+                      final String? storeUuid =
+                          state.uri.queryParameters['storeUuid'];
+
+                      if (reviewUuid == null || storeUuid == null) {
+                        return const Scaffold();
+                      }
+                      return UpdateShortReviewView(
+                        reviewUuid: reviewUuid,
+                        storeUuid: storeUuid,
+                      );
+                    },
+                  ),
+                ],
               ),
 
               /// 약관 및 정책
