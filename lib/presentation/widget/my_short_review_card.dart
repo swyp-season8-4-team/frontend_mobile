@@ -198,19 +198,23 @@ class _ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(6),
-        color: ScaleColorConfig.primary80,
-      ),
-      child: SizedBox(
-        width: 23,
-        child: Center(
-          child: Text(
-            label,
-            style: textTheme.labelLarge?.copyWith(
-              color: const Color(0xFF412D00),
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.translucent,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6),
+          color: ScaleColorConfig.primary80,
+        ),
+        child: SizedBox(
+          width: 23,
+          child: Center(
+            child: Text(
+              label,
+              style: textTheme.labelLarge?.copyWith(
+                color: const Color(0xFF412D00),
+              ),
             ),
           ),
         ),

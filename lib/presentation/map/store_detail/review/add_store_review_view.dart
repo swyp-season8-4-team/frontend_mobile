@@ -20,6 +20,7 @@ import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user_review/user_review_view_model.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/review/add_store_review_view_model.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view_model.dart';
+import 'package:frontend_mobile/presentation/widget/review_note.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -328,11 +329,11 @@ class _AddStoreReviewViewState extends ConsumerState<AddStoreReviewView> {
                               ),
                             ),
                             const SizedBox(height: 6),
-                            const _ReviewNote(
+                            const ReviewNote(
                               note:
                                   '한 줄 리뷰는 장소 방문 경험을 기록하고, 도움이 될만한 정보를 공유하기 위해 메이트들과 가게 사장님들이 함께 소통하는 공간입니다.',
                             ),
-                            const _ReviewNote(
+                            const ReviewNote(
                               note: '욕설, 성희롱, 명예훼손성 표현은 가게 사장님들께 큰 상처가 됩니다.',
                             ),
                           ],
@@ -346,38 +347,6 @@ class _AddStoreReviewViewState extends ConsumerState<AddStoreReviewView> {
           ),
         ),
       ),
-    );
-  }
-}
-
-// 유의 사항
-class _ReviewNote extends StatelessWidget {
-  const _ReviewNote({required this.note});
-  final String note;
-
-  @override
-  Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          ' · ',
-          style: textTheme.labelSmall?.copyWith(
-            color: ScaleColorConfig.neutral40,
-          ),
-        ),
-        const SizedBox(width: 4),
-        Expanded(
-          child: Text(
-            note,
-            style: textTheme.labelSmall?.copyWith(
-              color: ScaleColorConfig.neutral40,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

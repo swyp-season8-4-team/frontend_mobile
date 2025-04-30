@@ -52,6 +52,7 @@ class _CustomPhotoCardState extends State<CustomPhotoCard> {
           borderRadius: BorderRadius.circular(6),
           border: Border.all(color: const Color.fromRGBO(0, 0, 0, 0.10)),
         ),
+        clipBehavior: Clip.hardEdge,
         child: Image.file(
           widget.file!,
           width: 68,

@@ -47,7 +47,7 @@ class UpdateShortReviewViewModel extends StateNotifier<UpdateShortReviewState> {
   }
 
   /// 한줄 리뷰 수정
-  Future<void> addStoreReview({
+  Future<void> updateShortReview({
     required String reviewUuid,
     required String storeUuid,
   }) async {
