@@ -256,6 +256,12 @@ abstract class AppRoutes {
     path: 'dessert_mate',
   );
 
+  /// 마이페이지 > Default > 리뷰
+  static RouteInfo myReview = RouteInfo(
+    name: '${myPageDefault.name}/store_review',
+    path: 'store_review',
+  );
+
   /// 마이페이지 > Default > 약관 및 정책
   static RouteInfo myPolicy = RouteInfo(
     name: '${myPageDefault.name}/policy',

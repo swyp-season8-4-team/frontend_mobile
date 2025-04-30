@@ -23,6 +23,7 @@ import 'package:frontend_mobile/presentation/map/user_store/update/update_user_s
 import 'package:frontend_mobile/presentation/my_page/dessert_mate/my_dessert_mate_view.dart';
 import 'package:frontend_mobile/presentation/my_page/my_page_view.dart';
 import 'package:frontend_mobile/presentation/my_page/policy/my_policy_view.dart';
+import 'package:frontend_mobile/presentation/my_page/review/my_review_view.dart';
 import 'package:frontend_mobile/presentation/my_page/setting/delete_my_info/delete_my_info_view.dart';
 import 'package:frontend_mobile/presentation/my_page/setting/my_setting_view.dart';
 import 'package:frontend_mobile/presentation/my_page/update_profile/update_profile_info_view.dart';
@@ -529,6 +530,15 @@ class AppRouter {
                 name: AppRoutes.myDessertMate.name,
                 builder: (BuildContext context, GoRouterState state) {
                   return const MyDessertMateView();
+                },
+              ),
+
+              /// 내가 작성한 리뷰 조회
+              GoRoute(
+                path: AppRoutes.myReview.path,
+                name: AppRoutes.myReview.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MyReviewView();
                 },
               ),
 
