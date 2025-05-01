@@ -21,7 +21,7 @@ extension MapViewWidgetExt on _MapViewState {
                 onPressed: () async {
                   final ({double lat, double lng, double radius}) queryOption =
                       await NaverMapUtil.getLocationInfo(
-                        controller: _mapController,
+                        controller: _mapController!,
                       );
 
                   viewmodel.updateMyPreferenceFilter(
@@ -40,7 +40,7 @@ extension MapViewWidgetExt on _MapViewState {
                     onPressed: () async {
                       final ({double lat, double lng, double radius})
                       queryOption = await NaverMapUtil.getLocationInfo(
-                        controller: _mapController,
+                        controller: _mapController!,
                       );
                       viewmodel.updatePreferenceFilter(
                         lat: queryOption.lat,
@@ -75,7 +75,7 @@ extension MapViewWidgetExt on _MapViewState {
               onPressed: () async {
                 final ({double lat, double lng, double radius}) queryOption =
                     await NaverMapUtil.getLocationInfo(
-                      controller: _mapController,
+                      controller: _mapController!,
                     );
                 viewmodel.clearAllFilter(
                   lng: queryOption.lng,
@@ -119,7 +119,7 @@ extension MapViewWidgetExt on _MapViewState {
       child: GestureDetector(
         onTap: () async {
           final ({double lat, double lng, double radius}) queryOption =
-              await NaverMapUtil.getLocationInfo(controller: _mapController);
+              await NaverMapUtil.getLocationInfo(controller: _mapController!);
           viewmodel.getStoresByCameraPosition(
             lat: queryOption.lat,
             lng: queryOption.lng,
