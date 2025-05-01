@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/common/design_system/component/navigation_bar/navigation_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_edit.dart';
 import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar_right_item.dart';
@@ -88,7 +89,9 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
           actions: <Widget>[],
           leading: SizedBox.shrink(),
         ),
-        bottomNavigationBar: const DesserbeeBottomNavigation(),
+        bottomNavigationBar: const DesserbeeBottomNavigation(
+          currentItemType: NavigationItemType.my,
+        ),
         body: DefaultError(
           onRetry: () {
             ref.read(userViewModelProvider.notifier).getMe();
@@ -112,7 +115,9 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
           ),
         ],
       ),
-      bottomNavigationBar: const DesserbeeBottomNavigation(),
+      bottomNavigationBar: const DesserbeeBottomNavigation(
+        currentItemType: NavigationItemType.my,
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

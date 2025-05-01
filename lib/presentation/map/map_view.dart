@@ -189,9 +189,6 @@ class _MapViewState extends ConsumerState<MapView> {
                 left: 16,
                 child: CustomDessertMateButton(
                   onPressed: () {
-                    ref
-                        .read(bottomNavigationCurrentIndexProvider.notifier)
-                        .state = 0;
                     context.goNamed(AppRoutes.dessertBoard.name);
                   },
                 ),
@@ -211,7 +208,9 @@ class _MapViewState extends ConsumerState<MapView> {
                 bottom: 0,
                 right: 0,
                 left: 0,
-                child: DesserbeeBottomNavigation(),
+                child: DesserbeeBottomNavigation(
+                  currentItemType: NavigationItemType.map,
+                ),
               ),
               _StoreListSheet(
                 draggableScrollableController: _draggableScrollableController,

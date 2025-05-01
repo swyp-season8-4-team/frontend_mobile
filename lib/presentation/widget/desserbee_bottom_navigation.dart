@@ -4,9 +4,10 @@ import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
 
-// 앱의 최상단 페이지에서 사용될 Bottom Navigation Bar
+/// 앱의 최상단 페이지에서 사용될 Bottom Navigation Bar
 class DesserbeeBottomNavigation extends StatelessWidget {
-  const DesserbeeBottomNavigation({super.key});
+  const DesserbeeBottomNavigation({required this.currentItemType, super.key});
+  final NavigationItemType currentItemType;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class DesserbeeBottomNavigation extends StatelessWidget {
           onTap: () {
             context.goNamed(AppRoutes.dessertBoard.name);
           },
+          itemType: NavigationItemType.mate,
         ),
         NavigationBarType(
           svg: Assets.icon.map.mapLine,
@@ -25,6 +27,7 @@ class DesserbeeBottomNavigation extends StatelessWidget {
           onTap: () {
             context.goNamed(AppRoutes.map.name);
           },
+          itemType: NavigationItemType.map,
         ),
         NavigationBarType(
           svg: Assets.icon.user.user3Line,
@@ -32,8 +35,10 @@ class DesserbeeBottomNavigation extends StatelessWidget {
           onTap: () {
             context.goNamed(AppRoutes.myPageDefault.name);
           },
+          itemType: NavigationItemType.my,
         ),
       ],
+      currentItemType: currentItemType,
     );
   }
 }

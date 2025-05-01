@@ -5,28 +5,40 @@ import 'package:frontend_mobile/common/design_system/foundation/color/scale_colo
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/util/highlight_painter.dart';
 
-final StateProvider<int> bottomNavigationCurrentIndexProvider =
-    StateProvider<int>((Ref ref) {
-      return 1;
-    });
+/// Bottom Navigation Bar의 item type
+enum NavigationItemType {
+  mate(label: '커뮤니티'),
+  map(label: '지도'),
+  my(label: 'MY');
+
+  const NavigationItemType({required this.label});
+
+  final String label;
+}
 
 class NavigationBarType {
   NavigationBarType({
     required this.svg,
     required this.label,
     required this.onTap,
+    required this.itemType,
   });
 
   final SvgGenImage svg;
   final String label;
   final VoidCallback onTap;
+  final NavigationItemType itemType;
 }
 
 class CustomNavigationBar extends ConsumerStatefulWidget {
-  const CustomNavigationBar({required this.list, super.key})
-    : assert(list.length <= 5, 'List length must be 5 or less.');
+  const CustomNavigationBar({
+    required this.list,
+    required this.currentItemType,
+    super.key,
+  }) : assert(list.length <= 5, 'List length must be 5 or less.');
 
   final List<NavigationBarType> list;
+  final NavigationItemType currentItemType;
 
   @override
   ConsumerState<CustomNavigationBar> createState() =>
@@ -40,12 +52,14 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    final int currentIndex = ref.read(bottomNavigationCurrentIndexProvider);
+    final int currentIndex =
+        NavigationItemType.values
+            .firstWhere((NavigationItemType e) => e == widget.currentItemType)
+            .index;
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
-        ref.read(bottomNavigationCurrentIndexProvider.notifier).state = index;
         item.onTap.call();
       },
       onTapDown: (_) {
