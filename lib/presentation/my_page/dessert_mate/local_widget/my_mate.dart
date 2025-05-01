@@ -22,7 +22,8 @@ class _MyMateState extends ConsumerState<_MyMate> {
         SliverPersistentHeader(
           pinned: true,
           delegate: _MateHeader(
-            widget: Padding(
+            widget: Container(
+              color: ScaleColorConfig.primary100,
               padding: const EdgeInsets.only(top: 60, bottom: 20),
               child: Row(
                 children: <Widget>[
@@ -92,23 +93,32 @@ class _MyMateState extends ConsumerState<_MyMate> {
             ),
           ),
         ),
-        ..._myMate.map(
-          (MateDetailModel e) => Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: DessertListCard(
-              bookmarkSelected: false,
-              onBookMarkTap: () {},
+        if (_myMate.isEmpty)
+          const _Empty()
+        else
+          SliverList(
+            delegate: SliverChildBuilderDelegate((
+              BuildContext context,
+              int index,
+            ) {
+              final MateDetailModel mate = _myMate[index];
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: DessertListCard(
+                  bookmarkSelected: false,
+                  onBookMarkTap: () {},
 
-              onCardTap: () {
-                context.pushNamed(
-                  AppRoutes.dessertPost.name,
-                  extra: e.mateUuid,
-                );
-              },
-              mate: e,
-            ),
+                  onCardTap: () {
+                    context.pushNamed(
+                      AppRoutes.dessertPost.name,
+                      extra: mate.mateUuid,
+                    );
+                  },
+                  mate: mate,
+                ),
+              );
+            }, childCount: _myMate.length),
           ),
-        ),
       ],
     );
   }
