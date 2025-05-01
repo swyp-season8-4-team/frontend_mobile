@@ -22,8 +22,9 @@ class _ApprovedMateState extends ConsumerState<_ApprovedMate> {
         SliverPersistentHeader(
           pinned: true,
           delegate: _MateHeader(
-            widget: Padding(
+            widget: Container(
               padding: const EdgeInsets.only(top: 60, bottom: 20),
+              color: ScaleColorConfig.primary100,
               child: Row(
                 children: <Widget>[
                   CustomSuggestiveChip(
@@ -92,23 +93,32 @@ class _ApprovedMateState extends ConsumerState<_ApprovedMate> {
             ),
           ),
         ),
-        ..._approvedMate.map(
-          (MateDetailModel e) => Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: DessertListCard(
-              bookmarkSelected: false,
-              onBookMarkTap: () {},
+        if (_approvedMate.isEmpty)
+          const _Empty()
+        else
+          SliverList(
+            delegate: SliverChildBuilderDelegate((
+              BuildContext context,
+              int index,
+            ) {
+              final MateDetailModel mate = _approvedMate[index];
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: DessertListCard(
+                  bookmarkSelected: false,
+                  onBookMarkTap: () {},
 
-              onCardTap: () {
-                context.pushNamed(
-                  AppRoutes.dessertPost.name,
-                  extra: e.mateUuid,
-                );
-              },
-              mate: e,
-            ),
+                  onCardTap: () {
+                    context.pushNamed(
+                      AppRoutes.dessertPost.name,
+                      extra: mate.mateUuid,
+                    );
+                  },
+                  mate: mate,
+                ),
+              );
+            }, childCount: _approvedMate.length),
           ),
-        ),
       ],
     );
   }

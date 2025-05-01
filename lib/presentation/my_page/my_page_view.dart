@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/common/design_system/component/navigation_bar/navigation_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_edit.dart';
 import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar_right_item.dart';
@@ -14,6 +15,7 @@ import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/global/preference/preference_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
+import 'package:frontend_mobile/presentation/global/user_review/user_review_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user_store/user_store_list_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/widget/default_error.dart';
@@ -42,10 +44,14 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final UserState userState = ref.read(userViewModelProvider);
-      await ref.read(preferenceViewModelProvider.notifier).getAllPreferences();
-      await ref
-          .read(userStoreListViewModelProvider.notifier)
-          .getUserStoreListAll(userUuid: userState.data.userUuid);
+
+      await Future.wait(<Future<void>>[
+        ref.read(preferenceViewModelProvider.notifier).getAllPreferences(),
+        ref
+            .read(userStoreListViewModelProvider.notifier)
+            .getUserStoreListAll(userUuid: userState.data.userUuid),
+        ref.read(userReviewViewModelProvider.notifier).getMyShortReviews(),
+      ]);
     });
   }
 
@@ -55,10 +61,14 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
     final UserStoreListState userStoreListState = ref.watch(
       userStoreListViewModelProvider,
     );
+    final UserReviewState userReviewState = ref.watch(
+      userReviewViewModelProvider,
+    );
 
     // TODO: 로딩 UI 개선 필요
     if (userState.status.isLoading ||
-        userStoreListState.getUserStoreListAllStatus.isLoading) {
+        userStoreListState.getUserStoreListAllStatus.isLoading ||
+        userReviewState.getMyShortReviewsStatus.isLoading) {
       return const Scaffold(
         appBar: CustomSubTopBar(
           leading: SizedBox.shrink(),
@@ -70,14 +80,18 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
     }
 
     // TODO: 에러 UI 개선 필요 (현재는 임의로 설정함)
-    if (userState.status.isFailure) {
+    if (userState.status.isFailure ||
+        userStoreListState.getUserStoreListAllStatus.isFailure ||
+        userReviewState.getMyShortReviewsStatus.isFailure) {
       return Scaffold(
         appBar: const CustomSubTopBar(
           title: 'MY',
           actions: <Widget>[],
           leading: SizedBox.shrink(),
         ),
-        bottomNavigationBar: const DesserbeeBottomNavigation(),
+        bottomNavigationBar: const DesserbeeBottomNavigation(
+          currentItemType: NavigationItemType.my,
+        ),
         body: DefaultError(
           onRetry: () {
             ref.read(userViewModelProvider.notifier).getMe();
@@ -101,7 +115,9 @@ class _MyPageViewState extends ConsumerState<MyPageView> {
           ),
         ],
       ),
-      bottomNavigationBar: const DesserbeeBottomNavigation(),
+      bottomNavigationBar: const DesserbeeBottomNavigation(
+        currentItemType: NavigationItemType.my,
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -14,59 +14,104 @@ import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_b
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/core/util/image_util.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
-import 'package:frontend_mobile/domain/model/store/store_detail_model.dart';
-import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
+import 'package:frontend_mobile/domain/model/user/user_review_model.dart';
 import 'package:frontend_mobile/presentation/global/user_review/user_review_view_model.dart';
-import 'package:frontend_mobile/presentation/map/store_detail/review/add_store_review_view_model.dart';
-import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view_model.dart';
+import 'package:frontend_mobile/presentation/my_page/review/update_short_review/update_short_review_view_model.dart';
 import 'package:frontend_mobile/presentation/widget/review_note.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
-class AddStoreReviewView extends ConsumerStatefulWidget {
-  const AddStoreReviewView({required this.storeUuid, super.key});
+class UpdateShortReviewView extends ConsumerStatefulWidget {
+  const UpdateShortReviewView({
+    required this.reviewUuid,
+    required this.storeUuid,
+    super.key,
+  });
+  final String reviewUuid;
   final String storeUuid;
 
   @override
-  ConsumerState<AddStoreReviewView> createState() => _AddStoreReviewViewState();
+  ConsumerState<UpdateShortReviewView> createState() =>
+      _UpdateShortReviewViewState();
 }
 
-class _AddStoreReviewViewState extends ConsumerState<AddStoreReviewView> {
+class _UpdateShortReviewViewState extends ConsumerState<UpdateShortReviewView> {
   final int _contentMaxLength = 50;
   final TopBarIcon _icon = TopBarIcon();
+
+  final TextEditingController _contentTextController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // 한줄 리뷰 수정에 필요한 상태값 초기화
+
+      final UserReviewState userReviewState = ref.read(
+        userReviewViewModelProvider,
+      );
+
+      final UserReviewDetailModel shortReview = userReviewState
+          .shortReview
+          .reviews
+          .firstWhere(
+            (UserReviewDetailModel e) => e.reviewUuid == widget.reviewUuid,
+          );
+
+      final UpdateShortReviewViewModel viewmodel = ref.read(
+        updateShortReviewViewModelProvider.notifier,
+      );
+
+      viewmodel.updateContent(content: shortReview.content);
+      _contentTextController.text = shortReview.content;
+
+      viewmodel.updateRating(rating: shortReview.rating.round());
+
+      viewmodel.updateImage(
+        image:
+            shortReview.reviewImage != null
+                ? await ImageUtil.downloadImageUrlToFile(
+                  shortReview.reviewImage!,
+                )
+                : null,
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final StoreDetailState storeDetailState = ref.watch(
-      storeDetailViewModelProvider,
+
+    final UpdateShortReviewState state = ref.watch(
+      updateShortReviewViewModelProvider,
     );
 
-    final AddStoreReviewState state = ref.watch(
-      addStoreReviewViewModelProvider,
+    final UserReviewState userReviewState = ref.watch(
+      userReviewViewModelProvider,
     );
-    final AddStoreReviewViewModel viewmodel = ref.read(
-      addStoreReviewViewModelProvider.notifier,
+    final UpdateShortReviewViewModel viewmodel = ref.read(
+      updateShortReviewViewModelProvider.notifier,
     );
-    final StoreDetailModel storeDetail = storeDetailState.storeDetail!;
+
+    final UserReviewDetailModel shortReview = userReviewState
+        .shortReview
+        .reviews
+        .firstWhere(
+          (UserReviewDetailModel e) => e.reviewUuid == widget.reviewUuid,
+        );
+
+    final UserReviewStoreModel storeInfo = shortReview.store;
 
     ref.listen(
-      addStoreReviewViewModelProvider.select(
-        (AddStoreReviewState state) => state.addStoreReviewStatus,
+      updateShortReviewViewModelProvider.select(
+        (UpdateShortReviewState state) => state.updateShortReviewStatus,
       ),
       (_, Status next) {
         if (next.isSuccess) {
-          final StoreDetailViewModel storeDetailViewModel = ref.read(
-            storeDetailViewModelProvider.notifier,
-          );
-          final UserState userState = ref.read(userViewModelProvider);
-          storeDetailViewModel.getStoreDetail(storeUuid: widget.storeUuid);
-          storeDetailViewModel.checkTodayReview(
-            storeUuid: widget.storeUuid,
-            userUuid: userState.data.userUuid,
-          );
           ref.read(userReviewViewModelProvider.notifier).getMyShortReviews();
           context.pop(true);
         }
@@ -74,10 +119,10 @@ class _AddStoreReviewViewState extends ConsumerState<AddStoreReviewView> {
     );
 
     return CustomLoadingOverlay(
-      isLoading: state.addStoreReviewStatus.isLoading,
+      isLoading: state.updateShortReviewStatus.isLoading,
       child: Scaffold(
         appBar: CustomSubTopBar(
-          title: '리뷰 추가',
+          title: '리뷰 수정',
           actions: const <Widget>[],
           primary: false,
           leading: _icon.leftLine(
@@ -118,11 +163,10 @@ class _AddStoreReviewViewState extends ConsumerState<AddStoreReviewView> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
             child: CustomFillButton.medium(
               label: '저장',
-              disabled: !state.saveButtonEnabled,
+              disabled: !state.updateButtonEnabled,
               onPressed: () {
-                final UserState userState = ref.read(userViewModelProvider);
-                viewmodel.addStoreReview(
-                  userUuid: userState.data.userUuid,
+                viewmodel.updateShortReview(
+                  reviewUuid: widget.reviewUuid,
                   storeUuid: widget.storeUuid,
                 );
               },
@@ -154,11 +198,7 @@ class _AddStoreReviewViewState extends ConsumerState<AddStoreReviewView> {
                         clipBehavior: Clip.hardEdge,
                         child: CachedNetworkImage(
                           fit: BoxFit.cover,
-                          imageUrl:
-                              storeDetail.storeImages != null &&
-                                      storeDetail.storeImages!.isNotEmpty
-                                  ? storeDetail.storeImages!.first
-                                  : '',
+                          imageUrl: storeInfo.thumbnail ?? '',
                           errorWidget: (_, __, ___) {
                             return const Icon(Icons.error);
                           },
@@ -170,7 +210,7 @@ class _AddStoreReviewViewState extends ConsumerState<AddStoreReviewView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              storeDetail.name,
+                              storeInfo.name,
                               style: textTheme.titleSmall?.copyWith(
                                 color: const Color(0xFF393939),
                               ),
@@ -189,7 +229,7 @@ class _AddStoreReviewViewState extends ConsumerState<AddStoreReviewView> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    storeDetail.address,
+                                    storeInfo.address,
                                     overflow: TextOverflow.ellipsis,
                                     style: textTheme.labelSmall?.copyWith(
                                       color: ScaleColorConfig.neutral40,
@@ -276,6 +316,7 @@ class _AddStoreReviewViewState extends ConsumerState<AddStoreReviewView> {
                         onCloseButtonTap: () {
                           viewmodel.updateContent(content: '');
                         },
+                        controller: _contentTextController,
                       ),
                       const SizedBox(height: 10),
                       Text(
@@ -348,5 +389,11 @@ class _AddStoreReviewViewState extends ConsumerState<AddStoreReviewView> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _contentTextController.dispose();
+    super.dispose();
   }
 }

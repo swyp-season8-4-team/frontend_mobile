@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:frontend_mobile/data/data_source/remote/user_remote_data_source.dart';
 import 'package:frontend_mobile/data/entity/user/nickname_availability_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_detail_entity.dart';
+import 'package:frontend_mobile/data/entity/user/user_review_entity.dart';
 import 'package:frontend_mobile/data/request_body/user/patch_me_request_body.dart';
 import 'package:frontend_mobile/data/request_body/user/post_nickname_request_body.dart';
 
@@ -40,6 +41,12 @@ class UserMockDataSource implements UserRemoteDataSource {
   @override
   Future<void> deleteMe() {
     // TODO: implement deleteMe
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserReviewEntity> getMyReviews() {
+    // TODO: implement getMyReviews
     throw UnimplementedError();
   }
 }

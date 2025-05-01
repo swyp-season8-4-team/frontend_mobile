@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/floating_action_button.dart';
 import 'package:frontend_mobile/common/design_system/component/chip/suggestive_chip.dart';
+import 'package:frontend_mobile/common/design_system/component/navigation_bar/navigation_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
@@ -436,7 +437,9 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
             ),
           ],
         ),
-        bottomNavigationBar: const DesserbeeBottomNavigation(),
+        bottomNavigationBar: const DesserbeeBottomNavigation(
+          currentItemType: NavigationItemType.mate,
+        ),
       ),
     );
   }

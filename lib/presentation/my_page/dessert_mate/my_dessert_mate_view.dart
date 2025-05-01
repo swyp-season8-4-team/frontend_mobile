@@ -18,6 +18,7 @@ part 'local_widget/saved_mate.dart';
 part 'local_widget/approved_mate.dart';
 part 'local_widget/my_mate.dart';
 part 'local_widget/tab_bar.dart';
+part 'local_widget/empty.dart';
 
 class MyDessertMateView extends ConsumerStatefulWidget {
   const MyDessertMateView({super.key});
@@ -84,6 +85,7 @@ class _MyDessertMateViewState extends ConsumerState<MyDessertMateView>
         actions: <Widget>[],
         primary: false,
       ),
+      backgroundColor: ScaleColorConfig.primary100,
       body: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {

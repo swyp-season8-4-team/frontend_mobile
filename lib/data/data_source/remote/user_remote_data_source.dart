@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
 import 'package:frontend_mobile/data/entity/user/nickname_availability_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_detail_entity.dart';
+import 'package:frontend_mobile/data/entity/user/user_review_entity.dart';
 import 'package:frontend_mobile/data/request_body/user/patch_me_request_body.dart';
 import 'package:frontend_mobile/data/request_body/user/post_nickname_request_body.dart';
 import 'package:retrofit/retrofit.dart';
@@ -46,4 +47,8 @@ abstract interface class UserRemoteDataSource {
   /// 회원 탈퇴
   @DELETE('/api/users/me')
   Future<void> deleteMe();
+
+  /// 내가 작성한 한줄 리뷰 조회
+  @GET('/api/users/me/reviews/short')
+  Future<UserReviewEntity> getMyReviews();
 }

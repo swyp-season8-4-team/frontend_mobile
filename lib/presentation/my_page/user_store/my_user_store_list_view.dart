@@ -21,7 +21,6 @@ import 'package:frontend_mobile/presentation/global/user_store/user_store_list_v
 import 'package:frontend_mobile/presentation/my_page/user_store/my_user_store_list_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/widget/default_error.dart';
-import 'package:frontend_mobile/presentation/widget/desserbee_bottom_navigation.dart';
 import 'package:go_router/go_router.dart';
 
 class MyUserStoreListView extends ConsumerStatefulWidget {
@@ -95,7 +94,6 @@ class _MyUserStoreListViewState extends ConsumerState<MyUserStoreListView> {
           primary: false,
           actions: <Widget>[],
         ),
-        bottomNavigationBar: const DesserbeeBottomNavigation(),
         body: DefaultError(
           onRetry: () {
             userStoreListViewModel.getUserStoreListAll(
