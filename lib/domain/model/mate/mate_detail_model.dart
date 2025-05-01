@@ -1,47 +1,30 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'generated/mate_detail_model.freezed.dart';
 part 'generated/mate_detail_model.g.dart';
 
-class MateDetailModel {
-  const MateDetailModel({
-    required this.mateUuid,
-    required this.storeId,
-    required this.userUuid,
-    required this.capacity,
-    required this.currentMemberCount,
-    required this.nickname,
-    required this.title,
-    required this.content,
-    required this.recruitYn,
-    required this.mateImage,
-    required this.profileImage,
-    required this.place,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.saved,
-    required this.applyStatus,
-    required this.gender,
-    required this.mateCategory,
-  });
-
-  final String mateUuid;
-  final int storeId;
-  final String userUuid;
-  final int capacity;
-  final int currentMemberCount;
-  final String nickname;
-  final String title;
-  final String content;
-  final bool recruitYn;
-  final String mateImage;
-  final String profileImage;
-  final PlaceModel? place;
-  final String createdAt;
-  final String? updatedAt;
-  final bool saved;
-  final String applyStatus;
-  final String gender;
-  final String mateCategory;
+@freezed
+class MateDetailModel with _$MateDetailModel {
+  const factory MateDetailModel({
+    required String mateUuid,
+    required int storeId,
+    required String userUuid,
+    required int capacity,
+    required int currentMemberCount,
+    required String nickname,
+    required String title,
+    required String content,
+    required bool recruitYn,
+    required String mateImage,
+    required String profileImage,
+    required String createdAt,
+    required bool saved,
+    required String applyStatus,
+    required String gender,
+    required String mateCategory,
+    PlaceModel? place,
+    String? updatedAt,
+  }) = _MateDetailModel;
 }
 
 @JsonSerializable()

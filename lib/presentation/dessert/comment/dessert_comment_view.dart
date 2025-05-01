@@ -5,6 +5,7 @@ import 'package:frontend_mobile/common/design_system/component/button/fill_butto
 import 'package:frontend_mobile/common/design_system/component/button/outline_button.dart';
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_size.dart';
+import 'package:frontend_mobile/common/design_system/component/tag/label_tag.dart';
 import 'package:frontend_mobile/common/design_system/component/textfield/text_field.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
@@ -13,6 +14,7 @@ import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/domain/model/mate_reply/mate_reply_detail_model.dart';
 import 'package:frontend_mobile/domain/param/mate_reply/post_mate_reply_params.dart';
 import 'package:frontend_mobile/presentation/dessert/comment/dessert_comment_view_model.dart';
+import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:go_router/go_router.dart';
 
@@ -94,6 +96,7 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
     bool replyButton = true,
   }) {
     final UserState userState = ref.watch(userViewModelProvider);
+    final DessertPostState postState = ref.watch(dessertPostViewModelProvider);
     final DessertCommentState state = ref.watch(
       dessertCommentViewModelProvider,
     );
@@ -115,6 +118,14 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
                     color: ScaleColorConfig.neutral10,
                   ),
                 ),
+                const SizedBox(width: 6),
+
+                if (userState.data.userUuid == postState.data.userUuid)
+                  const CustomLabelTag(
+                    label: '모임장',
+                    backgroundColor: ScaleColorConfig.success80,
+                    color: ScaleColorConfig.success10,
+                  ),
               ],
             ),
             GestureDetector(

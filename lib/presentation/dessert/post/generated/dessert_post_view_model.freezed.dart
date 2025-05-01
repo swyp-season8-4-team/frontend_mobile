@@ -17,8 +17,15 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DessertPostState {
-  Status get status => throw _privateConstructorUsedError;
+  Status get mateDetailStatus => throw _privateConstructorUsedError;
+  Status get postMateStatus => throw _privateConstructorUsedError;
+  Status get deleteMateStatus => throw _privateConstructorUsedError;
+  Status get leaveMateStatus => throw _privateConstructorUsedError;
+  Status get pendingMateStatus => throw _privateConstructorUsedError;
+  Status get acceptMateStatus => throw _privateConstructorUsedError;
   MateDetailModel get data => throw _privateConstructorUsedError;
+  List<MateMemberDetailModel> get pendingData =>
+      throw _privateConstructorUsedError;
   ExceptionModel get exception => throw _privateConstructorUsedError;
 
   /// Create a copy of DessertPostState
@@ -35,7 +42,19 @@ abstract class $DessertPostStateCopyWith<$Res> {
     $Res Function(DessertPostState) then,
   ) = _$DessertPostStateCopyWithImpl<$Res, DessertPostState>;
   @useResult
-  $Res call({Status status, MateDetailModel data, ExceptionModel exception});
+  $Res call({
+    Status mateDetailStatus,
+    Status postMateStatus,
+    Status deleteMateStatus,
+    Status leaveMateStatus,
+    Status pendingMateStatus,
+    Status acceptMateStatus,
+    MateDetailModel data,
+    List<MateMemberDetailModel> pendingData,
+    ExceptionModel exception,
+  });
+
+  $MateDetailModelCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -53,22 +72,58 @@ class _$DessertPostStateCopyWithImpl<$Res, $Val extends DessertPostState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
+    Object? mateDetailStatus = null,
+    Object? postMateStatus = null,
+    Object? deleteMateStatus = null,
+    Object? leaveMateStatus = null,
+    Object? pendingMateStatus = null,
+    Object? acceptMateStatus = null,
     Object? data = null,
+    Object? pendingData = null,
     Object? exception = null,
   }) {
     return _then(
       _value.copyWith(
-            status:
-                null == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
+            mateDetailStatus:
+                null == mateDetailStatus
+                    ? _value.mateDetailStatus
+                    : mateDetailStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            postMateStatus:
+                null == postMateStatus
+                    ? _value.postMateStatus
+                    : postMateStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            deleteMateStatus:
+                null == deleteMateStatus
+                    ? _value.deleteMateStatus
+                    : deleteMateStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            leaveMateStatus:
+                null == leaveMateStatus
+                    ? _value.leaveMateStatus
+                    : leaveMateStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            pendingMateStatus:
+                null == pendingMateStatus
+                    ? _value.pendingMateStatus
+                    : pendingMateStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            acceptMateStatus:
+                null == acceptMateStatus
+                    ? _value.acceptMateStatus
+                    : acceptMateStatus // ignore: cast_nullable_to_non_nullable
                         as Status,
             data:
                 null == data
                     ? _value.data
                     : data // ignore: cast_nullable_to_non_nullable
                         as MateDetailModel,
+            pendingData:
+                null == pendingData
+                    ? _value.pendingData
+                    : pendingData // ignore: cast_nullable_to_non_nullable
+                        as List<MateMemberDetailModel>,
             exception:
                 null == exception
                     ? _value.exception
@@ -77,6 +132,16 @@ class _$DessertPostStateCopyWithImpl<$Res, $Val extends DessertPostState>
           )
           as $Val,
     );
+  }
+
+  /// Create a copy of DessertPostState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MateDetailModelCopyWith<$Res> get data {
+    return $MateDetailModelCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value) as $Val);
+    });
   }
 }
 
@@ -89,7 +154,20 @@ abstract class _$$DessertPostStateImplCopyWith<$Res>
   ) = __$$DessertPostStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Status status, MateDetailModel data, ExceptionModel exception});
+  $Res call({
+    Status mateDetailStatus,
+    Status postMateStatus,
+    Status deleteMateStatus,
+    Status leaveMateStatus,
+    Status pendingMateStatus,
+    Status acceptMateStatus,
+    MateDetailModel data,
+    List<MateMemberDetailModel> pendingData,
+    ExceptionModel exception,
+  });
+
+  @override
+  $MateDetailModelCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -106,22 +184,58 @@ class __$$DessertPostStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
+    Object? mateDetailStatus = null,
+    Object? postMateStatus = null,
+    Object? deleteMateStatus = null,
+    Object? leaveMateStatus = null,
+    Object? pendingMateStatus = null,
+    Object? acceptMateStatus = null,
     Object? data = null,
+    Object? pendingData = null,
     Object? exception = null,
   }) {
     return _then(
       _$DessertPostStateImpl(
-        status:
-            null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
+        mateDetailStatus:
+            null == mateDetailStatus
+                ? _value.mateDetailStatus
+                : mateDetailStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        postMateStatus:
+            null == postMateStatus
+                ? _value.postMateStatus
+                : postMateStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        deleteMateStatus:
+            null == deleteMateStatus
+                ? _value.deleteMateStatus
+                : deleteMateStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        leaveMateStatus:
+            null == leaveMateStatus
+                ? _value.leaveMateStatus
+                : leaveMateStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        pendingMateStatus:
+            null == pendingMateStatus
+                ? _value.pendingMateStatus
+                : pendingMateStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        acceptMateStatus:
+            null == acceptMateStatus
+                ? _value.acceptMateStatus
+                : acceptMateStatus // ignore: cast_nullable_to_non_nullable
                     as Status,
         data:
             null == data
                 ? _value.data
                 : data // ignore: cast_nullable_to_non_nullable
                     as MateDetailModel,
+        pendingData:
+            null == pendingData
+                ? _value._pendingData
+                : pendingData // ignore: cast_nullable_to_non_nullable
+                    as List<MateMemberDetailModel>,
         exception:
             null == exception
                 ? _value.exception
@@ -136,7 +250,12 @@ class __$$DessertPostStateImplCopyWithImpl<$Res>
 
 class _$DessertPostStateImpl implements _DessertPostState {
   const _$DessertPostStateImpl({
-    this.status = Status.initial,
+    this.mateDetailStatus = Status.initial,
+    this.postMateStatus = Status.initial,
+    this.deleteMateStatus = Status.initial,
+    this.leaveMateStatus = Status.initial,
+    this.pendingMateStatus = Status.initial,
+    this.acceptMateStatus = Status.initial,
     this.data = const MateDetailModel(
       mateUuid: '',
       storeId: -1,
@@ -162,27 +281,53 @@ class _$DessertPostStateImpl implements _DessertPostState {
       gender: '',
       mateCategory: '',
     ),
+    final List<MateMemberDetailModel> pendingData =
+        const <MateMemberDetailModel>[],
     this.exception = const ExceptionModel(
       status: -1,
       code: '',
       message: '',
       timestamp: '',
     ),
-  });
+  }) : _pendingData = pendingData;
 
   @override
   @JsonKey()
-  final Status status;
+  final Status mateDetailStatus;
+  @override
+  @JsonKey()
+  final Status postMateStatus;
+  @override
+  @JsonKey()
+  final Status deleteMateStatus;
+  @override
+  @JsonKey()
+  final Status leaveMateStatus;
+  @override
+  @JsonKey()
+  final Status pendingMateStatus;
+  @override
+  @JsonKey()
+  final Status acceptMateStatus;
   @override
   @JsonKey()
   final MateDetailModel data;
+  final List<MateMemberDetailModel> _pendingData;
+  @override
+  @JsonKey()
+  List<MateMemberDetailModel> get pendingData {
+    if (_pendingData is EqualUnmodifiableListView) return _pendingData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_pendingData);
+  }
+
   @override
   @JsonKey()
   final ExceptionModel exception;
 
   @override
   String toString() {
-    return 'DessertPostState(status: $status, data: $data, exception: $exception)';
+    return 'DessertPostState(mateDetailStatus: $mateDetailStatus, postMateStatus: $postMateStatus, deleteMateStatus: $deleteMateStatus, leaveMateStatus: $leaveMateStatus, pendingMateStatus: $pendingMateStatus, acceptMateStatus: $acceptMateStatus, data: $data, pendingData: $pendingData, exception: $exception)';
   }
 
   @override
@@ -190,14 +335,40 @@ class _$DessertPostStateImpl implements _DessertPostState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DessertPostStateImpl &&
-            (identical(other.status, status) || other.status == status) &&
+            (identical(other.mateDetailStatus, mateDetailStatus) ||
+                other.mateDetailStatus == mateDetailStatus) &&
+            (identical(other.postMateStatus, postMateStatus) ||
+                other.postMateStatus == postMateStatus) &&
+            (identical(other.deleteMateStatus, deleteMateStatus) ||
+                other.deleteMateStatus == deleteMateStatus) &&
+            (identical(other.leaveMateStatus, leaveMateStatus) ||
+                other.leaveMateStatus == leaveMateStatus) &&
+            (identical(other.pendingMateStatus, pendingMateStatus) ||
+                other.pendingMateStatus == pendingMateStatus) &&
+            (identical(other.acceptMateStatus, acceptMateStatus) ||
+                other.acceptMateStatus == acceptMateStatus) &&
             (identical(other.data, data) || other.data == data) &&
+            const DeepCollectionEquality().equals(
+              other._pendingData,
+              _pendingData,
+            ) &&
             (identical(other.exception, exception) ||
                 other.exception == exception));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, data, exception);
+  int get hashCode => Object.hash(
+    runtimeType,
+    mateDetailStatus,
+    postMateStatus,
+    deleteMateStatus,
+    leaveMateStatus,
+    pendingMateStatus,
+    acceptMateStatus,
+    data,
+    const DeepCollectionEquality().hash(_pendingData),
+    exception,
+  );
 
   /// Create a copy of DessertPostState
   /// with the given fields replaced by the non-null parameter values.
@@ -213,15 +384,33 @@ class _$DessertPostStateImpl implements _DessertPostState {
 
 abstract class _DessertPostState implements DessertPostState {
   const factory _DessertPostState({
-    final Status status,
+    final Status mateDetailStatus,
+    final Status postMateStatus,
+    final Status deleteMateStatus,
+    final Status leaveMateStatus,
+    final Status pendingMateStatus,
+    final Status acceptMateStatus,
     final MateDetailModel data,
+    final List<MateMemberDetailModel> pendingData,
     final ExceptionModel exception,
   }) = _$DessertPostStateImpl;
 
   @override
-  Status get status;
+  Status get mateDetailStatus;
+  @override
+  Status get postMateStatus;
+  @override
+  Status get deleteMateStatus;
+  @override
+  Status get leaveMateStatus;
+  @override
+  Status get pendingMateStatus;
+  @override
+  Status get acceptMateStatus;
   @override
   MateDetailModel get data;
+  @override
+  List<MateMemberDetailModel> get pendingData;
   @override
   ExceptionModel get exception;
 
