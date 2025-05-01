@@ -26,6 +26,7 @@ class DessertBoard extends ConsumerStatefulWidget {
 }
 
 class _DessertBoardState extends ConsumerState<DessertBoard> {
+  final int to = 1000;
   final bool _floatingActionButtonDisabled = false;
   // bool _bookMarkSelected = false;
 
@@ -57,11 +58,10 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
   void initState() {
     super.initState();
 
-    /// FIXME: 메이트 전체 조회 테스트 -> 나중에 지울 예정
     WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {
       ref
           .read(dessertBoardViewModelProvider.notifier)
-          .getMate(params: GetMateParams(to: 100));
+          .getMate(params: GetMateParams(to: to));
     });
   }
 
@@ -95,6 +95,7 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
           params: GetMateParams(
             mateCategoryId: mateCategoryId,
             recruit: _isRecruit ? true : null,
+            to: to,
           ),
         );
   }
@@ -145,6 +146,7 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
           params: GetMateParams(
             mateCategoryId: mateCategoryId,
             recruit: _isRecruit ? true : null,
+            to: to,
           ),
         );
 
@@ -418,7 +420,9 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
               bottom: 16,
               right: 16,
               child: CustomFloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.pushNamed(AppRoutes.dessertWriteStep1.name);
+                },
                 disabled: _floatingActionButtonDisabled,
                 svg: Assets.icon.editor.pencil2Line.svg(
                   colorFilter: ColorFilter.mode(

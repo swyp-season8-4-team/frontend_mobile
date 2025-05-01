@@ -1,3 +1,7 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'generated/mate_detail_model.g.dart';
+
 class MateDetailModel {
   const MateDetailModel({
     required this.mateUuid,
@@ -40,7 +44,11 @@ class MateDetailModel {
   final String mateCategory;
 }
 
+@JsonSerializable()
 class PlaceModel {
+  factory PlaceModel.fromJson(Map<String, dynamic> json) =>
+      _$PlaceModelFromJson(json);
+
   const PlaceModel({
     required this.placeName,
     required this.address,
@@ -52,4 +60,6 @@ class PlaceModel {
   final String? address;
   final int? latitude;
   final int? longitude;
+
+  Map<String, dynamic> toJson() => _$PlaceModelToJson(this);
 }

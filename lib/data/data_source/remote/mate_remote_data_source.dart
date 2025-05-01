@@ -33,4 +33,9 @@ abstract interface class MateRemoteDataSource {
   Future<MateEntity> getMyMates({
     @Queries() required GetMyMateQueryParam query,
   });
+
+  /// 메이트 생성
+  @POST('/api/app/mates')
+  @MultiPart()
+  Future<MateDetailEntity> postMate({@Body() required FormData formData});
 }

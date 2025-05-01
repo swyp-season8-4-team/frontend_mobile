@@ -573,6 +573,13 @@ class $AssetIconEtcGen {
   SvgGenImage get bookmarkUnselected =>
       const SvgGenImage('asset/icon/etc/bookmark_unselected.svg');
 
+  /// File path: asset/icon/etc/circle_down.svg
+  SvgGenImage get circleDown =>
+      const SvgGenImage('asset/icon/etc/circle_down.svg');
+
+  /// File path: asset/icon/etc/circle_up.svg
+  SvgGenImage get circleUp => const SvgGenImage('asset/icon/etc/circle_up.svg');
+
   /// File path: asset/icon/etc/friends.svg
   SvgGenImage get friends => const SvgGenImage('asset/icon/etc/friends.svg');
 
@@ -627,6 +634,8 @@ class $AssetIconEtcGen {
     a48RadioButtonUncheckedPressed,
     bookmarkSelected,
     bookmarkUnselected,
+    circleDown,
+    circleUp,
     friends,
     hexagon,
     hexagon11,
