@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend_mobile/core/util/json_converter.dart';
 
 part 'generated/search_popular_entity.g.dart';
 
@@ -10,6 +11,7 @@ class PopularSearchesEntity {
       _$PopularSearchesEntityFromJson(json);
 
   const PopularSearchesEntity({required this.lastUpdatedTime, this.searches});
+  @DateTimeJsonConverter()
   final DateTime lastUpdatedTime;
   final List<PopularSearch>? searches;
 }

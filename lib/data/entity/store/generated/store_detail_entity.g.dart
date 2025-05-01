@@ -79,52 +79,58 @@ StoreDetailEntity _$StoreDetailEntityFromJson(
           )
           .toList(),
   description: json['description'] as String?,
-  descriptionUpdateTime:
-      json['descriptionUpdateTime'] == null
-          ? null
-          : DateTime.parse(json['descriptionUpdateTime'] as String),
+  descriptionUpdateTime: const DateTimeJsonConverter().fromJson(
+    json['descriptionUpdateTime'] as String?,
+  ),
   animalYn: json['animalYn'] as bool?,
   tumblerYn: json['tumblerYn'] as bool?,
   parkingYn: json['parkingYn'] as bool?,
 );
 
-Map<String, dynamic> _$StoreDetailEntityToJson(
-  StoreDetailEntity instance,
-) => <String, dynamic>{
-  'storeId': instance.storeId,
-  'storeUuid': instance.storeUuid,
-  'name': instance.name,
-  'averageRating': instance.averageRating,
-  'storeImages': instance.storeImages,
-  'ownerPickImages': instance.ownerPickImages,
-  'tags': instance.tags,
-  'primaryStoreLink': instance.primaryStoreLink,
-  'storeLinks': instance.storeLinks,
-  'operatingHours': instance.operatingHours,
-  'holidays': instance.holidays,
-  'topPreferences': instance.topPreferences,
-  'address': instance.address,
-  'phone': instance.phone,
-  'description': instance.description,
-  'descriptionUpdateTime': instance.descriptionUpdateTime?.toIso8601String(),
-  'animalYn': instance.animalYn,
-  'tumblerYn': instance.tumblerYn,
-  'parkingYn': instance.parkingYn,
-  'userId': instance.userId,
-  'userUuid': instance.userUuid,
-  'ownerId': instance.ownerId,
-  'ownerUuid': instance.ownerUuid,
-  'latitude': instance.latitude,
-  'longitude': instance.longitude,
-  'menus': instance.menus,
-  'totalReviewCount': instance.totalReviewCount,
-  'storeReviews': instance.storeReviews,
-  'communityReviews': instance.communityReviews,
-  'mate': instance.mate,
-  'saved': instance.saved,
-  'savedListId': instance.savedListId,
-  'notices': instance.notices,
-};
+Map<String, dynamic> _$StoreDetailEntityToJson(StoreDetailEntity instance) =>
+    <String, dynamic>{
+      'storeId': instance.storeId,
+      'storeUuid': instance.storeUuid,
+      'name': instance.name,
+      'averageRating': instance.averageRating,
+      'storeImages': instance.storeImages,
+      'ownerPickImages': instance.ownerPickImages,
+      'tags': instance.tags,
+      'primaryStoreLink': instance.primaryStoreLink,
+      'storeLinks': instance.storeLinks,
+      'operatingHours': instance.operatingHours,
+      'holidays': instance.holidays,
+      'topPreferences': instance.topPreferences,
+      'address': instance.address,
+      'phone': instance.phone,
+      'description': instance.description,
+      'descriptionUpdateTime': _$JsonConverterToJson<String?, DateTime>(
+        instance.descriptionUpdateTime,
+        const DateTimeJsonConverter().toJson,
+      ),
+      'animalYn': instance.animalYn,
+      'tumblerYn': instance.tumblerYn,
+      'parkingYn': instance.parkingYn,
+      'userId': instance.userId,
+      'userUuid': instance.userUuid,
+      'ownerId': instance.ownerId,
+      'ownerUuid': instance.ownerUuid,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
+      'menus': instance.menus,
+      'totalReviewCount': instance.totalReviewCount,
+      'storeReviews': instance.storeReviews,
+      'communityReviews': instance.communityReviews,
+      'mate': instance.mate,
+      'saved': instance.saved,
+      'savedListId': instance.savedListId,
+      'notices': instance.notices,
+    };
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);
 
 StoreDetailMenu _$StoreDetailMenuFromJson(Map<String, dynamic> json) =>
     StoreDetailMenu(
@@ -155,7 +161,9 @@ StoreDetailReview _$StoreDetailReviewFromJson(Map<String, dynamic> json) =>
       nickname: json['nickname'] as String,
       content: json['content'] as String,
       rating: (json['rating'] as num).toDouble(),
-      createdAt: DateTime.parse(json['createdAt'] as String),
+      createdAt: const DateTimeJsonConverter().fromJson(
+        json['createdAt'] as String?,
+      ),
       profileImage: json['profileImage'] as String?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
@@ -170,7 +178,7 @@ Map<String, dynamic> _$StoreDetailReviewToJson(StoreDetailReview instance) =>
       'profileImage': instance.profileImage,
       'content': instance.content,
       'rating': instance.rating,
-      'createdAt': instance.createdAt.toIso8601String(),
+      'createdAt': const DateTimeJsonConverter().toJson(instance.createdAt),
       'images': instance.images,
     };
 
@@ -184,8 +192,12 @@ StoreDetailCommunityReview _$StoreDetailCommunityReviewFromJson(
   thumbnail: json['thumbnail'] as String,
   title: json['title'] as String,
   content: json['content'] as String,
-  createdAt: DateTime.parse(json['createdAt'] as String),
-  updatedAt: DateTime.parse(json['updatedAt'] as String),
+  createdAt: const DateTimeJsonConverter().fromJson(
+    json['createdAt'] as String?,
+  ),
+  updatedAt: const DateTimeJsonConverter().fromJson(
+    json['updatedAt'] as String?,
+  ),
 );
 
 Map<String, dynamic> _$StoreDetailCommunityReviewToJson(
@@ -198,8 +210,8 @@ Map<String, dynamic> _$StoreDetailCommunityReviewToJson(
   'thumbnail': instance.thumbnail,
   'title': instance.title,
   'content': instance.content,
-  'createdAt': instance.createdAt.toIso8601String(),
-  'updatedAt': instance.updatedAt.toIso8601String(),
+  'createdAt': const DateTimeJsonConverter().toJson(instance.createdAt),
+  'updatedAt': const DateTimeJsonConverter().toJson(instance.updatedAt),
 };
 
 StoreDetailMate _$StoreDetailMateFromJson(Map<String, dynamic> json) =>
@@ -233,11 +245,12 @@ StoreDetailNoticeEntity _$StoreDetailNoticeEntityFromJson(
   tag: json['tag'] as String,
   title: json['title'] as String,
   content: json['content'] as String,
-  createdAt: DateTime.parse(json['createdAt'] as String),
-  updatedAt:
-      json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
+  createdAt: const DateTimeJsonConverter().fromJson(
+    json['createdAt'] as String?,
+  ),
+  updatedAt: const DateTimeJsonConverter().fromJson(
+    json['updatedAt'] as String?,
+  ),
 );
 
 Map<String, dynamic> _$StoreDetailNoticeEntityToJson(
@@ -247,8 +260,11 @@ Map<String, dynamic> _$StoreDetailNoticeEntityToJson(
   'tag': instance.tag,
   'title': instance.title,
   'content': instance.content,
-  'createdAt': instance.createdAt.toIso8601String(),
-  'updatedAt': instance.updatedAt?.toIso8601String(),
+  'createdAt': const DateTimeJsonConverter().toJson(instance.createdAt),
+  'updatedAt': _$JsonConverterToJson<String?, DateTime>(
+    instance.updatedAt,
+    const DateTimeJsonConverter().toJson,
+  ),
 };
 
 StoreDetailTagEntity _$StoreDetailTagEntityFromJson(

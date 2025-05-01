@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend_mobile/core/util/json_converter.dart';
 
 part 'generated/search_recent_entity.g.dart';
 
@@ -15,5 +16,6 @@ class RecentSearchEntity {
 
   final int id;
   final String keyword;
+  @DateTimeJsonConverter()
   final DateTime createdAt;
 }

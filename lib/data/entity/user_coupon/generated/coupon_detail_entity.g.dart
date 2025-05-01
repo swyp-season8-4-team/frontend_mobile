@@ -17,10 +17,9 @@ UserCouponDetailEntity _$UserCouponDetailEntityFromJson(
   conditionType: json['conditionType'] as String,
   storeUuid: json['storeUuid'] as String,
   couponUuid: json['couponUuid'] as String,
-  expiryDate:
-      json['expiryDate'] == null
-          ? null
-          : DateTime.parse(json['expiryDate'] as String),
+  expiryDate: const DateTimeJsonConverter().fromJson(
+    json['expiryDate'] as String?,
+  ),
   expired: json['expired'] as bool?,
 );
 
@@ -31,10 +30,18 @@ Map<String, dynamic> _$UserCouponDetailEntityToJson(
   'qrImageUrl': instance.qrImageUrl,
   'storeName': instance.storeName,
   'couponName': instance.couponName,
-  'expiryDate': instance.expiryDate?.toIso8601String(),
+  'expiryDate': _$JsonConverterToJson<String?, DateTime>(
+    instance.expiryDate,
+    const DateTimeJsonConverter().toJson,
+  ),
   'couponCode': instance.couponCode,
   'conditionType': instance.conditionType,
   'storeUuid': instance.storeUuid,
   'couponUuid': instance.couponUuid,
   'expired': instance.expired,
 };
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);

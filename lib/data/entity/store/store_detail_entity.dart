@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend_mobile/core/util/json_converter.dart';
 import 'package:frontend_mobile/data/entity/store/store_holiday_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_operating_hour_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_top_preference_entity.dart';
@@ -62,6 +63,7 @@ class StoreDetailEntity {
   final String address;
   final String phone;
   final String? description;
+  @DateTimeJsonConverter()
   final DateTime? descriptionUpdateTime;
   final bool? animalYn;
   final bool? tumblerYn;
@@ -127,6 +129,7 @@ class StoreDetailReview {
   final String? profileImage;
   final String content;
   final double rating;
+  @DateTimeJsonConverter()
   final DateTime createdAt;
   final List<String>? images;
 }
@@ -154,7 +157,9 @@ class StoreDetailCommunityReview {
   final String thumbnail;
   final String title;
   final String content;
+  @DateTimeJsonConverter()
   final DateTime createdAt;
+  @DateTimeJsonConverter()
   final DateTime updatedAt;
 }
 
@@ -200,7 +205,9 @@ class StoreDetailNoticeEntity {
   final String tag;
   final String title;
   final String content;
+  @DateTimeJsonConverter()
   final DateTime createdAt;
+  @DateTimeJsonConverter()
   final DateTime? updatedAt;
 }
 
