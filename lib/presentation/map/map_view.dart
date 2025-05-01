@@ -285,8 +285,9 @@ class _MapViewState extends ConsumerState<MapView> {
             position: state.selectedMarker!.position,
             anchor: state.selectedMarker!.anchor,
             size: const Size(60, 66),
-            icon: NOverlayImage.fromAssetImage(
-              Assets.image.markerSelected.path,
+            // 정확한 asset path 지정 (flutter_gen 사용 x)
+            icon: const NOverlayImage.fromAssetImage(
+              'asset/image/4.0x/marker_selected.png',
             ),
           );
 
