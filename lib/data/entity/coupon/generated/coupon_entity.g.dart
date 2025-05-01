@@ -13,7 +13,9 @@ CouponEntity _$CouponEntityFromJson(Map<String, dynamic> json) => CouponEntity(
   condition: CouponConditionEntity.fromJson(
     json['condition'] as Map<String, dynamic>,
   ),
-  createdAt: DateTime.parse(json['createdAt'] as String),
+  createdAt: const DateTimeJsonConverter().fromJson(
+    json['createdAt'] as String?,
+  ),
   couponId: (json['couponId'] as num?)?.toInt() ?? -1,
   couponUuid: json['couponUuid'] as String? ?? '',
   storeUuid: json['storeUuid'] as String? ?? '',
@@ -21,19 +23,16 @@ CouponEntity _$CouponEntityFromJson(Map<String, dynamic> json) => CouponEntity(
   status: json['status'] as String? ?? '',
   target: json['target'] as String? ?? '',
   hasExposureDate: json['hasExposureDate'] as bool? ?? false,
-  exposureStartAt:
-      json['exposureStartAt'] == null
-          ? null
-          : DateTime.parse(json['exposureStartAt'] as String),
-  exposureEndAt:
-      json['exposureEndAt'] == null
-          ? null
-          : DateTime.parse(json['exposureEndAt'] as String),
+  exposureStartAt: const DateTimeJsonConverter().fromJson(
+    json['exposureStartAt'] as String?,
+  ),
+  exposureEndAt: const DateTimeJsonConverter().fromJson(
+    json['exposureEndAt'] as String?,
+  ),
   hasExpiryDate: json['hasExpiryDate'] as bool? ?? false,
-  expiryDate:
-      json['expiryDate'] == null
-          ? null
-          : DateTime.parse(json['expiryDate'] as String),
+  expiryDate: const DateTimeJsonConverter().fromJson(
+    json['expiryDate'] as String?,
+  ),
   hasQuantity: json['hasQuantity'] as bool? ?? false,
   quantity: (json['quantity'] as num?)?.toInt(),
 );
@@ -47,16 +46,30 @@ Map<String, dynamic> _$CouponEntityToJson(CouponEntity instance) =>
       'status': instance.status,
       'target': instance.target,
       'hasExposureDate': instance.hasExposureDate,
-      'exposureStartAt': instance.exposureStartAt?.toIso8601String(),
-      'exposureEndAt': instance.exposureEndAt?.toIso8601String(),
+      'exposureStartAt': _$JsonConverterToJson<String?, DateTime>(
+        instance.exposureStartAt,
+        const DateTimeJsonConverter().toJson,
+      ),
+      'exposureEndAt': _$JsonConverterToJson<String?, DateTime>(
+        instance.exposureEndAt,
+        const DateTimeJsonConverter().toJson,
+      ),
       'hasExpiryDate': instance.hasExpiryDate,
-      'expiryDate': instance.expiryDate?.toIso8601String(),
+      'expiryDate': _$JsonConverterToJson<String?, DateTime>(
+        instance.expiryDate,
+        const DateTimeJsonConverter().toJson,
+      ),
       'hasQuantity': instance.hasQuantity,
       'quantity': instance.quantity,
       'couponType': instance.couponType,
       'condition': instance.condition,
-      'createdAt': instance.createdAt.toIso8601String(),
+      'createdAt': const DateTimeJsonConverter().toJson(instance.createdAt),
     };
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);
 
 CouponTypeEntity _$CouponTypeEntityFromJson(Map<String, dynamic> json) =>
     CouponTypeEntity(

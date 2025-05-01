@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend_mobile/core/util/json_converter.dart';
 
 part 'generated/coupon_entity.g.dart';
 
@@ -22,6 +23,7 @@ class UserCouponEntity {
   final String couponCode;
   final String? qrImageUrl;
   final String storeName;
+  @DateTimeJsonConverter()
   final DateTime? expiryDate;
   final bool? used;
 }
