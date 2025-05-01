@@ -49,7 +49,7 @@ class DessertListHeader extends StatelessWidget {
             ),
             const SizedBox(width: 4),
             Text(
-              '2 / 5',
+              '${mate.currentMemberCount} / ${mate.capacity}',
               style: textTheme.labelMedium?.copyWith(
                 color: ScaleColorConfig.neutral40,
               ),

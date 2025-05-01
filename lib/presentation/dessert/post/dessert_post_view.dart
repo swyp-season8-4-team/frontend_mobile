@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
@@ -80,6 +81,40 @@ class _DessertPostState extends ConsumerState<DessertPost> {
                           ),
                         ),
                         child: const DessertPostHeaderLocation(),
+                      ),
+
+                    if (state.data.mateImage.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: CachedNetworkImage(
+                          placeholder: (BuildContext context, String url) {
+                            return Container(color: ScaleColorConfig.neutral70);
+                          },
+                          imageUrl: state.data.mateImage,
+                          errorWidget: (_, __, ___) {
+                            return Container(
+                              color: ScaleColorConfig.neutral60,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Assets.icon.file.noImageStatus.svg(
+                                    colorFilter: const ColorFilter.mode(
+                                      ScaleColorConfig.neutral40,
+                                      BlendMode.srcIn,
+                                    ),
+                                  ),
+                                  Text(
+                                    'No Image',
+                                    style: textTheme.labelSmall?.copyWith(
+                                      color: ScaleColorConfig.neutral40,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          fit: BoxFit.cover,
+                        ),
                       ),
 
                     Padding(

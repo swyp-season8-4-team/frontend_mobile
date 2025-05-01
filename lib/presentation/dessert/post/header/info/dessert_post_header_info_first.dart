@@ -23,6 +23,18 @@ class DessertPostHeaderInfoFirst extends ConsumerWidget {
               backgroundColor: ScaleColorConfig.success80,
               color: ScaleColorConfig.success10,
             ),
+            const SizedBox(width: 4),
+            state.data.recruitYn
+                ? const CustomLabelTag(
+                  label: '모집중',
+                  backgroundColor: ScaleColorConfig.error90,
+                  color: ScaleColorConfig.error20,
+                )
+                : const CustomLabelTag(
+                  label: '모집마감',
+                  backgroundColor: ScaleColorConfig.neutral70,
+                  color: ScaleColorConfig.neutral30,
+                ),
           ],
         ),
 
