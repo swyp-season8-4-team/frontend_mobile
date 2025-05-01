@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend_mobile/core/util/json_converter.dart';
 
 part 'generated/user_review_entity.g.dart';
 
@@ -28,6 +29,7 @@ class UserReviewDetailEntity {
   final String? reviewImage;
   final double rating;
   final String content;
+  @DateTimeJsonConverter()
   final DateTime createdAt;
   final UserReviewStoreEntity store;
 }

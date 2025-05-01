@@ -30,7 +30,9 @@ UserReviewDetailEntity _$UserReviewDetailEntityFromJson(
   reviewUuid: json['reviewUuid'] as String,
   rating: (json['rating'] as num).toDouble(),
   content: json['content'] as String,
-  createdAt: DateTime.parse(json['createdAt'] as String),
+  createdAt: const DateTimeJsonConverter().fromJson(
+    json['createdAt'] as String?,
+  ),
   store: UserReviewStoreEntity.fromJson(json['store'] as Map<String, dynamic>),
   reviewImage: json['reviewImage'] as String?,
 );
@@ -42,7 +44,7 @@ Map<String, dynamic> _$UserReviewDetailEntityToJson(
   'reviewImage': instance.reviewImage,
   'rating': instance.rating,
   'content': instance.content,
-  'createdAt': instance.createdAt.toIso8601String(),
+  'createdAt': const DateTimeJsonConverter().toJson(instance.createdAt),
   'store': instance.store,
 };
 
