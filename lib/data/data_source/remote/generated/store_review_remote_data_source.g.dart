@@ -20,30 +20,29 @@ class _StoreReviewRemoteDataSource implements StoreReviewRemoteDataSource {
   @override
   Future<void> addStoreReview({
     required String storeUuid,
-    required List<File> images,
-    required String userUuid,
-    required String content,
-    required int rating,
+    required String request,
+    List<File>? images,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
-    _data.files.addAll(
-      images.map(
-        (i) => MapEntry(
-          'images',
-          MultipartFile.fromFileSync(
-            i.path,
-            filename: i.path.split(Platform.pathSeparator).last,
-            contentType: DioMediaType.parse('image/png'),
+    _data.fields.add(MapEntry('request', request));
+    if (images != null) {
+      _data.files.addAll(
+        images.map(
+          (i) => MapEntry(
+            'images',
+            MultipartFile.fromFileSync(
+              i.path,
+              filename: i.path.split(Platform.pathSeparator).last,
+              contentType: DioMediaType.parse('image/png'),
+            ),
           ),
         ),
-      ),
-    );
-    _data.fields.add(MapEntry('userUuid', userUuid));
-    _data.fields.add(MapEntry('content', content));
-    _data.fields.add(MapEntry('rating', rating.toString()));
+      );
+    }
     final _options = _setStreamType<void>(
       Options(
             method: 'POST',
@@ -124,6 +123,37 @@ class _StoreReviewRemoteDataSource implements StoreReviewRemoteDataSource {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     await _dio.fetch<void>(_options);
+  }
+
+  @override
+  Future<bool> checkTodayReview({
+    required String storeUuid,
+    required CheckTodayReviewQueryParams query,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(query.toJson());
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<bool>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/stores/${storeUuid}/reviews/today-exists',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<bool>(_options);
+    late bool _value;
+    try {
+      _value = _result.data!;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

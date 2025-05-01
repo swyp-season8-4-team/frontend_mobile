@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend_mobile/core/util/json_converter.dart';
 
 part 'generated/coupon_entity.g.dart';
 
@@ -24,6 +25,7 @@ class CouponEntity {
   });
   factory CouponEntity.fromJson(Map<String, dynamic> json) =>
       _$CouponEntityFromJson(json);
+
   final int couponId;
   final String couponUuid;
   final String storeUuid;
@@ -31,14 +33,18 @@ class CouponEntity {
   final String status;
   final String target;
   final bool hasExposureDate;
+  @DateTimeJsonConverter()
   final DateTime? exposureStartAt;
+  @DateTimeJsonConverter()
   final DateTime? exposureEndAt;
   final bool hasExpiryDate;
+  @DateTimeJsonConverter()
   final DateTime? expiryDate;
   final bool hasQuantity;
   final int? quantity;
   final CouponTypeEntity couponType;
   final CouponConditionEntity condition;
+  @DateTimeJsonConverter()
   final DateTime createdAt;
 }
 

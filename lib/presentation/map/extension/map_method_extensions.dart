@@ -70,6 +70,7 @@ extension MapViewMethodExt on _MapViewState {
 
     // 저장 리스트 모드 활성화 여부
     required bool userStoreMode,
+    int? listId,
     Color? backgroundColor,
   }) async {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -111,7 +112,7 @@ extension MapViewMethodExt on _MapViewState {
 
       // 선택한 마커에 해당하는 가게 간략 정보 조회
       //ignore: unawaited_futures
-      viewmodel.getStoreSummary(overlay: overlay);
+      viewmodel.getStoreSummary(overlay: overlay, listId: listId);
 
       await NaverMapUtil.moveCameraToLocation(
         controller: _mapController,
@@ -120,12 +121,15 @@ extension MapViewMethodExt on _MapViewState {
       );
 
       //ignore: unawaited_futures
-      _showStoreSummary(storeUuid: overlay.info.id);
+      _showStoreSummary(storeUuid: overlay.info.id, listId: listId);
     });
   }
 
   Future<void> _clearSelectedShop() async {
     final MapState state = ref.read(mapViewModelProvider);
+    final UserStoreListState userStoreListState = ref.read(
+      userStoreListViewModelProvider,
+    );
 
     if (state.selectedMarker != null) {
       await _mapController.deleteOverlay(
@@ -141,18 +145,18 @@ extension MapViewMethodExt on _MapViewState {
                 e.storeUuid == state.selectedMarker!.info.id,
           );
 
-      final UserStoreListModel? savedStoreList =
-          _findUserStoreListModelByStoreUuid(
-            state.userStoreLists,
-            state.selectedMarker!.info.id,
+      final UserStoreListModel? savedStoreList = userStoreListState
+          .userStoreLists
+          .firstWhereOrNull(
+            (UserStoreListModel e) => e.listId == state.selectedListId,
           );
 
       final UserStoreDataModel? savedStore = _findUserStoreModelByStoreUuid(
-        state.userStoreLists,
+        userStoreListState.userStoreLists,
         state.selectedMarker!.info.id,
       );
 
-      if (savedStore != null) {
+      if (savedStore != null && state.userStoresEnabled) {
         await _mapController.addOverlay(
           await _storeToMarker(
             storeUuid: savedStore.storeUuid,
@@ -160,6 +164,7 @@ extension MapViewMethodExt on _MapViewState {
             latitude: savedStore.latitude,
             longitude: savedStore.longitude,
             isSavedStore: true,
+            listId: state.selectedListId,
             backgroundColor:
                 StoreListIconColor.values
                     .firstWhereOrNull(
@@ -167,7 +172,6 @@ extension MapViewMethodExt on _MapViewState {
                           e.id == savedStoreList?.iconColorId,
                     )
                     ?.color,
-
             userStoreMode: state.userStoresEnabled,
           ),
         );
@@ -184,6 +188,7 @@ extension MapViewMethodExt on _MapViewState {
             longitude: storeByLocation.longitude,
             isSavedStore: false,
             userStoreMode: state.userStoresEnabled,
+            listId: state.selectedListId,
           ),
         );
       }
@@ -208,38 +213,24 @@ extension MapViewMethodExt on _MapViewState {
     return null;
   }
 
-  // List<UserStoreListModel>에서 주어진 targetStoreUuid를 갖는 UserStoreListModel 찾기
-  UserStoreListModel? _findUserStoreListModelByStoreUuid(
-    List<UserStoreListModel> storeLists,
-    String targetStoreUuid,
-  ) {
-    for (final UserStoreListModel storeList in storeLists) {
-      final List<UserStoreDataModel>? storeData = storeList.storeData;
-      if (storeData == null) continue;
-
-      for (final UserStoreDataModel store in storeData) {
-        if (store.storeUuid == targetStoreUuid) {
-          return storeList;
-        }
-      }
-    }
-    return null;
-  }
-
   // 지도에 표시할 마커 생성
   Future<List<NMarker>> _createMarkers() async {
     final MapState state = ref.read(mapViewModelProvider);
+
+    final UserStoreListState userStoreListState = ref.read(
+      userStoreListViewModelProvider,
+    );
 
     // default markers
     final List<Future<NMarker>> markers = <Future<NMarker>>[];
 
     for (final StoreByLocationModel e in state.storesByLocation) {
       final UserStoreDataModel? savedStore = _findUserStoreModelByStoreUuid(
-        state.userStoreLists,
+        userStoreListState.userStoreLists,
         e.storeUuid,
       );
 
-      if (savedStore == null) {
+      if (savedStore == null || !state.userStoresEnabled) {
         markers.add(
           _storeToMarker(
             storeName: e.name,
@@ -248,17 +239,6 @@ extension MapViewMethodExt on _MapViewState {
             longitude: e.longitude,
             isSavedStore: false,
             userStoreMode: state.userStoresEnabled,
-            backgroundColor:
-                StoreListIconColor.values
-                    .firstWhereOrNull(
-                      (StoreListIconColor color) =>
-                          color.id ==
-                          _findUserStoreListModelByStoreUuid(
-                            state.userStoreLists,
-                            e.storeUuid,
-                          )?.iconColorId,
-                    )
-                    ?.color,
           ),
         );
       }
@@ -268,27 +248,28 @@ extension MapViewMethodExt on _MapViewState {
     final List<Future<NMarker>> savedMarkers = <Future<NMarker>>[];
 
     if (state.userStoresEnabled) {
-      for (final UserStoreListModel e in state.userStoreLists) {
-        final UserStoreDataModel? savedStore =
-            e.storeData?.isNotEmpty == true ? e.storeData![0] : null;
-
-        if (savedStore != null) {
-          savedMarkers.add(
-            _storeToMarker(
-              storeName: savedStore.name,
-              storeUuid: savedStore.storeUuid,
-              latitude: savedStore.latitude,
-              longitude: savedStore.longitude,
-              isSavedStore: true,
-              userStoreMode: state.userStoresEnabled,
-              backgroundColor:
-                  StoreListIconColor.values
-                      .firstWhereOrNull(
-                        (StoreListIconColor color) => color.id == e.iconColorId,
-                      )
-                      ?.color,
-            ),
-          );
+      for (final UserStoreListModel e in userStoreListState.userStoreLists) {
+        if (e.storeData?.isNotEmpty == true) {
+          for (final UserStoreDataModel savedStore in e.storeData!) {
+            savedMarkers.add(
+              _storeToMarker(
+                storeName: savedStore.name,
+                storeUuid: savedStore.storeUuid,
+                latitude: savedStore.latitude,
+                longitude: savedStore.longitude,
+                isSavedStore: true,
+                userStoreMode: state.userStoresEnabled,
+                listId: e.listId,
+                backgroundColor:
+                    StoreListIconColor.values
+                        .firstWhereOrNull(
+                          (StoreListIconColor color) =>
+                              color.id == e.iconColorId,
+                        )
+                        ?.color,
+              ),
+            );
+          }
         }
       }
     }

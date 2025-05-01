@@ -7,6 +7,11 @@ class StoreDetailState with _$StoreDetailState {
     @Default(Status.loading) Status getStoreDetailStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel getStoreDetailException,
+
+    @Default(false) bool todayReviewExist,
+    @Default(Status.loading) Status checkTodayReviewStatus,
+    @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
+    ExceptionModel checkTodayReviewException,
   }) = _StoreDetailState;
 
   const StoreDetailState._();

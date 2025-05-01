@@ -10,12 +10,14 @@ RecentSearchEntity _$RecentSearchEntityFromJson(Map<String, dynamic> json) =>
     RecentSearchEntity(
       id: (json['id'] as num).toInt(),
       keyword: json['keyword'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
+      createdAt: const DateTimeJsonConverter().fromJson(
+        json['createdAt'] as String?,
+      ),
     );
 
 Map<String, dynamic> _$RecentSearchEntityToJson(RecentSearchEntity instance) =>
     <String, dynamic>{
       'id': instance.id,
       'keyword': instance.keyword,
-      'createdAt': instance.createdAt.toIso8601String(),
+      'createdAt': const DateTimeJsonConverter().toJson(instance.createdAt),
     };

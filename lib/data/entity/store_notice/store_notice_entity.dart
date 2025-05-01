@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend_mobile/core/util/json_converter.dart';
 
 part 'generated/store_notice_entity.g.dart';
 
@@ -19,6 +20,8 @@ class StoreNoticeEntity {
   final String tag;
   final String title;
   final String content;
+  @DateTimeJsonConverter()
   final DateTime createdAt;
+  @DateTimeJsonConverter()
   final DateTime? updatedAt;
 }

@@ -8,10 +8,17 @@ import 'package:image_picker/image_picker.dart';
 /// Photo Uploader
 /// https://www.figma.com/design/S1zkOn7DjDJ0b1mcPVJRil/SWYP_%E1%84%8B%E1%85%A2%E1%86%B8_1%E1%84%80%E1%85%B5_%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A5%E1%84%87%E1%85%B5?node-id=404-39738&m=dev
 class CustomPhotoUploader extends StatefulWidget {
-  const CustomPhotoUploader({required this.onImageInsert, super.key});
+  const CustomPhotoUploader({
+    required this.onImageInsert,
+    this.limit = 1,
+    super.key,
+  });
 
   // 이미지 삽입 이벤트 콜백
   final FutureOr<void> Function(List<XFile> xFiles) onImageInsert;
+
+  // 이미지 개수 제한
+  final int limit;
 
   @override
   State<CustomPhotoUploader> createState() => _CustomPhotoUploaderState();
@@ -70,7 +77,17 @@ class _CustomPhotoUploaderState extends State<CustomPhotoUploader> {
   }
 
   Future<void> _onTap() async {
-    final List<XFile> xFiles = await _imagePicker.pickMultiImage();
-    widget.onImageInsert(xFiles);
+    if (widget.limit > 1) {
+      final List<XFile> xFiles = await _imagePicker.pickMultiImage(
+        limit: widget.limit,
+      );
+      widget.onImageInsert(xFiles);
+      return;
+    }
+
+    final XFile? xFile = await _imagePicker.pickImage(
+      source: ImageSource.gallery,
+    );
+    widget.onImageInsert(xFile == null ? <XFile>[] : <XFile>[xFile]);
   }
 }

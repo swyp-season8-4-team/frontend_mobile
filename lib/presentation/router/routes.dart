@@ -28,6 +28,12 @@ abstract class AppRoutes {
     path: ':listId/stores',
   );
 
+  // 지도 > 저장 리스트 내 가게 조회 > 리스트에 가게 저장
+  static final RouteInfo updateStoreToUserStoreList = RouteInfo(
+    name: '${storesByUserStoreList.name}/:storeUuid/update',
+    path: ':storeUuid/update',
+  );
+
   // 지도 > 저장 리스트 생성
   static final RouteInfo addUserStoreList = RouteInfo(
     name: '${map.name}/add_user_store_list',
@@ -44,6 +50,12 @@ abstract class AppRoutes {
   static final RouteInfo storeDetail = RouteInfo(
     name: '${map.name}/store/:id',
     path: 'store/:id',
+  );
+
+  // 지도 > 가게 상세 > 리뷰 작성
+  static final RouteInfo addStoreReview = RouteInfo(
+    name: '${storeDetail.name}/add_store_review',
+    path: 'add_store_review',
   );
 
   // 지도 > 가게 상세 > 저장 리스트에 가게 추가
@@ -254,6 +266,12 @@ abstract class AppRoutes {
   static RouteInfo myUserStoreList = RouteInfo(
     name: '${myPageDefault.name}/user_store_list',
     path: 'user_store_list',
+  );
+
+  /// 마이페이지 > Default > 디저트 메이트
+  static RouteInfo myDessertMate = RouteInfo(
+    name: '${myPageDefault.name}/dessert_mate',
+    path: 'dessert_mate',
   );
 
   /// 마이페이지 > Default > 약관 및 정책

@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_entity.dart';
 import 'package:frontend_mobile/data/query_param/mate/get_mate_query_param.dart';
+import 'package:frontend_mobile/data/query_param/mate/get_my_mate_query_param.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'generated/mate_remote_data_source.g.dart';
@@ -28,6 +27,12 @@ abstract interface class MateRemoteDataSource {
   /// 메이트 상세 정보 조회
   @GET('/api/mates/{mateUuid}')
   Future<MateDetailEntity> getMateDetail({@Path() required String mateUuid});
+
+  /// 내가 참여한 메이트 조회
+  @GET('/api/mates/me')
+  Future<MateEntity> getMyMates({
+    @Queries() required GetMyMateQueryParam query,
+  });
 
   /// 메이트 생성
   @POST('/api/app/mates')

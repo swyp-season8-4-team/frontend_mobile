@@ -157,7 +157,7 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
   Widget build(BuildContext context) {
     final DessertBoardState state = ref.watch(dessertBoardViewModelProvider);
     final ToastManager _ = ref.read(toastManagerProvider);
-    final TopBarIcon icon = TopBarIcon();
+    final TopBarIcon _ = TopBarIcon();
 
     return CustomLoadingOverlay(
       isLoading: state.status.isLoading,

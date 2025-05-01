@@ -42,7 +42,36 @@ class _StoreReviews extends ConsumerWidget {
                               width: 91,
                               label: '리뷰쓰기',
                               svg: Assets.icon.editor.pencil2Line,
-                              onPressed: () {},
+                              onPressed: () async {
+                                if (state.todayReviewExist) {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return CustomDialog.basic(
+                                        description: '오늘은 이미 리뷰를 작성하셨어요',
+                                        primaryButton: CustomDialogButton(
+                                          text: '확인',
+                                          onTap: () {
+                                            context.pop();
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  final Object? result = await context
+                                      .pushNamed(
+                                        AppRoutes.addStoreReview.name,
+                                        pathParameters: <String, String>{
+                                          'id': state.storeDetail!.storeUuid,
+                                        },
+                                      );
+
+                                  if (result == true && context.mounted) {
+                                    _showSuccessAddStoreReview(context, ref);
+                                  }
+                                }
+                              },
                             ),
                           ],
                         ),
@@ -101,6 +130,22 @@ class _StoreReviews extends ConsumerWidget {
             }, childCount: state.storeDetail!.storeReviews!.length),
           ),
       ],
+    );
+  }
+
+  void _showSuccessAddStoreReview(BuildContext context, WidgetRef ref) {
+    final ToastManager toastManager = ref.read(toastManagerProvider);
+    toastManager.show(
+      context: context,
+      toastWidget: CustomSnackBar(
+        description: '한 줄 리뷰가 추가되었습니다',
+        actionButton: SnackBarActionButton(
+          onTap: () {
+            toastManager.remove();
+          },
+          label: '닫기',
+        ),
+      ),
     );
   }
 }

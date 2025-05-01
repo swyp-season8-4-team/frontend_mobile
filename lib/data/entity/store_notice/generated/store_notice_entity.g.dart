@@ -12,11 +12,12 @@ StoreNoticeEntity _$StoreNoticeEntityFromJson(Map<String, dynamic> json) =>
       tag: json['tag'] as String,
       title: json['title'] as String,
       content: json['content'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt:
-          json['updatedAt'] == null
-              ? null
-              : DateTime.parse(json['updatedAt'] as String),
+      createdAt: const DateTimeJsonConverter().fromJson(
+        json['createdAt'] as String?,
+      ),
+      updatedAt: const DateTimeJsonConverter().fromJson(
+        json['updatedAt'] as String?,
+      ),
     );
 
 Map<String, dynamic> _$StoreNoticeEntityToJson(StoreNoticeEntity instance) =>
@@ -25,6 +26,14 @@ Map<String, dynamic> _$StoreNoticeEntityToJson(StoreNoticeEntity instance) =>
       'tag': instance.tag,
       'title': instance.title,
       'content': instance.content,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'createdAt': const DateTimeJsonConverter().toJson(instance.createdAt),
+      'updatedAt': _$JsonConverterToJson<String?, DateTime>(
+        instance.updatedAt,
+        const DateTimeJsonConverter().toJson,
+      ),
     };
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);

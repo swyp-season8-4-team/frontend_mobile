@@ -32,14 +32,9 @@ class MapState with _$MapState {
     ExceptionModel getStoreSummaryExceptionModel,
 
     NMarker? selectedMarker,
+    int? selectedListId,
 
     @Default(false) bool userStoresEnabled,
-    @Default(<UserStoreListModel>[]) List<UserStoreListModel> userStoreLists,
-    @Default(<UserStoreListOptionMenuVisible>[])
-    List<UserStoreListOptionMenuVisible> userStoreListOptionMenuVisible,
-    @Default(Status.initial) Status getUserStoreListAllStatus,
-    @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
-    ExceptionModel getUserStoreListAllException,
 
     @Default(Status.initial) Status deleteUserStoreListStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))

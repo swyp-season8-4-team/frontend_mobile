@@ -36,6 +36,7 @@ class AddStoreToUserStoreListViewModel
 
   Future<AddStoreToUserStoreListState> addStoreToUserStoreList({
     required String storeUuid,
+    required List<int> preferencesIds,
   }) async {
     state = state.copyWith(addStoreToUserStoreListStatus: Status.loading);
 

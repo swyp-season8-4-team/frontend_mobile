@@ -1,15 +1,17 @@
-part of 'my_page_view_model.dart';
+part of 'user_store_list_view_model.dart';
 
 @freezed
-class MyPageState with _$MyPageState {
-  factory MyPageState({
+class UserStoreListState with _$UserStoreListState {
+  factory UserStoreListState({
+    @Default(<UserStoreListOptionMenuVisible>[])
+    List<UserStoreListOptionMenuVisible> userStoreListOptionMenuVisible,
     @Default(<UserStoreListModel>[]) List<UserStoreListModel> userStoreLists,
-    @Default(Status.loading) Status getUserStoreListAllStatus,
+    @Default(Status.initial) Status getUserStoreListAllStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel getUserStoreListAllException,
-  }) = _MyPageState;
+  }) = _UserStoreListState;
 
-  const MyPageState._();
+  const UserStoreListState._();
 
   // 찜한 가게 개수
   int get storeAllCount => userStoreLists.fold(

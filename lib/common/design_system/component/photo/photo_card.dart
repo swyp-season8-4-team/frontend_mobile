@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
 /// Photo Card
@@ -105,21 +104,13 @@ class _CustomPhotoCardState extends State<CustomPhotoCard> {
           ),
           child:
               _removeButtonPressed
-                  ? Assets.icon.system.closeCircleFill.svg(
+                  ? Assets.icon.etc.a18CloseCircleFilledPressed.svg(
                     width: 16,
                     height: 16,
-                    colorFilter: const ColorFilter.mode(
-                      ScaleColorConfig.neutral30,
-                      BlendMode.srcIn,
-                    ),
                   )
-                  : Assets.icon.system.closeCircleFill.svg(
+                  : Assets.icon.etc.a18CloseCircleFilledEnabled.svg(
                     width: 16,
                     height: 16,
-                    colorFilter: const ColorFilter.mode(
-                      ScaleColorConfig.neutral50,
-                      BlendMode.srcIn,
-                    ),
                   ),
         ),
       ),
