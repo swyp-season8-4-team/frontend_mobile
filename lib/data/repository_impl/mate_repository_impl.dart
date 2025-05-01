@@ -10,6 +10,7 @@ import 'package:frontend_mobile/domain/model/mate/mate_detail_model.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_model.dart';
 import 'package:frontend_mobile/domain/param/mate/get_mate_detail_params.dart';
 import 'package:frontend_mobile/domain/param/mate/get_mate_params.dart';
+import 'package:frontend_mobile/domain/param/mate/post_mate_params.dart';
 import 'package:frontend_mobile/domain/repository/mate_repository.dart';
 
 final Provider<MateRepository> mateRepositoryProvider =
@@ -43,6 +44,21 @@ class MateRepositoryImpl implements MateRepository {
       api: () async {
         final MateDetailEntity result = await api.getMateDetail(
           mateUuid: params.mateUuid,
+        );
+
+        return result.toModel();
+      },
+    );
+  }
+
+  @override
+  Future<Result<MateDetailModel, CustomException>> postMate({
+    required PostMateParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        final MateDetailEntity result = await api.postMate(
+          formData: params.toBody().toFormData(),
         );
 
         return result.toModel();

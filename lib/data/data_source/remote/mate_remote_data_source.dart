@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
@@ -26,4 +28,9 @@ abstract interface class MateRemoteDataSource {
   /// 메이트 상세 정보 조회
   @GET('/api/mates/{mateUuid}')
   Future<MateDetailEntity> getMateDetail({@Path() required String mateUuid});
+
+  /// 메이트 생성
+  @POST('/api/app/mates')
+  @MultiPart()
+  Future<MateDetailEntity> postMate({@Body() required FormData formData});
 }

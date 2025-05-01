@@ -1,9 +1,14 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_entity.dart';
 import 'package:frontend_mobile/data/query_param/mate/get_mate_query_param.dart';
+import 'package:frontend_mobile/data/request_body/mate/post_mate_request_body.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_detail_model.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_model.dart';
 import 'package:frontend_mobile/domain/param/mate/get_mate_params.dart';
+import 'package:frontend_mobile/domain/param/mate/post_mate_params.dart';
 
 extension MateEntityExt on MateEntity {
   MateModel toModel() {
@@ -59,5 +64,48 @@ extension GetMateParamsExt on GetMateParams {
       mateCategoryId: mateCategoryId,
       recruit: recruit,
     );
+  }
+}
+
+extension PlaceModelExt on PlaceModel {
+  PlaceEntity toEntity() {
+    return PlaceEntity(
+      placeName: placeName,
+      address: address,
+      latitude: latitude,
+      longitude: longitude,
+    );
+  }
+}
+
+extension PostMateParamsExt on PostMateParams {
+  PostMateRequestBody toBody() {
+    return PostMateRequestBody(
+      userUuid: userUuid,
+      mateCategoryId: mateCategoryId,
+      capacity: capacity,
+      title: title,
+      content: content,
+      recruitYn: recruitYn,
+      mateImage: mateImage,
+      place: place?.toEntity(),
+      storeId: storeId,
+    );
+  }
+}
+
+extension PostMateRequestBodyExt on PostMateRequestBody {
+  FormData toFormData() {
+    final String requestJson = jsonEncode(toJson());
+
+    final MultipartFile request = MultipartFile.fromString(
+      requestJson,
+      contentType: DioMediaType('application', 'json'),
+    );
+
+    return FormData.fromMap(<String, MultipartFile?>{
+      'request': request,
+      'mateImage': mateImage,
+    });
   }
 }

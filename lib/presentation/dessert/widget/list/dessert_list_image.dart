@@ -19,6 +19,9 @@ class DessertListImage extends StatelessWidget {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
       child: CachedNetworkImage(
         imageUrl: imageUrl,
+        placeholder: (BuildContext context, String url) {
+          return Container(color: ScaleColorConfig.neutral70);
+        },
         errorWidget: (BuildContext context, String url, Object error) {
           return Container(
             color: ScaleColorConfig.neutral60,
