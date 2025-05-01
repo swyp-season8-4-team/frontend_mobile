@@ -46,6 +46,7 @@ class _MenuList extends StatelessWidget {
         border: Border.all(color: colorScheme.outlineVariant),
         color: ScaleColorConfig.neutral100,
       ),
+      clipBehavior: Clip.hardEdge,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
