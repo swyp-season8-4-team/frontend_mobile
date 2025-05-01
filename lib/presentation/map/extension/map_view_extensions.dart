@@ -6,6 +6,10 @@ extension MapViewWidgetExt on _MapViewState {
   Widget _buildFilterList() {
     final MapState state = ref.watch(mapViewModelProvider);
     final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
+
+    final PreferenceState preferenceState = ref.watch(
+      preferenceViewModelProvider,
+    );
     return SizedBox(
       height: 56,
       width: MediaQuery.of(context).size.width,
@@ -31,7 +35,7 @@ extension MapViewWidgetExt on _MapViewState {
                   );
                 },
               ),
-              ...state.preferences.mapIndexed(
+              ...preferenceState.data.mapIndexed(
                 (int index, PreferenceModel e) => Padding(
                   padding: const EdgeInsets.only(left: 6),
                   child: CustomFloatingChip(

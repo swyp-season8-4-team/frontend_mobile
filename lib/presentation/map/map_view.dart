@@ -33,6 +33,7 @@ import 'package:frontend_mobile/core/util/naver_map_util.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
 import 'package:frontend_mobile/domain/model/user_store/user_store_list_model.dart';
+import 'package:frontend_mobile/presentation/global/preference/preference_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user_store/user_store_list_view_model.dart';
 import 'package:frontend_mobile/presentation/map/map_view_model.dart';
@@ -76,6 +77,8 @@ class _MapViewState extends ConsumerState<MapView> {
       ref
           .read(userStoreListViewModelProvider.notifier)
           .getUserStoreListAll(userUuid: userState.data.userUuid);
+
+      ref.read(preferenceViewModelProvider.notifier).getAllPreferences();
     });
   }
 
@@ -106,6 +109,10 @@ class _MapViewState extends ConsumerState<MapView> {
       userStoreListViewModelProvider.notifier,
     );
 
+    final PreferenceState preferenceState = ref.watch(
+      preferenceViewModelProvider,
+    );
+
     final TopBarIcon topBarIcon = TopBarIcon();
 
     _listenProvider();
@@ -116,7 +123,7 @@ class _MapViewState extends ConsumerState<MapView> {
       },
       child: CustomLoadingOverlay(
         isLoading:
-            state.getAllPreferencesStatus.isLoading ||
+            preferenceState.status.isLoading ||
             state.getStoresByLocationStatus.isLoading ||
             userStoreListState.getUserStoreListAllStatus.isLoading ||
             state.deleteUserStoreListStatus.isLoading ||

@@ -84,10 +84,15 @@ extension MapViewMethodExt on _MapViewState {
     NOverlayImage? savedMarkerImage;
     if (mounted) {
       savedMarkerImage = await NOverlayImage.fromWidget(
-        widget: CustomSavedMarker(
-          backgroundColor: backgroundColor ?? colorScheme.accentYellow,
+        widget: SizedBox.square(
+          dimension: 36,
+          child: Center(
+            child: CustomSavedMarker(
+              backgroundColor: backgroundColor ?? colorScheme.accentYellow,
+            ),
+          ),
         ),
-        size: const Size(32, 32),
+        size: const Size(36, 36),
         context: context,
       );
     }

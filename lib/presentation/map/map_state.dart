@@ -6,11 +6,6 @@ typedef UserStoreListOptionMenuVisible =
 @freezed
 class MapState with _$MapState {
   factory MapState({
-    @Default(<PreferenceModel>[]) List<PreferenceModel> preferences,
-    @Default(Status.loading) Status getAllPreferencesStatus,
-    @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
-    ExceptionModel getAllPreferencesException,
-
     @Default(<StoreByLocationModel>[])
     List<StoreByLocationModel> storesByLocation,
     @Default(37.514575) double lat,
