@@ -17,10 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MapState {
-  List<PreferenceModel> get preferences => throw _privateConstructorUsedError;
-  Status get getAllPreferencesStatus => throw _privateConstructorUsedError;
-  ExceptionModel get getAllPreferencesException =>
-      throw _privateConstructorUsedError;
   List<StoreByLocationModel> get storesByLocation =>
       throw _privateConstructorUsedError;
   double get lat => throw _privateConstructorUsedError;
@@ -60,9 +56,6 @@ abstract class $MapStateCopyWith<$Res> {
       _$MapStateCopyWithImpl<$Res, MapState>;
   @useResult
   $Res call({
-    List<PreferenceModel> preferences,
-    Status getAllPreferencesStatus,
-    ExceptionModel getAllPreferencesException,
     List<StoreByLocationModel> storesByLocation,
     double lat,
     double lng,
@@ -100,9 +93,6 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? preferences = null,
-    Object? getAllPreferencesStatus = null,
-    Object? getAllPreferencesException = null,
     Object? storesByLocation = null,
     Object? lat = null,
     Object? lng = null,
@@ -125,21 +115,6 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
   }) {
     return _then(
       _value.copyWith(
-            preferences:
-                null == preferences
-                    ? _value.preferences
-                    : preferences // ignore: cast_nullable_to_non_nullable
-                        as List<PreferenceModel>,
-            getAllPreferencesStatus:
-                null == getAllPreferencesStatus
-                    ? _value.getAllPreferencesStatus
-                    : getAllPreferencesStatus // ignore: cast_nullable_to_non_nullable
-                        as Status,
-            getAllPreferencesException:
-                null == getAllPreferencesException
-                    ? _value.getAllPreferencesException
-                    : getAllPreferencesException // ignore: cast_nullable_to_non_nullable
-                        as ExceptionModel,
             storesByLocation:
                 null == storesByLocation
                     ? _value.storesByLocation
@@ -251,9 +226,6 @@ abstract class _$$MapStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    List<PreferenceModel> preferences,
-    Status getAllPreferencesStatus,
-    ExceptionModel getAllPreferencesException,
     List<StoreByLocationModel> storesByLocation,
     double lat,
     double lng,
@@ -290,9 +262,6 @@ class __$$MapStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? preferences = null,
-    Object? getAllPreferencesStatus = null,
-    Object? getAllPreferencesException = null,
     Object? storesByLocation = null,
     Object? lat = null,
     Object? lng = null,
@@ -315,21 +284,6 @@ class __$$MapStateImplCopyWithImpl<$Res>
   }) {
     return _then(
       _$MapStateImpl(
-        preferences:
-            null == preferences
-                ? _value._preferences
-                : preferences // ignore: cast_nullable_to_non_nullable
-                    as List<PreferenceModel>,
-        getAllPreferencesStatus:
-            null == getAllPreferencesStatus
-                ? _value.getAllPreferencesStatus
-                : getAllPreferencesStatus // ignore: cast_nullable_to_non_nullable
-                    as Status,
-        getAllPreferencesException:
-            null == getAllPreferencesException
-                ? _value.getAllPreferencesException
-                : getAllPreferencesException // ignore: cast_nullable_to_non_nullable
-                    as ExceptionModel,
         storesByLocation:
             null == storesByLocation
                 ? _value._storesByLocation
@@ -434,14 +388,6 @@ class __$$MapStateImplCopyWithImpl<$Res>
 
 class _$MapStateImpl implements _MapState {
   _$MapStateImpl({
-    final List<PreferenceModel> preferences = const <PreferenceModel>[],
-    this.getAllPreferencesStatus = Status.loading,
-    this.getAllPreferencesException = const ExceptionModel(
-      status: -1,
-      code: '',
-      message: '',
-      timestamp: '',
-    ),
     final List<StoreByLocationModel> storesByLocation =
         const <StoreByLocationModel>[],
     this.lat = 37.514575,
@@ -482,25 +428,9 @@ class _$MapStateImpl implements _MapState {
       message: '',
       timestamp: '',
     ),
-  }) : _preferences = preferences,
-       _storesByLocation = storesByLocation,
+  }) : _storesByLocation = storesByLocation,
        _preferenceTagIds = preferenceTagIds;
 
-  final List<PreferenceModel> _preferences;
-  @override
-  @JsonKey()
-  List<PreferenceModel> get preferences {
-    if (_preferences is EqualUnmodifiableListView) return _preferences;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_preferences);
-  }
-
-  @override
-  @JsonKey()
-  final Status getAllPreferencesStatus;
-  @override
-  @JsonKey()
-  final ExceptionModel getAllPreferencesException;
   final List<StoreByLocationModel> _storesByLocation;
   @override
   @JsonKey()
@@ -572,7 +502,7 @@ class _$MapStateImpl implements _MapState {
 
   @override
   String toString() {
-    return 'MapState(preferences: $preferences, getAllPreferencesStatus: $getAllPreferencesStatus, getAllPreferencesException: $getAllPreferencesException, storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, myPreferenceFilterSelected: $myPreferenceFilterSelected, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel, storeSummary: $storeSummary, getStoreSummaryStatus: $getStoreSummaryStatus, getStoreSummaryExceptionModel: $getStoreSummaryExceptionModel, selectedMarker: $selectedMarker, selectedListId: $selectedListId, userStoresEnabled: $userStoresEnabled, deleteUserStoreListStatus: $deleteUserStoreListStatus, deleteUserStoreListException: $deleteUserStoreListException)';
+    return 'MapState(storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, myPreferenceFilterSelected: $myPreferenceFilterSelected, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel, storeSummary: $storeSummary, getStoreSummaryStatus: $getStoreSummaryStatus, getStoreSummaryExceptionModel: $getStoreSummaryExceptionModel, selectedMarker: $selectedMarker, selectedListId: $selectedListId, userStoresEnabled: $userStoresEnabled, deleteUserStoreListStatus: $deleteUserStoreListStatus, deleteUserStoreListException: $deleteUserStoreListException)';
   }
 
   @override
@@ -580,21 +510,6 @@ class _$MapStateImpl implements _MapState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MapStateImpl &&
-            const DeepCollectionEquality().equals(
-              other._preferences,
-              _preferences,
-            ) &&
-            (identical(
-                  other.getAllPreferencesStatus,
-                  getAllPreferencesStatus,
-                ) ||
-                other.getAllPreferencesStatus == getAllPreferencesStatus) &&
-            (identical(
-                  other.getAllPreferencesException,
-                  getAllPreferencesException,
-                ) ||
-                other.getAllPreferencesException ==
-                    getAllPreferencesException) &&
             const DeepCollectionEquality().equals(
               other._storesByLocation,
               _storesByLocation,
@@ -669,9 +584,6 @@ class _$MapStateImpl implements _MapState {
   @override
   int get hashCode => Object.hashAll([
     runtimeType,
-    const DeepCollectionEquality().hash(_preferences),
-    getAllPreferencesStatus,
-    getAllPreferencesException,
     const DeepCollectionEquality().hash(_storesByLocation),
     lat,
     lng,
@@ -704,9 +616,6 @@ class _$MapStateImpl implements _MapState {
 
 abstract class _MapState implements MapState {
   factory _MapState({
-    final List<PreferenceModel> preferences,
-    final Status getAllPreferencesStatus,
-    final ExceptionModel getAllPreferencesException,
     final List<StoreByLocationModel> storesByLocation,
     final double lat,
     final double lng,
@@ -728,12 +637,6 @@ abstract class _MapState implements MapState {
     final ExceptionModel deleteUserStoreListException,
   }) = _$MapStateImpl;
 
-  @override
-  List<PreferenceModel> get preferences;
-  @override
-  Status get getAllPreferencesStatus;
-  @override
-  ExceptionModel get getAllPreferencesException;
   @override
   List<StoreByLocationModel> get storesByLocation;
   @override

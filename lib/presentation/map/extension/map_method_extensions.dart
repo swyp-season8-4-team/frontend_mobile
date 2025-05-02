@@ -7,7 +7,7 @@ extension MapViewMethodExt on _MapViewState {
       final Position result =
           await ref.read(geoLocationManagerProvider).getCurrentPosition();
 
-      await _mapController.updateCamera(
+      await _mapController!.updateCamera(
         NCameraUpdate.fromCameraPosition(
           NCameraPosition(
             target: NLatLng(result.latitude, result.longitude),
@@ -18,7 +18,7 @@ extension MapViewMethodExt on _MapViewState {
 
       // 위치 권한이 허용된 이후
       // 트래킹할 수 있도록 설정
-      await _mapController.setLocationTrackingMode(
+      await _mapController!.setLocationTrackingMode(
         NLocationTrackingMode.noFollow,
       );
 
@@ -37,7 +37,7 @@ extension MapViewMethodExt on _MapViewState {
           await ref.read(geoLocationManagerProvider).getCurrentPosition();
 
       final ({double lat, double lng, double radius}) queryOption =
-          await NaverMapUtil.getLocationInfo(controller: _mapController);
+          await NaverMapUtil.getLocationInfo(controller: _mapController!);
 
       ref
           .read(mapViewModelProvider.notifier)
@@ -48,7 +48,7 @@ extension MapViewMethodExt on _MapViewState {
           );
     } catch (e) {
       final ({double lat, double lng, double radius}) queryOption =
-          await NaverMapUtil.getLocationInfo(controller: _mapController);
+          await NaverMapUtil.getLocationInfo(controller: _mapController!);
 
       ref
           .read(mapViewModelProvider.notifier)
@@ -84,10 +84,15 @@ extension MapViewMethodExt on _MapViewState {
     NOverlayImage? savedMarkerImage;
     if (mounted) {
       savedMarkerImage = await NOverlayImage.fromWidget(
-        widget: CustomSavedMarker(
-          backgroundColor: backgroundColor ?? colorScheme.accentYellow,
+        widget: SizedBox.square(
+          dimension: 36,
+          child: Center(
+            child: CustomSavedMarker(
+              backgroundColor: backgroundColor ?? colorScheme.accentYellow,
+            ),
+          ),
         ),
-        size: const Size(32, 32),
+        size: const Size(36, 36),
         context: context,
       );
     }
@@ -115,7 +120,7 @@ extension MapViewMethodExt on _MapViewState {
       viewmodel.getStoreSummary(overlay: overlay, listId: listId);
 
       await NaverMapUtil.moveCameraToLocation(
-        controller: _mapController,
+        controller: _mapController!,
         lat: overlay.position.latitude,
         lng: overlay.position.longitude,
       );
@@ -132,7 +137,7 @@ extension MapViewMethodExt on _MapViewState {
     );
 
     if (state.selectedMarker != null) {
-      await _mapController.deleteOverlay(
+      await _mapController!.deleteOverlay(
         NOverlayInfo(
           type: NOverlayType.marker,
           id: state.selectedMarker!.info.id,
@@ -157,7 +162,7 @@ extension MapViewMethodExt on _MapViewState {
       );
 
       if (savedStore != null && state.userStoresEnabled) {
-        await _mapController.addOverlay(
+        await _mapController!.addOverlay(
           await _storeToMarker(
             storeUuid: savedStore.storeUuid,
             storeName: savedStore.name,
@@ -180,7 +185,7 @@ extension MapViewMethodExt on _MapViewState {
       }
 
       if (storeByLocation != null) {
-        await _mapController.addOverlay(
+        await _mapController!.addOverlay(
           await _storeToMarker(
             storeUuid: storeByLocation.storeUuid,
             storeName: storeByLocation.name,

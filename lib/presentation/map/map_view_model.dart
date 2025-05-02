@@ -6,7 +6,6 @@ import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
 import 'package:frontend_mobile/core/resource/exception/exception_model.dart';
 import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
-import 'package:frontend_mobile/core/resource/params/no_params.dart';
 import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_by_location_model.dart';
@@ -15,7 +14,6 @@ import 'package:frontend_mobile/domain/param/store/get_my_preferences_stores_by_
 import 'package:frontend_mobile/domain/param/store/get_store_summary_params.dart';
 import 'package:frontend_mobile/domain/param/store/get_stores_by_location_params.dart';
 import 'package:frontend_mobile/domain/param/user_store/delete_user_store_list_params.dart';
-import 'package:frontend_mobile/domain/usecase/preference/get_all_preferences_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/store/get_my_preferences_stores_by_location_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/store/get_store_summary_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/store/get_stores_by_location_usecase.dart';
@@ -32,39 +30,9 @@ mapViewModelProvider =
     });
 
 class MapViewModel extends StateNotifier<MapState> {
-  MapViewModel({required Ref<Object?> ref}) : _ref = ref, super(MapState()) {
-    getAllPrferences();
-  }
+  MapViewModel({required Ref<Object?> ref}) : _ref = ref, super(MapState());
 
   final Ref _ref;
-
-  // 모든 선호도 조회
-  Future<MapState> getAllPrferences() async {
-    state = state.copyWith(getAllPreferencesStatus: Status.loading);
-
-    final Result<List<PreferenceModel>, CustomException> result =
-        await Usecase.execute(
-          usecase: _ref.read(getAllPreferencesUsecaseProvider),
-          params: NoParams(),
-        );
-
-    result.map(
-      success: (Success<List<PreferenceModel>, CustomException> success) {
-        state = state.copyWith(
-          getAllPreferencesStatus: Status.success,
-          preferences: success.data,
-        );
-      },
-      failure: (Failure<List<PreferenceModel>, CustomException> failure) {
-        state = state.copyWith(
-          getAllPreferencesStatus: Status.failure,
-          getAllPreferencesException: failure.exception.model,
-        );
-      },
-    );
-
-    return state;
-  }
 
   // 주어진 위치에서 가게 조회
   void getStoresByCameraPosition({
