@@ -37,7 +37,7 @@ abstract interface class MateReplyRemoteDataSource {
   });
 
   /// 디저트메이트 댓글 신고
-  @POST('/api/{mateUuid}/reply/{replyId}/report')
+  @POST('/api/mates/{mateUuid}/reply/{replyId}/report')
   Future<MateReplyReportEntity> postMateReplyReport({
     @Path() required String mateUuid,
     @Path() required String replyId,

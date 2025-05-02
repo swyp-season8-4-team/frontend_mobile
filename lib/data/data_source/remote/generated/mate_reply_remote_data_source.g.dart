@@ -94,7 +94,7 @@ class _MateReplyRemoteDataSource implements MateReplyRemoteDataSource {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/api/${mateUuid}/reply/${replyId}/report',
+            '/api/mates/${mateUuid}/reply/${replyId}/report',
             queryParameters: queryParameters,
             data: _data,
           )
