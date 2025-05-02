@@ -92,7 +92,7 @@ class _DessertWriteStep1State extends State<DessertWriteStep1> {
                 children: <Widget>[
                   Expanded(
                     child: CustomPillOutlineButton.small(
-                      label: '친목도모☕',
+                      label: '친목도모☕️',
                       onPressed: () {
                         _resetHandler();
 

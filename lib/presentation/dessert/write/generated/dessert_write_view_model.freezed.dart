@@ -36,6 +36,8 @@ abstract class $DessertWriteStateCopyWith<$Res> {
   ) = _$DessertWriteStateCopyWithImpl<$Res, DessertWriteState>;
   @useResult
   $Res call({Status status, MateDetailModel data, ExceptionModel exception});
+
+  $MateDetailModelCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -78,6 +80,16 @@ class _$DessertWriteStateCopyWithImpl<$Res, $Val extends DessertWriteState>
           as $Val,
     );
   }
+
+  /// Create a copy of DessertWriteState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MateDetailModelCopyWith<$Res> get data {
+    return $MateDetailModelCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -90,6 +102,9 @@ abstract class _$$DessertWriteStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({Status status, MateDetailModel data, ExceptionModel exception});
+
+  @override
+  $MateDetailModelCopyWith<$Res> get data;
 }
 
 /// @nodoc

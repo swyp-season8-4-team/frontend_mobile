@@ -64,7 +64,7 @@ class _DessertWriteStep2State extends ConsumerState<DessertWriteStep2> {
     int mateCategoryId = -1;
 
     switch (widget.subject) {
-      case '친목도모☕':
+      case '친목도모☕️':
         mateCategoryId = 1;
         break;
 
