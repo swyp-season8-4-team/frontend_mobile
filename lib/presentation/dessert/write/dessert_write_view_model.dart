@@ -8,6 +8,7 @@ import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_detail_model.dart';
 import 'package:frontend_mobile/domain/param/mate/post_mate_params.dart';
 import 'package:frontend_mobile/domain/usecase/mate/post_mate_usecase.dart';
+import 'package:frontend_mobile/presentation/dessert/dessert_board_view_model.dart';
 
 part 'dessert_write_state.dart';
 part 'generated/dessert_write_view_model.freezed.dart';
@@ -34,6 +35,10 @@ class DessertWriteViewModel extends StateNotifier<DessertWriteState> {
 
     response.map(
       success: (Success<MateDetailModel, CustomException> success) {
+        ref
+            .read(dessertBoardViewModelProvider.notifier)
+            .modifyData(item: success.data);
+
         state = state.copyWith(status: Status.success, data: success.data);
       },
       failure: (Failure<MateDetailModel, CustomException> failure) {

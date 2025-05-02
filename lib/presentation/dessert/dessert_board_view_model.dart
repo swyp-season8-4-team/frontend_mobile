@@ -50,4 +50,22 @@ class DessertBoardViewModel extends StateNotifier<DessertBoardState> {
       },
     );
   }
+
+  void modifyData({required MateDetailModel item}) {
+    final List<MateDetailModel> newBackupMates = <MateDetailModel>[
+      item,
+      ...state.backupData.mates,
+    ];
+
+    /// 글쓰기 카테고리가 현재 선택한 카테고리 리스트와 같은 경우
+    List<MateDetailModel> newDataMates = state.data.mates;
+    if (state.data.mates[0].mateCategory == item.mateCategory) {
+      newDataMates = <MateDetailModel>[item, ...state.data.mates];
+    }
+
+    state = state.copyWith(
+      data: state.data.copyWith(mates: newDataMates),
+      backupData: state.backupData.copyWith(mates: newBackupMates),
+    );
+  }
 }

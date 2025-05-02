@@ -42,6 +42,9 @@ abstract class $DessertBoardStateCopyWith<$Res> {
     MateModel backupData,
     ExceptionModel exception,
   });
+
+  $MateModelCopyWith<$Res> get data;
+  $MateModelCopyWith<$Res> get backupData;
 }
 
 /// @nodoc
@@ -90,6 +93,26 @@ class _$DessertBoardStateCopyWithImpl<$Res, $Val extends DessertBoardState>
           as $Val,
     );
   }
+
+  /// Create a copy of DessertBoardState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MateModelCopyWith<$Res> get data {
+    return $MateModelCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value) as $Val);
+    });
+  }
+
+  /// Create a copy of DessertBoardState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MateModelCopyWith<$Res> get backupData {
+    return $MateModelCopyWith<$Res>(_value.backupData, (value) {
+      return _then(_value.copyWith(backupData: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -107,6 +130,11 @@ abstract class _$$DessertBoardStateImplCopyWith<$Res>
     MateModel backupData,
     ExceptionModel exception,
   });
+
+  @override
+  $MateModelCopyWith<$Res> get data;
+  @override
+  $MateModelCopyWith<$Res> get backupData;
 }
 
 /// @nodoc

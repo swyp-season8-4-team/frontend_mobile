@@ -43,6 +43,8 @@ abstract class $MyDessertMateStateCopyWith<$Res> {
     MateModel data,
     ExceptionModel getMyMateException,
   });
+
+  $MateModelCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -91,6 +93,16 @@ class _$MyDessertMateStateCopyWithImpl<$Res, $Val extends MyDessertMateState>
           as $Val,
     );
   }
+
+  /// Create a copy of MyDessertMateState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MateModelCopyWith<$Res> get data {
+    return $MateModelCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -108,6 +120,9 @@ abstract class _$$MyDessertMateStateImplCopyWith<$Res>
     MateModel data,
     ExceptionModel getMyMateException,
   });
+
+  @override
+  $MateModelCopyWith<$Res> get data;
 }
 
 /// @nodoc
