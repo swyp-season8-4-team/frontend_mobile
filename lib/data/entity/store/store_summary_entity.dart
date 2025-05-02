@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend_mobile/data/entity/store/store_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_holiday_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_operating_hour_entity.dart';
 import 'package:frontend_mobile/data/entity/store/store_top_preference_entity.dart';
@@ -34,8 +35,8 @@ class StoreSummaryEntity {
   final String storeUuid;
   final String name;
   final double? averageRating;
-  final List<String>? storeImages;
-  final List<String>? ownerPickImages;
+  final List<StoreDetailImage>? storeImages;
+  final List<StoreDetailImage>? ownerPickImages;
   final List<String> tags;
   final String? primaryStoreLink;
   final List<String>? storeLinks;

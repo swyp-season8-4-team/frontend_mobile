@@ -140,8 +140,9 @@ extension StoreSummaryEntityExt on StoreSummaryEntity {
     address: address,
     phone: phone,
     averageRating: averageRating,
-    storeImages: storeImages,
-    ownerPickImages: ownerPickImages,
+    storeImages: storeImages?.map((StoreDetailImage e) => e.toModel()).toList(),
+    ownerPickImages:
+        ownerPickImages?.map((StoreDetailImage e) => e.toModel()).toList(),
     primaryStoreLink: primaryStoreLink,
     storeLinks: storeLinks,
     holidays: holidays?.map((StoreHolidayEntity e) => e.toModel()).toList(),
@@ -197,8 +198,9 @@ extension StoreDetailEntityExt on StoreDetailEntity {
     savedListId: savedListId,
     notices: notices?.map((StoreDetailNoticeEntity e) => e.toModel()).toList(),
     averageRating: averageRating,
-    storeImages: storeImages,
-    ownerPickImages: ownerPickImages,
+    storeImages: storeImages?.map((StoreDetailImage e) => e.toModel()).toList(),
+    ownerPickImages:
+        ownerPickImages?.map((StoreDetailImage e) => e.toModel()).toList(),
     primaryStoreLink: primaryStoreLink,
     storeLinks: storeLinks,
     holidays: holidays?.map((StoreHolidayEntity e) => e.toModel()).toList(),
@@ -237,4 +239,8 @@ extension GetMyPreferencesStoresByLocationParamsExt
 extension StoreTopPreferenceEntityExt on StoreTopPreferenceEntity {
   StoreTopPreferenceModel toModel() =>
       StoreTopPreferenceModel(tagId: tagId, name: name, rank: rank);
+}
+
+extension StoreDetailImageEntityExt on StoreDetailImage {
+  StoreDetailImageModel toModel() => StoreDetailImageModel(id: id, url: url);
 }

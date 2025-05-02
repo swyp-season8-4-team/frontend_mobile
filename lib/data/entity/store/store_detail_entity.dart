@@ -52,8 +52,8 @@ class StoreDetailEntity {
   final String storeUuid;
   final String name;
   final double? averageRating;
-  final List<String>? storeImages;
-  final List<String>? ownerPickImages;
+  final List<StoreDetailImage>? storeImages;
+  final List<StoreDetailImage>? ownerPickImages;
   final List<StoreDetailTagEntity> tags;
   final String? primaryStoreLink;
   final List<String>? storeLinks;
@@ -234,4 +234,14 @@ class StoreDetailTagCategoryEntity {
       _$StoreDetailTagCategoryEntityFromJson(json);
   final int id;
   final String name;
+}
+
+@JsonSerializable()
+class StoreDetailImage {
+  factory StoreDetailImage.fromJson(Map<String, dynamic> json) =>
+      _$StoreDetailImageFromJson(json);
+
+  const StoreDetailImage({this.id, this.url});
+  final int? id;
+  final String? url;
 }

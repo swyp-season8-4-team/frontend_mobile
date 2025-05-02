@@ -44,9 +44,11 @@ class _StoreRepresentiveInfo extends ConsumerWidget {
                   (StoreTopPreferenceModel? e) =>
                       CustomHexagon(text: e?.name ?? ''),
                 ),
-                ..._normalizeToLength3<String>(storeDetail.storeImages).map((
-                  String? e,
-                ) {
+                ..._normalizeToLength3<String>(
+                  storeDetail.storeImages
+                      ?.map((StoreDetailImageModel e) => e.url ?? '')
+                      .toList(),
+                ).map((String? e) {
                   if (e != null) {
                     return CustomHexagon(imageUrl: e);
                   }

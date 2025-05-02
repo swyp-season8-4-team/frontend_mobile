@@ -1,3 +1,4 @@
+import 'package:frontend_mobile/domain/model/store/store_detail_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_holiday_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_operating_hour_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_top_preference_model.dart';
@@ -27,8 +28,8 @@ class StoreSummaryModel {
   final String storeUuid;
   final String name;
   final double? averageRating;
-  final List<String>? storeImages;
-  final List<String>? ownerPickImages;
+  final List<StoreDetailImageModel>? storeImages;
+  final List<StoreDetailImageModel>? ownerPickImages;
   final List<String> tags;
   final String? primaryStoreLink;
   final List<String>? storeLinks;
