@@ -12,6 +12,7 @@ class CustomTextField extends StatefulWidget {
     this.onChanged,
     this.maxLength = 60,
     this.controller,
+    this.showCounter = true,
     super.key,
   });
 
@@ -21,6 +22,7 @@ class CustomTextField extends StatefulWidget {
   final void Function(String)? onChanged;
   final int maxLength;
   final TextEditingController? controller;
+  final bool showCounter;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -74,25 +76,26 @@ class _CustomTextFieldState extends State<CustomTextField> {
               ],
 
               // counter 표시
-              Text.rich(
-                TextSpan(
-                  children: <InlineSpan>[
-                    TextSpan(
-                      text: '${_textEditingController.text.length}',
-                      style: textTheme.labelLarge?.copyWith(
-                        color: ScaleColorConfig.neutral30,
+              if (widget.showCounter)
+                Text.rich(
+                  TextSpan(
+                    children: <InlineSpan>[
+                      TextSpan(
+                        text: '${_textEditingController.text.length}',
+                        style: textTheme.labelLarge?.copyWith(
+                          color: ScaleColorConfig.neutral30,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: '/${widget.maxLength}',
-                      style: textTheme.labelLarge?.copyWith(
-                        color: ScaleColorConfig.neutral50,
+                      TextSpan(
+                        text: '/${widget.maxLength}',
+                        style: textTheme.labelLarge?.copyWith(
+                          color: ScaleColorConfig.neutral50,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                  textAlign: TextAlign.right,
                 ),
-                textAlign: TextAlign.right,
-              ),
             ],
           ),
         ),

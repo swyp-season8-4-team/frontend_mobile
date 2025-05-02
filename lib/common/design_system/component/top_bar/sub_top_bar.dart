@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 
@@ -8,6 +9,7 @@ class CustomSubTopBar extends StatelessWidget implements PreferredSizeWidget {
     required this.actions,
     this.primary = true,
     this.leading,
+    this.systemOverlayStyle,
     super.key,
   });
 
@@ -15,6 +17,7 @@ class CustomSubTopBar extends StatelessWidget implements PreferredSizeWidget {
   final bool primary;
   final List<Widget> actions;
   final Widget? leading;
+  final SystemUiOverlayStyle? systemOverlayStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +28,7 @@ class CustomSubTopBar extends StatelessWidget implements PreferredSizeWidget {
       color: primary ? ScaleColorConfig.primary80 : ScaleColorConfig.surface90,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: AppBar(
+        systemOverlayStyle: systemOverlayStyle,
         backgroundColor: Colors.transparent,
         leadingWidth: 24 + 7,
         leading: leading ?? icon.leftLine(onTap: () => Navigator.pop(context)),
