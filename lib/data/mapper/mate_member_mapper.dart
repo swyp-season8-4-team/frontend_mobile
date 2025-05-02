@@ -1,9 +1,13 @@
 import 'package:frontend_mobile/data/entity/mate_member/mate_member_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/mate_member/mate_member_entity.dart';
 import 'package:frontend_mobile/data/request_body/mate_member/accept_mate_member_request_body.dart';
+import 'package:frontend_mobile/data/request_body/mate_member/ban_mate_member_request_body.dart';
+import 'package:frontend_mobile/data/request_body/mate_member/reject_mate_member_request_body.dart';
 import 'package:frontend_mobile/domain/model/mate_member/mate_member_detail_model.dart';
 import 'package:frontend_mobile/domain/model/mate_member/mate_member_model.dart';
 import 'package:frontend_mobile/domain/param/mate_member/accept_mate_member_params.dart';
+import 'package:frontend_mobile/domain/param/mate_member/ban_mate_member_params.dart';
+import 'package:frontend_mobile/domain/param/mate_member/reject_mate_member_params.dart';
 
 extension MateMemberEntityExt on MateMemberEntity {
   MateMemberModel toModel() {
@@ -30,6 +34,24 @@ extension AcceptMateMemberParamsExt on AcceptMateMemberParams {
     return AcceptMateMemberRequestBody(
       creatorUserUuid: creatorUserUuid,
       acceptUserUuid: acceptUserUuid,
+    );
+  }
+}
+
+extension RejectMateMemberParamsExt on RejectMateMemberParams {
+  RejectMateMemberRequestBody toBody() {
+    return RejectMateMemberRequestBody(
+      creatorUserUuid: creatorUserUuid,
+      rejectUserUuid: rejectUserUuid,
+    );
+  }
+}
+
+extension BanMateMemberParamsExt on BanMateMemberParams {
+  BanMateMemberRequestBody toBody() {
+    return BanMateMemberRequestBody(
+      creatorUserUuid: creatorUserUuid,
+      banUserUuid: banUserUuid,
     );
   }
 }

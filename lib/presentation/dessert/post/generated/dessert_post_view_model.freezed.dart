@@ -23,8 +23,13 @@ mixin _$DessertPostState {
   Status get leaveMateStatus => throw _privateConstructorUsedError;
   Status get pendingMateStatus => throw _privateConstructorUsedError;
   Status get acceptMateStatus => throw _privateConstructorUsedError;
+  Status get rejectMateStatus => throw _privateConstructorUsedError;
+  Status get getMateStatus => throw _privateConstructorUsedError;
+  Status get banMateStatus => throw _privateConstructorUsedError;
   MateDetailModel get data => throw _privateConstructorUsedError;
   List<MateMemberDetailModel> get pendingData =>
+      throw _privateConstructorUsedError;
+  List<MateMemberDetailModel> get memberData =>
       throw _privateConstructorUsedError;
   ExceptionModel get exception => throw _privateConstructorUsedError;
 
@@ -49,8 +54,12 @@ abstract class $DessertPostStateCopyWith<$Res> {
     Status leaveMateStatus,
     Status pendingMateStatus,
     Status acceptMateStatus,
+    Status rejectMateStatus,
+    Status getMateStatus,
+    Status banMateStatus,
     MateDetailModel data,
     List<MateMemberDetailModel> pendingData,
+    List<MateMemberDetailModel> memberData,
     ExceptionModel exception,
   });
 
@@ -78,8 +87,12 @@ class _$DessertPostStateCopyWithImpl<$Res, $Val extends DessertPostState>
     Object? leaveMateStatus = null,
     Object? pendingMateStatus = null,
     Object? acceptMateStatus = null,
+    Object? rejectMateStatus = null,
+    Object? getMateStatus = null,
+    Object? banMateStatus = null,
     Object? data = null,
     Object? pendingData = null,
+    Object? memberData = null,
     Object? exception = null,
   }) {
     return _then(
@@ -114,6 +127,21 @@ class _$DessertPostStateCopyWithImpl<$Res, $Val extends DessertPostState>
                     ? _value.acceptMateStatus
                     : acceptMateStatus // ignore: cast_nullable_to_non_nullable
                         as Status,
+            rejectMateStatus:
+                null == rejectMateStatus
+                    ? _value.rejectMateStatus
+                    : rejectMateStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            getMateStatus:
+                null == getMateStatus
+                    ? _value.getMateStatus
+                    : getMateStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            banMateStatus:
+                null == banMateStatus
+                    ? _value.banMateStatus
+                    : banMateStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
             data:
                 null == data
                     ? _value.data
@@ -123,6 +151,11 @@ class _$DessertPostStateCopyWithImpl<$Res, $Val extends DessertPostState>
                 null == pendingData
                     ? _value.pendingData
                     : pendingData // ignore: cast_nullable_to_non_nullable
+                        as List<MateMemberDetailModel>,
+            memberData:
+                null == memberData
+                    ? _value.memberData
+                    : memberData // ignore: cast_nullable_to_non_nullable
                         as List<MateMemberDetailModel>,
             exception:
                 null == exception
@@ -161,8 +194,12 @@ abstract class _$$DessertPostStateImplCopyWith<$Res>
     Status leaveMateStatus,
     Status pendingMateStatus,
     Status acceptMateStatus,
+    Status rejectMateStatus,
+    Status getMateStatus,
+    Status banMateStatus,
     MateDetailModel data,
     List<MateMemberDetailModel> pendingData,
+    List<MateMemberDetailModel> memberData,
     ExceptionModel exception,
   });
 
@@ -190,8 +227,12 @@ class __$$DessertPostStateImplCopyWithImpl<$Res>
     Object? leaveMateStatus = null,
     Object? pendingMateStatus = null,
     Object? acceptMateStatus = null,
+    Object? rejectMateStatus = null,
+    Object? getMateStatus = null,
+    Object? banMateStatus = null,
     Object? data = null,
     Object? pendingData = null,
+    Object? memberData = null,
     Object? exception = null,
   }) {
     return _then(
@@ -226,6 +267,21 @@ class __$$DessertPostStateImplCopyWithImpl<$Res>
                 ? _value.acceptMateStatus
                 : acceptMateStatus // ignore: cast_nullable_to_non_nullable
                     as Status,
+        rejectMateStatus:
+            null == rejectMateStatus
+                ? _value.rejectMateStatus
+                : rejectMateStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        getMateStatus:
+            null == getMateStatus
+                ? _value.getMateStatus
+                : getMateStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        banMateStatus:
+            null == banMateStatus
+                ? _value.banMateStatus
+                : banMateStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
         data:
             null == data
                 ? _value.data
@@ -235,6 +291,11 @@ class __$$DessertPostStateImplCopyWithImpl<$Res>
             null == pendingData
                 ? _value._pendingData
                 : pendingData // ignore: cast_nullable_to_non_nullable
+                    as List<MateMemberDetailModel>,
+        memberData:
+            null == memberData
+                ? _value._memberData
+                : memberData // ignore: cast_nullable_to_non_nullable
                     as List<MateMemberDetailModel>,
         exception:
             null == exception
@@ -256,6 +317,9 @@ class _$DessertPostStateImpl implements _DessertPostState {
     this.leaveMateStatus = Status.initial,
     this.pendingMateStatus = Status.initial,
     this.acceptMateStatus = Status.initial,
+    this.rejectMateStatus = Status.initial,
+    this.getMateStatus = Status.initial,
+    this.banMateStatus = Status.initial,
     this.data = const MateDetailModel(
       mateUuid: '',
       storeId: -1,
@@ -283,13 +347,16 @@ class _$DessertPostStateImpl implements _DessertPostState {
     ),
     final List<MateMemberDetailModel> pendingData =
         const <MateMemberDetailModel>[],
+    final List<MateMemberDetailModel> memberData =
+        const <MateMemberDetailModel>[],
     this.exception = const ExceptionModel(
       status: -1,
       code: '',
       message: '',
       timestamp: '',
     ),
-  }) : _pendingData = pendingData;
+  }) : _pendingData = pendingData,
+       _memberData = memberData;
 
   @override
   @JsonKey()
@@ -311,6 +378,15 @@ class _$DessertPostStateImpl implements _DessertPostState {
   final Status acceptMateStatus;
   @override
   @JsonKey()
+  final Status rejectMateStatus;
+  @override
+  @JsonKey()
+  final Status getMateStatus;
+  @override
+  @JsonKey()
+  final Status banMateStatus;
+  @override
+  @JsonKey()
   final MateDetailModel data;
   final List<MateMemberDetailModel> _pendingData;
   @override
@@ -321,13 +397,22 @@ class _$DessertPostStateImpl implements _DessertPostState {
     return EqualUnmodifiableListView(_pendingData);
   }
 
+  final List<MateMemberDetailModel> _memberData;
+  @override
+  @JsonKey()
+  List<MateMemberDetailModel> get memberData {
+    if (_memberData is EqualUnmodifiableListView) return _memberData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_memberData);
+  }
+
   @override
   @JsonKey()
   final ExceptionModel exception;
 
   @override
   String toString() {
-    return 'DessertPostState(mateDetailStatus: $mateDetailStatus, postMateStatus: $postMateStatus, deleteMateStatus: $deleteMateStatus, leaveMateStatus: $leaveMateStatus, pendingMateStatus: $pendingMateStatus, acceptMateStatus: $acceptMateStatus, data: $data, pendingData: $pendingData, exception: $exception)';
+    return 'DessertPostState(mateDetailStatus: $mateDetailStatus, postMateStatus: $postMateStatus, deleteMateStatus: $deleteMateStatus, leaveMateStatus: $leaveMateStatus, pendingMateStatus: $pendingMateStatus, acceptMateStatus: $acceptMateStatus, rejectMateStatus: $rejectMateStatus, getMateStatus: $getMateStatus, banMateStatus: $banMateStatus, data: $data, pendingData: $pendingData, memberData: $memberData, exception: $exception)';
   }
 
   @override
@@ -347,10 +432,20 @@ class _$DessertPostStateImpl implements _DessertPostState {
                 other.pendingMateStatus == pendingMateStatus) &&
             (identical(other.acceptMateStatus, acceptMateStatus) ||
                 other.acceptMateStatus == acceptMateStatus) &&
+            (identical(other.rejectMateStatus, rejectMateStatus) ||
+                other.rejectMateStatus == rejectMateStatus) &&
+            (identical(other.getMateStatus, getMateStatus) ||
+                other.getMateStatus == getMateStatus) &&
+            (identical(other.banMateStatus, banMateStatus) ||
+                other.banMateStatus == banMateStatus) &&
             (identical(other.data, data) || other.data == data) &&
             const DeepCollectionEquality().equals(
               other._pendingData,
               _pendingData,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._memberData,
+              _memberData,
             ) &&
             (identical(other.exception, exception) ||
                 other.exception == exception));
@@ -365,8 +460,12 @@ class _$DessertPostStateImpl implements _DessertPostState {
     leaveMateStatus,
     pendingMateStatus,
     acceptMateStatus,
+    rejectMateStatus,
+    getMateStatus,
+    banMateStatus,
     data,
     const DeepCollectionEquality().hash(_pendingData),
+    const DeepCollectionEquality().hash(_memberData),
     exception,
   );
 
@@ -390,8 +489,12 @@ abstract class _DessertPostState implements DessertPostState {
     final Status leaveMateStatus,
     final Status pendingMateStatus,
     final Status acceptMateStatus,
+    final Status rejectMateStatus,
+    final Status getMateStatus,
+    final Status banMateStatus,
     final MateDetailModel data,
     final List<MateMemberDetailModel> pendingData,
+    final List<MateMemberDetailModel> memberData,
     final ExceptionModel exception,
   }) = _$DessertPostStateImpl;
 
@@ -408,9 +511,17 @@ abstract class _DessertPostState implements DessertPostState {
   @override
   Status get acceptMateStatus;
   @override
+  Status get rejectMateStatus;
+  @override
+  Status get getMateStatus;
+  @override
+  Status get banMateStatus;
+  @override
   MateDetailModel get data;
   @override
   List<MateMemberDetailModel> get pendingData;
+  @override
+  List<MateMemberDetailModel> get memberData;
   @override
   ExceptionModel get exception;
 

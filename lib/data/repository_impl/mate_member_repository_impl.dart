@@ -9,10 +9,13 @@ import 'package:frontend_mobile/data/mapper/mate_member_mapper.dart';
 import 'package:frontend_mobile/domain/model/mate_member/mate_member_detail_model.dart';
 import 'package:frontend_mobile/domain/model/mate_member/mate_member_model.dart';
 import 'package:frontend_mobile/domain/param/mate_member/accept_mate_member_params.dart';
+import 'package:frontend_mobile/domain/param/mate_member/ban_mate_member_params.dart';
 import 'package:frontend_mobile/domain/param/mate_member/delete_mate_member_params.dart';
+import 'package:frontend_mobile/domain/param/mate_member/get_mate_member_params.dart';
 import 'package:frontend_mobile/domain/param/mate_member/leave_mate_member_params.dart';
 import 'package:frontend_mobile/domain/param/mate_member/pending_mate_member_params.dart';
 import 'package:frontend_mobile/domain/param/mate_member/post_mate_member_params.dart';
+import 'package:frontend_mobile/domain/param/mate_member/reject_mate_member_params.dart';
 import 'package:frontend_mobile/domain/repository/mate_member_repository.dart';
 
 final Provider<MateMemberRepository> mateMemberRepositoryProvider = Provider<
@@ -89,6 +92,53 @@ class MateMemberRepositoryImpl implements MateMemberRepository {
     return await apiCall(
       api: () async {
         final MateMemberEntity result = await api.acceptMateMember(
+          mateUuid: params.mateUuid,
+          body: params.toBody(),
+        );
+
+        return result.toModel();
+      },
+    );
+  }
+
+  @override
+  Future<Result<MateMemberModel, CustomException>> rejectMateMember({
+    required RejectMateMemberParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        final MateMemberEntity result = await api.rejectMateMember(
+          mateUuid: params.mateUuid,
+          body: params.toBody(),
+        );
+
+        return result.toModel();
+      },
+    );
+  }
+
+  @override
+  Future<Result<List<MateMemberDetailModel>, CustomException>> getMateMember({
+    required GetMateMemberParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        final List<MateMemberDetailEntity> result = await api.getMateMember(
+          mateUuid: params.mateUuid,
+        );
+
+        return result.map((MateMemberDetailEntity e) => e.toModel()).toList();
+      },
+    );
+  }
+
+  @override
+  Future<Result<MateMemberModel, CustomException>> banMateMember({
+    required BanMateMemberParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        final MateMemberEntity result = await api.banMateMember(
           mateUuid: params.mateUuid,
           body: params.toBody(),
         );

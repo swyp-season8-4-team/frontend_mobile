@@ -13,11 +13,13 @@ import 'package:frontend_mobile/core/resource/extension.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/mate/get_mate_detail_params.dart';
+import 'package:frontend_mobile/domain/param/mate_member/get_mate_member_params.dart';
 import 'package:frontend_mobile/domain/param/mate_member/pending_mate_member_params.dart';
 import 'package:frontend_mobile/domain/param/mate_reply/get_mate_reply_params.dart';
 import 'package:frontend_mobile/presentation/dessert/comment/dessert_comment_view_model.dart';
 import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view_model.dart';
 import 'package:frontend_mobile/presentation/dessert/post/widget/header/info/dessert_post_header_info.dart';
+import 'package:frontend_mobile/presentation/dessert/post/widget/host/dessert_post_host_approved.dart';
 import 'package:frontend_mobile/presentation/dessert/post/widget/host/dessert_post_host_pending.dart';
 import 'package:frontend_mobile/presentation/dessert/post/widget/participant/dessert_post_participant_approved.dart';
 import 'package:frontend_mobile/presentation/dessert/post/widget/participant/dessert_post_participant_none.dart';
@@ -50,6 +52,12 @@ class _DessertPostState extends ConsumerState<DessertPost> {
           .read(dessertPostViewModelProvider.notifier)
           .pendingMateMember(
             params: PendingMateMemberParams(mateUuid: widget.mateUuid),
+          );
+
+      ref
+          .read(dessertPostViewModelProvider.notifier)
+          .getMateMember(
+            params: GetMateMemberParams(mateUuid: widget.mateUuid),
           );
 
       ref
@@ -290,7 +298,12 @@ class _DessertPostState extends ConsumerState<DessertPost> {
 
                       /// 모임장인 경우
                       if (userState.data.userUuid == state.data.userUuid)
-                        const DessertPostHostPending(),
+                        const Column(
+                          children: <Widget>[
+                            DessertPostHostPending(),
+                            DessertPostHostApproved(),
+                          ],
+                        ),
 
                       /// 참가자가 승인된 경우
                       if (state.data.applyStatus == 'APPROVED')

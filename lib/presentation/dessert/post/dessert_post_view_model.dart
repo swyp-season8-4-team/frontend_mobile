@@ -10,16 +10,22 @@ import 'package:frontend_mobile/domain/model/mate_member/mate_member_detail_mode
 import 'package:frontend_mobile/domain/model/mate_member/mate_member_model.dart';
 import 'package:frontend_mobile/domain/param/mate/get_mate_detail_params.dart';
 import 'package:frontend_mobile/domain/param/mate_member/accept_mate_member_params.dart';
+import 'package:frontend_mobile/domain/param/mate_member/ban_mate_member_params.dart';
 import 'package:frontend_mobile/domain/param/mate_member/delete_mate_member_params.dart';
+import 'package:frontend_mobile/domain/param/mate_member/get_mate_member_params.dart';
 import 'package:frontend_mobile/domain/param/mate_member/leave_mate_member_params.dart';
 import 'package:frontend_mobile/domain/param/mate_member/pending_mate_member_params.dart';
 import 'package:frontend_mobile/domain/param/mate_member/post_mate_member_params.dart';
+import 'package:frontend_mobile/domain/param/mate_member/reject_mate_member_params.dart';
 import 'package:frontend_mobile/domain/usecase/mate/get_mate_detail_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/mate_member/accept_mate_member_usecase.dart';
+import 'package:frontend_mobile/domain/usecase/mate_member/ban_mate_member_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/mate_member/delete_mate_member_usecase.dart';
+import 'package:frontend_mobile/domain/usecase/mate_member/get_mate_member_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/mate_member/leave_mate_member_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/mate_member/pending_mate_member_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/mate_member/post_mate_member_usecase.dart';
+import 'package:frontend_mobile/domain/usecase/mate_member/reject_mate_member_usecase.dart';
 
 part 'dessert_post_state.dart';
 part 'generated/dessert_post_view_model.freezed.dart';
@@ -68,6 +74,9 @@ class DessertPostViewModel extends StateNotifier<DessertPostState> {
       leaveMateStatus: Status.initial,
       pendingMateStatus: Status.initial,
       acceptMateStatus: Status.initial,
+      rejectMateStatus: Status.initial,
+      getMateStatus: Status.initial,
+      banMateStatus: Status.initial,
     );
 
     final Result<MateMemberModel, CustomException> response =
@@ -102,6 +111,9 @@ class DessertPostViewModel extends StateNotifier<DessertPostState> {
       leaveMateStatus: Status.initial,
       pendingMateStatus: Status.initial,
       acceptMateStatus: Status.initial,
+      rejectMateStatus: Status.initial,
+      getMateStatus: Status.initial,
+      banMateStatus: Status.initial,
     );
 
     final Result<MateMemberModel, CustomException> response =
@@ -134,6 +146,9 @@ class DessertPostViewModel extends StateNotifier<DessertPostState> {
       postMateStatus: Status.initial,
       pendingMateStatus: Status.initial,
       acceptMateStatus: Status.initial,
+      rejectMateStatus: Status.initial,
+      getMateStatus: Status.initial,
+      banMateStatus: Status.initial,
     );
 
     final Result<MateMemberModel, CustomException> response =
@@ -168,6 +183,9 @@ class DessertPostViewModel extends StateNotifier<DessertPostState> {
       deleteMateStatus: Status.initial,
       postMateStatus: Status.initial,
       acceptMateStatus: Status.initial,
+      rejectMateStatus: Status.initial,
+      getMateStatus: Status.initial,
+      banMateStatus: Status.initial,
     );
 
     final Result<List<MateMemberDetailModel>, CustomException> response =
@@ -202,6 +220,9 @@ class DessertPostViewModel extends StateNotifier<DessertPostState> {
       leaveMateStatus: Status.initial,
       deleteMateStatus: Status.initial,
       postMateStatus: Status.initial,
+      rejectMateStatus: Status.initial,
+      getMateStatus: Status.initial,
+      banMateStatus: Status.initial,
     );
 
     final Result<MateMemberModel, CustomException> response =
@@ -212,24 +233,126 @@ class DessertPostViewModel extends StateNotifier<DessertPostState> {
 
     response.map(
       success: (Success<MateMemberModel, CustomException> success) {
-        final List<MateMemberDetailModel> pendingData =
-            state.pendingData
-                .where(
-                  (MateMemberDetailModel element) =>
-                      element.userUuid != params.acceptUserUuid,
-                )
-                .toList();
-
-        state = state.copyWith(
-          acceptMateStatus: Status.success,
-          pendingData: pendingData,
-        );
-
         getMateDetail(params: GetMateDetailParams(mateUuid: params.mateUuid));
+        pendingMateMember(
+          params: PendingMateMemberParams(mateUuid: params.mateUuid),
+        );
+        getMateMember(params: GetMateMemberParams(mateUuid: params.mateUuid));
+
+        state = state.copyWith(acceptMateStatus: Status.success);
       },
       failure: (Failure<MateMemberModel, CustomException> failure) {
         state = state.copyWith(
           acceptMateStatus: Status.failure,
+          exception: failure.exception.model,
+        );
+      },
+    );
+  }
+
+  /// 디저트 메이트 멤버 신청 거절
+  Future<void> rejectMateMember({
+    required RejectMateMemberParams params,
+  }) async {
+    state = state.copyWith(
+      rejectMateStatus: Status.loading,
+      acceptMateStatus: Status.initial,
+      pendingMateStatus: Status.initial,
+      leaveMateStatus: Status.initial,
+      deleteMateStatus: Status.initial,
+      postMateStatus: Status.initial,
+      getMateStatus: Status.initial,
+      banMateStatus: Status.initial,
+    );
+
+    final Result<MateMemberModel, CustomException> response =
+        await Usecase.execute(
+          usecase: ref.read(rejectMateMemberUsecaseProvider),
+          params: params,
+        );
+
+    response.map(
+      success: (Success<MateMemberModel, CustomException> success) {
+        getMateDetail(params: GetMateDetailParams(mateUuid: params.mateUuid));
+        pendingMateMember(
+          params: PendingMateMemberParams(mateUuid: params.mateUuid),
+        );
+
+        state = state.copyWith(rejectMateStatus: Status.success);
+      },
+      failure: (Failure<MateMemberModel, CustomException> failure) {
+        state = state.copyWith(
+          rejectMateStatus: Status.failure,
+          exception: failure.exception.model,
+        );
+      },
+    );
+  }
+
+  /// 디저트 메이트 멤버 전체 조회
+  Future<void> getMateMember({required GetMateMemberParams params}) async {
+    state = state.copyWith(
+      getMateStatus: Status.loading,
+      pendingMateStatus: Status.initial,
+      leaveMateStatus: Status.initial,
+      deleteMateStatus: Status.initial,
+      postMateStatus: Status.initial,
+      acceptMateStatus: Status.initial,
+      rejectMateStatus: Status.initial,
+      banMateStatus: Status.initial,
+    );
+
+    final Result<List<MateMemberDetailModel>, CustomException> response =
+        await Usecase.execute(
+          usecase: ref.read(getMateMemberUsecaseProvider),
+          params: params,
+        );
+
+    response.map(
+      success: (Success<List<MateMemberDetailModel>, CustomException> success) {
+        state = state.copyWith(
+          pendingMateStatus: Status.success,
+          memberData: success.data,
+        );
+      },
+      failure: (Failure<List<MateMemberDetailModel>, CustomException> failure) {
+        state = state.copyWith(
+          pendingMateStatus: Status.failure,
+          exception: failure.exception.model,
+        );
+      },
+    );
+  }
+
+  /// 디저트 메이트 멤버 신청 강퇴
+  Future<void> banMateMember({required BanMateMemberParams params}) async {
+    state = state.copyWith(
+      banMateStatus: Status.loading,
+      rejectMateStatus: Status.initial,
+      acceptMateStatus: Status.initial,
+      pendingMateStatus: Status.initial,
+      leaveMateStatus: Status.initial,
+      deleteMateStatus: Status.initial,
+      postMateStatus: Status.initial,
+      getMateStatus: Status.initial,
+    );
+
+    final Result<MateMemberModel, CustomException> response =
+        await Usecase.execute(
+          usecase: ref.read(banMateMemberUsecaseProvider),
+          params: params,
+        );
+
+    response.map(
+      success: (Success<MateMemberModel, CustomException> success) {
+        getMateDetail(params: GetMateDetailParams(mateUuid: params.mateUuid));
+        getMateMember(params: GetMateMemberParams(mateUuid: params.mateUuid));
+
+        state = state.copyWith(banMateStatus: Status.success);
+      },
+      failure: (Failure<MateMemberModel, CustomException> failure) {
+        state = state.copyWith(
+          banMateStatus: Status.failure,
           exception: failure.exception.model,
         );
       },

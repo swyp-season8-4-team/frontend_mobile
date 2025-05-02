@@ -120,7 +120,7 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
                 ),
                 const SizedBox(width: 6),
 
-                if (userState.data.userUuid == postState.data.userUuid)
+                if (item.userUuid == postState.data.userUuid)
                   const CustomLabelTag(
                     label: '모임장',
                     backgroundColor: ScaleColorConfig.success80,
@@ -283,7 +283,10 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
                   Text(
                     state.data.count.toString(),
                     style: textTheme.titleSmall?.copyWith(
-                      color: ScaleColorConfig.success50,
+                      color:
+                          state.data.count == 0
+                              ? ScaleColorConfig.neutral40
+                              : ScaleColorConfig.success50,
                     ),
                   ),
                 ],
@@ -336,55 +339,70 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
           ),
         ),
 
-        /// 댓글 리스트
-        ...List<Widget>.generate(state.data.mateReplies.length, (int index) {
-          final MateReplyDetailModel item = state.data.mateReplies[index];
-
-          return Column(
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: ScaleColorConfig.surface80),
-                  ),
+        if (state.data.mateReplies.isEmpty)
+          SizedBox(
+            height: 116,
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.only(bottom: 20),
+              child: Text(
+                '아직 댓글이 없어요',
+                style: textTheme.labelLarge?.copyWith(
+                  color: ScaleColorConfig.neutral50,
                 ),
-                child: _commentItem(item: item),
               ),
+            ),
+          )
+        else
+          /// 댓글 리스트
+          ...List<Widget>.generate(state.data.mateReplies.length, (int index) {
+            final MateReplyDetailModel item = state.data.mateReplies[index];
 
-              ...List<Widget>.generate(item.children.length, (int index) {
-                final MateReplyDetailModel childItem = item.children[index];
-
-                return Container(
+            return Column(
+              children: <Widget>[
+                Container(
                   padding: const EdgeInsets.all(16),
                   decoration: const BoxDecoration(
                     border: Border(
                       bottom: BorderSide(color: ScaleColorConfig.surface80),
                     ),
                   ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Assets.icon.arrow.cornerDownRightLine.svg(
-                        colorFilter: const ColorFilter.mode(
-                          ScaleColorConfig.neutral50,
-                          BlendMode.srcIn,
-                        ),
+                  child: _commentItem(item: item),
+                ),
+
+                ...List<Widget>.generate(item.children.length, (int index) {
+                  final MateReplyDetailModel childItem = item.children[index];
+
+                  return Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(color: ScaleColorConfig.surface80),
                       ),
-                      const SizedBox(width: 6),
-                      Expanded(
-                        child: _commentItem(
-                          item: childItem,
-                          replyButton: false,
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Assets.icon.arrow.cornerDownRightLine.svg(
+                          colorFilter: const ColorFilter.mode(
+                            ScaleColorConfig.neutral50,
+                            BlendMode.srcIn,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
-              }),
-            ],
-          );
-        }),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: _commentItem(
+                            item: childItem,
+                            replyButton: false,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+              ],
+            );
+          }),
       ],
     );
   }
