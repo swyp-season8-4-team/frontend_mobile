@@ -85,8 +85,7 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return CustomDialog.basic(
-                  description:
-                      '${next.signUpData.imageError!.message!}\n마이페이지에서 프로필 이미지 변경이 가능합니다.',
+                  description: next.signUpData.imageError!.message!,
                   primaryButton: CustomDialogButton(
                     text: '확인',
                     onTap: () => context.pushNamed(AppRoutes.signUpStep6.name),
