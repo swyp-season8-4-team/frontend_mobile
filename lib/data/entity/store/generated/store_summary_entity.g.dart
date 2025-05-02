@@ -23,10 +23,12 @@ StoreSummaryEntity _$StoreSummaryEntityFromJson(
   phone: json['phone'] as String,
   averageRating: (json['averageRating'] as num?)?.toDouble(),
   storeImages:
-      (json['storeImages'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      (json['storeImages'] as List<dynamic>?)
+          ?.map((e) => StoreDetailImage.fromJson(e as Map<String, dynamic>))
+          .toList(),
   ownerPickImages:
       (json['ownerPickImages'] as List<dynamic>?)
-          ?.map((e) => e as String)
+          ?.map((e) => StoreDetailImage.fromJson(e as Map<String, dynamic>))
           .toList(),
   primaryStoreLink: json['primaryStoreLink'] as String?,
   storeLinks:

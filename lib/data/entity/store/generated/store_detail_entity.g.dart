@@ -60,10 +60,12 @@ StoreDetailEntity _$StoreDetailEntityFromJson(
           .toList(),
   averageRating: (json['averageRating'] as num?)?.toDouble(),
   storeImages:
-      (json['storeImages'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      (json['storeImages'] as List<dynamic>?)
+          ?.map((e) => StoreDetailImage.fromJson(e as Map<String, dynamic>))
+          .toList(),
   ownerPickImages:
       (json['ownerPickImages'] as List<dynamic>?)
-          ?.map((e) => e as String)
+          ?.map((e) => StoreDetailImage.fromJson(e as Map<String, dynamic>))
           .toList(),
   primaryStoreLink: json['primaryStoreLink'] as String?,
   storeLinks:
@@ -298,3 +300,12 @@ StoreDetailTagCategoryEntity _$StoreDetailTagCategoryEntityFromJson(
 Map<String, dynamic> _$StoreDetailTagCategoryEntityToJson(
   StoreDetailTagCategoryEntity instance,
 ) => <String, dynamic>{'id': instance.id, 'name': instance.name};
+
+StoreDetailImage _$StoreDetailImageFromJson(Map<String, dynamic> json) =>
+    StoreDetailImage(
+      id: (json['id'] as num?)?.toInt(),
+      url: json['url'] as String?,
+    );
+
+Map<String, dynamic> _$StoreDetailImageToJson(StoreDetailImage instance) =>
+    <String, dynamic>{'id': instance.id, 'url': instance.url};

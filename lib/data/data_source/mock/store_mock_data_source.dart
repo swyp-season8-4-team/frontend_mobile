@@ -49,25 +49,7 @@ class StoreMockDataSource implements StoreRemoteDataSource {
           createdAt: DateTime.now(),
         ),
       ],
-      storeImages: <String>[
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-      ],
-      ownerPickImages: <String>[
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-      ],
+
       operatingHours: <StoreOperatingHourEntity>[
         const StoreOperatingHourEntity(
           dayOfWeek: 'MONDAY',
@@ -150,14 +132,7 @@ class StoreMockDataSource implements StoreRemoteDataSource {
         const StoreTopPreferenceEntity(tagId: 2, name: '락토프리', rank: 2),
         const StoreTopPreferenceEntity(tagId: 3, name: '글루텐프리', rank: 2),
       ],
-      storeImages: <String>[
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-        'https://picsum.photos/250?image=5',
-      ],
+
       operatingHours: <StoreOperatingHourEntity>[
         const StoreOperatingHourEntity(
           dayOfWeek: 'MONDAY',

@@ -7,6 +7,7 @@ import 'package:frontend_mobile/common/design_system/component/hexagon_grid/hexa
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/resource/constant.dart';
+import 'package:frontend_mobile/domain/model/store/store_detail_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_operating_hour_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_summary_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_top_preference_model.dart';
@@ -147,7 +148,12 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
                                       CustomHexagon(text: e?.name ?? ''),
                                 ),
                                 ..._normalizeToLength3<String>(
-                                  storeSummary!.storeImages,
+                                  storeSummary!.storeImages
+                                      ?.map(
+                                        (StoreDetailImageModel e) =>
+                                            e.url ?? '',
+                                      )
+                                      .toList(),
                                 ).map((String? e) {
                                   if (e != null) {
                                     return CustomHexagon(imageUrl: e);
@@ -306,7 +312,8 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
                                     }
 
                                     final String imageUrl =
-                                        storeSummary!.storeImages![index];
+                                        storeSummary!.storeImages![index].url ??
+                                        '';
 
                                     // 마지막 이미지에 남은 수가 있으면 표시
                                     final int? numberOfImages =

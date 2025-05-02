@@ -157,7 +157,7 @@ class _AddStoreReviewViewState extends ConsumerState<AddStoreReviewView> {
                           imageUrl:
                               storeDetail.storeImages != null &&
                                       storeDetail.storeImages!.isNotEmpty
-                                  ? storeDetail.storeImages!.first
+                                  ? (storeDetail.storeImages!.first.url ?? '')
                                   : '',
                           errorWidget: (_, __, ___) {
                             return const Icon(Icons.error);

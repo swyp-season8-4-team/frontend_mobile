@@ -43,8 +43,8 @@ class StoreDetailModel {
   final String storeUuid;
   final String name;
   final double? averageRating;
-  final List<String>? storeImages;
-  final List<String>? ownerPickImages;
+  final List<StoreDetailImageModel>? storeImages;
+  final List<StoreDetailImageModel>? ownerPickImages;
   final List<StoreDetailTagModel> tags;
   final String? primaryStoreLink;
   final List<String>? storeLinks;
@@ -194,4 +194,10 @@ class StoreDetailTagCategoryModel {
 
   final int id;
   final String name;
+}
+
+class StoreDetailImageModel {
+  const StoreDetailImageModel({required this.id, required this.url});
+  final int? id;
+  final String? url;
 }

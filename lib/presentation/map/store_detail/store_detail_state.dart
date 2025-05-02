@@ -17,7 +17,10 @@ class StoreDetailState with _$StoreDetailState {
   const StoreDetailState._();
 
   List<String> get thumbnailImageUrls => <String>[
-    ...storeDetail!.ownerPickImages ?? <String>[],
+    ...storeDetail!.ownerPickImages?.map(
+          (StoreDetailImageModel e) => e.url ?? '',
+        ) ??
+        <String>[],
     ...storeDetail!.menus
         .map((StoreDetailMenuModel e) => e.images ?? <String>[])
         .expand((List<String> e) => e),

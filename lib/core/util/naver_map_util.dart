@@ -32,7 +32,7 @@ abstract class NaverMapUtil {
     final double lngDistance =
         lngRadius * cos(latitudeInRadian) * killometerPerLatitude;
 
-    final double radiusDistance = min(latDistance, lngDistance);
+    final double radiusDistance = max(latDistance, lngDistance);
 
     return (
       lat: nCameraPosition.target.latitude,
