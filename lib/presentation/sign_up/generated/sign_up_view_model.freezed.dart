@@ -22,7 +22,7 @@ mixin _$SignUpState {
       throw _privateConstructorUsedError;
   Status get postVerifyStatus => throw _privateConstructorUsedError;
   Status get postNicknameStatus => throw _privateConstructorUsedError;
-  LocalLoginModel get signUpData => throw _privateConstructorUsedError;
+  SignUpWithProfileModel get signUpData => throw _privateConstructorUsedError;
   EmailVerificationRequestModel get verificationRequestData =>
       throw _privateConstructorUsedError;
   EmailVerifyModel get verifyData => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $SignUpStateCopyWith<$Res> {
     Status postVerificationRequestStatus,
     Status postVerifyStatus,
     Status postNicknameStatus,
-    LocalLoginModel signUpData,
+    SignUpWithProfileModel signUpData,
     EmailVerificationRequestModel verificationRequestData,
     EmailVerifyModel verifyData,
     NicknameAvailabilityModel nicknameAvailabilityData,
@@ -108,7 +108,7 @@ class _$SignUpStateCopyWithImpl<$Res, $Val extends SignUpState>
                 null == signUpData
                     ? _value.signUpData
                     : signUpData // ignore: cast_nullable_to_non_nullable
-                        as LocalLoginModel,
+                        as SignUpWithProfileModel,
             verificationRequestData:
                 null == verificationRequestData
                     ? _value.verificationRequestData
@@ -149,7 +149,7 @@ abstract class _$$SignUpStateImplCopyWith<$Res>
     Status postVerificationRequestStatus,
     Status postVerifyStatus,
     Status postNicknameStatus,
-    LocalLoginModel signUpData,
+    SignUpWithProfileModel signUpData,
     EmailVerificationRequestModel verificationRequestData,
     EmailVerifyModel verifyData,
     NicknameAvailabilityModel nicknameAvailabilityData,
@@ -207,7 +207,7 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
             null == signUpData
                 ? _value.signUpData
                 : signUpData // ignore: cast_nullable_to_non_nullable
-                    as LocalLoginModel,
+                    as SignUpWithProfileModel,
         verificationRequestData:
             null == verificationRequestData
                 ? _value.verificationRequestData
@@ -241,7 +241,7 @@ class _$SignUpStateImpl implements _SignUpState {
     this.postVerificationRequestStatus = Status.initial,
     this.postVerifyStatus = Status.initial,
     this.postNicknameStatus = Status.initial,
-    this.signUpData = const LocalLoginModel(
+    this.signUpData = const SignUpWithProfileModel(
       accessToken: '',
       refreshToken: '',
       tokenType: '',
@@ -251,6 +251,7 @@ class _$SignUpStateImpl implements _SignUpState {
       nickname: '',
       profileImageUrl: null,
       deviceId: '',
+      imageError: null,
       preferenceSet: false,
     ),
     this.verificationRequestData = const EmailVerificationRequestModel(
@@ -286,7 +287,7 @@ class _$SignUpStateImpl implements _SignUpState {
   final Status postNicknameStatus;
   @override
   @JsonKey()
-  final LocalLoginModel signUpData;
+  final SignUpWithProfileModel signUpData;
   @override
   @JsonKey()
   final EmailVerificationRequestModel verificationRequestData;
@@ -373,7 +374,7 @@ abstract class _SignUpState implements SignUpState {
     final Status postVerificationRequestStatus,
     final Status postVerifyStatus,
     final Status postNicknameStatus,
-    final LocalLoginModel signUpData,
+    final SignUpWithProfileModel signUpData,
     final EmailVerificationRequestModel verificationRequestData,
     final EmailVerifyModel verifyData,
     final NicknameAvailabilityModel nicknameAvailabilityData,
@@ -389,7 +390,7 @@ abstract class _SignUpState implements SignUpState {
   @override
   Status get postNicknameStatus;
   @override
-  LocalLoginModel get signUpData;
+  SignUpWithProfileModel get signUpData;
   @override
   EmailVerificationRequestModel get verificationRequestData;
   @override
