@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/domain/model/mate_reply/mate_reply_detail_model.dart';
 import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
+import 'package:frontend_mobile/presentation/dessert/comment/report/dessert_comment_report_success_view.dart';
+import 'package:frontend_mobile/presentation/dessert/comment/report/dessert_comment_report_view.dart';
 import 'package:frontend_mobile/presentation/dessert/dessert_board_view.dart';
 import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view.dart';
 import 'package:frontend_mobile/presentation/dessert/write/view/dessert_write_step1.dart';
@@ -469,6 +472,9 @@ class AppRouter {
             pageBuilder: (BuildContext context, GoRouterState state) {
               return const NoTransitionPage<dynamic>(child: DessertBoard());
             },
+            // builder: (BuildContext context, GoRouterState state) {
+            //   return const DessertBoard();
+            // },
             routes: <RouteBase>[
               /// 게시글
               GoRoute(
@@ -479,6 +485,37 @@ class AppRouter {
 
                   return DessertPost(mateUuid: mateUuid);
                 },
+                routes: <RouteBase>[
+                  /// 댓글 신고
+                  GoRoute(
+                    path: AppRoutes.dessertCommentReport.path,
+                    name: AppRoutes.dessertCommentReport.name,
+                    builder: (BuildContext context, GoRouterState state) {
+                      final Map<String, dynamic> extra =
+                          state.extra as Map<String, dynamic>;
+
+                      final String mateUuid = extra['mateUuid'] as String;
+                      final MateReplyDetailModel item =
+                          extra['item'] as MateReplyDetailModel;
+
+                      return DessertCommentReportView(
+                        mateUuid: mateUuid,
+                        item: item,
+                      );
+                    },
+
+                    routes: <RouteBase>[
+                      /// 성공
+                      GoRoute(
+                        path: AppRoutes.dessertCommentReportSuccess.path,
+                        name: AppRoutes.dessertCommentReportSuccess.name,
+                        builder: (BuildContext context, GoRouterState state) {
+                          return const DessertCommentReportSuccessView();
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),
