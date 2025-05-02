@@ -1,17 +1,26 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/outline_button.dart';
+import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_size.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/domain/model/mate_member/mate_member_detail_model.dart';
+import 'package:frontend_mobile/domain/param/mate_member/ban_mate_member_params.dart';
 import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view_model.dart';
+import 'package:go_router/go_router.dart';
 
-class DessertPostHostApproved extends ConsumerWidget {
+class DessertPostHostApproved extends ConsumerStatefulWidget {
   const DessertPostHostApproved({super.key});
 
-  Widget _pendingListProfileImage({required MateMemberDetailModel item}) {
+  @override
+  ConsumerState<DessertPostHostApproved> createState() =>
+      _DessertPostHostApprovedState();
+}
+
+class _DessertPostHostApprovedState
+    extends ConsumerState<DessertPostHostApproved> {
+  Widget _approvedListProfileImage({required MateMemberDetailModel item}) {
     if (item.profileImage.isNotEmpty) {
       return Container(
         width: 32,
@@ -30,24 +39,60 @@ class DessertPostHostApproved extends ConsumerWidget {
         : CustomProfilePhotoSize.girl(size: CustomProfilePhotoSizeEnum.m);
   }
 
-  Widget _pendingListItem({required MateMemberDetailModel item}) {
+  Widget _approvedListItem({required MateMemberDetailModel item}) {
+    final DessertPostState state = ref.watch(dessertPostViewModelProvider);
+
     return Row(
       children: <Widget>[
-        _pendingListProfileImage(item: item),
+        _approvedListProfileImage(item: item),
         const SizedBox(width: 6),
         Text(item.nickname),
 
         const Spacer(),
 
-        CustomFillButton.xSmall(label: '수락', width: 55, onPressed: () {}),
-        const SizedBox(width: 6),
-        CustomOutlineButton.xSmall(label: '거절', width: 55, onPressed: () {}),
+        CustomOutlineButton.xSmall(
+          label: '강퇴',
+          width: 55,
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return CustomDialog.basic(
+                  title: '강제퇴장',
+                  description: '${item.nickname} 님을\n강퇴하시겠습니까?',
+                  primaryButton: CustomDialogButton(
+                    text: '강제퇴장',
+                    warning: true,
+                    onTap: () {
+                      ref
+                          .read(dessertPostViewModelProvider.notifier)
+                          .banMateMember(
+                            params: BanMateMemberParams(
+                              mateUuid: state.data.mateUuid,
+                              creatorUserUuid: state.data.userUuid,
+                              banUserUuid: item.userUuid,
+                            ),
+                          );
+                      context.pop();
+                    },
+                  ),
+                  secondaryButton: CustomDialogButton(
+                    text: '취소',
+                    onTap: () {
+                      context.pop();
+                    },
+                  ),
+                );
+              },
+            );
+          },
+        ),
       ],
     );
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final DessertPostState state = ref.watch(dessertPostViewModelProvider);
     final TextTheme textTheme = Theme.of(context).textTheme;
 
@@ -68,27 +113,45 @@ class DessertPostHostApproved extends ConsumerWidget {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    state.pendingData.length.toString(),
+                    state.memberData.length.toString(),
                     style: textTheme.titleSmall?.copyWith(
-                      color: ScaleColorConfig.success50,
+                      color:
+                          state.memberData.isEmpty
+                              ? ScaleColorConfig.neutral40
+                              : ScaleColorConfig.success50,
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 20),
 
-              ...List<Widget>.generate(state.pendingData.length, (int index) {
-                final MateMemberDetailModel item = state.pendingData[index];
+              if (state.memberData.isEmpty)
+                SizedBox(
+                  height: 116,
+                  child: Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Text(
+                      '아직 참여한 멤버가 없어요',
+                      style: textTheme.labelLarge?.copyWith(
+                        color: ScaleColorConfig.neutral50,
+                      ),
+                    ),
+                  ),
+                )
+              else
+                ...List<Widget>.generate(state.memberData.length, (int index) {
+                  final MateMemberDetailModel item = state.memberData[index];
 
-                return Column(
-                  children: <Widget>[
-                    _pendingListItem(item: item),
+                  return Column(
+                    children: <Widget>[
+                      _approvedListItem(item: item),
 
-                    if (index != state.pendingData.length - 1)
-                      const SizedBox(height: 10),
-                  ],
-                );
-              }),
+                      if (index != state.memberData.length - 1)
+                        const SizedBox(height: 10),
+                    ],
+                  );
+                }),
             ],
           ),
         ),

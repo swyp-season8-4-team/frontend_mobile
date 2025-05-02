@@ -8,6 +8,7 @@ import 'package:frontend_mobile/common/design_system/component/profile_photo/pro
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/domain/model/mate_member/mate_member_detail_model.dart';
 import 'package:frontend_mobile/domain/param/mate_member/accept_mate_member_params.dart';
+import 'package:frontend_mobile/domain/param/mate_member/reject_mate_member_params.dart';
 import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view_model.dart';
 import 'package:go_router/go_router.dart';
 
@@ -59,7 +60,7 @@ class _DessertPostHostPendingState
               context: context,
               builder: (BuildContext context) {
                 return CustomDialog.basic(
-                  title: '참여 수락',
+                  title: '참여수락',
                   description: '${item.nickname} 님의\n참여를 수락하시겠습니까?',
                   primaryButton: CustomDialogButton(
                     text: '수락',
@@ -88,7 +89,43 @@ class _DessertPostHostPendingState
           },
         ),
         const SizedBox(width: 6),
-        CustomOutlineButton.xSmall(label: '거절', width: 55, onPressed: () {}),
+        CustomOutlineButton.xSmall(
+          label: '거절',
+          width: 55,
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return CustomDialog.basic(
+                  title: '참여거절',
+                  description: '${item.nickname} 님의\n참여를 거절하시겠습니까?',
+                  primaryButton: CustomDialogButton(
+                    text: '거절',
+                    warning: true,
+                    onTap: () {
+                      ref
+                          .read(dessertPostViewModelProvider.notifier)
+                          .rejectMateMember(
+                            params: RejectMateMemberParams(
+                              mateUuid: state.data.mateUuid,
+                              creatorUserUuid: state.data.userUuid,
+                              rejectUserUuid: item.userUuid,
+                            ),
+                          );
+                      context.pop();
+                    },
+                  ),
+                  secondaryButton: CustomDialogButton(
+                    text: '취소',
+                    onTap: () {
+                      context.pop();
+                    },
+                  ),
+                );
+              },
+            );
+          },
+        ),
       ],
     );
   }
@@ -117,25 +154,43 @@ class _DessertPostHostPendingState
                   Text(
                     state.pendingData.length.toString(),
                     style: textTheme.titleSmall?.copyWith(
-                      color: ScaleColorConfig.success50,
+                      color:
+                          state.pendingData.isEmpty
+                              ? ScaleColorConfig.neutral40
+                              : ScaleColorConfig.success50,
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 20),
 
-              ...List<Widget>.generate(state.pendingData.length, (int index) {
-                final MateMemberDetailModel item = state.pendingData[index];
+              if (state.pendingData.isEmpty)
+                SizedBox(
+                  height: 116,
+                  child: Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Text(
+                      '아직 참여 요청이 없어요',
+                      style: textTheme.labelLarge?.copyWith(
+                        color: ScaleColorConfig.neutral50,
+                      ),
+                    ),
+                  ),
+                )
+              else
+                ...List<Widget>.generate(state.pendingData.length, (int index) {
+                  final MateMemberDetailModel item = state.pendingData[index];
 
-                return Column(
-                  children: <Widget>[
-                    _pendingListItem(item: item),
+                  return Column(
+                    children: <Widget>[
+                      _pendingListItem(item: item),
 
-                    if (index != state.pendingData.length - 1)
-                      const SizedBox(height: 10),
-                  ],
-                );
-              }),
+                      if (index != state.pendingData.length - 1)
+                        const SizedBox(height: 10),
+                    ],
+                  );
+                }),
             ],
           ),
         ),
