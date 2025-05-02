@@ -17,7 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DessertCommentState {
-  Status get status => throw _privateConstructorUsedError;
+  Status get getMateReplyStatus => throw _privateConstructorUsedError;
+  Status get postMateReplyStatus => throw _privateConstructorUsedError;
+  Status get postMateReplyReportStatus => throw _privateConstructorUsedError;
   MateReplyModel get data => throw _privateConstructorUsedError;
   ExceptionModel get exception => throw _privateConstructorUsedError;
 
@@ -35,7 +37,13 @@ abstract class $DessertCommentStateCopyWith<$Res> {
     $Res Function(DessertCommentState) then,
   ) = _$DessertCommentStateCopyWithImpl<$Res, DessertCommentState>;
   @useResult
-  $Res call({Status status, MateReplyModel data, ExceptionModel exception});
+  $Res call({
+    Status getMateReplyStatus,
+    Status postMateReplyStatus,
+    Status postMateReplyReportStatus,
+    MateReplyModel data,
+    ExceptionModel exception,
+  });
 }
 
 /// @nodoc
@@ -53,16 +61,28 @@ class _$DessertCommentStateCopyWithImpl<$Res, $Val extends DessertCommentState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
+    Object? getMateReplyStatus = null,
+    Object? postMateReplyStatus = null,
+    Object? postMateReplyReportStatus = null,
     Object? data = null,
     Object? exception = null,
   }) {
     return _then(
       _value.copyWith(
-            status:
-                null == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
+            getMateReplyStatus:
+                null == getMateReplyStatus
+                    ? _value.getMateReplyStatus
+                    : getMateReplyStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            postMateReplyStatus:
+                null == postMateReplyStatus
+                    ? _value.postMateReplyStatus
+                    : postMateReplyStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            postMateReplyReportStatus:
+                null == postMateReplyReportStatus
+                    ? _value.postMateReplyReportStatus
+                    : postMateReplyReportStatus // ignore: cast_nullable_to_non_nullable
                         as Status,
             data:
                 null == data
@@ -89,7 +109,13 @@ abstract class _$$DessertCommentStateImplCopyWith<$Res>
   ) = __$$DessertCommentStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Status status, MateReplyModel data, ExceptionModel exception});
+  $Res call({
+    Status getMateReplyStatus,
+    Status postMateReplyStatus,
+    Status postMateReplyReportStatus,
+    MateReplyModel data,
+    ExceptionModel exception,
+  });
 }
 
 /// @nodoc
@@ -106,16 +132,28 @@ class __$$DessertCommentStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
+    Object? getMateReplyStatus = null,
+    Object? postMateReplyStatus = null,
+    Object? postMateReplyReportStatus = null,
     Object? data = null,
     Object? exception = null,
   }) {
     return _then(
       _$DessertCommentStateImpl(
-        status:
-            null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
+        getMateReplyStatus:
+            null == getMateReplyStatus
+                ? _value.getMateReplyStatus
+                : getMateReplyStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        postMateReplyStatus:
+            null == postMateReplyStatus
+                ? _value.postMateReplyStatus
+                : postMateReplyStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        postMateReplyReportStatus:
+            null == postMateReplyReportStatus
+                ? _value.postMateReplyReportStatus
+                : postMateReplyReportStatus // ignore: cast_nullable_to_non_nullable
                     as Status,
         data:
             null == data
@@ -136,7 +174,9 @@ class __$$DessertCommentStateImplCopyWithImpl<$Res>
 
 class _$DessertCommentStateImpl implements _DessertCommentState {
   const _$DessertCommentStateImpl({
-    this.status = Status.initial,
+    this.getMateReplyStatus = Status.initial,
+    this.postMateReplyStatus = Status.initial,
+    this.postMateReplyReportStatus = Status.initial,
     this.data = const MateReplyModel(
       mateUuid: '',
       mateReplies: <MateReplyDetailModel>[],
@@ -153,7 +193,13 @@ class _$DessertCommentStateImpl implements _DessertCommentState {
 
   @override
   @JsonKey()
-  final Status status;
+  final Status getMateReplyStatus;
+  @override
+  @JsonKey()
+  final Status postMateReplyStatus;
+  @override
+  @JsonKey()
+  final Status postMateReplyReportStatus;
   @override
   @JsonKey()
   final MateReplyModel data;
@@ -163,7 +209,7 @@ class _$DessertCommentStateImpl implements _DessertCommentState {
 
   @override
   String toString() {
-    return 'DessertCommentState(status: $status, data: $data, exception: $exception)';
+    return 'DessertCommentState(getMateReplyStatus: $getMateReplyStatus, postMateReplyStatus: $postMateReplyStatus, postMateReplyReportStatus: $postMateReplyReportStatus, data: $data, exception: $exception)';
   }
 
   @override
@@ -171,14 +217,29 @@ class _$DessertCommentStateImpl implements _DessertCommentState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DessertCommentStateImpl &&
-            (identical(other.status, status) || other.status == status) &&
+            (identical(other.getMateReplyStatus, getMateReplyStatus) ||
+                other.getMateReplyStatus == getMateReplyStatus) &&
+            (identical(other.postMateReplyStatus, postMateReplyStatus) ||
+                other.postMateReplyStatus == postMateReplyStatus) &&
+            (identical(
+                  other.postMateReplyReportStatus,
+                  postMateReplyReportStatus,
+                ) ||
+                other.postMateReplyReportStatus == postMateReplyReportStatus) &&
             (identical(other.data, data) || other.data == data) &&
             (identical(other.exception, exception) ||
                 other.exception == exception));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, data, exception);
+  int get hashCode => Object.hash(
+    runtimeType,
+    getMateReplyStatus,
+    postMateReplyStatus,
+    postMateReplyReportStatus,
+    data,
+    exception,
+  );
 
   /// Create a copy of DessertCommentState
   /// with the given fields replaced by the non-null parameter values.
@@ -194,13 +255,19 @@ class _$DessertCommentStateImpl implements _DessertCommentState {
 
 abstract class _DessertCommentState implements DessertCommentState {
   const factory _DessertCommentState({
-    final Status status,
+    final Status getMateReplyStatus,
+    final Status postMateReplyStatus,
+    final Status postMateReplyReportStatus,
     final MateReplyModel data,
     final ExceptionModel exception,
   }) = _$DessertCommentStateImpl;
 
   @override
-  Status get status;
+  Status get getMateReplyStatus;
+  @override
+  Status get postMateReplyStatus;
+  @override
+  Status get postMateReplyReportStatus;
   @override
   MateReplyModel get data;
   @override

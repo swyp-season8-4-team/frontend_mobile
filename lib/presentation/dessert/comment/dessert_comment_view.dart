@@ -16,6 +16,7 @@ import 'package:frontend_mobile/domain/param/mate_reply/post_mate_reply_params.d
 import 'package:frontend_mobile/presentation/dessert/comment/dessert_comment_view_model.dart';
 import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
 
 class DessertComment extends ConsumerStatefulWidget {
@@ -128,16 +129,27 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
                   ),
               ],
             ),
-            GestureDetector(
-              onTap: () {},
-              child: Assets.icon.system.reportLine.svg(
-                width: 16,
-                colorFilter: const ColorFilter.mode(
-                  ScaleColorConfig.neutral40,
-                  BlendMode.srcIn,
+
+            /// 본인이 작성한 댓글은 신고 버튼 안나옴
+            if (item.userUuid != userState.data.userUuid)
+              GestureDetector(
+                onTap: () {
+                  context.pushNamed(
+                    AppRoutes.dessertCommentReport.name,
+                    extra: <String, dynamic>{
+                      'mateUuid': widget.mateUuid,
+                      'item': item,
+                    },
+                  );
+                },
+                child: Assets.icon.system.reportLine.svg(
+                  width: 16,
+                  colorFilter: const ColorFilter.mode(
+                    ScaleColorConfig.neutral40,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
-            ),
           ],
         ),
         const SizedBox(height: 10),
@@ -235,7 +247,7 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     ref.listen(dessertCommentViewModelProvider, (_, DessertCommentState next) {
-      switch (next.status) {
+      switch (next.postMateReplyStatus) {
         case Status.success:
           _commentController.clear();
           _replyController.clear();

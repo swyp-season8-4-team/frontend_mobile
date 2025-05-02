@@ -3,7 +3,9 @@ part of 'dessert_comment_view_model.dart';
 @freezed
 class DessertCommentState with _$DessertCommentState {
   const factory DessertCommentState({
-    @Default(Status.initial) Status status,
+    @Default(Status.initial) Status getMateReplyStatus,
+    @Default(Status.initial) Status postMateReplyStatus,
+    @Default(Status.initial) Status postMateReplyReportStatus,
     @Default(
       MateReplyModel(
         mateUuid: '',
