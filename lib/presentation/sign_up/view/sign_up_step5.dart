@@ -79,7 +79,7 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
     ref.listen(signUpViewModelProvider, (_, SignUpState next) {
       switch (next.postSignUpWithProfileStatus) {
         case Status.success:
-          if (next.signUpData.imageError != null) {
+          if (next.signUpData.imageError?.message != null) {
             showDialog(
               context: context,
               barrierDismissible: false,
