@@ -5,7 +5,7 @@ import 'package:frontend_mobile/core/resource/exception/exception_model.dart';
 import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/resource/usecase.dart';
-import 'package:frontend_mobile/domain/model/auth/local_login_model.dart';
+import 'package:frontend_mobile/domain/model/auth/sign_up_with_profile_model.dart';
 import 'package:frontend_mobile/domain/model/email/email_verification_request_model.dart';
 import 'package:frontend_mobile/domain/model/email/email_verify_model.dart';
 import 'package:frontend_mobile/domain/model/user/nickname_availability_model.dart';
@@ -53,20 +53,20 @@ class SignUpViewModel extends StateNotifier<SignUpState> {
   }) async {
     state = state.copyWith(postSignUpWithProfileStatus: Status.loading);
 
-    final Result<LocalLoginModel, CustomException> response =
+    final Result<SignUpWithProfileModel, CustomException> response =
         await Usecase.execute(
           usecase: ref.read(postSignUpUsecaseProvider),
           params: params,
         );
 
     response.map(
-      success: (Success<LocalLoginModel, CustomException> success) {
+      success: (Success<SignUpWithProfileModel, CustomException> success) {
         state = state.copyWith(
           postSignUpWithProfileStatus: Status.success,
           signUpData: success.data,
         );
       },
-      failure: (Failure<LocalLoginModel, CustomException> failure) {
+      failure: (Failure<SignUpWithProfileModel, CustomException> failure) {
         state = state.copyWith(
           postSignUpWithProfileStatus: Status.failure,
           exception: failure.exception.model,

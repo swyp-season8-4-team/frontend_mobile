@@ -34,8 +34,8 @@ class ImageErrorModel {
     required this.timestamp,
   });
 
-  final int status;
-  final String code;
-  final String message;
-  final String timestamp;
+  final int? status;
+  final String? code;
+  final String? message;
+  final String? timestamp;
 }

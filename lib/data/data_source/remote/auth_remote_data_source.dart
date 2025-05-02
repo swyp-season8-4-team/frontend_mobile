@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
 import 'package:frontend_mobile/data/entity/auth/local_login_entity.dart';
+import 'package:frontend_mobile/data/entity/auth/sign_up_with_profile_entity.dart';
 import 'package:frontend_mobile/data/request_body/auth/local_login_request_body.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -23,7 +24,7 @@ abstract interface class AuthRemoteDataSource {
   /// 프로필 이미지 포함 회원가입
   @POST('/api/auth/signup-with-profile')
   @MultiPart()
-  Future<LocalLoginEntity> postSignUp({
+  Future<SignUpWithProfileEntity> postSignUp({
     @Header('X-Email-Verification-Token') required String emailToken,
     @Body() required FormData formData,
   });

@@ -79,8 +79,26 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
     ref.listen(signUpViewModelProvider, (_, SignUpState next) {
       switch (next.postSignUpWithProfileStatus) {
         case Status.success:
+          if (next.signUpData.imageError != null) {
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return CustomDialog.basic(
+                  description:
+                      '${next.signUpData.imageError!.message!}\n마이페이지에서 프로필 이미지 변경이 가능합니다.',
+                  primaryButton: CustomDialogButton(
+                    text: '확인',
+                    onTap: () => context.pushNamed(AppRoutes.signUpStep6.name),
+                  ),
+                );
+              },
+            );
+          } else {
+            context.pushNamed(AppRoutes.signUpStep6.name);
+          }
+
           ref.invalidate(signUpProvider);
-          context.pushNamed(AppRoutes.signUpStep6.name);
           return;
 
         case Status.failure:

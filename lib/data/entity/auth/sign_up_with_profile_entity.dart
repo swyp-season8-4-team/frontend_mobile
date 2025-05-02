@@ -37,17 +37,17 @@ class SignUpWithProfileEntity {
 @JsonSerializable()
 class ImageErrorEntity {
   const ImageErrorEntity({
-    this.status = -1,
-    this.code = '',
-    this.message = '',
-    this.timestamp = '',
+    this.status,
+    this.code,
+    this.message,
+    this.timestamp,
   });
 
   factory ImageErrorEntity.fromJson(Map<String, dynamic> json) =>
       _$ImageErrorEntityFromJson(json);
 
-  final int status;
-  final String code;
-  final String message;
-  final String timestamp;
+  final int? status;
+  final String? code;
+  final String? message;
+  final String? timestamp;
 }

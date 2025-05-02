@@ -18,7 +18,7 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<LocalLoginEntity> postSignUp({
+  Future<SignUpWithProfileEntity> postSignUp({
     required String emailToken,
     required FormData formData,
   }) async {
@@ -29,7 +29,7 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
     };
     _headers.removeWhere((k, v) => v == null);
     final _data = formData;
-    final _options = _setStreamType<LocalLoginEntity>(
+    final _options = _setStreamType<SignUpWithProfileEntity>(
       Options(
             method: 'POST',
             headers: _headers,
@@ -45,9 +45,9 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late LocalLoginEntity _value;
+    late SignUpWithProfileEntity _value;
     try {
-      _value = LocalLoginEntity.fromJson(_result.data!);
+      _value = SignUpWithProfileEntity.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

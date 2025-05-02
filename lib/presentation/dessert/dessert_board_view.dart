@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/floating_action_button.dart';
 import 'package:frontend_mobile/common/design_system/component/chip/suggestive_chip.dart';
+import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/navigation_bar/navigation_bar.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
@@ -159,6 +160,26 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
     final DessertBoardState state = ref.watch(dessertBoardViewModelProvider);
     final ToastManager _ = ref.read(toastManagerProvider);
     final TopBarIcon _ = TopBarIcon();
+
+    ref.listen(dessertBoardViewModelProvider, (_, DessertBoardState next) {
+      switch (next.status) {
+        case Status.failure:
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap: () => context.pop(),
+                ),
+              );
+            },
+          );
+          break;
+        default:
+      }
+    });
 
     return CustomLoadingOverlay(
       isLoading: state.status.isLoading,

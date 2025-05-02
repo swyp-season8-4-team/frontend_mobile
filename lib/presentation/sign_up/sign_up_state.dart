@@ -9,7 +9,7 @@ class SignUpState with _$SignUpState {
     @Default(Status.initial) Status postNicknameStatus,
 
     @Default(
-      LocalLoginModel(
+      SignUpWithProfileModel(
         accessToken: '',
         refreshToken: '',
         tokenType: '',
@@ -19,10 +19,11 @@ class SignUpState with _$SignUpState {
         nickname: '',
         profileImageUrl: null,
         deviceId: '',
+        imageError: null,
         preferenceSet: false,
       ),
     )
-    LocalLoginModel signUpData,
+    SignUpWithProfileModel signUpData,
     @Default(EmailVerificationRequestModel(message: '', expirationMinutes: -1))
     EmailVerificationRequestModel verificationRequestData,
     @Default(EmailVerifyModel(verificationToken: '', verified: false))

@@ -45,10 +45,10 @@ Map<String, dynamic> _$SignUpWithProfileEntityToJson(
 
 ImageErrorEntity _$ImageErrorEntityFromJson(Map<String, dynamic> json) =>
     ImageErrorEntity(
-      status: (json['status'] as num?)?.toInt() ?? -1,
-      code: json['code'] as String? ?? '',
-      message: json['message'] as String? ?? '',
-      timestamp: json['timestamp'] as String? ?? '',
+      status: (json['status'] as num?)?.toInt(),
+      code: json['code'] as String?,
+      message: json['message'] as String?,
+      timestamp: json['timestamp'] as String?,
     );
 
 Map<String, dynamic> _$ImageErrorEntityToJson(ImageErrorEntity instance) =>
