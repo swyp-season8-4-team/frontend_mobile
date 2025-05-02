@@ -7,9 +7,12 @@ import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/mate_reply/mate_reply_detail_model.dart';
 import 'package:frontend_mobile/domain/model/mate_reply/mate_reply_model.dart';
+import 'package:frontend_mobile/domain/model/mate_reply/mate_reply_report_model.dart';
 import 'package:frontend_mobile/domain/param/mate_reply/get_mate_reply_params.dart';
 import 'package:frontend_mobile/domain/param/mate_reply/post_mate_reply_params.dart';
+import 'package:frontend_mobile/domain/param/mate_reply/post_mate_reply_report_params.dart';
 import 'package:frontend_mobile/domain/usecase/mate_reply/get_mate_reply_usecase.dart';
+import 'package:frontend_mobile/domain/usecase/mate_reply/post_mate_reply_report_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/mate_reply/post_mate_reply_usecase.dart';
 
 part 'dessert_comment_state.dart';
@@ -31,7 +34,7 @@ class DessertCommentViewModel extends StateNotifier<DessertCommentState> {
 
   /// [App]메이트 댓글 전체 조회
   Future<void> getMateReply({required GetMateReplyParams params}) async {
-    state = state.copyWith(status: Status.loading);
+    state = state.copyWith(getMateReplyStatus: Status.loading);
 
     final Result<MateReplyModel, CustomException> response =
         await Usecase.execute(
@@ -41,11 +44,14 @@ class DessertCommentViewModel extends StateNotifier<DessertCommentState> {
 
     response.map(
       success: (Success<MateReplyModel, CustomException> success) {
-        state = state.copyWith(status: Status.success, data: success.data);
+        state = state.copyWith(
+          getMateReplyStatus: Status.success,
+          data: success.data,
+        );
       },
       failure: (Failure<MateReplyModel, CustomException> failure) {
         state = state.copyWith(
-          status: Status.failure,
+          getMateReplyStatus: Status.failure,
           exception: failure.exception.model,
         );
       },
@@ -54,7 +60,7 @@ class DessertCommentViewModel extends StateNotifier<DessertCommentState> {
 
   /// [App]메이트 댓글 생성
   Future<void> postMateReply({required PostMateReplyParams params}) async {
-    state = state.copyWith(status: Status.loading);
+    state = state.copyWith(postMateReplyStatus: Status.loading);
 
     final Result<MateReplyDetailModel, CustomException> response =
         await Usecase.execute(
@@ -66,11 +72,36 @@ class DessertCommentViewModel extends StateNotifier<DessertCommentState> {
       success: (Success<MateReplyDetailModel, CustomException> success) {
         getMateReply(params: GetMateReplyParams(mateUuid: params.mateUuid));
 
-        // state = state.copyWith(status: Status.success, data: success.data);
+        state = state.copyWith(postMateReplyStatus: Status.success);
       },
       failure: (Failure<MateReplyDetailModel, CustomException> failure) {
         state = state.copyWith(
-          status: Status.failure,
+          postMateReplyStatus: Status.failure,
+          exception: failure.exception.model,
+        );
+      },
+    );
+  }
+
+  /// 디저트메이트 댓글 신고
+  Future<void> postMateReplyReport({
+    required PostMateReplyReportParams params,
+  }) async {
+    state = state.copyWith(postMateReplyReportStatus: Status.loading);
+
+    final Result<MateReplyReportModel, CustomException> response =
+        await Usecase.execute(
+          usecase: ref.read(postMateReplyReportUsecaseProvider),
+          params: params,
+        );
+
+    response.map(
+      success: (Success<MateReplyReportModel, CustomException> success) {
+        state = state.copyWith(postMateReplyReportStatus: Status.success);
+      },
+      failure: (Failure<MateReplyReportModel, CustomException> failure) {
+        state = state.copyWith(
+          postMateReplyReportStatus: Status.failure,
           exception: failure.exception.model,
         );
       },

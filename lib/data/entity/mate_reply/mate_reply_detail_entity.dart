@@ -6,13 +6,13 @@ part 'generated/mate_reply_detail_entity.g.dart';
 class MateReplyDetailEntity {
   MateReplyDetailEntity({
     this.mateReplyId = -1,
-    this.mateUuid = '',
     this.parentMateReplyId,
     this.userUuid = '',
     this.nickname = '',
     this.content = '',
     this.profileImage = '',
     this.gender = '',
+    this.mateMemberGrade = '',
     this.createdAt = '',
     this.updatedAt,
     this.deletedAt,
@@ -23,13 +23,13 @@ class MateReplyDetailEntity {
       _$MateReplyDetailEntityFromJson(json);
 
   final int mateReplyId;
-  final String mateUuid;
   final int? parentMateReplyId;
   final String userUuid;
   final String nickname;
   final String content;
   final String profileImage;
   final String gender;
+  final String mateMemberGrade;
   final String createdAt;
   final String? updatedAt;
   final String? deletedAt;
