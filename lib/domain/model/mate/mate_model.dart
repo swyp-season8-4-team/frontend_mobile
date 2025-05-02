@@ -1,8 +1,12 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_detail_model.dart';
 
-class MateModel {
-  const MateModel({required this.mates, required this.last});
+part 'generated/mate_model.freezed.dart';
 
-  final List<MateDetailModel> mates;
-  final bool last;
+@freezed
+class MateModel with _$MateModel {
+  const factory MateModel({
+    required List<MateDetailModel> mates,
+    required bool last,
+  }) = _MateModel;
 }
