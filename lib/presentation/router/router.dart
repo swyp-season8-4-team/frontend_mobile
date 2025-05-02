@@ -472,9 +472,6 @@ class AppRouter {
             pageBuilder: (BuildContext context, GoRouterState state) {
               return const NoTransitionPage<dynamic>(child: DessertBoard());
             },
-            // builder: (BuildContext context, GoRouterState state) {
-            //   return const DessertBoard();
-            // },
             routes: <RouteBase>[
               /// 게시글
               GoRoute(
