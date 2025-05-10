@@ -20,6 +20,7 @@ import 'package:frontend_mobile/presentation/map/store_detail/notice/store_notic
 import 'package:frontend_mobile/presentation/map/store_detail/notice/store_notice_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/review/add_store_review_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/review/report/report_store_review_view.dart';
+import 'package:frontend_mobile/presentation/map/store_detail/review/report/success_report_store_review_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/user_store/add_store_to_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/stores_by_user_store_list_view.dart';
@@ -253,6 +254,19 @@ class AppRouter {
                     storeUuid: storeUuid,
                     reviewUuid: reviewUuid,
                   );
+                },
+              ),
+
+              /// 리뷰 신고 성공
+              GoRoute(
+                path: AppRoutes.successReportStoreReview.path,
+                name: AppRoutes.successReportStoreReview.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  final String? storeUuid = state.pathParameters['id'];
+                  if (storeUuid == null) {
+                    return const Scaffold();
+                  }
+                  return const SuccessReportStoreReviewView();
                 },
               ),
 

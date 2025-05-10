@@ -125,7 +125,18 @@ class _StoreReviews extends ConsumerWidget {
                   state.storeDetail!.storeReviews![index];
               return Padding(
                 padding: const EdgeInsets.fromLTRB(16, 13, 16, 11),
-                child: StoreReviewCard(storeReview: storeReview),
+                child: StoreReviewCard(
+                  storeReview: storeReview,
+                  onReportIconTap: () {
+                    context.pushNamed(
+                      AppRoutes.reportStoreReview.name,
+                      pathParameters: <String, String>{
+                        'id': state.storeDetail!.storeUuid,
+                        'reviewUuid': storeReview.reviewUuid,
+                      },
+                    );
+                  },
+                ),
               );
             }, childCount: state.storeDetail!.storeReviews!.length),
           ),

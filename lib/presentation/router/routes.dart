@@ -64,6 +64,12 @@ abstract class AppRoutes {
     path: ':reviewUuid/report',
   );
 
+  // 지도 > 가게 상세 > 리뷰 신고 성공
+  static final RouteInfo successReportStoreReview = RouteInfo(
+    name: '${storeDetail.name}/success_report_review',
+    path: 'success_report_review',
+  );
+
   // 지도 > 가게 상세 > 저장 리스트에 가게 추가
   static final RouteInfo addStoreToUserStoreList = RouteInfo(
     name: '${storeDetail.name}/add-store-to-user-store-list',

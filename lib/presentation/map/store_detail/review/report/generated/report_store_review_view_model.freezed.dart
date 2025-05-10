@@ -162,10 +162,10 @@ class __$$ReportStoreReviewStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ReportStoreReviewStateImpl implements _ReportStoreReviewState {
+class _$ReportStoreReviewStateImpl extends _ReportStoreReviewState {
   _$ReportStoreReviewStateImpl({
     this.reportComment = '',
-    this.reportCategoryId = 1,
+    this.reportCategoryId = -1,
     this.reportStoreReviewStatus = Status.initial,
     this.reportStoreReviewException = const ExceptionModel(
       status: -1,
@@ -173,7 +173,7 @@ class _$ReportStoreReviewStateImpl implements _ReportStoreReviewState {
       message: '',
       timestamp: '',
     ),
-  });
+  }) : super._();
 
   @override
   @JsonKey()
@@ -237,13 +237,14 @@ class _$ReportStoreReviewStateImpl implements _ReportStoreReviewState {
       );
 }
 
-abstract class _ReportStoreReviewState implements ReportStoreReviewState {
+abstract class _ReportStoreReviewState extends ReportStoreReviewState {
   factory _ReportStoreReviewState({
     final String reportComment,
     final int reportCategoryId,
     final Status reportStoreReviewStatus,
     final ExceptionModel reportStoreReviewException,
   }) = _$ReportStoreReviewStateImpl;
+  _ReportStoreReviewState._() : super._();
 
   @override
   String get reportComment;
