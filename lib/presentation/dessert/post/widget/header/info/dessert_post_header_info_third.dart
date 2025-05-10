@@ -7,6 +7,8 @@ import 'package:frontend_mobile/common/design_system/component/profile_photo/pro
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view_model.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:go_router/go_router.dart';
 
 class DessertPostHeaderInfoThird extends ConsumerWidget {
   const DessertPostHeaderInfoThird({
@@ -66,6 +68,7 @@ class DessertPostHeaderInfoThird extends ConsumerWidget {
                   text: '신고하기',
                   onTap: () {
                     optionHandler();
+                    context.pushNamed(AppRoutes.dessertPostReport.name);
                   },
                 ),
               ],
