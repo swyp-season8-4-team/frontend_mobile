@@ -19,6 +19,7 @@ import 'package:frontend_mobile/presentation/map/store_detail/find_place_by_map_
 import 'package:frontend_mobile/presentation/map/store_detail/notice/store_notice_detail_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/notice/store_notice_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/review/add_store_review_view.dart';
+import 'package:frontend_mobile/presentation/map/store_detail/review/report/report_review_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/store_detail_view.dart';
 import 'package:frontend_mobile/presentation/map/store_detail/user_store/add_store_to_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/map/stores_by_user_store_list/stores_by_user_store_list_view.dart';
@@ -225,6 +226,7 @@ class AppRouter {
               return StoreDetailView(storeUuid: id);
             },
             routes: <RouteBase>[
+              /// 리뷰 작성
               GoRoute(
                 path: AppRoutes.addStoreReview.path,
                 name: AppRoutes.addStoreReview.name,
@@ -234,6 +236,23 @@ class AppRouter {
                     return const Scaffold();
                   }
                   return AddStoreReviewView(storeUuid: id);
+                },
+              ),
+
+              /// 리뷰 신고
+              GoRoute(
+                path: AppRoutes.reportStoreReview.path,
+                name: AppRoutes.reportStoreReview.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  final String? storeUuid = state.pathParameters['id'];
+                  final String? reviewUuid = state.pathParameters['reviewUuid'];
+                  if (storeUuid == null || reviewUuid == null) {
+                    return const Scaffold();
+                  }
+                  return ReportReviewView(
+                    storeUuid: storeUuid,
+                    reviewUuid: reviewUuid,
+                  );
                 },
               ),
 
