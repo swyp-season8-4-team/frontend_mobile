@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
 import 'package:frontend_mobile/data/query_param/store_review/check_today_review_query_params.dart';
+import 'package:frontend_mobile/data/request_body/store_review/report_review_request_body.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:http_parser/http_parser.dart';
@@ -61,6 +62,14 @@ abstract class StoreReviewRemoteDataSource {
   Future<bool> checkTodayReview({
     @Path('storeUuid') required String storeUuid,
     @Queries() required CheckTodayReviewQueryParams query,
+  });
+
+  /// 한줄 리뷰 신고
+  @POST('/api/stores/{storeUuid}/reviews/{reviewUuid}/report')
+  Future<void> reportReview({
+    @Path('storeUuid') required String storeUuid,
+    @Path('reviewUuid') required String reviewUuid,
+    @Body() required ReportReviewRequestBody body,
   });
 }
 
