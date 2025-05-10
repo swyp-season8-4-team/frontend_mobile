@@ -20,6 +20,7 @@ class SuccessReportStoreReviewView extends ConsumerWidget {
       body: SafeArea(
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               // TODO: 타이포그래피 적용 필요
               const Text(
