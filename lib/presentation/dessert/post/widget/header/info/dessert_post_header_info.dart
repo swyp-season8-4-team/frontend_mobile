@@ -4,20 +4,30 @@ import 'package:frontend_mobile/presentation/dessert/post/widget/header/info/des
 import 'package:frontend_mobile/presentation/dessert/post/widget/header/info/dessert_post_header_info_third.dart';
 
 class DessertPostHeaderInfo extends StatelessWidget {
-  const DessertPostHeaderInfo({super.key});
+  const DessertPostHeaderInfo({
+    required this.isOptionActive,
+    required this.optionHandler,
+    super.key,
+  });
+
+  final bool isOptionActive;
+  final VoidCallback optionHandler;
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        DessertPostHeaderInfoFirst(),
-        SizedBox(height: 10),
+        const DessertPostHeaderInfoFirst(),
+        const SizedBox(height: 10),
 
-        DessertPostHeaderInfoSecond(),
-        SizedBox(height: 16),
+        const DessertPostHeaderInfoSecond(),
+        const SizedBox(height: 16),
 
-        DessertPostHeaderInfoThird(),
+        DessertPostHeaderInfoThird(
+          isOptionActive: isOptionActive,
+          optionHandler: optionHandler,
+        ),
       ],
     );
   }
