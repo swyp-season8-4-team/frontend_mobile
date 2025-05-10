@@ -6,6 +6,8 @@ import 'package:frontend_mobile/presentation/dessert/comment/report/dessert_comm
 import 'package:frontend_mobile/presentation/dessert/comment/report/dessert_comment_report_view.dart';
 import 'package:frontend_mobile/presentation/dessert/dessert_board_view.dart';
 import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view.dart';
+import 'package:frontend_mobile/presentation/dessert/post/report/dessert_post_report_success_view.dart';
+import 'package:frontend_mobile/presentation/dessert/post/report/dessert_post_report_view.dart';
 import 'package:frontend_mobile/presentation/dessert/write/view/dessert_write_step1.dart';
 import 'package:frontend_mobile/presentation/dessert/write/view/dessert_write_step2.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step1.dart';
@@ -483,6 +485,25 @@ class AppRouter {
                   return DessertPost(mateUuid: mateUuid);
                 },
                 routes: <RouteBase>[
+                  /// 게시글 신고
+                  GoRoute(
+                    path: AppRoutes.dessertPostReport.path,
+                    name: AppRoutes.dessertPostReport.name,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const DessertPostReportView();
+                    },
+                    routes: <RouteBase>[
+                      /// 성공
+                      GoRoute(
+                        path: AppRoutes.dessertPostReportSuccess.path,
+                        name: AppRoutes.dessertPostReportSuccess.name,
+                        builder: (BuildContext context, GoRouterState state) {
+                          return const DessertPostReportSuccessView();
+                        },
+                      ),
+                    ],
+                  ),
+
                   /// 댓글 신고
                   GoRoute(
                     path: AppRoutes.dessertCommentReport.path,

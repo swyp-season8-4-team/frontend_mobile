@@ -37,6 +37,8 @@ class DessertPost extends ConsumerStatefulWidget {
 }
 
 class _DessertPostState extends ConsumerState<DessertPost> {
+  bool isOptionActive = false;
+
   @override
   void initState() {
     super.initState();
@@ -145,6 +147,12 @@ class _DessertPostState extends ConsumerState<DessertPost> {
     );
   }
 
+  void _optionHandler() {
+    setState(() {
+      isOptionActive = !isOptionActive;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final DessertPostState state = ref.watch(dessertPostViewModelProvider);
@@ -228,101 +236,111 @@ class _DessertPostState extends ConsumerState<DessertPost> {
       }
     });
 
-    return CustomLoadingOverlay(
-      isLoading: state.postMateStatus.isLoading,
-      child: Scaffold(
-        appBar: CustomSubTopBar(
-          title: '',
-          actions: TopBarIcon.toList(<Widget>[]),
-        ),
-        body: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      const Padding(
-                        padding: EdgeInsets.all(16),
-                        child: DessertPostHeaderInfo(),
-                      ),
-
-                      // if (state.data.place?.placeName != null)
-                      //   Container(
-                      //     padding: const EdgeInsets.symmetric(
-                      //       vertical: 8,
-                      //       horizontal: 16,
-                      //     ),
-                      //     decoration: const BoxDecoration(
-                      //       border: Border(
-                      //         top: BorderSide(
-                      //           color: ScaleColorConfig.neutral70,
-                      //         ),
-                      //         bottom: BorderSide(
-                      //           color: ScaleColorConfig.neutral70,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     child: const DessertPostHeaderLocation(),
-                      //   ),
-
-                      /// 콘텐츠에 이미지가 있는경우
-                      if (state.data.mateImage.isNotEmpty)
+    return Listener(
+      onPointerDown: (PointerDownEvent event) {
+        setState(() {
+          isOptionActive = false;
+        });
+      },
+      child: CustomLoadingOverlay(
+        isLoading: state.postMateStatus.isLoading,
+        child: Scaffold(
+          appBar: CustomSubTopBar(
+            title: '',
+            actions: TopBarIcon.toList(<Widget>[]),
+          ),
+          body: SafeArea(
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: _contentsImage(),
-                        ),
-
-                      /// 콘텐츠 텍스트
-                      Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Text(state.data.content),
-                      ),
-
-                      /// 댓글수, 작성 시간
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 10,
-                        ),
-                        decoration: const BoxDecoration(
-                          border: Border.symmetric(
-                            horizontal: BorderSide(
-                              color: ScaleColorConfig.surface80,
-                            ),
+                          padding: const EdgeInsets.all(16),
+                          child: DessertPostHeaderInfo(
+                            isOptionActive: isOptionActive,
+                            optionHandler: _optionHandler,
                           ),
                         ),
-                        child: _contentsFooter(),
-                      ),
 
-                      /// 모임장인 경우
-                      if (userState.data.userUuid == state.data.userUuid)
-                        const Column(
-                          children: <Widget>[
-                            DessertPostHostPending(),
-                            DessertPostHostApproved(),
-                          ],
+                        // if (state.data.place?.placeName != null)
+                        //   Container(
+                        //     padding: const EdgeInsets.symmetric(
+                        //       vertical: 8,
+                        //       horizontal: 16,
+                        //     ),
+                        //     decoration: const BoxDecoration(
+                        //       border: Border(
+                        //         top: BorderSide(
+                        //           color: ScaleColorConfig.neutral70,
+                        //         ),
+                        //         bottom: BorderSide(
+                        //           color: ScaleColorConfig.neutral70,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     child: const DessertPostHeaderLocation(),
+                        //   ),
+
+                        /// 콘텐츠에 이미지가 있는경우
+                        if (state.data.mateImage.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: _contentsImage(),
+                          ),
+
+                        /// 콘텐츠 텍스트
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(state.data.content),
                         ),
 
-                      /// 참가자가 승인된 경우
-                      if (state.data.applyStatus == 'APPROVED')
-                        DessertPostParticipantApproved(
-                          mateUuid: widget.mateUuid,
+                        /// 댓글수, 작성 시간
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 10,
+                          ),
+                          decoration: const BoxDecoration(
+                            border: Border.symmetric(
+                              horizontal: BorderSide(
+                                color: ScaleColorConfig.surface80,
+                              ),
+                            ),
+                          ),
+                          child: _contentsFooter(),
                         ),
-                    ],
+
+                        /// 모임장인 경우
+                        if (userState.data.userUuid == state.data.userUuid)
+                          const Column(
+                            children: <Widget>[
+                              DessertPostHostPending(),
+                              DessertPostHostApproved(),
+                            ],
+                          ),
+
+                        /// 참가자가 승인된 경우
+                        if (state.data.applyStatus == 'APPROVED')
+                          DessertPostParticipantApproved(
+                            mateUuid: widget.mateUuid,
+                          ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
 
-              /// 참가자가 신청 안한 경우
-              if (state.data.applyStatus == 'NONE')
-                const DessertPostParticipantNone(),
+                /// 참가자가 신청 안한 경우
+                if (state.data.applyStatus == 'NONE')
+                  const DessertPostParticipantNone(),
 
-              /// 참가자가 신청해서 기다리는 중인 경우
-              if (state.data.applyStatus == 'PENDING')
-                const DessertPostParticipantPending(),
-            ],
+                /// 참가자가 신청해서 기다리는 중인 경우
+                if (state.data.applyStatus == 'PENDING')
+                  const DessertPostParticipantPending(),
+              ],
+            ),
           ),
         ),
       ),
