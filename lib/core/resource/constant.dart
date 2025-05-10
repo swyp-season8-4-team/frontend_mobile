@@ -83,3 +83,18 @@ enum Nickname {
 
 /// 디저트 메이트 카테고리
 enum DessertBoardCategory { all, amity, photo, study, health, bread, cafe }
+
+/// 신고 카테고리
+enum ReportCategory {
+  swearWord(text: '욕설 또는 폭언', id: 1),
+  pornography(text: '음란물 또는 부적절한 내용', id: 2),
+  advertisement(text: '광고 또는 스팸', id: 3),
+  disinformation(text: '허위 정보', id: 4),
+  spam(text: '게시물 도배', id: 5),
+  etc(text: '기타', id: 6);
+
+  const ReportCategory({required this.text, required this.id});
+
+  final String text;
+  final int id;
+}
