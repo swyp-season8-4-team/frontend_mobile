@@ -3,6 +3,7 @@ import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/domain/param/store_review/add_store_review_params.dart';
 import 'package:frontend_mobile/domain/param/store_review/check_today_review_params.dart';
 import 'package:frontend_mobile/domain/param/store_review/delete_store_review_params.dart';
+import 'package:frontend_mobile/domain/param/store_review/report_review_params.dart';
 import 'package:frontend_mobile/domain/param/store_review/update_store_review_params.dart';
 
 abstract interface class StoreReviewRepository {
@@ -20,5 +21,9 @@ abstract interface class StoreReviewRepository {
 
   Future<Result<bool, CustomException>> checkTodayReview({
     required CheckTodayReviewParams params,
+  });
+
+  Future<Result<void, CustomException>> reportReview({
+    required ReportReviewParams params,
   });
 }
