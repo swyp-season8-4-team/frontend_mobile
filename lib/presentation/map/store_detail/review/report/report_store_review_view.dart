@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ReportReviewView extends ConsumerStatefulWidget {
-  const ReportReviewView({
+class ReportStoreReviewView extends ConsumerStatefulWidget {
+  const ReportStoreReviewView({
     required this.storeUuid,
     required this.reviewUuid,
     super.key,
@@ -11,10 +11,11 @@ class ReportReviewView extends ConsumerStatefulWidget {
   final String reviewUuid;
 
   @override
-  ConsumerState<ReportReviewView> createState() => _ReportReviewViewState();
+  ConsumerState<ReportStoreReviewView> createState() =>
+      _ReportReviewViewState();
 }
 
-class _ReportReviewViewState extends ConsumerState<ReportReviewView> {
+class _ReportReviewViewState extends ConsumerState<ReportStoreReviewView> {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
