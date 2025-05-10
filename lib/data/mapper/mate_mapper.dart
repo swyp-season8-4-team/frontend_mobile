@@ -3,14 +3,18 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_entity.dart';
+import 'package:frontend_mobile/data/entity/mate/mate_report_entity.dart';
 import 'package:frontend_mobile/data/query_param/mate/get_mate_query_param.dart';
 import 'package:frontend_mobile/data/query_param/mate/get_my_mate_query_param.dart';
+import 'package:frontend_mobile/data/request_body/mate/post_mate_report_request_body.dart';
 import 'package:frontend_mobile/data/request_body/mate/post_mate_request_body.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_detail_model.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_model.dart';
+import 'package:frontend_mobile/domain/model/mate/mate_report_model.dart';
 import 'package:frontend_mobile/domain/param/mate/get_mate_params.dart';
 import 'package:frontend_mobile/domain/param/mate/get_my_mate_params.dart';
 import 'package:frontend_mobile/domain/param/mate/post_mate_params.dart';
+import 'package:frontend_mobile/domain/param/mate/post_mate_report_params.dart';
 
 extension MateEntityExt on MateEntity {
   MateModel toModel() {
@@ -115,5 +119,21 @@ extension PostMateRequestBodyExt on PostMateRequestBody {
       'request': request,
       'mateImage': mateImage,
     });
+  }
+}
+
+extension MateReportEntityExt on MateReportEntity {
+  MateReportModel toModel() {
+    return MateReportModel(message: message);
+  }
+}
+
+extension PostMateReportParamsExt on PostMateReportParams {
+  PostMateReportRequestBody toBody() {
+    return PostMateReportRequestBody(
+      userUuid: userUuid,
+      reportCategoryId: reportCategoryId,
+      reportComment: reportComment,
+    );
   }
 }

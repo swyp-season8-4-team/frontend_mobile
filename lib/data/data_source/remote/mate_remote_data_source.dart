@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_entity.dart';
+import 'package:frontend_mobile/data/entity/mate/mate_report_entity.dart';
 import 'package:frontend_mobile/data/query_param/mate/get_mate_query_param.dart';
 import 'package:frontend_mobile/data/query_param/mate/get_my_mate_query_param.dart';
+import 'package:frontend_mobile/data/request_body/mate/post_mate_report_request_body.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'generated/mate_remote_data_source.g.dart';
@@ -38,4 +40,11 @@ abstract interface class MateRemoteDataSource {
   @POST('/api/app/mates')
   @MultiPart()
   Future<MateDetailEntity> postMate({@Body() required FormData formData});
+
+  /// 디저트메이트 신고 기능
+  @POST('/api/mates/{mateUuid}/report')
+  Future<MateReportEntity> postMateReport({
+    @Path() required String mateUuid,
+    @Body() required PostMateReportRequestBody body,
+  });
 }
