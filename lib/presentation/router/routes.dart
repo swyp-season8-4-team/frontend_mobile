@@ -223,6 +223,18 @@ abstract class AppRoutes {
     path: 'post',
   );
 
+  /// 디저트 메이트 > 게시판 > 게시글 > 게시글 신고
+  static RouteInfo dessertPostReport = RouteInfo(
+    name: '${dessertPost.name}/report',
+    path: 'report',
+  );
+
+  /// 디저트 메이트 > 게시판 > 게시글 > 게시글 신고 > 성공
+  static RouteInfo dessertPostReportSuccess = RouteInfo(
+    name: '${dessertPostReport.name}/success',
+    path: 'success',
+  );
+
   /// 디저트 메이트 > 게시판 > 게시글 > 댓글 신고
   static RouteInfo dessertCommentReport = RouteInfo(
     name: '${dessertPost.name}/comment/report',
