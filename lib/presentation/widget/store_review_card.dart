@@ -9,8 +9,13 @@ import 'package:intl/intl.dart';
 
 // 가게 상세 페이지 > 한줄 리뷰 목록 아이템 UI
 class StoreReviewCard extends StatelessWidget {
-  const StoreReviewCard({required this.storeReview, super.key});
+  const StoreReviewCard({
+    required this.storeReview,
+    required this.onReportIconTap,
+    super.key,
+  });
   final StoreDetailReviewModel storeReview;
+  final VoidCallback onReportIconTap;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +37,19 @@ class StoreReviewCard extends StatelessWidget {
                 storeReview.nickname,
                 style: textTheme.titleSmall?.copyWith(
                   color: ScaleColorConfig.neutral20,
+                ),
+              ),
+            ),
+            const SizedBox(width: 10),
+            GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: onReportIconTap,
+              child: Assets.icon.system.reportLine.svg(
+                width: 20,
+                height: 20,
+                colorFilter: const ColorFilter.mode(
+                  ScaleColorConfig.neutral40,
+                  BlendMode.srcIn,
                 ),
               ),
             ),
