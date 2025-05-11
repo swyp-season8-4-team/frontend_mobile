@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:frontend_mobile/common/env/env.dart';
@@ -10,7 +11,6 @@ import 'package:frontend_mobile/presentation/router/router.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:flutter/material.dart';
 
 final Provider<Dio> appDioProvider = Provider<Dio>((Ref ref) {
   void onRequest(
@@ -70,7 +70,7 @@ class _AppDio {
     _dio =
         Dio()
           ..options = BaseOptions(
-            baseUrl: Env.devServerBaseUrl,
+            baseUrl: Env.prodServerBaseUrl,
             connectTimeout: const Duration(seconds: 10),
             receiveTimeout: const Duration(seconds: 10),
             sendTimeout: const Duration(seconds: 10),
