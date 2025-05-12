@@ -5,10 +5,10 @@ part 'generated/store_operating_hour_entity.g.dart';
 @JsonSerializable()
 class StoreOperatingHourEntity {
   const StoreOperatingHourEntity({
-    required this.dayOfWeek,
-    required this.openingTime,
-    required this.closingTime,
-    required this.isClosed,
+    this.dayOfWeek = '',
+    this.openingTime = '',
+    this.closingTime = '',
+    this.isClosed = false,
     this.lastOrderTime,
     this.regularClosureType,
     this.regularClosureWeeks,
@@ -35,7 +35,7 @@ class _BreakTime {
   factory _BreakTime.fromJson(Map<String, dynamic> json) =>
       _$BreakTimeFromJson(json);
 
-  const _BreakTime({required this.startTime, required this.endTime});
+  const _BreakTime({this.startTime = '', this.endTime = ''});
   final String startTime;
   final String endTime;
 }

@@ -8,11 +8,11 @@ part of '../search_recent_entity.dart';
 
 RecentSearchEntity _$RecentSearchEntityFromJson(Map<String, dynamic> json) =>
     RecentSearchEntity(
-      id: (json['id'] as num).toInt(),
-      keyword: json['keyword'] as String,
       createdAt: const DateTimeJsonConverter().fromJson(
         json['createdAt'] as String?,
       ),
+      id: (json['id'] as num?)?.toInt() ?? -1,
+      keyword: json['keyword'] as String? ?? '',
     );
 
 Map<String, dynamic> _$RecentSearchEntityToJson(RecentSearchEntity instance) =>

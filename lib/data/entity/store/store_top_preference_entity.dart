@@ -5,9 +5,9 @@ part 'generated/store_top_preference_entity.g.dart';
 @JsonSerializable()
 class StoreTopPreferenceEntity {
   const StoreTopPreferenceEntity({
-    required this.tagId,
-    required this.name,
-    required this.rank,
+    this.tagId = -1,
+    this.name = '',
+    this.rank = -1,
   });
 
   factory StoreTopPreferenceEntity.fromJson(Map<String, dynamic> json) =>

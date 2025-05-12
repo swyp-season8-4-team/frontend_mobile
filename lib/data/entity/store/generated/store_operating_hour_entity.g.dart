@@ -9,10 +9,10 @@ part of '../store_operating_hour_entity.dart';
 StoreOperatingHourEntity _$StoreOperatingHourEntityFromJson(
   Map<String, dynamic> json,
 ) => StoreOperatingHourEntity(
-  dayOfWeek: json['dayOfWeek'] as String,
-  openingTime: json['openingTime'] as String,
-  closingTime: json['closingTime'] as String,
-  isClosed: json['isClosed'] as bool,
+  dayOfWeek: json['dayOfWeek'] as String? ?? '',
+  openingTime: json['openingTime'] as String? ?? '',
+  closingTime: json['closingTime'] as String? ?? '',
+  isClosed: json['isClosed'] as bool? ?? false,
   lastOrderTime: json['lastOrderTime'] as String?,
   regularClosureType: json['regularClosureType'] as String?,
   regularClosureWeeks: json['regularClosureWeeks'] as String?,
@@ -36,8 +36,8 @@ Map<String, dynamic> _$StoreOperatingHourEntityToJson(
 };
 
 _BreakTime _$BreakTimeFromJson(Map<String, dynamic> json) => _BreakTime(
-  startTime: json['startTime'] as String,
-  endTime: json['endTime'] as String,
+  startTime: json['startTime'] as String? ?? '',
+  endTime: json['endTime'] as String? ?? '',
 );
 
 Map<String, dynamic> _$BreakTimeToJson(_BreakTime instance) =>

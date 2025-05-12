@@ -13,19 +13,19 @@ class StoreDetailEntity {
       _$StoreDetailEntityFromJson(json);
 
   StoreDetailEntity({
-    required this.storeId,
-    required this.storeUuid,
-    required this.name,
-    required this.tags,
-    required this.operatingHours,
-    required this.address,
-    required this.phone,
-    required this.ownerId,
-    required this.ownerUuid,
-    required this.latitude,
-    required this.longitude,
-    required this.menus,
-    required this.totalReviewCount,
+    this.storeId = -1,
+    this.storeUuid = '',
+    this.name = '',
+    this.tags = const <StoreDetailTagEntity>[],
+    this.operatingHours = const <StoreOperatingHourEntity>[],
+    this.address = '',
+    this.phone = '',
+    this.ownerId = -1,
+    this.ownerUuid = '',
+    this.latitude = 0,
+    this.longitude = 0,
+    this.menus = const <StoreDetailMenu>[],
+    this.totalReviewCount = -1,
     this.userId,
     this.userUuid,
     this.storeReviews,
@@ -90,9 +90,9 @@ class StoreDetailMenu {
       _$StoreDetailMenuFromJson(json);
 
   const StoreDetailMenu({
-    required this.menuUuid,
-    required this.name,
-    required this.price,
+    this.menuUuid = '',
+    this.name = '',
+    this.price = -1,
     this.isPopular,
     this.description,
     this.images,
@@ -108,13 +108,13 @@ class StoreDetailMenu {
 @JsonSerializable()
 class StoreDetailReview {
   const StoreDetailReview({
-    required this.reviewUuid,
-    required this.storeId,
-    required this.userUuid,
-    required this.nickname,
-    required this.content,
-    required this.rating,
     required this.createdAt,
+    this.reviewUuid = '',
+    this.storeId = -1,
+    this.userUuid = '',
+    this.nickname = '',
+    this.content = '',
+    this.rating = 1,
     this.profileImage,
     this.images,
   });
@@ -140,15 +140,15 @@ class StoreDetailCommunityReview {
       _$StoreDetailCommunityReviewFromJson(json);
 
   const StoreDetailCommunityReview({
-    required this.reviewUuid,
-    required this.userUuid,
-    required this.nickname,
-    required this.profileImage,
-    required this.thumbnail,
-    required this.title,
-    required this.content,
     required this.createdAt,
     required this.updatedAt,
+    this.reviewUuid = '',
+    this.userUuid = '',
+    this.nickname = '',
+    this.profileImage = '',
+    this.thumbnail = '',
+    this.title = '',
+    this.content = '',
   });
   final String reviewUuid;
   final String userUuid;
@@ -166,13 +166,13 @@ class StoreDetailCommunityReview {
 @JsonSerializable()
 class StoreDetailMate {
   const StoreDetailMate({
-    required this.mateUuid,
-    required this.mateCategory,
-    required this.thumbnail,
-    required this.title,
-    required this.content,
-    required this.nickname,
-    required this.recruitYn,
+    this.mateUuid = '',
+    this.mateCategory = '',
+    this.thumbnail = '',
+    this.title = '',
+    this.content = '',
+    this.nickname = '',
+    this.recruitYn = false,
     this.saved,
   });
 
@@ -194,11 +194,11 @@ class StoreDetailNoticeEntity {
   factory StoreDetailNoticeEntity.fromJson(Map<String, dynamic> json) =>
       _$StoreDetailNoticeEntityFromJson(json);
   const StoreDetailNoticeEntity({
-    required this.noticeId,
-    required this.tag,
-    required this.title,
-    required this.content,
     required this.createdAt,
+    this.noticeId = -1,
+    this.tag = '',
+    this.title = '',
+    this.content = '',
     this.updatedAt,
   });
   final int noticeId;
@@ -213,11 +213,7 @@ class StoreDetailNoticeEntity {
 
 @JsonSerializable()
 class StoreDetailTagEntity {
-  const StoreDetailTagEntity({
-    required this.id,
-    required this.name,
-    this.category,
-  });
+  StoreDetailTagEntity({this.id = -1, this.name = '', this.category});
 
   factory StoreDetailTagEntity.fromJson(Map<String, dynamic> json) =>
       _$StoreDetailTagEntityFromJson(json);

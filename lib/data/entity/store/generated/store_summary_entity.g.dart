@@ -9,18 +9,21 @@ part of '../store_summary_entity.dart';
 StoreSummaryEntity _$StoreSummaryEntityFromJson(
   Map<String, dynamic> json,
 ) => StoreSummaryEntity(
-  storeId: (json['storeId'] as num).toInt(),
-  storeUuid: json['storeUuid'] as String,
-  name: json['name'] as String,
-  tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
+  storeId: (json['storeId'] as num?)?.toInt() ?? -1,
+  storeUuid: json['storeUuid'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  tags:
+      (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      const <String>[],
   operatingHours:
-      (json['operatingHours'] as List<dynamic>)
-          .map(
+      (json['operatingHours'] as List<dynamic>?)
+          ?.map(
             (e) => StoreOperatingHourEntity.fromJson(e as Map<String, dynamic>),
           )
-          .toList(),
-  address: json['address'] as String,
-  phone: json['phone'] as String,
+          .toList() ??
+      const <StoreOperatingHourEntity>[],
+  address: json['address'] as String? ?? '',
+  phone: json['phone'] as String? ?? '',
   averageRating: (json['averageRating'] as num?)?.toDouble(),
   storeImages:
       (json['storeImages'] as List<dynamic>?)

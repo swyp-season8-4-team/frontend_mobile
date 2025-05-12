@@ -9,11 +9,11 @@ part of '../user_store_list_detail_entity.dart';
 UserStoreListDetailEntity _$UserStoreListDetailEntityFromJson(
   Map<String, dynamic> json,
 ) => UserStoreListDetailEntity(
-  listId: (json['listId'] as num).toInt(),
-  userUuid: json['userUuid'] as String,
-  listName: json['listName'] as String,
-  iconColorId: (json['iconColorId'] as num).toInt(),
-  storeCount: (json['storeCount'] as num).toInt(),
+  listId: (json['listId'] as num?)?.toInt() ?? -1,
+  userUuid: json['userUuid'] as String? ?? '',
+  listName: json['listName'] as String? ?? '',
+  iconColorId: (json['iconColorId'] as num?)?.toInt() ?? 1,
+  storeCount: (json['storeCount'] as num?)?.toInt() ?? -1,
   storeData:
       (json['storeData'] as List<dynamic>?)
           ?.map(
@@ -37,14 +37,14 @@ Map<String, dynamic> _$UserStoreListDetailEntityToJson(
 UserStoreDataDetailEntity _$UserStoreDataDetailEntityFromJson(
   Map<String, dynamic> json,
 ) => UserStoreDataDetailEntity(
-  userUuid: json['userUuid'] as String,
-  storeUuid: json['storeUuid'] as String,
-  listId: (json['listId'] as num).toInt(),
-  listName: json['listName'] as String,
-  storeName: json['storeName'] as String,
-  storeAddress: json['storeAddress'] as String,
-  latitude: (json['latitude'] as num).toDouble(),
-  longitude: (json['longitude'] as num).toDouble(),
+  userUuid: json['userUuid'] as String? ?? '',
+  storeUuid: json['storeUuid'] as String? ?? '',
+  listId: (json['listId'] as num?)?.toInt() ?? -1,
+  listName: json['listName'] as String? ?? '',
+  storeName: json['storeName'] as String? ?? '',
+  storeAddress: json['storeAddress'] as String? ?? '',
+  latitude: (json['latitude'] as num?)?.toDouble() ?? 0,
+  longitude: (json['longitude'] as num?)?.toDouble() ?? 0,
   imageUrls:
       (json['imageUrls'] as List<dynamic>?)?.map((e) => e as String).toList(),
   userPreferences:

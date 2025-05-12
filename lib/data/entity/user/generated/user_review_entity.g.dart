@@ -8,14 +8,15 @@ part of '../user_review_entity.dart';
 
 UserReviewEntity _$UserReviewEntityFromJson(Map<String, dynamic> json) =>
     UserReviewEntity(
-      reviewCount: (json['reviewCount'] as num).toInt(),
+      reviewCount: (json['reviewCount'] as num?)?.toInt() ?? -1,
       reviews:
-          (json['reviews'] as List<dynamic>)
-              .map(
+          (json['reviews'] as List<dynamic>?)
+              ?.map(
                 (e) =>
                     UserReviewDetailEntity.fromJson(e as Map<String, dynamic>),
               )
-              .toList(),
+              .toList() ??
+          const <UserReviewDetailEntity>[],
     );
 
 Map<String, dynamic> _$UserReviewEntityToJson(UserReviewEntity instance) =>
@@ -27,13 +28,18 @@ Map<String, dynamic> _$UserReviewEntityToJson(UserReviewEntity instance) =>
 UserReviewDetailEntity _$UserReviewDetailEntityFromJson(
   Map<String, dynamic> json,
 ) => UserReviewDetailEntity(
-  reviewUuid: json['reviewUuid'] as String,
-  rating: (json['rating'] as num).toDouble(),
-  content: json['content'] as String,
   createdAt: const DateTimeJsonConverter().fromJson(
     json['createdAt'] as String?,
   ),
-  store: UserReviewStoreEntity.fromJson(json['store'] as Map<String, dynamic>),
+  reviewUuid: json['reviewUuid'] as String? ?? '',
+  rating: (json['rating'] as num?)?.toDouble() ?? -1,
+  content: json['content'] as String? ?? '',
+  store:
+      json['store'] == null
+          ? const UserReviewStoreEntity()
+          : UserReviewStoreEntity.fromJson(
+            json['store'] as Map<String, dynamic>,
+          ),
   reviewImage: json['reviewImage'] as String?,
 );
 
@@ -51,9 +57,9 @@ Map<String, dynamic> _$UserReviewDetailEntityToJson(
 UserReviewStoreEntity _$UserReviewStoreEntityFromJson(
   Map<String, dynamic> json,
 ) => UserReviewStoreEntity(
-  storeUuid: json['storeUuid'] as String,
-  name: json['name'] as String,
-  address: json['address'] as String,
+  storeUuid: json['storeUuid'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  address: json['address'] as String? ?? '',
   thumbnail: json['thumbnail'] as String?,
 );
 

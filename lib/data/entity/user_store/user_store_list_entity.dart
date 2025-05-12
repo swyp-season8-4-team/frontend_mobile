@@ -7,11 +7,11 @@ class UserStoreListEntity {
   factory UserStoreListEntity.fromJson(Map<String, dynamic> json) =>
       _$UserStoreListEntityFromJson(json);
   const UserStoreListEntity({
-    required this.listId,
-    required this.userUuid,
-    required this.listName,
-    required this.iconColorId,
-    required this.storeCount,
+    this.listId = -1,
+    this.userUuid = '',
+    this.listName = '',
+    this.iconColorId = 1,
+    this.storeCount = -1,
     this.storeData,
   });
 
@@ -26,13 +26,13 @@ class UserStoreListEntity {
 @JsonSerializable()
 class UserStoreDataEntity {
   const UserStoreDataEntity({
-    required this.listId,
-    required this.iconColorId,
-    required this.storeId,
-    required this.storeUuid,
-    required this.name,
-    required this.latitude,
-    required this.longitude,
+    this.listId = -1,
+    this.iconColorId = 1,
+    this.storeId = -1,
+    this.storeUuid = '',
+    this.name = '',
+    this.latitude = 0,
+    this.longitude = 0,
   });
 
   factory UserStoreDataEntity.fromJson(Map<String, dynamic> json) =>

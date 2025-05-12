@@ -9,30 +9,33 @@ part of '../store_detail_entity.dart';
 StoreDetailEntity _$StoreDetailEntityFromJson(
   Map<String, dynamic> json,
 ) => StoreDetailEntity(
-  storeId: (json['storeId'] as num).toInt(),
-  storeUuid: json['storeUuid'] as String,
-  name: json['name'] as String,
+  storeId: (json['storeId'] as num?)?.toInt() ?? -1,
+  storeUuid: json['storeUuid'] as String? ?? '',
+  name: json['name'] as String? ?? '',
   tags:
-      (json['tags'] as List<dynamic>)
-          .map((e) => StoreDetailTagEntity.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      (json['tags'] as List<dynamic>?)
+          ?.map((e) => StoreDetailTagEntity.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <StoreDetailTagEntity>[],
   operatingHours:
-      (json['operatingHours'] as List<dynamic>)
-          .map(
+      (json['operatingHours'] as List<dynamic>?)
+          ?.map(
             (e) => StoreOperatingHourEntity.fromJson(e as Map<String, dynamic>),
           )
-          .toList(),
-  address: json['address'] as String,
-  phone: json['phone'] as String,
-  ownerId: (json['ownerId'] as num).toInt(),
-  ownerUuid: json['ownerUuid'] as String,
-  latitude: (json['latitude'] as num).toDouble(),
-  longitude: (json['longitude'] as num).toDouble(),
+          .toList() ??
+      const <StoreOperatingHourEntity>[],
+  address: json['address'] as String? ?? '',
+  phone: json['phone'] as String? ?? '',
+  ownerId: (json['ownerId'] as num?)?.toInt() ?? -1,
+  ownerUuid: json['ownerUuid'] as String? ?? '',
+  latitude: (json['latitude'] as num?)?.toDouble() ?? 0,
+  longitude: (json['longitude'] as num?)?.toDouble() ?? 0,
   menus:
-      (json['menus'] as List<dynamic>)
-          .map((e) => StoreDetailMenu.fromJson(e as Map<String, dynamic>))
-          .toList(),
-  totalReviewCount: (json['totalReviewCount'] as num).toInt(),
+      (json['menus'] as List<dynamic>?)
+          ?.map((e) => StoreDetailMenu.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <StoreDetailMenu>[],
+  totalReviewCount: (json['totalReviewCount'] as num?)?.toInt() ?? -1,
   userId: (json['userId'] as num?)?.toInt(),
   userUuid: json['userUuid'] as String?,
   storeReviews:
@@ -136,9 +139,9 @@ Json? _$JsonConverterToJson<Json, Value>(
 
 StoreDetailMenu _$StoreDetailMenuFromJson(Map<String, dynamic> json) =>
     StoreDetailMenu(
-      menuUuid: json['menuUuid'] as String,
-      name: json['name'] as String,
-      price: (json['price'] as num).toInt(),
+      menuUuid: json['menuUuid'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      price: (json['price'] as num?)?.toInt() ?? -1,
       isPopular: json['isPopular'] as bool?,
       description: json['description'] as String?,
       images:
@@ -157,15 +160,15 @@ Map<String, dynamic> _$StoreDetailMenuToJson(StoreDetailMenu instance) =>
 
 StoreDetailReview _$StoreDetailReviewFromJson(Map<String, dynamic> json) =>
     StoreDetailReview(
-      reviewUuid: json['reviewUuid'] as String,
-      storeId: (json['storeId'] as num).toInt(),
-      userUuid: json['userUuid'] as String,
-      nickname: json['nickname'] as String,
-      content: json['content'] as String,
-      rating: (json['rating'] as num).toDouble(),
       createdAt: const DateTimeJsonConverter().fromJson(
         json['createdAt'] as String?,
       ),
+      reviewUuid: json['reviewUuid'] as String? ?? '',
+      storeId: (json['storeId'] as num?)?.toInt() ?? -1,
+      userUuid: json['userUuid'] as String? ?? '',
+      nickname: json['nickname'] as String? ?? '',
+      content: json['content'] as String? ?? '',
+      rating: (json['rating'] as num?)?.toDouble() ?? 1,
       profileImage: json['profileImage'] as String?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
@@ -187,19 +190,19 @@ Map<String, dynamic> _$StoreDetailReviewToJson(StoreDetailReview instance) =>
 StoreDetailCommunityReview _$StoreDetailCommunityReviewFromJson(
   Map<String, dynamic> json,
 ) => StoreDetailCommunityReview(
-  reviewUuid: json['reviewUuid'] as String,
-  userUuid: json['userUuid'] as String,
-  nickname: json['nickname'] as String,
-  profileImage: json['profileImage'] as String,
-  thumbnail: json['thumbnail'] as String,
-  title: json['title'] as String,
-  content: json['content'] as String,
   createdAt: const DateTimeJsonConverter().fromJson(
     json['createdAt'] as String?,
   ),
   updatedAt: const DateTimeJsonConverter().fromJson(
     json['updatedAt'] as String?,
   ),
+  reviewUuid: json['reviewUuid'] as String? ?? '',
+  userUuid: json['userUuid'] as String? ?? '',
+  nickname: json['nickname'] as String? ?? '',
+  profileImage: json['profileImage'] as String? ?? '',
+  thumbnail: json['thumbnail'] as String? ?? '',
+  title: json['title'] as String? ?? '',
+  content: json['content'] as String? ?? '',
 );
 
 Map<String, dynamic> _$StoreDetailCommunityReviewToJson(
@@ -218,13 +221,13 @@ Map<String, dynamic> _$StoreDetailCommunityReviewToJson(
 
 StoreDetailMate _$StoreDetailMateFromJson(Map<String, dynamic> json) =>
     StoreDetailMate(
-      mateUuid: json['mateUuid'] as String,
-      mateCategory: json['mateCategory'] as String,
-      thumbnail: json['thumbnail'] as String,
-      title: json['title'] as String,
-      content: json['content'] as String,
-      nickname: json['nickname'] as String,
-      recruitYn: json['recruitYn'] as bool,
+      mateUuid: json['mateUuid'] as String? ?? '',
+      mateCategory: json['mateCategory'] as String? ?? '',
+      thumbnail: json['thumbnail'] as String? ?? '',
+      title: json['title'] as String? ?? '',
+      content: json['content'] as String? ?? '',
+      nickname: json['nickname'] as String? ?? '',
+      recruitYn: json['recruitYn'] as bool? ?? false,
       saved: json['saved'] as bool?,
     );
 
@@ -243,13 +246,13 @@ Map<String, dynamic> _$StoreDetailMateToJson(StoreDetailMate instance) =>
 StoreDetailNoticeEntity _$StoreDetailNoticeEntityFromJson(
   Map<String, dynamic> json,
 ) => StoreDetailNoticeEntity(
-  noticeId: (json['noticeId'] as num).toInt(),
-  tag: json['tag'] as String,
-  title: json['title'] as String,
-  content: json['content'] as String,
   createdAt: const DateTimeJsonConverter().fromJson(
     json['createdAt'] as String?,
   ),
+  noticeId: (json['noticeId'] as num?)?.toInt() ?? -1,
+  tag: json['tag'] as String? ?? '',
+  title: json['title'] as String? ?? '',
+  content: json['content'] as String? ?? '',
   updatedAt: const DateTimeJsonConverter().fromJson(
     json['updatedAt'] as String?,
   ),
@@ -272,8 +275,8 @@ Map<String, dynamic> _$StoreDetailNoticeEntityToJson(
 StoreDetailTagEntity _$StoreDetailTagEntityFromJson(
   Map<String, dynamic> json,
 ) => StoreDetailTagEntity(
-  id: (json['id'] as num).toInt(),
-  name: json['name'] as String,
+  id: (json['id'] as num?)?.toInt() ?? -1,
+  name: json['name'] as String? ?? '',
   category:
       json['category'] == null
           ? null

@@ -9,9 +9,9 @@ part of '../store_top_preference_entity.dart';
 StoreTopPreferenceEntity _$StoreTopPreferenceEntityFromJson(
   Map<String, dynamic> json,
 ) => StoreTopPreferenceEntity(
-  tagId: (json['tagId'] as num).toInt(),
-  name: json['name'] as String,
-  rank: (json['rank'] as num).toInt(),
+  tagId: (json['tagId'] as num?)?.toInt() ?? -1,
+  name: json['name'] as String? ?? '',
+  rank: (json['rank'] as num?)?.toInt() ?? -1,
 );
 
 Map<String, dynamic> _$StoreTopPreferenceEntityToJson(

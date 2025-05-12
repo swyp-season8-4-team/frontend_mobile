@@ -9,20 +9,23 @@ part of '../store_by_location_entity.dart';
 StoreByLocationEntity _$StoreByLocationEntityFromJson(
   Map<String, dynamic> json,
 ) => StoreByLocationEntity(
-  storeId: (json['storeId'] as num).toInt(),
-  storeUuid: json['storeUuid'] as String,
-  name: json['name'] as String,
-  address: json['address'] as String,
-  latitude: (json['latitude'] as num).toDouble(),
-  longitude: (json['longitude'] as num).toDouble(),
+  storeId: (json['storeId'] as num?)?.toInt() ?? -1,
+  storeUuid: json['storeUuid'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  address: json['address'] as String? ?? '',
+  latitude: (json['latitude'] as num?)?.toDouble() ?? 0,
+  longitude: (json['longitude'] as num?)?.toDouble() ?? 0,
   operatingHours:
-      (json['operatingHours'] as List<dynamic>)
-          .map(
+      (json['operatingHours'] as List<dynamic>?)
+          ?.map(
             (e) => StoreOperatingHourEntity.fromJson(e as Map<String, dynamic>),
           )
-          .toList(),
-  shortReviewCount: (json['shortReviewCount'] as num).toInt(),
-  tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
+          .toList() ??
+      const <StoreOperatingHourEntity>[],
+  shortReviewCount: (json['shortReviewCount'] as num?)?.toInt() ?? -1,
+  tags:
+      (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      const <String>[],
   storeImage: json['storeImage'] as String?,
   holidays:
       (json['holidays'] as List<dynamic>?)

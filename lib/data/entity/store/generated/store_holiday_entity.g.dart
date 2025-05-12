@@ -8,7 +8,7 @@ part of '../store_holiday_entity.dart';
 
 StoreHolidayEntity _$StoreHolidayEntityFromJson(Map<String, dynamic> json) =>
     StoreHolidayEntity(
-      date: json['date'] as String,
+      date: json['date'] as String? ?? '',
       reason: json['reason'] as String?,
     );
 

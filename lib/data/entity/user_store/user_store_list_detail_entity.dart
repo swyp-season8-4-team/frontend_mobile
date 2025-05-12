@@ -7,11 +7,11 @@ part 'generated/user_store_list_detail_entity.g.dart';
 @JsonSerializable()
 class UserStoreListDetailEntity {
   const UserStoreListDetailEntity({
-    required this.listId,
-    required this.userUuid,
-    required this.listName,
-    required this.iconColorId,
-    required this.storeCount,
+    this.listId = -1,
+    this.userUuid = '',
+    this.listName = '',
+    this.iconColorId = 1,
+    this.storeCount = -1,
     this.storeData,
   });
 
@@ -29,14 +29,14 @@ class UserStoreListDetailEntity {
 @JsonSerializable()
 class UserStoreDataDetailEntity {
   const UserStoreDataDetailEntity({
-    required this.userUuid,
-    required this.storeUuid,
-    required this.listId,
-    required this.listName,
-    required this.storeName,
-    required this.storeAddress,
-    required this.latitude,
-    required this.longitude,
+    this.userUuid = '',
+    this.storeUuid = '',
+    this.listId = -1,
+    this.listName = '',
+    this.storeName = '',
+    this.storeAddress = '',
+    this.latitude = 0,
+    this.longitude = 0,
     this.imageUrls,
     this.userPreferences,
   });

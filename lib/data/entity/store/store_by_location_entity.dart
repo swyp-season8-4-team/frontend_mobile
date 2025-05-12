@@ -6,16 +6,16 @@ part 'generated/store_by_location_entity.g.dart';
 
 @JsonSerializable()
 class StoreByLocationEntity {
-  const StoreByLocationEntity({
-    required this.storeId,
-    required this.storeUuid,
-    required this.name,
-    required this.address,
-    required this.latitude,
-    required this.longitude,
-    required this.operatingHours,
-    required this.shortReviewCount,
-    required this.tags,
+  StoreByLocationEntity({
+    this.storeId = -1,
+    this.storeUuid = '',
+    this.name = '',
+    this.address = '',
+    this.latitude = 0,
+    this.longitude = 0,
+    this.operatingHours = const <StoreOperatingHourEntity>[],
+    this.shortReviewCount = -1,
+    this.tags = const <String>[],
     this.storeImage,
     this.holidays,
   });

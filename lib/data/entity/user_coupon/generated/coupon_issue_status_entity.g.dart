@@ -9,9 +9,9 @@ part of '../coupon_issue_status_entity.dart';
 CouponIssueStatusEntity _$CouponIssueStatusEntityFromJson(
   Map<String, dynamic> json,
 ) => CouponIssueStatusEntity(
-  couponId: (json['couponId'] as num).toInt(),
-  couponName: json['couponName'] as String,
-  issued: json['issued'] as bool,
+  couponId: (json['couponId'] as num?)?.toInt() ?? -1,
+  couponName: json['couponName'] as String? ?? '',
+  issued: json['issued'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$CouponIssueStatusEntityToJson(

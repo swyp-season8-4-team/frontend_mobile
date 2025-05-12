@@ -5,9 +5,9 @@ part 'generated/preference_entity.g.dart';
 @JsonSerializable()
 class PreferenceEntity {
   const PreferenceEntity({
-    required this.id,
-    required this.preferenceName,
-    required this.preferenceDesc,
+    this.id = -1,
+    this.preferenceName = '',
+    this.preferenceDesc = '',
   });
 
   factory PreferenceEntity.fromJson(Map<String, dynamic> json) =>

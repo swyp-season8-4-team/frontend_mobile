@@ -6,9 +6,9 @@ part 'generated/search_recent_entity.g.dart';
 @JsonSerializable()
 class RecentSearchEntity {
   const RecentSearchEntity({
-    required this.id,
-    required this.keyword,
     required this.createdAt,
+    this.id = -1,
+    this.keyword = '',
   });
 
   factory RecentSearchEntity.fromJson(Map<String, dynamic> json) =>

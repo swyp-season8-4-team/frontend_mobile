@@ -5,9 +5,9 @@ part 'generated/coupon_usage_status_entity.g.dart';
 @JsonSerializable()
 class UserCouponUsageStatusEntity {
   const UserCouponUsageStatusEntity({
-    required this.usedCount,
-    required this.unusedCount,
-    required this.expiredCount,
+    this.usedCount = -1,
+    this.unusedCount = -1,
+    this.expiredCount = -1,
   });
 
   factory UserCouponUsageStatusEntity.fromJson(Map<String, dynamic> json) =>

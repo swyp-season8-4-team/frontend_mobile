@@ -8,13 +8,13 @@ part of '../store_notice_entity.dart';
 
 StoreNoticeEntity _$StoreNoticeEntityFromJson(Map<String, dynamic> json) =>
     StoreNoticeEntity(
-      noticeId: (json['noticeId'] as num).toInt(),
-      tag: json['tag'] as String,
-      title: json['title'] as String,
-      content: json['content'] as String,
       createdAt: const DateTimeJsonConverter().fromJson(
         json['createdAt'] as String?,
       ),
+      noticeId: (json['noticeId'] as num?)?.toInt() ?? -1,
+      tag: json['tag'] as String? ?? '',
+      title: json['title'] as String? ?? '',
+      content: json['content'] as String? ?? '',
       updatedAt: const DateTimeJsonConverter().fromJson(
         json['updatedAt'] as String?,
       ),

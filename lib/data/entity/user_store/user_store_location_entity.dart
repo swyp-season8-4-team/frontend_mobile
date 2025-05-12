@@ -5,12 +5,12 @@ part 'generated/user_store_location_entity.g.dart';
 @JsonSerializable()
 class UserStoreLocationEntity {
   const UserStoreLocationEntity({
-    required this.listId,
-    required this.iconColorId,
-    required this.storeId,
-    required this.name,
-    required this.latitude,
-    required this.longitude,
+    this.listId = -1,
+    this.iconColorId = 1,
+    this.storeId = -1,
+    this.name = '',
+    this.latitude = 0,
+    this.longitude = 0,
   });
 
   factory UserStoreLocationEntity.fromJson(Map<String, dynamic> json) =>

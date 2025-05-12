@@ -29,10 +29,10 @@ Map<String, dynamic> _$PopularSearchesEntityToJson(
 
 PopularSearch _$PopularSearchFromJson(Map<String, dynamic> json) =>
     PopularSearch(
-      keyword: json['keyword'] as String,
-      searchCount: (json['searchCount'] as num).toInt(),
-      rank: (json['rank'] as num).toInt(),
-      difference: (json['difference'] as num).toInt(),
+      keyword: json['keyword'] as String? ?? '',
+      searchCount: (json['searchCount'] as num?)?.toInt() ?? -1,
+      rank: (json['rank'] as num?)?.toInt() ?? -1,
+      difference: (json['difference'] as num?)?.toInt() ?? -1,
     );
 
 Map<String, dynamic> _$PopularSearchToJson(PopularSearch instance) =>

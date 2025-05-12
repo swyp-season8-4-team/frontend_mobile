@@ -9,9 +9,9 @@ part of '../user_store_list_summary_entity.dart';
 UserStoreListSummaryEntity _$UserStoreListSummaryEntityFromJson(
   Map<String, dynamic> json,
 ) => UserStoreListSummaryEntity(
-  listId: (json['listId'] as num).toInt(),
-  listName: json['listName'] as String,
-  iconColorId: (json['iconColorId'] as num).toInt(),
+  listId: (json['listId'] as num?)?.toInt() ?? -1,
+  listName: json['listName'] as String? ?? '',
+  iconColorId: (json['iconColorId'] as num?)?.toInt() ?? 1,
 );
 
 Map<String, dynamic> _$UserStoreListSummaryEntityToJson(

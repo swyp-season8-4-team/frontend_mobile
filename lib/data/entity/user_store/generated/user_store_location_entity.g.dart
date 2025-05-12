@@ -9,12 +9,12 @@ part of '../user_store_location_entity.dart';
 UserStoreLocationEntity _$UserStoreLocationEntityFromJson(
   Map<String, dynamic> json,
 ) => UserStoreLocationEntity(
-  listId: (json['listId'] as num).toInt(),
-  iconColorId: (json['iconColorId'] as num).toInt(),
-  storeId: (json['storeId'] as num).toInt(),
-  name: json['name'] as String,
-  latitude: (json['latitude'] as num).toDouble(),
-  longitude: (json['longitude'] as num).toDouble(),
+  listId: (json['listId'] as num?)?.toInt() ?? -1,
+  iconColorId: (json['iconColorId'] as num?)?.toInt() ?? 1,
+  storeId: (json['storeId'] as num?)?.toInt() ?? -1,
+  name: json['name'] as String? ?? '',
+  latitude: (json['latitude'] as num?)?.toDouble() ?? 0,
+  longitude: (json['longitude'] as num?)?.toDouble() ?? 0,
 );
 
 Map<String, dynamic> _$UserStoreLocationEntityToJson(

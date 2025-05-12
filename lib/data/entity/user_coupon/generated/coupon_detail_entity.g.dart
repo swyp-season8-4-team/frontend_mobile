@@ -9,14 +9,14 @@ part of '../coupon_detail_entity.dart';
 UserCouponDetailEntity _$UserCouponDetailEntityFromJson(
   Map<String, dynamic> json,
 ) => UserCouponDetailEntity(
-  userCouponId: (json['userCouponId'] as num).toInt(),
-  qrImageUrl: json['qrImageUrl'] as String,
-  storeName: json['storeName'] as String,
-  couponName: json['couponName'] as String,
-  couponCode: json['couponCode'] as String,
-  conditionType: json['conditionType'] as String,
-  storeUuid: json['storeUuid'] as String,
-  couponUuid: json['couponUuid'] as String,
+  userCouponId: (json['userCouponId'] as num?)?.toInt() ?? -1,
+  qrImageUrl: json['qrImageUrl'] as String? ?? '',
+  storeName: json['storeName'] as String? ?? '',
+  couponName: json['couponName'] as String? ?? '',
+  couponCode: json['couponCode'] as String? ?? '',
+  conditionType: json['conditionType'] as String? ?? '',
+  storeUuid: json['storeUuid'] as String? ?? '',
+  couponUuid: json['couponUuid'] as String? ?? '',
   expiryDate: const DateTimeJsonConverter().fromJson(
     json['expiryDate'] as String?,
   ),

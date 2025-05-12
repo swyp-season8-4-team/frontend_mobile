@@ -5,9 +5,9 @@ part 'generated/coupon_issue_status_entity.g.dart';
 @JsonSerializable()
 class CouponIssueStatusEntity {
   const CouponIssueStatusEntity({
-    required this.couponId,
-    required this.couponName,
-    required this.issued,
+    this.couponId = -1,
+    this.couponName = '',
+    this.issued = false,
   });
 
   factory CouponIssueStatusEntity.fromJson(Map<String, dynamic> json) =>

@@ -6,10 +6,10 @@ part 'generated/coupon_entity.g.dart';
 @JsonSerializable()
 class UserCouponEntity {
   const UserCouponEntity({
-    required this.userCouponId,
-    required this.couponName,
-    required this.couponCode,
-    required this.storeName,
+    this.userCouponId = -1,
+    this.couponName = '',
+    this.couponCode = '',
+    this.storeName = '',
     this.qrImageUrl,
     this.expiryDate,
     this.used,

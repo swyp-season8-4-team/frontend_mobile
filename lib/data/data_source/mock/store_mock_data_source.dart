@@ -56,33 +56,28 @@ class StoreMockDataSource implements StoreRemoteDataSource {
           openingTime: '09:00',
           closingTime: '17:00',
           lastOrderTime: '17:30',
-          isClosed: false,
         ),
         const StoreOperatingHourEntity(
           dayOfWeek: 'TUESDAY',
           openingTime: '09:00',
           closingTime: '17:00',
-          isClosed: false,
         ),
         const StoreOperatingHourEntity(
           dayOfWeek: 'WEDNESDAY',
           openingTime: '09:00',
           closingTime: '17:00',
           regularClosureType: 'WEEKLY',
-          isClosed: false,
         ),
         const StoreOperatingHourEntity(
           dayOfWeek: 'THURSDAY',
           openingTime: '09:00',
           closingTime: '17:00',
-          isClosed: false,
         ),
         const StoreOperatingHourEntity(
           dayOfWeek: 'FRIDAY',
           openingTime: '09:00',
           closingTime: '17:00',
           regularClosureType: 'WEEKLY',
-          isClosed: false,
         ),
         const StoreOperatingHourEntity(
           dayOfWeek: 'SATURDAY',
@@ -95,13 +90,11 @@ class StoreMockDataSource implements StoreRemoteDataSource {
           dayOfWeek: 'SUNDAY',
           openingTime: '09:00',
           closingTime: '17:00',
-          isClosed: false,
         ),
       ],
       address: '서울시 강남구 역삼동',
       phone: '010-9999-8888',
       ownerId: 123,
-      ownerUuid: '',
       latitude: 37.514575,
       longitude: 127.0495556,
       menus: <StoreDetailMenu>[
@@ -138,31 +131,26 @@ class StoreMockDataSource implements StoreRemoteDataSource {
           dayOfWeek: 'MONDAY',
           openingTime: '09:00',
           closingTime: '17:00',
-          isClosed: false,
         ),
         const StoreOperatingHourEntity(
           dayOfWeek: 'TUESDAY',
           openingTime: '09:00',
           closingTime: '17:00',
-          isClosed: false,
         ),
         const StoreOperatingHourEntity(
           dayOfWeek: 'WEDNESDAY',
           openingTime: '09:00',
           closingTime: '17:00',
-          isClosed: false,
         ),
         const StoreOperatingHourEntity(
           dayOfWeek: 'THURSDAY',
           openingTime: '09:00',
           closingTime: '17:00',
-          isClosed: false,
         ),
         const StoreOperatingHourEntity(
           dayOfWeek: 'FRIDAY',
           openingTime: '09:00',
           closingTime: '17:00',
-          isClosed: false,
         ),
         const StoreOperatingHourEntity(
           dayOfWeek: 'SATURDAY',
@@ -174,7 +162,6 @@ class StoreMockDataSource implements StoreRemoteDataSource {
           dayOfWeek: 'SUNDAY',
           openingTime: '09:00',
           closingTime: '17:00',
-          isClosed: false,
         ),
       ],
       address: '서울시 강남구 역삼동',
@@ -188,7 +175,7 @@ class StoreMockDataSource implements StoreRemoteDataSource {
   }) async {
     await Future<void>.delayed(const Duration(seconds: 3));
     return <StoreByLocationEntity>[
-      const StoreByLocationEntity(
+      StoreByLocationEntity(
         storeId: 1,
         storeUuid: 'store-uuid-1',
         name: '디저트 가게1',
@@ -199,7 +186,7 @@ class StoreMockDataSource implements StoreRemoteDataSource {
         shortReviewCount: 2,
         tags: <String>[],
       ),
-      const StoreByLocationEntity(
+      StoreByLocationEntity(
         storeId: 2,
         storeUuid: 'store-uuid-2',
         name: '디저트 가게2',

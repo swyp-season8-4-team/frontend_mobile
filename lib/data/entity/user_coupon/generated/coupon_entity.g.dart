@@ -8,10 +8,10 @@ part of '../coupon_entity.dart';
 
 UserCouponEntity _$UserCouponEntityFromJson(Map<String, dynamic> json) =>
     UserCouponEntity(
-      userCouponId: (json['userCouponId'] as num).toInt(),
-      couponName: json['couponName'] as String,
-      couponCode: json['couponCode'] as String,
-      storeName: json['storeName'] as String,
+      userCouponId: (json['userCouponId'] as num?)?.toInt() ?? -1,
+      couponName: json['couponName'] as String? ?? '',
+      couponCode: json['couponCode'] as String? ?? '',
+      storeName: json['storeName'] as String? ?? '',
       qrImageUrl: json['qrImageUrl'] as String?,
       expiryDate: const DateTimeJsonConverter().fromJson(
         json['expiryDate'] as String?,

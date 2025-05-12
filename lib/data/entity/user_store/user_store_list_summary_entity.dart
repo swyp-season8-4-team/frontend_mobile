@@ -5,9 +5,9 @@ part 'generated/user_store_list_summary_entity.g.dart';
 @JsonSerializable()
 class UserStoreListSummaryEntity {
   const UserStoreListSummaryEntity({
-    required this.listId,
-    required this.listName,
-    required this.iconColorId,
+    this.listId = -1,
+    this.listName = '',
+    this.iconColorId = 1,
   });
 
   factory UserStoreListSummaryEntity.fromJson(Map<String, dynamic> json) =>

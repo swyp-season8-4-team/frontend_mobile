@@ -19,10 +19,10 @@ class PopularSearchesEntity {
 @JsonSerializable()
 class PopularSearch {
   const PopularSearch({
-    required this.keyword,
-    required this.searchCount,
-    required this.rank,
-    required this.difference,
+    this.keyword = '',
+    this.searchCount = -1,
+    this.rank = -1,
+    this.difference = -1,
   });
 
   factory PopularSearch.fromJson(Map<String, dynamic> json) =>

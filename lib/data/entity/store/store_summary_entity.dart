@@ -12,13 +12,13 @@ class StoreSummaryEntity {
       _$StoreSummaryEntityFromJson(json);
 
   const StoreSummaryEntity({
-    required this.storeId,
-    required this.storeUuid,
-    required this.name,
-    required this.tags,
-    required this.operatingHours,
-    required this.address,
-    required this.phone,
+    this.storeId = -1,
+    this.storeUuid = '',
+    this.name = '',
+    this.tags = const <String>[],
+    this.operatingHours = const <StoreOperatingHourEntity>[],
+    this.address = '',
+    this.phone = '',
     this.averageRating,
     this.storeImages,
     this.ownerPickImages,
