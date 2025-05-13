@@ -39,6 +39,7 @@ import 'package:frontend_mobile/presentation/my_page/setting/my_setting_view.dar
 import 'package:frontend_mobile/presentation/my_page/update_profile/update_profile_info_view.dart';
 import 'package:frontend_mobile/presentation/my_page/user_store/my_user_store_list_view.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step0.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step1.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step2.dart';
 import 'package:frontend_mobile/presentation/sign_up/view/sign_up_step3.dart';
@@ -147,6 +148,15 @@ class AppRouter {
             name: AppRoutes.signUp.name,
             redirect: (_, __) => null,
             routes: <RouteBase>[
+              /// step0
+              GoRoute(
+                path: AppRoutes.signUpStep0.path,
+                name: AppRoutes.signUpStep0.name,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const SignUpStep0();
+                },
+              ),
+
               /// step1
               GoRoute(
                 path: AppRoutes.signUpStep1.path,

@@ -130,6 +130,12 @@ abstract class AppRoutes {
     path: 'sign_up',
   );
 
+  /// 인증 > 회원가입 > step0
+  static final RouteInfo signUpStep0 = RouteInfo(
+    name: '${signUp.name}/step0',
+    path: 'step0',
+  );
+
   /// 인증 > 회원가입 > step1
   static final RouteInfo signUpStep1 = RouteInfo(
     name: '${signUp.name}/step1',

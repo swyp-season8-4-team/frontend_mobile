@@ -359,7 +359,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                         CustomTextButton.underline(
                           label: '회원가입',
                           onPressed: () {
-                            context.pushNamed(AppRoutes.signUpStep1.name);
+                            context.pushNamed(AppRoutes.signUpStep0.name);
                           },
                         ),
                       ],
