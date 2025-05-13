@@ -21,7 +21,10 @@ class _SignUpStep5State extends ConsumerState<SignUpStep0> {
   /// 전체 동의
   bool _isAllAgreed = false;
 
-  /// 이용약관 및 개인정보취급방침 (필수)
+  /// 이용약관 (필수)
+  bool _isTermAgreed = false;
+
+  /// 개인정보취급방침 (필수)
   bool _isPrivacyAgreed = false;
 
   /// 위치기반서비스 이용약관 (필수)
@@ -77,11 +80,13 @@ class _SignUpStep5State extends ConsumerState<SignUpStep0> {
                             setState(() {
                               if (_isAllAgreed) {
                                 _isAllAgreed = false;
+                                _isTermAgreed = false;
                                 _isPrivacyAgreed = false;
                                 _isLocationAgreed = false;
                                 _isMarketingAgreed = false;
                               } else {
                                 _isAllAgreed = true;
+                                _isTermAgreed = true;
                                 _isPrivacyAgreed = true;
                                 _isLocationAgreed = true;
                                 _isMarketingAgreed = true;
@@ -108,7 +113,61 @@ class _SignUpStep5State extends ConsumerState<SignUpStep0> {
                           child: Row(
                             children: <Widget>[
                               Text(
-                                '이용약관 및 개인정보취급방침 (필수)',
+                                '이용약관 동의 (필수)',
+                                style: textTheme.bodyMedium?.copyWith(
+                                  color: ScaleColorConfig.neutral20,
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              Assets.icon.arrow.rightLine.svg(
+                                width: 20,
+                                colorFilter: const ColorFilter.mode(
+                                  ScaleColorConfig.neutral40,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        CustomCheckBox(
+                          onTap: () {
+                            setState(() {
+                              if (_isTermAgreed) {
+                                _isAllAgreed = false;
+                                _isTermAgreed = false;
+                              } else {
+                                _isTermAgreed = true;
+
+                                /// 모든 항목이 체크된 경우
+                                if (_isTermAgreed &&
+                                    _isPrivacyAgreed &&
+                                    _isLocationAgreed &&
+                                    _isMarketingAgreed) {
+                                  _isAllAgreed = true;
+                                }
+                              }
+                            });
+                          },
+                          value: _isTermAgreed,
+                        ),
+                      ],
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () {
+                            _launchUrl(
+                              urlString:
+                                  'https://docs.google.com/document/d/19idqC9uxRsP_akj5DMXOcQ6FHk_qUun8NnSYLgtOQ6s/edit?tab=t.0#heading=h.x0195amxm9oc',
+                            );
+                          },
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                '개인정보 수집 이용 동의 (필수)',
                                 style: textTheme.bodyMedium?.copyWith(
                                   color: ScaleColorConfig.neutral20,
                                 ),
@@ -135,7 +194,8 @@ class _SignUpStep5State extends ConsumerState<SignUpStep0> {
                                 _isPrivacyAgreed = true;
 
                                 /// 모든 항목이 체크된 경우
-                                if (_isPrivacyAgreed &&
+                                if (_isTermAgreed &&
+                                    _isPrivacyAgreed &&
                                     _isLocationAgreed &&
                                     _isMarketingAgreed) {
                                   _isAllAgreed = true;
@@ -161,7 +221,7 @@ class _SignUpStep5State extends ConsumerState<SignUpStep0> {
                           child: Row(
                             children: <Widget>[
                               Text(
-                                '위치기반서비스 이용약관 (필수)',
+                                '위치기반서비스 이용약관 동의 (필수)',
                                 style: textTheme.bodyMedium?.copyWith(
                                   color: ScaleColorConfig.neutral20,
                                 ),
@@ -188,7 +248,8 @@ class _SignUpStep5State extends ConsumerState<SignUpStep0> {
                                 _isLocationAgreed = true;
 
                                 /// 모든 항목이 체크된 경우
-                                if (_isPrivacyAgreed &&
+                                if (_isTermAgreed &&
+                                    _isPrivacyAgreed &&
                                     _isLocationAgreed &&
                                     _isMarketingAgreed) {
                                   _isAllAgreed = true;
@@ -241,7 +302,8 @@ class _SignUpStep5State extends ConsumerState<SignUpStep0> {
                                 _isMarketingAgreed = true;
 
                                 /// 모든 항목이 체크된 경우
-                                if (_isPrivacyAgreed &&
+                                if (_isTermAgreed &&
+                                    _isPrivacyAgreed &&
                                     _isLocationAgreed &&
                                     _isMarketingAgreed) {
                                   _isAllAgreed = true;
@@ -260,7 +322,8 @@ class _SignUpStep5State extends ConsumerState<SignUpStep0> {
 
             CustomFillButton.large(
               label: '동의하고 다음',
-              disabled: !_isPrivacyAgreed || !_isLocationAgreed,
+              disabled:
+                  !_isTermAgreed || !_isPrivacyAgreed || !_isLocationAgreed,
               onPressed: () {
                 context.pushNamed(AppRoutes.signUpStep1.name);
               },
