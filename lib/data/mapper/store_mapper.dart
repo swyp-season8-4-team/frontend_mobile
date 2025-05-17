@@ -17,7 +17,8 @@ import 'package:frontend_mobile/domain/param/store/get_my_preferences_stores_by_
 import 'package:frontend_mobile/domain/param/store/get_stores_by_location_params.dart';
 
 extension StoreHolidayEntityExt on StoreHolidayEntity {
-  StoreHolidayModel toModel() => StoreHolidayModel(date: date, reason: reason);
+  StoreHolidayModel toModel() =>
+      StoreHolidayModel(startDate: startDate, endDate: endDate, reason: reason);
 }
 
 extension StoreOperatingHourEntityExt on StoreOperatingHourEntity {

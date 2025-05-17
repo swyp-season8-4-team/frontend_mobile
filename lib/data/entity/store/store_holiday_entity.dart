@@ -4,11 +4,16 @@ part 'generated/store_holiday_entity.g.dart';
 
 @JsonSerializable()
 class StoreHolidayEntity {
-  const StoreHolidayEntity({this.date = '', this.reason});
+  const StoreHolidayEntity({
+    this.startDate = '',
+    this.endDate = '',
+    this.reason = '',
+  });
 
   factory StoreHolidayEntity.fromJson(Map<String, dynamic> json) =>
       _$StoreHolidayEntityFromJson(json);
 
-  final String date;
-  final String? reason;
+  final String startDate;
+  final String endDate;
+  final String reason;
 }
