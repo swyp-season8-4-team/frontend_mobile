@@ -15,4 +15,9 @@ class BlockedUserListState with _$BlockedUserListState {
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel unblockUserException,
   }) = _BlockedUserListState;
+
+  const BlockedUserListState._();
+
+  bool get isFirstLoading =>
+      blockedList.totalCount == -1 && getBlockedUsersStatus.isLoading;
 }

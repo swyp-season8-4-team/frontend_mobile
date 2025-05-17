@@ -176,7 +176,7 @@ class __$$BlockedUserListStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BlockedUserListStateImpl implements _BlockedUserListState {
+class _$BlockedUserListStateImpl extends _BlockedUserListState {
   _$BlockedUserListStateImpl({
     this.blockedList = const BlockedUserListModel(
       blockedUsers: <BlockedUserModel>[],
@@ -196,7 +196,7 @@ class _$BlockedUserListStateImpl implements _BlockedUserListState {
       message: '',
       timestamp: '',
     ),
-  });
+  }) : super._();
 
   @override
   @JsonKey()
@@ -262,7 +262,7 @@ class _$BlockedUserListStateImpl implements _BlockedUserListState {
       );
 }
 
-abstract class _BlockedUserListState implements BlockedUserListState {
+abstract class _BlockedUserListState extends BlockedUserListState {
   factory _BlockedUserListState({
     final BlockedUserListModel blockedList,
     final Status getBlockedUsersStatus,
@@ -270,6 +270,7 @@ abstract class _BlockedUserListState implements BlockedUserListState {
     final Status unblockUserStatus,
     final ExceptionModel unblockUserException,
   }) = _$BlockedUserListStateImpl;
+  _BlockedUserListState._() : super._();
 
   @override
   BlockedUserListModel get blockedList;

@@ -29,7 +29,9 @@ blockedUserListViewModelProvider = StateNotifierProvider.autoDispose<
 class BlockedUserListViewModel extends StateNotifier<BlockedUserListState> {
   BlockedUserListViewModel({required Ref<Object?> ref})
     : _ref = ref,
-      super(BlockedUserListState());
+      super(BlockedUserListState()) {
+    getBlockedUsers();
+  }
 
   final Ref _ref;
 
