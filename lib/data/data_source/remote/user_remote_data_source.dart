@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
+import 'package:frontend_mobile/data/entity/user/blocked_user_list_entity.dart';
 import 'package:frontend_mobile/data/entity/user/nickname_availability_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_review_entity.dart';
@@ -51,4 +52,12 @@ abstract interface class UserRemoteDataSource {
   /// 내가 작성한 한줄 리뷰 조회
   @GET('/api/users/me/reviews/short')
   Future<UserReviewEntity> getMyReviews();
+
+  /// 차단된 사용자 목록 조회
+  @GET('/api/users/blocks')
+  Future<BlockedUserListEntity> getBlockedUsers();
+
+  /// 특정 사용자 차단 해제
+  @DELETE('/api/users/blocks/{blockId}')
+  Future<void> unblockUser({@Path('blockId') required int blockId});
 }

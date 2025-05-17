@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:frontend_mobile/data/data_source/remote/user_remote_data_source.dart';
+import 'package:frontend_mobile/data/entity/user/blocked_user_list_entity.dart';
 import 'package:frontend_mobile/data/entity/user/nickname_availability_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_review_entity.dart';
@@ -47,6 +48,18 @@ class UserMockDataSource implements UserRemoteDataSource {
   @override
   Future<UserReviewEntity> getMyReviews() {
     // TODO: implement getMyReviews
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BlockedUserListEntity> getBlockedUsers() {
+    // TODO: implement getBlockedUsers
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> unblockUser({required int blockId}) {
+    // TODO: implement unblockUser
     throw UnimplementedError();
   }
 }
