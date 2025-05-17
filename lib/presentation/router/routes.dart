@@ -304,6 +304,12 @@ abstract class AppRoutes {
     path: 'delete_my_info',
   );
 
+  /// 마이페이지 > Default > 설정 > 차단 유저 관리
+  static RouteInfo blockedUser = RouteInfo(
+    name: '${myPageSetting.name}/blocked_user',
+    path: 'blocked_user',
+  );
+
   /// 마이페이지 > Default > 저장 리스트 (찜한 가게)
   static RouteInfo myUserStoreList = RouteInfo(
     name: '${myPageDefault.name}/user_store_list',
