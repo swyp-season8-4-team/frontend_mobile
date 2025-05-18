@@ -7,7 +7,7 @@ import 'package:frontend_mobile/common/design_system/foundation/color/scale_colo
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/domain/model/mate_reply/mate_reply_detail_model.dart';
 import 'package:frontend_mobile/domain/param/user/block_user_params.dart';
-import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view_model.dart';
+import 'package:frontend_mobile/presentation/dessert/comment/dessert_comment_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
 
@@ -76,7 +76,7 @@ class _DessertCommentItemViewState
                         text: '네, 차단할래요',
                         onTap: () {
                           ref
-                              .read(dessertPostViewModelProvider.notifier)
+                              .read(dessertCommentViewModelProvider.notifier)
                               .postBlockUser(
                                 params: BlockUserParams(
                                   blockedUserUuid: widget.item.userUuid,

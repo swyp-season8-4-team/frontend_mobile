@@ -137,77 +137,86 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
         ),
         const SizedBox(height: 10),
 
-        Text(
-          item.content,
-          style: textTheme.bodySmall?.copyWith(
-            color: ScaleColorConfig.neutral30,
-          ),
-        ),
-        const SizedBox(height: 6),
-
-        Text(
-          item.createdAt.toTime(),
-          style: textTheme.bodySmall?.copyWith(
-            color: ScaleColorConfig.neutral50,
-          ),
-        ),
-        const SizedBox(height: 6),
-
-        if (replyButton)
-          if (commentMateReplyId != item.mateReplyId)
-            CustomOutlineButton.xSmall(
-              width: 50,
-              label: '답글',
-              onPressed: () {
-                setState(() {
-                  commentMateReplyId = item.mateReplyId;
-                });
-              },
-            )
-          else
-            Column(
-              children: <Widget>[
-                CustomTextField(controller: _replyController),
-                const SizedBox(height: 8),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    CustomOutlineButton.xSmall(
-                      width: 50,
-                      label: '취소',
-                      onPressed: () {
-                        setState(() {
-                          commentMateReplyId = -1;
-                        });
-                      },
-                    ),
-                    const SizedBox(width: 3),
-                    CustomFillButton.xSmall(
-                      width: 50,
-                      label: '등록',
-                      disabled: _replyController.text.isEmpty,
-                      onPressed: () {
-                        ref
-                            .read(dessertCommentViewModelProvider.notifier)
-                            .postMateReply(
-                              params: PostMateReplyParams(
-                                parentMateReplyId: commentMateReplyId,
-                                mateUuid: state.data.mateUuid,
-                                userUuid: userState.data.userUuid,
-                                content: _replyController.text,
-                              ),
-                            );
-
-                        setState(() {
-                          commentMateReplyId = -1;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ],
+        if (item.blockedByAuthorYn)
+          Text(
+            '차단된 사용자입니다',
+            style: textTheme.bodySmall?.copyWith(
+              color: ScaleColorConfig.neutral50,
             ),
+          )
+        else ...<Widget>[
+          Text(
+            item.content,
+            style: textTheme.bodySmall?.copyWith(
+              color: ScaleColorConfig.neutral30,
+            ),
+          ),
+          const SizedBox(height: 6),
+
+          Text(
+            item.createdAt.toTime(),
+            style: textTheme.bodySmall?.copyWith(
+              color: ScaleColorConfig.neutral50,
+            ),
+          ),
+          const SizedBox(height: 6),
+
+          if (replyButton)
+            if (commentMateReplyId != item.mateReplyId)
+              CustomOutlineButton.xSmall(
+                width: 50,
+                label: '답글',
+                onPressed: () {
+                  setState(() {
+                    commentMateReplyId = item.mateReplyId;
+                  });
+                },
+              )
+            else
+              Column(
+                children: <Widget>[
+                  CustomTextField(controller: _replyController),
+                  const SizedBox(height: 8),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      CustomOutlineButton.xSmall(
+                        width: 50,
+                        label: '취소',
+                        onPressed: () {
+                          setState(() {
+                            commentMateReplyId = -1;
+                          });
+                        },
+                      ),
+                      const SizedBox(width: 3),
+                      CustomFillButton.xSmall(
+                        width: 50,
+                        label: '등록',
+                        disabled: _replyController.text.isEmpty,
+                        onPressed: () {
+                          ref
+                              .read(dessertCommentViewModelProvider.notifier)
+                              .postMateReply(
+                                params: PostMateReplyParams(
+                                  parentMateReplyId: commentMateReplyId,
+                                  mateUuid: state.data.mateUuid,
+                                  userUuid: userState.data.userUuid,
+                                  content: _replyController.text,
+                                ),
+                              );
+
+                          setState(() {
+                            commentMateReplyId = -1;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+        ],
       ],
     );
   }

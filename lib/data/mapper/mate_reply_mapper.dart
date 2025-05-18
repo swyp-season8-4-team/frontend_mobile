@@ -38,6 +38,7 @@ extension MateReplyDetailEntityExt on MateReplyDetailEntity {
       updatedAt: updatedAt,
       deletedAt: deletedAt,
       children: children.map((MateReplyDetailEntity e) => e.toModel()).toList(),
+      blockedByAuthorYn: blockedByAuthorYn,
     );
   }
 }

@@ -27,6 +27,7 @@ MateReplyDetailEntity _$MateReplyDetailEntityFromJson(
           )
           .toList() ??
       const <MateReplyDetailEntity>[],
+  blockedByAuthorYn: json['blockedByAuthorYn'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$MateReplyDetailEntityToJson(
@@ -44,4 +45,5 @@ Map<String, dynamic> _$MateReplyDetailEntityToJson(
   'updatedAt': instance.updatedAt,
   'deletedAt': instance.deletedAt,
   'children': instance.children,
+  'blockedByAuthorYn': instance.blockedByAuthorYn,
 };

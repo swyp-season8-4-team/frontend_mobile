@@ -9,6 +9,7 @@ import 'package:frontend_mobile/domain/model/mate_reply/mate_reply_detail_model.
 import 'package:frontend_mobile/domain/model/mate_reply/mate_reply_model.dart';
 import 'package:frontend_mobile/domain/model/mate_reply/mate_reply_report_model.dart';
 import 'package:frontend_mobile/domain/model/user/blocked_user_model.dart';
+import 'package:frontend_mobile/domain/param/mate/get_mate_params.dart';
 import 'package:frontend_mobile/domain/param/mate_reply/get_mate_reply_params.dart';
 import 'package:frontend_mobile/domain/param/mate_reply/post_mate_reply_params.dart';
 import 'package:frontend_mobile/domain/param/mate_reply/post_mate_reply_report_params.dart';
@@ -17,6 +18,7 @@ import 'package:frontend_mobile/domain/usecase/mate_reply/get_mate_reply_usecase
 import 'package:frontend_mobile/domain/usecase/mate_reply/post_mate_reply_report_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/mate_reply/post_mate_reply_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/user/post_block_user_usecase.dart';
+import 'package:frontend_mobile/presentation/dessert/dessert_board_view_model.dart';
 
 part 'dessert_comment_state.dart';
 part 'generated/dessert_comment_view_model.freezed.dart';
@@ -123,6 +125,10 @@ class DessertCommentViewModel extends StateNotifier<DessertCommentState> {
 
     response.map(
       success: (Success<BlockedUserModel, CustomException> success) {
+        ref
+            .read(dessertBoardViewModelProvider.notifier)
+            .getMate(params: GetMateParams());
+
         state = state.copyWith(
           postBlockUserStatus: Status.success,
           blockedUserNickname: success.data.blockedUserNickname,

@@ -265,9 +265,10 @@ class _DessertPostState extends ConsumerState<DessertPost> {
     ref.listen(dessertCommentViewModelProvider, (_, DessertCommentState next) {
       switch (next.postBlockUserStatus) {
         case Status.success:
+          context.pop();
+
           toastManager.show(
             context: context,
-            aboveBottomNavigation: true,
             toastWidget: CustomSnackBar(
               description: '${next.blockedUserNickname}님을 차단했습니다.',
               actionButton: SnackBarActionButton(onTap: () {}, label: '확인'),

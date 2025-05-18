@@ -17,6 +17,7 @@ class MateReplyDetailEntity {
     this.updatedAt,
     this.deletedAt,
     this.children = const <MateReplyDetailEntity>[],
+    this.blockedByAuthorYn = false,
   });
 
   factory MateReplyDetailEntity.fromJson(Map<String, dynamic> json) =>
@@ -34,4 +35,5 @@ class MateReplyDetailEntity {
   final String? updatedAt;
   final String? deletedAt;
   final List<MateReplyDetailEntity> children;
+  final bool blockedByAuthorYn;
 }
