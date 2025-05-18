@@ -323,6 +323,10 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
                       itemBuilder: (BuildContext context, int index) {
                         final MateDetailModel mate = state.data.mates[index];
 
+                        if (mate.blockedByAuthorYn) {
+                          return const SizedBox.shrink();
+                        }
+
                         return DessertListCard(
                           bookmarkSelected: false,
                           onBookMarkTap: () {},
@@ -357,7 +361,15 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
                           mate: mate,
                         );
                       },
-                      separatorBuilder: (_, __) => const SizedBox(height: 6),
+                      separatorBuilder: (_, int index) {
+                        final MateDetailModel mate = state.data.mates[index];
+
+                        if (mate.blockedByAuthorYn) {
+                          return const SizedBox.shrink();
+                        }
+
+                        return const SizedBox(height: 6);
+                      },
                     ),
                   ),
 
