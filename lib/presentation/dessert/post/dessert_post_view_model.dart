@@ -8,6 +8,7 @@ import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_detail_model.dart';
 import 'package:frontend_mobile/domain/model/mate_member/mate_member_detail_model.dart';
 import 'package:frontend_mobile/domain/model/mate_member/mate_member_model.dart';
+import 'package:frontend_mobile/domain/model/user/blocked_user_model.dart';
 import 'package:frontend_mobile/domain/param/mate/get_mate_detail_params.dart';
 import 'package:frontend_mobile/domain/param/mate_member/accept_mate_member_params.dart';
 import 'package:frontend_mobile/domain/param/mate_member/ban_mate_member_params.dart';
@@ -17,6 +18,7 @@ import 'package:frontend_mobile/domain/param/mate_member/leave_mate_member_param
 import 'package:frontend_mobile/domain/param/mate_member/pending_mate_member_params.dart';
 import 'package:frontend_mobile/domain/param/mate_member/post_mate_member_params.dart';
 import 'package:frontend_mobile/domain/param/mate_member/reject_mate_member_params.dart';
+import 'package:frontend_mobile/domain/param/user/block_user_params.dart';
 import 'package:frontend_mobile/domain/usecase/mate/get_mate_detail_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/mate_member/accept_mate_member_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/mate_member/ban_mate_member_usecase.dart';
@@ -26,6 +28,8 @@ import 'package:frontend_mobile/domain/usecase/mate_member/leave_mate_member_use
 import 'package:frontend_mobile/domain/usecase/mate_member/pending_mate_member_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/mate_member/post_mate_member_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/mate_member/reject_mate_member_usecase.dart';
+import 'package:frontend_mobile/domain/usecase/user/post_block_user_usecase.dart';
+import 'package:frontend_mobile/presentation/dessert/dessert_board_view_model.dart';
 
 part 'dessert_post_state.dart';
 part 'generated/dessert_post_view_model.freezed.dart';
@@ -353,6 +357,38 @@ class DessertPostViewModel extends StateNotifier<DessertPostState> {
       failure: (Failure<MateMemberModel, CustomException> failure) {
         state = state.copyWith(
           banMateStatus: Status.failure,
+          exception: failure.exception.model,
+        );
+      },
+    );
+  }
+
+  /// 사용자 차단하기
+  Future<void> postBlockUser({required BlockUserParams params}) async {
+    state = state.copyWith(postBlockUserStatus: Status.loading);
+
+    final Result<BlockedUserModel, CustomException> response =
+        await Usecase.execute(
+          usecase: ref.read(postBlockUserUsecaseProvider),
+          params: params,
+        );
+
+    response.map(
+      success: (Success<BlockedUserModel, CustomException> success) {
+        final DessertBoardViewModel notifier = ref.read(
+          dessertBoardViewModelProvider.notifier,
+        );
+
+        notifier.updateMateBlockData(
+          blockedUserUuid: success.data.blockedUserUuid,
+          blockedUserNickname: success.data.blockedUserNickname,
+        );
+
+        state = state.copyWith(postBlockUserStatus: Status.success);
+      },
+      failure: (Failure<BlockedUserModel, CustomException> failure) {
+        state = state.copyWith(
+          postBlockUserStatus: Status.failure,
           exception: failure.exception.model,
         );
       },

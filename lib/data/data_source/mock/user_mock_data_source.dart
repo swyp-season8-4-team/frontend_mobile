@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:frontend_mobile/data/data_source/remote/user_remote_data_source.dart';
+import 'package:frontend_mobile/data/entity/user/blocked_user_entity.dart';
 import 'package:frontend_mobile/data/entity/user/blocked_user_list_entity.dart';
 import 'package:frontend_mobile/data/entity/user/nickname_availability_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_review_entity.dart';
+import 'package:frontend_mobile/data/request_body/user/block_user_request_body.dart';
 import 'package:frontend_mobile/data/request_body/user/patch_me_request_body.dart';
 import 'package:frontend_mobile/data/request_body/user/post_nickname_request_body.dart';
 
@@ -60,6 +62,14 @@ class UserMockDataSource implements UserRemoteDataSource {
   @override
   Future<void> unblockUser({required int blockId}) {
     // TODO: implement unblockUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BlockedUserEntity> postBlockUser({
+    required BlockUserRequestBody body,
+  }) {
+    // TODO: implement postBlockUser
     throw UnimplementedError();
   }
 }

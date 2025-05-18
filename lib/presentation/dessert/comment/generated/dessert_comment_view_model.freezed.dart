@@ -20,6 +20,8 @@ mixin _$DessertCommentState {
   Status get getMateReplyStatus => throw _privateConstructorUsedError;
   Status get postMateReplyStatus => throw _privateConstructorUsedError;
   Status get postMateReplyReportStatus => throw _privateConstructorUsedError;
+  Status get postBlockUserStatus => throw _privateConstructorUsedError;
+  String get blockedUserNickname => throw _privateConstructorUsedError;
   MateReplyModel get data => throw _privateConstructorUsedError;
   ExceptionModel get exception => throw _privateConstructorUsedError;
 
@@ -41,6 +43,8 @@ abstract class $DessertCommentStateCopyWith<$Res> {
     Status getMateReplyStatus,
     Status postMateReplyStatus,
     Status postMateReplyReportStatus,
+    Status postBlockUserStatus,
+    String blockedUserNickname,
     MateReplyModel data,
     ExceptionModel exception,
   });
@@ -64,6 +68,8 @@ class _$DessertCommentStateCopyWithImpl<$Res, $Val extends DessertCommentState>
     Object? getMateReplyStatus = null,
     Object? postMateReplyStatus = null,
     Object? postMateReplyReportStatus = null,
+    Object? postBlockUserStatus = null,
+    Object? blockedUserNickname = null,
     Object? data = null,
     Object? exception = null,
   }) {
@@ -84,6 +90,16 @@ class _$DessertCommentStateCopyWithImpl<$Res, $Val extends DessertCommentState>
                     ? _value.postMateReplyReportStatus
                     : postMateReplyReportStatus // ignore: cast_nullable_to_non_nullable
                         as Status,
+            postBlockUserStatus:
+                null == postBlockUserStatus
+                    ? _value.postBlockUserStatus
+                    : postBlockUserStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            blockedUserNickname:
+                null == blockedUserNickname
+                    ? _value.blockedUserNickname
+                    : blockedUserNickname // ignore: cast_nullable_to_non_nullable
+                        as String,
             data:
                 null == data
                     ? _value.data
@@ -113,6 +129,8 @@ abstract class _$$DessertCommentStateImplCopyWith<$Res>
     Status getMateReplyStatus,
     Status postMateReplyStatus,
     Status postMateReplyReportStatus,
+    Status postBlockUserStatus,
+    String blockedUserNickname,
     MateReplyModel data,
     ExceptionModel exception,
   });
@@ -135,6 +153,8 @@ class __$$DessertCommentStateImplCopyWithImpl<$Res>
     Object? getMateReplyStatus = null,
     Object? postMateReplyStatus = null,
     Object? postMateReplyReportStatus = null,
+    Object? postBlockUserStatus = null,
+    Object? blockedUserNickname = null,
     Object? data = null,
     Object? exception = null,
   }) {
@@ -155,6 +175,16 @@ class __$$DessertCommentStateImplCopyWithImpl<$Res>
                 ? _value.postMateReplyReportStatus
                 : postMateReplyReportStatus // ignore: cast_nullable_to_non_nullable
                     as Status,
+        postBlockUserStatus:
+            null == postBlockUserStatus
+                ? _value.postBlockUserStatus
+                : postBlockUserStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        blockedUserNickname:
+            null == blockedUserNickname
+                ? _value.blockedUserNickname
+                : blockedUserNickname // ignore: cast_nullable_to_non_nullable
+                    as String,
         data:
             null == data
                 ? _value.data
@@ -177,6 +207,8 @@ class _$DessertCommentStateImpl implements _DessertCommentState {
     this.getMateReplyStatus = Status.initial,
     this.postMateReplyStatus = Status.initial,
     this.postMateReplyReportStatus = Status.initial,
+    this.postBlockUserStatus = Status.initial,
+    this.blockedUserNickname = '',
     this.data = const MateReplyModel(
       mateUuid: '',
       mateReplies: <MateReplyDetailModel>[],
@@ -202,6 +234,12 @@ class _$DessertCommentStateImpl implements _DessertCommentState {
   final Status postMateReplyReportStatus;
   @override
   @JsonKey()
+  final Status postBlockUserStatus;
+  @override
+  @JsonKey()
+  final String blockedUserNickname;
+  @override
+  @JsonKey()
   final MateReplyModel data;
   @override
   @JsonKey()
@@ -209,7 +247,7 @@ class _$DessertCommentStateImpl implements _DessertCommentState {
 
   @override
   String toString() {
-    return 'DessertCommentState(getMateReplyStatus: $getMateReplyStatus, postMateReplyStatus: $postMateReplyStatus, postMateReplyReportStatus: $postMateReplyReportStatus, data: $data, exception: $exception)';
+    return 'DessertCommentState(getMateReplyStatus: $getMateReplyStatus, postMateReplyStatus: $postMateReplyStatus, postMateReplyReportStatus: $postMateReplyReportStatus, postBlockUserStatus: $postBlockUserStatus, blockedUserNickname: $blockedUserNickname, data: $data, exception: $exception)';
   }
 
   @override
@@ -226,6 +264,10 @@ class _$DessertCommentStateImpl implements _DessertCommentState {
                   postMateReplyReportStatus,
                 ) ||
                 other.postMateReplyReportStatus == postMateReplyReportStatus) &&
+            (identical(other.postBlockUserStatus, postBlockUserStatus) ||
+                other.postBlockUserStatus == postBlockUserStatus) &&
+            (identical(other.blockedUserNickname, blockedUserNickname) ||
+                other.blockedUserNickname == blockedUserNickname) &&
             (identical(other.data, data) || other.data == data) &&
             (identical(other.exception, exception) ||
                 other.exception == exception));
@@ -237,6 +279,8 @@ class _$DessertCommentStateImpl implements _DessertCommentState {
     getMateReplyStatus,
     postMateReplyStatus,
     postMateReplyReportStatus,
+    postBlockUserStatus,
+    blockedUserNickname,
     data,
     exception,
   );
@@ -258,6 +302,8 @@ abstract class _DessertCommentState implements DessertCommentState {
     final Status getMateReplyStatus,
     final Status postMateReplyStatus,
     final Status postMateReplyReportStatus,
+    final Status postBlockUserStatus,
+    final String blockedUserNickname,
     final MateReplyModel data,
     final ExceptionModel exception,
   }) = _$DessertCommentStateImpl;
@@ -268,6 +314,10 @@ abstract class _DessertCommentState implements DessertCommentState {
   Status get postMateReplyStatus;
   @override
   Status get postMateReplyReportStatus;
+  @override
+  Status get postBlockUserStatus;
+  @override
+  String get blockedUserNickname;
   @override
   MateReplyModel get data;
   @override

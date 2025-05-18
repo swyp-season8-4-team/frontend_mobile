@@ -156,6 +156,7 @@ class _DessertPostState extends ConsumerState<DessertPost> {
   @override
   Widget build(BuildContext context) {
     final DessertPostState state = ref.watch(dessertPostViewModelProvider);
+    final ToastManager toastManager = ref.read(toastManagerProvider);
     final UserState userState = ref.read(userViewModelProvider);
 
     ref.listen(dessertPostViewModelProvider, (_, DessertPostState next) {
@@ -229,6 +230,63 @@ class _DessertPostState extends ConsumerState<DessertPost> {
               description: '모든 정원이 다 채워졌어요',
               actionButton: SnackBarActionButton(onTap: () {}, label: '확인'),
             ),
+          );
+          break;
+
+        default:
+      }
+
+      switch (next.postBlockUserStatus) {
+        case Status.success:
+          while (context.canPop()) {
+            context.pop();
+          }
+          break;
+
+        case Status.failure:
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap: () => context.pop(),
+                ),
+              );
+            },
+          );
+          break;
+
+        default:
+      }
+    });
+
+    ref.listen(dessertCommentViewModelProvider, (_, DessertCommentState next) {
+      switch (next.postBlockUserStatus) {
+        case Status.success:
+          toastManager.show(
+            context: context,
+            aboveBottomNavigation: true,
+            toastWidget: CustomSnackBar(
+              description: '${next.blockedUserNickname}님을 차단했습니다.',
+              actionButton: SnackBarActionButton(onTap: () {}, label: '확인'),
+            ),
+          );
+          break;
+
+        case Status.failure:
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap: () => context.pop(),
+                ),
+              );
+            },
           );
           break;
 

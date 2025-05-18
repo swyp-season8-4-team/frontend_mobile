@@ -8,12 +8,15 @@ import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/mate_reply/mate_reply_detail_model.dart';
 import 'package:frontend_mobile/domain/model/mate_reply/mate_reply_model.dart';
 import 'package:frontend_mobile/domain/model/mate_reply/mate_reply_report_model.dart';
+import 'package:frontend_mobile/domain/model/user/blocked_user_model.dart';
 import 'package:frontend_mobile/domain/param/mate_reply/get_mate_reply_params.dart';
 import 'package:frontend_mobile/domain/param/mate_reply/post_mate_reply_params.dart';
 import 'package:frontend_mobile/domain/param/mate_reply/post_mate_reply_report_params.dart';
+import 'package:frontend_mobile/domain/param/user/block_user_params.dart';
 import 'package:frontend_mobile/domain/usecase/mate_reply/get_mate_reply_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/mate_reply/post_mate_reply_report_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/mate_reply/post_mate_reply_usecase.dart';
+import 'package:frontend_mobile/domain/usecase/user/post_block_user_usecase.dart';
 
 part 'dessert_comment_state.dart';
 part 'generated/dessert_comment_view_model.freezed.dart';
@@ -102,6 +105,32 @@ class DessertCommentViewModel extends StateNotifier<DessertCommentState> {
       failure: (Failure<MateReplyReportModel, CustomException> failure) {
         state = state.copyWith(
           postMateReplyReportStatus: Status.failure,
+          exception: failure.exception.model,
+        );
+      },
+    );
+  }
+
+  /// 사용자 차단하기
+  Future<void> postBlockUser({required BlockUserParams params}) async {
+    state = state.copyWith(postBlockUserStatus: Status.loading);
+
+    final Result<BlockedUserModel, CustomException> response =
+        await Usecase.execute(
+          usecase: ref.read(postBlockUserUsecaseProvider),
+          params: params,
+        );
+
+    response.map(
+      success: (Success<BlockedUserModel, CustomException> success) {
+        state = state.copyWith(
+          postBlockUserStatus: Status.success,
+          blockedUserNickname: success.data.blockedUserNickname,
+        );
+      },
+      failure: (Failure<BlockedUserModel, CustomException> failure) {
+        state = state.copyWith(
+          postBlockUserStatus: Status.failure,
           exception: failure.exception.model,
         );
       },

@@ -256,13 +256,13 @@ abstract class AppRoutes {
   /// 디저트 메이트 > 게시판 > 게시글 > 댓글 신고
   static RouteInfo dessertCommentReport = RouteInfo(
     name: '${dessertPost.name}/comment/report',
-    path: 'report',
+    path: 'commentReport',
   );
 
   /// 디저트 메이트 > 게시판 > 게시글 > 댓글 신고 > 성공
   static RouteInfo dessertCommentReportSuccess = RouteInfo(
     name: '${dessertCommentReport.name}/success',
-    path: 'success',
+    path: 'commentSuccess',
   );
 
   /// 디저트 메이트 > 글쓰기

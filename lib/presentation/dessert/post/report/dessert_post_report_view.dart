@@ -21,14 +21,7 @@ import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
 
 class DessertPostReportView extends ConsumerStatefulWidget {
-  const DessertPostReportView({
-    // required this.mateUuid,
-    // required this.item,
-    super.key,
-  });
-
-  // final String mateUuid;
-  // final MateDetailModel item;
+  const DessertPostReportView({super.key});
 
   @override
   ConsumerState<DessertPostReportView> createState() =>

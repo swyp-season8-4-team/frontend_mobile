@@ -4,15 +4,18 @@ import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
 import 'package:frontend_mobile/core/resource/params/no_params.dart';
 import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/data/data_source/remote/user_remote_data_source.dart';
+import 'package:frontend_mobile/data/entity/user/blocked_user_entity.dart';
 import 'package:frontend_mobile/data/entity/user/blocked_user_list_entity.dart';
 import 'package:frontend_mobile/data/entity/user/nickname_availability_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_review_entity.dart';
 import 'package:frontend_mobile/data/mapper/user_mapper.dart';
 import 'package:frontend_mobile/domain/model/user/blocked_user_list_model.dart';
+import 'package:frontend_mobile/domain/model/user/blocked_user_model.dart';
 import 'package:frontend_mobile/domain/model/user/nickname_availability_model.dart';
 import 'package:frontend_mobile/domain/model/user/user_detail_model.dart';
 import 'package:frontend_mobile/domain/model/user/user_review_model.dart';
+import 'package:frontend_mobile/domain/param/user/block_user_params.dart';
 import 'package:frontend_mobile/domain/param/user/patch_me_params.dart';
 import 'package:frontend_mobile/domain/param/user/post_nickname_params.dart';
 import 'package:frontend_mobile/domain/param/user/unblock_user_params.dart';
@@ -111,6 +114,21 @@ class UserRepositoryImpl implements UserRepository {
     return await apiCall(
       api: () async {
         final BlockedUserListEntity result = await api.getBlockedUsers();
+        return result.toModel();
+      },
+    );
+  }
+
+  @override
+  Future<Result<BlockedUserModel, CustomException>> postBlockUser({
+    required BlockUserParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        final BlockedUserEntity result = await api.postBlockUser(
+          body: params.toBody(),
+        );
+
         return result.toModel();
       },
     );

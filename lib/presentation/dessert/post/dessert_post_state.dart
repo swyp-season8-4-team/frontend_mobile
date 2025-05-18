@@ -12,6 +12,7 @@ class DessertPostState with _$DessertPostState {
     @Default(Status.initial) Status rejectMateStatus,
     @Default(Status.initial) Status getMateStatus,
     @Default(Status.initial) Status banMateStatus,
+    @Default(Status.initial) Status postBlockUserStatus,
     @Default(
       MateDetailModel(
         mateUuid: '',

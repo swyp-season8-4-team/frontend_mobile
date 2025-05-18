@@ -17,7 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DessertBoardState {
-  Status get status => throw _privateConstructorUsedError;
+  Status get getMateStatus => throw _privateConstructorUsedError;
+  Status get updateMateBlockDataStatus => throw _privateConstructorUsedError;
+  String get blockedUserNickname => throw _privateConstructorUsedError;
   MateModel get data => throw _privateConstructorUsedError;
   MateModel get backupData => throw _privateConstructorUsedError;
   ExceptionModel get exception => throw _privateConstructorUsedError;
@@ -37,7 +39,9 @@ abstract class $DessertBoardStateCopyWith<$Res> {
   ) = _$DessertBoardStateCopyWithImpl<$Res, DessertBoardState>;
   @useResult
   $Res call({
-    Status status,
+    Status getMateStatus,
+    Status updateMateBlockDataStatus,
+    String blockedUserNickname,
     MateModel data,
     MateModel backupData,
     ExceptionModel exception,
@@ -62,18 +66,30 @@ class _$DessertBoardStateCopyWithImpl<$Res, $Val extends DessertBoardState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
+    Object? getMateStatus = null,
+    Object? updateMateBlockDataStatus = null,
+    Object? blockedUserNickname = null,
     Object? data = null,
     Object? backupData = null,
     Object? exception = null,
   }) {
     return _then(
       _value.copyWith(
-            status:
-                null == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
+            getMateStatus:
+                null == getMateStatus
+                    ? _value.getMateStatus
+                    : getMateStatus // ignore: cast_nullable_to_non_nullable
                         as Status,
+            updateMateBlockDataStatus:
+                null == updateMateBlockDataStatus
+                    ? _value.updateMateBlockDataStatus
+                    : updateMateBlockDataStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            blockedUserNickname:
+                null == blockedUserNickname
+                    ? _value.blockedUserNickname
+                    : blockedUserNickname // ignore: cast_nullable_to_non_nullable
+                        as String,
             data:
                 null == data
                     ? _value.data
@@ -125,7 +141,9 @@ abstract class _$$DessertBoardStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    Status status,
+    Status getMateStatus,
+    Status updateMateBlockDataStatus,
+    String blockedUserNickname,
     MateModel data,
     MateModel backupData,
     ExceptionModel exception,
@@ -151,18 +169,30 @@ class __$$DessertBoardStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
+    Object? getMateStatus = null,
+    Object? updateMateBlockDataStatus = null,
+    Object? blockedUserNickname = null,
     Object? data = null,
     Object? backupData = null,
     Object? exception = null,
   }) {
     return _then(
       _$DessertBoardStateImpl(
-        status:
-            null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
+        getMateStatus:
+            null == getMateStatus
+                ? _value.getMateStatus
+                : getMateStatus // ignore: cast_nullable_to_non_nullable
                     as Status,
+        updateMateBlockDataStatus:
+            null == updateMateBlockDataStatus
+                ? _value.updateMateBlockDataStatus
+                : updateMateBlockDataStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        blockedUserNickname:
+            null == blockedUserNickname
+                ? _value.blockedUserNickname
+                : blockedUserNickname // ignore: cast_nullable_to_non_nullable
+                    as String,
         data:
             null == data
                 ? _value.data
@@ -187,7 +217,9 @@ class __$$DessertBoardStateImplCopyWithImpl<$Res>
 
 class _$DessertBoardStateImpl implements _DessertBoardState {
   const _$DessertBoardStateImpl({
-    this.status = Status.initial,
+    this.getMateStatus = Status.initial,
+    this.updateMateBlockDataStatus = Status.initial,
+    this.blockedUserNickname = '',
     this.data = const MateModel(mates: <MateDetailModel>[], last: false),
     this.backupData = const MateModel(mates: <MateDetailModel>[], last: false),
     this.exception = const ExceptionModel(
@@ -200,7 +232,13 @@ class _$DessertBoardStateImpl implements _DessertBoardState {
 
   @override
   @JsonKey()
-  final Status status;
+  final Status getMateStatus;
+  @override
+  @JsonKey()
+  final Status updateMateBlockDataStatus;
+  @override
+  @JsonKey()
+  final String blockedUserNickname;
   @override
   @JsonKey()
   final MateModel data;
@@ -213,7 +251,7 @@ class _$DessertBoardStateImpl implements _DessertBoardState {
 
   @override
   String toString() {
-    return 'DessertBoardState(status: $status, data: $data, backupData: $backupData, exception: $exception)';
+    return 'DessertBoardState(getMateStatus: $getMateStatus, updateMateBlockDataStatus: $updateMateBlockDataStatus, blockedUserNickname: $blockedUserNickname, data: $data, backupData: $backupData, exception: $exception)';
   }
 
   @override
@@ -221,7 +259,15 @@ class _$DessertBoardStateImpl implements _DessertBoardState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DessertBoardStateImpl &&
-            (identical(other.status, status) || other.status == status) &&
+            (identical(other.getMateStatus, getMateStatus) ||
+                other.getMateStatus == getMateStatus) &&
+            (identical(
+                  other.updateMateBlockDataStatus,
+                  updateMateBlockDataStatus,
+                ) ||
+                other.updateMateBlockDataStatus == updateMateBlockDataStatus) &&
+            (identical(other.blockedUserNickname, blockedUserNickname) ||
+                other.blockedUserNickname == blockedUserNickname) &&
             (identical(other.data, data) || other.data == data) &&
             (identical(other.backupData, backupData) ||
                 other.backupData == backupData) &&
@@ -230,8 +276,15 @@ class _$DessertBoardStateImpl implements _DessertBoardState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, status, data, backupData, exception);
+  int get hashCode => Object.hash(
+    runtimeType,
+    getMateStatus,
+    updateMateBlockDataStatus,
+    blockedUserNickname,
+    data,
+    backupData,
+    exception,
+  );
 
   /// Create a copy of DessertBoardState
   /// with the given fields replaced by the non-null parameter values.
@@ -247,14 +300,20 @@ class _$DessertBoardStateImpl implements _DessertBoardState {
 
 abstract class _DessertBoardState implements DessertBoardState {
   const factory _DessertBoardState({
-    final Status status,
+    final Status getMateStatus,
+    final Status updateMateBlockDataStatus,
+    final String blockedUserNickname,
     final MateModel data,
     final MateModel backupData,
     final ExceptionModel exception,
   }) = _$DessertBoardStateImpl;
 
   @override
-  Status get status;
+  Status get getMateStatus;
+  @override
+  Status get updateMateBlockDataStatus;
+  @override
+  String get blockedUserNickname;
   @override
   MateModel get data;
   @override

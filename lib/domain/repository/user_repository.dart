@@ -2,9 +2,11 @@ import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
 import 'package:frontend_mobile/core/resource/params/no_params.dart';
 import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/domain/model/user/blocked_user_list_model.dart';
+import 'package:frontend_mobile/domain/model/user/blocked_user_model.dart';
 import 'package:frontend_mobile/domain/model/user/nickname_availability_model.dart';
 import 'package:frontend_mobile/domain/model/user/user_detail_model.dart';
 import 'package:frontend_mobile/domain/model/user/user_review_model.dart';
+import 'package:frontend_mobile/domain/param/user/block_user_params.dart';
 import 'package:frontend_mobile/domain/param/user/patch_me_params.dart';
 import 'package:frontend_mobile/domain/param/user/post_nickname_params.dart';
 import 'package:frontend_mobile/domain/param/user/unblock_user_params.dart';
@@ -40,6 +42,11 @@ abstract interface class UserRepository {
   /// 차단한 사용자 목록 조회
   Future<Result<BlockedUserListModel, CustomException>> getBlockedUsers({
     required NoParams params,
+  });
+
+  /// 사용자 차단하기
+  Future<Result<BlockedUserModel, CustomException>> postBlockUser({
+    required BlockUserParams params,
   });
 
   /// 특정 사용자 차단 해제

@@ -3,10 +3,12 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
+import 'package:frontend_mobile/data/entity/user/blocked_user_entity.dart';
 import 'package:frontend_mobile/data/entity/user/blocked_user_list_entity.dart';
 import 'package:frontend_mobile/data/entity/user/nickname_availability_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_review_entity.dart';
+import 'package:frontend_mobile/data/request_body/user/block_user_request_body.dart';
 import 'package:frontend_mobile/data/request_body/user/patch_me_request_body.dart';
 import 'package:frontend_mobile/data/request_body/user/post_nickname_request_body.dart';
 import 'package:retrofit/retrofit.dart';
@@ -56,6 +58,12 @@ abstract interface class UserRemoteDataSource {
   /// 차단된 사용자 목록 조회
   @GET('/api/users/blocks')
   Future<BlockedUserListEntity> getBlockedUsers();
+
+  /// 사용자 차단하기
+  @POST('/api/users/blocks')
+  Future<BlockedUserEntity> postBlockUser({
+    @Body() required BlockUserRequestBody body,
+  });
 
   /// 특정 사용자 차단 해제
   @DELETE('/api/users/blocks/{blockId}')
