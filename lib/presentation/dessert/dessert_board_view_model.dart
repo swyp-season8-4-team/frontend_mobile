@@ -26,7 +26,10 @@ class DessertBoardViewModel extends StateNotifier<DessertBoardState> {
 
   /// 메이트 전체 조회
   Future<void> getMate({required GetMateParams params}) async {
-    state = state.copyWith(status: Status.loading);
+    state = state.copyWith(
+      getMateStatus: Status.loading,
+      updateMateBlockDataStatus: Status.initial,
+    );
 
     final Result<MateModel, CustomException> response = await Usecase.execute(
       usecase: ref.read(getMateUsecaseProvider),
@@ -36,7 +39,7 @@ class DessertBoardViewModel extends StateNotifier<DessertBoardState> {
     response.map(
       success: (Success<MateModel, CustomException> success) {
         state = state.copyWith(
-          status: Status.success,
+          getMateStatus: Status.success,
           data: success.data,
           backupData:
               state.backupData.mates.isEmpty ? success.data : state.backupData,
@@ -44,10 +47,36 @@ class DessertBoardViewModel extends StateNotifier<DessertBoardState> {
       },
       failure: (Failure<MateModel, CustomException> failure) {
         state = state.copyWith(
-          status: Status.failure,
+          getMateStatus: Status.failure,
           exception: failure.exception.model,
         );
       },
+    );
+  }
+
+  void updateMateBlockData({
+    required String blockedUserUuid,
+    required String blockedUserNickname,
+  }) {
+    final List<MateDetailModel> newMates =
+        state.data.mates
+            .where(
+              (MateDetailModel element) => element.userUuid != blockedUserUuid,
+            )
+            .toList();
+
+    final List<MateDetailModel> newBackupMates =
+        state.backupData.mates
+            .where(
+              (MateDetailModel element) => element.userUuid != blockedUserUuid,
+            )
+            .toList();
+
+    state = state.copyWith(
+      updateMateBlockDataStatus: Status.success,
+      blockedUserNickname: blockedUserNickname,
+      data: state.data.copyWith(mates: newMates),
+      backupData: state.data.copyWith(mates: newBackupMates),
     );
   }
 

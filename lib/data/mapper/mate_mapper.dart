@@ -46,6 +46,7 @@ extension MateDetailEntityExt on MateDetailEntity {
       applyStatus: applyStatus,
       gender: gender,
       mateCategory: mateCategory,
+      blockedByAuthorYn: blockedByAuthorYn,
     );
   }
 }

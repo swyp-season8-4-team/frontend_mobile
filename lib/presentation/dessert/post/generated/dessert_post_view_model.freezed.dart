@@ -26,6 +26,7 @@ mixin _$DessertPostState {
   Status get rejectMateStatus => throw _privateConstructorUsedError;
   Status get getMateStatus => throw _privateConstructorUsedError;
   Status get banMateStatus => throw _privateConstructorUsedError;
+  Status get postBlockUserStatus => throw _privateConstructorUsedError;
   MateDetailModel get data => throw _privateConstructorUsedError;
   List<MateMemberDetailModel> get pendingData =>
       throw _privateConstructorUsedError;
@@ -57,6 +58,7 @@ abstract class $DessertPostStateCopyWith<$Res> {
     Status rejectMateStatus,
     Status getMateStatus,
     Status banMateStatus,
+    Status postBlockUserStatus,
     MateDetailModel data,
     List<MateMemberDetailModel> pendingData,
     List<MateMemberDetailModel> memberData,
@@ -90,6 +92,7 @@ class _$DessertPostStateCopyWithImpl<$Res, $Val extends DessertPostState>
     Object? rejectMateStatus = null,
     Object? getMateStatus = null,
     Object? banMateStatus = null,
+    Object? postBlockUserStatus = null,
     Object? data = null,
     Object? pendingData = null,
     Object? memberData = null,
@@ -141,6 +144,11 @@ class _$DessertPostStateCopyWithImpl<$Res, $Val extends DessertPostState>
                 null == banMateStatus
                     ? _value.banMateStatus
                     : banMateStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            postBlockUserStatus:
+                null == postBlockUserStatus
+                    ? _value.postBlockUserStatus
+                    : postBlockUserStatus // ignore: cast_nullable_to_non_nullable
                         as Status,
             data:
                 null == data
@@ -197,6 +205,7 @@ abstract class _$$DessertPostStateImplCopyWith<$Res>
     Status rejectMateStatus,
     Status getMateStatus,
     Status banMateStatus,
+    Status postBlockUserStatus,
     MateDetailModel data,
     List<MateMemberDetailModel> pendingData,
     List<MateMemberDetailModel> memberData,
@@ -230,6 +239,7 @@ class __$$DessertPostStateImplCopyWithImpl<$Res>
     Object? rejectMateStatus = null,
     Object? getMateStatus = null,
     Object? banMateStatus = null,
+    Object? postBlockUserStatus = null,
     Object? data = null,
     Object? pendingData = null,
     Object? memberData = null,
@@ -282,6 +292,11 @@ class __$$DessertPostStateImplCopyWithImpl<$Res>
                 ? _value.banMateStatus
                 : banMateStatus // ignore: cast_nullable_to_non_nullable
                     as Status,
+        postBlockUserStatus:
+            null == postBlockUserStatus
+                ? _value.postBlockUserStatus
+                : postBlockUserStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
         data:
             null == data
                 ? _value.data
@@ -320,6 +335,7 @@ class _$DessertPostStateImpl implements _DessertPostState {
     this.rejectMateStatus = Status.initial,
     this.getMateStatus = Status.initial,
     this.banMateStatus = Status.initial,
+    this.postBlockUserStatus = Status.initial,
     this.data = const MateDetailModel(
       mateUuid: '',
       storeId: -1,
@@ -344,6 +360,7 @@ class _$DessertPostStateImpl implements _DessertPostState {
       applyStatus: '',
       gender: '',
       mateCategory: '',
+      blockedByAuthorYn: false,
     ),
     final List<MateMemberDetailModel> pendingData =
         const <MateMemberDetailModel>[],
@@ -387,6 +404,9 @@ class _$DessertPostStateImpl implements _DessertPostState {
   final Status banMateStatus;
   @override
   @JsonKey()
+  final Status postBlockUserStatus;
+  @override
+  @JsonKey()
   final MateDetailModel data;
   final List<MateMemberDetailModel> _pendingData;
   @override
@@ -412,7 +432,7 @@ class _$DessertPostStateImpl implements _DessertPostState {
 
   @override
   String toString() {
-    return 'DessertPostState(mateDetailStatus: $mateDetailStatus, postMateStatus: $postMateStatus, deleteMateStatus: $deleteMateStatus, leaveMateStatus: $leaveMateStatus, pendingMateStatus: $pendingMateStatus, acceptMateStatus: $acceptMateStatus, rejectMateStatus: $rejectMateStatus, getMateStatus: $getMateStatus, banMateStatus: $banMateStatus, data: $data, pendingData: $pendingData, memberData: $memberData, exception: $exception)';
+    return 'DessertPostState(mateDetailStatus: $mateDetailStatus, postMateStatus: $postMateStatus, deleteMateStatus: $deleteMateStatus, leaveMateStatus: $leaveMateStatus, pendingMateStatus: $pendingMateStatus, acceptMateStatus: $acceptMateStatus, rejectMateStatus: $rejectMateStatus, getMateStatus: $getMateStatus, banMateStatus: $banMateStatus, postBlockUserStatus: $postBlockUserStatus, data: $data, pendingData: $pendingData, memberData: $memberData, exception: $exception)';
   }
 
   @override
@@ -438,6 +458,8 @@ class _$DessertPostStateImpl implements _DessertPostState {
                 other.getMateStatus == getMateStatus) &&
             (identical(other.banMateStatus, banMateStatus) ||
                 other.banMateStatus == banMateStatus) &&
+            (identical(other.postBlockUserStatus, postBlockUserStatus) ||
+                other.postBlockUserStatus == postBlockUserStatus) &&
             (identical(other.data, data) || other.data == data) &&
             const DeepCollectionEquality().equals(
               other._pendingData,
@@ -463,6 +485,7 @@ class _$DessertPostStateImpl implements _DessertPostState {
     rejectMateStatus,
     getMateStatus,
     banMateStatus,
+    postBlockUserStatus,
     data,
     const DeepCollectionEquality().hash(_pendingData),
     const DeepCollectionEquality().hash(_memberData),
@@ -492,6 +515,7 @@ abstract class _DessertPostState implements DessertPostState {
     final Status rejectMateStatus,
     final Status getMateStatus,
     final Status banMateStatus,
+    final Status postBlockUserStatus,
     final MateDetailModel data,
     final List<MateMemberDetailModel> pendingData,
     final List<MateMemberDetailModel> memberData,
@@ -516,6 +540,8 @@ abstract class _DessertPostState implements DessertPostState {
   Status get getMateStatus;
   @override
   Status get banMateStatus;
+  @override
+  Status get postBlockUserStatus;
   @override
   MateDetailModel get data;
   @override

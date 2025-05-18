@@ -4,6 +4,8 @@ import 'package:frontend_mobile/common/design_system/component/button/floating_a
 import 'package:frontend_mobile/common/design_system/component/chip/suggestive_chip.dart';
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/navigation_bar/navigation_bar.dart';
+import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar.dart';
+import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar_right_item.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
@@ -158,11 +160,11 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
   @override
   Widget build(BuildContext context) {
     final DessertBoardState state = ref.watch(dessertBoardViewModelProvider);
-    final ToastManager _ = ref.read(toastManagerProvider);
+    final ToastManager toastManager = ref.read(toastManagerProvider);
     final TopBarIcon _ = TopBarIcon();
 
     ref.listen(dessertBoardViewModelProvider, (_, DessertBoardState next) {
-      switch (next.status) {
+      switch (next.getMateStatus) {
         case Status.failure:
           showDialog(
             context: context,
@@ -179,10 +181,25 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
           break;
         default:
       }
+
+      switch (next.updateMateBlockDataStatus) {
+        case Status.success:
+          toastManager.show(
+            context: context,
+            aboveBottomNavigation: true,
+            toastWidget: CustomSnackBar(
+              description: '${next.blockedUserNickname}님을 차단했습니다.',
+              actionButton: SnackBarActionButton(onTap: () {}, label: '확인'),
+            ),
+          );
+          break;
+
+        default:
+      }
     });
 
     return CustomLoadingOverlay(
-      isLoading: state.status.isLoading,
+      isLoading: state.getMateStatus.isLoading,
       child: Scaffold(
         appBar: CustomSubTopBar(
           title: '디저트 메이트',
@@ -306,6 +323,10 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
                       itemBuilder: (BuildContext context, int index) {
                         final MateDetailModel mate = state.data.mates[index];
 
+                        if (mate.blockedByAuthorYn) {
+                          return const SizedBox.shrink();
+                        }
+
                         return DessertListCard(
                           bookmarkSelected: false,
                           onBookMarkTap: () {},
@@ -340,7 +361,15 @@ class _DessertBoardState extends ConsumerState<DessertBoard> {
                           mate: mate,
                         );
                       },
-                      separatorBuilder: (_, __) => const SizedBox(height: 6),
+                      separatorBuilder: (_, int index) {
+                        final MateDetailModel mate = state.data.mates[index];
+
+                        if (mate.blockedByAuthorYn) {
+                          return const SizedBox.shrink();
+                        }
+
+                        return const SizedBox(height: 6);
+                      },
                     ),
                   ),
 

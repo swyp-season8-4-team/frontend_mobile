@@ -29,6 +29,7 @@ class DessertWriteState with _$DessertWriteState {
         applyStatus: '',
         gender: '',
         mateCategory: '',
+        blockedByAuthorYn: false,
       ),
     )
     MateDetailModel data,

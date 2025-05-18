@@ -12,6 +12,7 @@ class MateReplyDetailModel {
     required this.updatedAt,
     required this.deletedAt,
     required this.children,
+    required this.blockedByAuthorYn,
   });
 
   final int mateReplyId;
@@ -26,4 +27,5 @@ class MateReplyDetailModel {
   final String? updatedAt;
   final String? deletedAt;
   final List<MateReplyDetailModel> children;
+  final bool blockedByAuthorYn;
 }

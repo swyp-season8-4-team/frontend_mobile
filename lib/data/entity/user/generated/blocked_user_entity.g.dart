@@ -15,6 +15,7 @@ BlockedUserEntity _$BlockedUserEntityFromJson(Map<String, dynamic> json) =>
       blockerUserUuid: json['blockerUserUuid'] as String? ?? '',
       blockedUserUuid: json['blockedUserUuid'] as String? ?? '',
       blockedUserNickname: json['blockedUserNickname'] as String? ?? '',
+      blocked: json['blocked'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$BlockedUserEntityToJson(BlockedUserEntity instance) =>
@@ -24,4 +25,5 @@ Map<String, dynamic> _$BlockedUserEntityToJson(BlockedUserEntity instance) =>
       'blockedUserUuid': instance.blockedUserUuid,
       'blockedUserNickname': instance.blockedUserNickname,
       'createdAt': const DateTimeJsonConverter().toJson(instance.createdAt),
+      'blocked': instance.blocked,
     };

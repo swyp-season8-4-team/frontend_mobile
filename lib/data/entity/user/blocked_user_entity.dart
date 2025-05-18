@@ -13,6 +13,7 @@ class BlockedUserEntity {
     this.blockerUserUuid = '',
     this.blockedUserUuid = '',
     this.blockedUserNickname = '',
+    this.blocked = false,
   });
   final int id;
   final String blockerUserUuid;
@@ -20,4 +21,5 @@ class BlockedUserEntity {
   final String blockedUserNickname;
   @DateTimeJsonConverter()
   final DateTime createdAt;
+  final bool blocked;
 }
