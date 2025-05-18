@@ -1,8 +1,12 @@
+import 'package:frontend_mobile/data/entity/user/blocked_user_entity.dart';
+import 'package:frontend_mobile/data/entity/user/blocked_user_list_entity.dart';
 import 'package:frontend_mobile/data/entity/user/nickname_availability_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/user/user_review_entity.dart';
 import 'package:frontend_mobile/data/request_body/user/patch_me_request_body.dart';
 import 'package:frontend_mobile/data/request_body/user/post_nickname_request_body.dart';
+import 'package:frontend_mobile/domain/model/user/blocked_user_list_model.dart';
+import 'package:frontend_mobile/domain/model/user/blocked_user_model.dart';
 import 'package:frontend_mobile/domain/model/user/nickname_availability_model.dart';
 import 'package:frontend_mobile/domain/model/user/user_detail_model.dart';
 import 'package:frontend_mobile/domain/model/user/user_review_model.dart';
@@ -73,5 +77,23 @@ extension UserReviewDetailEntityExt on UserReviewDetailEntity {
       thumbnail: store.thumbnail,
     ),
     reviewImage: reviewImage,
+  );
+}
+
+extension BlockedUserEntityExt on BlockedUserEntity {
+  BlockedUserModel toModel() => BlockedUserModel(
+    id: id,
+    blockerUserUuid: blockerUserUuid,
+    blockedUserUuid: blockedUserUuid,
+    blockedUserNickname: blockedUserNickname,
+    createdAt: createdAt,
+  );
+}
+
+extension BlockedUserListEntityExt on BlockedUserListEntity {
+  BlockedUserListModel toModel() => BlockedUserListModel(
+    blockedUsers:
+        blockedUsers.map((BlockedUserEntity e) => e.toModel()).toList(),
+    totalCount: totalCount,
   );
 }

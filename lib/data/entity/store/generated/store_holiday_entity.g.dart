@@ -8,9 +8,14 @@ part of '../store_holiday_entity.dart';
 
 StoreHolidayEntity _$StoreHolidayEntityFromJson(Map<String, dynamic> json) =>
     StoreHolidayEntity(
-      date: json['date'] as String? ?? '',
-      reason: json['reason'] as String?,
+      startDate: json['startDate'] as String? ?? '',
+      endDate: json['endDate'] as String? ?? '',
+      reason: json['reason'] as String? ?? '',
     );
 
 Map<String, dynamic> _$StoreHolidayEntityToJson(StoreHolidayEntity instance) =>
-    <String, dynamic>{'date': instance.date, 'reason': instance.reason};
+    <String, dynamic>{
+      'startDate': instance.startDate,
+      'endDate': instance.endDate,
+      'reason': instance.reason,
+    };

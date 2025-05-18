@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
+import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/secure_storage/secure_storage.dart';
 import 'package:frontend_mobile/presentation/global/login/login_view_model.dart';
@@ -27,6 +28,33 @@ class MySettingView extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              const _MenuTitle(title: '친구 관리'),
+              Divider(color: colorScheme.outlineVariant, height: 1),
+              _Menu(
+                widget: Row(
+                  children: <Widget>[
+                    Text(
+                      '차단 맴버 관리하기',
+                      style: textTheme.titleSmall?.copyWith(
+                        color: ScaleColorConfig.neutral30,
+                      ),
+                    ),
+                    const Spacer(),
+                    Assets.icon.arrow.rightLine.svg(
+                      width: 20,
+                      height: 20,
+                      colorFilter: const ColorFilter.mode(
+                        ScaleColorConfig.neutral40,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  context.pushNamed(AppRoutes.blockedUser.name);
+                },
+              ),
+              Divider(color: colorScheme.outlineVariant, height: 1),
               const _MenuTitle(title: '내 계정'),
               Divider(color: colorScheme.outlineVariant, height: 1),
               _Menu(

@@ -34,6 +34,7 @@ import 'package:frontend_mobile/presentation/my_page/my_page_view.dart';
 import 'package:frontend_mobile/presentation/my_page/policy/my_policy_view.dart';
 import 'package:frontend_mobile/presentation/my_page/review/my_review_view.dart';
 import 'package:frontend_mobile/presentation/my_page/review/update_short_review/update_short_review_view.dart';
+import 'package:frontend_mobile/presentation/my_page/setting/blocked_user/blocked_user_list_view.dart';
 import 'package:frontend_mobile/presentation/my_page/setting/delete_my_info/delete_my_info_view.dart';
 import 'package:frontend_mobile/presentation/my_page/setting/my_setting_view.dart';
 import 'package:frontend_mobile/presentation/my_page/update_profile/update_profile_info_view.dart';
@@ -639,6 +640,15 @@ class AppRouter {
                     name: AppRoutes.deleteMyInfo.name,
                     builder: (BuildContext context, GoRouterState state) {
                       return const DeleteMyInfoView();
+                    },
+                  ),
+
+                  /// 차단 유저 관리
+                  GoRoute(
+                    path: AppRoutes.blockedUser.path,
+                    name: AppRoutes.blockedUser.name,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const BlockedUserListView();
                     },
                   ),
                 ],
