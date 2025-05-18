@@ -136,4 +136,30 @@ class DessertCommentViewModel extends StateNotifier<DessertCommentState> {
       },
     );
   }
+
+  // /// 차단 여부 확인
+  // Future<void> postBlockUser({required BlockUserParams params}) async {
+  //   state = state.copyWith(postBlockUserStatus: Status.loading);
+
+  //   final Result<BlockedUserModel, CustomException> response =
+  //       await Usecase.execute(
+  //         usecase: ref.read(postBlockUserUsecaseProvider),
+  //         params: params,
+  //       );
+
+  //   response.map(
+  //     success: (Success<BlockedUserModel, CustomException> success) {
+  //       state = state.copyWith(
+  //         postBlockUserStatus: Status.success,
+  //         blockedUserNickname: success.data.blockedUserNickname,
+  //       );
+  //     },
+  //     failure: (Failure<BlockedUserModel, CustomException> failure) {
+  //       state = state.copyWith(
+  //         postBlockUserStatus: Status.failure,
+  //         exception: failure.exception.model,
+  //       );
+  //     },
+  //   );
+  // }
 }

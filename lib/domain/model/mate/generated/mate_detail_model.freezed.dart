@@ -33,6 +33,7 @@ mixin _$MateDetailModel {
   String get applyStatus => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
   String get mateCategory => throw _privateConstructorUsedError;
+  bool get blockedByAuthorYn => throw _privateConstructorUsedError;
   PlaceModel? get place => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
 
@@ -67,6 +68,7 @@ abstract class $MateDetailModelCopyWith<$Res> {
     String applyStatus,
     String gender,
     String mateCategory,
+    bool blockedByAuthorYn,
     PlaceModel? place,
     String? updatedAt,
   });
@@ -103,6 +105,7 @@ class _$MateDetailModelCopyWithImpl<$Res, $Val extends MateDetailModel>
     Object? applyStatus = null,
     Object? gender = null,
     Object? mateCategory = null,
+    Object? blockedByAuthorYn = null,
     Object? place = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -188,6 +191,11 @@ class _$MateDetailModelCopyWithImpl<$Res, $Val extends MateDetailModel>
                     ? _value.mateCategory
                     : mateCategory // ignore: cast_nullable_to_non_nullable
                         as String,
+            blockedByAuthorYn:
+                null == blockedByAuthorYn
+                    ? _value.blockedByAuthorYn
+                    : blockedByAuthorYn // ignore: cast_nullable_to_non_nullable
+                        as bool,
             place:
                 freezed == place
                     ? _value.place
@@ -230,6 +238,7 @@ abstract class _$$MateDetailModelImplCopyWith<$Res>
     String applyStatus,
     String gender,
     String mateCategory,
+    bool blockedByAuthorYn,
     PlaceModel? place,
     String? updatedAt,
   });
@@ -265,6 +274,7 @@ class __$$MateDetailModelImplCopyWithImpl<$Res>
     Object? applyStatus = null,
     Object? gender = null,
     Object? mateCategory = null,
+    Object? blockedByAuthorYn = null,
     Object? place = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -350,6 +360,11 @@ class __$$MateDetailModelImplCopyWithImpl<$Res>
                 ? _value.mateCategory
                 : mateCategory // ignore: cast_nullable_to_non_nullable
                     as String,
+        blockedByAuthorYn:
+            null == blockedByAuthorYn
+                ? _value.blockedByAuthorYn
+                : blockedByAuthorYn // ignore: cast_nullable_to_non_nullable
+                    as bool,
         place:
             freezed == place
                 ? _value.place
@@ -385,6 +400,7 @@ class _$MateDetailModelImpl implements _MateDetailModel {
     required this.applyStatus,
     required this.gender,
     required this.mateCategory,
+    required this.blockedByAuthorYn,
     this.place,
     this.updatedAt,
   });
@@ -422,13 +438,15 @@ class _$MateDetailModelImpl implements _MateDetailModel {
   @override
   final String mateCategory;
   @override
+  final bool blockedByAuthorYn;
+  @override
   final PlaceModel? place;
   @override
   final String? updatedAt;
 
   @override
   String toString() {
-    return 'MateDetailModel(mateUuid: $mateUuid, storeId: $storeId, userUuid: $userUuid, capacity: $capacity, currentMemberCount: $currentMemberCount, nickname: $nickname, title: $title, content: $content, recruitYn: $recruitYn, mateImage: $mateImage, profileImage: $profileImage, createdAt: $createdAt, saved: $saved, applyStatus: $applyStatus, gender: $gender, mateCategory: $mateCategory, place: $place, updatedAt: $updatedAt)';
+    return 'MateDetailModel(mateUuid: $mateUuid, storeId: $storeId, userUuid: $userUuid, capacity: $capacity, currentMemberCount: $currentMemberCount, nickname: $nickname, title: $title, content: $content, recruitYn: $recruitYn, mateImage: $mateImage, profileImage: $profileImage, createdAt: $createdAt, saved: $saved, applyStatus: $applyStatus, gender: $gender, mateCategory: $mateCategory, blockedByAuthorYn: $blockedByAuthorYn, place: $place, updatedAt: $updatedAt)';
   }
 
   @override
@@ -463,13 +481,15 @@ class _$MateDetailModelImpl implements _MateDetailModel {
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.mateCategory, mateCategory) ||
                 other.mateCategory == mateCategory) &&
+            (identical(other.blockedByAuthorYn, blockedByAuthorYn) ||
+                other.blockedByAuthorYn == blockedByAuthorYn) &&
             (identical(other.place, place) || other.place == place) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt));
   }
 
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     runtimeType,
     mateUuid,
     storeId,
@@ -487,9 +507,10 @@ class _$MateDetailModelImpl implements _MateDetailModel {
     applyStatus,
     gender,
     mateCategory,
+    blockedByAuthorYn,
     place,
     updatedAt,
-  );
+  ]);
 
   /// Create a copy of MateDetailModel
   /// with the given fields replaced by the non-null parameter values.
@@ -521,6 +542,7 @@ abstract class _MateDetailModel implements MateDetailModel {
     required final String applyStatus,
     required final String gender,
     required final String mateCategory,
+    required final bool blockedByAuthorYn,
     final PlaceModel? place,
     final String? updatedAt,
   }) = _$MateDetailModelImpl;
@@ -557,6 +579,8 @@ abstract class _MateDetailModel implements MateDetailModel {
   String get gender;
   @override
   String get mateCategory;
+  @override
+  bool get blockedByAuthorYn;
   @override
   PlaceModel? get place;
   @override

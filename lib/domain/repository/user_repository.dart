@@ -49,6 +49,11 @@ abstract interface class UserRepository {
     required BlockUserParams params,
   });
 
+  /// 차단 여부 확인
+  Future<Result<BlockedUserModel, CustomException>> getCheckBlockedUser({
+    required BlockUserParams params,
+  });
+
   /// 특정 사용자 차단 해제
   Future<Result<void, CustomException>> unblockUser({
     required UnblockUserParams params,

@@ -89,6 +89,7 @@ extension BlockedUserEntityExt on BlockedUserEntity {
     blockedUserUuid: blockedUserUuid,
     blockedUserNickname: blockedUserNickname,
     createdAt: createdAt,
+    blocked: blocked,
   );
 }
 

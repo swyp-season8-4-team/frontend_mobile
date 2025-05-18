@@ -38,6 +38,7 @@ class DessertPostState with _$DessertPostState {
         applyStatus: '',
         gender: '',
         mateCategory: '',
+        blockedByAuthorYn: false,
       ),
     )
     MateDetailModel data,

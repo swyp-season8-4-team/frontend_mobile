@@ -65,6 +65,12 @@ abstract interface class UserRemoteDataSource {
     @Body() required BlockUserRequestBody body,
   });
 
+  /// 차단 여부 확인
+  @POST('/api/users/blocks/check/{blockedUserUuid}')
+  Future<BlockedUserEntity> getCheckBlockedUser({
+    @Path() required String blockedUserUuid,
+  });
+
   /// 특정 사용자 차단 해제
   @DELETE('/api/users/blocks/{blockId}')
   Future<void> unblockUser({@Path('blockId') required int blockId});

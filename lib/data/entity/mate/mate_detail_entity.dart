@@ -23,6 +23,7 @@ class MateDetailEntity {
     this.applyStatus = '',
     this.gender = '',
     this.mateCategory = '',
+    this.blockedByAuthorYn = false,
   });
 
   factory MateDetailEntity.fromJson(Map<String, dynamic> json) =>
@@ -46,6 +47,7 @@ class MateDetailEntity {
   final String applyStatus;
   final String gender;
   final String mateCategory;
+  final bool blockedByAuthorYn;
 }
 
 @JsonSerializable()

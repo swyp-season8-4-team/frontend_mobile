@@ -176,6 +176,7 @@ class _$DessertWriteStateImpl implements _DessertWriteState {
       applyStatus: '',
       gender: '',
       mateCategory: '',
+      blockedByAuthorYn: false,
     ),
     this.exception = const ExceptionModel(
       status: -1,

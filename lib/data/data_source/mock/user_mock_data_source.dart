@@ -72,4 +72,12 @@ class UserMockDataSource implements UserRemoteDataSource {
     // TODO: implement postBlockUser
     throw UnimplementedError();
   }
+
+  @override
+  Future<BlockedUserEntity> getCheckBlockedUser({
+    required String blockedUserUuid,
+  }) {
+    // TODO: implement getCheckBlockedUser
+    throw UnimplementedError();
+  }
 }

@@ -29,6 +29,7 @@ MateDetailEntity _$MateDetailEntityFromJson(Map<String, dynamic> json) =>
       applyStatus: json['applyStatus'] as String? ?? '',
       gender: json['gender'] as String? ?? '',
       mateCategory: json['mateCategory'] as String? ?? '',
+      blockedByAuthorYn: json['blockedByAuthorYn'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$MateDetailEntityToJson(MateDetailEntity instance) =>
@@ -51,6 +52,7 @@ Map<String, dynamic> _$MateDetailEntityToJson(MateDetailEntity instance) =>
       'applyStatus': instance.applyStatus,
       'gender': instance.gender,
       'mateCategory': instance.mateCategory,
+      'blockedByAuthorYn': instance.blockedByAuthorYn,
     };
 
 PlaceEntity _$PlaceEntityFromJson(Map<String, dynamic> json) => PlaceEntity(

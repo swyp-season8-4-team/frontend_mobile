@@ -22,6 +22,7 @@ class MateDetailModel with _$MateDetailModel {
     required String applyStatus,
     required String gender,
     required String mateCategory,
+    required bool blockedByAuthorYn,
     PlaceModel? place,
     String? updatedAt,
   }) = _MateDetailModel;

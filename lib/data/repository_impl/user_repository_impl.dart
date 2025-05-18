@@ -135,6 +135,21 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
+  Future<Result<BlockedUserModel, CustomException>> getCheckBlockedUser({
+    required BlockUserParams params,
+  }) async {
+    return await apiCall(
+      api: () async {
+        final BlockedUserEntity result = await api.getCheckBlockedUser(
+          blockedUserUuid: params.blockedUserUuid,
+        );
+
+        return result.toModel();
+      },
+    );
+  }
+
+  @override
   Future<Result<void, CustomException>> unblockUser({
     required UnblockUserParams params,
   }) async {

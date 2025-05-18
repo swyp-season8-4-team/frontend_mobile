@@ -360,6 +360,7 @@ class _$DessertPostStateImpl implements _DessertPostState {
       applyStatus: '',
       gender: '',
       mateCategory: '',
+      blockedByAuthorYn: false,
     ),
     final List<MateMemberDetailModel> pendingData =
         const <MateMemberDetailModel>[],
