@@ -110,7 +110,7 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
               description: '${state.blockedNickname}님을 차단했습니다.',
               actionButton: SnackBarActionButton(
                 onTap: () {
-                  context.pop();
+                  toastManager.remove();
                 },
                 label: '확인',
               ),
