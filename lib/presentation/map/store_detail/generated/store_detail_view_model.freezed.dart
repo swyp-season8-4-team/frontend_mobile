@@ -21,10 +21,15 @@ mixin _$StoreDetailState {
   Status get getStoreDetailStatus => throw _privateConstructorUsedError;
   ExceptionModel get getStoreDetailException =>
       throw _privateConstructorUsedError;
+  List<({bool isOptionMenuVisible, String reviewUuid})>
+  get reviewMenuOptionsVisible => throw _privateConstructorUsedError;
   bool get todayReviewExist => throw _privateConstructorUsedError;
   Status get checkTodayReviewStatus => throw _privateConstructorUsedError;
   ExceptionModel get checkTodayReviewException =>
       throw _privateConstructorUsedError;
+  String get blockedNickname => throw _privateConstructorUsedError;
+  Status get blockUserStatus => throw _privateConstructorUsedError;
+  ExceptionModel get blockUserException => throw _privateConstructorUsedError;
 
   /// Create a copy of StoreDetailState
   /// with the given fields replaced by the non-null parameter values.
@@ -44,9 +49,14 @@ abstract class $StoreDetailStateCopyWith<$Res> {
     StoreDetailModel? storeDetail,
     Status getStoreDetailStatus,
     ExceptionModel getStoreDetailException,
+    List<({bool isOptionMenuVisible, String reviewUuid})>
+    reviewMenuOptionsVisible,
     bool todayReviewExist,
     Status checkTodayReviewStatus,
     ExceptionModel checkTodayReviewException,
+    String blockedNickname,
+    Status blockUserStatus,
+    ExceptionModel blockUserException,
   });
 }
 
@@ -68,9 +78,13 @@ class _$StoreDetailStateCopyWithImpl<$Res, $Val extends StoreDetailState>
     Object? storeDetail = freezed,
     Object? getStoreDetailStatus = null,
     Object? getStoreDetailException = null,
+    Object? reviewMenuOptionsVisible = null,
     Object? todayReviewExist = null,
     Object? checkTodayReviewStatus = null,
     Object? checkTodayReviewException = null,
+    Object? blockedNickname = null,
+    Object? blockUserStatus = null,
+    Object? blockUserException = null,
   }) {
     return _then(
       _value.copyWith(
@@ -89,6 +103,13 @@ class _$StoreDetailStateCopyWithImpl<$Res, $Val extends StoreDetailState>
                     ? _value.getStoreDetailException
                     : getStoreDetailException // ignore: cast_nullable_to_non_nullable
                         as ExceptionModel,
+            reviewMenuOptionsVisible:
+                null == reviewMenuOptionsVisible
+                    ? _value.reviewMenuOptionsVisible
+                    : reviewMenuOptionsVisible // ignore: cast_nullable_to_non_nullable
+                        as List<
+                          ({bool isOptionMenuVisible, String reviewUuid})
+                        >,
             todayReviewExist:
                 null == todayReviewExist
                     ? _value.todayReviewExist
@@ -103,6 +124,21 @@ class _$StoreDetailStateCopyWithImpl<$Res, $Val extends StoreDetailState>
                 null == checkTodayReviewException
                     ? _value.checkTodayReviewException
                     : checkTodayReviewException // ignore: cast_nullable_to_non_nullable
+                        as ExceptionModel,
+            blockedNickname:
+                null == blockedNickname
+                    ? _value.blockedNickname
+                    : blockedNickname // ignore: cast_nullable_to_non_nullable
+                        as String,
+            blockUserStatus:
+                null == blockUserStatus
+                    ? _value.blockUserStatus
+                    : blockUserStatus // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            blockUserException:
+                null == blockUserException
+                    ? _value.blockUserException
+                    : blockUserException // ignore: cast_nullable_to_non_nullable
                         as ExceptionModel,
           )
           as $Val,
@@ -123,9 +159,14 @@ abstract class _$$StoreDetailStateImplCopyWith<$Res>
     StoreDetailModel? storeDetail,
     Status getStoreDetailStatus,
     ExceptionModel getStoreDetailException,
+    List<({bool isOptionMenuVisible, String reviewUuid})>
+    reviewMenuOptionsVisible,
     bool todayReviewExist,
     Status checkTodayReviewStatus,
     ExceptionModel checkTodayReviewException,
+    String blockedNickname,
+    Status blockUserStatus,
+    ExceptionModel blockUserException,
   });
 }
 
@@ -146,9 +187,13 @@ class __$$StoreDetailStateImplCopyWithImpl<$Res>
     Object? storeDetail = freezed,
     Object? getStoreDetailStatus = null,
     Object? getStoreDetailException = null,
+    Object? reviewMenuOptionsVisible = null,
     Object? todayReviewExist = null,
     Object? checkTodayReviewStatus = null,
     Object? checkTodayReviewException = null,
+    Object? blockedNickname = null,
+    Object? blockUserStatus = null,
+    Object? blockUserException = null,
   }) {
     return _then(
       _$StoreDetailStateImpl(
@@ -167,6 +212,11 @@ class __$$StoreDetailStateImplCopyWithImpl<$Res>
                 ? _value.getStoreDetailException
                 : getStoreDetailException // ignore: cast_nullable_to_non_nullable
                     as ExceptionModel,
+        reviewMenuOptionsVisible:
+            null == reviewMenuOptionsVisible
+                ? _value._reviewMenuOptionsVisible
+                : reviewMenuOptionsVisible // ignore: cast_nullable_to_non_nullable
+                    as List<({bool isOptionMenuVisible, String reviewUuid})>,
         todayReviewExist:
             null == todayReviewExist
                 ? _value.todayReviewExist
@@ -181,6 +231,21 @@ class __$$StoreDetailStateImplCopyWithImpl<$Res>
             null == checkTodayReviewException
                 ? _value.checkTodayReviewException
                 : checkTodayReviewException // ignore: cast_nullable_to_non_nullable
+                    as ExceptionModel,
+        blockedNickname:
+            null == blockedNickname
+                ? _value.blockedNickname
+                : blockedNickname // ignore: cast_nullable_to_non_nullable
+                    as String,
+        blockUserStatus:
+            null == blockUserStatus
+                ? _value.blockUserStatus
+                : blockUserStatus // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        blockUserException:
+            null == blockUserException
+                ? _value.blockUserException
+                : blockUserException // ignore: cast_nullable_to_non_nullable
                     as ExceptionModel,
       ),
     );
@@ -199,6 +264,9 @@ class _$StoreDetailStateImpl extends _StoreDetailState {
       message: '',
       timestamp: '',
     ),
+    final List<({bool isOptionMenuVisible, String reviewUuid})>
+        reviewMenuOptionsVisible =
+        const <ReviewMenuOptionVisible>[],
     this.todayReviewExist = false,
     this.checkTodayReviewStatus = Status.loading,
     this.checkTodayReviewException = const ExceptionModel(
@@ -207,7 +275,16 @@ class _$StoreDetailStateImpl extends _StoreDetailState {
       message: '',
       timestamp: '',
     ),
-  }) : super._();
+    this.blockedNickname = '',
+    this.blockUserStatus = Status.initial,
+    this.blockUserException = const ExceptionModel(
+      status: -1,
+      code: '',
+      message: '',
+      timestamp: '',
+    ),
+  }) : _reviewMenuOptionsVisible = reviewMenuOptionsVisible,
+       super._();
 
   @override
   final StoreDetailModel? storeDetail;
@@ -217,6 +294,18 @@ class _$StoreDetailStateImpl extends _StoreDetailState {
   @override
   @JsonKey()
   final ExceptionModel getStoreDetailException;
+  final List<({bool isOptionMenuVisible, String reviewUuid})>
+  _reviewMenuOptionsVisible;
+  @override
+  @JsonKey()
+  List<({bool isOptionMenuVisible, String reviewUuid})>
+  get reviewMenuOptionsVisible {
+    if (_reviewMenuOptionsVisible is EqualUnmodifiableListView)
+      return _reviewMenuOptionsVisible;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_reviewMenuOptionsVisible);
+  }
+
   @override
   @JsonKey()
   final bool todayReviewExist;
@@ -226,10 +315,19 @@ class _$StoreDetailStateImpl extends _StoreDetailState {
   @override
   @JsonKey()
   final ExceptionModel checkTodayReviewException;
+  @override
+  @JsonKey()
+  final String blockedNickname;
+  @override
+  @JsonKey()
+  final Status blockUserStatus;
+  @override
+  @JsonKey()
+  final ExceptionModel blockUserException;
 
   @override
   String toString() {
-    return 'StoreDetailState(storeDetail: $storeDetail, getStoreDetailStatus: $getStoreDetailStatus, getStoreDetailException: $getStoreDetailException, todayReviewExist: $todayReviewExist, checkTodayReviewStatus: $checkTodayReviewStatus, checkTodayReviewException: $checkTodayReviewException)';
+    return 'StoreDetailState(storeDetail: $storeDetail, getStoreDetailStatus: $getStoreDetailStatus, getStoreDetailException: $getStoreDetailException, reviewMenuOptionsVisible: $reviewMenuOptionsVisible, todayReviewExist: $todayReviewExist, checkTodayReviewStatus: $checkTodayReviewStatus, checkTodayReviewException: $checkTodayReviewException, blockedNickname: $blockedNickname, blockUserStatus: $blockUserStatus, blockUserException: $blockUserException)';
   }
 
   @override
@@ -246,6 +344,10 @@ class _$StoreDetailStateImpl extends _StoreDetailState {
                   getStoreDetailException,
                 ) ||
                 other.getStoreDetailException == getStoreDetailException) &&
+            const DeepCollectionEquality().equals(
+              other._reviewMenuOptionsVisible,
+              _reviewMenuOptionsVisible,
+            ) &&
             (identical(other.todayReviewExist, todayReviewExist) ||
                 other.todayReviewExist == todayReviewExist) &&
             (identical(other.checkTodayReviewStatus, checkTodayReviewStatus) ||
@@ -254,7 +356,13 @@ class _$StoreDetailStateImpl extends _StoreDetailState {
                   other.checkTodayReviewException,
                   checkTodayReviewException,
                 ) ||
-                other.checkTodayReviewException == checkTodayReviewException));
+                other.checkTodayReviewException == checkTodayReviewException) &&
+            (identical(other.blockedNickname, blockedNickname) ||
+                other.blockedNickname == blockedNickname) &&
+            (identical(other.blockUserStatus, blockUserStatus) ||
+                other.blockUserStatus == blockUserStatus) &&
+            (identical(other.blockUserException, blockUserException) ||
+                other.blockUserException == blockUserException));
   }
 
   @override
@@ -263,9 +371,13 @@ class _$StoreDetailStateImpl extends _StoreDetailState {
     storeDetail,
     getStoreDetailStatus,
     getStoreDetailException,
+    const DeepCollectionEquality().hash(_reviewMenuOptionsVisible),
     todayReviewExist,
     checkTodayReviewStatus,
     checkTodayReviewException,
+    blockedNickname,
+    blockUserStatus,
+    blockUserException,
   );
 
   /// Create a copy of StoreDetailState
@@ -285,9 +397,14 @@ abstract class _StoreDetailState extends StoreDetailState {
     final StoreDetailModel? storeDetail,
     final Status getStoreDetailStatus,
     final ExceptionModel getStoreDetailException,
+    final List<({bool isOptionMenuVisible, String reviewUuid})>
+    reviewMenuOptionsVisible,
     final bool todayReviewExist,
     final Status checkTodayReviewStatus,
     final ExceptionModel checkTodayReviewException,
+    final String blockedNickname,
+    final Status blockUserStatus,
+    final ExceptionModel blockUserException,
   }) = _$StoreDetailStateImpl;
   _StoreDetailState._() : super._();
 
@@ -298,11 +415,20 @@ abstract class _StoreDetailState extends StoreDetailState {
   @override
   ExceptionModel get getStoreDetailException;
   @override
+  List<({bool isOptionMenuVisible, String reviewUuid})>
+  get reviewMenuOptionsVisible;
+  @override
   bool get todayReviewExist;
   @override
   Status get checkTodayReviewStatus;
   @override
   ExceptionModel get checkTodayReviewException;
+  @override
+  String get blockedNickname;
+  @override
+  Status get blockUserStatus;
+  @override
+  ExceptionModel get blockUserException;
 
   /// Create a copy of StoreDetailState
   /// with the given fields replaced by the non-null parameter values.

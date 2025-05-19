@@ -1,5 +1,8 @@
 part of 'store_detail_view_model.dart';
 
+typedef ReviewMenuOptionVisible =
+    ({String reviewUuid, bool isOptionMenuVisible});
+
 @freezed
 class StoreDetailState with _$StoreDetailState {
   factory StoreDetailState({
@@ -8,10 +11,18 @@ class StoreDetailState with _$StoreDetailState {
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel getStoreDetailException,
 
+    @Default(<ReviewMenuOptionVisible>[])
+    List<ReviewMenuOptionVisible> reviewMenuOptionsVisible,
+
     @Default(false) bool todayReviewExist,
     @Default(Status.loading) Status checkTodayReviewStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel checkTodayReviewException,
+
+    @Default('') String blockedNickname,
+    @Default(Status.initial) Status blockUserStatus,
+    @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
+    ExceptionModel blockUserException,
   }) = _StoreDetailState;
 
   const StoreDetailState._();
