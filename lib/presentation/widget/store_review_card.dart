@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:frontend_mobile/common/design_system/component/etc/option_menu_dropdown.dart';
 import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_size.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
@@ -11,11 +13,17 @@ import 'package:intl/intl.dart';
 class StoreReviewCard extends StatelessWidget {
   const StoreReviewCard({
     required this.storeReview,
-    required this.onReportIconTap,
+    required this.onReportTap,
+    required this.onBlockTap,
+    required this.isOptionMenuVisible,
+    required this.onMenuTap,
     super.key,
   });
   final StoreDetailReviewModel storeReview;
-  final VoidCallback onReportIconTap;
+  final VoidCallback onReportTap;
+  final VoidCallback onBlockTap;
+  final VoidCallback onMenuTap;
+  final bool isOptionMenuVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +49,28 @@ class StoreReviewCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-            GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: onReportIconTap,
-              child: Assets.icon.system.reportLine.svg(
-                width: 20,
-                height: 20,
-                colorFilter: const ColorFilter.mode(
-                  ScaleColorConfig.neutral40,
-                  BlendMode.srcIn,
+            PortalTarget(
+              portalFollower: Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: CustomOptionMenuDropdown(
+                  optionMenus: <CustomOptionMenu>[
+                    CustomOptionMenu(text: '신고하기', onTap: onReportTap),
+                    CustomOptionMenu(text: '차단하기', onTap: onBlockTap),
+                  ],
+                ),
+              ),
+              anchor: const Aligned(
+                follower: Alignment.topRight,
+                target: Alignment.bottomRight,
+              ),
+              visible: isOptionMenuVisible,
+              child: GestureDetector(
+                onTap: onMenuTap,
+                child: Assets.icon.menu.more2Fill.svg(
+                  colorFilter: const ColorFilter.mode(
+                    ScaleColorConfig.neutral40,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
             ),

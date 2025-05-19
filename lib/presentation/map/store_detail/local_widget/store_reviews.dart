@@ -9,6 +9,9 @@ class _StoreReviews extends ConsumerWidget {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     final StoreDetailState state = ref.watch(storeDetailViewModelProvider);
+    final StoreDetailViewModel viewmodel = ref.read(
+      storeDetailViewModelProvider.notifier,
+    );
 
     return CustomScrollView(
       slivers: <Widget>[
@@ -127,7 +130,43 @@ class _StoreReviews extends ConsumerWidget {
                 padding: const EdgeInsets.fromLTRB(16, 13, 16, 11),
                 child: StoreReviewCard(
                   storeReview: storeReview,
-                  onReportIconTap: () {
+                  onMenuTap: () {
+                    viewmodel.updateReviewOptionMenuVisible(
+                      reviewUuid: storeReview.reviewUuid,
+                      isVisible: true,
+                    );
+                  },
+                  onBlockTap: () {
+                    viewmodel.invisibleAllReviewOptionMenu();
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CustomDialog.basic(
+                          title: '${storeReview.nickname}님을 차단하시겠어요?',
+                          description:
+                              '차단하면 상대방이 진행하는 디저비 활동 정보를 모두 볼 수 없어요.\n추후 [My > 설정 > 차단 멤버 관리하기]에서 언제든지 해제할 수 있어요',
+                          secondaryButton: CustomDialogButton(
+                            text: '아니오',
+                            onTap: () => context.pop(),
+                          ),
+                          primaryButton: CustomDialogButton(
+                            warning: true,
+                            text: '네, 차단할래요',
+                            onTap: () {
+                              viewmodel.blockUser(
+                                blockedUserUuid: storeReview.userUuid,
+                                blockedNickname: storeReview.nickname,
+                              );
+                              context.pop();
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  onReportTap: () {
+                    viewmodel.invisibleAllReviewOptionMenu();
+
                     context.pushNamed(
                       AppRoutes.reportStoreReview.name,
                       pathParameters: <String, String>{
@@ -136,6 +175,15 @@ class _StoreReviews extends ConsumerWidget {
                       },
                     );
                   },
+                  isOptionMenuVisible:
+                      state.reviewMenuOptionsVisible
+                          .firstWhereOrNull(
+                            (
+                              ({bool isOptionMenuVisible, String reviewUuid}) e,
+                            ) => e.reviewUuid == storeReview.reviewUuid,
+                          )
+                          ?.isOptionMenuVisible ??
+                      false,
                 ),
               );
             }, childCount: state.storeDetail!.storeReviews!.length),

@@ -18,6 +18,7 @@ import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/manager/toast/toast_manager.dart';
 import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/model/store/store_detail_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_operating_hour_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_top_preference_model.dart';
@@ -77,10 +78,13 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
   @override
   Widget build(BuildContext context) {
     final StoreDetailState state = ref.watch(storeDetailViewModelProvider);
+    final StoreDetailViewModel viewmodel = ref.read(
+      storeDetailViewModelProvider.notifier,
+    );
+    final ToastManager toastManager = ref.read(toastManagerProvider);
 
     // TODO: 페이지 전환 로딩 UI 구현 필요
-    if (state.getStoreDetailStatus.isLoading ||
-        state.checkTodayReviewStatus.isLoading) {
+    if (state.storeDetail == null && state.getStoreDetailStatus.isLoading) {
       return const Scaffold(
         appBar: CustomSubTopBar(title: '', actions: <Widget>[]),
 
@@ -93,76 +97,128 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
       return _Failure(storeUuid: widget.storeUuid);
     }
 
-    return Scaffold(
-      appBar: CustomSubTopBar(
-        primary: !_isTabBarPinned,
-        title: _isTabBarPinned ? state.storeDetail!.name : '',
-        actions: <Widget>[
-          GestureDetector(
-            onTap: () {
-              context.pushNamed(
-                AppRoutes.updateStoreToUserStoreList.name,
-                pathParameters: <String, String>{
-                  'listId': '-999',
-                  'storeUuid': widget.storeUuid,
+    ref.listen(
+      storeDetailViewModelProvider.select(
+        (StoreDetailState state) => state.blockUserStatus,
+      ),
+      (Status? prev, Status next) {
+        if (next.isSuccess) {
+          viewmodel.getStoreDetail(storeUuid: widget.storeUuid);
+          toastManager.show(
+            context: context,
+            toastWidget: CustomSnackBar(
+              description: '${state.blockedNickname}님을 차단했습니다.',
+              actionButton: SnackBarActionButton(
+                onTap: () {
+                  context.pop();
                 },
-                queryParameters: <String, String>{
-                  'storeName': state.storeDetail!.name,
-                },
+                label: '확인',
+              ),
+            ),
+          );
+        } else if (next.isFailure) {
+          final StoreDetailState state = ref.read(storeDetailViewModelProvider);
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: state.blockUserException.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap: () => context.pop(),
+                ),
               );
             },
-            child: Assets.image.flowerFilled.image(
-              width: 24,
-              height: 24,
-              color: ScaleColorConfig.primary10,
-            ),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (_isTabBarPinned != innerBoxIsScrolled) {
-                setState(() {
-                  _isTabBarPinned = innerBoxIsScrolled;
-                });
-              }
-            });
+          );
+        }
+      },
+    );
 
-            return <Widget>[
-              const SliverToBoxAdapter(child: _OwnerPickImage()),
-              const SliverToBoxAdapter(child: _StoreRepresentiveInfo()),
-              const SliverToBoxAdapter(child: _StoreDetailInfo()),
-              const SliverToBoxAdapter(child: _Introduce()),
-              const SliverToBoxAdapter(child: _RecentNotice()),
-
-              //고의적으로 _TabBarDelegate가 TabBarView를 덮도록 설정
-              SliverOverlapAbsorber(
-                handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                  context,
-                ),
-                sliver: SliverPersistentHeader(
-                  pinned: true,
-                  delegate: _TabBarDelegate(
-                    storeDetail: state.storeDetail!,
-                    tabController: _tabController,
-                    thumbnailImageUrls: state.thumbnailImageUrls,
-                  ),
+    return GestureDetector(
+      onTap: () {
+        viewmodel.invisibleAllReviewOptionMenu();
+      },
+      behavior: HitTestBehavior.translucent,
+      child: CustomLoadingOverlay(
+        isLoading:
+            state.blockUserStatus.isLoading ||
+            state.checkTodayReviewStatus.isLoading ||
+            state.getStoreDetailStatus.isLoading,
+        child: Scaffold(
+          appBar: CustomSubTopBar(
+            primary: !_isTabBarPinned,
+            title: _isTabBarPinned ? state.storeDetail!.name : '',
+            actions: <Widget>[
+              GestureDetector(
+                onTap: () {
+                  context.pushNamed(
+                    AppRoutes.updateStoreToUserStoreList.name,
+                    pathParameters: <String, String>{
+                      'listId': '-999',
+                      'storeUuid': widget.storeUuid,
+                    },
+                    queryParameters: <String, String>{
+                      'storeName': state.storeDetail!.name,
+                    },
+                  );
+                },
+                child: Assets.image.flowerFilled.image(
+                  width: 24,
+                  height: 24,
+                  color: ScaleColorConfig.primary10,
                 ),
               ),
-            ];
-          },
-          body: TabBarView(
-            controller: _tabController,
-            physics: const NeverScrollableScrollPhysics(),
-            children: const <Widget>[
-              _Menus(),
-              _StoreReviews(),
-              _DessertImages(),
-              // TODO: 추후 구현 에정
-              // Center(child: Text('디저트 메이트')),
             ],
+          ),
+          body: SafeArea(
+            child: NestedScrollView(
+              headerSliverBuilder: (
+                BuildContext context,
+                bool innerBoxIsScrolled,
+              ) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  if (_isTabBarPinned != innerBoxIsScrolled) {
+                    setState(() {
+                      _isTabBarPinned = innerBoxIsScrolled;
+                    });
+                  }
+                });
+
+                return <Widget>[
+                  const SliverToBoxAdapter(child: _OwnerPickImage()),
+                  const SliverToBoxAdapter(child: _StoreRepresentiveInfo()),
+                  const SliverToBoxAdapter(child: _StoreDetailInfo()),
+                  const SliverToBoxAdapter(child: _Introduce()),
+                  const SliverToBoxAdapter(child: _RecentNotice()),
+
+                  //고의적으로 _TabBarDelegate가 TabBarView를 덮도록 설정
+                  SliverOverlapAbsorber(
+                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                      context,
+                    ),
+                    sliver: SliverPersistentHeader(
+                      pinned: true,
+                      delegate: _TabBarDelegate(
+                        storeDetail: state.storeDetail!,
+                        tabController: _tabController,
+                        thumbnailImageUrls: state.thumbnailImageUrls,
+                      ),
+                    ),
+                  ),
+                ];
+              },
+              body: TabBarView(
+                controller: _tabController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: const <Widget>[
+                  _Menus(),
+                  _StoreReviews(),
+                  _DessertImages(),
+                  // TODO: 추후 구현 에정
+                  // Center(child: Text('디저트 메이트')),
+                ],
+              ),
+            ),
           ),
         ),
       ),
