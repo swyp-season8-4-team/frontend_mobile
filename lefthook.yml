@@ -5,4 +5,4 @@ pre-commit:
       run: fvm dart format --set-exit-if-changed lib
     # linter 적용
     linter:
-      run: fvm flutter analyze
+      run: fvm flutter analyze lib

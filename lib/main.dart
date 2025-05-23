@@ -12,7 +12,7 @@ import 'package:frontend_mobile/presentation/router/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await NaverMapSdk.instance.initialize(clientId: Env.naverMapClientId);
+  await FlutterNaverMap().init(clientId: Env.naverMapClientId);
   runApp(const ProviderScope(child: Portal(child: MainApp())));
 }
 
