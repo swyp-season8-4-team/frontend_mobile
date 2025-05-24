@@ -26,12 +26,14 @@ class TypographyConfig {
     fontSize: 32,
     fontWeight: FontWeightConfig.semibold,
     height: 40 / 32,
+    letterSpacing: -0.08,
   );
 
   static const TextStyle headlineMedium = TextStyle(
     fontSize: 28,
     fontWeight: FontWeightConfig.medium,
     height: 36 / 28,
+    letterSpacing: -0.07,
   );
 
   static const TextStyle headlineSmall = TextStyle(
@@ -57,7 +59,7 @@ class TypographyConfig {
     fontSize: 14,
     fontWeight: FontWeightConfig.medium,
     height: 20 / 14,
-    letterSpacing: -1.5,
+    letterSpacing: -0.21,
   );
 
   // Label
@@ -65,21 +67,21 @@ class TypographyConfig {
     fontSize: 12,
     fontWeight: FontWeightConfig.medium,
     height: 16 / 12,
-    letterSpacing: -1.5,
+    letterSpacing: -0.18,
   );
 
   static const TextStyle labelMedium = TextStyle(
     fontSize: 11,
     fontWeight: FontWeightConfig.medium,
     height: 16 / 11,
-    letterSpacing: -1.5,
+    letterSpacing: -0.17,
   );
 
   static const TextStyle labelSmall = TextStyle(
     fontSize: 10,
     fontWeight: FontWeightConfig.medium,
     height: 16 / 10,
-    letterSpacing: -1.5,
+    letterSpacing: -0.15,
   );
 
   // Body
@@ -87,20 +89,20 @@ class TypographyConfig {
     fontSize: 16,
     fontWeight: FontWeightConfig.regular,
     height: 24 / 16,
-    letterSpacing: -1.5,
+    letterSpacing: -0.24,
   );
 
   static const TextStyle bodyMedium = TextStyle(
     fontSize: 14,
     fontWeight: FontWeightConfig.regular,
     height: 20 / 14,
-    letterSpacing: -1.5,
+    letterSpacing: -0.21,
   );
 
   static const TextStyle bodySmall = TextStyle(
     fontSize: 12,
     fontWeight: FontWeightConfig.regular,
     height: 16 / 12,
-    letterSpacing: -1.5,
+    letterSpacing: -0.18,
   );
 }
