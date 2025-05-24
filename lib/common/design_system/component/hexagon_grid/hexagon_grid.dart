@@ -264,6 +264,7 @@ class _CustomHexagonGridState extends State<CustomHexagonGrid> {
                                       child: Text(
                                         hexagon.text!,
                                         style: getTextStyle(context),
+                                        textAlign: TextAlign.center,
                                       ),
                                     )
                                     : CachedNetworkImage(
