@@ -173,6 +173,7 @@ class _MapViewState extends ConsumerState<MapView> {
                       zoom: _zoom,
                     ),
                     minZoom: 6,
+                    rotationGesturesEnable: false,
                   ),
                   onMapReady: (NaverMapController controller) async {
                     _mapController = controller;

@@ -32,6 +32,7 @@ class _FindPlaceByMapState extends ConsumerState<FindPlaceByMapView> {
             zoom: _zoom,
           ),
           minZoom: 6,
+          rotationGesturesEnable: false,
         ),
         onMapReady: (NaverMapController controller) async {
           _mapController = controller;
