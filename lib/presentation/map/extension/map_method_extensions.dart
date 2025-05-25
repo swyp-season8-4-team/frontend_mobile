@@ -60,7 +60,7 @@ extension MapViewMethodExt on _MapViewState {
     }
   }
 
-  Future<NMarker> _storeToMarker({
+  Future<NClusterableMarker> _storeToMarker({
     required String storeUuid,
     required String storeName,
     required double latitude,
@@ -99,7 +99,7 @@ extension MapViewMethodExt on _MapViewState {
 
     // 저장된 가게면 -> Saved marker로 표시
     // 저장되지 않은 가게라면 -> Default marker로 표시
-    return NMarker(
+    return NClusterableMarker(
       id: storeUuid,
       icon: isSavedStore && userStoreMode ? savedMarkerImage : markerImage,
       position: NLatLng(latitude, longitude),
@@ -139,7 +139,7 @@ extension MapViewMethodExt on _MapViewState {
     if (state.selectedMarker != null) {
       await _mapController!.deleteOverlay(
         NOverlayInfo(
-          type: NOverlayType.marker,
+          type: NOverlayType.clusterableMarker,
           id: state.selectedMarker!.info.id,
         ),
       );
@@ -219,7 +219,7 @@ extension MapViewMethodExt on _MapViewState {
   }
 
   // 지도에 표시할 마커 생성
-  Future<List<NMarker>> _createMarkers() async {
+  Future<List<NClusterableMarker>> _createMarkers() async {
     final MapState state = ref.read(mapViewModelProvider);
 
     final UserStoreListState userStoreListState = ref.read(
@@ -227,7 +227,8 @@ extension MapViewMethodExt on _MapViewState {
     );
 
     // default markers
-    final List<Future<NMarker>> markers = <Future<NMarker>>[];
+    final List<Future<NClusterableMarker>> markers =
+        <Future<NClusterableMarker>>[];
 
     for (final StoreByLocationModel e in state.storesByLocation) {
       final UserStoreDataModel? savedStore = _findUserStoreModelByStoreUuid(
@@ -250,7 +251,8 @@ extension MapViewMethodExt on _MapViewState {
     }
 
     // saved markers
-    final List<Future<NMarker>> savedMarkers = <Future<NMarker>>[];
+    final List<Future<NClusterableMarker>> savedMarkers =
+        <Future<NClusterableMarker>>[];
 
     if (state.userStoresEnabled) {
       for (final UserStoreListModel e in userStoreListState.userStoreLists) {
@@ -279,10 +281,9 @@ extension MapViewMethodExt on _MapViewState {
       }
     }
 
-    final List<NMarker> totalMarkers = await Future.wait(<Future<NMarker>>[
-      ...markers,
-      ...savedMarkers,
-    ]);
+    final List<NClusterableMarker> totalMarkers = await Future.wait(
+      <Future<NClusterableMarker>>[...markers, ...savedMarkers],
+    );
 
     return totalMarkers;
   }

@@ -284,12 +284,12 @@ class _MapViewState extends ConsumerState<MapView> {
           final MapState state = ref.read(mapViewModelProvider);
           await _mapController!.deleteOverlay(
             NOverlayInfo(
-              type: NOverlayType.marker,
+              type: NOverlayType.clusterableMarker,
               id: state.selectedMarker!.info.id,
             ),
           );
 
-          final NMarker newMarker = NMarker(
+          final NMarker newMarker = NClusterableMarker(
             id: state.selectedMarker!.info.id,
             position: state.selectedMarker!.position,
             anchor: state.selectedMarker!.anchor,
