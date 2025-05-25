@@ -172,6 +172,7 @@ class _MapViewState extends ConsumerState<MapView> {
                       target: const NLatLng(37.514575, 127.0495556),
                       zoom: _zoom,
                     ),
+                    minZoom: 6,
                   ),
                   onMapReady: (NaverMapController controller) async {
                     _mapController = controller;
