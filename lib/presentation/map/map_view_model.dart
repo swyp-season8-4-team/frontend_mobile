@@ -249,4 +249,9 @@ class MapViewModel extends StateNotifier<MapState> {
 
     return state;
   }
+
+  // 현 위치에서 새로고침 버튼 표시 여부 수정
+  void updateIsRefreshButtonVisible({required bool visible}) {
+    state = state.copyWith(isRefreshButtonVisible: visible);
+  }
 }
