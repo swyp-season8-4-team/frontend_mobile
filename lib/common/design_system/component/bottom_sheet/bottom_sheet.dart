@@ -87,14 +87,14 @@ class CustomBottomSheet {
 class CustomBottomSheetContent extends StatelessWidget {
   const CustomBottomSheetContent({
     required this.child,
-    required this.height,
+    this.height,
     super.key,
     this.padding,
     this.rightButton,
     this.leftButton,
   });
   final Widget child;
-  final double height;
+  final double? height;
   final EdgeInsets? padding;
   final BottomSheetButton? rightButton;
   final BottomSheetButton? leftButton;
@@ -150,7 +150,7 @@ class CustomBottomSheetContent extends StatelessWidget {
             width: double.infinity,
             height: height,
             padding: padding,
-            child: SingleChildScrollView(child: child),
+            child: height != null ? SingleChildScrollView(child: child) : child,
           ),
           if (leftButton != null && rightButton != null) _button,
         ],

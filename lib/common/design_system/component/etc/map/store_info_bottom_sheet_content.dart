@@ -41,7 +41,6 @@ class CustomStoreInfoBottomSheetContent extends StatelessWidget {
     final DayOfWeek today = DayOfWeek.values[DateTime.now().weekday - 1];
 
     return CustomBottomSheetContent(
-      height: isLoading || isFailure ? 134 : 310,
       padding: const EdgeInsets.all(10),
       child:
           isLoading
