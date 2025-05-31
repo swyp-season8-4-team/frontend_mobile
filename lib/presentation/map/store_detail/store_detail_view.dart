@@ -54,6 +54,10 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
   bool _isTabBarPinned = false;
+  final GlobalKey _tabBarKey = GlobalKey();
+
+  // nested scroll view controller
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -172,6 +176,7 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
           ),
           body: SafeArea(
             child: NestedScrollView(
+              controller: _scrollController,
               headerSliverBuilder: (
                 BuildContext context,
                 bool innerBoxIsScrolled,
@@ -185,7 +190,13 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
                 });
 
                 return <Widget>[
-                  const SliverToBoxAdapter(child: _OwnerPickImage()),
+                  SliverToBoxAdapter(
+                    child: _OwnerPickImage(
+                      onImageTap: (int tabIndex) {
+                        _scrollToTab(tabIndex);
+                      },
+                    ),
+                  ),
                   const SliverToBoxAdapter(child: _StoreRepresentiveInfo()),
                   const SliverToBoxAdapter(child: _StoreDetailInfo()),
                   const SliverToBoxAdapter(child: _Introduce()),
@@ -202,6 +213,7 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
                         storeDetail: state.storeDetail!,
                         tabController: _tabController,
                         thumbnailImageUrls: state.thumbnailImageUrls,
+                        key: _tabBarKey,
                       ),
                     ),
                   ),
@@ -225,9 +237,28 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
     );
   }
 
+  void _scrollToTab(int tabIndex) {
+    _tabController.animateTo(tabIndex);
+
+    final RenderBox? renderBox =
+        _tabBarKey.currentContext?.findRenderObject() as RenderBox?;
+    if (renderBox != null) {
+      final double y = renderBox.localToGlobal(Offset.zero).dy;
+
+      final double scrollY = _scrollController.offset + y - kToolbarHeight;
+
+      _scrollController.animateTo(
+        scrollY,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
   @override
   void dispose() {
     _tabController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 }

@@ -1,7 +1,8 @@
 part of '../store_detail_view.dart';
 
 class _OwnerPickImage extends ConsumerWidget {
-  const _OwnerPickImage();
+  const _OwnerPickImage({required this.onImageTap});
+  final void Function(int tabIndex) onImageTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -161,32 +162,38 @@ class _OwnerPickImage extends ConsumerWidget {
             ),
             if (hiddenimageLength != null)
               Positioned.fill(
-                child: Container(
-                  color: ScaleColorConfig.neutral0.withAlpha(110),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Assets.icon.file.picLine.svg(
-                          width: large ? 24 : 16,
-                          height: large ? 24 : 16,
-                          colorFilter: const ColorFilter.mode(
-                            ScaleColorConfig.neutral100,
-                            BlendMode.srcIn,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () {
+                    onImageTap(2);
+                  },
+                  child: Container(
+                    color: ScaleColorConfig.neutral0.withAlpha(110),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Assets.icon.file.picLine.svg(
+                            width: large ? 24 : 16,
+                            height: large ? 24 : 16,
+                            colorFilter: const ColorFilter.mode(
+                              ScaleColorConfig.neutral100,
+                              BlendMode.srcIn,
+                            ),
                           ),
-                        ),
-                        Text(
-                          '+$hiddenimageLength',
-                          style:
-                              large
-                                  ? textTheme.labelLarge?.copyWith(
-                                    color: ScaleColorConfig.neutral100,
-                                  )
-                                  : textTheme.labelSmall?.copyWith(
-                                    color: ScaleColorConfig.neutral100,
-                                  ),
-                        ),
-                      ],
+                          Text(
+                            '+$hiddenimageLength',
+                            style:
+                                large
+                                    ? textTheme.labelLarge?.copyWith(
+                                      color: ScaleColorConfig.neutral100,
+                                    )
+                                    : textTheme.labelSmall?.copyWith(
+                                      color: ScaleColorConfig.neutral100,
+                                    ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
