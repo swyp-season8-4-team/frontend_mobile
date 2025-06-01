@@ -8,6 +8,9 @@ class _StoreList extends ConsumerWidget {
     final StoresByUserStoreListState state = ref.watch(
       storesByUserStoreListViewModelProvider,
     );
+    final StoresByUserStoreListViewModel viewmodel = ref.read(
+      storesByUserStoreListViewModelProvider.notifier,
+    );
 
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -20,6 +23,7 @@ class _StoreList extends ConsumerWidget {
               behavior: HitTestBehavior.translucent,
               onTap: () {
                 // FIXME: 지도를 통해 간략하게 조회한 후 상세 조회 페이지로 이동할 수 있어야함
+                viewmodel.invisibleAllStoreOptionMenu();
                 context.pushNamed(
                   AppRoutes.storeDetail.name,
                   pathParameters: <String, String>{'id': store.storeUuid},

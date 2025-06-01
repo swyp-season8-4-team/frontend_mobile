@@ -99,6 +99,7 @@ class _StoreListSheet extends ConsumerWidget {
                             CustomOutlineButton.xSmall(
                               label: '새 리스트 추가',
                               onPressed: () async {
+                                userStoreListViewModel.invisibleAllOptionMenu();
                                 final Object? result = await context.pushNamed(
                                   AppRoutes.addUserStoreList.name,
                                 );
@@ -273,6 +274,8 @@ class _StoreListSheet extends ConsumerWidget {
                                       );
                                 },
                                 onTap: () {
+                                  userStoreListViewModel
+                                      .invisibleAllOptionMenu();
                                   context.pushNamed(
                                     AppRoutes.storesByUserStoreList.name,
                                     pathParameters: <String, String>{
