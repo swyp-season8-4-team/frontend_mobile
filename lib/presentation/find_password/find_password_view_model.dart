@@ -5,10 +5,13 @@ import 'package:frontend_mobile/core/resource/exception/exception_model.dart';
 import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/resource/usecase.dart';
+import 'package:frontend_mobile/domain/model/auth/password_reset_model.dart';
 import 'package:frontend_mobile/domain/model/email/email_verification_request_model.dart';
 import 'package:frontend_mobile/domain/model/email/email_verify_model.dart';
+import 'package:frontend_mobile/domain/param/auth/password_reset_params.dart';
 import 'package:frontend_mobile/domain/param/email/email_verification_request_params.dart';
 import 'package:frontend_mobile/domain/param/email/email_verify_params.dart';
+import 'package:frontend_mobile/domain/usecase/auth/post_password_reset_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/email/post_email_verification_request_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/email/post_email_verify_usecase.dart';
 
@@ -33,6 +36,7 @@ class FindPasswordViewModel extends StateNotifier<FindPasswordState> {
     state = state.copyWith(
       postVerificationRequestStatus: Status.loading,
       postVerifyStatus: Status.initial,
+      passwordResetStatus: Status.initial,
     );
 
     final Result<EmailVerificationRequestModel, CustomException> response =
@@ -64,8 +68,9 @@ class FindPasswordViewModel extends StateNotifier<FindPasswordState> {
   /// 이메일 인증 코드 확인
   void postVerify({required EmailVerifyParams params}) async {
     state = state.copyWith(
-      postVerificationRequestStatus: Status.initial,
       postVerifyStatus: Status.loading,
+      postVerificationRequestStatus: Status.initial,
+      passwordResetStatus: Status.initial,
     );
 
     final Result<EmailVerifyModel, CustomException> response =
@@ -89,4 +94,45 @@ class FindPasswordViewModel extends StateNotifier<FindPasswordState> {
       },
     );
   }
+
+  /// 비밀번호 재설정
+  void postPasswordReset({required PasswordResetParams params}) async {
+    state = state.copyWith(
+      passwordResetStatus: Status.loading,
+      postVerificationRequestStatus: Status.initial,
+      postVerifyStatus: Status.initial,
+    );
+
+    final Result<PasswordResetModel, CustomException> response =
+        await Usecase.execute(
+          usecase: ref.read(postPasswordResetUsecaseProvider),
+          params: params,
+        );
+
+    response.map(
+      success: (Success<PasswordResetModel, CustomException> success) {
+        state = state.copyWith(
+          postVerifyStatus: Status.success,
+          passwordResetData: success.data,
+        );
+      },
+      failure: (Failure<PasswordResetModel, CustomException> failure) {
+        state = state.copyWith(
+          postVerifyStatus: Status.failure,
+          exception: failure.exception.model,
+        );
+      },
+    );
+  }
 }
+
+/// 선택한 내용들을 저장하는 provider
+final StateProvider<PasswordResetParams> findPasswordProvider =
+    StateProvider<PasswordResetParams>(
+      (Ref ref) => const PasswordResetParams(
+        emailToken: '',
+        email: '',
+        currentPassword: '',
+        newPassword: '',
+      ),
+    );

@@ -5,13 +5,15 @@ class FindPasswordState with _$FindPasswordState {
   const factory FindPasswordState({
     @Default(Status.initial) Status postVerificationRequestStatus,
     @Default(Status.initial) Status postVerifyStatus,
+    @Default(Status.initial) Status passwordResetStatus,
 
-    /// TODO: 비밀번호 변경 api 만들어지면 제대로 변수명 짓기
-    @Default(Status.initial) Status passwordStatus,
     @Default(EmailVerificationRequestModel(message: '', expirationMinutes: -1))
     EmailVerificationRequestModel verificationRequestData,
     @Default(EmailVerifyModel(verificationToken: '', verified: false))
     EmailVerifyModel verifyData,
+    @Default(PasswordResetModel(success: false, message: ''))
+    PasswordResetModel passwordResetData,
+
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel exception,
   }) = _FindPasswordState;
