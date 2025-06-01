@@ -1,3 +1,4 @@
+import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/domain/model/store/store_holiday_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_operating_hour_model.dart';
 import 'package:frontend_mobile/domain/model/store/store_top_preference_model.dart';
@@ -97,6 +98,7 @@ class StoreDetailReviewModel {
     required this.storeId,
     required this.userUuid,
     required this.nickname,
+    required this.gender,
     required this.content,
     required this.rating,
     required this.createdAt,
@@ -108,6 +110,7 @@ class StoreDetailReviewModel {
   final int storeId;
   final String userUuid;
   final String nickname;
+  final ReviewerGender gender;
   final String? profileImage;
   final String content;
   final double rating;

@@ -82,6 +82,7 @@ extension StoreDetailReviewEntityExt on StoreDetailReview {
     storeId: storeId,
     userUuid: userUuid,
     nickname: nickname,
+    gender: ReviewerGender.fromKey(key: gender),
     content: content,
     rating: rating,
     createdAt: createdAt,

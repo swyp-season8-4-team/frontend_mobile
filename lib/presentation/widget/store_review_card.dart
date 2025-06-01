@@ -6,6 +6,7 @@ import 'package:frontend_mobile/common/design_system/component/etc/option_menu_d
 import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_size.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/domain/model/store/store_detail_model.dart';
 import 'package:intl/intl.dart';
 
@@ -34,11 +35,16 @@ class StoreReviewCard extends StatelessWidget {
       children: <Widget>[
         Row(
           children: <Widget>[
-            // TODO: 성별에 따라 위젯을 달리 적용해야함
-            CustomProfilePhotoSize.boy(
-              imageUrl: storeReview.profileImage,
-              size: CustomProfilePhotoSizeEnum.m,
-            ),
+            if (storeReview.gender == ReviewerGender.male)
+              CustomProfilePhotoSize.boy(
+                imageUrl: storeReview.profileImage,
+                size: CustomProfilePhotoSizeEnum.m,
+              )
+            else
+              CustomProfilePhotoSize.girl(
+                imageUrl: storeReview.profileImage,
+                size: CustomProfilePhotoSizeEnum.m,
+              ),
             const SizedBox(width: 10),
             Expanded(
               child: Text(
