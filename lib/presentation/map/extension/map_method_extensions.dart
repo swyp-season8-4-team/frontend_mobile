@@ -16,6 +16,18 @@ extension MapViewMethodExt on _MapViewState {
         ),
       );
 
+      final NLatLngBounds contentBounds =
+          await _mapController!.getContentBounds();
+
+      ref
+          .read(mapViewModelProvider.notifier)
+          .updateIsRefreshButtonVisible(
+            visible:
+                !contentBounds.containsPoint(
+                  NLatLng(result.latitude, result.longitude),
+                ),
+          );
+
       // 위치 권한이 허용된 이후
       // 트래킹할 수 있도록 설정
       await _mapController!.setLocationTrackingMode(
