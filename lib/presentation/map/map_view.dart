@@ -172,6 +172,8 @@ class _MapViewState extends ConsumerState<MapView> {
                       target: const NLatLng(37.514575, 127.0495556),
                       zoom: _zoom,
                     ),
+                    minZoom: 12,
+                    rotationGesturesEnable: false,
                   ),
                   onMapReady: (NaverMapController controller) async {
                     _mapController = controller;
@@ -187,6 +189,30 @@ class _MapViewState extends ConsumerState<MapView> {
                   onMapTapped: (_, _) {
                     _clearSelectedShop();
                   },
+                  onCameraIdle: () async {
+                    // 카메라 이동이 완료된 경우
+                    // 카메라가 보고있는 Bound에 사용자의 위치가 포함되는지 확인
+
+                    final NLatLngBounds contentBounds =
+                        await _mapController!.getContentBounds();
+
+                    final Position currentPosition =
+                        await ref
+                            .read(geoLocationManagerProvider)
+                            .getCurrentPosition();
+
+                    ref
+                        .read(mapViewModelProvider.notifier)
+                        .updateIsRefreshButtonVisible(
+                          visible:
+                              !contentBounds.containsPoint(
+                                NLatLng(
+                                  currentPosition.latitude,
+                                  currentPosition.longitude,
+                                ),
+                              ),
+                        );
+                  },
                 ),
               ),
               Positioned(top: 0, left: 0, child: _buildFilterList()),
@@ -200,12 +226,12 @@ class _MapViewState extends ConsumerState<MapView> {
                 ),
               ),
               Positioned(top: 56, right: 16, child: _buildControlButtons()),
-              if (!state.userStoresEnabled)
+              if (!state.userStoresEnabled && state.isRefreshButtonVisible)
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: _buildRefreshButton(),
                 )
-              else
+              else if (state.userStoresEnabled)
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: _buildUserStoreListButton(),
@@ -284,12 +310,12 @@ class _MapViewState extends ConsumerState<MapView> {
           final MapState state = ref.read(mapViewModelProvider);
           await _mapController!.deleteOverlay(
             NOverlayInfo(
-              type: NOverlayType.marker,
+              type: NOverlayType.clusterableMarker,
               id: state.selectedMarker!.info.id,
             ),
           );
 
-          final NMarker newMarker = NMarker(
+          final NMarker newMarker = NClusterableMarker(
             id: state.selectedMarker!.info.id,
             position: state.selectedMarker!.position,
             anchor: state.selectedMarker!.anchor,

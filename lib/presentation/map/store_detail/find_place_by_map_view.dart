@@ -31,6 +31,8 @@ class _FindPlaceByMapState extends ConsumerState<FindPlaceByMapView> {
             target: NLatLng(storeDetail.latitude, storeDetail.longitude),
             zoom: _zoom,
           ),
+          minZoom: 6,
+          rotationGesturesEnable: false,
         ),
         onMapReady: (NaverMapController controller) async {
           _mapController = controller;

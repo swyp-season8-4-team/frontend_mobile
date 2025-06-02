@@ -43,6 +43,9 @@ mixin _$MapState {
   ExceptionModel get deleteUserStoreListException =>
       throw _privateConstructorUsedError;
 
+  /// 현 위치에서 새로고침 버튼 표시 여부
+  bool get isRefreshButtonVisible => throw _privateConstructorUsedError;
+
   /// Create a copy of MapState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -75,6 +78,7 @@ abstract class $MapStateCopyWith<$Res> {
     bool userStoresEnabled,
     Status deleteUserStoreListStatus,
     ExceptionModel deleteUserStoreListException,
+    bool isRefreshButtonVisible,
   });
 }
 
@@ -112,6 +116,7 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
     Object? userStoresEnabled = null,
     Object? deleteUserStoreListStatus = null,
     Object? deleteUserStoreListException = null,
+    Object? isRefreshButtonVisible = null,
   }) {
     return _then(
       _value.copyWith(
@@ -210,6 +215,11 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
                     ? _value.deleteUserStoreListException
                     : deleteUserStoreListException // ignore: cast_nullable_to_non_nullable
                         as ExceptionModel,
+            isRefreshButtonVisible:
+                null == isRefreshButtonVisible
+                    ? _value.isRefreshButtonVisible
+                    : isRefreshButtonVisible // ignore: cast_nullable_to_non_nullable
+                        as bool,
           )
           as $Val,
     );
@@ -245,6 +255,7 @@ abstract class _$$MapStateImplCopyWith<$Res>
     bool userStoresEnabled,
     Status deleteUserStoreListStatus,
     ExceptionModel deleteUserStoreListException,
+    bool isRefreshButtonVisible,
   });
 }
 
@@ -281,6 +292,7 @@ class __$$MapStateImplCopyWithImpl<$Res>
     Object? userStoresEnabled = null,
     Object? deleteUserStoreListStatus = null,
     Object? deleteUserStoreListException = null,
+    Object? isRefreshButtonVisible = null,
   }) {
     return _then(
       _$MapStateImpl(
@@ -379,6 +391,11 @@ class __$$MapStateImplCopyWithImpl<$Res>
                 ? _value.deleteUserStoreListException
                 : deleteUserStoreListException // ignore: cast_nullable_to_non_nullable
                     as ExceptionModel,
+        isRefreshButtonVisible:
+            null == isRefreshButtonVisible
+                ? _value.isRefreshButtonVisible
+                : isRefreshButtonVisible // ignore: cast_nullable_to_non_nullable
+                    as bool,
       ),
     );
   }
@@ -428,6 +445,7 @@ class _$MapStateImpl implements _MapState {
       message: '',
       timestamp: '',
     ),
+    this.isRefreshButtonVisible = false,
   }) : _storesByLocation = storesByLocation,
        _preferenceTagIds = preferenceTagIds;
 
@@ -500,9 +518,14 @@ class _$MapStateImpl implements _MapState {
   @JsonKey()
   final ExceptionModel deleteUserStoreListException;
 
+  /// 현 위치에서 새로고침 버튼 표시 여부
+  @override
+  @JsonKey()
+  final bool isRefreshButtonVisible;
+
   @override
   String toString() {
-    return 'MapState(storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, myPreferenceFilterSelected: $myPreferenceFilterSelected, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel, storeSummary: $storeSummary, getStoreSummaryStatus: $getStoreSummaryStatus, getStoreSummaryExceptionModel: $getStoreSummaryExceptionModel, selectedMarker: $selectedMarker, selectedListId: $selectedListId, userStoresEnabled: $userStoresEnabled, deleteUserStoreListStatus: $deleteUserStoreListStatus, deleteUserStoreListException: $deleteUserStoreListException)';
+    return 'MapState(storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, myPreferenceFilterSelected: $myPreferenceFilterSelected, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel, storeSummary: $storeSummary, getStoreSummaryStatus: $getStoreSummaryStatus, getStoreSummaryExceptionModel: $getStoreSummaryExceptionModel, selectedMarker: $selectedMarker, selectedListId: $selectedListId, userStoresEnabled: $userStoresEnabled, deleteUserStoreListStatus: $deleteUserStoreListStatus, deleteUserStoreListException: $deleteUserStoreListException, isRefreshButtonVisible: $isRefreshButtonVisible)';
   }
 
   @override
@@ -578,7 +601,9 @@ class _$MapStateImpl implements _MapState {
                   deleteUserStoreListException,
                 ) ||
                 other.deleteUserStoreListException ==
-                    deleteUserStoreListException));
+                    deleteUserStoreListException) &&
+            (identical(other.isRefreshButtonVisible, isRefreshButtonVisible) ||
+                other.isRefreshButtonVisible == isRefreshButtonVisible));
   }
 
   @override
@@ -603,6 +628,7 @@ class _$MapStateImpl implements _MapState {
     userStoresEnabled,
     deleteUserStoreListStatus,
     deleteUserStoreListException,
+    isRefreshButtonVisible,
   ]);
 
   /// Create a copy of MapState
@@ -635,6 +661,7 @@ abstract class _MapState implements MapState {
     final bool userStoresEnabled,
     final Status deleteUserStoreListStatus,
     final ExceptionModel deleteUserStoreListException,
+    final bool isRefreshButtonVisible,
   }) = _$MapStateImpl;
 
   @override
@@ -675,6 +702,10 @@ abstract class _MapState implements MapState {
   Status get deleteUserStoreListStatus;
   @override
   ExceptionModel get deleteUserStoreListException;
+
+  /// 현 위치에서 새로고침 버튼 표시 여부
+  @override
+  bool get isRefreshButtonVisible;
 
   /// Create a copy of MapState
   /// with the given fields replaced by the non-null parameter values.

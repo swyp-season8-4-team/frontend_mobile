@@ -34,5 +34,8 @@ class MapState with _$MapState {
     @Default(Status.initial) Status deleteUserStoreListStatus,
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))
     ExceptionModel deleteUserStoreListException,
+
+    /// 현 위치에서 새로고침 버튼 표시 여부
+    @Default(false) bool isRefreshButtonVisible,
   }) = _MapState;
 }

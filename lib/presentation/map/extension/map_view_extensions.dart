@@ -231,28 +231,33 @@ extension MapViewWidgetExt on _MapViewState {
           builder: (BuildContext context, WidgetRef ref, Widget? child) {
             final MapState state = ref.watch(mapViewModelProvider);
 
-            return CustomStoreInfoBottomSheetContent(
-              storeSummary: state.storeSummary,
-              onViewDetailTap: () {
-                context.pushNamed(
-                  AppRoutes.storeDetail.name,
-                  pathParameters: <String, String>{
-                    'id': state.storeSummary!.storeUuid,
-                  },
-                );
-              },
-              isLoading:
-                  state.getStoreSummaryStatus.isLoading ||
-                  state.getStoreSummaryStatus.isInitial,
-              isFailure: state.getStoreSummaryStatus.isFailure,
-              onRefreshTap: () {
-                ref
-                    .read(mapViewModelProvider.notifier)
-                    .getStoreSummary(
-                      overlay: ref.read(mapViewModelProvider).selectedMarker!,
-                      listId: listId,
+            return Wrap(
+              children: <Widget>[
+                CustomStoreInfoBottomSheetContent(
+                  storeSummary: state.storeSummary,
+                  onViewDetailTap: () {
+                    context.pushNamed(
+                      AppRoutes.storeDetail.name,
+                      pathParameters: <String, String>{
+                        'id': state.storeSummary!.storeUuid,
+                      },
                     );
-              },
+                  },
+                  isLoading:
+                      state.getStoreSummaryStatus.isLoading ||
+                      state.getStoreSummaryStatus.isInitial,
+                  isFailure: state.getStoreSummaryStatus.isFailure,
+                  onRefreshTap: () {
+                    ref
+                        .read(mapViewModelProvider.notifier)
+                        .getStoreSummary(
+                          overlay:
+                              ref.read(mapViewModelProvider).selectedMarker!,
+                          listId: listId,
+                        );
+                  },
+                ),
+              ],
             );
           },
         );
