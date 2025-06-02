@@ -114,6 +114,20 @@ class CustomOutlineButton extends StatelessWidget {
         return const BorderSide(color: ScaleColorConfig.neutral50);
       });
 
+  /// 아이콘과 텍스트 사이 간격
+  double get _gapIconAndText {
+    switch (size) {
+      case CustomOutlineButtonSize.medium:
+        return 8;
+
+      case CustomOutlineButtonSize.small:
+        return 10;
+
+      case CustomOutlineButtonSize.xSmall:
+        return 6;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -147,7 +161,7 @@ class CustomOutlineButton extends StatelessWidget {
                           BlendMode.srcIn,
                         ),
               ),
-              const SizedBox(width: 10),
+              SizedBox(width: _gapIconAndText),
             ],
 
             if (width != null)

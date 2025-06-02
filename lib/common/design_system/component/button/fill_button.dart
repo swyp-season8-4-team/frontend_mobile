@@ -129,6 +129,20 @@ class CustomFillButton extends StatelessWidget {
         }
       });
 
+  EdgeInsets get _padding {
+    switch (size) {
+      case CustomFillButtonSize.large:
+      case CustomFillButtonSize.medium:
+        return const EdgeInsets.symmetric(horizontal: 16, vertical: 10.5);
+
+      case CustomFillButtonSize.small:
+        return const EdgeInsets.symmetric(horizontal: 16, vertical: 10);
+
+      case CustomFillButtonSize.xSmall:
+        return const EdgeInsets.symmetric(horizontal: 12, vertical: 8);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -138,7 +152,7 @@ class CustomFillButton extends StatelessWidget {
         style: FilledButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
           minimumSize: Size.zero,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10.5),
+          padding: _padding,
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           elevation: 0,
           textStyle: _textStyle(context: context),
