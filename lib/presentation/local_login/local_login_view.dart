@@ -23,6 +23,7 @@ import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalLoginView extends ConsumerStatefulWidget {
   const LocalLoginView({super.key});
@@ -56,12 +57,22 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
   bool _visibility = false;
 
   Timer? _timer;
+  SharedPreferences? prefs;
 
   @override
   void initState() {
     super.initState();
     _emailController.addListener(_onEmailRender);
     _passwordController.addListener(_onPasswordRender);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      prefs = await SharedPreferences.getInstance();
+      final String? email = prefs?.getString(Constant.email);
+
+      if (email != null) {
+        _emailController.text = email;
+      }
+    });
   }
 
   void _onEmailRender() {
@@ -83,7 +94,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
     }
   }
 
-  void _onSubmit() {
+  void _onSubmit() async {
     final String email = _emailController.text;
     final String password = _passwordController.text;
 
@@ -117,6 +128,10 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
             keepLoggedIn: _keepLoggedIn,
           ),
         );
+
+    if (_keepLoggedIn) {
+      await prefs?.setString(Constant.email, _emailController.text);
+    }
   }
 
   @override
