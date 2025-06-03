@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
 import 'package:frontend_mobile/data/entity/auth/local_login_entity.dart';
 import 'package:frontend_mobile/data/entity/auth/password_reset_entity.dart';
+import 'package:frontend_mobile/data/entity/auth/refresh_token_entity.dart';
 import 'package:frontend_mobile/data/entity/auth/sign_up_with_profile_entity.dart';
 import 'package:frontend_mobile/data/request_body/auth/local_login_request_body.dart';
 import 'package:frontend_mobile/data/request_body/auth/password_reset_request_body.dart';

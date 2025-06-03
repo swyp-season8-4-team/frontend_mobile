@@ -1,18 +1,39 @@
 import 'package:dio/dio.dart';
 import 'package:frontend_mobile/data/entity/auth/local_login_entity.dart';
 import 'package:frontend_mobile/data/entity/auth/password_reset_entity.dart';
+import 'package:frontend_mobile/data/entity/auth/refresh_token_entity.dart';
 import 'package:frontend_mobile/data/entity/auth/sign_up_with_profile_entity.dart';
 import 'package:frontend_mobile/data/request_body/auth/local_login_request_body.dart';
 import 'package:frontend_mobile/data/request_body/auth/password_reset_request_body.dart';
 import 'package:frontend_mobile/data/request_body/auth/post_sign_up_with_profile_request_body.dart';
 import 'package:frontend_mobile/data/request_header/auth/password_reset_header.dart';
 import 'package:frontend_mobile/data/request_header/auth/post_sign_up_with_profile_header.dart';
+import 'package:frontend_mobile/data/request_header/auth/refresh_token_header.dart';
 import 'package:frontend_mobile/domain/model/auth/local_login_model.dart';
 import 'package:frontend_mobile/domain/model/auth/password_reset_model.dart';
+import 'package:frontend_mobile/domain/model/auth/refresh_token_model.dart';
 import 'package:frontend_mobile/domain/model/auth/sign_up_with_profile_model.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/domain/param/auth/password_reset_params.dart';
 import 'package:frontend_mobile/domain/param/auth/post_sign_up_with_profile_params.dart';
+import 'package:frontend_mobile/domain/param/auth/refresh_token_params.dart';
+
+extension RefreshTokenEntityExt on RefreshTokenEntity {
+  RefreshTokenModel toModel() {
+    return RefreshTokenModel(
+      accessToken: accessToken,
+      tokenType: tokenType,
+      expiresIn: expiresIn,
+      deviceId: deviceId,
+    );
+  }
+}
+
+extension RefreshTokenParamsExt on RefreshTokenParams {
+  RefreshTokenHeader toHeader() {
+    return RefreshTokenHeader(deviceId: deviceId);
+  }
+}
 
 extension LocalLoginEntityExt on LocalLoginEntity {
   LocalLoginModel toModel() {
@@ -20,6 +41,7 @@ extension LocalLoginEntityExt on LocalLoginEntity {
       accessToken: accessToken,
       refreshToken: refreshToken,
       tokenType: tokenType,
+      refreshExpiresIn: refreshExpiresIn,
       expiresIn: expiresIn,
       userUuid: userUuid,
       email: email,

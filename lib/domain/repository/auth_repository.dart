@@ -2,12 +2,19 @@ import 'package:frontend_mobile/core/resource/exception/custom_exception.dart';
 import 'package:frontend_mobile/core/resource/result.dart';
 import 'package:frontend_mobile/domain/model/auth/local_login_model.dart';
 import 'package:frontend_mobile/domain/model/auth/password_reset_model.dart';
+import 'package:frontend_mobile/domain/model/auth/refresh_token_model.dart';
 import 'package:frontend_mobile/domain/model/auth/sign_up_with_profile_model.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/domain/param/auth/password_reset_params.dart';
 import 'package:frontend_mobile/domain/param/auth/post_sign_up_with_profile_params.dart';
+import 'package:frontend_mobile/domain/param/auth/refresh_token_params.dart';
 
 abstract interface class AuthRepository {
+  /// 토큰 재발급
+  Future<Result<RefreshTokenModel, CustomException>> postRefreshToken({
+    required RefreshTokenParams params,
+  });
+
   /// 프로필 이미지 포함 회원가입
   Future<Result<SignUpWithProfileModel, CustomException>>
   postSignUpWithProfile({required PostSignUpWithProfileParams params});
