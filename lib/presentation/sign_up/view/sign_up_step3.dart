@@ -41,40 +41,6 @@ class _SignUpStep3State extends ConsumerState<SignUpStep3> {
 
   void _onPasswordRender() {
     setState(() {});
-    // /// 비밀번호가 비어있지 않은 경우
-    // if (_passwordController.text.isNotEmpty) {
-    //   /// 유효하지 않은 비밀번호인 경우
-    //   if (!_passwordController.text.isPasswordValid) {
-    //     setState(() {
-    //       _realTimePasswordCheckError = true;
-    //       _realTimePasswordCheckErrorText =
-    //           '최소 8자, 영문 소문자, 숫자, 특수문자 조합을 지켜주세요.';
-    //       _realTimePasswordCheckSuccess = false;
-    //     });
-    //   }
-    //   /// 비밀번호가 서로 다른 경우
-    //   else if (_passwordController.text != _passwordCheckController.text) {
-    //     setState(() {
-    //       _realTimePasswordCheckError = true;
-    //       _realTimePasswordCheckErrorText = '비밀번호가 서로 일치하지 않습니다';
-    //       _realTimePasswordCheckSuccess = false;
-    //     });
-    //   }
-    //   /// 유효한 비밀번호인 경우
-    //   else {
-    //     setState(() {
-    //       _realTimePasswordCheckError = false;
-    //       _realTimePasswordCheckSuccess = true;
-    //     });
-    //   }
-    // }
-    // /// 비밀번호가 비어있는 경우
-    // else {
-    //   setState(() {
-    //     _realTimePasswordCheckError = false;
-    //     _realTimePasswordCheckSuccess = false;
-    //   });
-    // }
   }
 
   void _onPasswordCheckRender() {
@@ -85,7 +51,7 @@ class _SignUpStep3State extends ConsumerState<SignUpStep3> {
         setState(() {
           _realTimePasswordCheckError = true;
           _realTimePasswordCheckErrorText =
-              '최소 8자, 영문 소문자, 숫자, 특수문자 조합을 지켜주세요.';
+              '최소 8자, 영문 소문자, 숫자, 특수문자(@\$!%#?&) 조합을 지켜주세요.';
           _realTimePasswordCheckSuccess = false;
         });
       }
@@ -112,37 +78,6 @@ class _SignUpStep3State extends ConsumerState<SignUpStep3> {
         _realTimePasswordCheckSuccess = false;
       });
     }
-    // /// 비밀번호가 비어있지 않은 경우
-    // if (_passwordCheckController.text.isNotEmpty) {
-    //   /// 유효하지 않은 비밀번호인 경우
-    //   if (!_passwordCheckController.text.isPasswordValid) {
-    //     setState(() {
-    //       _realTimePasswordCheckError = true;
-    //       _realTimePasswordCheckSuccess = false;
-    //     });
-    //   }
-    //   /// 비밀번호가 서로 다른 경우
-    //   else if (_passwordController.text != _passwordCheckController.text) {
-    //     setState(() {
-    //       _realTimePasswordCheckError = true;
-    //       _realTimePasswordCheckSuccess = false;
-    //     });
-    //   }
-    //   /// 유효한 비밀번호인 경우
-    //   else {
-    //     setState(() {
-    //       _realTimePasswordCheckError = false;
-    //       _realTimePasswordCheckSuccess = true;
-    //     });
-    //   }
-    // }
-    // /// 비밀번호가 비어있는 경우
-    // else {
-    //   setState(() {
-    //     _realTimePasswordCheckError = false;
-    //     _realTimePasswordCheckSuccess = false;
-    //   });
-    // }
   }
 
   @override
@@ -175,7 +110,7 @@ class _SignUpStep3State extends ConsumerState<SignUpStep3> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '최소 8자, 영문 소문자, 숫자, 특수문자 조합',
+                    '최소 8자, 영문 소문자, 숫자, 특수문자(@\$!%#?&) 조합',
                     style: textTheme.titleSmall?.copyWith(
                       color: ScaleColorConfig.neutral30,
                     ),
