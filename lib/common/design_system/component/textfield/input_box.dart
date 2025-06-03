@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/design_system/foundation/font_weight/font_weight_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:intl/intl.dart';
 
 /// Input Box
 /// https://www.figma.com/design/Cmw8GLJYfuUVf9A3QNxqgW/SWYP_%EC%95%B1_1%EA%B8%B0_%EB%94%94%EC%A0%80%EB%B9%84?node-id=400-73177&t=3ArDzZQuJj0XGk5f-4
@@ -25,6 +28,8 @@ class CustomInputBox extends StatefulWidget {
     this.onCloseButtonTap,
     this.onVisibilityButtonTap,
     this.maxLength,
+    this.useTimer = false,
+    this.startSeconds,
     super.key,
   });
 
@@ -52,6 +57,10 @@ class CustomInputBox extends StatefulWidget {
   final VoidCallback? onCloseButtonTap;
   // 텍스트 암호화 탭 이벤트 이벤트 콜백
   final VoidCallback? onVisibilityButtonTap;
+  // 타이머 사용 여부
+  final bool useTimer;
+  // 타이머 시작 시간
+  final int? startSeconds;
 
   final int? maxLength;
   @override
@@ -61,12 +70,43 @@ class CustomInputBox extends StatefulWidget {
 class _CustomInputBoxState extends State<CustomInputBox> {
   late final TextEditingController _textEditingController;
 
-  bool get _hasSuffix => widget.closeControll || widget.visibilityControll;
+  int _startSeconds = -1;
+  Timer? _timer;
+
+  bool get _hasSuffix =>
+      widget.closeControll || widget.visibilityControll || widget.useTimer;
 
   @override
   void initState() {
     super.initState();
     _textEditingController = widget.controller ?? TextEditingController();
+
+    if (widget.startSeconds != null) {
+      _startSeconds = widget.startSeconds!;
+    }
+
+    if (widget.useTimer) {
+      _startTimer();
+    }
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      if (_startSeconds > 0) {
+        setState(() {
+          _startSeconds--;
+        });
+      } else {
+        timer.cancel();
+      }
+    });
+  }
+
+  String _formattedTime({required int seconds}) {
+    final Duration duration = Duration(seconds: seconds);
+    final DateFormat formatter = DateFormat('mm:ss');
+    final DateTime time = DateTime.utc(0).add(duration);
+    return formatter.format(time);
   }
 
   @override
@@ -129,6 +169,7 @@ class _CustomInputBoxState extends State<CustomInputBox> {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
+                          _buildTimer(),
                           _buildCloseButton(),
                           _buildVisibilityOptionButton(),
                         ],
@@ -211,6 +252,19 @@ class _CustomInputBoxState extends State<CustomInputBox> {
     );
   }
 
+  Widget _buildTimer() {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    if (!widget.useTimer) {
+      return const SizedBox.shrink();
+    }
+
+    return Text(
+      _formattedTime(seconds: _startSeconds),
+      style: textTheme.bodySmall?.copyWith(color: ScaleColorConfig.error60),
+    );
+  }
+
   Widget _buildCloseButton() {
     if (_textEditingController.text.isEmpty) {
       return const SizedBox.shrink();
@@ -222,7 +276,12 @@ class _CustomInputBoxState extends State<CustomInputBox> {
         widget.onCloseButtonTap?.call();
         _textEditingController.clear();
       },
-      child: Assets.icon.etc.a18CloseCircleFilledEnabled.svg(),
+      child: Row(
+        children: <Widget>[
+          if (widget.useTimer) const SizedBox(width: 10),
+          Assets.icon.etc.a18CloseCircleFilledEnabled.svg(),
+        ],
+      ),
     );
   }
 
@@ -250,6 +309,7 @@ class _CustomInputBoxState extends State<CustomInputBox> {
     if (_textEditingController != widget.controller) {
       _textEditingController.dispose();
     }
+    _timer?.cancel();
     super.dispose();
   }
 }
