@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
-import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
+import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/presentation/auth/auth_view_model.dart';
+import 'package:frontend_mobile/presentation/global/login/login_view_model.dart';
+import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,53 +20,67 @@ class _SplashViewState extends ConsumerState<SplashView> {
   @override
   void initState() {
     super.initState();
-    _autoLogin();
-  }
-
-  Future<void> _autoLogin() async {
-    /// TODO: 제대로된 splash 만들면 지우기
-    await Future<void>.delayed(const Duration(seconds: 1));
-
-    // const FlutterSecureStorage storage = FlutterSecureStorage();
-    // final String? json = await storage.read(key: Constant.tokenInfo);
-
-    // if (!mounted) return;
-    // if (json != null) {
-    //   final TokenInfo tokenInfo = TokenInfo.deserialize(json: json);
-
-    //   final DateTime now = DateTime.now();
-    //   final DateTime startTime = tokenInfo.startTime;
-    //   final int expiresIn = tokenInfo.expiresIn;
-    //   final String email = tokenInfo.email;
-    //   final String password = tokenInfo.password;
-
-    //   /// 토큰값이 유효한 경우 -> 자동 로그인
-    //   if (now.difference(startTime).inMilliseconds < expiresIn) {
-    //     await ref
-    //         .read(localLoginViewModelProvider.notifier)
-    //         .postLocalLogin(
-    //           params: LocalLoginParams(
-    //             email: email,
-    //             password: password,
-    //             keepLoggedIn: true,
-    //           ),
-    //         );
-
-    //     if (mounted) {
-    //       context.goNamed(AppRoutes.home.name);
-    //     }
-    //     return;
-    //   }
-    // }
-
-    if (mounted) {
-      context.goNamed(AppRoutes.localLogin.name);
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      ref.read(userViewModelProvider.notifier).getMe();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    ref.watch(localLoginViewModelProvider);
+    ref.listen(userViewModelProvider, (_, UserState next) {
+      switch (next.status) {
+        case Status.success:
+
+          /// 로그인 유무 판단
+          ref.read(loginViewModelProvider.notifier).login();
+
+          context.goNamed(AppRoutes.map.name);
+          break;
+
+        case Status.failure:
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
+                ),
+              );
+            },
+          );
+
+          break;
+
+        default:
+      }
+    });
+
+    ref.listen(authViewModelProvider, (_, AuthState next) {
+      switch (next.statusRefreshToken) {
+        case Status.failure:
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
+                ),
+              );
+            },
+          );
+        default:
+      }
+    });
 
     return Material(
       color: const Color(0xFF723E00),

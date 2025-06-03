@@ -20,12 +20,12 @@ mixin _$FindPasswordState {
   Status get postVerificationRequestStatus =>
       throw _privateConstructorUsedError;
   Status get postVerifyStatus => throw _privateConstructorUsedError;
-
-  /// TODO: 비밀번호 변경 api 만들어지면 제대로 변수명 짓기
-  Status get passwordStatus => throw _privateConstructorUsedError;
+  Status get passwordResetStatus => throw _privateConstructorUsedError;
   EmailVerificationRequestModel get verificationRequestData =>
       throw _privateConstructorUsedError;
   EmailVerifyModel get verifyData => throw _privateConstructorUsedError;
+  PasswordResetModel get passwordResetData =>
+      throw _privateConstructorUsedError;
   ExceptionModel get exception => throw _privateConstructorUsedError;
 
   /// Create a copy of FindPasswordState
@@ -45,9 +45,10 @@ abstract class $FindPasswordStateCopyWith<$Res> {
   $Res call({
     Status postVerificationRequestStatus,
     Status postVerifyStatus,
-    Status passwordStatus,
+    Status passwordResetStatus,
     EmailVerificationRequestModel verificationRequestData,
     EmailVerifyModel verifyData,
+    PasswordResetModel passwordResetData,
     ExceptionModel exception,
   });
 }
@@ -69,9 +70,10 @@ class _$FindPasswordStateCopyWithImpl<$Res, $Val extends FindPasswordState>
   $Res call({
     Object? postVerificationRequestStatus = null,
     Object? postVerifyStatus = null,
-    Object? passwordStatus = null,
+    Object? passwordResetStatus = null,
     Object? verificationRequestData = null,
     Object? verifyData = null,
+    Object? passwordResetData = null,
     Object? exception = null,
   }) {
     return _then(
@@ -86,10 +88,10 @@ class _$FindPasswordStateCopyWithImpl<$Res, $Val extends FindPasswordState>
                     ? _value.postVerifyStatus
                     : postVerifyStatus // ignore: cast_nullable_to_non_nullable
                         as Status,
-            passwordStatus:
-                null == passwordStatus
-                    ? _value.passwordStatus
-                    : passwordStatus // ignore: cast_nullable_to_non_nullable
+            passwordResetStatus:
+                null == passwordResetStatus
+                    ? _value.passwordResetStatus
+                    : passwordResetStatus // ignore: cast_nullable_to_non_nullable
                         as Status,
             verificationRequestData:
                 null == verificationRequestData
@@ -101,6 +103,11 @@ class _$FindPasswordStateCopyWithImpl<$Res, $Val extends FindPasswordState>
                     ? _value.verifyData
                     : verifyData // ignore: cast_nullable_to_non_nullable
                         as EmailVerifyModel,
+            passwordResetData:
+                null == passwordResetData
+                    ? _value.passwordResetData
+                    : passwordResetData // ignore: cast_nullable_to_non_nullable
+                        as PasswordResetModel,
             exception:
                 null == exception
                     ? _value.exception
@@ -124,9 +131,10 @@ abstract class _$$FindPasswordStateImplCopyWith<$Res>
   $Res call({
     Status postVerificationRequestStatus,
     Status postVerifyStatus,
-    Status passwordStatus,
+    Status passwordResetStatus,
     EmailVerificationRequestModel verificationRequestData,
     EmailVerifyModel verifyData,
+    PasswordResetModel passwordResetData,
     ExceptionModel exception,
   });
 }
@@ -147,9 +155,10 @@ class __$$FindPasswordStateImplCopyWithImpl<$Res>
   $Res call({
     Object? postVerificationRequestStatus = null,
     Object? postVerifyStatus = null,
-    Object? passwordStatus = null,
+    Object? passwordResetStatus = null,
     Object? verificationRequestData = null,
     Object? verifyData = null,
+    Object? passwordResetData = null,
     Object? exception = null,
   }) {
     return _then(
@@ -164,10 +173,10 @@ class __$$FindPasswordStateImplCopyWithImpl<$Res>
                 ? _value.postVerifyStatus
                 : postVerifyStatus // ignore: cast_nullable_to_non_nullable
                     as Status,
-        passwordStatus:
-            null == passwordStatus
-                ? _value.passwordStatus
-                : passwordStatus // ignore: cast_nullable_to_non_nullable
+        passwordResetStatus:
+            null == passwordResetStatus
+                ? _value.passwordResetStatus
+                : passwordResetStatus // ignore: cast_nullable_to_non_nullable
                     as Status,
         verificationRequestData:
             null == verificationRequestData
@@ -179,6 +188,11 @@ class __$$FindPasswordStateImplCopyWithImpl<$Res>
                 ? _value.verifyData
                 : verifyData // ignore: cast_nullable_to_non_nullable
                     as EmailVerifyModel,
+        passwordResetData:
+            null == passwordResetData
+                ? _value.passwordResetData
+                : passwordResetData // ignore: cast_nullable_to_non_nullable
+                    as PasswordResetModel,
         exception:
             null == exception
                 ? _value.exception
@@ -195,7 +209,7 @@ class _$FindPasswordStateImpl implements _FindPasswordState {
   const _$FindPasswordStateImpl({
     this.postVerificationRequestStatus = Status.initial,
     this.postVerifyStatus = Status.initial,
-    this.passwordStatus = Status.initial,
+    this.passwordResetStatus = Status.initial,
     this.verificationRequestData = const EmailVerificationRequestModel(
       message: '',
       expirationMinutes: -1,
@@ -203,6 +217,12 @@ class _$FindPasswordStateImpl implements _FindPasswordState {
     this.verifyData = const EmailVerifyModel(
       verificationToken: '',
       verified: false,
+    ),
+    this.passwordResetData = const PasswordResetModel(
+      success: false,
+      message: '',
+      status: -1,
+      timestamp: '',
     ),
     this.exception = const ExceptionModel(
       status: -1,
@@ -218,11 +238,9 @@ class _$FindPasswordStateImpl implements _FindPasswordState {
   @override
   @JsonKey()
   final Status postVerifyStatus;
-
-  /// TODO: 비밀번호 변경 api 만들어지면 제대로 변수명 짓기
   @override
   @JsonKey()
-  final Status passwordStatus;
+  final Status passwordResetStatus;
   @override
   @JsonKey()
   final EmailVerificationRequestModel verificationRequestData;
@@ -231,11 +249,14 @@ class _$FindPasswordStateImpl implements _FindPasswordState {
   final EmailVerifyModel verifyData;
   @override
   @JsonKey()
+  final PasswordResetModel passwordResetData;
+  @override
+  @JsonKey()
   final ExceptionModel exception;
 
   @override
   String toString() {
-    return 'FindPasswordState(postVerificationRequestStatus: $postVerificationRequestStatus, postVerifyStatus: $postVerifyStatus, passwordStatus: $passwordStatus, verificationRequestData: $verificationRequestData, verifyData: $verifyData, exception: $exception)';
+    return 'FindPasswordState(postVerificationRequestStatus: $postVerificationRequestStatus, postVerifyStatus: $postVerifyStatus, passwordResetStatus: $passwordResetStatus, verificationRequestData: $verificationRequestData, verifyData: $verifyData, passwordResetData: $passwordResetData, exception: $exception)';
   }
 
   @override
@@ -251,8 +272,8 @@ class _$FindPasswordStateImpl implements _FindPasswordState {
                     postVerificationRequestStatus) &&
             (identical(other.postVerifyStatus, postVerifyStatus) ||
                 other.postVerifyStatus == postVerifyStatus) &&
-            (identical(other.passwordStatus, passwordStatus) ||
-                other.passwordStatus == passwordStatus) &&
+            (identical(other.passwordResetStatus, passwordResetStatus) ||
+                other.passwordResetStatus == passwordResetStatus) &&
             (identical(
                   other.verificationRequestData,
                   verificationRequestData,
@@ -260,6 +281,8 @@ class _$FindPasswordStateImpl implements _FindPasswordState {
                 other.verificationRequestData == verificationRequestData) &&
             (identical(other.verifyData, verifyData) ||
                 other.verifyData == verifyData) &&
+            (identical(other.passwordResetData, passwordResetData) ||
+                other.passwordResetData == passwordResetData) &&
             (identical(other.exception, exception) ||
                 other.exception == exception));
   }
@@ -269,9 +292,10 @@ class _$FindPasswordStateImpl implements _FindPasswordState {
     runtimeType,
     postVerificationRequestStatus,
     postVerifyStatus,
-    passwordStatus,
+    passwordResetStatus,
     verificationRequestData,
     verifyData,
+    passwordResetData,
     exception,
   );
 
@@ -291,9 +315,10 @@ abstract class _FindPasswordState implements FindPasswordState {
   const factory _FindPasswordState({
     final Status postVerificationRequestStatus,
     final Status postVerifyStatus,
-    final Status passwordStatus,
+    final Status passwordResetStatus,
     final EmailVerificationRequestModel verificationRequestData,
     final EmailVerifyModel verifyData,
+    final PasswordResetModel passwordResetData,
     final ExceptionModel exception,
   }) = _$FindPasswordStateImpl;
 
@@ -301,14 +326,14 @@ abstract class _FindPasswordState implements FindPasswordState {
   Status get postVerificationRequestStatus;
   @override
   Status get postVerifyStatus;
-
-  /// TODO: 비밀번호 변경 api 만들어지면 제대로 변수명 짓기
   @override
-  Status get passwordStatus;
+  Status get passwordResetStatus;
   @override
   EmailVerificationRequestModel get verificationRequestData;
   @override
   EmailVerifyModel get verifyData;
+  @override
+  PasswordResetModel get passwordResetData;
   @override
   ExceptionModel get exception;
 

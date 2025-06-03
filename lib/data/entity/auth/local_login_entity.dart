@@ -8,6 +8,7 @@ class LocalLoginEntity {
     this.accessToken = '',
     this.refreshToken = '',
     this.tokenType = '',
+    this.refreshExpiresIn = -1,
     this.expiresIn = -1,
     this.userUuid = '',
     this.email = '',
@@ -23,6 +24,7 @@ class LocalLoginEntity {
   final String accessToken;
   final String refreshToken;
   final String tokenType;
+  final int refreshExpiresIn;
   final int expiresIn;
   final String userUuid;
   final String email;

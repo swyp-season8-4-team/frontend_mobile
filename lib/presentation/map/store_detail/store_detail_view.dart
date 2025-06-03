@@ -31,16 +31,16 @@ import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-part 'local_widget/owner_pick_image.dart';
-part 'local_widget/store_representive_info.dart';
-part 'local_widget/store_detail_info.dart';
-part 'local_widget/introduce.dart';
-part 'local_widget/notice.dart';
-part 'local_widget/menus.dart';
 part 'local_widget/dessert_images.dart';
-part 'local_widget/tab_bar.dart';
 part 'local_widget/failure.dart';
+part 'local_widget/introduce.dart';
+part 'local_widget/menus.dart';
+part 'local_widget/notice.dart';
+part 'local_widget/owner_pick_image.dart';
+part 'local_widget/store_detail_info.dart';
+part 'local_widget/store_representive_info.dart';
 part 'local_widget/store_reviews.dart';
+part 'local_widget/tab_bar.dart';
 
 class StoreDetailView extends ConsumerStatefulWidget {
   const StoreDetailView({required this.storeUuid, super.key});
@@ -125,7 +125,10 @@ class _StoreDetailViewState extends ConsumerState<StoreDetailView>
                 description: state.blockUserException.message,
                 primaryButton: CustomDialogButton(
                   text: '확인',
-                  onTap: () => context.pop(),
+                  onTap:
+                      state.blockUserException.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
                 ),
               );
             },

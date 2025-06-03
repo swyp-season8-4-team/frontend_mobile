@@ -13,7 +13,6 @@ import 'package:frontend_mobile/presentation/dessert/write/view/dessert_write_st
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step1.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step2.dart';
 import 'package:frontend_mobile/presentation/find_password/view/find_password_step3.dart';
-import 'package:frontend_mobile/presentation/home.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view.dart';
 import 'package:frontend_mobile/presentation/map/map_view.dart';
 import 'package:frontend_mobile/presentation/map/search/search_store_view.dart';
@@ -77,11 +76,6 @@ class AppRouter {
         name: AppRoutes.splash.name,
         builder:
             (BuildContext context, GoRouterState state) => const SplashView(),
-      ),
-      GoRoute(
-        path: AppRoutes.home.path,
-        name: AppRoutes.home.name,
-        builder: (BuildContext context, GoRouterState state) => const Home(),
       ),
 
       // 인증

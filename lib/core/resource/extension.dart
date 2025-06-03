@@ -7,7 +7,7 @@ extension StringValidationExt on String {
       RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(this);
 
   bool get isPasswordValid => RegExp(
-    r'^(?=.*[a-z])(?=.*\d)(?=.*[!@#\$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$',
+    r'^(?=[A-Za-z\d@$!%*#?&]{8,}$)(?=(?:[^@$!%*#?&]*[@$!%*#?&]){1}[^@$!%*#?&]*$)(?=.*[a-z])(?=.*\d).*$',
   ).hasMatch(this);
 
   String toDate() {

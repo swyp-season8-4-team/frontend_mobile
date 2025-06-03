@@ -21,7 +21,21 @@ Future<Result<T, CustomException>> apiCall<T>({
   }
   /// dio 에러
   on DioException catch (exception) {
-    if (exception.response == null) {
+    if (exception.response?.data == null) {
+      /// 토큰이 유효하지 않은 경우
+      if (exception.response?.statusCode == 403) {
+        return Failure<T, CustomException>(
+          exception: CustomException.accessTokenError(
+            model: ExceptionModel(
+              status: 603,
+              code: 'ZZ003',
+              message: '로그인 시간이 만료되었습니다.\n다시 로그인해주세요.',
+              timestamp: timestamp,
+            ),
+          ),
+        );
+      }
+
       return Failure<T, CustomException>(
         exception: CustomException.serverError(
           model: ExceptionModel(

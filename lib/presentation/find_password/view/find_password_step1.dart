@@ -51,11 +51,16 @@ class _FindPasswordStep1State extends ConsumerState<FindPasswordStep1> {
         case Status.success:
           final GoRouterState route = GoRouter.of(context).routerDelegate.state;
           if (route.name == AppRoutes.findPasswordStep1.name) {
+            ref.read(findPasswordProvider.notifier).state = ref
+                .read(findPasswordProvider)
+                .copyWith(email: _emailController.text);
+
             context.pushNamed(
               AppRoutes.findPasswordStep2.name,
               extra: _emailController.text,
             );
           }
+
           break;
 
         case Status.failure:
@@ -66,7 +71,10 @@ class _FindPasswordStep1State extends ConsumerState<FindPasswordStep1> {
                 description: next.exception.message,
                 primaryButton: CustomDialogButton(
                   text: '확인',
-                  onTap: () => context.pop(),
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
                 ),
               );
             },

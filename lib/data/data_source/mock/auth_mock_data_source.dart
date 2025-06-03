@@ -2,8 +2,10 @@
 import 'package:dio/src/form_data.dart';
 import 'package:frontend_mobile/data/data_source/remote/auth_remote_data_source.dart';
 import 'package:frontend_mobile/data/entity/auth/local_login_entity.dart';
+import 'package:frontend_mobile/data/entity/auth/password_reset_entity.dart';
 import 'package:frontend_mobile/data/entity/auth/sign_up_with_profile_entity.dart';
 import 'package:frontend_mobile/data/request_body/auth/local_login_request_body.dart';
+import 'package:frontend_mobile/data/request_body/auth/password_reset_request_body.dart';
 
 class AuthMockDataSource implements AuthRemoteDataSource {
   @override
@@ -54,6 +56,15 @@ class AuthMockDataSource implements AuthRemoteDataSource {
     required FormData formData,
   }) {
     // TODO: implement postSignUp
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<PasswordResetEntity> postPasswordReset({
+    required String emailToken,
+    required PasswordResetRequestBody body,
+  }) {
+    // TODO: implement postPasswordReset
     throw UnimplementedError();
   }
 }

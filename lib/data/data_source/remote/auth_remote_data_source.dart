@@ -2,8 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
 import 'package:frontend_mobile/data/entity/auth/local_login_entity.dart';
+import 'package:frontend_mobile/data/entity/auth/password_reset_entity.dart';
+import 'package:frontend_mobile/data/entity/auth/refresh_token_entity.dart';
 import 'package:frontend_mobile/data/entity/auth/sign_up_with_profile_entity.dart';
 import 'package:frontend_mobile/data/request_body/auth/local_login_request_body.dart';
+import 'package:frontend_mobile/data/request_body/auth/password_reset_request_body.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'generated/auth_remote_data_source.g.dart';
@@ -27,6 +30,13 @@ abstract interface class AuthRemoteDataSource {
   Future<SignUpWithProfileEntity> postSignUp({
     @Header('X-Email-Verification-Token') required String emailToken,
     @Body() required FormData formData,
+  });
+
+  /// 비밀번호 재설정
+  @POST('/api/auth/password/reset')
+  Future<PasswordResetEntity> postPasswordReset({
+    @Header('X-Email-Verification-Token') required String emailToken,
+    @Body() required PasswordResetRequestBody body,
   });
 
   /// Dev 로그인(data)

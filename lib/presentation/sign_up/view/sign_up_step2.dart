@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
@@ -15,6 +17,7 @@ import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/sign_up/sign_up_view_model.dart';
 import 'package:frontend_mobile/presentation/sign_up/widget/sign_up_wrapper.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 class SignUpStep2 extends ConsumerStatefulWidget {
   const SignUpStep2({required this.email, super.key});
@@ -35,10 +38,14 @@ class _SignUpStep2State extends ConsumerState<SignUpStep2> {
 
   bool _isValidCode = false;
 
+  int _remainingSeconds = 5 * 60;
+  Timer? _timer;
+
   @override
   void initState() {
     super.initState();
     _codeController.addListener(_renderHandler);
+    _startTimer();
   }
 
   void _renderHandler() {
@@ -49,10 +56,30 @@ class _SignUpStep2State extends ConsumerState<SignUpStep2> {
     });
   }
 
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      if (_remainingSeconds > 0) {
+        setState(() {
+          _remainingSeconds--;
+        });
+      } else {
+        timer.cancel();
+      }
+    });
+  }
+
+  String _formattedTime({required int seconds}) {
+    final Duration duration = Duration(seconds: seconds);
+    final DateFormat formatter = DateFormat('mm:ss');
+    final DateTime time = DateTime.utc(0).add(duration);
+    return formatter.format(time);
+  }
+
   @override
   void dispose() {
     _codeController.removeListener(_renderHandler);
     _codeController.dispose();
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -63,13 +90,17 @@ class _SignUpStep2State extends ConsumerState<SignUpStep2> {
       _error = false;
     });
 
-    final ToastManager toastManager = ref.read(toastManagerProvider);
+    Future<void>.delayed(const Duration(milliseconds: 100), () {
+      final ToastManager toastManager = ref.read(toastManagerProvider);
 
-    toastManager.show(
-      context: context,
-      aboveBottomNavigation: true,
-      toastWidget: const CustomSnackBar(description: '인증코드를 다시 보내드렸습니다.'),
-    );
+      if (mounted) {
+        toastManager.show(
+          context: context,
+          aboveBottomNavigation: true,
+          toastWidget: const CustomSnackBar(description: '인증코드를 다시 보내드렸습니다.'),
+        );
+      }
+    });
 
     ref
         .read(signUpViewModelProvider.notifier)
@@ -147,7 +178,8 @@ class _SignUpStep2State extends ConsumerState<SignUpStep2> {
                           Expanded(
                             child: CustomInputBox(
                               controller: _codeController,
-                              hintText: '인증번호 N자리',
+                              hintText: '인증번호 6자리',
+                              maxLength: 6,
                               closeControll: true,
                               success: _success,
                               successText: _successText,
@@ -157,6 +189,8 @@ class _SignUpStep2State extends ConsumerState<SignUpStep2> {
                                 _isValidCode = false;
                               },
                               keyboardType: TextInputType.number,
+                              useTimer: true,
+                              startSeconds: 5 * 60,
                             ),
                           ),
                           const SizedBox(width: 10),

@@ -3,6 +3,7 @@ class LocalLoginModel {
     required this.accessToken,
     required this.refreshToken,
     required this.tokenType,
+    required this.refreshExpiresIn,
     required this.expiresIn,
     required this.userUuid,
     required this.email,
@@ -15,6 +16,7 @@ class LocalLoginModel {
   final String accessToken;
   final String refreshToken;
   final String tokenType;
+  final int refreshExpiresIn;
   final int expiresIn;
   final String userUuid;
   final String email;

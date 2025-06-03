@@ -1,5 +1,6 @@
 abstract class Constant {
   static String tokenInfo = 'TOKEN_INFO';
+  static String email = 'EMAIL';
 }
 
 // 저장 리스트 아이콘 컬러

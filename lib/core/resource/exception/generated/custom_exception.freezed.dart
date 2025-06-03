@@ -109,6 +109,7 @@ mixin _$CustomException {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -201,6 +202,7 @@ mixin _$CustomException {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -293,6 +295,7 @@ mixin _$CustomException {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -386,6 +389,7 @@ mixin _$CustomException {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -478,6 +482,7 @@ mixin _$CustomException {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -570,6 +575,7 @@ mixin _$CustomException {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 
@@ -778,6 +784,7 @@ class _$C001Impl implements C001 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return c001(model);
   }
@@ -874,6 +881,7 @@ class _$C001Impl implements C001 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return c001?.call(model);
   }
@@ -970,6 +978,7 @@ class _$C001Impl implements C001 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (c001 != null) {
@@ -1070,6 +1079,7 @@ class _$C001Impl implements C001 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return c001(this);
   }
@@ -1166,6 +1176,7 @@ class _$C001Impl implements C001 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return c001?.call(this);
   }
@@ -1262,6 +1273,7 @@ class _$C001Impl implements C001 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (c001 != null) {
@@ -1445,6 +1457,7 @@ class _$C002Impl implements C002 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return c002(model);
   }
@@ -1541,6 +1554,7 @@ class _$C002Impl implements C002 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return c002?.call(model);
   }
@@ -1637,6 +1651,7 @@ class _$C002Impl implements C002 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (c002 != null) {
@@ -1737,6 +1752,7 @@ class _$C002Impl implements C002 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return c002(this);
   }
@@ -1833,6 +1849,7 @@ class _$C002Impl implements C002 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return c002?.call(this);
   }
@@ -1929,6 +1946,7 @@ class _$C002Impl implements C002 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (c002 != null) {
@@ -2112,6 +2130,7 @@ class _$A001Impl implements A001 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a001(model);
   }
@@ -2208,6 +2227,7 @@ class _$A001Impl implements A001 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a001?.call(model);
   }
@@ -2304,6 +2324,7 @@ class _$A001Impl implements A001 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a001 != null) {
@@ -2404,6 +2425,7 @@ class _$A001Impl implements A001 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a001(this);
   }
@@ -2500,6 +2522,7 @@ class _$A001Impl implements A001 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a001?.call(this);
   }
@@ -2596,6 +2619,7 @@ class _$A001Impl implements A001 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a001 != null) {
@@ -2779,6 +2803,7 @@ class _$A002Impl implements A002 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a002(model);
   }
@@ -2875,6 +2900,7 @@ class _$A002Impl implements A002 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a002?.call(model);
   }
@@ -2971,6 +2997,7 @@ class _$A002Impl implements A002 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a002 != null) {
@@ -3071,6 +3098,7 @@ class _$A002Impl implements A002 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a002(this);
   }
@@ -3167,6 +3195,7 @@ class _$A002Impl implements A002 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a002?.call(this);
   }
@@ -3263,6 +3292,7 @@ class _$A002Impl implements A002 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a002 != null) {
@@ -3446,6 +3476,7 @@ class _$A003Impl implements A003 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a003(model);
   }
@@ -3542,6 +3573,7 @@ class _$A003Impl implements A003 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a003?.call(model);
   }
@@ -3638,6 +3670,7 @@ class _$A003Impl implements A003 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a003 != null) {
@@ -3738,6 +3771,7 @@ class _$A003Impl implements A003 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a003(this);
   }
@@ -3834,6 +3868,7 @@ class _$A003Impl implements A003 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a003?.call(this);
   }
@@ -3930,6 +3965,7 @@ class _$A003Impl implements A003 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a003 != null) {
@@ -4113,6 +4149,7 @@ class _$A004Impl implements A004 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a004(model);
   }
@@ -4209,6 +4246,7 @@ class _$A004Impl implements A004 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a004?.call(model);
   }
@@ -4305,6 +4343,7 @@ class _$A004Impl implements A004 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a004 != null) {
@@ -4405,6 +4444,7 @@ class _$A004Impl implements A004 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a004(this);
   }
@@ -4501,6 +4541,7 @@ class _$A004Impl implements A004 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a004?.call(this);
   }
@@ -4597,6 +4638,7 @@ class _$A004Impl implements A004 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a004 != null) {
@@ -4780,6 +4822,7 @@ class _$A005Impl implements A005 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a005(model);
   }
@@ -4876,6 +4919,7 @@ class _$A005Impl implements A005 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a005?.call(model);
   }
@@ -4972,6 +5016,7 @@ class _$A005Impl implements A005 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a005 != null) {
@@ -5072,6 +5117,7 @@ class _$A005Impl implements A005 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a005(this);
   }
@@ -5168,6 +5214,7 @@ class _$A005Impl implements A005 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a005?.call(this);
   }
@@ -5264,6 +5311,7 @@ class _$A005Impl implements A005 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a005 != null) {
@@ -5447,6 +5495,7 @@ class _$A006Impl implements A006 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a006(model);
   }
@@ -5543,6 +5592,7 @@ class _$A006Impl implements A006 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a006?.call(model);
   }
@@ -5639,6 +5689,7 @@ class _$A006Impl implements A006 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a006 != null) {
@@ -5739,6 +5790,7 @@ class _$A006Impl implements A006 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a006(this);
   }
@@ -5835,6 +5887,7 @@ class _$A006Impl implements A006 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a006?.call(this);
   }
@@ -5931,6 +5984,7 @@ class _$A006Impl implements A006 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a006 != null) {
@@ -6114,6 +6168,7 @@ class _$A007Impl implements A007 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a007(model);
   }
@@ -6210,6 +6265,7 @@ class _$A007Impl implements A007 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a007?.call(model);
   }
@@ -6306,6 +6362,7 @@ class _$A007Impl implements A007 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a007 != null) {
@@ -6406,6 +6463,7 @@ class _$A007Impl implements A007 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a007(this);
   }
@@ -6502,6 +6560,7 @@ class _$A007Impl implements A007 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a007?.call(this);
   }
@@ -6598,6 +6657,7 @@ class _$A007Impl implements A007 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a007 != null) {
@@ -6781,6 +6841,7 @@ class _$A008Impl implements A008 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a008(model);
   }
@@ -6877,6 +6938,7 @@ class _$A008Impl implements A008 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a008?.call(model);
   }
@@ -6973,6 +7035,7 @@ class _$A008Impl implements A008 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a008 != null) {
@@ -7073,6 +7136,7 @@ class _$A008Impl implements A008 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a008(this);
   }
@@ -7169,6 +7233,7 @@ class _$A008Impl implements A008 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a008?.call(this);
   }
@@ -7265,6 +7330,7 @@ class _$A008Impl implements A008 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a008 != null) {
@@ -7448,6 +7514,7 @@ class _$A009Impl implements A009 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a009(model);
   }
@@ -7544,6 +7611,7 @@ class _$A009Impl implements A009 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a009?.call(model);
   }
@@ -7640,6 +7708,7 @@ class _$A009Impl implements A009 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a009 != null) {
@@ -7740,6 +7809,7 @@ class _$A009Impl implements A009 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a009(this);
   }
@@ -7836,6 +7906,7 @@ class _$A009Impl implements A009 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a009?.call(this);
   }
@@ -7932,6 +8003,7 @@ class _$A009Impl implements A009 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a009 != null) {
@@ -8115,6 +8187,7 @@ class _$A010Impl implements A010 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a010(model);
   }
@@ -8211,6 +8284,7 @@ class _$A010Impl implements A010 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a010?.call(model);
   }
@@ -8307,6 +8381,7 @@ class _$A010Impl implements A010 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a010 != null) {
@@ -8407,6 +8482,7 @@ class _$A010Impl implements A010 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a010(this);
   }
@@ -8503,6 +8579,7 @@ class _$A010Impl implements A010 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a010?.call(this);
   }
@@ -8599,6 +8676,7 @@ class _$A010Impl implements A010 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a010 != null) {
@@ -8782,6 +8860,7 @@ class _$A011Impl implements A011 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a011(model);
   }
@@ -8878,6 +8957,7 @@ class _$A011Impl implements A011 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a011?.call(model);
   }
@@ -8974,6 +9054,7 @@ class _$A011Impl implements A011 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a011 != null) {
@@ -9074,6 +9155,7 @@ class _$A011Impl implements A011 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a011(this);
   }
@@ -9170,6 +9252,7 @@ class _$A011Impl implements A011 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a011?.call(this);
   }
@@ -9266,6 +9349,7 @@ class _$A011Impl implements A011 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a011 != null) {
@@ -9449,6 +9533,7 @@ class _$A012Impl implements A012 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a012(model);
   }
@@ -9545,6 +9630,7 @@ class _$A012Impl implements A012 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a012?.call(model);
   }
@@ -9641,6 +9727,7 @@ class _$A012Impl implements A012 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a012 != null) {
@@ -9741,6 +9828,7 @@ class _$A012Impl implements A012 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a012(this);
   }
@@ -9837,6 +9925,7 @@ class _$A012Impl implements A012 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a012?.call(this);
   }
@@ -9933,6 +10022,7 @@ class _$A012Impl implements A012 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a012 != null) {
@@ -10116,6 +10206,7 @@ class _$A013Impl implements A013 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a013(model);
   }
@@ -10212,6 +10303,7 @@ class _$A013Impl implements A013 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a013?.call(model);
   }
@@ -10308,6 +10400,7 @@ class _$A013Impl implements A013 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a013 != null) {
@@ -10408,6 +10501,7 @@ class _$A013Impl implements A013 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a013(this);
   }
@@ -10504,6 +10598,7 @@ class _$A013Impl implements A013 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a013?.call(this);
   }
@@ -10600,6 +10695,7 @@ class _$A013Impl implements A013 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a013 != null) {
@@ -10783,6 +10879,7 @@ class _$A014Impl implements A014 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a014(model);
   }
@@ -10879,6 +10976,7 @@ class _$A014Impl implements A014 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a014?.call(model);
   }
@@ -10975,6 +11073,7 @@ class _$A014Impl implements A014 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a014 != null) {
@@ -11075,6 +11174,7 @@ class _$A014Impl implements A014 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a014(this);
   }
@@ -11171,6 +11271,7 @@ class _$A014Impl implements A014 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a014?.call(this);
   }
@@ -11267,6 +11368,7 @@ class _$A014Impl implements A014 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a014 != null) {
@@ -11450,6 +11552,7 @@ class _$A015Impl implements A015 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a015(model);
   }
@@ -11546,6 +11649,7 @@ class _$A015Impl implements A015 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a015?.call(model);
   }
@@ -11642,6 +11746,7 @@ class _$A015Impl implements A015 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a015 != null) {
@@ -11742,6 +11847,7 @@ class _$A015Impl implements A015 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a015(this);
   }
@@ -11838,6 +11944,7 @@ class _$A015Impl implements A015 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a015?.call(this);
   }
@@ -11934,6 +12041,7 @@ class _$A015Impl implements A015 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a015 != null) {
@@ -12117,6 +12225,7 @@ class _$A016Impl implements A016 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return a016(model);
   }
@@ -12213,6 +12322,7 @@ class _$A016Impl implements A016 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return a016?.call(model);
   }
@@ -12309,6 +12419,7 @@ class _$A016Impl implements A016 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a016 != null) {
@@ -12409,6 +12520,7 @@ class _$A016Impl implements A016 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return a016(this);
   }
@@ -12505,6 +12617,7 @@ class _$A016Impl implements A016 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return a016?.call(this);
   }
@@ -12601,6 +12714,7 @@ class _$A016Impl implements A016 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (a016 != null) {
@@ -12784,6 +12898,7 @@ class _$B001Impl implements B001 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return b001(model);
   }
@@ -12880,6 +12995,7 @@ class _$B001Impl implements B001 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return b001?.call(model);
   }
@@ -12976,6 +13092,7 @@ class _$B001Impl implements B001 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (b001 != null) {
@@ -13076,6 +13193,7 @@ class _$B001Impl implements B001 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return b001(this);
   }
@@ -13172,6 +13290,7 @@ class _$B001Impl implements B001 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return b001?.call(this);
   }
@@ -13268,6 +13387,7 @@ class _$B001Impl implements B001 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (b001 != null) {
@@ -13451,6 +13571,7 @@ class _$B002Impl implements B002 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return b002(model);
   }
@@ -13547,6 +13668,7 @@ class _$B002Impl implements B002 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return b002?.call(model);
   }
@@ -13643,6 +13765,7 @@ class _$B002Impl implements B002 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (b002 != null) {
@@ -13743,6 +13866,7 @@ class _$B002Impl implements B002 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return b002(this);
   }
@@ -13839,6 +13963,7 @@ class _$B002Impl implements B002 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return b002?.call(this);
   }
@@ -13935,6 +14060,7 @@ class _$B002Impl implements B002 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (b002 != null) {
@@ -14118,6 +14244,7 @@ class _$B003Impl implements B003 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return b003(model);
   }
@@ -14214,6 +14341,7 @@ class _$B003Impl implements B003 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return b003?.call(model);
   }
@@ -14310,6 +14438,7 @@ class _$B003Impl implements B003 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (b003 != null) {
@@ -14410,6 +14539,7 @@ class _$B003Impl implements B003 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return b003(this);
   }
@@ -14506,6 +14636,7 @@ class _$B003Impl implements B003 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return b003?.call(this);
   }
@@ -14602,6 +14733,7 @@ class _$B003Impl implements B003 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (b003 != null) {
@@ -14785,6 +14917,7 @@ class _$O001Impl implements O001 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return o001(model);
   }
@@ -14881,6 +15014,7 @@ class _$O001Impl implements O001 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return o001?.call(model);
   }
@@ -14977,6 +15111,7 @@ class _$O001Impl implements O001 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (o001 != null) {
@@ -15077,6 +15212,7 @@ class _$O001Impl implements O001 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return o001(this);
   }
@@ -15173,6 +15309,7 @@ class _$O001Impl implements O001 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return o001?.call(this);
   }
@@ -15269,6 +15406,7 @@ class _$O001Impl implements O001 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (o001 != null) {
@@ -15452,6 +15590,7 @@ class _$J001Impl implements J001 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return j001(model);
   }
@@ -15548,6 +15687,7 @@ class _$J001Impl implements J001 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return j001?.call(model);
   }
@@ -15644,6 +15784,7 @@ class _$J001Impl implements J001 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (j001 != null) {
@@ -15744,6 +15885,7 @@ class _$J001Impl implements J001 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return j001(this);
   }
@@ -15840,6 +15982,7 @@ class _$J001Impl implements J001 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return j001?.call(this);
   }
@@ -15936,6 +16079,7 @@ class _$J001Impl implements J001 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (j001 != null) {
@@ -16119,6 +16263,7 @@ class _$J002Impl implements J002 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return j002(model);
   }
@@ -16215,6 +16360,7 @@ class _$J002Impl implements J002 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return j002?.call(model);
   }
@@ -16311,6 +16457,7 @@ class _$J002Impl implements J002 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (j002 != null) {
@@ -16411,6 +16558,7 @@ class _$J002Impl implements J002 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return j002(this);
   }
@@ -16507,6 +16655,7 @@ class _$J002Impl implements J002 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return j002?.call(this);
   }
@@ -16603,6 +16752,7 @@ class _$J002Impl implements J002 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (j002 != null) {
@@ -16786,6 +16936,7 @@ class _$J003Impl implements J003 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return j003(model);
   }
@@ -16882,6 +17033,7 @@ class _$J003Impl implements J003 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return j003?.call(model);
   }
@@ -16978,6 +17130,7 @@ class _$J003Impl implements J003 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (j003 != null) {
@@ -17078,6 +17231,7 @@ class _$J003Impl implements J003 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return j003(this);
   }
@@ -17174,6 +17328,7 @@ class _$J003Impl implements J003 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return j003?.call(this);
   }
@@ -17270,6 +17425,7 @@ class _$J003Impl implements J003 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (j003 != null) {
@@ -17453,6 +17609,7 @@ class _$J004Impl implements J004 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return j004(model);
   }
@@ -17549,6 +17706,7 @@ class _$J004Impl implements J004 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return j004?.call(model);
   }
@@ -17645,6 +17803,7 @@ class _$J004Impl implements J004 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (j004 != null) {
@@ -17745,6 +17904,7 @@ class _$J004Impl implements J004 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return j004(this);
   }
@@ -17841,6 +18001,7 @@ class _$J004Impl implements J004 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return j004?.call(this);
   }
@@ -17937,6 +18098,7 @@ class _$J004Impl implements J004 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (j004 != null) {
@@ -18120,6 +18282,7 @@ class _$J005Impl implements J005 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return j005(model);
   }
@@ -18216,6 +18379,7 @@ class _$J005Impl implements J005 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return j005?.call(model);
   }
@@ -18312,6 +18476,7 @@ class _$J005Impl implements J005 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (j005 != null) {
@@ -18412,6 +18577,7 @@ class _$J005Impl implements J005 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return j005(this);
   }
@@ -18508,6 +18674,7 @@ class _$J005Impl implements J005 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return j005?.call(this);
   }
@@ -18604,6 +18771,7 @@ class _$J005Impl implements J005 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (j005 != null) {
@@ -18787,6 +18955,7 @@ class _$E001Impl implements E001 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return e001(model);
   }
@@ -18883,6 +19052,7 @@ class _$E001Impl implements E001 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return e001?.call(model);
   }
@@ -18979,6 +19149,7 @@ class _$E001Impl implements E001 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (e001 != null) {
@@ -19079,6 +19250,7 @@ class _$E001Impl implements E001 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return e001(this);
   }
@@ -19175,6 +19347,7 @@ class _$E001Impl implements E001 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return e001?.call(this);
   }
@@ -19271,6 +19444,7 @@ class _$E001Impl implements E001 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (e001 != null) {
@@ -19454,6 +19628,7 @@ class _$E005Impl implements E005 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return e005(model);
   }
@@ -19550,6 +19725,7 @@ class _$E005Impl implements E005 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return e005?.call(model);
   }
@@ -19646,6 +19822,7 @@ class _$E005Impl implements E005 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (e005 != null) {
@@ -19746,6 +19923,7 @@ class _$E005Impl implements E005 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return e005(this);
   }
@@ -19842,6 +20020,7 @@ class _$E005Impl implements E005 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return e005?.call(this);
   }
@@ -19938,6 +20117,7 @@ class _$E005Impl implements E005 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (e005 != null) {
@@ -20121,6 +20301,7 @@ class _$U001Impl implements U001 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return u001(model);
   }
@@ -20217,6 +20398,7 @@ class _$U001Impl implements U001 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return u001?.call(model);
   }
@@ -20313,6 +20495,7 @@ class _$U001Impl implements U001 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (u001 != null) {
@@ -20413,6 +20596,7 @@ class _$U001Impl implements U001 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return u001(this);
   }
@@ -20509,6 +20693,7 @@ class _$U001Impl implements U001 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return u001?.call(this);
   }
@@ -20605,6 +20790,7 @@ class _$U001Impl implements U001 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (u001 != null) {
@@ -20788,6 +20974,7 @@ class _$U004Impl implements U004 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return u004(model);
   }
@@ -20884,6 +21071,7 @@ class _$U004Impl implements U004 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return u004?.call(model);
   }
@@ -20980,6 +21168,7 @@ class _$U004Impl implements U004 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (u004 != null) {
@@ -21080,6 +21269,7 @@ class _$U004Impl implements U004 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return u004(this);
   }
@@ -21176,6 +21366,7 @@ class _$U004Impl implements U004 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return u004?.call(this);
   }
@@ -21272,6 +21463,7 @@ class _$U004Impl implements U004 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (u004 != null) {
@@ -21455,6 +21647,7 @@ class _$U005Impl implements U005 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return u005(model);
   }
@@ -21551,6 +21744,7 @@ class _$U005Impl implements U005 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return u005?.call(model);
   }
@@ -21647,6 +21841,7 @@ class _$U005Impl implements U005 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (u005 != null) {
@@ -21747,6 +21942,7 @@ class _$U005Impl implements U005 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return u005(this);
   }
@@ -21843,6 +22039,7 @@ class _$U005Impl implements U005 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return u005?.call(this);
   }
@@ -21939,6 +22136,7 @@ class _$U005Impl implements U005 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (u005 != null) {
@@ -22122,6 +22320,7 @@ class _$P001Impl implements P001 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return p001(model);
   }
@@ -22218,6 +22417,7 @@ class _$P001Impl implements P001 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return p001?.call(model);
   }
@@ -22314,6 +22514,7 @@ class _$P001Impl implements P001 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (p001 != null) {
@@ -22414,6 +22615,7 @@ class _$P001Impl implements P001 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return p001(this);
   }
@@ -22510,6 +22712,7 @@ class _$P001Impl implements P001 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return p001?.call(this);
   }
@@ -22606,6 +22809,7 @@ class _$P001Impl implements P001 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (p001 != null) {
@@ -22789,6 +22993,7 @@ class _$P002Impl implements P002 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return p002(model);
   }
@@ -22885,6 +23090,7 @@ class _$P002Impl implements P002 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return p002?.call(model);
   }
@@ -22981,6 +23187,7 @@ class _$P002Impl implements P002 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (p002 != null) {
@@ -23081,6 +23288,7 @@ class _$P002Impl implements P002 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return p002(this);
   }
@@ -23177,6 +23385,7 @@ class _$P002Impl implements P002 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return p002?.call(this);
   }
@@ -23273,6 +23482,7 @@ class _$P002Impl implements P002 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (p002 != null) {
@@ -23456,6 +23666,7 @@ class _$K001Impl implements K001 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return k001(model);
   }
@@ -23552,6 +23763,7 @@ class _$K001Impl implements K001 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return k001?.call(model);
   }
@@ -23648,6 +23860,7 @@ class _$K001Impl implements K001 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (k001 != null) {
@@ -23748,6 +23961,7 @@ class _$K001Impl implements K001 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return k001(this);
   }
@@ -23844,6 +24058,7 @@ class _$K001Impl implements K001 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return k001?.call(this);
   }
@@ -23940,6 +24155,7 @@ class _$K001Impl implements K001 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (k001 != null) {
@@ -24123,6 +24339,7 @@ class _$K002Impl implements K002 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return k002(model);
   }
@@ -24219,6 +24436,7 @@ class _$K002Impl implements K002 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return k002?.call(model);
   }
@@ -24315,6 +24533,7 @@ class _$K002Impl implements K002 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (k002 != null) {
@@ -24415,6 +24634,7 @@ class _$K002Impl implements K002 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return k002(this);
   }
@@ -24511,6 +24731,7 @@ class _$K002Impl implements K002 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return k002?.call(this);
   }
@@ -24607,6 +24828,7 @@ class _$K002Impl implements K002 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (k002 != null) {
@@ -24790,6 +25012,7 @@ class _$S001Impl implements S001 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s001(model);
   }
@@ -24886,6 +25109,7 @@ class _$S001Impl implements S001 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s001?.call(model);
   }
@@ -24982,6 +25206,7 @@ class _$S001Impl implements S001 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s001 != null) {
@@ -25082,6 +25307,7 @@ class _$S001Impl implements S001 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s001(this);
   }
@@ -25178,6 +25404,7 @@ class _$S001Impl implements S001 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s001?.call(this);
   }
@@ -25274,6 +25501,7 @@ class _$S001Impl implements S001 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s001 != null) {
@@ -25457,6 +25685,7 @@ class _$S002Impl implements S002 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s002(model);
   }
@@ -25553,6 +25782,7 @@ class _$S002Impl implements S002 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s002?.call(model);
   }
@@ -25649,6 +25879,7 @@ class _$S002Impl implements S002 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s002 != null) {
@@ -25749,6 +25980,7 @@ class _$S002Impl implements S002 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s002(this);
   }
@@ -25845,6 +26077,7 @@ class _$S002Impl implements S002 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s002?.call(this);
   }
@@ -25941,6 +26174,7 @@ class _$S002Impl implements S002 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s002 != null) {
@@ -26124,6 +26358,7 @@ class _$S003Impl implements S003 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s003(model);
   }
@@ -26220,6 +26455,7 @@ class _$S003Impl implements S003 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s003?.call(model);
   }
@@ -26316,6 +26552,7 @@ class _$S003Impl implements S003 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s003 != null) {
@@ -26416,6 +26653,7 @@ class _$S003Impl implements S003 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s003(this);
   }
@@ -26512,6 +26750,7 @@ class _$S003Impl implements S003 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s003?.call(this);
   }
@@ -26608,6 +26847,7 @@ class _$S003Impl implements S003 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s003 != null) {
@@ -26791,6 +27031,7 @@ class _$S004Impl implements S004 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s004(model);
   }
@@ -26887,6 +27128,7 @@ class _$S004Impl implements S004 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s004?.call(model);
   }
@@ -26983,6 +27225,7 @@ class _$S004Impl implements S004 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s004 != null) {
@@ -27083,6 +27326,7 @@ class _$S004Impl implements S004 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s004(this);
   }
@@ -27179,6 +27423,7 @@ class _$S004Impl implements S004 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s004?.call(this);
   }
@@ -27275,6 +27520,7 @@ class _$S004Impl implements S004 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s004 != null) {
@@ -27458,6 +27704,7 @@ class _$S005Impl implements S005 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s005(model);
   }
@@ -27554,6 +27801,7 @@ class _$S005Impl implements S005 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s005?.call(model);
   }
@@ -27650,6 +27898,7 @@ class _$S005Impl implements S005 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s005 != null) {
@@ -27750,6 +27999,7 @@ class _$S005Impl implements S005 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s005(this);
   }
@@ -27846,6 +28096,7 @@ class _$S005Impl implements S005 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s005?.call(this);
   }
@@ -27942,6 +28193,7 @@ class _$S005Impl implements S005 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s005 != null) {
@@ -28125,6 +28377,7 @@ class _$S007Impl implements S007 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s007(model);
   }
@@ -28221,6 +28474,7 @@ class _$S007Impl implements S007 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s007?.call(model);
   }
@@ -28317,6 +28571,7 @@ class _$S007Impl implements S007 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s007 != null) {
@@ -28417,6 +28672,7 @@ class _$S007Impl implements S007 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s007(this);
   }
@@ -28513,6 +28769,7 @@ class _$S007Impl implements S007 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s007?.call(this);
   }
@@ -28609,6 +28866,7 @@ class _$S007Impl implements S007 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s007 != null) {
@@ -28792,6 +29050,7 @@ class _$S009Impl implements S009 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s009(model);
   }
@@ -28888,6 +29147,7 @@ class _$S009Impl implements S009 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s009?.call(model);
   }
@@ -28984,6 +29244,7 @@ class _$S009Impl implements S009 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s009 != null) {
@@ -29084,6 +29345,7 @@ class _$S009Impl implements S009 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s009(this);
   }
@@ -29180,6 +29442,7 @@ class _$S009Impl implements S009 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s009?.call(this);
   }
@@ -29276,6 +29539,7 @@ class _$S009Impl implements S009 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s009 != null) {
@@ -29459,6 +29723,7 @@ class _$S010Impl implements S010 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s010(model);
   }
@@ -29555,6 +29820,7 @@ class _$S010Impl implements S010 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s010?.call(model);
   }
@@ -29651,6 +29917,7 @@ class _$S010Impl implements S010 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s010 != null) {
@@ -29751,6 +30018,7 @@ class _$S010Impl implements S010 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s010(this);
   }
@@ -29847,6 +30115,7 @@ class _$S010Impl implements S010 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s010?.call(this);
   }
@@ -29943,6 +30212,7 @@ class _$S010Impl implements S010 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s010 != null) {
@@ -30126,6 +30396,7 @@ class _$S011Impl implements S011 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s011(model);
   }
@@ -30222,6 +30493,7 @@ class _$S011Impl implements S011 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s011?.call(model);
   }
@@ -30318,6 +30590,7 @@ class _$S011Impl implements S011 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s011 != null) {
@@ -30418,6 +30691,7 @@ class _$S011Impl implements S011 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s011(this);
   }
@@ -30514,6 +30788,7 @@ class _$S011Impl implements S011 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s011?.call(this);
   }
@@ -30610,6 +30885,7 @@ class _$S011Impl implements S011 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s011 != null) {
@@ -30793,6 +31069,7 @@ class _$S012Impl implements S012 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s012(model);
   }
@@ -30889,6 +31166,7 @@ class _$S012Impl implements S012 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s012?.call(model);
   }
@@ -30985,6 +31263,7 @@ class _$S012Impl implements S012 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s012 != null) {
@@ -31085,6 +31364,7 @@ class _$S012Impl implements S012 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s012(this);
   }
@@ -31181,6 +31461,7 @@ class _$S012Impl implements S012 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s012?.call(this);
   }
@@ -31277,6 +31558,7 @@ class _$S012Impl implements S012 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s012 != null) {
@@ -31460,6 +31742,7 @@ class _$S013Impl implements S013 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s013(model);
   }
@@ -31556,6 +31839,7 @@ class _$S013Impl implements S013 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s013?.call(model);
   }
@@ -31652,6 +31936,7 @@ class _$S013Impl implements S013 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s013 != null) {
@@ -31752,6 +32037,7 @@ class _$S013Impl implements S013 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s013(this);
   }
@@ -31848,6 +32134,7 @@ class _$S013Impl implements S013 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s013?.call(this);
   }
@@ -31944,6 +32231,7 @@ class _$S013Impl implements S013 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s013 != null) {
@@ -32127,6 +32415,7 @@ class _$S014Impl implements S014 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s014(model);
   }
@@ -32223,6 +32512,7 @@ class _$S014Impl implements S014 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s014?.call(model);
   }
@@ -32319,6 +32609,7 @@ class _$S014Impl implements S014 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s014 != null) {
@@ -32419,6 +32710,7 @@ class _$S014Impl implements S014 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s014(this);
   }
@@ -32515,6 +32807,7 @@ class _$S014Impl implements S014 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s014?.call(this);
   }
@@ -32611,6 +32904,7 @@ class _$S014Impl implements S014 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s014 != null) {
@@ -32794,6 +33088,7 @@ class _$S015Impl implements S015 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s015(model);
   }
@@ -32890,6 +33185,7 @@ class _$S015Impl implements S015 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s015?.call(model);
   }
@@ -32986,6 +33282,7 @@ class _$S015Impl implements S015 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s015 != null) {
@@ -33086,6 +33383,7 @@ class _$S015Impl implements S015 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s015(this);
   }
@@ -33182,6 +33480,7 @@ class _$S015Impl implements S015 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s015?.call(this);
   }
@@ -33278,6 +33577,7 @@ class _$S015Impl implements S015 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s015 != null) {
@@ -33461,6 +33761,7 @@ class _$S016Impl implements S016 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s016(model);
   }
@@ -33557,6 +33858,7 @@ class _$S016Impl implements S016 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s016?.call(model);
   }
@@ -33653,6 +33955,7 @@ class _$S016Impl implements S016 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s016 != null) {
@@ -33753,6 +34056,7 @@ class _$S016Impl implements S016 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s016(this);
   }
@@ -33849,6 +34153,7 @@ class _$S016Impl implements S016 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s016?.call(this);
   }
@@ -33945,6 +34250,7 @@ class _$S016Impl implements S016 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s016 != null) {
@@ -34128,6 +34434,7 @@ class _$S017Impl implements S017 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s017(model);
   }
@@ -34224,6 +34531,7 @@ class _$S017Impl implements S017 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s017?.call(model);
   }
@@ -34320,6 +34628,7 @@ class _$S017Impl implements S017 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s017 != null) {
@@ -34420,6 +34729,7 @@ class _$S017Impl implements S017 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s017(this);
   }
@@ -34516,6 +34826,7 @@ class _$S017Impl implements S017 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s017?.call(this);
   }
@@ -34612,6 +34923,7 @@ class _$S017Impl implements S017 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s017 != null) {
@@ -34795,6 +35107,7 @@ class _$S018Impl implements S018 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s018(model);
   }
@@ -34891,6 +35204,7 @@ class _$S018Impl implements S018 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s018?.call(model);
   }
@@ -34987,6 +35301,7 @@ class _$S018Impl implements S018 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s018 != null) {
@@ -35087,6 +35402,7 @@ class _$S018Impl implements S018 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s018(this);
   }
@@ -35183,6 +35499,7 @@ class _$S018Impl implements S018 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s018?.call(this);
   }
@@ -35279,6 +35596,7 @@ class _$S018Impl implements S018 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s018 != null) {
@@ -35462,6 +35780,7 @@ class _$S019Impl implements S019 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return s019(model);
   }
@@ -35558,6 +35877,7 @@ class _$S019Impl implements S019 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return s019?.call(model);
   }
@@ -35654,6 +35974,7 @@ class _$S019Impl implements S019 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s019 != null) {
@@ -35754,6 +36075,7 @@ class _$S019Impl implements S019 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return s019(this);
   }
@@ -35850,6 +36172,7 @@ class _$S019Impl implements S019 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return s019?.call(this);
   }
@@ -35946,6 +36269,7 @@ class _$S019Impl implements S019 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (s019 != null) {
@@ -36129,6 +36453,7 @@ class _$F001Impl implements F001 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return f001(model);
   }
@@ -36225,6 +36550,7 @@ class _$F001Impl implements F001 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return f001?.call(model);
   }
@@ -36321,6 +36647,7 @@ class _$F001Impl implements F001 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (f001 != null) {
@@ -36421,6 +36748,7 @@ class _$F001Impl implements F001 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return f001(this);
   }
@@ -36517,6 +36845,7 @@ class _$F001Impl implements F001 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return f001?.call(this);
   }
@@ -36613,6 +36942,7 @@ class _$F001Impl implements F001 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (f001 != null) {
@@ -36796,6 +37126,7 @@ class _$F002Impl implements F002 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return f002(model);
   }
@@ -36892,6 +37223,7 @@ class _$F002Impl implements F002 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return f002?.call(model);
   }
@@ -36988,6 +37320,7 @@ class _$F002Impl implements F002 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (f002 != null) {
@@ -37088,6 +37421,7 @@ class _$F002Impl implements F002 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return f002(this);
   }
@@ -37184,6 +37518,7 @@ class _$F002Impl implements F002 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return f002?.call(this);
   }
@@ -37280,6 +37615,7 @@ class _$F002Impl implements F002 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (f002 != null) {
@@ -37463,6 +37799,7 @@ class _$F003Impl implements F003 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return f003(model);
   }
@@ -37559,6 +37896,7 @@ class _$F003Impl implements F003 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return f003?.call(model);
   }
@@ -37655,6 +37993,7 @@ class _$F003Impl implements F003 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (f003 != null) {
@@ -37755,6 +38094,7 @@ class _$F003Impl implements F003 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return f003(this);
   }
@@ -37851,6 +38191,7 @@ class _$F003Impl implements F003 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return f003?.call(this);
   }
@@ -37947,6 +38288,7 @@ class _$F003Impl implements F003 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (f003 != null) {
@@ -38130,6 +38472,7 @@ class _$F004Impl implements F004 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return f004(model);
   }
@@ -38226,6 +38569,7 @@ class _$F004Impl implements F004 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return f004?.call(model);
   }
@@ -38322,6 +38666,7 @@ class _$F004Impl implements F004 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (f004 != null) {
@@ -38422,6 +38767,7 @@ class _$F004Impl implements F004 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return f004(this);
   }
@@ -38518,6 +38864,7 @@ class _$F004Impl implements F004 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return f004?.call(this);
   }
@@ -38614,6 +38961,7 @@ class _$F004Impl implements F004 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (f004 != null) {
@@ -38797,6 +39145,7 @@ class _$F005Impl implements F005 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return f005(model);
   }
@@ -38893,6 +39242,7 @@ class _$F005Impl implements F005 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return f005?.call(model);
   }
@@ -38989,6 +39339,7 @@ class _$F005Impl implements F005 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (f005 != null) {
@@ -39089,6 +39440,7 @@ class _$F005Impl implements F005 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return f005(this);
   }
@@ -39185,6 +39537,7 @@ class _$F005Impl implements F005 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return f005?.call(this);
   }
@@ -39281,6 +39634,7 @@ class _$F005Impl implements F005 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (f005 != null) {
@@ -39464,6 +39818,7 @@ class _$I001Impl implements I001 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return i001(model);
   }
@@ -39560,6 +39915,7 @@ class _$I001Impl implements I001 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return i001?.call(model);
   }
@@ -39656,6 +40012,7 @@ class _$I001Impl implements I001 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (i001 != null) {
@@ -39756,6 +40113,7 @@ class _$I001Impl implements I001 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return i001(this);
   }
@@ -39852,6 +40210,7 @@ class _$I001Impl implements I001 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return i001?.call(this);
   }
@@ -39948,6 +40307,7 @@ class _$I001Impl implements I001 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (i001 != null) {
@@ -40131,6 +40491,7 @@ class _$I002Impl implements I002 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return i002(model);
   }
@@ -40227,6 +40588,7 @@ class _$I002Impl implements I002 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return i002?.call(model);
   }
@@ -40323,6 +40685,7 @@ class _$I002Impl implements I002 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (i002 != null) {
@@ -40423,6 +40786,7 @@ class _$I002Impl implements I002 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return i002(this);
   }
@@ -40519,6 +40883,7 @@ class _$I002Impl implements I002 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return i002?.call(this);
   }
@@ -40615,6 +40980,7 @@ class _$I002Impl implements I002 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (i002 != null) {
@@ -40798,6 +41164,7 @@ class _$I003Impl implements I003 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return i003(model);
   }
@@ -40894,6 +41261,7 @@ class _$I003Impl implements I003 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return i003?.call(model);
   }
@@ -40990,6 +41358,7 @@ class _$I003Impl implements I003 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (i003 != null) {
@@ -41090,6 +41459,7 @@ class _$I003Impl implements I003 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return i003(this);
   }
@@ -41186,6 +41556,7 @@ class _$I003Impl implements I003 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return i003?.call(this);
   }
@@ -41282,6 +41653,7 @@ class _$I003Impl implements I003 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (i003 != null) {
@@ -41465,6 +41837,7 @@ class _$M001Impl implements M001 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m001(model);
   }
@@ -41561,6 +41934,7 @@ class _$M001Impl implements M001 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m001?.call(model);
   }
@@ -41657,6 +42031,7 @@ class _$M001Impl implements M001 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m001 != null) {
@@ -41757,6 +42132,7 @@ class _$M001Impl implements M001 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m001(this);
   }
@@ -41853,6 +42229,7 @@ class _$M001Impl implements M001 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m001?.call(this);
   }
@@ -41949,6 +42326,7 @@ class _$M001Impl implements M001 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m001 != null) {
@@ -42132,6 +42510,7 @@ class _$M002Impl implements M002 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m002(model);
   }
@@ -42228,6 +42607,7 @@ class _$M002Impl implements M002 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m002?.call(model);
   }
@@ -42324,6 +42704,7 @@ class _$M002Impl implements M002 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m002 != null) {
@@ -42424,6 +42805,7 @@ class _$M002Impl implements M002 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m002(this);
   }
@@ -42520,6 +42902,7 @@ class _$M002Impl implements M002 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m002?.call(this);
   }
@@ -42616,6 +42999,7 @@ class _$M002Impl implements M002 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m002 != null) {
@@ -42799,6 +43183,7 @@ class _$M003Impl implements M003 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m003(model);
   }
@@ -42895,6 +43280,7 @@ class _$M003Impl implements M003 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m003?.call(model);
   }
@@ -42991,6 +43377,7 @@ class _$M003Impl implements M003 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m003 != null) {
@@ -43091,6 +43478,7 @@ class _$M003Impl implements M003 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m003(this);
   }
@@ -43187,6 +43575,7 @@ class _$M003Impl implements M003 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m003?.call(this);
   }
@@ -43283,6 +43672,7 @@ class _$M003Impl implements M003 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m003 != null) {
@@ -43466,6 +43856,7 @@ class _$M004Impl implements M004 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m004(model);
   }
@@ -43562,6 +43953,7 @@ class _$M004Impl implements M004 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m004?.call(model);
   }
@@ -43658,6 +44050,7 @@ class _$M004Impl implements M004 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m004 != null) {
@@ -43758,6 +44151,7 @@ class _$M004Impl implements M004 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m004(this);
   }
@@ -43854,6 +44248,7 @@ class _$M004Impl implements M004 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m004?.call(this);
   }
@@ -43950,6 +44345,7 @@ class _$M004Impl implements M004 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m004 != null) {
@@ -44133,6 +44529,7 @@ class _$M005Impl implements M005 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m005(model);
   }
@@ -44229,6 +44626,7 @@ class _$M005Impl implements M005 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m005?.call(model);
   }
@@ -44325,6 +44723,7 @@ class _$M005Impl implements M005 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m005 != null) {
@@ -44425,6 +44824,7 @@ class _$M005Impl implements M005 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m005(this);
   }
@@ -44521,6 +44921,7 @@ class _$M005Impl implements M005 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m005?.call(this);
   }
@@ -44617,6 +45018,7 @@ class _$M005Impl implements M005 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m005 != null) {
@@ -44800,6 +45202,7 @@ class _$M006Impl implements M006 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m006(model);
   }
@@ -44896,6 +45299,7 @@ class _$M006Impl implements M006 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m006?.call(model);
   }
@@ -44992,6 +45396,7 @@ class _$M006Impl implements M006 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m006 != null) {
@@ -45092,6 +45497,7 @@ class _$M006Impl implements M006 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m006(this);
   }
@@ -45188,6 +45594,7 @@ class _$M006Impl implements M006 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m006?.call(this);
   }
@@ -45284,6 +45691,7 @@ class _$M006Impl implements M006 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m006 != null) {
@@ -45467,6 +45875,7 @@ class _$M007Impl implements M007 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m007(model);
   }
@@ -45563,6 +45972,7 @@ class _$M007Impl implements M007 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m007?.call(model);
   }
@@ -45659,6 +46069,7 @@ class _$M007Impl implements M007 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m007 != null) {
@@ -45759,6 +46170,7 @@ class _$M007Impl implements M007 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m007(this);
   }
@@ -45855,6 +46267,7 @@ class _$M007Impl implements M007 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m007?.call(this);
   }
@@ -45951,6 +46364,7 @@ class _$M007Impl implements M007 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m007 != null) {
@@ -46134,6 +46548,7 @@ class _$M008Impl implements M008 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m008(model);
   }
@@ -46230,6 +46645,7 @@ class _$M008Impl implements M008 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m008?.call(model);
   }
@@ -46326,6 +46742,7 @@ class _$M008Impl implements M008 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m008 != null) {
@@ -46426,6 +46843,7 @@ class _$M008Impl implements M008 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m008(this);
   }
@@ -46522,6 +46940,7 @@ class _$M008Impl implements M008 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m008?.call(this);
   }
@@ -46618,6 +47037,7 @@ class _$M008Impl implements M008 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m008 != null) {
@@ -46801,6 +47221,7 @@ class _$M009Impl implements M009 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m009(model);
   }
@@ -46897,6 +47318,7 @@ class _$M009Impl implements M009 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m009?.call(model);
   }
@@ -46993,6 +47415,7 @@ class _$M009Impl implements M009 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m009 != null) {
@@ -47093,6 +47516,7 @@ class _$M009Impl implements M009 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m009(this);
   }
@@ -47189,6 +47613,7 @@ class _$M009Impl implements M009 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m009?.call(this);
   }
@@ -47285,6 +47710,7 @@ class _$M009Impl implements M009 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m009 != null) {
@@ -47468,6 +47894,7 @@ class _$M010Impl implements M010 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m010(model);
   }
@@ -47564,6 +47991,7 @@ class _$M010Impl implements M010 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m010?.call(model);
   }
@@ -47660,6 +48088,7 @@ class _$M010Impl implements M010 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m010 != null) {
@@ -47760,6 +48189,7 @@ class _$M010Impl implements M010 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m010(this);
   }
@@ -47856,6 +48286,7 @@ class _$M010Impl implements M010 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m010?.call(this);
   }
@@ -47952,6 +48383,7 @@ class _$M010Impl implements M010 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m010 != null) {
@@ -48135,6 +48567,7 @@ class _$M011Impl implements M011 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m011(model);
   }
@@ -48231,6 +48664,7 @@ class _$M011Impl implements M011 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m011?.call(model);
   }
@@ -48327,6 +48761,7 @@ class _$M011Impl implements M011 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m011 != null) {
@@ -48427,6 +48862,7 @@ class _$M011Impl implements M011 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m011(this);
   }
@@ -48523,6 +48959,7 @@ class _$M011Impl implements M011 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m011?.call(this);
   }
@@ -48619,6 +49056,7 @@ class _$M011Impl implements M011 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m011 != null) {
@@ -48802,6 +49240,7 @@ class _$M012Impl implements M012 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m012(model);
   }
@@ -48898,6 +49337,7 @@ class _$M012Impl implements M012 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m012?.call(model);
   }
@@ -48994,6 +49434,7 @@ class _$M012Impl implements M012 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m012 != null) {
@@ -49094,6 +49535,7 @@ class _$M012Impl implements M012 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m012(this);
   }
@@ -49190,6 +49632,7 @@ class _$M012Impl implements M012 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m012?.call(this);
   }
@@ -49286,6 +49729,7 @@ class _$M012Impl implements M012 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m012 != null) {
@@ -49469,6 +49913,7 @@ class _$M013Impl implements M013 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m013(model);
   }
@@ -49565,6 +50010,7 @@ class _$M013Impl implements M013 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m013?.call(model);
   }
@@ -49661,6 +50107,7 @@ class _$M013Impl implements M013 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m013 != null) {
@@ -49761,6 +50208,7 @@ class _$M013Impl implements M013 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m013(this);
   }
@@ -49857,6 +50305,7 @@ class _$M013Impl implements M013 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m013?.call(this);
   }
@@ -49953,6 +50402,7 @@ class _$M013Impl implements M013 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m013 != null) {
@@ -50136,6 +50586,7 @@ class _$M014Impl implements M014 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m014(model);
   }
@@ -50232,6 +50683,7 @@ class _$M014Impl implements M014 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m014?.call(model);
   }
@@ -50328,6 +50780,7 @@ class _$M014Impl implements M014 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m014 != null) {
@@ -50428,6 +50881,7 @@ class _$M014Impl implements M014 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m014(this);
   }
@@ -50524,6 +50978,7 @@ class _$M014Impl implements M014 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m014?.call(this);
   }
@@ -50620,6 +51075,7 @@ class _$M014Impl implements M014 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m014 != null) {
@@ -50803,6 +51259,7 @@ class _$M015Impl implements M015 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m015(model);
   }
@@ -50899,6 +51356,7 @@ class _$M015Impl implements M015 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m015?.call(model);
   }
@@ -50995,6 +51453,7 @@ class _$M015Impl implements M015 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m015 != null) {
@@ -51095,6 +51554,7 @@ class _$M015Impl implements M015 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m015(this);
   }
@@ -51191,6 +51651,7 @@ class _$M015Impl implements M015 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m015?.call(this);
   }
@@ -51287,6 +51748,7 @@ class _$M015Impl implements M015 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m015 != null) {
@@ -51470,6 +51932,7 @@ class _$M016Impl implements M016 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m016(model);
   }
@@ -51566,6 +52029,7 @@ class _$M016Impl implements M016 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m016?.call(model);
   }
@@ -51662,6 +52126,7 @@ class _$M016Impl implements M016 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m016 != null) {
@@ -51762,6 +52227,7 @@ class _$M016Impl implements M016 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m016(this);
   }
@@ -51858,6 +52324,7 @@ class _$M016Impl implements M016 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m016?.call(this);
   }
@@ -51954,6 +52421,7 @@ class _$M016Impl implements M016 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m016 != null) {
@@ -52137,6 +52605,7 @@ class _$M017Impl implements M017 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return m017(model);
   }
@@ -52233,6 +52702,7 @@ class _$M017Impl implements M017 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return m017?.call(model);
   }
@@ -52329,6 +52799,7 @@ class _$M017Impl implements M017 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m017 != null) {
@@ -52429,6 +52900,7 @@ class _$M017Impl implements M017 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return m017(this);
   }
@@ -52525,6 +52997,7 @@ class _$M017Impl implements M017 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return m017?.call(this);
   }
@@ -52621,6 +53094,7 @@ class _$M017Impl implements M017 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (m017 != null) {
@@ -52804,6 +53278,7 @@ class _$R001Impl implements R001 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return r001(model);
   }
@@ -52900,6 +53375,7 @@ class _$R001Impl implements R001 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return r001?.call(model);
   }
@@ -52996,6 +53472,7 @@ class _$R001Impl implements R001 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r001 != null) {
@@ -53096,6 +53573,7 @@ class _$R001Impl implements R001 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return r001(this);
   }
@@ -53192,6 +53670,7 @@ class _$R001Impl implements R001 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return r001?.call(this);
   }
@@ -53288,6 +53767,7 @@ class _$R001Impl implements R001 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r001 != null) {
@@ -53471,6 +53951,7 @@ class _$R002Impl implements R002 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return r002(model);
   }
@@ -53567,6 +54048,7 @@ class _$R002Impl implements R002 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return r002?.call(model);
   }
@@ -53663,6 +54145,7 @@ class _$R002Impl implements R002 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r002 != null) {
@@ -53763,6 +54246,7 @@ class _$R002Impl implements R002 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return r002(this);
   }
@@ -53859,6 +54343,7 @@ class _$R002Impl implements R002 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return r002?.call(this);
   }
@@ -53955,6 +54440,7 @@ class _$R002Impl implements R002 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r002 != null) {
@@ -54138,6 +54624,7 @@ class _$R003Impl implements R003 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return r003(model);
   }
@@ -54234,6 +54721,7 @@ class _$R003Impl implements R003 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return r003?.call(model);
   }
@@ -54330,6 +54818,7 @@ class _$R003Impl implements R003 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r003 != null) {
@@ -54430,6 +54919,7 @@ class _$R003Impl implements R003 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return r003(this);
   }
@@ -54526,6 +55016,7 @@ class _$R003Impl implements R003 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return r003?.call(this);
   }
@@ -54622,6 +55113,7 @@ class _$R003Impl implements R003 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r003 != null) {
@@ -54805,6 +55297,7 @@ class _$R004Impl implements R004 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return r004(model);
   }
@@ -54901,6 +55394,7 @@ class _$R004Impl implements R004 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return r004?.call(model);
   }
@@ -54997,6 +55491,7 @@ class _$R004Impl implements R004 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r004 != null) {
@@ -55097,6 +55592,7 @@ class _$R004Impl implements R004 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return r004(this);
   }
@@ -55193,6 +55689,7 @@ class _$R004Impl implements R004 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return r004?.call(this);
   }
@@ -55289,6 +55786,7 @@ class _$R004Impl implements R004 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r004 != null) {
@@ -55472,6 +55970,7 @@ class _$R005Impl implements R005 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return r005(model);
   }
@@ -55568,6 +56067,7 @@ class _$R005Impl implements R005 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return r005?.call(model);
   }
@@ -55664,6 +56164,7 @@ class _$R005Impl implements R005 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r005 != null) {
@@ -55764,6 +56265,7 @@ class _$R005Impl implements R005 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return r005(this);
   }
@@ -55860,6 +56362,7 @@ class _$R005Impl implements R005 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return r005?.call(this);
   }
@@ -55956,6 +56459,7 @@ class _$R005Impl implements R005 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r005 != null) {
@@ -56139,6 +56643,7 @@ class _$R006Impl implements R006 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return r006(model);
   }
@@ -56235,6 +56740,7 @@ class _$R006Impl implements R006 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return r006?.call(model);
   }
@@ -56331,6 +56837,7 @@ class _$R006Impl implements R006 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r006 != null) {
@@ -56431,6 +56938,7 @@ class _$R006Impl implements R006 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return r006(this);
   }
@@ -56527,6 +57035,7 @@ class _$R006Impl implements R006 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return r006?.call(this);
   }
@@ -56623,6 +57132,7 @@ class _$R006Impl implements R006 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r006 != null) {
@@ -56806,6 +57316,7 @@ class _$R007Impl implements R007 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return r007(model);
   }
@@ -56902,6 +57413,7 @@ class _$R007Impl implements R007 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return r007?.call(model);
   }
@@ -56998,6 +57510,7 @@ class _$R007Impl implements R007 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r007 != null) {
@@ -57098,6 +57611,7 @@ class _$R007Impl implements R007 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return r007(this);
   }
@@ -57194,6 +57708,7 @@ class _$R007Impl implements R007 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return r007?.call(this);
   }
@@ -57290,6 +57805,7 @@ class _$R007Impl implements R007 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r007 != null) {
@@ -57473,6 +57989,7 @@ class _$R008Impl implements R008 {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return r008(model);
   }
@@ -57569,6 +58086,7 @@ class _$R008Impl implements R008 {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return r008?.call(model);
   }
@@ -57665,6 +58183,7 @@ class _$R008Impl implements R008 {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r008 != null) {
@@ -57765,6 +58284,7 @@ class _$R008Impl implements R008 {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return r008(this);
   }
@@ -57861,6 +58381,7 @@ class _$R008Impl implements R008 {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return r008?.call(this);
   }
@@ -57957,6 +58478,7 @@ class _$R008Impl implements R008 {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (r008 != null) {
@@ -58142,6 +58664,7 @@ class _$ServerErrorImpl implements ServerError {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return serverError(model);
   }
@@ -58238,6 +58761,7 @@ class _$ServerErrorImpl implements ServerError {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return serverError?.call(model);
   }
@@ -58334,6 +58858,7 @@ class _$ServerErrorImpl implements ServerError {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -58434,6 +58959,7 @@ class _$ServerErrorImpl implements ServerError {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return serverError(this);
   }
@@ -58530,6 +59056,7 @@ class _$ServerErrorImpl implements ServerError {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return serverError?.call(this);
   }
@@ -58626,6 +59153,7 @@ class _$ServerErrorImpl implements ServerError {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -58812,6 +59340,7 @@ class _$NetworkErrorImpl implements NetworkError {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return networkError(model);
   }
@@ -58908,6 +59437,7 @@ class _$NetworkErrorImpl implements NetworkError {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return networkError?.call(model);
   }
@@ -59004,6 +59534,7 @@ class _$NetworkErrorImpl implements NetworkError {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (networkError != null) {
@@ -59104,6 +59635,7 @@ class _$NetworkErrorImpl implements NetworkError {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return networkError(this);
   }
@@ -59200,6 +59732,7 @@ class _$NetworkErrorImpl implements NetworkError {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return networkError?.call(this);
   }
@@ -59296,6 +59829,7 @@ class _$NetworkErrorImpl implements NetworkError {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (networkError != null) {
@@ -59482,6 +60016,7 @@ class _$UnknownErrorImpl implements UnknownError {
     required TResult Function(ExceptionModel model) serverError,
     required TResult Function(ExceptionModel model) networkError,
     required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
   }) {
     return unknownError(model);
   }
@@ -59578,6 +60113,7 @@ class _$UnknownErrorImpl implements UnknownError {
     TResult? Function(ExceptionModel model)? serverError,
     TResult? Function(ExceptionModel model)? networkError,
     TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
   }) {
     return unknownError?.call(model);
   }
@@ -59674,6 +60210,7 @@ class _$UnknownErrorImpl implements UnknownError {
     TResult Function(ExceptionModel model)? serverError,
     TResult Function(ExceptionModel model)? networkError,
     TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
     required TResult orElse(),
   }) {
     if (unknownError != null) {
@@ -59774,6 +60311,7 @@ class _$UnknownErrorImpl implements UnknownError {
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
   }) {
     return unknownError(this);
   }
@@ -59870,6 +60408,7 @@ class _$UnknownErrorImpl implements UnknownError {
     TResult? Function(ServerError value)? serverError,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
   }) {
     return unknownError?.call(this);
   }
@@ -59966,6 +60505,7 @@ class _$UnknownErrorImpl implements UnknownError {
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
     TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
     required TResult orElse(),
   }) {
     if (unknownError != null) {
@@ -59987,5 +60527,684 @@ abstract class UnknownError implements CustomException {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UnknownErrorImplCopyWith<_$UnknownErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AccessTokenErrorImplCopyWith<$Res>
+    implements $CustomExceptionCopyWith<$Res> {
+  factory _$$AccessTokenErrorImplCopyWith(
+    _$AccessTokenErrorImpl value,
+    $Res Function(_$AccessTokenErrorImpl) then,
+  ) = __$$AccessTokenErrorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ExceptionModel model});
+}
+
+/// @nodoc
+class __$$AccessTokenErrorImplCopyWithImpl<$Res>
+    extends _$CustomExceptionCopyWithImpl<$Res, _$AccessTokenErrorImpl>
+    implements _$$AccessTokenErrorImplCopyWith<$Res> {
+  __$$AccessTokenErrorImplCopyWithImpl(
+    _$AccessTokenErrorImpl _value,
+    $Res Function(_$AccessTokenErrorImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CustomException
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? model = null}) {
+    return _then(
+      _$AccessTokenErrorImpl(
+        model:
+            null == model
+                ? _value.model
+                : model // ignore: cast_nullable_to_non_nullable
+                    as ExceptionModel,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$AccessTokenErrorImpl implements AccessTokenError {
+  const _$AccessTokenErrorImpl({required this.model});
+
+  @override
+  final ExceptionModel model;
+
+  @override
+  String toString() {
+    return 'CustomException.accessTokenError(model: $model)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AccessTokenErrorImpl &&
+            (identical(other.model, model) || other.model == model));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, model);
+
+  /// Create a copy of CustomException
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AccessTokenErrorImplCopyWith<_$AccessTokenErrorImpl> get copyWith =>
+      __$$AccessTokenErrorImplCopyWithImpl<_$AccessTokenErrorImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ExceptionModel model) c001,
+    required TResult Function(ExceptionModel model) c002,
+    required TResult Function(ExceptionModel model) a001,
+    required TResult Function(ExceptionModel model) a002,
+    required TResult Function(ExceptionModel model) a003,
+    required TResult Function(ExceptionModel model) a004,
+    required TResult Function(ExceptionModel model) a005,
+    required TResult Function(ExceptionModel model) a006,
+    required TResult Function(ExceptionModel model) a007,
+    required TResult Function(ExceptionModel model) a008,
+    required TResult Function(ExceptionModel model) a009,
+    required TResult Function(ExceptionModel model) a010,
+    required TResult Function(ExceptionModel model) a011,
+    required TResult Function(ExceptionModel model) a012,
+    required TResult Function(ExceptionModel model) a013,
+    required TResult Function(ExceptionModel model) a014,
+    required TResult Function(ExceptionModel model) a015,
+    required TResult Function(ExceptionModel model) a016,
+    required TResult Function(ExceptionModel model) b001,
+    required TResult Function(ExceptionModel model) b002,
+    required TResult Function(ExceptionModel model) b003,
+    required TResult Function(ExceptionModel model) o001,
+    required TResult Function(ExceptionModel model) j001,
+    required TResult Function(ExceptionModel model) j002,
+    required TResult Function(ExceptionModel model) j003,
+    required TResult Function(ExceptionModel model) j004,
+    required TResult Function(ExceptionModel model) j005,
+    required TResult Function(ExceptionModel model) e001,
+    required TResult Function(ExceptionModel model) e005,
+    required TResult Function(ExceptionModel model) u001,
+    required TResult Function(ExceptionModel model) u004,
+    required TResult Function(ExceptionModel model) u005,
+    required TResult Function(ExceptionModel model) p001,
+    required TResult Function(ExceptionModel model) p002,
+    required TResult Function(ExceptionModel model) k001,
+    required TResult Function(ExceptionModel model) k002,
+    required TResult Function(ExceptionModel model) s001,
+    required TResult Function(ExceptionModel model) s002,
+    required TResult Function(ExceptionModel model) s003,
+    required TResult Function(ExceptionModel model) s004,
+    required TResult Function(ExceptionModel model) s005,
+    required TResult Function(ExceptionModel model) s007,
+    required TResult Function(ExceptionModel model) s009,
+    required TResult Function(ExceptionModel model) s010,
+    required TResult Function(ExceptionModel model) s011,
+    required TResult Function(ExceptionModel model) s012,
+    required TResult Function(ExceptionModel model) s013,
+    required TResult Function(ExceptionModel model) s014,
+    required TResult Function(ExceptionModel model) s015,
+    required TResult Function(ExceptionModel model) s016,
+    required TResult Function(ExceptionModel model) s017,
+    required TResult Function(ExceptionModel model) s018,
+    required TResult Function(ExceptionModel model) s019,
+    required TResult Function(ExceptionModel model) f001,
+    required TResult Function(ExceptionModel model) f002,
+    required TResult Function(ExceptionModel model) f003,
+    required TResult Function(ExceptionModel model) f004,
+    required TResult Function(ExceptionModel model) f005,
+    required TResult Function(ExceptionModel model) i001,
+    required TResult Function(ExceptionModel model) i002,
+    required TResult Function(ExceptionModel model) i003,
+    required TResult Function(ExceptionModel model) m001,
+    required TResult Function(ExceptionModel model) m002,
+    required TResult Function(ExceptionModel model) m003,
+    required TResult Function(ExceptionModel model) m004,
+    required TResult Function(ExceptionModel model) m005,
+    required TResult Function(ExceptionModel model) m006,
+    required TResult Function(ExceptionModel model) m007,
+    required TResult Function(ExceptionModel model) m008,
+    required TResult Function(ExceptionModel model) m009,
+    required TResult Function(ExceptionModel model) m010,
+    required TResult Function(ExceptionModel model) m011,
+    required TResult Function(ExceptionModel model) m012,
+    required TResult Function(ExceptionModel model) m013,
+    required TResult Function(ExceptionModel model) m014,
+    required TResult Function(ExceptionModel model) m015,
+    required TResult Function(ExceptionModel model) m016,
+    required TResult Function(ExceptionModel model) m017,
+    required TResult Function(ExceptionModel model) r001,
+    required TResult Function(ExceptionModel model) r002,
+    required TResult Function(ExceptionModel model) r003,
+    required TResult Function(ExceptionModel model) r004,
+    required TResult Function(ExceptionModel model) r005,
+    required TResult Function(ExceptionModel model) r006,
+    required TResult Function(ExceptionModel model) r007,
+    required TResult Function(ExceptionModel model) r008,
+    required TResult Function(ExceptionModel model) serverError,
+    required TResult Function(ExceptionModel model) networkError,
+    required TResult Function(ExceptionModel model) unknownError,
+    required TResult Function(ExceptionModel model) accessTokenError,
+  }) {
+    return accessTokenError(model);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ExceptionModel model)? c001,
+    TResult? Function(ExceptionModel model)? c002,
+    TResult? Function(ExceptionModel model)? a001,
+    TResult? Function(ExceptionModel model)? a002,
+    TResult? Function(ExceptionModel model)? a003,
+    TResult? Function(ExceptionModel model)? a004,
+    TResult? Function(ExceptionModel model)? a005,
+    TResult? Function(ExceptionModel model)? a006,
+    TResult? Function(ExceptionModel model)? a007,
+    TResult? Function(ExceptionModel model)? a008,
+    TResult? Function(ExceptionModel model)? a009,
+    TResult? Function(ExceptionModel model)? a010,
+    TResult? Function(ExceptionModel model)? a011,
+    TResult? Function(ExceptionModel model)? a012,
+    TResult? Function(ExceptionModel model)? a013,
+    TResult? Function(ExceptionModel model)? a014,
+    TResult? Function(ExceptionModel model)? a015,
+    TResult? Function(ExceptionModel model)? a016,
+    TResult? Function(ExceptionModel model)? b001,
+    TResult? Function(ExceptionModel model)? b002,
+    TResult? Function(ExceptionModel model)? b003,
+    TResult? Function(ExceptionModel model)? o001,
+    TResult? Function(ExceptionModel model)? j001,
+    TResult? Function(ExceptionModel model)? j002,
+    TResult? Function(ExceptionModel model)? j003,
+    TResult? Function(ExceptionModel model)? j004,
+    TResult? Function(ExceptionModel model)? j005,
+    TResult? Function(ExceptionModel model)? e001,
+    TResult? Function(ExceptionModel model)? e005,
+    TResult? Function(ExceptionModel model)? u001,
+    TResult? Function(ExceptionModel model)? u004,
+    TResult? Function(ExceptionModel model)? u005,
+    TResult? Function(ExceptionModel model)? p001,
+    TResult? Function(ExceptionModel model)? p002,
+    TResult? Function(ExceptionModel model)? k001,
+    TResult? Function(ExceptionModel model)? k002,
+    TResult? Function(ExceptionModel model)? s001,
+    TResult? Function(ExceptionModel model)? s002,
+    TResult? Function(ExceptionModel model)? s003,
+    TResult? Function(ExceptionModel model)? s004,
+    TResult? Function(ExceptionModel model)? s005,
+    TResult? Function(ExceptionModel model)? s007,
+    TResult? Function(ExceptionModel model)? s009,
+    TResult? Function(ExceptionModel model)? s010,
+    TResult? Function(ExceptionModel model)? s011,
+    TResult? Function(ExceptionModel model)? s012,
+    TResult? Function(ExceptionModel model)? s013,
+    TResult? Function(ExceptionModel model)? s014,
+    TResult? Function(ExceptionModel model)? s015,
+    TResult? Function(ExceptionModel model)? s016,
+    TResult? Function(ExceptionModel model)? s017,
+    TResult? Function(ExceptionModel model)? s018,
+    TResult? Function(ExceptionModel model)? s019,
+    TResult? Function(ExceptionModel model)? f001,
+    TResult? Function(ExceptionModel model)? f002,
+    TResult? Function(ExceptionModel model)? f003,
+    TResult? Function(ExceptionModel model)? f004,
+    TResult? Function(ExceptionModel model)? f005,
+    TResult? Function(ExceptionModel model)? i001,
+    TResult? Function(ExceptionModel model)? i002,
+    TResult? Function(ExceptionModel model)? i003,
+    TResult? Function(ExceptionModel model)? m001,
+    TResult? Function(ExceptionModel model)? m002,
+    TResult? Function(ExceptionModel model)? m003,
+    TResult? Function(ExceptionModel model)? m004,
+    TResult? Function(ExceptionModel model)? m005,
+    TResult? Function(ExceptionModel model)? m006,
+    TResult? Function(ExceptionModel model)? m007,
+    TResult? Function(ExceptionModel model)? m008,
+    TResult? Function(ExceptionModel model)? m009,
+    TResult? Function(ExceptionModel model)? m010,
+    TResult? Function(ExceptionModel model)? m011,
+    TResult? Function(ExceptionModel model)? m012,
+    TResult? Function(ExceptionModel model)? m013,
+    TResult? Function(ExceptionModel model)? m014,
+    TResult? Function(ExceptionModel model)? m015,
+    TResult? Function(ExceptionModel model)? m016,
+    TResult? Function(ExceptionModel model)? m017,
+    TResult? Function(ExceptionModel model)? r001,
+    TResult? Function(ExceptionModel model)? r002,
+    TResult? Function(ExceptionModel model)? r003,
+    TResult? Function(ExceptionModel model)? r004,
+    TResult? Function(ExceptionModel model)? r005,
+    TResult? Function(ExceptionModel model)? r006,
+    TResult? Function(ExceptionModel model)? r007,
+    TResult? Function(ExceptionModel model)? r008,
+    TResult? Function(ExceptionModel model)? serverError,
+    TResult? Function(ExceptionModel model)? networkError,
+    TResult? Function(ExceptionModel model)? unknownError,
+    TResult? Function(ExceptionModel model)? accessTokenError,
+  }) {
+    return accessTokenError?.call(model);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ExceptionModel model)? c001,
+    TResult Function(ExceptionModel model)? c002,
+    TResult Function(ExceptionModel model)? a001,
+    TResult Function(ExceptionModel model)? a002,
+    TResult Function(ExceptionModel model)? a003,
+    TResult Function(ExceptionModel model)? a004,
+    TResult Function(ExceptionModel model)? a005,
+    TResult Function(ExceptionModel model)? a006,
+    TResult Function(ExceptionModel model)? a007,
+    TResult Function(ExceptionModel model)? a008,
+    TResult Function(ExceptionModel model)? a009,
+    TResult Function(ExceptionModel model)? a010,
+    TResult Function(ExceptionModel model)? a011,
+    TResult Function(ExceptionModel model)? a012,
+    TResult Function(ExceptionModel model)? a013,
+    TResult Function(ExceptionModel model)? a014,
+    TResult Function(ExceptionModel model)? a015,
+    TResult Function(ExceptionModel model)? a016,
+    TResult Function(ExceptionModel model)? b001,
+    TResult Function(ExceptionModel model)? b002,
+    TResult Function(ExceptionModel model)? b003,
+    TResult Function(ExceptionModel model)? o001,
+    TResult Function(ExceptionModel model)? j001,
+    TResult Function(ExceptionModel model)? j002,
+    TResult Function(ExceptionModel model)? j003,
+    TResult Function(ExceptionModel model)? j004,
+    TResult Function(ExceptionModel model)? j005,
+    TResult Function(ExceptionModel model)? e001,
+    TResult Function(ExceptionModel model)? e005,
+    TResult Function(ExceptionModel model)? u001,
+    TResult Function(ExceptionModel model)? u004,
+    TResult Function(ExceptionModel model)? u005,
+    TResult Function(ExceptionModel model)? p001,
+    TResult Function(ExceptionModel model)? p002,
+    TResult Function(ExceptionModel model)? k001,
+    TResult Function(ExceptionModel model)? k002,
+    TResult Function(ExceptionModel model)? s001,
+    TResult Function(ExceptionModel model)? s002,
+    TResult Function(ExceptionModel model)? s003,
+    TResult Function(ExceptionModel model)? s004,
+    TResult Function(ExceptionModel model)? s005,
+    TResult Function(ExceptionModel model)? s007,
+    TResult Function(ExceptionModel model)? s009,
+    TResult Function(ExceptionModel model)? s010,
+    TResult Function(ExceptionModel model)? s011,
+    TResult Function(ExceptionModel model)? s012,
+    TResult Function(ExceptionModel model)? s013,
+    TResult Function(ExceptionModel model)? s014,
+    TResult Function(ExceptionModel model)? s015,
+    TResult Function(ExceptionModel model)? s016,
+    TResult Function(ExceptionModel model)? s017,
+    TResult Function(ExceptionModel model)? s018,
+    TResult Function(ExceptionModel model)? s019,
+    TResult Function(ExceptionModel model)? f001,
+    TResult Function(ExceptionModel model)? f002,
+    TResult Function(ExceptionModel model)? f003,
+    TResult Function(ExceptionModel model)? f004,
+    TResult Function(ExceptionModel model)? f005,
+    TResult Function(ExceptionModel model)? i001,
+    TResult Function(ExceptionModel model)? i002,
+    TResult Function(ExceptionModel model)? i003,
+    TResult Function(ExceptionModel model)? m001,
+    TResult Function(ExceptionModel model)? m002,
+    TResult Function(ExceptionModel model)? m003,
+    TResult Function(ExceptionModel model)? m004,
+    TResult Function(ExceptionModel model)? m005,
+    TResult Function(ExceptionModel model)? m006,
+    TResult Function(ExceptionModel model)? m007,
+    TResult Function(ExceptionModel model)? m008,
+    TResult Function(ExceptionModel model)? m009,
+    TResult Function(ExceptionModel model)? m010,
+    TResult Function(ExceptionModel model)? m011,
+    TResult Function(ExceptionModel model)? m012,
+    TResult Function(ExceptionModel model)? m013,
+    TResult Function(ExceptionModel model)? m014,
+    TResult Function(ExceptionModel model)? m015,
+    TResult Function(ExceptionModel model)? m016,
+    TResult Function(ExceptionModel model)? m017,
+    TResult Function(ExceptionModel model)? r001,
+    TResult Function(ExceptionModel model)? r002,
+    TResult Function(ExceptionModel model)? r003,
+    TResult Function(ExceptionModel model)? r004,
+    TResult Function(ExceptionModel model)? r005,
+    TResult Function(ExceptionModel model)? r006,
+    TResult Function(ExceptionModel model)? r007,
+    TResult Function(ExceptionModel model)? r008,
+    TResult Function(ExceptionModel model)? serverError,
+    TResult Function(ExceptionModel model)? networkError,
+    TResult Function(ExceptionModel model)? unknownError,
+    TResult Function(ExceptionModel model)? accessTokenError,
+    required TResult orElse(),
+  }) {
+    if (accessTokenError != null) {
+      return accessTokenError(model);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(C001 value) c001,
+    required TResult Function(C002 value) c002,
+    required TResult Function(A001 value) a001,
+    required TResult Function(A002 value) a002,
+    required TResult Function(A003 value) a003,
+    required TResult Function(A004 value) a004,
+    required TResult Function(A005 value) a005,
+    required TResult Function(A006 value) a006,
+    required TResult Function(A007 value) a007,
+    required TResult Function(A008 value) a008,
+    required TResult Function(A009 value) a009,
+    required TResult Function(A010 value) a010,
+    required TResult Function(A011 value) a011,
+    required TResult Function(A012 value) a012,
+    required TResult Function(A013 value) a013,
+    required TResult Function(A014 value) a014,
+    required TResult Function(A015 value) a015,
+    required TResult Function(A016 value) a016,
+    required TResult Function(B001 value) b001,
+    required TResult Function(B002 value) b002,
+    required TResult Function(B003 value) b003,
+    required TResult Function(O001 value) o001,
+    required TResult Function(J001 value) j001,
+    required TResult Function(J002 value) j002,
+    required TResult Function(J003 value) j003,
+    required TResult Function(J004 value) j004,
+    required TResult Function(J005 value) j005,
+    required TResult Function(E001 value) e001,
+    required TResult Function(E005 value) e005,
+    required TResult Function(U001 value) u001,
+    required TResult Function(U004 value) u004,
+    required TResult Function(U005 value) u005,
+    required TResult Function(P001 value) p001,
+    required TResult Function(P002 value) p002,
+    required TResult Function(K001 value) k001,
+    required TResult Function(K002 value) k002,
+    required TResult Function(S001 value) s001,
+    required TResult Function(S002 value) s002,
+    required TResult Function(S003 value) s003,
+    required TResult Function(S004 value) s004,
+    required TResult Function(S005 value) s005,
+    required TResult Function(S007 value) s007,
+    required TResult Function(S009 value) s009,
+    required TResult Function(S010 value) s010,
+    required TResult Function(S011 value) s011,
+    required TResult Function(S012 value) s012,
+    required TResult Function(S013 value) s013,
+    required TResult Function(S014 value) s014,
+    required TResult Function(S015 value) s015,
+    required TResult Function(S016 value) s016,
+    required TResult Function(S017 value) s017,
+    required TResult Function(S018 value) s018,
+    required TResult Function(S019 value) s019,
+    required TResult Function(F001 value) f001,
+    required TResult Function(F002 value) f002,
+    required TResult Function(F003 value) f003,
+    required TResult Function(F004 value) f004,
+    required TResult Function(F005 value) f005,
+    required TResult Function(I001 value) i001,
+    required TResult Function(I002 value) i002,
+    required TResult Function(I003 value) i003,
+    required TResult Function(M001 value) m001,
+    required TResult Function(M002 value) m002,
+    required TResult Function(M003 value) m003,
+    required TResult Function(M004 value) m004,
+    required TResult Function(M005 value) m005,
+    required TResult Function(M006 value) m006,
+    required TResult Function(M007 value) m007,
+    required TResult Function(M008 value) m008,
+    required TResult Function(M009 value) m009,
+    required TResult Function(M010 value) m010,
+    required TResult Function(M011 value) m011,
+    required TResult Function(M012 value) m012,
+    required TResult Function(M013 value) m013,
+    required TResult Function(M014 value) m014,
+    required TResult Function(M015 value) m015,
+    required TResult Function(M016 value) m016,
+    required TResult Function(M017 value) m017,
+    required TResult Function(R001 value) r001,
+    required TResult Function(R002 value) r002,
+    required TResult Function(R003 value) r003,
+    required TResult Function(R004 value) r004,
+    required TResult Function(R005 value) r005,
+    required TResult Function(R006 value) r006,
+    required TResult Function(R007 value) r007,
+    required TResult Function(R008 value) r008,
+    required TResult Function(ServerError value) serverError,
+    required TResult Function(NetworkError value) networkError,
+    required TResult Function(UnknownError value) unknownError,
+    required TResult Function(AccessTokenError value) accessTokenError,
+  }) {
+    return accessTokenError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(C001 value)? c001,
+    TResult? Function(C002 value)? c002,
+    TResult? Function(A001 value)? a001,
+    TResult? Function(A002 value)? a002,
+    TResult? Function(A003 value)? a003,
+    TResult? Function(A004 value)? a004,
+    TResult? Function(A005 value)? a005,
+    TResult? Function(A006 value)? a006,
+    TResult? Function(A007 value)? a007,
+    TResult? Function(A008 value)? a008,
+    TResult? Function(A009 value)? a009,
+    TResult? Function(A010 value)? a010,
+    TResult? Function(A011 value)? a011,
+    TResult? Function(A012 value)? a012,
+    TResult? Function(A013 value)? a013,
+    TResult? Function(A014 value)? a014,
+    TResult? Function(A015 value)? a015,
+    TResult? Function(A016 value)? a016,
+    TResult? Function(B001 value)? b001,
+    TResult? Function(B002 value)? b002,
+    TResult? Function(B003 value)? b003,
+    TResult? Function(O001 value)? o001,
+    TResult? Function(J001 value)? j001,
+    TResult? Function(J002 value)? j002,
+    TResult? Function(J003 value)? j003,
+    TResult? Function(J004 value)? j004,
+    TResult? Function(J005 value)? j005,
+    TResult? Function(E001 value)? e001,
+    TResult? Function(E005 value)? e005,
+    TResult? Function(U001 value)? u001,
+    TResult? Function(U004 value)? u004,
+    TResult? Function(U005 value)? u005,
+    TResult? Function(P001 value)? p001,
+    TResult? Function(P002 value)? p002,
+    TResult? Function(K001 value)? k001,
+    TResult? Function(K002 value)? k002,
+    TResult? Function(S001 value)? s001,
+    TResult? Function(S002 value)? s002,
+    TResult? Function(S003 value)? s003,
+    TResult? Function(S004 value)? s004,
+    TResult? Function(S005 value)? s005,
+    TResult? Function(S007 value)? s007,
+    TResult? Function(S009 value)? s009,
+    TResult? Function(S010 value)? s010,
+    TResult? Function(S011 value)? s011,
+    TResult? Function(S012 value)? s012,
+    TResult? Function(S013 value)? s013,
+    TResult? Function(S014 value)? s014,
+    TResult? Function(S015 value)? s015,
+    TResult? Function(S016 value)? s016,
+    TResult? Function(S017 value)? s017,
+    TResult? Function(S018 value)? s018,
+    TResult? Function(S019 value)? s019,
+    TResult? Function(F001 value)? f001,
+    TResult? Function(F002 value)? f002,
+    TResult? Function(F003 value)? f003,
+    TResult? Function(F004 value)? f004,
+    TResult? Function(F005 value)? f005,
+    TResult? Function(I001 value)? i001,
+    TResult? Function(I002 value)? i002,
+    TResult? Function(I003 value)? i003,
+    TResult? Function(M001 value)? m001,
+    TResult? Function(M002 value)? m002,
+    TResult? Function(M003 value)? m003,
+    TResult? Function(M004 value)? m004,
+    TResult? Function(M005 value)? m005,
+    TResult? Function(M006 value)? m006,
+    TResult? Function(M007 value)? m007,
+    TResult? Function(M008 value)? m008,
+    TResult? Function(M009 value)? m009,
+    TResult? Function(M010 value)? m010,
+    TResult? Function(M011 value)? m011,
+    TResult? Function(M012 value)? m012,
+    TResult? Function(M013 value)? m013,
+    TResult? Function(M014 value)? m014,
+    TResult? Function(M015 value)? m015,
+    TResult? Function(M016 value)? m016,
+    TResult? Function(M017 value)? m017,
+    TResult? Function(R001 value)? r001,
+    TResult? Function(R002 value)? r002,
+    TResult? Function(R003 value)? r003,
+    TResult? Function(R004 value)? r004,
+    TResult? Function(R005 value)? r005,
+    TResult? Function(R006 value)? r006,
+    TResult? Function(R007 value)? r007,
+    TResult? Function(R008 value)? r008,
+    TResult? Function(ServerError value)? serverError,
+    TResult? Function(NetworkError value)? networkError,
+    TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(AccessTokenError value)? accessTokenError,
+  }) {
+    return accessTokenError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(C001 value)? c001,
+    TResult Function(C002 value)? c002,
+    TResult Function(A001 value)? a001,
+    TResult Function(A002 value)? a002,
+    TResult Function(A003 value)? a003,
+    TResult Function(A004 value)? a004,
+    TResult Function(A005 value)? a005,
+    TResult Function(A006 value)? a006,
+    TResult Function(A007 value)? a007,
+    TResult Function(A008 value)? a008,
+    TResult Function(A009 value)? a009,
+    TResult Function(A010 value)? a010,
+    TResult Function(A011 value)? a011,
+    TResult Function(A012 value)? a012,
+    TResult Function(A013 value)? a013,
+    TResult Function(A014 value)? a014,
+    TResult Function(A015 value)? a015,
+    TResult Function(A016 value)? a016,
+    TResult Function(B001 value)? b001,
+    TResult Function(B002 value)? b002,
+    TResult Function(B003 value)? b003,
+    TResult Function(O001 value)? o001,
+    TResult Function(J001 value)? j001,
+    TResult Function(J002 value)? j002,
+    TResult Function(J003 value)? j003,
+    TResult Function(J004 value)? j004,
+    TResult Function(J005 value)? j005,
+    TResult Function(E001 value)? e001,
+    TResult Function(E005 value)? e005,
+    TResult Function(U001 value)? u001,
+    TResult Function(U004 value)? u004,
+    TResult Function(U005 value)? u005,
+    TResult Function(P001 value)? p001,
+    TResult Function(P002 value)? p002,
+    TResult Function(K001 value)? k001,
+    TResult Function(K002 value)? k002,
+    TResult Function(S001 value)? s001,
+    TResult Function(S002 value)? s002,
+    TResult Function(S003 value)? s003,
+    TResult Function(S004 value)? s004,
+    TResult Function(S005 value)? s005,
+    TResult Function(S007 value)? s007,
+    TResult Function(S009 value)? s009,
+    TResult Function(S010 value)? s010,
+    TResult Function(S011 value)? s011,
+    TResult Function(S012 value)? s012,
+    TResult Function(S013 value)? s013,
+    TResult Function(S014 value)? s014,
+    TResult Function(S015 value)? s015,
+    TResult Function(S016 value)? s016,
+    TResult Function(S017 value)? s017,
+    TResult Function(S018 value)? s018,
+    TResult Function(S019 value)? s019,
+    TResult Function(F001 value)? f001,
+    TResult Function(F002 value)? f002,
+    TResult Function(F003 value)? f003,
+    TResult Function(F004 value)? f004,
+    TResult Function(F005 value)? f005,
+    TResult Function(I001 value)? i001,
+    TResult Function(I002 value)? i002,
+    TResult Function(I003 value)? i003,
+    TResult Function(M001 value)? m001,
+    TResult Function(M002 value)? m002,
+    TResult Function(M003 value)? m003,
+    TResult Function(M004 value)? m004,
+    TResult Function(M005 value)? m005,
+    TResult Function(M006 value)? m006,
+    TResult Function(M007 value)? m007,
+    TResult Function(M008 value)? m008,
+    TResult Function(M009 value)? m009,
+    TResult Function(M010 value)? m010,
+    TResult Function(M011 value)? m011,
+    TResult Function(M012 value)? m012,
+    TResult Function(M013 value)? m013,
+    TResult Function(M014 value)? m014,
+    TResult Function(M015 value)? m015,
+    TResult Function(M016 value)? m016,
+    TResult Function(M017 value)? m017,
+    TResult Function(R001 value)? r001,
+    TResult Function(R002 value)? r002,
+    TResult Function(R003 value)? r003,
+    TResult Function(R004 value)? r004,
+    TResult Function(R005 value)? r005,
+    TResult Function(R006 value)? r006,
+    TResult Function(R007 value)? r007,
+    TResult Function(R008 value)? r008,
+    TResult Function(ServerError value)? serverError,
+    TResult Function(NetworkError value)? networkError,
+    TResult Function(UnknownError value)? unknownError,
+    TResult Function(AccessTokenError value)? accessTokenError,
+    required TResult orElse(),
+  }) {
+    if (accessTokenError != null) {
+      return accessTokenError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AccessTokenError implements CustomException {
+  const factory AccessTokenError({required final ExceptionModel model}) =
+      _$AccessTokenErrorImpl;
+
+  @override
+  ExceptionModel get model;
+
+  /// Create a copy of CustomException
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AccessTokenErrorImplCopyWith<_$AccessTokenErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

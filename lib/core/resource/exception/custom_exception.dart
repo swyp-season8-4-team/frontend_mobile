@@ -121,4 +121,14 @@ class CustomException with _$CustomException {
   /// }
   const factory CustomException.unknownError({required ExceptionModel model}) =
       UnknownError;
+
+  /// {
+  ///   "status": 603,
+  ///   "code": "ZZ003",
+  ///   "message": "로그인 시간이 만료되었습니다.\n다시 로그인해주세요.",
+  ///   "timestamp": <현재 시간>
+  /// }
+  const factory CustomException.accessTokenError({
+    required ExceptionModel model,
+  }) = AccessTokenError;
 }
