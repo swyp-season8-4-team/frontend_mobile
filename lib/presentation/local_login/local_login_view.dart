@@ -71,6 +71,8 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
 
       if (email != null) {
         _emailController.text = email;
+        _keepLoggedIn = true;
+        setState(() {});
       }
     });
   }
@@ -131,6 +133,8 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
 
     if (_keepLoggedIn) {
       await prefs?.setString(Constant.email, _emailController.text);
+    } else {
+      await prefs?.remove(Constant.email);
     }
   }
 
@@ -195,19 +199,20 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
               break;
 
             default:
-              unawaited(
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return CustomDialog.basic(
-                      description: next.exception.message,
-                      primaryButton: CustomDialogButton(
-                        text: '확인',
-                        onTap: () => context.pop(),
-                      ),
-                    );
-                  },
-                ),
+              await showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CustomDialog.basic(
+                    description: next.exception.message,
+                    primaryButton: CustomDialogButton(
+                      text: '확인',
+                      onTap:
+                          next.exception.code == 'ZZ003'
+                              ? () => context.goNamed(AppRoutes.localLogin.name)
+                              : () => context.pop(),
+                    ),
+                  );
+                },
               );
           }
 

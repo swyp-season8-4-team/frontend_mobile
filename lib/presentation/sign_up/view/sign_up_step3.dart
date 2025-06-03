@@ -24,10 +24,11 @@ class _SignUpStep3State extends ConsumerState<SignUpStep3> {
   bool _passwordVisibility = false;
   bool _passwordCheckVisibility = false;
 
-  /// 실시간 입력과 관련된 비밀번호
+  /// '비밀번호 확인' 실시간 비밀번호 에러
   bool _realTimePasswordCheckError = false;
   String _realTimePasswordCheckErrorText = '';
 
+  /// '비밀번호 확인' 실시간 비밀번호 성공
   bool _realTimePasswordCheckSuccess = false;
   final String _realTimePasswordCheckSuccessText = '비밀번호가 서로 일치합니다';
 
@@ -39,14 +40,52 @@ class _SignUpStep3State extends ConsumerState<SignUpStep3> {
   }
 
   void _onPasswordRender() {
+    setState(() {});
+    // /// 비밀번호가 비어있지 않은 경우
+    // if (_passwordController.text.isNotEmpty) {
+    //   /// 유효하지 않은 비밀번호인 경우
+    //   if (!_passwordController.text.isPasswordValid) {
+    //     setState(() {
+    //       _realTimePasswordCheckError = true;
+    //       _realTimePasswordCheckErrorText =
+    //           '최소 8자, 영문 소문자, 숫자, 특수문자 조합을 지켜주세요.';
+    //       _realTimePasswordCheckSuccess = false;
+    //     });
+    //   }
+    //   /// 비밀번호가 서로 다른 경우
+    //   else if (_passwordController.text != _passwordCheckController.text) {
+    //     setState(() {
+    //       _realTimePasswordCheckError = true;
+    //       _realTimePasswordCheckErrorText = '비밀번호가 서로 일치하지 않습니다';
+    //       _realTimePasswordCheckSuccess = false;
+    //     });
+    //   }
+    //   /// 유효한 비밀번호인 경우
+    //   else {
+    //     setState(() {
+    //       _realTimePasswordCheckError = false;
+    //       _realTimePasswordCheckSuccess = true;
+    //     });
+    //   }
+    // }
+    // /// 비밀번호가 비어있는 경우
+    // else {
+    //   setState(() {
+    //     _realTimePasswordCheckError = false;
+    //     _realTimePasswordCheckSuccess = false;
+    //   });
+    // }
+  }
+
+  void _onPasswordCheckRender() {
     /// 비밀번호가 비어있지 않은 경우
-    if (_passwordController.text.isNotEmpty) {
+    if (_passwordCheckController.text.isNotEmpty) {
       /// 유효하지 않은 비밀번호인 경우
       if (!_passwordController.text.isPasswordValid) {
         setState(() {
           _realTimePasswordCheckError = true;
           _realTimePasswordCheckErrorText =
-              '최소 8자, 영문 소문자, 숫자, 특수문자 조합를 지켜주세요.';
+              '최소 8자, 영문 소문자, 숫자, 특수문자 조합을 지켜주세요.';
           _realTimePasswordCheckSuccess = false;
         });
       }
@@ -73,40 +112,37 @@ class _SignUpStep3State extends ConsumerState<SignUpStep3> {
         _realTimePasswordCheckSuccess = false;
       });
     }
-  }
-
-  void _onPasswordCheckRender() {
-    /// 비밀번호가 비어있지 않은 경우
-    if (_passwordCheckController.text.isNotEmpty) {
-      /// 유효하지 않은 비밀번호인 경우
-      if (!_passwordCheckController.text.isPasswordValid) {
-        setState(() {
-          _realTimePasswordCheckError = true;
-          _realTimePasswordCheckSuccess = false;
-        });
-      }
-      /// 비밀번호가 서로 다른 경우
-      else if (_passwordController.text != _passwordCheckController.text) {
-        setState(() {
-          _realTimePasswordCheckError = true;
-          _realTimePasswordCheckSuccess = false;
-        });
-      }
-      /// 유효한 비밀번호인 경우
-      else {
-        setState(() {
-          _realTimePasswordCheckError = false;
-          _realTimePasswordCheckSuccess = true;
-        });
-      }
-    }
-    /// 비밀번호가 비어있는 경우
-    else {
-      setState(() {
-        _realTimePasswordCheckError = false;
-        _realTimePasswordCheckSuccess = false;
-      });
-    }
+    // /// 비밀번호가 비어있지 않은 경우
+    // if (_passwordCheckController.text.isNotEmpty) {
+    //   /// 유효하지 않은 비밀번호인 경우
+    //   if (!_passwordCheckController.text.isPasswordValid) {
+    //     setState(() {
+    //       _realTimePasswordCheckError = true;
+    //       _realTimePasswordCheckSuccess = false;
+    //     });
+    //   }
+    //   /// 비밀번호가 서로 다른 경우
+    //   else if (_passwordController.text != _passwordCheckController.text) {
+    //     setState(() {
+    //       _realTimePasswordCheckError = true;
+    //       _realTimePasswordCheckSuccess = false;
+    //     });
+    //   }
+    //   /// 유효한 비밀번호인 경우
+    //   else {
+    //     setState(() {
+    //       _realTimePasswordCheckError = false;
+    //       _realTimePasswordCheckSuccess = true;
+    //     });
+    //   }
+    // }
+    // /// 비밀번호가 비어있는 경우
+    // else {
+    //   setState(() {
+    //     _realTimePasswordCheckError = false;
+    //     _realTimePasswordCheckSuccess = false;
+    //   });
+    // }
   }
 
   @override
