@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
@@ -90,32 +92,31 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
     final FindPasswordState state = ref.watch(findPasswordViewModelProvider);
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    ref.listen(
-      findPasswordViewModelProvider.select(
-        (FindPasswordState state) => state.postVerifyStatus,
-      ),
-      (_, Status status) {
-        switch (status) {
-          case Status.success:
-            setState(() {
-              _isValidCode = true;
-              _success = true;
-              _successText = '인증이 완료되었습니다.';
-            });
-            break;
+    ref.listen(findPasswordViewModelProvider, (_, FindPasswordState next) {
+      switch (next.postVerifyStatus) {
+        case Status.success:
+          ref.read(findPasswordProvider.notifier).state = ref
+              .read(findPasswordProvider)
+              .copyWith(emailToken: next.verifyData.verificationToken);
 
-          case Status.failure:
-            setState(() {
-              _isValidCode = false;
-              _error = true;
-              _errorText = '잘못된 인증코드입니다.';
-            });
-            break;
+          setState(() {
+            _isValidCode = true;
+            _success = true;
+            _successText = '인증이 완료되었습니다.';
+          });
+          break;
 
-          default:
-        }
-      },
-    );
+        case Status.failure:
+          setState(() {
+            _isValidCode = false;
+            _error = true;
+            _errorText = '잘못된 인증코드입니다.';
+          });
+          break;
+
+        default:
+      }
+    });
 
     return CustomLoadingOverlay(
       isLoading: state.postVerifyStatus.isLoading,
@@ -158,6 +159,8 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
                               _isValidCode = false;
                             },
                             keyboardType: TextInputType.number,
+                            useTimer: true,
+                            startSeconds: 5 * 60,
                           ),
                         ),
                         const SizedBox(width: 10),

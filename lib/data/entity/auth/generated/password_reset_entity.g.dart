@@ -10,6 +10,8 @@ PasswordResetEntity _$PasswordResetEntityFromJson(Map<String, dynamic> json) =>
     PasswordResetEntity(
       success: json['success'] as bool?,
       message: json['message'] as String?,
+      status: (json['status'] as num?)?.toInt(),
+      timestamp: json['timestamp'] as String?,
     );
 
 Map<String, dynamic> _$PasswordResetEntityToJson(
@@ -17,4 +19,6 @@ Map<String, dynamic> _$PasswordResetEntityToJson(
 ) => <String, dynamic>{
   'success': instance.success,
   'message': instance.message,
+  'status': instance.status,
+  'timestamp': instance.timestamp,
 };

@@ -1,13 +1,13 @@
-class PasswordResetParams {
-  const PasswordResetParams({
-    required this.emailToken,
-    required this.email,
-    required this.currentPassword,
-    required this.newPassword,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  final String emailToken;
-  final String email;
-  final String currentPassword;
-  final String newPassword;
+part 'generated/password_reset_params.freezed.dart';
+
+@freezed
+class PasswordResetParams with _$PasswordResetParams {
+  const factory PasswordResetParams({
+    required String emailToken,
+    required String email,
+    required String newPassword,
+    required String confirmNewPassword,
+  }) = _PasswordResetParams;
 }

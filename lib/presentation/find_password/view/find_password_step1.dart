@@ -51,11 +51,16 @@ class _FindPasswordStep1State extends ConsumerState<FindPasswordStep1> {
         case Status.success:
           final GoRouterState route = GoRouter.of(context).routerDelegate.state;
           if (route.name == AppRoutes.findPasswordStep1.name) {
+            ref.read(findPasswordProvider.notifier).state = ref
+                .read(findPasswordProvider)
+                .copyWith(email: _emailController.text);
+
             context.pushNamed(
               AppRoutes.findPasswordStep2.name,
               extra: _emailController.text,
             );
           }
+
           break;
 
         case Status.failure:

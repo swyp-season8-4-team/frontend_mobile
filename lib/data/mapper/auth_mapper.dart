@@ -145,7 +145,12 @@ extension PostSignUpWithProfileRequestBodyExt
 
 extension PasswordResetEntityExt on PasswordResetEntity {
   PasswordResetModel toModel() {
-    return PasswordResetModel(success: success, message: message);
+    return PasswordResetModel(
+      success: success,
+      message: message,
+      status: status,
+      timestamp: timestamp,
+    );
   }
 }
 
@@ -157,8 +162,8 @@ extension PasswordResetParamsExt on PasswordResetParams {
   PasswordResetRequestBody toBody() {
     return PasswordResetRequestBody(
       email: email,
-      currentPassword: currentPassword,
       newPassword: newPassword,
+      confirmNewPassword: confirmNewPassword,
     );
   }
 }

@@ -221,6 +221,8 @@ class _$FindPasswordStateImpl implements _FindPasswordState {
     this.passwordResetData = const PasswordResetModel(
       success: false,
       message: '',
+      status: -1,
+      timestamp: '',
     ),
     this.exception = const ExceptionModel(
       status: -1,

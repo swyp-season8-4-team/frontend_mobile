@@ -112,13 +112,13 @@ class FindPasswordViewModel extends StateNotifier<FindPasswordState> {
     response.map(
       success: (Success<PasswordResetModel, CustomException> success) {
         state = state.copyWith(
-          postVerifyStatus: Status.success,
+          passwordResetStatus: Status.success,
           passwordResetData: success.data,
         );
       },
       failure: (Failure<PasswordResetModel, CustomException> failure) {
         state = state.copyWith(
-          postVerifyStatus: Status.failure,
+          passwordResetStatus: Status.failure,
           exception: failure.exception.model,
         );
       },
@@ -132,7 +132,7 @@ final StateProvider<PasswordResetParams> findPasswordProvider =
       (Ref ref) => const PasswordResetParams(
         emailToken: '',
         email: '',
-        currentPassword: '',
         newPassword: '',
+        confirmNewPassword: '',
       ),
     );

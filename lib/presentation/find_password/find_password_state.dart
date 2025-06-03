@@ -11,7 +11,14 @@ class FindPasswordState with _$FindPasswordState {
     EmailVerificationRequestModel verificationRequestData,
     @Default(EmailVerifyModel(verificationToken: '', verified: false))
     EmailVerifyModel verifyData,
-    @Default(PasswordResetModel(success: false, message: ''))
+    @Default(
+      PasswordResetModel(
+        success: false,
+        message: '',
+        status: -1,
+        timestamp: '',
+      ),
+    )
     PasswordResetModel passwordResetData,
 
     @Default(ExceptionModel(status: -1, code: '', message: '', timestamp: ''))

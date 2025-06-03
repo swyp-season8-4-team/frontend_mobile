@@ -34,9 +34,14 @@ final Provider<Dio> appDioProvider = Provider<Dio>((Ref ref) {
           tokenRequired = false;
         }
 
-        /// 로그인하지 않은 경우
+        /// 로그인 페이지 && 로그인하지 않은 경우
         if (route.name!.contains(AppRoutes.localLogin.name) &&
             !loginState.isLoggedIn) {
+          tokenRequired = false;
+        }
+
+        /// 비밀번호 찾기 페이지
+        if (route.name!.contains(AppRoutes.findPassword.name)) {
           tokenRequired = false;
         }
       }
