@@ -9,17 +9,21 @@ class TokenInfo {
   factory TokenInfo.fromJson(Map<String, dynamic> json) =>
       _$TokenInfoFromJson(json);
 
-  TokenInfo({
+  const TokenInfo({
+    required this.startTime,
     required this.accessToken,
-    required this.refreshToken,
     required this.expiresIn,
     required this.deviceId,
+    required this.refreshToken,
+    required this.refreshExpiresIn,
   });
 
+  final DateTime startTime;
   final String accessToken;
-  final String refreshToken;
   final int expiresIn;
   final String deviceId;
+  final String refreshToken;
+  final int refreshExpiresIn;
 
   Map<String, dynamic> toJson() => _$TokenInfoToJson(this);
 
