@@ -83,7 +83,7 @@ class DessertPostHeaderInfoThird extends ConsumerWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return CustomDialog.basic(
-                          title: '${userstate.data.nickname}님을 차단하시겠어요?',
+                          title: '${state.data.nickname}님을 차단하시겠어요?',
                           description:
                               '차단하면 상대방이 진행하는 디저비 활동 정보를 모두 볼 수 없어요.\n추후 [My > 설정 > 차단 멤버 관리하기]에서 언제든지 해제할 수 있어요',
                           secondaryButton: CustomDialogButton(
