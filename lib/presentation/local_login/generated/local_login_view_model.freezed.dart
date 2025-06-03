@@ -141,6 +141,7 @@ class _$LocalLoginStateImpl implements _LocalLoginState {
       accessToken: '',
       refreshToken: '',
       tokenType: '',
+      refreshExpiresIn: -1,
       expiresIn: -1,
       userUuid: '',
       email: '',

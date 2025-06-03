@@ -7,11 +7,13 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
+import 'package:frontend_mobile/common/design_system/component/radio/radio_button.dart';
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
+import 'package:frontend_mobile/core/resource/secure_storage/secure_storage.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/resource/token_info.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
@@ -50,7 +52,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
   bool _passwordError = false;
   String _passwordErrorText = '';
 
-  final bool _keepLoggedIn = false;
+  bool _keepLoggedIn = false;
   bool _visibility = false;
 
   Timer? _timer;
@@ -141,13 +143,15 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
 
           /// 토큰, 만료시간 및 디바이스 정보 저장
           final TokenInfo tokenInfo = TokenInfo(
+            startTime: DateTime.now(),
             accessToken: next.data.accessToken,
             refreshToken: next.data.refreshToken,
+            refreshExpiresIn: next.data.refreshExpiresIn,
             expiresIn: next.data.expiresIn,
             deviceId: next.data.deviceId,
           );
 
-          const FlutterSecureStorage storage = FlutterSecureStorage();
+          final FlutterSecureStorage storage = ref.read(secureStorageProvider);
           await storage.write(
             key: Constant.tokenInfo,
             value: TokenInfo.serialize(tokenInfo: tokenInfo),
@@ -215,7 +219,10 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                 description: next.exception.message,
                 primaryButton: CustomDialogButton(
                   text: '확인',
-                  onTap: () => context.pop(),
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
                 ),
               );
             },
@@ -273,26 +280,27 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                     ),
                     const SizedBox(height: 12),
 
-                    /// TODO: 추후에 작업 진행
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: <Widget>[
-                    //     CustomRadioButton.small(
-                    //       onTap: () {
-                    //         setState(() {
-                    //           _keepLoggedIn = !_keepLoggedIn;
-                    //         });
-                    //       },
-                    //       label: '로그인 유지',
-                    //       value: _keepLoggedIn,
-                    //     ),
-                    //     CustomTextButton.underline(
-                    //       label: '비밀번호 찾기',
-                    //       onPressed: () {},
-                    //     ),
-                    //   ],
-                    // ),
-                    // const SizedBox(height: 44),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        CustomRadioButton.small(
+                          onTap: () {
+                            setState(() {
+                              _keepLoggedIn = !_keepLoggedIn;
+                            });
+                          },
+                          label: '로그인 유지',
+                          value: _keepLoggedIn,
+                        ),
+                        CustomTextButton.underline(
+                          label: '비밀번호 찾기',
+                          onPressed: () {
+                            context.pushNamed(AppRoutes.findPasswordStep1.name);
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 44),
                     CustomFillButton.large(
                       label: '로그인',
                       disabled:

@@ -30,8 +30,6 @@ class LocalLoginViewModel extends StateNotifier<LocalLoginState> {
   Future<void> postDevLocalLogin({required LocalLoginParams params}) async {
     state = state.copyWith(status: Status.loading);
 
-    // await Future<void>.delayed(const Duration(seconds: 2));
-
     final Result<LocalLoginModel, CustomException> response =
         await Usecase.execute(
           usecase: ref.read(postDevLocalLoginUsecaseProvider),

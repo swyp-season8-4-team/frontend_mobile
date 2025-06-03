@@ -5,7 +5,6 @@ import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dar
 import 'package:frontend_mobile/common/design_system/component/textfield/input_box.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/core/resource/extension.dart';
-import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/find_password_wrapper.dart';
 import 'package:frontend_mobile/presentation/find_password/find_password_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
@@ -26,16 +25,13 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
   bool _passwordVisibility = false;
   bool _passwordCheckVisibility = false;
 
-  bool _passwordError = false;
-  final String _passwordErrorText = '';
-
-  /// 실시간 입력과 관련된 비밀번호
+  /// '비밀번호 확인' 실시간 비밀번호 에러
   bool _realTimePasswordCheckError = false;
-  final String _realTimePasswordCheckErrorText = '비밀번호를 다시 입력해주세요';
+  String _realTimePasswordCheckErrorText = '';
 
-  /// api 통신와 관련된 비밀번호
-  bool _passwordCheckError = false;
-  String _passwordCheckErrorText = '';
+  /// '비밀번호 확인' 실시간 비밀번호 성공
+  bool _realTimePasswordCheckSuccess = false;
+  final String _realTimePasswordCheckSuccessText = '비밀번호가 서로 일치합니다';
 
   @override
   void initState() {
@@ -49,14 +45,38 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
   }
 
   void _onPasswordCheckRender() {
-    if (_passwordCheckController.text.isNotEmpty &&
-        !_passwordCheckController.text.isPasswordValid) {
-      setState(() {
-        _realTimePasswordCheckError = true;
-      });
-    } else {
+    /// 비밀번호가 비어있지 않은 경우
+    if (_passwordCheckController.text.isNotEmpty) {
+      /// 유효하지 않은 비밀번호인 경우
+      if (!_passwordController.text.isPasswordValid) {
+        setState(() {
+          _realTimePasswordCheckError = true;
+          _realTimePasswordCheckErrorText =
+              '최소 8자, 영문 소문자, 숫자, 특수문자 조합를 지켜주세요.';
+          _realTimePasswordCheckSuccess = false;
+        });
+      }
+      /// 비밀번호가 서로 다른 경우
+      else if (_passwordController.text != _passwordCheckController.text) {
+        setState(() {
+          _realTimePasswordCheckError = true;
+          _realTimePasswordCheckErrorText = '비밀번호가 서로 일치하지 않습니다';
+          _realTimePasswordCheckSuccess = false;
+        });
+      }
+      /// 유효한 비밀번호인 경우
+      else {
+        setState(() {
+          _realTimePasswordCheckError = false;
+          _realTimePasswordCheckSuccess = true;
+        });
+      }
+    }
+    /// 비밀번호가 비어있는 경우
+    else {
       setState(() {
         _realTimePasswordCheckError = false;
+        _realTimePasswordCheckSuccess = false;
       });
     }
   }
@@ -70,31 +90,20 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
     super.dispose();
   }
 
-  void _onNextButton() {
-    if (_passwordController.text != _passwordCheckController.text) {
-      setState(() {
-        _passwordError = true;
-        _passwordCheckError = true;
-        _passwordCheckErrorText = '비밀번호가 서로 일치하지 않습니다.';
-      });
-      return;
-    }
-
-    if (!_passwordController.text.isPasswordValid) {
-      setState(() {
-        _passwordError = true;
-        _passwordCheckError = true;
-        _passwordCheckErrorText = '최소 8자, 영문 소문자, 숫자, 특수문자 조합를 지켜주세요.';
-      });
-      return;
-    }
-
-    setState(() {
-      _passwordError = false;
-      _passwordCheckError = false;
-    });
-
+  void _onSubmit() {
     /// TODO: 비밀번호 변경 api 완성되면 연결해야 함
+    ///
+
+    // ref
+    //     .read(findPasswordViewModelProvider.notifier)
+    //     .postPasswordReset(
+    //       params: PasswordResetParams(
+    //         emailToken: emailToken,
+    //         email: email,
+    //         currentPassword: currentPassword,
+    //         newPassword: newPassword,
+    //       ),
+    //     );
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -144,8 +153,7 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
                     controller: _passwordController,
                     hintText: '비밀번호',
                     visibility: _passwordVisibility,
-                    error: _passwordError,
-                    errorText: _passwordErrorText,
+                    error: _realTimePasswordCheckError,
                     onVisibilityButtonTap: () {
                       setState(() {
                         _passwordVisibility = !_passwordVisibility;
@@ -159,14 +167,10 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
                     controller: _passwordCheckController,
                     hintText: '비밀번호 확인',
                     visibility: _passwordCheckVisibility,
-                    error:
-                        state.passwordStatus.isFailure
-                            ? _passwordCheckError
-                            : _realTimePasswordCheckError,
-                    errorText:
-                        state.passwordStatus.isFailure
-                            ? _passwordCheckErrorText
-                            : _realTimePasswordCheckErrorText,
+                    success: _realTimePasswordCheckSuccess,
+                    successText: _realTimePasswordCheckSuccessText,
+                    error: _realTimePasswordCheckError,
+                    errorText: _realTimePasswordCheckErrorText,
                     onVisibilityButtonTap: () {
                       setState(() {
                         _passwordCheckVisibility = !_passwordCheckVisibility;
@@ -185,10 +189,8 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
                 !(_passwordController.text.isNotEmpty &&
                     _passwordCheckController.text.isNotEmpty &&
                     _passwordController.text == _passwordCheckController.text &&
-                    !_passwordError &&
-                    !_realTimePasswordCheckError &&
-                    !_passwordCheckError),
-            onPressed: _onNextButton,
+                    !_realTimePasswordCheckError),
+            onPressed: _onSubmit,
           ),
           SizedBox(height: MediaQuery.of(context).padding.bottom + 32),
         ],

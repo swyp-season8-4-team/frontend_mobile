@@ -63,13 +63,17 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
       _error = false;
     });
 
-    final ToastManager toastManager = ref.read(toastManagerProvider);
+    Future<void>.delayed(const Duration(milliseconds: 100), () {
+      final ToastManager toastManager = ref.read(toastManagerProvider);
 
-    toastManager.show(
-      context: context,
-      aboveBottomNavigation: true,
-      toastWidget: const CustomSnackBar(description: '인증코드를 다시 보내드렸습니다.'),
-    );
+      if (mounted) {
+        toastManager.show(
+          context: context,
+          aboveBottomNavigation: true,
+          toastWidget: const CustomSnackBar(description: '인증코드를 다시 보내드렸습니다.'),
+        );
+      }
+    });
 
     ref
         .read(findPasswordViewModelProvider.notifier)
@@ -143,7 +147,8 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
                         Expanded(
                           child: CustomInputBox(
                             controller: _codeController,
-                            hintText: '인증번호 N자리',
+                            hintText: '인증번호 6자리',
+                            maxLength: 6,
                             closeControll: true,
                             success: _success,
                             successText: _successText,
@@ -157,7 +162,8 @@ class _FindPasswordStep2State extends ConsumerState<FindPasswordStep2> {
                         ),
                         const SizedBox(width: 10),
                         CustomFillButton.medium(
-                          label: '중복확인',
+                          label: '인증확인',
+                          backgroundColor: CustomFillButtonColor.olive,
                           disabled:
                               state.postVerificationRequestStatus.isLoading ||
                               state.postVerifyStatus.isLoading ||

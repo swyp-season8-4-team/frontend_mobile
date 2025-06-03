@@ -9,6 +9,7 @@ class LocalLoginState with _$LocalLoginState {
         accessToken: '',
         refreshToken: '',
         tokenType: '',
+        refreshExpiresIn: -1,
         expiresIn: -1,
         userUuid: '',
         email: '',

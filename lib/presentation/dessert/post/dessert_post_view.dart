@@ -25,6 +25,7 @@ import 'package:frontend_mobile/presentation/dessert/post/widget/participant/des
 import 'package:frontend_mobile/presentation/dessert/post/widget/participant/dessert_post_participant_none.dart';
 import 'package:frontend_mobile/presentation/dessert/post/widget/participant/dessert_post_participant_pending.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
 
 class DessertPost extends ConsumerStatefulWidget {
@@ -182,7 +183,10 @@ class _DessertPostState extends ConsumerState<DessertPost> {
                 description: next.exception.message,
                 primaryButton: CustomDialogButton(
                   text: '확인',
-                  onTap: () => context.pop(),
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
                 ),
               );
             },
@@ -212,7 +216,10 @@ class _DessertPostState extends ConsumerState<DessertPost> {
                 description: next.exception.message,
                 primaryButton: CustomDialogButton(
                   text: '확인',
-                  onTap: () => context.pop(),
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
                 ),
               );
             },
@@ -251,7 +258,10 @@ class _DessertPostState extends ConsumerState<DessertPost> {
                 description: next.exception.message,
                 primaryButton: CustomDialogButton(
                   text: '확인',
-                  onTap: () => context.pop(),
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
                 ),
               );
             },
@@ -284,7 +294,10 @@ class _DessertPostState extends ConsumerState<DessertPost> {
                 description: next.exception.message,
                 primaryButton: CustomDialogButton(
                   text: '확인',
-                  onTap: () => context.pop(),
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
                 ),
               );
             },

@@ -63,13 +63,17 @@ class _SignUpStep2State extends ConsumerState<SignUpStep2> {
       _error = false;
     });
 
-    final ToastManager toastManager = ref.read(toastManagerProvider);
+    Future<void>.delayed(const Duration(milliseconds: 100), () {
+      final ToastManager toastManager = ref.read(toastManagerProvider);
 
-    toastManager.show(
-      context: context,
-      aboveBottomNavigation: true,
-      toastWidget: const CustomSnackBar(description: '인증코드를 다시 보내드렸습니다.'),
-    );
+      if (mounted) {
+        toastManager.show(
+          context: context,
+          aboveBottomNavigation: true,
+          toastWidget: const CustomSnackBar(description: '인증코드를 다시 보내드렸습니다.'),
+        );
+      }
+    });
 
     ref
         .read(signUpViewModelProvider.notifier)
