@@ -55,7 +55,7 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
         setState(() {
           _realTimePasswordCheckError = true;
           _realTimePasswordCheckErrorText =
-              '최소 8자, 영문 소문자, 숫자, 특수문자 조합을 지켜주세요.';
+              '최소 8자, 영문 소문자, 숫자, 특수문자(@\$!%#?&) 조합을 지켜주세요.';
           _realTimePasswordCheckSuccess = false;
         });
       }
@@ -171,7 +171,7 @@ class _FindPasswordStep3State extends ConsumerState<FindPasswordStep3> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '최소 8자, 영문 소문자, 숫자, 특수문자 조합',
+                      '최소 8자, 영문 소문자, 숫자, 특수문자(@\$!%#?&) 조합',
                       style: textTheme.titleSmall?.copyWith(
                         color: ScaleColorConfig.neutral30,
                       ),
