@@ -97,4 +97,15 @@ class DessertBoardViewModel extends StateNotifier<DessertBoardState> {
       backupData: state.backupData.copyWith(mates: newBackupMates),
     );
   }
+
+  void removeData({required String mateUuid}) {
+    final List<MateDetailModel> newDataMates =
+        state.data.mates
+            .where((MateDetailModel element) => element.mateUuid != mateUuid)
+            .toList();
+
+    state = state.copyWith(
+      backupData: state.backupData.copyWith(mates: newDataMates),
+    );
+  }
 }

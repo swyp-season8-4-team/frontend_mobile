@@ -1,18 +1,24 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:frontend_mobile/data/entity/mate/mate_delete_entity.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_entity.dart';
+import 'package:frontend_mobile/data/entity/mate/mate_patch_entity.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_report_entity.dart';
 import 'package:frontend_mobile/data/query_param/mate/get_mate_query_param.dart';
 import 'package:frontend_mobile/data/query_param/mate/get_my_mate_query_param.dart';
+import 'package:frontend_mobile/data/request_body/mate/patch_mate_request_body.dart';
 import 'package:frontend_mobile/data/request_body/mate/post_mate_report_request_body.dart';
 import 'package:frontend_mobile/data/request_body/mate/post_mate_request_body.dart';
+import 'package:frontend_mobile/domain/model/mate/mate_delete_model.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_detail_model.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_model.dart';
+import 'package:frontend_mobile/domain/model/mate/mate_patch_model.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_report_model.dart';
 import 'package:frontend_mobile/domain/param/mate/get_mate_params.dart';
 import 'package:frontend_mobile/domain/param/mate/get_my_mate_params.dart';
+import 'package:frontend_mobile/domain/param/mate/patch_mate_params.dart';
 import 'package:frontend_mobile/domain/param/mate/post_mate_params.dart';
 import 'package:frontend_mobile/domain/param/mate/post_mate_report_params.dart';
 
@@ -136,5 +142,49 @@ extension PostMateReportParamsExt on PostMateReportParams {
       reportCategoryId: reportCategoryId,
       reportComment: reportComment,
     );
+  }
+}
+
+extension MatePatchEntityExt on MatePatchEntity {
+  MatePatchModel toModel() {
+    return MatePatchModel(message: message);
+  }
+}
+
+extension PatchMateParamsExt on PatchMateParams {
+  PatchMateRequestBody toBody() {
+    return PatchMateRequestBody(
+      userUuid: userUuid,
+      mateCategoryId: mateCategoryId,
+      title: title,
+      content: content,
+      recruitYn: recruitYn,
+      capacity: capacity,
+      mateImage: mateImage,
+      place: place?.toEntity(),
+      storeId: storeId,
+    );
+  }
+}
+
+extension PatchMateRequestBodyExt on PatchMateRequestBody {
+  FormData toFormData() {
+    final String requestJson = jsonEncode(toJson());
+
+    final MultipartFile request = MultipartFile.fromString(
+      requestJson,
+      contentType: DioMediaType('application', 'json'),
+    );
+
+    return FormData.fromMap(<String, MultipartFile?>{
+      'request': request,
+      'mateImage': mateImage,
+    });
+  }
+}
+
+extension MateDeleteEntityExt on MateDeleteEntity {
+  MateDeleteModel toModel() {
+    return MateDeleteModel(message: message);
   }
 }

@@ -7,7 +7,12 @@ import 'package:frontend_mobile/common/design_system/component/etc/option_menu_d
 import 'package:frontend_mobile/common/design_system/component/profile_photo/profile_photo_size.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/core/resource/status.dart';
+import 'package:frontend_mobile/domain/param/mate/delete_mate_params.dart';
+import 'package:frontend_mobile/domain/param/mate/get_mate_params.dart';
 import 'package:frontend_mobile/domain/param/user/block_user_params.dart';
+import 'package:frontend_mobile/presentation/dessert/dessert_board_view_model.dart';
+import 'package:frontend_mobile/presentation/dessert/modify/dessert_modify_view_model.dart';
 import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
@@ -28,6 +33,45 @@ class DessertPostHeaderInfoThird extends ConsumerWidget {
     final DessertPostState state = ref.watch(dessertPostViewModelProvider);
     final UserState userstate = ref.read(userViewModelProvider);
     final TextTheme textTheme = Theme.of(context).textTheme;
+
+    ref.listen(dessertModifyViewModelProvider, (
+      _,
+      DessertModifyState next,
+    ) async {
+      switch (next.deleteMateStatus) {
+        case Status.success:
+          await ref
+              .read(dessertBoardViewModelProvider.notifier)
+              .getMate(params: GetMateParams(to: 1000));
+
+          ref
+              .read(dessertBoardViewModelProvider.notifier)
+              .removeData(mateUuid: state.data.userUuid);
+
+          if (context.mounted) {
+            context.goNamed(AppRoutes.dessertBoard.name);
+          }
+          break;
+
+        case Status.failure:
+          await showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
+                ),
+              );
+            },
+          );
+        default:
+      }
+    });
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,6 +112,28 @@ class DessertPostHeaderInfoThird extends ConsumerWidget {
             margin: const EdgeInsets.only(top: 8),
             child: CustomOptionMenuDropdown(
               optionMenus: <CustomOptionMenu>[
+                if (state.data.userUuid == userstate.data.userUuid)
+                  CustomOptionMenu(
+                    text: '수정하기',
+                    onTap: () {
+                      optionHandler();
+                      context.pushNamed(AppRoutes.dessertModifyStep1.name);
+                    },
+                  ),
+                if (state.data.userUuid == userstate.data.userUuid)
+                  CustomOptionMenu(
+                    text: '삭제하기',
+                    onTap: () {
+                      optionHandler();
+                      ref
+                          .read(dessertModifyViewModelProvider.notifier)
+                          .deleteMate(
+                            params: DeleteMateParams(
+                              mateUuid: state.data.mateUuid,
+                            ),
+                          );
+                    },
+                  ),
                 if (state.data.userUuid != userstate.data.userUuid)
                   CustomOptionMenu(
                     text: '신고하기',
