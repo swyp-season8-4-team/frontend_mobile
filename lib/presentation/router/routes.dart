@@ -241,6 +241,24 @@ abstract class AppRoutes {
     path: 'post',
   );
 
+  /// 디저트 메이트 > 게시판 > 게시글 > 수정하기
+  static RouteInfo dessertModify = RouteInfo(
+    name: '${dessertPost.name}/modify',
+    path: 'modify',
+  );
+
+  /// 디저트 메이트 > 게시판 > 게시글 > 수정하기 > step1
+  static RouteInfo dessertModifyStep1 = RouteInfo(
+    name: '${dessertModify.name}/step1',
+    path: 'step1',
+  );
+
+  /// 디저트 메이트 > 게시판 > 게시글 > 수정하기 > step2
+  static RouteInfo dessertModifyStep2 = RouteInfo(
+    name: '${dessertModify.name}/step2',
+    path: 'step2',
+  );
+
   /// 디저트 메이트 > 게시판 > 게시글 > 게시글 신고
   static RouteInfo dessertPostReport = RouteInfo(
     name: '${dessertPost.name}/report',

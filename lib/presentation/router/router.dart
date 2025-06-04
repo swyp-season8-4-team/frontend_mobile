@@ -5,6 +5,8 @@ import 'package:frontend_mobile/domain/model/preference/preference_model.dart';
 import 'package:frontend_mobile/presentation/dessert/comment/report/dessert_comment_report_success_view.dart';
 import 'package:frontend_mobile/presentation/dessert/comment/report/dessert_comment_report_view.dart';
 import 'package:frontend_mobile/presentation/dessert/dessert_board_view.dart';
+import 'package:frontend_mobile/presentation/dessert/modify/view/dessert_modify_step1.dart';
+import 'package:frontend_mobile/presentation/dessert/modify/view/dessert_modify_step2.dart';
 import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view.dart';
 import 'package:frontend_mobile/presentation/dessert/post/report/dessert_post_report_success_view.dart';
 import 'package:frontend_mobile/presentation/dessert/post/report/dessert_post_report_view.dart';
@@ -523,6 +525,34 @@ class AppRouter {
                   return DessertPost(mateUuid: mateUuid);
                 },
                 routes: <RouteBase>[
+                  /// 수정하기
+                  GoRoute(
+                    path: AppRoutes.dessertModify.path,
+                    name: AppRoutes.dessertModify.name,
+                    redirect: (_, __) => null,
+                    routes: <RouteBase>[
+                      /// step1
+                      GoRoute(
+                        path: AppRoutes.dessertModifyStep1.path,
+                        name: AppRoutes.dessertModifyStep1.name,
+                        builder: (BuildContext context, GoRouterState state) {
+                          return const DessertModifyStep1();
+                        },
+                      ),
+
+                      /// step2
+                      GoRoute(
+                        path: AppRoutes.dessertModifyStep2.path,
+                        name: AppRoutes.dessertModifyStep2.name,
+                        builder: (BuildContext context, GoRouterState state) {
+                          final String subject = state.extra as String;
+
+                          return DessertModifyStep2(subject: subject);
+                        },
+                      ),
+                    ],
+                  ),
+
                   /// 게시글 신고
                   GoRoute(
                     path: AppRoutes.dessertPostReport.path,
