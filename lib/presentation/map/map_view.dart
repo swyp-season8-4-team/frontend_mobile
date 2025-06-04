@@ -134,6 +134,7 @@ class _MapViewState extends ConsumerState<MapView> {
                     primary: false,
                     leading: topBarIcon.leftLine(
                       onTap: () {
+                        userStoreListViewModel.invisibleAllOptionMenu();
                         _draggableScrollableController.animateTo(
                           0,
                           duration: const Duration(milliseconds: 300),
@@ -144,6 +145,7 @@ class _MapViewState extends ConsumerState<MapView> {
                     actions: <Widget>[
                       topBarIcon.close(
                         onTap: () {
+                          userStoreListViewModel.invisibleAllOptionMenu();
                           _draggableScrollableController.animateTo(
                             _snapSize,
                             duration: const Duration(milliseconds: 300),

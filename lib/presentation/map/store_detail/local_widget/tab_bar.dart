@@ -5,11 +5,13 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
     required this.storeDetail,
     required this.thumbnailImageUrls,
     required this.tabController,
+    this.key,
   });
 
   final StoreDetailModel storeDetail;
   final List<String> thumbnailImageUrls;
   final TabController tabController;
+  final Key? key;
 
   @override
   Widget build(
@@ -19,6 +21,7 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
   ) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Container(
+      key: key,
       height: 40,
       decoration: const BoxDecoration(
         color: ScaleColorConfig.surface90,

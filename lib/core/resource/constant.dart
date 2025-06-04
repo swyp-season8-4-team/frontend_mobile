@@ -99,3 +99,17 @@ enum ReportCategory {
   final String text;
   final int id;
 }
+
+/// 리뷰 작성자 성별
+enum ReviewerGender {
+  male,
+  female;
+
+  static ReviewerGender fromKey({required String key}) {
+    return switch (key) {
+      'MALE' => ReviewerGender.male,
+      'FEMALE' => ReviewerGender.female,
+      _ => ReviewerGender.male,
+    };
+  }
+}

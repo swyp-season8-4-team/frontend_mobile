@@ -113,6 +113,7 @@ class StoreDetailReview {
     this.storeId = -1,
     this.userUuid = '',
     this.nickname = '',
+    this.gender = '',
     this.content = '',
     this.rating = 1,
     this.profileImage,
@@ -126,6 +127,7 @@ class StoreDetailReview {
   final int storeId;
   final String userUuid;
   final String nickname;
+  final String gender;
   final String? profileImage;
   final String content;
   final double rating;

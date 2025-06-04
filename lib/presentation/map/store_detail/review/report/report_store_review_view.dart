@@ -94,11 +94,16 @@ class _ReportReviewViewState extends ConsumerState<ReportStoreReviewView> {
                           children: <Widget>[
                             Row(
                               children: <Widget>[
-                                // TODO: 성별에 따라 위젯을 달리 적용해야함
-                                CustomProfilePhotoSize.boy(
-                                  imageUrl: review.profileImage,
-                                  size: CustomProfilePhotoSizeEnum.s,
-                                ),
+                                if (review.gender == ReviewerGender.male)
+                                  CustomProfilePhotoSize.boy(
+                                    imageUrl: review.profileImage,
+                                    size: CustomProfilePhotoSizeEnum.s,
+                                  )
+                                else
+                                  CustomProfilePhotoSize.girl(
+                                    imageUrl: review.profileImage,
+                                    size: CustomProfilePhotoSizeEnum.s,
+                                  ),
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
