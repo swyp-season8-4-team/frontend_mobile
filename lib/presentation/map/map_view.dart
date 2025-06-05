@@ -189,11 +189,18 @@ class _MapViewState extends ConsumerState<MapView> {
                     setState(() {});
                   },
                   onMapTapped: (_, _) {
+                    if (_mapController == null) {
+                      return;
+                    }
                     _clearSelectedShop();
                   },
                   onCameraIdle: () async {
                     // 카메라 이동이 완료된 경우
                     // 카메라가 보고있는 Bound에 사용자의 위치가 포함되는지 확인
+
+                    if (_mapController == null) {
+                      return;
+                    }
 
                     final NLatLngBounds contentBounds =
                         await _mapController!.getContentBounds();
