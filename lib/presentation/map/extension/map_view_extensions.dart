@@ -153,7 +153,7 @@ extension MapViewWidgetExt on _MapViewState {
               Text(
                 '현 위치에서 새로고침',
                 style: textTheme.labelLarge?.copyWith(
-                  color: ScaleColorConfig.success50,
+                  color: ScaleColorConfig.neutral5,
                 ),
               ),
             ],
@@ -203,7 +203,7 @@ extension MapViewWidgetExt on _MapViewState {
               Text(
                 '찜한목록',
                 style: textTheme.labelLarge?.copyWith(
-                  color: ScaleColorConfig.primary40,
+                  color: ScaleColorConfig.neutral5,
                 ),
               ),
             ],
