@@ -53,6 +53,22 @@ final Provider<Dio> appDioProvider = Provider<Dio>((Ref ref) {
 
       /// 토큰 정보가 있는 경우
       if (json != null) {
+        /// 이전 토큰 모델이 적용되어 있는 경우 -> 토큰 정보가 없는 것으로 간주
+        if (!json.contains('refreshExpiresIn')) {
+          if (AppRouter.rootNavigatorKey.currentContext != null) {
+            final BuildContext context =
+                AppRouter.rootNavigatorKey.currentContext!;
+
+            Future<void>.delayed(const Duration(milliseconds: 300), () {
+              if (context.mounted) {
+                context.goNamed(AppRoutes.localLogin.name);
+              }
+            });
+          }
+
+          return;
+        }
+
         final TokenInfo tokenInfo = TokenInfo.deserialize(json: json);
 
         final DateTime now = DateTime.now();
