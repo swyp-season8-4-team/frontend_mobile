@@ -68,6 +68,7 @@ class _SignUpStep2State extends ConsumerState<SignUpStep2> {
     });
   }
 
+  //ignore: unused_element
   String _formattedTime({required int seconds}) {
     final Duration duration = Duration(seconds: seconds);
     final DateFormat formatter = DateFormat('mm:ss');
