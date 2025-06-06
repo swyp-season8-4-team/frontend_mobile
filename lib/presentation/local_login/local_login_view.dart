@@ -253,146 +253,151 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
       }
     });
 
-    return CustomLoadingOverlay(
-      isLoading: state.status.isLoading,
-      child: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.dark,
-        child: Material(
-          child: Align(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Assets.image.logo.image(width: 172, fit: BoxFit.fitWidth),
-                    const SizedBox(height: 73),
+    return PopScope(
+      canPop: false,
+      child: CustomLoadingOverlay(
+        isLoading: state.status.isLoading,
+        child: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.dark,
+          child: Material(
+            child: Align(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Assets.image.logo.image(width: 172, fit: BoxFit.fitWidth),
+                      const SizedBox(height: 73),
 
-                    CustomInputBox(
-                      controller: _emailController,
-                      error: _emailError,
-                      errorText: _emailErrorText,
-                      hintText: '이메일',
-                      closeControll: true,
-                    ),
-                    const SizedBox(height: 12),
-                    CustomInputBox(
-                      controller: _passwordController,
-                      error:
-                          isRealTimePasswordError != null &&
-                                  !isRealTimePasswordError!
-                              ? _passwordError
-                              : _realTimePasswordError,
-                      errorText:
-                          isRealTimePasswordError != null &&
-                                  !isRealTimePasswordError!
-                              ? _passwordErrorText
-                              : _realTimePasswordErrorText,
-                      hintText: '비밀번호',
-                      onVisibilityButtonTap: () {
-                        setState(() {
-                          _visibility = !_visibility;
-                        });
-                      },
-                      visibility: _visibility,
-                      closeControll: true,
-                      visibilityControll: true,
-                    ),
-                    const SizedBox(height: 12),
+                      CustomInputBox(
+                        controller: _emailController,
+                        error: _emailError,
+                        errorText: _emailErrorText,
+                        hintText: '이메일',
+                        closeControll: true,
+                      ),
+                      const SizedBox(height: 12),
+                      CustomInputBox(
+                        controller: _passwordController,
+                        error:
+                            isRealTimePasswordError != null &&
+                                    !isRealTimePasswordError!
+                                ? _passwordError
+                                : _realTimePasswordError,
+                        errorText:
+                            isRealTimePasswordError != null &&
+                                    !isRealTimePasswordError!
+                                ? _passwordErrorText
+                                : _realTimePasswordErrorText,
+                        hintText: '비밀번호',
+                        onVisibilityButtonTap: () {
+                          setState(() {
+                            _visibility = !_visibility;
+                          });
+                        },
+                        visibility: _visibility,
+                        closeControll: true,
+                        visibilityControll: true,
+                      ),
+                      const SizedBox(height: 12),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        CustomRadioButton.small(
-                          onTap: () {
-                            setState(() {
-                              _keepLoggedIn = !_keepLoggedIn;
-                            });
-                          },
-                          label: '로그인 유지',
-                          value: _keepLoggedIn,
-                        ),
-                        CustomTextButton.underline(
-                          label: '비밀번호 찾기',
-                          onPressed: () {
-                            context.pushNamed(AppRoutes.findPasswordStep1.name);
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 44),
-                    CustomFillButton.large(
-                      label: '로그인',
-                      disabled:
-                          !_emailController.text.isEmail ||
-                          _passwordController.text.length < 8 ||
-                          !_passwordController.text.isPasswordValid ||
-                          state.status.isLoading,
-                      onPressed: _onSubmit,
-                    ),
-                    // Container(
-                    //   margin: const EdgeInsets.symmetric(vertical: 12),
-                    //   child: Stack(
-                    //     children: <Widget>[
-                    //       const Divider(color: ScaleColorConfig.neutral70),
-                    //       Align(
-                    //         child: Container(
-                    //           padding: const EdgeInsets.symmetric(horizontal: 16),
-                    //           color: ScaleColorConfig.surface90,
-                    //           child: Text(
-                    //             '또는',
-                    //             style: textTheme.labelSmall?.copyWith(
-                    //               color: const Color(0xFF6C6C6C),
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-
-                    // /// TODO: 카카오 로그인 연동 해야됨
-                    // CustomSnsLoginButton(
-                    //   svgImage: Assets.icon.sns.kakao,
-                    //   label: '카카오 로그인',
-                    //   onPressed: () {
-                    //     showDialog(
-                    //       context: context,
-                    //       builder: (BuildContext context) {
-                    //         return CustomDialog.basic(
-                    //           description: '서비스 준비중',
-                    //           primaryButton: CustomDialogButton(
-                    //             text: '확인',
-                    //             onTap: () => context.pop(),
-                    //           ),
-                    //         );
-                    //       },
-                    //     );
-                    //   },
-                    //   backgroundColor: const Color(0xFFFEE500),
-                    //   foregroundColor: const Color(0xFF191919),
-                    // ),
-                    const SizedBox(height: 34),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          '아직 계정이 없으신가요?',
-                          style: textTheme.bodySmall?.copyWith(
-                            color: ScaleColorConfig.neutral30,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          CustomRadioButton.small(
+                            onTap: () {
+                              setState(() {
+                                _keepLoggedIn = !_keepLoggedIn;
+                              });
+                            },
+                            label: '로그인 유지',
+                            value: _keepLoggedIn,
                           ),
-                        ),
+                          CustomTextButton.underline(
+                            label: '비밀번호 찾기',
+                            onPressed: () {
+                              context.pushNamed(
+                                AppRoutes.findPasswordStep1.name,
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 44),
+                      CustomFillButton.large(
+                        label: '로그인',
+                        disabled:
+                            !_emailController.text.isEmail ||
+                            _passwordController.text.length < 8 ||
+                            !_passwordController.text.isPasswordValid ||
+                            state.status.isLoading,
+                        onPressed: _onSubmit,
+                      ),
+                      // Container(
+                      //   margin: const EdgeInsets.symmetric(vertical: 12),
+                      //   child: Stack(
+                      //     children: <Widget>[
+                      //       const Divider(color: ScaleColorConfig.neutral70),
+                      //       Align(
+                      //         child: Container(
+                      //           padding: const EdgeInsets.symmetric(horizontal: 16),
+                      //           color: ScaleColorConfig.surface90,
+                      //           child: Text(
+                      //             '또는',
+                      //             style: textTheme.labelSmall?.copyWith(
+                      //               color: const Color(0xFF6C6C6C),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
 
-                        CustomTextButton.underline(
-                          label: '회원가입',
-                          onPressed: () {
-                            context.pushNamed(AppRoutes.signUpStep0.name);
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
+                      // /// TODO: 카카오 로그인 연동 해야됨
+                      // CustomSnsLoginButton(
+                      //   svgImage: Assets.icon.sns.kakao,
+                      //   label: '카카오 로그인',
+                      //   onPressed: () {
+                      //     showDialog(
+                      //       context: context,
+                      //       builder: (BuildContext context) {
+                      //         return CustomDialog.basic(
+                      //           description: '서비스 준비중',
+                      //           primaryButton: CustomDialogButton(
+                      //             text: '확인',
+                      //             onTap: () => context.pop(),
+                      //           ),
+                      //         );
+                      //       },
+                      //     );
+                      //   },
+                      //   backgroundColor: const Color(0xFFFEE500),
+                      //   foregroundColor: const Color(0xFF191919),
+                      // ),
+                      const SizedBox(height: 34),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            '아직 계정이 없으신가요?',
+                            style: textTheme.bodySmall?.copyWith(
+                              color: ScaleColorConfig.neutral30,
+                            ),
+                          ),
+
+                          CustomTextButton.underline(
+                            label: '회원가입',
+                            onPressed: () {
+                              context.pushNamed(AppRoutes.signUpStep0.name);
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

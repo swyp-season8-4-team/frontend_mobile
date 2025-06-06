@@ -42,7 +42,7 @@ class SignUpStep6 extends StatelessWidget {
               child: CustomFillButton.large(
                 label: '로그인 가기',
                 onPressed: () {
-                  context.goNamed(AppRoutes.localLogin.name);
+                  context.pushNamed(AppRoutes.localLogin.name);
                 },
               ),
             ),

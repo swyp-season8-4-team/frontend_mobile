@@ -68,7 +68,7 @@ class _SignUpStep1State extends ConsumerState<SignUpStep1> {
           setState(() {
             _isValidEmail = true;
             _success = true;
-            _successText = next.verificationRequestData.message;
+            _successText = '사용 가능한 이메일 입니다';
           });
 
         case Status.failure:

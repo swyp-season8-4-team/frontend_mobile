@@ -155,6 +155,7 @@ class CustomFillButton extends StatelessWidget {
           padding: _padding,
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           elevation: 0,
+          animationDuration: Duration.zero,
           textStyle: _textStyle(context: context),
         ).copyWith(
           foregroundColor: _foregroundColor,
