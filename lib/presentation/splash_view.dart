@@ -45,10 +45,7 @@ class _SplashViewState extends ConsumerState<SplashView> {
                 description: next.exception.message,
                 primaryButton: CustomDialogButton(
                   text: '확인',
-                  onTap:
-                      next.exception.code == 'ZZ003'
-                          ? () => context.goNamed(AppRoutes.localLogin.name)
-                          : () => context.pop(),
+                  onTap: () => context.goNamed(AppRoutes.localLogin.name),
                 ),
               );
             },
@@ -70,10 +67,7 @@ class _SplashViewState extends ConsumerState<SplashView> {
                 description: next.exception.message,
                 primaryButton: CustomDialogButton(
                   text: '확인',
-                  onTap:
-                      next.exception.code == 'ZZ003'
-                          ? () => context.goNamed(AppRoutes.localLogin.name)
-                          : () => context.pop(),
+                  onTap: () => context.goNamed(AppRoutes.localLogin.name),
                 ),
               );
             },
