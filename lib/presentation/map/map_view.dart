@@ -210,17 +210,19 @@ class _MapViewState extends ConsumerState<MapView> {
                             .read(geoLocationManagerProvider)
                             .getCurrentPosition();
 
-                    ref
-                        .read(mapViewModelProvider.notifier)
-                        .updateIsRefreshButtonVisible(
-                          visible:
-                              !contentBounds.containsPoint(
-                                NLatLng(
-                                  currentPosition.latitude,
-                                  currentPosition.longitude,
+                    if (context.mounted) {
+                      ref
+                          .read(mapViewModelProvider.notifier)
+                          .updateIsRefreshButtonVisible(
+                            visible:
+                                !contentBounds.containsPoint(
+                                  NLatLng(
+                                    currentPosition.latitude,
+                                    currentPosition.longitude,
+                                  ),
                                 ),
-                              ),
-                        );
+                          );
+                    }
                   },
                 ),
               ),
