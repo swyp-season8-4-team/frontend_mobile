@@ -8,32 +8,31 @@ import 'package:frontend_mobile/common/design_system/component/button/fill_butto
 import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/etc/option_menu_dropdown.dart';
-import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar.dart';
-import 'package:frontend_mobile/common/design_system/component/snackbar/snack_bar_right_item.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/resource/top_bar_icon.dart';
 import 'package:frontend_mobile/common/design_system/component/top_bar/sub_top_bar.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
-import 'package:frontend_mobile/core/manager/toast/toast_manager.dart';
 import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
-import 'package:frontend_mobile/domain/param/mate/post_mate_params.dart';
-import 'package:frontend_mobile/presentation/dessert/write/dessert_write_view_model.dart';
+import 'package:frontend_mobile/domain/param/mate/patch_mate_params.dart';
+import 'package:frontend_mobile/presentation/dessert/modify/dessert_modify_view_model.dart';
+import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
-class DessertWriteStep2 extends ConsumerStatefulWidget {
-  const DessertWriteStep2({required this.subject, super.key});
+class DessertModifyStep2 extends ConsumerStatefulWidget {
+  const DessertModifyStep2({required this.subject, super.key});
 
   final String subject;
 
   @override
-  ConsumerState<DessertWriteStep2> createState() => _DessertWriteStep2State();
+  ConsumerState<DessertModifyStep2> createState() => _DessertModifyStep2State();
 }
 
-class _DessertWriteStep2State extends ConsumerState<DessertWriteStep2> {
+class _DessertModifyStep2State extends ConsumerState<DessertModifyStep2> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
 
@@ -48,6 +47,15 @@ class _DessertWriteStep2State extends ConsumerState<DessertWriteStep2> {
     super.initState();
     titleController.addListener(onTitle);
     contentController.addListener(onContent);
+
+    final DessertPostState state = ref.read(dessertPostViewModelProvider);
+    titleController.text = state.data.title;
+    contentController.text = state.data.content;
+    personNumber = state.data.capacity;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await downloadImageToFile();
+    });
   }
 
   void onTitle() {
@@ -56,6 +64,26 @@ class _DessertWriteStep2State extends ConsumerState<DessertWriteStep2> {
 
   void onContent() {
     setState(() {});
+  }
+
+  Future<void> downloadImageToFile() async {
+    final DessertPostState state = ref.read(dessertPostViewModelProvider);
+    final String imageUrl = state.data.mateImage;
+
+    if (imageUrl.isNotEmpty) {
+      final Directory tempDir = await getTemporaryDirectory();
+      final String filePath = '${tempDir.path}/${DateTime.now()}.png';
+
+      final Dio dio = Dio();
+      await dio.download(
+        imageUrl,
+        filePath,
+        options: Options(responseType: ResponseType.bytes),
+      );
+
+      _imageFile = File(filePath);
+      setState(() {});
+    }
   }
 
   void _onSubmit() async {
@@ -99,10 +127,13 @@ class _DessertWriteStep2State extends ConsumerState<DessertWriteStep2> {
     }
 
     if (context.mounted) {
+      final DessertPostState postState = ref.read(dessertPostViewModelProvider);
+
       await ref
-          .read(dessertWriteViewModelProvider.notifier)
-          .postMate(
-            params: PostMateParams(
+          .read(dessertModifyViewModelProvider.notifier)
+          .patchMate(
+            params: PatchMateParams(
+              mateUuid: postState.data.mateUuid,
               userUuid: ref.read(userViewModelProvider).data.userUuid,
               mateCategoryId: mateCategoryId,
               capacity: personNumber,
@@ -136,43 +167,37 @@ class _DessertWriteStep2State extends ConsumerState<DessertWriteStep2> {
 
   @override
   Widget build(BuildContext context) {
-    final DessertWriteState state = ref.watch(dessertWriteViewModelProvider);
+    final DessertModifyState modifyState = ref.watch(
+      dessertModifyViewModelProvider,
+    );
     final TextTheme textTheme = Theme.of(context).textTheme;
     final TopBarIcon icon = TopBarIcon();
 
-    ref.listen(dessertWriteViewModelProvider, (_, DessertWriteState next) {
-      final ToastManager toastManager = ref.read(toastManagerProvider);
-
-      switch (next.status) {
+    ref.listen(dessertModifyViewModelProvider, (
+      _,
+      DessertModifyState next,
+    ) async {
+      switch (next.patchMateStatus) {
         case Status.success:
-          context
-              .pushNamed(AppRoutes.dessertPost.name, extra: next.data.mateUuid)
-              .then((_) {
-                if (context.mounted) {
-                  context.pop();
-                  context.pop();
-                }
-              });
-
-          toastManager.show(
-            context: context,
-            toastWidget: CustomSnackBar(
-              description: '🎉  디저트 메이트 모임글이 등록됐어요! ',
-              actionButton: SnackBarActionButton(onTap: () {}, label: '확인'),
-            ),
-          );
+          context.pop();
+          context.pop();
           break;
 
         case Status.failure:
-          toastManager.show(
+          await showDialog(
             context: context,
-            toastWidget: CustomSnackBar(
-              description: '⛔️ 모임글 등록 중 문제가 발생했어요.\n다시 시도해주세요',
-              actionButton: SnackBarActionButton(
-                onTap: () => _onSubmit(),
-                label: '다시 시도',
-              ),
-            ),
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
+                ),
+              );
+            },
           );
           break;
 
@@ -188,7 +213,7 @@ class _DessertWriteStep2State extends ConsumerState<DessertWriteStep2> {
         });
       },
       child: CustomLoadingOverlay(
-        isLoading: state.status.isLoading,
+        isLoading: modifyState.patchMateStatus.isLoading,
         child: Scaffold(
           appBar: CustomSubTopBar(
             leading: icon.close(
@@ -207,9 +232,9 @@ class _DessertWriteStep2State extends ConsumerState<DessertWriteStep2> {
                       secondaryButton: CustomDialogButton(
                         text: '나가기',
                         onTap: () {
-                          while (context.canPop()) {
-                            context.pop();
-                          }
+                          context.pop();
+                          context.pop();
+                          context.pop();
                         },
                       ),
                     );
@@ -218,7 +243,7 @@ class _DessertWriteStep2State extends ConsumerState<DessertWriteStep2> {
               },
             ),
             primary: false,
-            title: '글쓰기',
+            title: '작성글 수정',
             actions: <Widget>[
               CustomFillButton.medium(
                 width: 70,
@@ -226,7 +251,7 @@ class _DessertWriteStep2State extends ConsumerState<DessertWriteStep2> {
                     titleController.text.isEmpty ||
                     personNumber == -1 ||
                     contentController.text.isEmpty,
-                label: '등록',
+                label: '수정',
                 backgroundColor: CustomFillButtonColor.olive,
                 onPressed: _onSubmit,
               ),
@@ -420,9 +445,6 @@ class _DessertWriteStep2State extends ConsumerState<DessertWriteStep2> {
                             Image.file(
                               _imageFile!,
                               width: double.infinity,
-                              height: 245,
-                              cacheWidth: 328,
-                              cacheHeight: 245,
                               fit: BoxFit.cover,
                             ),
 

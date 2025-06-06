@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend_mobile/core/resource/network/app_dio.dart';
+import 'package:frontend_mobile/data/entity/mate/mate_delete_entity.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_detail_entity.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_entity.dart';
+import 'package:frontend_mobile/data/entity/mate/mate_patch_entity.dart';
 import 'package:frontend_mobile/data/entity/mate/mate_report_entity.dart';
 import 'package:frontend_mobile/data/query_param/mate/get_mate_query_param.dart';
 import 'package:frontend_mobile/data/query_param/mate/get_my_mate_query_param.dart';
@@ -47,4 +49,16 @@ abstract interface class MateRemoteDataSource {
     @Path() required String mateUuid,
     @Body() required PostMateReportRequestBody body,
   });
+
+  /// 메이트 수정
+  @PATCH('/api/mates/{mateUuid}')
+  @MultiPart()
+  Future<MatePatchEntity> patchMate({
+    @Path() required String mateUuid,
+    @Body() required FormData formData,
+  });
+
+  /// 메이트 삭제
+  @DELETE('/api/mates/{mateUuid}')
+  Future<MateDeleteEntity> deleteMate({@Path() required String mateUuid});
 }
