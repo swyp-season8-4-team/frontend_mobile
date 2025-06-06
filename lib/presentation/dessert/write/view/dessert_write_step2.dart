@@ -93,7 +93,7 @@ class _DessertWriteStep2State extends ConsumerState<DessertWriteStep2> {
     if (_imageFile != null) {
       mateImage = await MultipartFile.fromFile(
         _imageFile!.path,
-        filename: 'profile_${DateTime.now().toIso8601String()}.png',
+        filename: '${DateTime.now()}.png',
         contentType: DioMediaType('image', 'png'),
       );
     }

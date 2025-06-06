@@ -8,9 +8,13 @@ import 'package:frontend_mobile/core/resource/usecase.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_delete_model.dart';
 import 'package:frontend_mobile/domain/model/mate/mate_patch_model.dart';
 import 'package:frontend_mobile/domain/param/mate/delete_mate_params.dart';
+import 'package:frontend_mobile/domain/param/mate/get_mate_detail_params.dart';
+import 'package:frontend_mobile/domain/param/mate/get_mate_params.dart';
 import 'package:frontend_mobile/domain/param/mate/patch_mate_params.dart';
 import 'package:frontend_mobile/domain/usecase/mate/delete_mate_usecase.dart';
 import 'package:frontend_mobile/domain/usecase/mate/patch_mate_usecase.dart';
+import 'package:frontend_mobile/presentation/dessert/dessert_board_view_model.dart';
+import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view_model.dart';
 
 part 'dessert_modify_state.dart';
 part 'generated/dessert_modify_view_model.freezed.dart';
@@ -42,11 +46,21 @@ class DessertModifyViewModel extends StateNotifier<DessertModifyState> {
           params: params,
         );
 
-    response.map(
-      success: (Success<MatePatchModel, CustomException> success) {
-        // ref
-        //     .read(dessertBoardViewModelProvider.notifier)
-        //     .modifyData(item: success.data);
+    await response.map(
+      success: (Success<MatePatchModel, CustomException> success) async {
+        await ref
+            .read(dessertBoardViewModelProvider.notifier)
+            .getMate(params: GetMateParams(to: 1000));
+
+        final DessertPostState postState = ref.read(
+          dessertPostViewModelProvider,
+        );
+
+        await ref
+            .read(dessertPostViewModelProvider.notifier)
+            .getMateDetail(
+              params: GetMateDetailParams(mateUuid: postState.data.mateUuid),
+            );
 
         state = state.copyWith(patchMateStatus: Status.success);
       },

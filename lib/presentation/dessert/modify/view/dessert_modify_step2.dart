@@ -18,8 +18,10 @@ import 'package:frontend_mobile/domain/param/mate/patch_mate_params.dart';
 import 'package:frontend_mobile/presentation/dessert/modify/dessert_modify_view_model.dart';
 import 'package:frontend_mobile/presentation/dessert/post/dessert_post_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
+import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 class DessertModifyStep2 extends ConsumerStatefulWidget {
   const DessertModifyStep2({required this.subject, super.key});
@@ -40,8 +42,6 @@ class _DessertModifyStep2State extends ConsumerState<DessertModifyStep2> {
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
 
-  bool showPhoto = false;
-
   @override
   void initState() {
     super.initState();
@@ -52,7 +52,10 @@ class _DessertModifyStep2State extends ConsumerState<DessertModifyStep2> {
     titleController.text = state.data.title;
     contentController.text = state.data.content;
     personNumber = state.data.capacity;
-    showPhoto = state.data.mateImage.isNotEmpty;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await downloadImageToFile();
+    });
   }
 
   void onTitle() {
@@ -61,6 +64,26 @@ class _DessertModifyStep2State extends ConsumerState<DessertModifyStep2> {
 
   void onContent() {
     setState(() {});
+  }
+
+  Future<void> downloadImageToFile() async {
+    final DessertPostState state = ref.read(dessertPostViewModelProvider);
+    final String imageUrl = state.data.mateImage;
+
+    if (imageUrl.isNotEmpty) {
+      final Directory tempDir = await getTemporaryDirectory();
+      final String filePath = '${tempDir.path}/${DateTime.now()}.png';
+
+      final Dio dio = Dio();
+      await dio.download(
+        imageUrl,
+        filePath,
+        options: Options(responseType: ResponseType.bytes),
+      );
+
+      _imageFile = File(filePath);
+      setState(() {});
+    }
   }
 
   void _onSubmit() async {
@@ -98,7 +121,7 @@ class _DessertModifyStep2State extends ConsumerState<DessertModifyStep2> {
     if (_imageFile != null) {
       mateImage = await MultipartFile.fromFile(
         _imageFile!.path,
-        filename: 'profile_${DateTime.now()}.png',
+        filename: '${DateTime.now()}.png',
         contentType: DioMediaType('image', 'png'),
       );
     }
@@ -147,49 +170,40 @@ class _DessertModifyStep2State extends ConsumerState<DessertModifyStep2> {
     final DessertModifyState modifyState = ref.watch(
       dessertModifyViewModelProvider,
     );
-    final DessertPostState postState = ref.watch(dessertPostViewModelProvider);
     final TextTheme textTheme = Theme.of(context).textTheme;
     final TopBarIcon icon = TopBarIcon();
 
-    // ref.listen(dessertWriteViewModelProvider, (_, DessertWriteState next) {
-    //   final ToastManager toastManager = ref.read(toastManagerProvider);
+    ref.listen(dessertModifyViewModelProvider, (
+      _,
+      DessertModifyState next,
+    ) async {
+      switch (next.patchMateStatus) {
+        case Status.success:
+          context.pop();
+          context.pop();
+          break;
 
-    //   switch (next.status) {
-    //     case Status.success:
-    //       context
-    //           .pushNamed(AppRoutes.dessertPost.name, extra: next.data.mateUuid)
-    //           .then((_) {
-    //             if (context.mounted) {
-    //               context.pop();
-    //               context.pop();
-    //             }
-    //           });
+        case Status.failure:
+          await showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
+                ),
+              );
+            },
+          );
+          break;
 
-    //       toastManager.show(
-    //         context: context,
-    //         toastWidget: CustomSnackBar(
-    //           description: '🎉  디저트 메이트 모임글이 등록됐어요! ',
-    //           actionButton: SnackBarActionButton(onTap: () {}, label: '확인'),
-    //         ),
-    //       );
-    //       break;
-
-    //     case Status.failure:
-    //       toastManager.show(
-    //         context: context,
-    //         toastWidget: CustomSnackBar(
-    //           description: '⛔️ 모임글 등록 중 문제가 발생했어요.\n다시 시도해주세요',
-    //           actionButton: SnackBarActionButton(
-    //             onTap: () => _onSubmit(),
-    //             label: '다시 시도',
-    //           ),
-    //         ),
-    //       );
-    //       break;
-
-    //     default:
-    //   }
-    // });
+        default:
+      }
+    });
 
     return Listener(
       behavior: HitTestBehavior.translucent,
@@ -424,66 +438,6 @@ class _DessertModifyStep2State extends ConsumerState<DessertModifyStep2> {
                   ),
                   child: Column(
                     children: <Widget>[
-                      /// 저장된 이미지
-                      if (showPhoto) ...<Widget>[
-                        Stack(
-                          children: <Widget>[
-                            Image.network(
-                              postState.data.mateImage,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
-
-                            Positioned(
-                              right: 10,
-                              bottom: 10,
-                              child: GestureDetector(
-                                behavior: HitTestBehavior.translucent,
-                                onTap: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return CustomDialog.basic(
-                                        description: '첨부한 사진을 삭제 하시겠어요?',
-                                        primaryButton: CustomDialogButton(
-                                          text: '삭제',
-                                          onTap: () {
-                                            setState(() {
-                                              showPhoto = false;
-                                            });
-                                            context.pop();
-                                          },
-                                        ),
-                                        secondaryButton: CustomDialogButton(
-                                          text: '취소',
-                                          onTap: () {
-                                            context.pop();
-                                          },
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.all(3),
-                                  decoration: BoxDecoration(
-                                    color: const Color.fromRGBO(
-                                      255,
-                                      255,
-                                      255,
-                                      0.8,
-                                    ),
-                                    borderRadius: BorderRadius.circular(3),
-                                  ),
-                                  child: Assets.icon.system.closeLine.svg(),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                      ],
-
                       /// 이미지
                       if (_imageFile != null) ...<Widget>[
                         Stack(
@@ -600,13 +554,10 @@ class _DessertModifyStep2State extends ConsumerState<DessertModifyStep2> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       GestureDetector(
-                        onTap:
-                            _imageFile == null && !showPhoto
-                                ? () => _pickImage()
-                                : null,
+                        onTap: _imageFile == null ? () => _pickImage() : null,
                         child: Assets.icon.file.picLine.svg(
                           colorFilter: ColorFilter.mode(
-                            _imageFile == null && !showPhoto
+                            _imageFile == null
                                 ? ScaleColorConfig.neutral40
                                 : ScaleColorConfig.neutral70,
                             BlendMode.srcIn,
