@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
 import 'package:frontend_mobile/common/design_system/foundation/color/scale_color_config.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
+import 'package:frontend_mobile/core/resource/constant.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpStep6 extends StatelessWidget {
   const SignUpStep6({super.key});
@@ -41,8 +45,14 @@ class SignUpStep6 extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 16),
               child: CustomFillButton.large(
                 label: '로그인 가기',
-                onPressed: () {
-                  context.pushNamed(AppRoutes.localLogin.name);
+                onPressed: () async {
+                  final SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  await prefs.remove(Constant.email);
+
+                  if (context.mounted) {
+                    unawaited(context.pushNamed(AppRoutes.localLogin.name));
+                  }
                 },
               ),
             ),

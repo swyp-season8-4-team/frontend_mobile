@@ -97,7 +97,6 @@ class _SignUpStep5State extends ConsumerState<SignUpStep5> {
             context.pushNamed(AppRoutes.signUpStep6.name);
           }
 
-          ref.invalidate(signUpProvider);
           return;
 
         case Status.failure:
