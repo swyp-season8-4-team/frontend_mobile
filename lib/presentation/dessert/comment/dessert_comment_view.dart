@@ -176,7 +176,7 @@ class _DessertCommentState extends ConsumerState<DessertComment> {
             else
               Column(
                 children: <Widget>[
-                  CustomTextField(controller: _replyController),
+                  CustomTextField(controller: _replyController, maxLength: 300),
                   const SizedBox(height: 8),
 
                   Row(
