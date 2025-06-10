@@ -442,11 +442,7 @@ class _DessertModifyStep2State extends ConsumerState<DessertModifyStep2> {
                       if (_imageFile != null) ...<Widget>[
                         Stack(
                           children: <Widget>[
-                            Image.file(
-                              _imageFile!,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
+                            Image.file(_imageFile!, width: double.infinity),
 
                             Positioned(
                               right: 10,
