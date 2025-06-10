@@ -18,10 +18,12 @@ import 'package:frontend_mobile/core/resource/status.dart';
 import 'package:frontend_mobile/core/resource/token_info.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
+import 'package:frontend_mobile/domain/param/auth/post_sign_up_with_profile_params.dart';
 import 'package:frontend_mobile/presentation/global/login/login_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
+import 'package:frontend_mobile/presentation/sign_up/sign_up_view_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,6 +68,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
     _passwordController.addListener(_onPasswordRender);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      /// 로그인 유지를 누른 경우
       prefs = await SharedPreferences.getInstance();
       final String? email = prefs?.getString(Constant.email);
 
@@ -73,6 +76,13 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
         _emailController.text = email;
         _keepLoggedIn = true;
         setState(() {});
+      }
+
+      /// 회원가입을 하고 로그인 페이지로 이동한 경우
+      final PostSignUpWithProfileParams signUpState = ref.read(signUpProvider);
+      if (signUpState.email.isNotEmpty && signUpState.password.isNotEmpty) {
+        _emailController.text = signUpState.email;
+        _passwordController.text = signUpState.password;
       }
     });
   }
@@ -156,8 +166,10 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
     ref.listen(localLoginViewModelProvider, (_, LocalLoginState next) async {
       switch (next.status) {
         case Status.success:
+          final LoginState loginState = ref.read(loginViewModelProvider);
+          if (loginState.isLoggedIn) return;
 
-          /// 로그인 유무 판단
+          /// 로그인 상태로 변환
           ref.read(loginViewModelProvider.notifier).login();
 
           /// 토큰, 만료시간 및 디바이스 정보 저장

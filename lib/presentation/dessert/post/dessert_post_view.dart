@@ -318,7 +318,11 @@ class _DessertPostState extends ConsumerState<DessertPost> {
         isLoading: state.postMateStatus.isLoading,
         child: Scaffold(
           appBar: CustomSubTopBar(
-            title: '',
+            title:
+                userState.data.userUuid == state.data.userUuid &&
+                        state.data.currentMemberCount != state.data.capacity
+                    ? '진행중 모임'
+                    : '',
             actions: TopBarIcon.toList(<Widget>[]),
           ),
           body: SafeArea(

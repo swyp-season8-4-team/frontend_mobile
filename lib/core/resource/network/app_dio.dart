@@ -147,7 +147,7 @@ class AppDio {
     _dio =
         Dio()
           ..options = BaseOptions(
-            baseUrl: Env.prodServerBaseUrl,
+            baseUrl: Env.devServerBaseUrl,
             connectTimeout: const Duration(seconds: 10),
             receiveTimeout: const Duration(seconds: 10),
             sendTimeout: const Duration(seconds: 10),

@@ -417,14 +417,7 @@ class _DessertWriteStep2State extends ConsumerState<DessertWriteStep2> {
                       if (_imageFile != null) ...<Widget>[
                         Stack(
                           children: <Widget>[
-                            Image.file(
-                              _imageFile!,
-                              width: double.infinity,
-                              height: 245,
-                              cacheWidth: 328,
-                              cacheHeight: 245,
-                              fit: BoxFit.cover,
-                            ),
+                            Image.file(_imageFile!, width: double.infinity),
 
                             Positioned(
                               right: 10,
