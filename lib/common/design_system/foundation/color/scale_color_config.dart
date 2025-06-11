@@ -63,7 +63,7 @@ class ScaleColorConfig {
   static const Color neutral10 = Color(0xFF14100C);
   static const Color neutral20 = Color(0xFF3F3C39);
   static const Color neutral30 = Color(0xFF635F59);
-  static const Color neutral40 = Color(0xFF9693BE);
+  static const Color neutral40 = Color(0xFF96938E);
   static const Color neutral50 = Color(0xFFCDC8C3);
   static const Color neutral60 = Color(0xFFE9E4E0);
   static const Color neutral70 = Color(0xFFEFEDEB);
