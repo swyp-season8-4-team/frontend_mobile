@@ -67,16 +67,12 @@ class CustomProfilePhotoSize extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
-      onPressed: null,
-      style: FilledButton.styleFrom(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(99)),
-        minimumSize: Size.zero,
-        padding: _padding,
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        elevation: 0,
-        backgroundColor: const Color(0xFFDFDFDF),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(99),
+        color: const Color(0xFFDFDFDF),
       ),
+      padding: _padding,
       child: SizedBox(width: _size, child: getImageFromUrl() ?? image),
     );
   }

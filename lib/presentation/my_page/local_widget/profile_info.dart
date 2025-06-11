@@ -66,14 +66,23 @@ class _ProfileInfoState extends ConsumerState<_ProfileInfo> {
                         _showSuccessUpdateProfileInfo();
                       }
                     },
-                    child:
-                        userState.isMale
-                            ? CustomProfilePhotoEdit.boy(
-                              imageUrl: userState.data.profileImageUrl,
-                            )
-                            : CustomProfilePhotoEdit.girl(
-                              imageUrl: userState.data.profileImageUrl,
-                            ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color(0xFFfafafa),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(99),
+                      ),
+                      child:
+                          userState.isMale
+                              ? CustomProfilePhotoEdit.boy(
+                                imageUrl: userState.data.profileImageUrl,
+                              )
+                              : CustomProfilePhotoEdit.girl(
+                                imageUrl: userState.data.profileImageUrl,
+                              ),
+                    ),
                   ),
                 ],
               ),
