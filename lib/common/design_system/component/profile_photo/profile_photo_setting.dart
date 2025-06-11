@@ -136,22 +136,26 @@ class _CustomProfilePhotoSettingState extends State<CustomProfilePhotoSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        _image,
-        Positioned(
-          bottom: 0,
-          right: 0,
-          child: CustomProfilePhotoBtc(
-            type: CustomProfilePhotoBtcType.camera,
-            onPressed: () {
-              _cropController.dispose();
-              _cropController = CropController();
-              _pickAndCropImage(context: context);
-            },
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        _cropController.dispose();
+        _cropController = CropController();
+        _pickAndCropImage(context: context);
+      },
+      child: Stack(
+        children: <Widget>[
+          _image,
+          const Positioned(
+            bottom: 0,
+            right: 0,
+            child: CustomProfilePhotoBtc(
+              type: CustomProfilePhotoBtcType.camera,
+              onPressed: null,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
