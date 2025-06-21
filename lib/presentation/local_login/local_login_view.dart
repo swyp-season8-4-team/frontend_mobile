@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
+import 'package:frontend_mobile/common/design_system/component/button/sns_login_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/radio/radio_button.dart';
@@ -25,6 +26,7 @@ import 'package:frontend_mobile/presentation/local_login/local_login_view_model.
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/sign_up/sign_up_view_model.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalLoginView extends ConsumerStatefulWidget {
@@ -145,6 +147,17 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
       await prefs?.setString(Constant.email, _emailController.text);
     } else {
       await prefs?.remove(Constant.email);
+    }
+  }
+
+  Future<void> _loginWithKakaoAccount() async {
+    /// 일반 에러
+    try {
+      await UserApi.instance.loginWithKakaoAccount();
+    } catch (error) {
+      if (error is PlatformException && error.code == 'CANCELLED') {
+        return;
+      }
     }
   }
 
@@ -346,48 +359,58 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                             state.status.isLoading,
                         onPressed: _onSubmit,
                       ),
-                      // Container(
-                      //   margin: const EdgeInsets.symmetric(vertical: 12),
-                      //   child: Stack(
-                      //     children: <Widget>[
-                      //       const Divider(color: ScaleColorConfig.neutral70),
-                      //       Align(
-                      //         child: Container(
-                      //           padding: const EdgeInsets.symmetric(horizontal: 16),
-                      //           color: ScaleColorConfig.surface90,
-                      //           child: Text(
-                      //             '또는',
-                      //             style: textTheme.labelSmall?.copyWith(
-                      //               color: const Color(0xFF6C6C6C),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 12),
+                        child: Stack(
+                          children: <Widget>[
+                            const Divider(color: ScaleColorConfig.neutral70),
+                            Align(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                ),
+                                color: ScaleColorConfig.surface90,
+                                child: Text(
+                                  '또는',
+                                  style: textTheme.labelSmall?.copyWith(
+                                    color: const Color(0xFF6C6C6C),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
 
-                      // /// TODO: 카카오 로그인 연동 해야됨
-                      // CustomSnsLoginButton(
-                      //   svgImage: Assets.icon.sns.kakao,
-                      //   label: '카카오 로그인',
-                      //   onPressed: () {
-                      //     showDialog(
-                      //       context: context,
-                      //       builder: (BuildContext context) {
-                      //         return CustomDialog.basic(
-                      //           description: '서비스 준비중',
-                      //           primaryButton: CustomDialogButton(
-                      //             text: '확인',
-                      //             onTap: () => context.pop(),
-                      //           ),
-                      //         );
-                      //       },
-                      //     );
-                      //   },
-                      //   backgroundColor: const Color(0xFFFEE500),
-                      //   foregroundColor: const Color(0xFF191919),
-                      // ),
+                      CustomSnsLoginButton(
+                        svgImage: Assets.icon.sns.kakao,
+                        label: '카카오 로그인',
+                        onPressed: () async {
+                          /// 카카오톡이 설치된 경우
+                          if (await isKakaoTalkInstalled()) {
+                            try {
+                              await UserApi.instance.loginWithKakaoTalk();
+                            } catch (error) {
+                              /// 유저가 취소한 에러
+                              if (error is KakaoAuthException &&
+                                  (error.message?.contains('Cancelled') ??
+                                      false)) {
+                                return;
+                              }
+
+                              await _loginWithKakaoAccount();
+                            }
+                          }
+                          /// 카카오톡이 설치되지 않은 경우
+                          else {
+                            await _loginWithKakaoAccount();
+                          }
+
+                          final User me = await UserApi.instance.me();
+                        },
+                        backgroundColor: const Color(0xFFFEE500),
+                        foregroundColor: const Color(0xFF191919),
+                      ),
                       const SizedBox(height: 34),
 
                       Row(
