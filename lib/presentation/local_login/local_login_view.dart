@@ -28,6 +28,7 @@ import 'package:frontend_mobile/presentation/sign_up/sign_up_view_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LocalLoginView extends ConsumerStatefulWidget {
   const LocalLoginView({super.key});
@@ -407,9 +408,33 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                           }
 
                           final User me = await UserApi.instance.me();
+
+                          print(me);
                         },
                         backgroundColor: const Color(0xFFFEE500),
                         foregroundColor: const Color(0xFF191919),
+                      ),
+                      const SizedBox(height: 10),
+                      CustomSnsLoginButton(
+                        svgImage: Assets.icon.sns.kakao,
+                        label: '애플',
+                        onPressed: () async {
+                          try {
+                            final AuthorizationCredentialAppleID credential =
+                                await SignInWithApple.getAppleIDCredential(
+                                  scopes: <AppleIDAuthorizationScopes>[
+                                    AppleIDAuthorizationScopes.email,
+                                    AppleIDAuthorizationScopes.fullName,
+                                  ],
+                                );
+
+                            print(credential);
+                          } catch (error) {
+                            if (error is PlatformException) return;
+                          }
+                        },
+                        backgroundColor: const Color(0xFF191919),
+                        foregroundColor: Colors.white,
                       ),
                       const SizedBox(height: 34),
 
