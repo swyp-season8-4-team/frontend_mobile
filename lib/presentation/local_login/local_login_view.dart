@@ -20,9 +20,12 @@ import 'package:frontend_mobile/core/resource/token_info.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/domain/param/auth/post_sign_up_with_profile_params.dart';
+import 'package:frontend_mobile/domain/param/oauth/apple_params.dart';
+import 'package:frontend_mobile/domain/param/oauth/kakao_params.dart';
 import 'package:frontend_mobile/presentation/global/login/login_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
+import 'package:frontend_mobile/presentation/oauth/oauth_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/sign_up/sign_up_view_model.dart';
 import 'package:go_router/go_router.dart';
@@ -151,16 +154,16 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
     }
   }
 
-  Future<void> _loginWithKakaoAccount() async {
-    /// 일반 에러
-    try {
-      await UserApi.instance.loginWithKakaoAccount();
-    } catch (error) {
-      if (error is PlatformException && error.code == 'CANCELLED') {
-        return;
-      }
-    }
-  }
+  // Future<void> _loginWithKakaoAccount() async {
+  //   /// 일반 에러
+  //   try {
+  //     await UserApi.instance.loginWithKakaoAccount();
+  //   } catch (error) {
+  //     if (error is PlatformException && error.code == 'CANCELLED') {
+  //       return;
+  //     }
+  //   }
+  // }
 
   @override
   void dispose() {
@@ -279,6 +282,104 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
       }
     });
 
+    ref.listen(oauthViewModelProvider, (_, OauthState next) async {
+      switch (next.kakaoStatus) {
+        case Status.success:
+          final LoginState loginState = ref.read(loginViewModelProvider);
+          if (loginState.isLoggedIn) return;
+
+          /// 로그인 상태로 변환
+          ref.read(loginViewModelProvider.notifier).login();
+
+          /// 토큰, 만료시간 및 디바이스 정보 저장
+          final TokenInfo tokenInfo = TokenInfo(
+            startTime: DateTime.now(),
+            accessToken: next.kakaoData?.accessToken ?? '',
+            refreshToken: next.kakaoData?.refreshToken ?? '',
+            refreshExpiresIn: next.kakaoData?.refreshExpiresIn ?? -1,
+            expiresIn: next.kakaoData?.expiresIn ?? -1,
+            deviceId: next.kakaoData?.deviceId ?? '',
+          );
+
+          final FlutterSecureStorage storage = ref.read(secureStorageProvider);
+          await storage.write(
+            key: Constant.tokenInfo,
+            value: TokenInfo.serialize(tokenInfo: tokenInfo),
+          );
+
+          /// 현재 로그인한 유저 정보
+          ref.read(userViewModelProvider.notifier).getMe();
+          break;
+
+        case Status.failure:
+          await showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
+                ),
+              );
+            },
+          );
+          break;
+        default:
+      }
+
+      switch (next.appleStatus) {
+        case Status.success:
+          final LoginState loginState = ref.read(loginViewModelProvider);
+          if (loginState.isLoggedIn) return;
+
+          /// 로그인 상태로 변환
+          ref.read(loginViewModelProvider.notifier).login();
+
+          /// 토큰, 만료시간 및 디바이스 정보 저장
+          final TokenInfo tokenInfo = TokenInfo(
+            startTime: DateTime.now(),
+            accessToken: next.appleData?.accessToken ?? '',
+            refreshToken: next.appleData?.refreshToken ?? '',
+            refreshExpiresIn: next.appleData?.refreshExpiresIn ?? -1,
+            expiresIn: next.appleData?.expiresIn ?? -1,
+            deviceId: next.appleData?.deviceId ?? '',
+          );
+
+          final FlutterSecureStorage storage = ref.read(secureStorageProvider);
+          await storage.write(
+            key: Constant.tokenInfo,
+            value: TokenInfo.serialize(tokenInfo: tokenInfo),
+          );
+
+          /// 현재 로그인한 유저 정보
+          ref.read(userViewModelProvider.notifier).getMe();
+          break;
+
+        case Status.failure:
+          await showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
+                ),
+              );
+            },
+          );
+          break;
+        default:
+      }
+    });
+
     return PopScope(
       canPop: false,
       child: CustomLoadingOverlay(
@@ -387,29 +488,52 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                         svgImage: Assets.icon.sns.kakao,
                         label: '카카오 로그인',
                         onPressed: () async {
-                          /// 카카오톡이 설치된 경우
-                          if (await isKakaoTalkInstalled()) {
-                            try {
-                              await UserApi.instance.loginWithKakaoTalk();
-                            } catch (error) {
-                              /// 유저가 취소한 에러
-                              if (error is KakaoAuthException &&
-                                  (error.message?.contains('Cancelled') ??
-                                      false)) {
-                                return;
-                              }
+                          // /// 카카오톡이 설치된 경우
+                          // if (await isKakaoTalkInstalled()) {
+                          //   try {
+                          //     await UserApi.instance.loginWithKakaoTalk();
+                          //   } catch (error) {
+                          //     /// 유저가 취소한 에러
+                          //     if (error is KakaoAuthException &&
+                          //         (error.message?.contains('Cancelled') ??
+                          //             false)) {
+                          //       return;
+                          //     }
 
-                              await _loginWithKakaoAccount();
+                          //     await _loginWithKakaoAccount();
+                          //   }
+                          // }
+                          // /// 카카오톡이 설치되지 않은 경우
+                          // else {
+                          //   await _loginWithKakaoAccount();
+                          // }
+
+                          try {
+                            final OAuthToken token =
+                                await UserApi.instance.loginWithKakaoAccount();
+
+                            // final OAuthToken? token =
+                            //     await TokenManagerProvider.instance.manager
+                            //         .getToken();
+
+                            ref
+                                .read(oauthViewModelProvider.notifier)
+                                .kakaoLogin(
+                                  params: KakaoParams(
+                                    code: token.accessToken,
+                                    provider: 'KAKAO',
+                                  ),
+                                );
+                          } catch (error) {
+                            /// 유저가 취소한 에러
+                            if (error is KakaoAuthException &&
+                                (error.message?.contains('Cancelled') ??
+                                    false)) {
+                              return;
                             }
-                          }
-                          /// 카카오톡이 설치되지 않은 경우
-                          else {
-                            await _loginWithKakaoAccount();
-                          }
 
-                          final User me = await UserApi.instance.me();
-
-                          print(me);
+                            // await _loginWithKakaoAccount();
+                          }
                         },
                         backgroundColor: const Color(0xFFFEE500),
                         foregroundColor: const Color(0xFF191919),
@@ -428,7 +552,22 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                                   ],
                                 );
 
-                            print(credential);
+                            ref
+                                .read(oauthViewModelProvider.notifier)
+                                .appleLogin(
+                                  params: AppleParams(
+                                    code: credential.authorizationCode,
+                                    state: 'xyz789',
+                                    id_token: credential.identityToken ?? '',
+                                    user: UserAppleParams(
+                                      email: credential.email ?? '',
+                                      name: NameAppleParams(
+                                        firstName: credential.familyName ?? '',
+                                        lastName: credential.givenName ?? '',
+                                      ),
+                                    ),
+                                  ),
+                                );
                           } catch (error) {
                             if (error is PlatformException) return;
                           }
