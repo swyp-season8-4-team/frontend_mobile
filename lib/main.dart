@@ -9,10 +9,14 @@ import 'package:frontend_mobile/common/env/env.dart';
 import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 import 'package:frontend_mobile/common/gen_asset/fonts.gen.dart';
 import 'package:frontend_mobile/presentation/router/router.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterNaverMap().init(clientId: Env.naverMapClientId);
+
+  KakaoSdk.init(nativeAppKey: 'c9f9280042164aaae6578f0e0b39ef3a');
+
   runApp(const ProviderScope(child: Portal(child: MainApp())));
 }
 

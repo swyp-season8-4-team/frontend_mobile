@@ -141,6 +141,10 @@ Future<Result<T, CustomException>> apiCall<T>({
         return Failure<T, CustomException>(
           exception: CustomException.o001(model: exceptionModel),
         );
+      case 'O002':
+        return Failure<T, CustomException>(
+          exception: CustomException.o002(model: exceptionModel),
+        );
       case 'J001':
         return Failure<T, CustomException>(
           exception: CustomException.j001(model: exceptionModel),

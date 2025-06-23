@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:frontend_mobile/common/design_system/component/button/fill_button.dart';
+import 'package:frontend_mobile/common/design_system/component/button/sns_login_button.dart';
 import 'package:frontend_mobile/common/design_system/component/button/text_button.dart';
 import 'package:frontend_mobile/common/design_system/component/dialog/dialog.dart';
 import 'package:frontend_mobile/common/design_system/component/radio/radio_button.dart';
@@ -19,13 +21,18 @@ import 'package:frontend_mobile/core/resource/token_info.dart';
 import 'package:frontend_mobile/core/util/loading/loading_overlay.dart';
 import 'package:frontend_mobile/domain/param/auth/local_login_params.dart';
 import 'package:frontend_mobile/domain/param/auth/post_sign_up_with_profile_params.dart';
+import 'package:frontend_mobile/domain/param/oauth/apple_params.dart';
+import 'package:frontend_mobile/domain/param/oauth/kakao_params.dart';
 import 'package:frontend_mobile/presentation/global/login/login_view_model.dart';
 import 'package:frontend_mobile/presentation/global/user/user_view_model.dart';
 import 'package:frontend_mobile/presentation/local_login/local_login_view_model.dart';
+import 'package:frontend_mobile/presentation/oauth/oauth_view_model.dart';
 import 'package:frontend_mobile/presentation/router/routes.dart';
 import 'package:frontend_mobile/presentation/sign_up/sign_up_view_model.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LocalLoginView extends ConsumerStatefulWidget {
   const LocalLoginView({super.key});
@@ -265,6 +272,105 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
       }
     });
 
+    ref.listen(oauthViewModelProvider, (_, OauthState next) async {
+      switch (next.kakaoStatus) {
+        case Status.success:
+          final LoginState loginState = ref.read(loginViewModelProvider);
+          if (loginState.isLoggedIn) return;
+
+          /// 로그인 상태로 변환
+          ref.read(loginViewModelProvider.notifier).login();
+
+          /// 토큰, 만료시간 및 디바이스 정보 저장
+          final TokenInfo tokenInfo = TokenInfo(
+            startTime: DateTime.now(),
+            accessToken: next.kakaoData?.accessToken ?? '',
+            refreshToken: next.kakaoData?.refreshToken ?? '',
+            refreshExpiresIn: next.kakaoData?.refreshExpiresIn ?? -1,
+            expiresIn: next.kakaoData?.expiresIn ?? -1,
+            deviceId: next.kakaoData?.deviceId ?? '',
+          );
+
+          final FlutterSecureStorage storage = ref.read(secureStorageProvider);
+          await storage.write(
+            key: Constant.tokenInfo,
+            value: TokenInfo.serialize(tokenInfo: tokenInfo),
+          );
+
+          /// 현재 로그인한 유저 정보
+          ref.read(userViewModelProvider.notifier).getMe();
+          break;
+
+        case Status.failure:
+          await showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
+                ),
+              );
+            },
+          );
+          break;
+        default:
+      }
+
+      switch (next.appleStatus) {
+        case Status.success:
+          final LoginState loginState = ref.read(loginViewModelProvider);
+          if (loginState.isLoggedIn) return;
+
+          /// 로그인 상태로 변환
+          ref.read(loginViewModelProvider.notifier).login();
+
+          /// 토큰, 만료시간 및 디바이스 정보 저장
+          final TokenInfo tokenInfo = TokenInfo(
+            startTime: DateTime.now(),
+            accessToken: next.appleData?.accessToken ?? '',
+            refreshToken: next.appleData?.refreshToken ?? '',
+            refreshExpiresIn: next.appleData?.refreshExpiresIn ?? -1,
+            expiresIn: next.appleData?.expiresIn ?? -1,
+            deviceId: next.appleData?.deviceId ?? '',
+          );
+
+          final FlutterSecureStorage storage = ref.read(secureStorageProvider);
+          await storage.write(
+            key: Constant.tokenInfo,
+            value: TokenInfo.serialize(tokenInfo: tokenInfo),
+          );
+
+          /// 현재 로그인한 유저 정보
+          ref.read(userViewModelProvider.notifier).getMe();
+          break;
+
+        case Status.failure:
+          await showDialog(
+            //ignore: use_build_context_synchronously
+            context: context,
+            builder: (BuildContext context) {
+              return CustomDialog.basic(
+                description: next.exception.message,
+                primaryButton: CustomDialogButton(
+                  text: '확인',
+                  onTap:
+                      next.exception.code == 'ZZ003'
+                          ? () => context.goNamed(AppRoutes.localLogin.name)
+                          : () => context.pop(),
+                ),
+              );
+            },
+          );
+          break;
+        default:
+      }
+    });
+
     return PopScope(
       canPop: false,
       child: CustomLoadingOverlay(
@@ -346,48 +452,96 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                             state.status.isLoading,
                         onPressed: _onSubmit,
                       ),
-                      // Container(
-                      //   margin: const EdgeInsets.symmetric(vertical: 12),
-                      //   child: Stack(
-                      //     children: <Widget>[
-                      //       const Divider(color: ScaleColorConfig.neutral70),
-                      //       Align(
-                      //         child: Container(
-                      //           padding: const EdgeInsets.symmetric(horizontal: 16),
-                      //           color: ScaleColorConfig.surface90,
-                      //           child: Text(
-                      //             '또는',
-                      //             style: textTheme.labelSmall?.copyWith(
-                      //               color: const Color(0xFF6C6C6C),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 12),
+                        child: Stack(
+                          children: <Widget>[
+                            const Divider(color: ScaleColorConfig.neutral70),
+                            Align(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                ),
+                                color: ScaleColorConfig.surface90,
+                                child: Text(
+                                  '또는',
+                                  style: textTheme.labelSmall?.copyWith(
+                                    color: const Color(0xFF6C6C6C),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
 
-                      // /// TODO: 카카오 로그인 연동 해야됨
-                      // CustomSnsLoginButton(
-                      //   svgImage: Assets.icon.sns.kakao,
-                      //   label: '카카오 로그인',
-                      //   onPressed: () {
-                      //     showDialog(
-                      //       context: context,
-                      //       builder: (BuildContext context) {
-                      //         return CustomDialog.basic(
-                      //           description: '서비스 준비중',
-                      //           primaryButton: CustomDialogButton(
-                      //             text: '확인',
-                      //             onTap: () => context.pop(),
-                      //           ),
-                      //         );
-                      //       },
-                      //     );
-                      //   },
-                      //   backgroundColor: const Color(0xFFFEE500),
-                      //   foregroundColor: const Color(0xFF191919),
-                      // ),
+                      CustomSnsLoginButton(
+                        svgImage: Assets.icon.sns.kakao,
+                        label: '카카오 로그인',
+                        onPressed: () async {
+                          try {
+                            final OAuthToken token =
+                                await UserApi.instance.loginWithKakaoAccount();
+
+                            ref
+                                .read(oauthViewModelProvider.notifier)
+                                .kakaoLogin(
+                                  params: KakaoParams(
+                                    code: token.accessToken,
+                                    provider: 'KAKAO',
+                                  ),
+                                );
+                          } catch (error) {
+                            /// 유저가 취소한 에러
+                            if (error is KakaoAuthException &&
+                                (error.message?.contains('Cancelled') ??
+                                    false)) {
+                              return;
+                            }
+                          }
+                        },
+                        backgroundColor: const Color(0xFFFEE500),
+                        foregroundColor: const Color(0xFF191919),
+                      ),
+                      const SizedBox(height: 10),
+
+                      if (Platform.isIOS)
+                        CustomSnsLoginButton(
+                          label: '애플 로그인',
+                          onPressed: () async {
+                            try {
+                              final AuthorizationCredentialAppleID credential =
+                                  await SignInWithApple.getAppleIDCredential(
+                                    scopes: <AppleIDAuthorizationScopes>[
+                                      AppleIDAuthorizationScopes.email,
+                                      AppleIDAuthorizationScopes.fullName,
+                                    ],
+                                  );
+
+                              ref
+                                  .read(oauthViewModelProvider.notifier)
+                                  .appleLogin(
+                                    params: AppleParams(
+                                      code: credential.authorizationCode,
+                                      state: 'xyz789',
+                                      id_token: credential.identityToken ?? '',
+                                      user: UserAppleParams(
+                                        email: credential.email ?? '',
+                                        name: NameAppleParams(
+                                          firstName:
+                                              credential.familyName ?? '',
+                                          lastName: credential.givenName ?? '',
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                            } catch (error) {
+                              if (error is PlatformException) return;
+                            }
+                          },
+                          backgroundColor: const Color(0xFF191919),
+                          foregroundColor: Colors.white,
+                        ),
                       const SizedBox(height: 34),
 
                       Row(
