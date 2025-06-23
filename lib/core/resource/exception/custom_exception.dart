@@ -29,6 +29,7 @@ class CustomException with _$CustomException {
   const factory CustomException.b002({required ExceptionModel model}) = B002;
   const factory CustomException.b003({required ExceptionModel model}) = B003;
   const factory CustomException.o001({required ExceptionModel model}) = O001;
+  const factory CustomException.o002({required ExceptionModel model}) = O002;
   const factory CustomException.j001({required ExceptionModel model}) = J001;
   const factory CustomException.j002({required ExceptionModel model}) = J002;
   const factory CustomException.j003({required ExceptionModel model}) = J003;
