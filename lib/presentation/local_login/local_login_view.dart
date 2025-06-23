@@ -155,17 +155,6 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
     }
   }
 
-  // Future<void> _loginWithKakaoAccount() async {
-  //   /// 일반 에러
-  //   try {
-  //     await UserApi.instance.loginWithKakaoAccount();
-  //   } catch (error) {
-  //     if (error is PlatformException && error.code == 'CANCELLED') {
-  //       return;
-  //     }
-  //   }
-  // }
-
   @override
   void dispose() {
     _timer?.cancel();
@@ -489,33 +478,9 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                         svgImage: Assets.icon.sns.kakao,
                         label: '카카오 로그인',
                         onPressed: () async {
-                          // /// 카카오톡이 설치된 경우
-                          // if (await isKakaoTalkInstalled()) {
-                          //   try {
-                          //     await UserApi.instance.loginWithKakaoTalk();
-                          //   } catch (error) {
-                          //     /// 유저가 취소한 에러
-                          //     if (error is KakaoAuthException &&
-                          //         (error.message?.contains('Cancelled') ??
-                          //             false)) {
-                          //       return;
-                          //     }
-
-                          //     await _loginWithKakaoAccount();
-                          //   }
-                          // }
-                          // /// 카카오톡이 설치되지 않은 경우
-                          // else {
-                          //   await _loginWithKakaoAccount();
-                          // }
-
                           try {
                             final OAuthToken token =
                                 await UserApi.instance.loginWithKakaoAccount();
-
-                            // final OAuthToken? token =
-                            //     await TokenManagerProvider.instance.manager
-                            //         .getToken();
 
                             ref
                                 .read(oauthViewModelProvider.notifier)
@@ -532,8 +497,6 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                                     false)) {
                               return;
                             }
-
-                            // await _loginWithKakaoAccount();
                           }
                         },
                         backgroundColor: const Color(0xFFFEE500),
