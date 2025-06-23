@@ -3,16 +3,16 @@ import 'package:frontend_mobile/common/gen_asset/assets.gen.dart';
 
 class CustomSnsLoginButton extends StatelessWidget {
   const CustomSnsLoginButton({
-    required this.svgImage,
     required this.label,
     required this.onPressed,
     required this.backgroundColor,
     required this.foregroundColor,
+    this.svgImage,
     this.width,
     super.key,
   });
 
-  final SvgGenImage svgImage;
+  final SvgGenImage? svgImage;
   final String label;
   final VoidCallback? onPressed;
   final Color backgroundColor;
@@ -44,7 +44,8 @@ class CustomSnsLoginButton extends StatelessWidget {
               width: double.infinity,
               child: Text(label, textAlign: TextAlign.center),
             ),
-            svgImage.svg(width: 18, height: 17),
+
+            if (svgImage != null) svgImage!.svg(width: 18, height: 17),
           ],
         ),
       ),
