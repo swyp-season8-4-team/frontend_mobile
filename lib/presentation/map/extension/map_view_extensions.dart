@@ -25,7 +25,7 @@ extension MapViewWidgetExt on _MapViewState {
                 onPressed: () async {
                   final ({double lat, double lng, double radius}) queryOption =
                       await NaverMapUtil.getLocationInfo(
-                        controller: _mapController!,
+                        controller: state.mapController!,
                       );
 
                   viewmodel.updateMyPreferenceFilter(
@@ -44,7 +44,7 @@ extension MapViewWidgetExt on _MapViewState {
                     onPressed: () async {
                       final ({double lat, double lng, double radius})
                       queryOption = await NaverMapUtil.getLocationInfo(
-                        controller: _mapController!,
+                        controller: state.mapController!,
                       );
                       viewmodel.updatePreferenceFilter(
                         lat: queryOption.lat,
@@ -79,7 +79,7 @@ extension MapViewWidgetExt on _MapViewState {
               onPressed: () async {
                 final ({double lat, double lng, double radius}) queryOption =
                     await NaverMapUtil.getLocationInfo(
-                      controller: _mapController!,
+                      controller: state.mapController!,
                     );
                 viewmodel.clearAllFilter(
                   lng: queryOption.lng,
@@ -112,6 +112,7 @@ extension MapViewWidgetExt on _MapViewState {
 
   // 하단 중앙 새로고침 버튼
   Widget _buildRefreshButton() {
+    final MapState state = ref.read(mapViewModelProvider);
     final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -123,7 +124,9 @@ extension MapViewWidgetExt on _MapViewState {
       child: GestureDetector(
         onTap: () async {
           final ({double lat, double lng, double radius}) queryOption =
-              await NaverMapUtil.getLocationInfo(controller: _mapController!);
+              await NaverMapUtil.getLocationInfo(
+                controller: state.mapController!,
+              );
           viewmodel.getStoresByCameraPosition(
             lat: queryOption.lat,
             lng: queryOption.lng,

@@ -6,6 +6,8 @@ typedef UserStoreListOptionMenuVisible =
 @freezed
 class MapState with _$MapState {
   factory MapState({
+    NaverMapController? mapController,
+
     @Default(<StoreByLocationModel>[])
     List<StoreByLocationModel> storesByLocation,
     @Default(37.514575) double lat,

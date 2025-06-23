@@ -4,10 +4,11 @@ part of '../map_view.dart';
 extension MapViewMethodExt on _MapViewState {
   Future<void> _goToCurrentLocation() async {
     try {
+      final MapState state = ref.read(mapViewModelProvider);
       final Position result =
           await ref.read(geoLocationManagerProvider).getCurrentPosition();
 
-      await _mapController!.updateCamera(
+      await state.mapController!.updateCamera(
         NCameraUpdate.fromCameraPosition(
           NCameraPosition(
             target: NLatLng(result.latitude, result.longitude),
@@ -17,7 +18,7 @@ extension MapViewMethodExt on _MapViewState {
       );
 
       final NLatLngBounds contentBounds =
-          await _mapController!.getContentBounds();
+          await state.mapController!.getContentBounds();
 
       ref
           .read(mapViewModelProvider.notifier)
@@ -30,7 +31,7 @@ extension MapViewMethodExt on _MapViewState {
 
       // 위치 권한이 허용된 이후
       // 트래킹할 수 있도록 설정
-      await _mapController!.setLocationTrackingMode(
+      await state.mapController!.setLocationTrackingMode(
         NLocationTrackingMode.noFollow,
       );
 
@@ -45,11 +46,12 @@ extension MapViewMethodExt on _MapViewState {
 
   Future<void> _getShopWithCurrentLocation() async {
     try {
+      final MapState state = ref.read(mapViewModelProvider);
       final Position positon =
           await ref.read(geoLocationManagerProvider).getCurrentPosition();
 
       final ({double lat, double lng, double radius}) queryOption =
-          await NaverMapUtil.getLocationInfo(controller: _mapController!);
+          await NaverMapUtil.getLocationInfo(controller: state.mapController!);
 
       ref
           .read(mapViewModelProvider.notifier)
@@ -59,8 +61,9 @@ extension MapViewMethodExt on _MapViewState {
             radius: queryOption.radius,
           );
     } catch (e) {
+      final MapState state = ref.read(mapViewModelProvider);
       final ({double lat, double lng, double radius}) queryOption =
-          await NaverMapUtil.getLocationInfo(controller: _mapController!);
+          await NaverMapUtil.getLocationInfo(controller: state.mapController!);
 
       ref
           .read(mapViewModelProvider.notifier)
@@ -132,7 +135,7 @@ extension MapViewMethodExt on _MapViewState {
       viewmodel.getStoreSummary(overlay: overlay, listId: listId);
 
       await NaverMapUtil.moveCameraToLocation(
-        controller: _mapController!,
+        controller: state.mapController!,
         lat: overlay.position.latitude,
         lng: overlay.position.longitude,
       );
@@ -149,7 +152,7 @@ extension MapViewMethodExt on _MapViewState {
     );
 
     if (state.selectedMarker != null) {
-      await _mapController!.deleteOverlay(
+      await state.mapController!.deleteOverlay(
         NOverlayInfo(
           type: NOverlayType.clusterableMarker,
           id: state.selectedMarker!.info.id,
@@ -174,7 +177,7 @@ extension MapViewMethodExt on _MapViewState {
       );
 
       if (savedStore != null && state.userStoresEnabled) {
-        await _mapController!.addOverlay(
+        await state.mapController!.addOverlay(
           await _storeToMarker(
             storeUuid: savedStore.storeUuid,
             storeName: savedStore.name,
@@ -197,7 +200,7 @@ extension MapViewMethodExt on _MapViewState {
       }
 
       if (storeByLocation != null) {
-        await _mapController!.addOverlay(
+        await state.mapController!.addOverlay(
           await _storeToMarker(
             storeUuid: storeByLocation.storeUuid,
             storeName: storeByLocation.name,

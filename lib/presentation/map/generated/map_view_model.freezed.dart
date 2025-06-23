@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MapState {
+  NaverMapController? get mapController => throw _privateConstructorUsedError;
   List<StoreByLocationModel> get storesByLocation =>
       throw _privateConstructorUsedError;
   double get lat => throw _privateConstructorUsedError;
@@ -59,6 +60,7 @@ abstract class $MapStateCopyWith<$Res> {
       _$MapStateCopyWithImpl<$Res, MapState>;
   @useResult
   $Res call({
+    NaverMapController? mapController,
     List<StoreByLocationModel> storesByLocation,
     double lat,
     double lng,
@@ -97,6 +99,7 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? mapController = freezed,
     Object? storesByLocation = null,
     Object? lat = null,
     Object? lng = null,
@@ -120,6 +123,11 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
   }) {
     return _then(
       _value.copyWith(
+            mapController:
+                freezed == mapController
+                    ? _value.mapController
+                    : mapController // ignore: cast_nullable_to_non_nullable
+                        as NaverMapController?,
             storesByLocation:
                 null == storesByLocation
                     ? _value.storesByLocation
@@ -236,6 +244,7 @@ abstract class _$$MapStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
+    NaverMapController? mapController,
     List<StoreByLocationModel> storesByLocation,
     double lat,
     double lng,
@@ -273,6 +282,7 @@ class __$$MapStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? mapController = freezed,
     Object? storesByLocation = null,
     Object? lat = null,
     Object? lng = null,
@@ -296,6 +306,11 @@ class __$$MapStateImplCopyWithImpl<$Res>
   }) {
     return _then(
       _$MapStateImpl(
+        mapController:
+            freezed == mapController
+                ? _value.mapController
+                : mapController // ignore: cast_nullable_to_non_nullable
+                    as NaverMapController?,
         storesByLocation:
             null == storesByLocation
                 ? _value._storesByLocation
@@ -405,6 +420,7 @@ class __$$MapStateImplCopyWithImpl<$Res>
 
 class _$MapStateImpl implements _MapState {
   _$MapStateImpl({
+    this.mapController,
     final List<StoreByLocationModel> storesByLocation =
         const <StoreByLocationModel>[],
     this.lat = 37.514575,
@@ -449,6 +465,8 @@ class _$MapStateImpl implements _MapState {
   }) : _storesByLocation = storesByLocation,
        _preferenceTagIds = preferenceTagIds;
 
+  @override
+  final NaverMapController? mapController;
   final List<StoreByLocationModel> _storesByLocation;
   @override
   @JsonKey()
@@ -525,7 +543,7 @@ class _$MapStateImpl implements _MapState {
 
   @override
   String toString() {
-    return 'MapState(storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, myPreferenceFilterSelected: $myPreferenceFilterSelected, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel, storeSummary: $storeSummary, getStoreSummaryStatus: $getStoreSummaryStatus, getStoreSummaryExceptionModel: $getStoreSummaryExceptionModel, selectedMarker: $selectedMarker, selectedListId: $selectedListId, userStoresEnabled: $userStoresEnabled, deleteUserStoreListStatus: $deleteUserStoreListStatus, deleteUserStoreListException: $deleteUserStoreListException, isRefreshButtonVisible: $isRefreshButtonVisible)';
+    return 'MapState(mapController: $mapController, storesByLocation: $storesByLocation, lat: $lat, lng: $lng, radius: $radius, myPreferenceFilterSelected: $myPreferenceFilterSelected, preferenceTagIds: $preferenceTagIds, searchKeyword: $searchKeyword, getStoresByLocationStatus: $getStoresByLocationStatus, getMyPreferencesStoresByLocationStatus: $getMyPreferencesStoresByLocationStatus, getStoresByLocationExceptionModel: $getStoresByLocationExceptionModel, getMyPreferencesStoresByLocationExceptionModel: $getMyPreferencesStoresByLocationExceptionModel, storeSummary: $storeSummary, getStoreSummaryStatus: $getStoreSummaryStatus, getStoreSummaryExceptionModel: $getStoreSummaryExceptionModel, selectedMarker: $selectedMarker, selectedListId: $selectedListId, userStoresEnabled: $userStoresEnabled, deleteUserStoreListStatus: $deleteUserStoreListStatus, deleteUserStoreListException: $deleteUserStoreListException, isRefreshButtonVisible: $isRefreshButtonVisible)';
   }
 
   @override
@@ -533,6 +551,8 @@ class _$MapStateImpl implements _MapState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MapStateImpl &&
+            (identical(other.mapController, mapController) ||
+                other.mapController == mapController) &&
             const DeepCollectionEquality().equals(
               other._storesByLocation,
               _storesByLocation,
@@ -609,6 +629,7 @@ class _$MapStateImpl implements _MapState {
   @override
   int get hashCode => Object.hashAll([
     runtimeType,
+    mapController,
     const DeepCollectionEquality().hash(_storesByLocation),
     lat,
     lng,
@@ -642,6 +663,7 @@ class _$MapStateImpl implements _MapState {
 
 abstract class _MapState implements MapState {
   factory _MapState({
+    final NaverMapController? mapController,
     final List<StoreByLocationModel> storesByLocation,
     final double lat,
     final double lng,
@@ -664,6 +686,8 @@ abstract class _MapState implements MapState {
     final bool isRefreshButtonVisible,
   }) = _$MapStateImpl;
 
+  @override
+  NaverMapController? get mapController;
   @override
   List<StoreByLocationModel> get storesByLocation;
   @override

@@ -34,6 +34,10 @@ class MapViewModel extends StateNotifier<MapState> {
 
   final Ref _ref;
 
+  void updateMapController({required NaverMapController controller}) {
+    state = state.copyWith(mapController: controller);
+  }
+
   // 주어진 위치에서 가게 조회
   void getStoresByCameraPosition({
     required double lat,
@@ -253,5 +257,11 @@ class MapViewModel extends StateNotifier<MapState> {
   // 현 위치에서 새로고침 버튼 표시 여부 수정
   void updateIsRefreshButtonVisible({required bool visible}) {
     state = state.copyWith(isRefreshButtonVisible: visible);
+  }
+
+  @override
+  void dispose() {
+    state.mapController?.dispose();
+    super.dispose();
   }
 }

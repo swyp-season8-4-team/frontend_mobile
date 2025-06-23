@@ -351,6 +351,7 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
 
         case Status.failure:
           await showDialog(
+            //ignore: use_build_context_synchronously
             context: context,
             builder: (BuildContext context) {
               return CustomDialog.basic(

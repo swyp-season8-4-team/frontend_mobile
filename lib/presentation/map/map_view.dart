@@ -56,7 +56,6 @@ class MapView extends ConsumerStatefulWidget {
 class _MapViewState extends ConsumerState<MapView> {
   final double _zoom = 12;
 
-  NaverMapController? _mapController;
   late final DraggableScrollableController _draggableScrollableController;
 
   // draggable scrollable sheet의 snap size
@@ -103,6 +102,8 @@ class _MapViewState extends ConsumerState<MapView> {
     final UserStoreListState userStoreListState = ref.watch(
       userStoreListViewModelProvider,
     );
+
+    final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
     final UserStoreListViewModel userStoreListViewModel = ref.read(
       userStoreListViewModelProvider.notifier,
     );
@@ -124,8 +125,7 @@ class _MapViewState extends ConsumerState<MapView> {
             preferenceState.status.isLoading ||
             state.getStoresByLocationStatus.isLoading ||
             userStoreListState.getUserStoreListAllStatus.isLoading ||
-            state.deleteUserStoreListStatus.isLoading ||
-            _mapController == null,
+            state.deleteUserStoreListStatus.isLoading,
         child: Scaffold(
           appBar:
               _isStoreListAppbarVisible
@@ -178,18 +178,12 @@ class _MapViewState extends ConsumerState<MapView> {
                     rotationGesturesEnable: false,
                   ),
                   onMapReady: (NaverMapController controller) async {
-                    _mapController = controller;
-
-                    await _goToCurrentLocation();
-
-                    await NaverMapUtil.setMyLocationOverlay(
-                      controller: _mapController!,
-                    );
-
-                    setState(() {});
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      viewmodel.updateMapController(controller: controller);
+                    });
                   },
                   onMapTapped: (_, _) {
-                    if (_mapController == null) {
+                    if (state.mapController == null) {
                       return;
                     }
                     _clearSelectedShop();
@@ -198,12 +192,12 @@ class _MapViewState extends ConsumerState<MapView> {
                     // 카메라 이동이 완료된 경우
                     // 카메라가 보고있는 Bound에 사용자의 위치가 포함되는지 확인
 
-                    if (_mapController == null) {
+                    if (state.mapController == null) {
                       return;
                     }
 
                     final NLatLngBounds contentBounds =
-                        await _mapController!.getContentBounds();
+                        await state.mapController!.getContentBounds();
 
                     final Position currentPosition =
                         await ref
@@ -269,14 +263,33 @@ class _MapViewState extends ConsumerState<MapView> {
 
   void _listenProvider() {
     final MapViewModel viewmodel = ref.read(mapViewModelProvider.notifier);
+
+    ref.listen(
+      mapViewModelProvider.select((MapState state) => state.mapController),
+      (
+        NaverMapController? prev,
+        //ignore: always_specify_types
+        next,
+      ) async {
+        if (next != null) {
+          await _goToCurrentLocation();
+
+          await NaverMapUtil.setMyLocationOverlay(controller: next);
+        }
+      },
+    );
+
     ref.listen(
       mapViewModelProvider.select((MapState state) => state.storesByLocation),
       (_, List<StoreByLocationModel> next) async {
-        if (_mapController == null) return;
-        await _mapController!.clearOverlays();
+        final MapState state = ref.read(mapViewModelProvider);
+        if (state.mapController == null) return;
+        await state.mapController!.clearOverlays();
         final List<NMarker> markers = await _createMarkers();
-        await _mapController!.addOverlayAll(markers.toSet());
-        await NaverMapUtil.setMyLocationOverlay(controller: _mapController!);
+        await state.mapController!.addOverlayAll(markers.toSet());
+        await NaverMapUtil.setMyLocationOverlay(
+          controller: state.mapController!,
+        );
       },
     );
 
@@ -285,12 +298,16 @@ class _MapViewState extends ConsumerState<MapView> {
         (UserStoreListState state) => state.userStoreLists,
       ),
       (_, List<UserStoreListModel> next) async {
-        if (_mapController == null) return;
-        await _mapController!.clearOverlays();
+        final MapState state = ref.read(mapViewModelProvider);
+
+        if (state.mapController == null) return;
+        await state.mapController!.clearOverlays();
         final List<NMarker> markers = await _createMarkers();
 
-        await _mapController!.addOverlayAll(markers.toSet());
-        await NaverMapUtil.setMyLocationOverlay(controller: _mapController!);
+        await state.mapController!.addOverlayAll(markers.toSet());
+        await NaverMapUtil.setMyLocationOverlay(
+          controller: state.mapController!,
+        );
       },
     );
 
@@ -317,9 +334,10 @@ class _MapViewState extends ConsumerState<MapView> {
       ),
       (_, Status next) async {
         if (next.isSuccess) {
-          if (_mapController == null) return;
           final MapState state = ref.read(mapViewModelProvider);
-          await _mapController!.deleteOverlay(
+
+          if (state.mapController == null) return;
+          await state.mapController!.deleteOverlay(
             NOverlayInfo(
               type: NOverlayType.clusterableMarker,
               id: state.selectedMarker!.info.id,
@@ -337,7 +355,7 @@ class _MapViewState extends ConsumerState<MapView> {
             ),
           );
 
-          await _mapController!.addOverlay(newMarker);
+          await state.mapController!.addOverlay(newMarker);
         }
       },
     );
@@ -362,9 +380,6 @@ class _MapViewState extends ConsumerState<MapView> {
 
   @override
   void dispose() {
-    if (_mapController != null) {
-      _mapController!.dispose();
-    }
     _draggableScrollableController.dispose();
     super.dispose();
   }
