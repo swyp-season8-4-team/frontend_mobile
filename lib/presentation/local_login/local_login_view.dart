@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -539,42 +540,44 @@ class _LocalLoginViewState extends ConsumerState<LocalLoginView> {
                         foregroundColor: const Color(0xFF191919),
                       ),
                       const SizedBox(height: 10),
-                      CustomSnsLoginButton(
-                        svgImage: Assets.icon.sns.kakao,
-                        label: '애플',
-                        onPressed: () async {
-                          try {
-                            final AuthorizationCredentialAppleID credential =
-                                await SignInWithApple.getAppleIDCredential(
-                                  scopes: <AppleIDAuthorizationScopes>[
-                                    AppleIDAuthorizationScopes.email,
-                                    AppleIDAuthorizationScopes.fullName,
-                                  ],
-                                );
 
-                            ref
-                                .read(oauthViewModelProvider.notifier)
-                                .appleLogin(
-                                  params: AppleParams(
-                                    code: credential.authorizationCode,
-                                    state: 'xyz789',
-                                    id_token: credential.identityToken ?? '',
-                                    user: UserAppleParams(
-                                      email: credential.email ?? '',
-                                      name: NameAppleParams(
-                                        firstName: credential.familyName ?? '',
-                                        lastName: credential.givenName ?? '',
+                      if (Platform.isIOS)
+                        CustomSnsLoginButton(
+                          label: '애플 로그인',
+                          onPressed: () async {
+                            try {
+                              final AuthorizationCredentialAppleID credential =
+                                  await SignInWithApple.getAppleIDCredential(
+                                    scopes: <AppleIDAuthorizationScopes>[
+                                      AppleIDAuthorizationScopes.email,
+                                      AppleIDAuthorizationScopes.fullName,
+                                    ],
+                                  );
+
+                              ref
+                                  .read(oauthViewModelProvider.notifier)
+                                  .appleLogin(
+                                    params: AppleParams(
+                                      code: credential.authorizationCode,
+                                      state: 'xyz789',
+                                      id_token: credential.identityToken ?? '',
+                                      user: UserAppleParams(
+                                        email: credential.email ?? '',
+                                        name: NameAppleParams(
+                                          firstName:
+                                              credential.familyName ?? '',
+                                          lastName: credential.givenName ?? '',
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
-                          } catch (error) {
-                            if (error is PlatformException) return;
-                          }
-                        },
-                        backgroundColor: const Color(0xFF191919),
-                        foregroundColor: Colors.white,
-                      ),
+                                  );
+                            } catch (error) {
+                              if (error is PlatformException) return;
+                            }
+                          },
+                          backgroundColor: const Color(0xFF191919),
+                          foregroundColor: Colors.white,
+                        ),
                       const SizedBox(height: 34),
 
                       Row(
